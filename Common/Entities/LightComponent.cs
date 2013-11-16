@@ -2,17 +2,8 @@
 
 namespace Common.Entities
 {
-  public class LightFrame : Frame
+  public class LightComponent : ComponentBase
   {
-
-    // Each light frame can be set seperately.  the idea is that you can have a certain animation as a one off and
-    // then certain parts don't show again.
-    [XmlAttribute]
-    public bool IsRepeated;
-
-    [XmlAttribute]
-    public int FadeTime;
-
     [XmlElement]
     public Light North;
 

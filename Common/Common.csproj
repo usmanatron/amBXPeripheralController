@@ -47,15 +47,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Communicationsettings.cs" />
+    <Compile Include="Entities\ComponentBase.cs" />
     <Compile Include="IntegratedamBXSceneAccessor.cs" />
     <Compile Include="IntegratedamBXScenes.cs" />
     <Compile Include="Entities\amBXScene.cs" />
     <Compile Include="Entities\Fan.cs" />
-    <Compile Include="Entities\FanFrame.cs" />
+    <Compile Include="Entities\FanComponent.cs" />
     <Compile Include="Entities\Frame.cs" />
     <Compile Include="Entities\Light.cs" />
-    <Compile Include="Entities\LightFrame.cs" />
-    <Compile Include="Entities\RumbleFrame.cs" />
+    <Compile Include="Entities\LightComponent.cs" />
+    <Compile Include="Entities\RumbleComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

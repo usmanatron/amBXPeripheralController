@@ -30,38 +30,38 @@ namespace Common
       }
     }
 
-    public Frame GetFrame(eFrameType xiFrametype, string xiDescription)
+    public ComponentBase GetComponent(eComponentType xiFrametype, string xiDescription)
     {
       switch (xiFrametype)
       {
-        case eFrameType.Light:
+        case eComponentType.Light:
           return GetLightFrame(xiDescription);
-        case eFrameType.Fan:
+        case eComponentType.Fan:
           return GetFanFrame(xiDescription);
-        case eFrameType.Rumble:
+        case eComponentType.Rumble:
           return GetRumbleFrame(xiDescription);
         default:
           throw new InvalidOperationException("Unexpected Frame type");
       }
     }
 
-    private LightFrame GetLightFrame(string xiDescription)
+    private LightComponent GetLightFrame(string xiDescription)
     {
       switch (xiDescription)
       {
         case "AllOff":
-          return IntegratedamBXScenes.LightsOffFrame;
+          return IntegratedamBXScenes.LightsOffComponent;
         default:
           throw new InvalidOperationException("Unexpected Light frame type");
       }
     }
 
-    private FanFrame GetFanFrame(string xiDescription)
+    private FanComponent GetFanFrame(string xiDescription)
     {
       throw new NotImplementedException();
     }
 
-    private RumbleFrame GetRumbleFrame(string xiDescription)
+    private RumbleComponent GetRumbleFrame(string xiDescription)
     {
       throw new NotImplementedException();
     }

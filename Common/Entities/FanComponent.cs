@@ -2,11 +2,8 @@
 
 namespace Common.Entities
 {
-  public class FanFrame : Frame
+  public class FanComponent : ComponentBase
   {
-    [XmlAttribute]
-    public bool IsRepeated;
-
     [XmlElement]
     public Fan East;
 

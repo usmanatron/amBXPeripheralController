@@ -21,11 +21,10 @@ namespace Common
 
     #endregion
 
-    #region LightFrame
+    #region LightComponent
 
-    private LightFrame mRedLightFrame = new LightFrame
+    private LightComponent mRedLightComponent = new LightComponent
     {
-      IsRepeated = true,
       FadeTime = 500,
       North = mRedLight,
       NorthEast = mRedLight,
@@ -37,9 +36,8 @@ namespace Common
       NorthWest = mRedLight,
     };
 
-    private LightFrame mGreenLightFrame = new LightFrame
+    private LightComponent mGreenLightComponent = new LightComponent
     {
-      IsRepeated = true,
       FadeTime = 500,
       North = mGreenLight,
       NorthEast = mGreenLight,
@@ -51,9 +49,8 @@ namespace Common
       NorthWest = mGreenLight,
     };
 
-    private LightFrame mYellowLightFrame = new LightFrame
+    private LightComponent mYellowLightComponent = new LightComponent
     {
-      IsRepeated = true,
       FadeTime = 500,
       North = mYellowLight,
       NorthEast = mYellowLight,
@@ -65,9 +62,8 @@ namespace Common
       NorthWest = mYellowLight,
     };
 
-    private LightFrame mOrangeLightFrame = new LightFrame
+    private LightComponent mOrangeLightComponent = new LightComponent
     {
-      IsRepeated = true,
       FadeTime = 500,
       North = mOrangeLight,
       NorthEast = mOrangeLight,
@@ -79,9 +75,8 @@ namespace Common
       NorthWest = mOrangeLight,
     };
 
-    public static LightFrame LightsOffFrame = new LightFrame
+    public static LightComponent LightsOffComponent = new LightComponent
     {
-      IsRepeated = true,
       FadeTime = 500,
       North = mLightOff,
       NorthEast = mLightOff,
@@ -97,13 +92,15 @@ namespace Common
 
     private amBXScene BasicScene = new amBXScene
     {
-      FrameLength = 1000,
       IsExclusive = true,
-      Version = 1,
-      LightFrames = new List<LightFrame>(),
-      FanFrames = new List<FanFrame>(),
-      RumbleFrames = new List<RumbleFrame>()
+      Frames = new List<Frame>()
     };
+
+    private Frame BasicFrame = new Frame
+                               {
+                                 IsRepeated = true,
+                                 Length = 1000
+                               };
     
     #endregion
 
@@ -114,7 +111,9 @@ namespace Common
       get
       {
         var lScene = BasicScene;
-        lScene.LightFrames = new List<LightFrame> { mRedLightFrame };
+        var lFrame = BasicFrame;
+        lFrame.Lights = mRedLightComponent;
+        lScene.Frames = new List<Frame> { BasicFrame };
         return lScene;
       }
     }
@@ -124,7 +123,9 @@ namespace Common
       get
       {
         var lScene = BasicScene;
-        lScene.LightFrames = new List<LightFrame> { mGreenLightFrame };
+        var lFrame = BasicFrame;
+        lFrame.Lights = mGreenLightComponent;
+        lScene.Frames = new List<Frame> { lFrame };
         return lScene;
       }
     }
@@ -134,7 +135,12 @@ namespace Common
       get
       {
         var lScene = BasicScene;
-        lScene.LightFrames = new List<LightFrame> { mYellowLightFrame, LightsOffFrame };
+        var lFrameOn = BasicFrame;
+        var lFrameOff = BasicFrame;
+        lFrameOn.Lights = mYellowLightComponent;
+        lFrameOff.Lights = LightsOffComponent;
+
+        lScene.Frames = new List<Frame> { lFrameOn, lFrameOff };
         return lScene;
       }
     }
@@ -144,7 +150,12 @@ namespace Common
       get
       {
         var lScene = BasicScene;
-        lScene.LightFrames = new List<LightFrame> { mOrangeLightFrame, LightsOffFrame };
+        var lFrameOn = BasicFrame;
+        var lFrameOff = BasicFrame;
+        lFrameOn.Lights = mOrangeLightComponent;
+        lFrameOff.Lights = LightsOffComponent;
+
+        lScene.Frames = new List<Frame> { lFrameOn, lFrameOff };
         return lScene;
       }
     }
@@ -154,7 +165,10 @@ namespace Common
       get
       {
         var lScene = BasicScene;
-        lScene.LightFrames = new List<LightFrame> { LightsOffFrame };
+        var lFrame = BasicFrame;
+        lFrame.Lights = LightsOffComponent;
+
+        lScene.Frames = new List<Frame> { lFrame };
         return lScene;
       }
     }
@@ -176,40 +190,42 @@ namespace Common
       get
       {
         var lScene = BasicScene;
-        lScene.FrameLength = 2000;
-        lScene.LightFrames = new List<LightFrame>
-                             {
-                               new LightFrame
-                               {
-                                 IsRepeated = false,
-                                 FadeTime = 100,
-                                 West = mSoftPurpleLight,
-                                 NorthWest = mSoftPurpleLight,
-                                 North = mSoftPurpleLight,
-                                 NorthEast = mSoftPurpleLight,
-                                 East = mSoftPurpleLight
-                               },
-                               new LightFrame
-                               {
-                                 IsRepeated = true,
-                                 FadeTime = 100,
-                                 West = mRedLight,
-                                 NorthWest = mRedLight,
-                                 North = mSoftPurpleLight,
-                                 NorthEast = mBlueLight,
-                                 East = mBlueLight
-                               },
-                               new LightFrame
-                               {
-                                 IsRepeated = true,
-                                 FadeTime = 100,
-                                 West = mBlueLight,
-                                 NorthWest = mBlueLight,
-                                 North = mSoftPurpleLight,
-                                 NorthEast = mRedLight,
-                                 East = mRedLight
-                               }
-                             };
+        var lPurple = BasicFrame;
+        var lRedBlue = BasicFrame;
+        var lBlueRed = BasicFrame;
+
+        lPurple.IsRepeated = true;
+        lPurple.Length = 2000;
+        lPurple.Lights = new LightComponent
+                         {
+                           FadeTime = 100,
+                           West = mSoftPurpleLight,
+                           NorthWest = mSoftPurpleLight,
+                           North = mSoftPurpleLight,
+                           NorthEast = mSoftPurpleLight,
+                           East = mSoftPurpleLight
+                         };
+
+        lRedBlue.Lights = new LightComponent
+                          {
+                            FadeTime = 100,
+                            West = mRedLight,
+                            NorthWest = mRedLight,
+                            North = mSoftPurpleLight,
+                            NorthEast = mBlueLight,
+                            East = mBlueLight
+                          };
+        lBlueRed.Lights = new LightComponent
+                          {
+                            FadeTime = 100,
+                            West = mBlueLight,
+                            NorthWest = mBlueLight,
+                            North = mSoftPurpleLight,
+                            NorthEast = mRedLight,
+                            East = mRedLight
+                          };
+
+        lScene.Frames = new List<Frame> {lPurple, lRedBlue, lBlueRed};
         return lScene;
       }
     }

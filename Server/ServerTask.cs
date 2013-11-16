@@ -26,13 +26,13 @@ namespace Server
           GetNewScene();
           ApplyNextFrame();
           WaitforInterval();
+          AdvanceScene();
         }
       }
     }
 
     private void InitialiseEngine(amBX xiEngine)
     {
-      // Lights
       mNorthLight = xiEngine.CreateLight(CompassDirection.North, RelativeHeight.AnyHeight);
       mNorthEastLight = xiEngine.CreateLight(CompassDirection.NorthEast, RelativeHeight.AnyHeight);
       mEastLight = xiEngine.CreateLight(CompassDirection.East, RelativeHeight.AnyHeight);
@@ -61,41 +61,43 @@ namespace Server
 
     private void ApplyNextFrame()
     {
+      var lFrame = mManager.GetNextFrame();
+
       if (mManager.IsLightEnabled)
       {
-        UpdateLights();
+        UpdateLights(lFrame.Lights);
       }
 
       if (mManager.IsFanEnabled)
       {
-        UpdateFans();
+        UpdateFans(lFrame.Fans);
       }
 
       if (mManager.IsRumbleEnabled)
       {
-        UpdateRumble();
+        UpdateRumble(lFrame.Rumble);
       }
     }
 
-    private void UpdateLights()
+    private void UpdateLights(LightComponent xiLights)
     {
-      var lLightFrame = mManager.GetNextLightFrame();
-      if (lLightFrame == null)
+      //qqUMI Remove this null check by adding the AllOff stuff into the null case of GetNextframe()
+      if (xiLights == null)
       {
         // this can only happen if the set of Light Frames only contains non-repeatable frames
         // and we've used them all up.  
         // In this case (and this case only!) we want to switch all lights off
-        lLightFrame = (LightFrame) mDefaultsAccessor.GetFrame(eFrameType.Light, "AllOff");
+        xiLights = (LightComponent) mDefaultsAccessor.GetComponent(eComponentType.Light, "AllOff");
       }
 
-      UpdateLight(mNorthLight, lLightFrame.North, lLightFrame.FadeTime);
-      UpdateLight(mNorthEastLight, lLightFrame.NorthEast, lLightFrame.FadeTime);
-      UpdateLight(mEastLight, lLightFrame.East, lLightFrame.FadeTime);
-      UpdateLight(mSouthEastLight, lLightFrame.SouthEast, lLightFrame.FadeTime);
-      UpdateLight(mSouthLight, lLightFrame.South, lLightFrame.FadeTime);
-      UpdateLight(mSouthWestLight, lLightFrame.SouthWest, lLightFrame.FadeTime);
-      UpdateLight(mWestLight, lLightFrame.West, lLightFrame.FadeTime);
-      UpdateLight(mNorthWestLight, lLightFrame.NorthWest, lLightFrame.FadeTime);
+      UpdateLight(mNorthLight, xiLights.North, xiLights.FadeTime);
+      UpdateLight(mNorthEastLight, xiLights.NorthEast, xiLights.FadeTime);
+      UpdateLight(mEastLight, xiLights.East, xiLights.FadeTime);
+      UpdateLight(mSouthEastLight, xiLights.SouthEast, xiLights.FadeTime);
+      UpdateLight(mSouthLight, xiLights.South, xiLights.FadeTime);
+      UpdateLight(mSouthWestLight, xiLights.SouthWest, xiLights.FadeTime);
+      UpdateLight(mWestLight, xiLights.West, xiLights.FadeTime);
+      UpdateLight(mNorthWestLight, xiLights.NorthWest, xiLights.FadeTime);
     }
 
     private void UpdateLight(amBXLight xiLight, Light xiInputLight, int xiFadeTime)
@@ -110,17 +112,16 @@ namespace Server
       xiLight.FadeTime = xiFadeTime;
     }
 
-    private void UpdateFans()
+    private void UpdateFans(FanComponent xiFans)
     {
-      var lFanFrame = mManager.GetNextFanFrame();
-      if (lFanFrame == null)
+      if (xiFans == null)
       {
         // qqUMI -  See the Light equivalent and finish properly!
-        return;
+        xiFans = (FanComponent)mDefaultsAccessor.GetComponent(eComponentType.Fan, "AllOff"); //qqUMI Will throw
       }
 
-      ApplyChangeToFan(mEastFan, lFanFrame.East);
-      ApplyChangeToFan(mWestFan, lFanFrame.West);
+      ApplyChangeToFan(mEastFan, xiFans.East);
+      ApplyChangeToFan(mWestFan, xiFans.West);
     }
 
     private void ApplyChangeToFan(amBXFan xiFan, Fan xiInputFan)
@@ -132,13 +133,12 @@ namespace Server
       xiFan.Intensity = xiInputFan.Intensity;
     }
 
-    private void UpdateRumble()
+    private void UpdateRumble(RumbleComponent xiRumble)
     {
-      var lFrame = mManager.GetNextRumbleFrame();
-      if (lFrame == null)
+      if (xiRumble == null)
       {
         // qqUMI -  See the Light equivalent and finish properly!
-        return;
+        xiRumble = (RumbleComponent)mDefaultsAccessor.GetComponent(eComponentType.Rumble, "AllOff"); //qqUMI Will throw
       }
       
       //qqUMI Rumble not supported yet
@@ -149,8 +149,13 @@ namespace Server
       Thread.Sleep(mManager.FrameLength);
     }
 
+    private void AdvanceScene()
+    {
+      mManager.AdvanceScene();
+    }
+
     private amBXSceneManager mManager;
-    private IntegratedamBXSceneAccessor mDefaultsAccessor;
+    private readonly IntegratedamBXSceneAccessor mDefaultsAccessor;
 
     #region amBXLib Members
 

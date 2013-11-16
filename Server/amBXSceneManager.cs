@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 using Common.Entities;
 
 namespace Server
@@ -9,89 +9,33 @@ namespace Server
     public amBXSceneManager(amBXScene xiScene)
     {
       mScene = xiScene;
-      SetupTickers();
+      mTicker = new AtypicalFirstRunInfiniteTicker(mScene.Frames.Count, mScene.RepeatableFrames.Count);
     }
 
-    private void SetupTickers()
+    public Frame GetNextFrame()
     {
-      if (mScene.LightSpecified)
-      {
-        mLightTicker = new AtypicalFirstRunInfiniteTicker(mScene.LightFrames.Count, mScene.RepeatableLightFrames.Count);
-      }
+      var lFrames = mTicker.IsFirstRun
+        ? mScene.Frames
+        : mScene.RepeatableFrames;
 
-      if (mScene.FanSpecified)
-      {
-        mFanTicker = new AtypicalFirstRunInfiniteTicker(mScene.FanFrames.Count, mScene.RepeatableFanFrames.Count);
-      }
-
-      if (mScene.RumbleSpecified)
-      {
-        mRumbleTicker = new AtypicalFirstRunInfiniteTicker(mScene.RumbleFrames.Count, mScene.RepeatableRumbleFrames.Count);
-      }
-    }
-
-    public LightFrame GetNextLightFrame()
-    {
-      List<LightFrame> lFrames = mLightTicker.IsFirstRun
-        ? mScene.LightFrames 
-        : mScene.RepeatableLightFrames;
-
-      if (lFrames.Count == 0)
+      if (!lFrames.Any())
       {
         // Nothing repeatable after the first run OR just nothing there (this shouldnt happen though).  Just return null.
-        return null;
+        return new Frame {Lights = null, Fans = null, Rumble = null, Length = 1000, IsRepeated = false};
       }
-
-      // Get the light
-      var lFrame = lFrames[mLightTicker.Index];
-      mLightTicker.Advance();
-
-      return lFrame;
+      return mScene.Frames[mTicker.Index];
     }
 
-    public FanFrame GetNextFanFrame()
+    public void AdvanceScene()
     {
-      List<FanFrame> lFrames = mFanTicker.IsFirstRun
-        ? mScene.FanFrames
-        : mScene.RepeatableFanFrames;
-
-      if (lFrames.Count == 0)
-      {
-        // Nothing repeatable \ nothing there.  Just return null.
-        return null;
-      }
-
-      // Get the light
-      var lFrame = lFrames[mFanTicker.Index];
-      mFanTicker.Advance();
-
-      return lFrame;
-    }
-
-    public RumbleFrame GetNextRumbleFrame()
-    {
-      List<RumbleFrame> lFrames = mLightTicker.IsFirstRun
-        ? mScene.RumbleFrames
-        : mScene.RepeatableRumbleFrames;
-
-      if (lFrames.Count == 0)
-      {
-        // Nothing repeatable \ nothing there.  Just return null.
-        return null;
-      }
-
-      // Get the light
-      var lFrame = lFrames[mRumbleTicker.Index];
-      mRumbleTicker.Advance();
-
-      return lFrame;
+      mTicker.Advance();
     }
 
     public int FrameLength
     {
       get
       {
-        return mScene.FrameLength;
+        return mScene.Frames[mTicker.Index].Length;
       }
     }
 
@@ -121,8 +65,6 @@ namespace Server
 
 
     private readonly amBXScene mScene;
-    private AtypicalFirstRunInfiniteTicker mLightTicker;
-    private AtypicalFirstRunInfiniteTicker mFanTicker;
-    private AtypicalFirstRunInfiniteTicker mRumbleTicker;
+    private readonly AtypicalFirstRunInfiniteTicker mTicker;
   }
 }
