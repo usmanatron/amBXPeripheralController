@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+This scene will first show all purple, and then will get into a loop where
+1. The RHS is red, the LHS is blue
+2. Vice versa
+
+It'll never repeat the all-purple "Frame" - this is what I mean by IsRepeated below.
+-->
+<amBXScene Version="1" IsExclusive="true" FrameLength="2000">
+  <LightFrames>
+    <!-- Start with all purple, non-repeated-->
+    <LightFrame IsRepeated="false" FadeTime="100">
+      <West      Intensity="0.5" Red="0.5" Green="0" Blue="1" />
+      <NorthWest Intensity="0.5" Red="0.5" Green="0" Blue="1" />
+      <North     Intensity="0.5" Red="0.5" Green="0" Blue="1" />
+      <NorthEast Intensity="0.5" Red="0.5" Green="0" Blue="1" />
+      <East      Intensity="0.5" Red="0.5" Green="0" Blue="1" />
+    </LightFrame>
+    <!-- Left-side blue -->
+    <LightFrame IsRepeated="true" FadeTime="100">
+      <West      Intensity="1" Red="0" Green="0" Blue="1" />
+      <NorthWest Intensity="1" Red="0" Green="0" Blue="1" />
+      <!-- Don't change Norths colour
+      Bug: Even though the above frame is non-repeated, at the moment the north light WILL repeat.  Needs fixing-->
+      <NorthEast Intensity="1" Red="1" Green="0" Blue="0" />
+      <East      Intensity="1" Red="1" Green="0" Blue="0" />
+    </LightFrame>
+    <!-- Right-side blue-->
+    <LightFrame IsRepeated="true" FadeTime="100">
+      <West      Intensity="1" Red="1" Green="0" Blue="0" />
+      <NorthWest Intensity="1" Red="1" Green="0" Blue="0" />
+      <!-- Don't change Norths colour-->
+      <NorthEast Intensity="1" Red="0" Green="0" Blue="1" />
+      <East      Intensity="1" Red="0" Green="0" Blue="1" />
+    </LightFrame>
+  </LightFrames>
+</amBXScene>
