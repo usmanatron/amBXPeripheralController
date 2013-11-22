@@ -35,12 +35,12 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArgumentReader.cs" />
+    <Compile Include="amBXSceneSerialiser.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="ClientTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

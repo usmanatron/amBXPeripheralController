@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Xml.Serialization;
 using Common.Entities;
 
 namespace Client
@@ -46,17 +45,7 @@ namespace Client
         throw new UsageException("Input was not a valid path");
       }
 
-      return GetSceneFromXml(lInputFilePath);
-    }
-
-    //TODO: Add an amBXSceneSerialiser that handles this (in COMMON)
-    private amBXScene GetSceneFromXml(string xiInputXmlPath)
-    {
-      using (var lReader = new StreamReader(xiInputXmlPath))
-      {
-        var lSerialiser = new XmlSerializer(typeof(amBXScene));
-        return (amBXScene) lSerialiser.Deserialize(lReader);
-      }
+      return amBXSceneSerialiser.Deserialise(lInputFilePath);
     }
 
     public bool IsIntegratedScene { get; private set; }
