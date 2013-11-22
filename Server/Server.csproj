@@ -36,7 +36,8 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="amBXLib">
+    <Reference Include="amBXLib, Version=1.0.5056.34406, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\amBXLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+A test event scene
+-->
+<amBXScene IsExclusive="true" IsEvent="true">
+  <Frames>
+    <Frame Length="200" IsRepeated="false">
+      <Lights FadeTime="100">
+        <West      Intensity="0.5" Red="0.5" Green="0" Blue="1" />
+        <NorthWest Intensity="0.5" Red="0.5" Green="0" Blue="1" />
+        <North     Intensity="0.5" Red="0.5" Green="0" Blue="1" />
+        <NorthEast Intensity="0.5" Red="0.5" Green="0" Blue="1" />
+        <East      Intensity="0.5" Red="0.5" Green="0" Blue="1" />
+      </Lights>
+    </Frame>
+    <Frame Length="1000" IsRepeated="false">
+      <Lights FadeTime="200">
+        <West      Intensity="1" Red="1" Green="0.5" Blue="0.5" />
+        <NorthWest Intensity="1" Red="1" Green="0.5" Blue="0.5" />
+        <North     Intensity="1" Red="1" Green="0.5" Blue="0.5" />
+        <NorthEast Intensity="1" Red="1" Green="0.5" Blue="0.5" />
+        <East      Intensity="1" Red="1" Green="0.5" Blue="0.5" />
+      </Lights>
+    </Frame>
+    <Frame Length="500" IsRepeated="false">
+      <Lights FadeTime="100">
+        <West      Intensity="0.5" Red="0.5" Green="0" Blue="1" />
+        <NorthWest Intensity="0.5" Red="0.5" Green="0" Blue="1" />
+        <North     Intensity="0.5" Red="0.5" Green="0" Blue="1" />
+        <NorthEast Intensity="0.5" Red="0.5" Green="0" Blue="1" />
+        <East      Intensity="0.5" Red="0.5" Green="0" Blue="1" />
+      </Lights>
+    </Frame>
+  </Frames>
+</amBXScene>

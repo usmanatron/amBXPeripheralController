@@ -1,22 +1,37 @@
 ﻿using System.Linq;
+using System.ServiceModel;
 using Common.Entities;
 
 namespace Server
 {
-  // Deals with accessing an amBX scene, because it's fairly messy at places!
   class amBXSceneManager
   {
     public amBXSceneManager(amBXScene xiScene)
     {
-      mScene = xiScene;
-      mTicker = new AtypicalFirstRunInfiniteTicker(mScene.Frames.Count, mScene.RepeatableFrames.Count);
+      if (xiScene.IsEvent)
+      {
+        throw new ActionNotSupportedException("The intial Scene cannot be an event!");
+      }
+      SetupNewScene(xiScene);
+    }
+
+    public void UpdateScene(amBXScene xiNewScene)
+    {
+      mPreviousScene = mCurrentScene;
+      SetupNewScene(xiNewScene);
+    }
+
+    private void SetupNewScene(amBXScene xiNewScene)
+    {
+      mCurrentScene = xiNewScene;
+      mTicker = new AtypicalFirstRunInfiniteTicker(mCurrentScene.Frames.Count, mCurrentScene.RepeatableFrames.Count);
     }
 
     public Frame GetNextFrame()
     {
       var lFrames = mTicker.IsFirstRun
-        ? mScene.Frames
-        : mScene.RepeatableFrames;
+        ? mCurrentScene.Frames
+        : mCurrentScene.RepeatableFrames;
 
       if (!lFrames.Any())
       {
@@ -29,13 +44,21 @@ namespace Server
     public void AdvanceScene()
     {
       mTicker.Advance();
+
+      if (mCurrentScene.IsEvent && mTicker.Index == 0)
+      {
+        // The event has completed one full cycle.  Revert to
+        // previous scene
+        SetupNewScene(mPreviousScene);
+      }
+
     }
 
     public bool IsLightEnabled
     {
       get
       {
-        return mScene.LightSpecified;
+        return mCurrentScene.LightSpecified;
       }
     }
 
@@ -43,7 +66,7 @@ namespace Server
     {
       get
       {
-        return mScene.FanSpecified;
+        return mCurrentScene.FanSpecified;
       }
     }
 
@@ -51,12 +74,13 @@ namespace Server
     {
       get
       {
-        return mScene.RumbleSpecified;
+        return mCurrentScene.RumbleSpecified;
       }
     }
 
 
-    private readonly amBXScene mScene;
-    private readonly AtypicalFirstRunInfiniteTicker mTicker;
+    private amBXScene mCurrentScene;
+    private amBXScene mPreviousScene;
+    private AtypicalFirstRunInfiniteTicker mTicker;
   }
 }

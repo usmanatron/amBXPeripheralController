@@ -11,7 +11,7 @@ namespace Server.Communication
     {
       try
       {
-        ApplyScene(xiScene);
+        UpdateScene(xiScene);
       }
       catch (Exception e)
       {
@@ -28,8 +28,7 @@ namespace Server.Communication
         // The following line will always find a scene - if there is an error
         // it defaults to "Lights off".
         var lScene = new IntegratedamBXSceneAccessor().GetScene(xiSceneName);
-
-        ApplyScene(lScene);
+        UpdateScene(lScene);
       }
       catch (Exception e)
       {
@@ -39,11 +38,11 @@ namespace Server.Communication
       return "";
     }
 
-    private void ApplyScene(amBXScene xiScene)
+    private void UpdateScene(amBXScene xiScene)
     {
       lock (ServerTask.Manager)
       {
-        ServerTask.Manager = new amBXSceneManager(xiScene);
+        ServerTask.Manager.UpdateScene(xiScene);
       }
     }
   }

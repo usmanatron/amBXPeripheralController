@@ -16,7 +16,7 @@ namespace Client
       if (xiArguments[0] == @"/F")
       {
         IsIntegratedScene = false;
-        CustomScene = RetrieveAndParseFile(xiArguments[0]);
+        CustomScene = RetrieveAndParseFile(xiArguments[1]);
         // File passed in
       }
       else if (xiArguments[0] == @"/I")
