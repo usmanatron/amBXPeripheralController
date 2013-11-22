@@ -23,20 +23,12 @@ namespace Server
         // Nothing repeatable after the first run OR just nothing there (this shouldnt happen though).  Just return null.
         return new Frame {Lights = null, Fans = null, Rumble = null, Length = 1000, IsRepeated = false};
       }
-      return mScene.Frames[mTicker.Index];
+      return lFrames[mTicker.Index];
     }
 
     public void AdvanceScene()
     {
       mTicker.Advance();
-    }
-
-    public int FrameLength
-    {
-      get
-      {
-        return mScene.Frames[mTicker.Index].Length;
-      }
     }
 
     public bool IsLightEnabled

@@ -24,8 +24,7 @@ namespace Server
         while (true)
         {
           GetNewScene();
-          ApplyNextFrame();
-          WaitforInterval();
+          ActNextFrame();
           AdvanceScene();
         }
       }
@@ -59,7 +58,7 @@ namespace Server
       }
     }
 
-    private void ApplyNextFrame()
+    private void ActNextFrame()
     {
       var lFrame = mManager.GetNextFrame();
 
@@ -77,6 +76,8 @@ namespace Server
       {
         UpdateRumble(lFrame.Rumble);
       }
+
+      WaitforInterval(lFrame.Length);
     }
 
     private void UpdateLights(LightComponent xiLights)
@@ -144,9 +145,9 @@ namespace Server
       //qqUMI Rumble not supported yet
     }
 
-    private void WaitforInterval()
+    private void WaitforInterval(int xiLength)
     {
-      Thread.Sleep(mManager.FrameLength);
+      Thread.Sleep(xiLength);
     }
 
     private void AdvanceScene()

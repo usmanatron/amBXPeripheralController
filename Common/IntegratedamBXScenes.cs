@@ -90,17 +90,29 @@ namespace Common
 
     #endregion
 
-    private amBXScene BasicScene = new amBXScene
+    private amBXScene BasicScene
     {
-      IsExclusive = true,
-      Frames = new List<Frame>()
-    };
-
-    private Frame BasicFrame = new Frame
-                               {
-                                 IsRepeated = true,
-                                 Length = 1000
-                               };
+      get
+      {
+        return new amBXScene
+               {
+                 IsExclusive = true,
+                 Frames = new List<Frame>()
+               };
+      }
+    }
+    
+    private Frame BasicFrame
+    {
+      get
+      {
+        return new Frame
+               {
+                 IsRepeated = true,
+                 Length = 1000
+               };
+      }
+    }
     
     #endregion
 
