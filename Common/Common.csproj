@@ -39,14 +39,15 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Messaging" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Communicationsettings.cs" />
+    <Compile Include="Communication\Communicationsettings.cs" />
+    <Compile Include="Communication\INotificationService.cs" />
     <Compile Include="Entities\ComponentBase.cs" />
     <Compile Include="IntegratedamBXSceneAccessor.cs" />
     <Compile Include="IntegratedamBXScenes.cs" />

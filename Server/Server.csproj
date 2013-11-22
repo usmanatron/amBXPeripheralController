@@ -42,17 +42,15 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Messaging" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="amBXSceneManager.cs" />
     <Compile Include="AtypicalFirstRunInfiniteTicker.cs" />
-    <Compile Include="Communication\MSMQAdministrator.cs" />
-    <Compile Include="Communication\MessageParser.cs" />
-    <Compile Include="Communication\NamedPipeClient.cs" />
+    <Compile Include="Communication\NotificationService.cs" />
     <Compile Include="Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerTask.cs" />

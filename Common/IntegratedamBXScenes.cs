@@ -206,7 +206,7 @@ namespace Common
         var lRedBlue = BasicFrame;
         var lBlueRed = BasicFrame;
 
-        lPurple.IsRepeated = true;
+        lPurple.IsRepeated = false;
         lPurple.Length = 2000;
         lPurple.Lights = new LightComponent
                          {

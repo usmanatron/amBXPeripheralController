@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Client.Communication;
+using System.ServiceModel;
+using Common.Communication;
 
 namespace Client
 {
@@ -22,8 +23,20 @@ namespace Client
 
     public void Push()
     {
-      var lQueueWriter = new MSMQWriter();
-      lQueueWriter.SendMessage(mArgs.InputScene);
+      var lClient = new ChannelFactory<INotificationService>(
+        new BasicHttpBinding(), 
+        CommunicationSettings.ServiceUrl);
+
+      var lOutput = mArgs.IsIntegratedScene 
+        ? lClient.CreateChannel().RunIntegratedScene(mArgs.SceneName) 
+        : lClient.CreateChannel().RunCustomScene(mArgs.CustomScene);
+
+      if (!string.IsNullOrEmpty(lOutput))
+      {
+        Console.WriteLine("An error occurred when communicating to the server:");
+        Console.WriteLine(Environment.NewLine);
+        Console.WriteLine(lOutput);
+      }
     }
 
     private readonly ArgumentReader mArgs;

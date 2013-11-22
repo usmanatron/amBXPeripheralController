@@ -1,6 +1,8 @@
-﻿using System.Threading;
+﻿using System.ServiceModel;
+using System.Threading;
 using amBXLib;
 using Common;
+using Common.Communication;
 using Common.Entities;
 using Server.Communication;
 
@@ -10,9 +12,18 @@ namespace Server
   {
     public ServerTask()
     {
-      MSMQAdministrator.SetupQueueAccess();
-      mDefaultsAccessor = new IntegratedamBXSceneAccessor();
-      mManager = new amBXSceneManager(mDefaultsAccessor.GetScene("Default_RedVsBlue"));
+      SetupAccess();
+      mIntegratedSceneAccessor = new IntegratedamBXSceneAccessor();
+      Manager = new amBXSceneManager(mIntegratedSceneAccessor.GetScene("Default_RedVsBlue"));
+    }
+
+    private void SetupAccess()
+    {
+      mHost = new ServiceHost(typeof (NotificationService));
+      mHost.AddServiceEndpoint(typeof (INotificationService), 
+                               new BasicHttpBinding(),
+                               CommunicationSettings.ServiceUrl);
+      mHost.Open();
     }
 
     public void Run()
@@ -23,9 +34,11 @@ namespace Server
 
         while (true)
         {
-          GetNewScene();
-          ActNextFrame();
-          AdvanceScene();
+          lock (Manager)
+          {
+            ActNextFrame();
+            AdvanceScene();
+          }
         }
       }
     }
@@ -47,32 +60,21 @@ namespace Server
       mRumble = xiEngine.CreateRumble(CompassDirection.Everywhere, RelativeHeight.AnyHeight);
     }
 
-    private void GetNewScene()
-    {
-      var lScene = new MessageParser().GetNewScene();
-
-      if (lScene != null)
-      {
-        // New Scene!
-        mManager = new amBXSceneManager(lScene);
-      }
-    }
-
     private void ActNextFrame()
     {
-      var lFrame = mManager.GetNextFrame();
+      var lFrame = Manager.GetNextFrame();
 
-      if (mManager.IsLightEnabled)
+      if (Manager.IsLightEnabled)
       {
         UpdateLights(lFrame.Lights);
       }
 
-      if (mManager.IsFanEnabled)
+      if (Manager.IsFanEnabled)
       {
         UpdateFans(lFrame.Fans);
       }
 
-      if (mManager.IsRumbleEnabled)
+      if (Manager.IsRumbleEnabled)
       {
         UpdateRumble(lFrame.Rumble);
       }
@@ -88,7 +90,7 @@ namespace Server
         // this can only happen if the set of Light Frames only contains non-repeatable frames
         // and we've used them all up.  
         // In this case (and this case only!) we want to switch all lights off
-        xiLights = (LightComponent) mDefaultsAccessor.GetComponent(eComponentType.Light, "AllOff");
+        xiLights = (LightComponent) mIntegratedSceneAccessor.GetComponent(eComponentType.Light, "AllOff");
       }
 
       UpdateLight(mNorthLight, xiLights.North, xiLights.FadeTime);
@@ -118,7 +120,7 @@ namespace Server
       if (xiFans == null)
       {
         // qqUMI -  See the Light equivalent and finish properly!
-        xiFans = (FanComponent)mDefaultsAccessor.GetComponent(eComponentType.Fan, "AllOff"); //qqUMI Will throw
+        xiFans = (FanComponent)mIntegratedSceneAccessor.GetComponent(eComponentType.Fan, "AllOff"); //qqUMI Will throw
       }
 
       ApplyChangeToFan(mEastFan, xiFans.East);
@@ -139,7 +141,7 @@ namespace Server
       if (xiRumble == null)
       {
         // qqUMI -  See the Light equivalent and finish properly!
-        xiRumble = (RumbleComponent)mDefaultsAccessor.GetComponent(eComponentType.Rumble, "AllOff"); //qqUMI Will throw
+        xiRumble = (RumbleComponent)mIntegratedSceneAccessor.GetComponent(eComponentType.Rumble, "AllOff"); //qqUMI Will throw
       }
       
       //qqUMI Rumble not supported yet
@@ -152,11 +154,12 @@ namespace Server
 
     private void AdvanceScene()
     {
-      mManager.AdvanceScene();
+      Manager.AdvanceScene();
     }
 
-    private amBXSceneManager mManager;
-    private readonly IntegratedamBXSceneAccessor mDefaultsAccessor;
+    public static amBXSceneManager Manager;
+    private readonly IntegratedamBXSceneAccessor mIntegratedSceneAccessor;
+    private ServiceHost mHost;
 
     #region amBXLib Members
 
