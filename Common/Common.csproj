@@ -42,9 +42,12 @@
   <ItemGroup>
     <Compile Include="Communication\Communicationsettings.cs" />
     <Compile Include="Communication\INotificationService.cs" />
+    <Compile Include="Accessors\ComponentAccessor.cs" />
+    <Compile Include="Defaults\DefaultLightComponents.cs" />
+    <Compile Include="Defaults\DefaultLights.cs" />
+    <Compile Include="Defaults\DefaultScenes.cs" />
     <Compile Include="Entities\ComponentBase.cs" />
-    <Compile Include="IntegratedamBXSceneAccessor.cs" />
-    <Compile Include="IntegratedamBXScenes.cs" />
+    <Compile Include="Accessors\SceneAccessor.cs" />
     <Compile Include="Entities\amBXScene.cs" />
     <Compile Include="Entities\Fan.cs" />
     <Compile Include="Entities\FanComponent.cs" />

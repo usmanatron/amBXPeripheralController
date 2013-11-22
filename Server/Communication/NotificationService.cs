@@ -1,5 +1,5 @@
 ﻿using System;
-using Common;
+using Common.Accessors;
 using Common.Communication;
 using Common.Entities;
 
@@ -27,7 +27,7 @@ namespace Server.Communication
       {
         // The following line will always find a scene - if there is an error
         // it defaults to "Lights off".
-        var lScene = new IntegratedamBXSceneAccessor().GetScene(xiSceneName);
+        var lScene = new SceneAccessor().GetScene(xiSceneName);
         UpdateScene(lScene);
       }
       catch (Exception e)

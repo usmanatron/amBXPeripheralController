@@ -1,7 +1,7 @@
 ﻿using System.ServiceModel;
 using System.Threading;
 using amBXLib;
-using Common;
+using Common.Accessors;
 using Common.Communication;
 using Common.Entities;
 using Server.Communication;
@@ -13,8 +13,10 @@ namespace Server
     public ServerTask()
     {
       SetupAccess();
-      mIntegratedSceneAccessor = new IntegratedamBXSceneAccessor();
-      Manager = new amBXSceneManager(mIntegratedSceneAccessor.GetScene("Default_RedVsBlue"));
+      mComponentAccessor = new ComponentAccessor();
+      
+      var lSceneAccessor = new SceneAccessor();
+      Manager = new amBXSceneManager(lSceneAccessor.GetScene("Default_RedVsBlue"));
     }
 
     private void SetupAccess()
@@ -90,7 +92,7 @@ namespace Server
         // this can only happen if the set of Light Frames only contains non-repeatable frames
         // and we've used them all up.  
         // In this case (and this case only!) we want to switch all lights off
-        xiLights = (LightComponent) mIntegratedSceneAccessor.GetComponent(eComponentType.Light, "AllOff");
+        xiLights = (LightComponent) mComponentAccessor.GetComponent(eComponentType.Light, "AllOff");
       }
 
       UpdateLight(mNorthLight, xiLights.North, xiLights.FadeTime);
@@ -120,7 +122,7 @@ namespace Server
       if (xiFans == null)
       {
         // qqUMI -  See the Light equivalent and finish properly!
-        xiFans = (FanComponent)mIntegratedSceneAccessor.GetComponent(eComponentType.Fan, "AllOff"); //qqUMI Will throw
+        xiFans = (FanComponent)mComponentAccessor.GetComponent(eComponentType.Fan, "AllOff"); //qqUMI Will throw
       }
 
       ApplyChangeToFan(mEastFan, xiFans.East);
@@ -141,7 +143,7 @@ namespace Server
       if (xiRumble == null)
       {
         // qqUMI -  See the Light equivalent and finish properly!
-        xiRumble = (RumbleComponent)mIntegratedSceneAccessor.GetComponent(eComponentType.Rumble, "AllOff"); //qqUMI Will throw
+        xiRumble = (RumbleComponent)mComponentAccessor.GetComponent(eComponentType.Rumble, "AllOff"); //qqUMI Will throw
       }
       
       //qqUMI Rumble not supported yet
@@ -158,7 +160,7 @@ namespace Server
     }
 
     public static amBXSceneManager Manager;
-    private readonly IntegratedamBXSceneAccessor mIntegratedSceneAccessor;
+    private readonly ComponentAccessor mComponentAccessor;
     private ServiceHost mHost;
 
     #region amBXLib Members

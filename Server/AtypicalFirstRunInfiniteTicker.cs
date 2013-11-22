@@ -1,7 +1,7 @@
 ﻿namespace Server
 {
   // an infinite ticker that deals with an atypical first run (e.g. the first run has more steps, 
-  // which are subsequently dropped in subsequent runs)
+  // which are dropped in subsequent runs)
   class AtypicalFirstRunInfiniteTicker
   {
     public AtypicalFirstRunInfiniteTicker(int xiInitialCount, int xiSubsequentCount)

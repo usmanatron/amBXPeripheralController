@@ -35,7 +35,12 @@ namespace Server
 
       if (!lFrames.Any())
       {
-        // Nothing repeatable after the first run OR just nothing there (this shouldnt happen though).  Just return null.
+        // this can happen due to one of two cases:
+        // * This isn't an event and all frames are not repeatable.
+        // * there aren't any frames at all (though this should never happen)
+        // Either way, return a frame which specifies everything as off (as a failsafe)
+
+        //TODO: finish changes here
         return new Frame {Lights = null, Fans = null, Rumble = null, Length = 1000, IsRepeated = false};
       }
       return lFrames[mTicker.Index];
