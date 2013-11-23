@@ -4,7 +4,7 @@ namespace Common.Entities
 {
   public class Fan
   {
-    [XmlElement]
+    [XmlAttribute]
     public float Intensity;
   }
 }

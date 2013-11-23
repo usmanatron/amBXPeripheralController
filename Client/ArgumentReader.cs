@@ -14,9 +14,9 @@ namespace Client
 
       if (xiArguments[0] == @"/F")
       {
+        // File passed in
         IsIntegratedScene = false;
         SceneXml = RetrieveFile(xiArguments[1]);
-        // File passed in
       }
       else if (xiArguments[0] == @"/I")
       {

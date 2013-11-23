@@ -79,7 +79,7 @@ namespace Server
       mEngine.Dispose();
     }
 
-    private amBX mEngine;
+    private readonly amBX mEngine;
 
     #region amBXLib Members
 

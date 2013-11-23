@@ -43,17 +43,17 @@ namespace Server
     {
       var lFrame = Manager.GetNextFrame();
 
-      if (Manager.IsLightEnabled)
+      if (lFrame.Lights != null)
       {
         xiEngine.UpdateLights(lFrame.Lights);
       }
 
-      if (Manager.IsFanEnabled)
+      if (lFrame.Fans != null)
       {
         xiEngine.UpdateFans(lFrame.Fans);
       }
 
-      if (Manager.IsRumbleEnabled)
+      if (lFrame.Rumble != null)
       {
         xiEngine.UpdateRumble(lFrame.Rumble);
       }

@@ -66,31 +66,6 @@ namespace Server
       }
     }
 
-    public bool IsLightEnabled
-    {
-      get
-      {
-        return mCurrentScene.LightSpecified;
-      }
-    }
-
-    public bool IsFanEnabled
-    {
-      get
-      {
-        return mCurrentScene.FanSpecified;
-      }
-    }
-
-    public bool IsRumbleEnabled
-    {
-      get
-      {
-        return mCurrentScene.RumbleSpecified;
-      }
-    }
-
-
     private amBXScene mCurrentScene;
     private amBXScene mPreviousScene;
     private AtypicalFirstRunInfiniteTicker mTicker;
