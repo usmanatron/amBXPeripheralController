@@ -68,7 +68,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArgumentReader.cs" />
-    <Compile Include="amBXSceneSerialiser.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="ClientTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,9 +78,9 @@
     <None Include="Client_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{b6543e75-59af-4059-acf8-560e82bc72ce}</Project>
-      <Name>Common</Name>
+    <ProjectReference Include="..\Common.Communication\Common.Communication.csproj">
+      <Project>{38537b40-b1fd-433b-b958-8a1b3c7b83d7}</Project>
+      <Name>Common.Communication</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -29,7 +29,7 @@ namespace Client
 
       var lOutput = mArgs.IsIntegratedScene 
         ? lClient.CreateChannel().RunIntegratedScene(mArgs.SceneName) 
-        : lClient.CreateChannel().RunCustomScene(mArgs.CustomScene);
+        : lClient.CreateChannel().RunCustomScene(mArgs.SceneXml);
 
       if (!string.IsNullOrEmpty(lOutput))
       {

@@ -1,5 +1,4 @@
-﻿using Common.Entities;
-using System.ServiceModel;
+﻿using System.ServiceModel;
 
 namespace Common.Communication
 {
@@ -7,7 +6,7 @@ namespace Common.Communication
   public interface INotificationService
   {
     [OperationContract]
-    string RunCustomScene(amBXScene xiScene);
+    string RunCustomScene(string xiSceneXml);
 
     [OperationContract]
     string RunIntegratedScene(string xiSceneName);

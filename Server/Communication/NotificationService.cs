@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Xml.Serialization;
 using Common.Accessors;
 using Common.Communication;
 using Common.Entities;
@@ -7,11 +9,12 @@ namespace Server.Communication
 {
   class NotificationService : INotificationService
   {
-    public string RunCustomScene(amBXScene xiScene)
+    public string RunCustomScene(string xiSceneXml)
     {
       try
       {
-        UpdateScene(xiScene);
+        var lScene = DeserialiseScene(xiSceneXml);
+        UpdateScene(lScene);
       }
       catch (Exception e)
       {
@@ -36,6 +39,15 @@ namespace Server.Communication
       }
 
       return "";
+    }
+
+    private amBXScene DeserialiseScene(string xiSceneXml)
+    {
+      using (var lReader = new StringReader(xiSceneXml))
+      {
+        var lSerialiser = new XmlSerializer(typeof(amBXScene));
+        return (amBXScene)lSerialiser.Deserialize(lReader);
+      }
     }
 
     private void UpdateScene(amBXScene xiScene)

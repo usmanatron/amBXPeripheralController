@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using Common.Entities;
 
 namespace Client
 {
@@ -16,7 +15,7 @@ namespace Client
       if (xiArguments[0] == @"/F")
       {
         IsIntegratedScene = false;
-        CustomScene = RetrieveAndParseFile(xiArguments[1]);
+        SceneXml = RetrieveFile(xiArguments[1]);
         // File passed in
       }
       else if (xiArguments[0] == @"/I")
@@ -31,7 +30,7 @@ namespace Client
       }
     }
 
-    private amBXScene RetrieveAndParseFile(string xifilePath)
+    private string RetrieveFile(string xifilePath)
     {
       string lInputFilePath;
 
@@ -45,16 +44,19 @@ namespace Client
         throw new UsageException("Input was not a valid path");
       }
 
-      return amBXSceneSerialiser.Deserialise(lInputFilePath);
+      using (var lReader = new StreamReader(lInputFilePath))
+      {
+        return lReader.ReadToEnd();
+      }
     }
 
     public bool IsIntegratedScene { get; private set; }
 
     // When IsIntegrated Scene is true:
     // * SceneName is specified
-    // * CustomScene is null
+    // * SceneXml is null
     // this is vice versa when IsIntegratedScene is false
     public string SceneName { get; private set; }
-    public amBXScene CustomScene { get; private set; }
+    public string SceneXml { get; private set; }
   }
 }

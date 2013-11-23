@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B6543E75-59AF-4059-ACF8-560E82BC72CE}</ProjectGuid>
+    <ProjectGuid>{38537B40-B1FD-433B-B958-8A1B3C7B83D7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Common</RootNamespace>
-    <AssemblyName>Common</AssemblyName>
+    <RootNamespace>Common.Communication</RootNamespace>
+    <AssemblyName>Common.Communication</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -21,7 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,32 +29,16 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Accessors\FrameAccessor.cs" />
-    <Compile Include="Accessors\ComponentAccessor.cs" />
-    <Compile Include="Defaults\DefaultRumbleComponents.cs" />
-    <Compile Include="Defaults\DefaultFanComponents.cs" />
-    <Compile Include="Defaults\DefaultFans.cs" />
-    <Compile Include="Defaults\DefaultLightComponents.cs" />
-    <Compile Include="Defaults\DefaultLights.cs" />
-    <Compile Include="Defaults\DefaultScenes.cs" />
-    <Compile Include="Entities\ComponentBase.cs" />
-    <Compile Include="Accessors\SceneAccessor.cs" />
-    <Compile Include="Entities\amBXScene.cs" />
-    <Compile Include="Entities\Fan.cs" />
-    <Compile Include="Entities\FanComponent.cs" />
-    <Compile Include="Entities\Frame.cs" />
-    <Compile Include="Entities\Light.cs" />
-    <Compile Include="Entities\LightComponent.cs" />
-    <Compile Include="Entities\RumbleComponent.cs" />
+    <Compile Include="Communicationsettings.cs" />
+    <Compile Include="INotificationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
