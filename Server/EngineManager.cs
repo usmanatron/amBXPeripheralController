@@ -1,6 +1,5 @@
 ﻿using System;
 using amBXLib;
-using Common.Accessors;
 using Common.Entities;
 
 namespace Server
@@ -10,7 +9,6 @@ namespace Server
   {
     public EngineManager()
     {
-      mComponentAccessor = new ComponentAccessor();
       mEngine = new amBX(1, 0, "amBXNotification", "1.0");
       InitialiseEngine(mEngine);
     }
@@ -35,15 +33,6 @@ namespace Server
 
     internal void UpdateLights(LightComponent xiLights)
     {
-      //qqUMI Remove this null check by adding the AllOff stuff into the null case of GetNextframe()
-      if (xiLights == null)
-      {
-        // this can only happen if the set of Light Frames only contains non-repeatable frames
-        // and we've used them all up.  
-        // In this case (and this case only!) we want to switch all lights off
-        xiLights = (LightComponent)mComponentAccessor.GetComponent(eComponentType.Light, "AllOff");
-      }
-
       UpdateLight(mNorthLight, xiLights.North, xiLights.FadeTime);
       UpdateLight(mNorthEastLight, xiLights.NorthEast, xiLights.FadeTime);
       UpdateLight(mEastLight, xiLights.East, xiLights.FadeTime);
@@ -67,12 +56,6 @@ namespace Server
 
     internal void UpdateFans(FanComponent xiFans)
     {
-      if (xiFans == null)
-      {
-        // qqUMI -  See the Light equivalent and finish properly!
-        xiFans = (FanComponent)mComponentAccessor.GetComponent(eComponentType.Fan, "AllOff"); //qqUMI Will throw
-      }
-
       UpdateFan(mEastFan, xiFans.East);
       UpdateFan(mWestFan, xiFans.West);
     }
@@ -88,12 +71,6 @@ namespace Server
 
     public void UpdateRumble(RumbleComponent xiRumble)
     {
-      if (xiRumble == null)
-      {
-        // qqUMI -  See the Light equivalent and finish properly!
-        xiRumble = (RumbleComponent)mComponentAccessor.GetComponent(eComponentType.Rumble, "AllOff"); //qqUMI Will throw
-      }
-
       //qqUMI Rumble not supported yet
     }
 
@@ -102,7 +79,6 @@ namespace Server
       mEngine.Dispose();
     }
 
-    private readonly ComponentAccessor mComponentAccessor;
     private amBX mEngine;
 
     #region amBXLib Members

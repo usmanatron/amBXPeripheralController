@@ -40,9 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accessors\FrameAccessor.cs" />
     <Compile Include="Communication\Communicationsettings.cs" />
     <Compile Include="Communication\INotificationService.cs" />
     <Compile Include="Accessors\ComponentAccessor.cs" />
+    <Compile Include="Defaults\DefaultRumbleComponents.cs" />
+    <Compile Include="Defaults\DefaultFanComponents.cs" />
+    <Compile Include="Defaults\DefaultFans.cs" />
     <Compile Include="Defaults\DefaultLightComponents.cs" />
     <Compile Include="Defaults\DefaultLights.cs" />
     <Compile Include="Defaults\DefaultScenes.cs" />

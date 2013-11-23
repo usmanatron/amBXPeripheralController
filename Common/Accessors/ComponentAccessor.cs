@@ -11,11 +11,11 @@ namespace Common.Accessors
       switch (xiFrametype)
       {
         case eComponentType.Light:
-          return GetLightComponent(xiDescription);
+          return GetLightComponent(xiDescription.ToLower());
         case eComponentType.Fan:
-          return GetFanComponent(xiDescription);
+          return GetFanComponent(xiDescription.ToLower());
         case eComponentType.Rumble:
-          return GetRumbleComponent(xiDescription);
+          return GetRumbleComponent(xiDescription.ToLower());
         default:
           throw new InvalidOperationException("Unexpected Frame type");
       }
@@ -25,7 +25,7 @@ namespace Common.Accessors
     {
       switch (xiDescription)
       {
-        case "AllOff":
+        case "off":
           return DefaultLightComponents.Off;
         default:
           throw new InvalidOperationException("Unexpected Light frame type");
@@ -34,12 +34,24 @@ namespace Common.Accessors
 
     private FanComponent GetFanComponent(string xiDescription)
     {
-      throw new NotImplementedException();
+      switch (xiDescription)
+      {
+        case "off":
+          return DefaultFanComponents.Off;
+        default:
+          throw new InvalidOperationException("Unexpected Fan frame type");
+      }
     }
 
     private RumbleComponent GetRumbleComponent(string xiDescription)
     {
-      throw new NotImplementedException();
+      switch (xiDescription)
+      {
+        case "off":
+          return DefaultRumbleComponents.Off;
+        default:
+          throw new InvalidOperationException("Unexpected Rumble frame type");
+      }
     }
 
   }
