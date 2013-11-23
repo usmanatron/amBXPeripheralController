@@ -35,10 +35,10 @@ namespace Server
 
       if (!lFrames.Any())
       {
-        // this can happen due to one of two cases:
+        // this can only happen in one of two cases:
         // * This isn't an event and all frames are not repeatable.
         // * there aren't any frames at all (though this should never happen)
-        // Either way, return a frame which specifies everything as off (as a failsafe)
+        // Either way, return a frame which specifies everything off (as a failsafe)
 
         //TODO: finish changes here
         return new Frame {Lights = null, Fans = null, Rumble = null, Length = 1000, IsRepeated = false};
@@ -56,7 +56,6 @@ namespace Server
         // previous scene
         SetupNewScene(mPreviousScene);
       }
-
     }
 
     public bool IsLightEnabled
