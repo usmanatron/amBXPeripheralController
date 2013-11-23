@@ -17,7 +17,16 @@ namespace Server
 
     public void UpdateScene(amBXScene xiNewScene)
     {
-      mPreviousScene = mCurrentScene;
+      if (xiNewScene.IsEvent && mCurrentScene.IsEvent)
+      {
+        // Skip updating the previous scene, to ensure that we don't get 
+        // stuck in an infinite loop of events.
+      }
+      else
+      {
+        mPreviousScene = mCurrentScene;
+      }
+
       SetupNewScene(xiNewScene);
     }
 
