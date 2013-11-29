@@ -8,7 +8,7 @@ It'll never repeat the all-purple "Frame" - this is what I mean by IsRepeated be
 -->
 <amBXScene IsExclusive="true">
   <Frames>
-    <Frame Length="5000" IsRepeated="false">
+    <Frame Length="4000" IsRepeated="false">
       <Lights FadeTime="100">
         <!-- Start with all purple, non-repeated-->
         <West      Intensity="0.5" Red="0.5" Green="0" Blue="1" />
@@ -17,6 +17,16 @@ It'll never repeat the all-purple "Frame" - this is what I mean by IsRepeated be
         <NorthEast Intensity="0.5" Red="0.5" Green="0" Blue="1" />
         <East      Intensity="0.5" Red="0.5" Green="0" Blue="1" />
       </Lights>
+      <Fans>
+        <East      Intensity="1" />
+        <West      Intensity="1" />
+      </Fans>
+    </Frame>
+    <Frame Length="10" IsRepeated="false">
+      <Fans>
+        <East      Intensity="0" />
+        <West      Intensity="0" />
+      </Fans>
     </Frame>
     <Frame Length="1500" IsRepeated="true">
       <Lights FadeTime="100">

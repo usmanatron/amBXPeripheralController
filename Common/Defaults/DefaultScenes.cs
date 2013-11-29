@@ -92,11 +92,12 @@ namespace Common.Defaults
       {
         var lScene = BasicScene;
         var lPurple = BasicFrame;
+        var lDisableFans = BasicFrame;
         var lRedBlue = BasicFrame;
         var lBlueRed = BasicFrame;
 
         lPurple.IsRepeated = false;
-        lPurple.Length = 2000;
+        lPurple.Length = 4000;
         lPurple.Lights = new LightComponent
                          {
                            FadeTime = 100,
@@ -106,6 +107,19 @@ namespace Common.Defaults
                            NorthEast = DefaultLights.SoftPurple,
                            East = DefaultLights.SoftPurple
                          };
+        lPurple.Fans = new FanComponent
+                       {
+                         East = DefaultFans.FullPower,
+                         West = DefaultFans.FullPower
+                       };
+
+        lDisableFans.IsRepeated = false;
+        lDisableFans.Length = 10;
+        lDisableFans.Fans = new FanComponent
+                            {
+                              East = DefaultFans.Off,
+                              West = DefaultFans.Off
+                            };
 
         lRedBlue.Lights = new LightComponent
                           {
