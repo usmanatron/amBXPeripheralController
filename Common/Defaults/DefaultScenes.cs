@@ -14,7 +14,7 @@ namespace Common.Defaults
         var lScene = BasicScene;
         var lFrame = BasicFrame;
         lFrame.Lights = DefaultLightComponents.Red;
-        lScene.Frames = new List<Frame> { BasicFrame };
+        lScene.Frames = new List<Frame> { lFrame };
         return lScene;
       }
     }
