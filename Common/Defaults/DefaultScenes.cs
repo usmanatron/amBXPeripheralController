@@ -140,7 +140,7 @@ namespace Common.Defaults
                             East = DefaultLights.Red
                           };
 
-        lScene.Frames = new List<Frame> {lPurple, lRedBlue, lBlueRed};
+        lScene.Frames = new List<Frame> {lPurple, lDisableFans, lRedBlue, lBlueRed};
         return lScene;
       }
     }
