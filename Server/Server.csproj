@@ -81,6 +81,7 @@
   <ItemGroup>
     <Compile Include="amBXSceneManager.cs" />
     <Compile Include="AtypicalFirstRunInfiniteTicker.cs" />
+    <Compile Include="Communication\CommunicationManager.cs" />
     <Compile Include="Communication\NotificationService.cs" />
     <Compile Include="EngineManager.cs" />
     <Compile Include="Server.cs" />

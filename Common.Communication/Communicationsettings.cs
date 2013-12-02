@@ -2,6 +2,9 @@
 {
     public static class CommunicationSettings
     {
-      public const string ServiceUrl = @"http://jackalope.zoo.lan/amBXNotification";
+      // Template to use for the Url - [HOSTNAME] needs to be replaced with
+      // the actual hostname to use.
+      public const string HostnameHolder = @"[HOSTNAME]";
+      public const string ServiceUrlTemplate = @"http://" + HostnameHolder + "/amBXNotification";
     }
 }

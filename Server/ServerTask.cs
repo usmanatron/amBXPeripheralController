@@ -1,7 +1,5 @@
-﻿using System.ServiceModel;
-using System.Threading;
+﻿using System.Threading;
 using Common.Accessors;
-using Common.Communication;
 using Server.Communication;
 
 namespace Server
@@ -10,22 +8,13 @@ namespace Server
   {
     public ServerTask()
     {
-      SetupAccess();
       var lSceneAccessor = new SceneAccessor();
       Manager = new amBXSceneManager(lSceneAccessor.GetScene("Default_RedVsBlue"));
     }
 
-    private void SetupAccess()
-    {
-      mHost = new ServiceHost(typeof (NotificationService));
-      mHost.AddServiceEndpoint(typeof (INotificationService), 
-                               new BasicHttpBinding(),
-                               CommunicationSettings.ServiceUrl);
-      mHost.Open();
-    }
-
     public void Run()
     {
+      using (new CommunicationManager()) 
       using (var lEngine = new EngineManager())
       {
         while (true)
@@ -73,6 +62,5 @@ namespace Server
     }
 
     public static amBXSceneManager Manager;
-    private ServiceHost mHost;
   }
 }
