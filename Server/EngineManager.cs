@@ -1,6 +1,7 @@
 ﻿using System;
 using amBXLib;
 using Common.Entities;
+using Common.Integration;
 
 namespace Server
 {
@@ -69,9 +70,35 @@ namespace Server
       xiFan.Intensity = xiInputFan.Intensity;
     }
 
-    public void UpdateRumble(RumbleComponent xiRumble)
+    internal void UpdateRumbles(RumbleComponent xiInputRumble)
     {
-      //qqUMI Rumble not supported yet
+      UpdateRumble(mRumble, xiInputRumble);
+    }
+
+    private void UpdateRumble(amBXRumble xiRumble, RumbleComponent xiInputRumble)
+    {
+      if (xiInputRumble == null)
+      {
+        return;
+      }
+
+      RumbleType lRumbleType;
+
+      try
+      {
+        lRumbleType = RumbleTypeConverter.GetRumbleType(xiInputRumble.RumbleType);
+      }
+      catch (InvalidRumbleException)
+      {
+        return;
+      }
+
+      xiRumble.RumbleSetting = new amBXRumbleSetting
+                               {
+                                 Intensity = xiInputRumble.Intensity,
+                                 Speed = xiInputRumble.Speed,
+                                 Type = lRumbleType
+                               };
     }
 
     public void Dispose()

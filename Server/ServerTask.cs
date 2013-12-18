@@ -45,7 +45,7 @@ namespace Server
 
       if (lFrame.Rumble != null)
       {
-        xiEngine.UpdateRumble(lFrame.Rumble);
+        xiEngine.UpdateRumbles(lFrame.Rumble);
       }
 
       WaitforInterval(lFrame.Length);

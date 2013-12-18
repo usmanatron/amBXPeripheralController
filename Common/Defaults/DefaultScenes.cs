@@ -191,6 +191,7 @@ namespace Common.Defaults
           NorthEast = DefaultLights.SoftPink,
           East = DefaultLights.SoftPink
         };
+        lPrePink.Rumble = DefaultRumbleComponents.Off;
 
         var lPurple = BasicFrame;
         lPurple.IsRepeated = false;
@@ -209,6 +210,7 @@ namespace Common.Defaults
           East = DefaultFans.FullPower,
           West = DefaultFans.FullPower
         };
+        lPurple.Rumble = DefaultRumbleComponents.Thunder;
 
 
         var lPostPink = BasicFrame;
@@ -228,6 +230,7 @@ namespace Common.Defaults
           East = DefaultFans.Off,
           West = DefaultFans.Off
         };
+        lPostPink.Rumble = DefaultRumbleComponents.Off;
 
         lScene.Frames = new List<Frame> {lPrePink, lPurple, lPostPink};
         return lScene;
