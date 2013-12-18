@@ -23,9 +23,11 @@ namespace Client
 
     public void Push()
     {
+      //This client only supports pushing to localhost
       var lClient = new ChannelFactory<INotificationService>(
-        new BasicHttpBinding(), 
-        CommunicationSettings.ServiceUrl);
+        new BasicHttpBinding(),
+        CommunicationSettings.ServiceUrlTemplate
+        .Replace(CommunicationSettings.HostnameHolder, "localhost"));
 
       var lOutput = mArgs.IsIntegratedScene 
         ? lClient.CreateChannel().RunIntegratedScene(mArgs.SceneName) 
