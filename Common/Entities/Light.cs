@@ -15,8 +15,5 @@ namespace Common.Entities
 
     [XmlAttribute] 
     public float Blue;
-    // An actual light.  Has colours etc
-
-    
   }
 }

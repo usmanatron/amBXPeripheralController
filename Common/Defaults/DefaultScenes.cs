@@ -97,7 +97,7 @@ namespace Common.Defaults
         var lBlueRed = BasicFrame;
 
         lPurple.IsRepeated = false;
-        lPurple.Length = 4000;
+        lPurple.Length = 2000;
         lPurple.Lights = new LightComponent
                          {
                            FadeTime = 100,
