@@ -9,6 +9,7 @@ namespace Server
     public ServerTask()
     {
       var lSceneAccessor = new SceneAccessor();
+      // The "Default_RedVsBlue" scene definitely exists
       Manager = new amBXSceneManager(lSceneAccessor.GetScene("Default_RedVsBlue"));
     }
 

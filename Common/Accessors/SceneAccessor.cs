@@ -23,10 +23,15 @@ namespace Common.Accessors
 
         case "Default_RedVsBlue":
           return mDefaultScenes.DefaultRedVsBlue;
+        case "PoolQ2_Event":
+          return mDefaultScenes.PoolQ_Event;
+
+        case "Error_Flash":
+          return mDefaultScenes.Error_Flash;
 
         default:
-          Console.WriteLine("Integrated scene with description {0} not found - defaulting to off.", xiDescription);
-          return mDefaultScenes.LightsOff;
+          Console.WriteLine("Integrated scene with description {0} not found.", xiDescription);
+          return null;
       }
     }
 

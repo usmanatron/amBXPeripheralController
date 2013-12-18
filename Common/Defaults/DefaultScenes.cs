@@ -145,6 +145,95 @@ namespace Common.Defaults
       }
     }
 
+    public amBXScene Error_Flash
+    {
+      get
+      {
+        var lScene = BasicScene;
+        lScene.IsEvent = true;
+
+        var lOff = BasicFrame;
+        lOff.Length = 100;
+        lOff.Lights = DefaultLightComponents.Off;
+        lOff.Lights.FadeTime = 10;
+
+        var lError = BasicFrame;
+        lError.Length = 200;
+        lError.Lights = DefaultLightComponents.Red;
+        lError.Lights.FadeTime = 10;
+
+        lScene.Frames = new List<Frame> { lOff, lError, lOff, lError, lOff };
+        return lScene;
+      }
+    }
+
+    #endregion
+
+    #region PoolQ2
+
+    public amBXScene PoolQ_Event
+    {
+      get
+      {
+        var lScene = BasicScene;
+        lScene.IsEvent = true;
+        lScene.IsExclusive = true;
+
+        var lPrePink  = BasicFrame;
+        lPrePink.IsRepeated = false;
+        lPrePink.Length = 200;
+        lPrePink.Lights = new LightComponent
+        {
+          FadeTime = 100,
+          West = DefaultLights.SoftPink,
+          NorthWest = DefaultLights.SoftPink,
+          North = DefaultLights.SoftPink,
+          NorthEast = DefaultLights.SoftPink,
+          East = DefaultLights.SoftPink
+        };
+
+        var lPurple = BasicFrame;
+        lPurple.IsRepeated = false;
+        lPurple.Length = 1000;
+        lPurple.Lights = new LightComponent
+        {
+          FadeTime = 200,
+          West = DefaultLights.StrongPurple,
+          NorthWest = DefaultLights.StrongPurple,
+          North = DefaultLights.StrongPurple,
+          NorthEast = DefaultLights.StrongPurple,
+          East = DefaultLights.StrongPurple
+        };
+        lPurple.Fans = new FanComponent
+        {
+          East = DefaultFans.FullPower,
+          West = DefaultFans.FullPower
+        };
+
+
+        var lPostPink = BasicFrame;
+        lPostPink.IsRepeated = false;
+        lPostPink.Length = 500;
+        lPostPink.Lights = new LightComponent
+        {
+          FadeTime = 100,
+          West = DefaultLights.SoftPink,
+          NorthWest = DefaultLights.SoftPink,
+          North = DefaultLights.SoftPink,
+          NorthEast = DefaultLights.SoftPink,
+          East = DefaultLights.SoftPink
+        };
+        lPostPink.Fans = new FanComponent
+        {
+          East = DefaultFans.Off,
+          West = DefaultFans.Off
+        };
+
+        lScene.Frames = new List<Frame> {lPrePink, lPurple, lPostPink};
+        return lScene;
+      }
+    }
+
     #endregion
 
     #region Helpers

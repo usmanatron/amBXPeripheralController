@@ -28,9 +28,15 @@ namespace Server.Communication
     {
       try
       {
-        // The following line will always find a scene - if there is an error
-        // it defaults to "Lights off".
-        var lScene = new SceneAccessor().GetScene(xiSceneName);
+        var lAccessor = new SceneAccessor();
+
+        var lScene = lAccessor.GetScene(xiSceneName);
+        if (lScene == null)
+        {
+          // We failed to find the scene - show the error visually
+          lScene = lAccessor.GetScene("Error_Flash");
+        }
+
         UpdateScene(lScene);
       }
       catch (Exception e)
