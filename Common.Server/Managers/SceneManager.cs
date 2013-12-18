@@ -3,11 +3,11 @@ using System.ServiceModel;
 using Common.Accessors;
 using Common.Entities;
 
-namespace Server
+namespace Common.Server.Managers
 {
-  class amBXSceneManager
+  public class SceneManager
   {
-    public amBXSceneManager(amBXScene xiScene)
+    public SceneManager(amBXScene xiScene)
     {
       if (xiScene.IsEvent)
       {

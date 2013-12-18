@@ -79,9 +79,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="amBXSceneManager.cs" />
-    <Compile Include="AtypicalFirstRunInfiniteTicker.cs" />
-    <Compile Include="Communication\CommunicationManager.cs" />
     <Compile Include="Communication\NotificationService.cs" />
     <Compile Include="EngineManager.cs" />
     <Compile Include="Server.cs" />
@@ -100,6 +97,10 @@
     <ProjectReference Include="..\Common.Integration\Common.Integration.csproj">
       <Project>{8fde532f-942f-432d-8926-6f4818737d1a}</Project>
       <Name>Common.Integration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common.Server\Common.Server.csproj">
+      <Project>{2165053e-6a4d-4718-bbf9-55301ced1d28}</Project>
+      <Name>Common.Server</Name>
     </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{b6543e75-59af-4059-acf8-560e82bc72ce}</Project>

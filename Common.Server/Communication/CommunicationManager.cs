@@ -2,19 +2,19 @@
 using System.ServiceModel;
 using Common.Communication;
 
-namespace Server.Communication
+namespace Common.Server.Communication
 {
-  class CommunicationManager : IDisposable
+  public class CommunicationManager : IDisposable
   {
-    public CommunicationManager()
+    public CommunicationManager(NotificationServiceBase xiNotificationService)
     {
-      SetupHost();
+      SetupHost(xiNotificationService);
       mHost.Open();
     }
 
-    private void SetupHost()
+    private void SetupHost(NotificationServiceBase xiNotificationService)
     {
-      mHost = new ServiceHost(typeof (NotificationService));
+      mHost = new ServiceHost(xiNotificationService.GetType());
 
       AddEndpoint(CommunicationSettings.ServiceUrlTemplate.
         Replace(CommunicationSettings.HostnameHolder, System.Net.Dns.GetHostName()));

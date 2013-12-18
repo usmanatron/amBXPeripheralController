@@ -1,5 +1,7 @@
 ﻿using System.Threading;
 using Common.Accessors;
+using Common.Server.Communication;
+using Common.Server.Managers;
 using Server.Communication;
 
 namespace Server
@@ -10,12 +12,12 @@ namespace Server
     {
       var lSceneAccessor = new SceneAccessor();
       // The "Default_RedVsBlue" scene definitely exists
-      Manager = new amBXSceneManager(lSceneAccessor.GetScene("Default_RedVsBlue"));
+      Manager = new SceneManager(lSceneAccessor.GetScene("Default_RedVsBlue"));
     }
 
     public void Run()
     {
-      using (new CommunicationManager()) 
+      using (new CommunicationManager(new NotificationService())) 
       using (var lEngine = new EngineManager())
       {
         while (true)
@@ -62,6 +64,6 @@ namespace Server
       Manager.AdvanceScene();
     }
 
-    public static amBXSceneManager Manager;
+    public static SceneManager Manager;
   }
 }
