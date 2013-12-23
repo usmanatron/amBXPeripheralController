@@ -11,15 +11,17 @@ using amBXLib;
 
 namespace Server
 {
-  public class SceneApplicator : ApplicatorBase<Frame>
+  public class FrameApplicator : ApplicatorBase<Frame>
   {
-    public SceneApplicator(EngineManager xiEngine) : base (xiEngine, new SceneManager())
+    public FrameApplicator(EngineManager xiEngine) : base (xiEngine, new FrameManager())
     {
     }
 
     protected override void ActNextFrame()
     {
-      var lFrame = mManager.GetNext();
+      var lFrameData = mManager.GetNext();
+      var lFrame = lFrameData.Item;
+
 
       if (lFrame.Lights != null)
       {

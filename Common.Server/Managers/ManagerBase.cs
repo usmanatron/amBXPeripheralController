@@ -50,7 +50,7 @@ namespace Common.Server.Managers
 
     protected abstract bool SceneIsApplicable(amBXScene xiNewScene);
 
-    public abstract T GetNext();
+    public abstract Data<T> GetNext();
 
     protected Frame GetNextFrame()
     {
@@ -68,8 +68,6 @@ namespace Common.Server.Managers
       }
       return lFrames[mTicker.Index];
     }
-
-
 
     public void AdvanceScene()
     {

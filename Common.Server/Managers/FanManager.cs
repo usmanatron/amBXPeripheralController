@@ -29,12 +29,12 @@ namespace Common.Server.Managers
       return lFans.Any(fan => fan != null);
     }
 
-    public override Fan GetNext()
+    public override Data<Fan> GetNext()
     {
       var lFrame = GetNextFrame();
       var lFan = CompassDirectionConverter.GetFan(mDirection, lFrame.Fans);
 
-      return lFan;
+      return new Data<Fan>(lFan, lFrame.Fans.FadeTime, lFrame.Length);
     }
 
     eComponentType mComponentType;

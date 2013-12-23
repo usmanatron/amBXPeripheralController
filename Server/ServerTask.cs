@@ -12,7 +12,7 @@ namespace Server
       using (new CommunicationManager(new NotificationService())) 
       using (var lEngine = new EngineManager())
       {
-        var lApplicator = new SceneApplicator(lEngine);
+        var lApplicator = new FrameApplicator(lEngine);
 
         while (true)
         {

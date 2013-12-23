@@ -3,7 +3,7 @@ using Common.Server.Managers;
 
 namespace Server
 {
-  public class SceneManager : ManagerBase<Frame>
+  public class FrameManager : ManagerBase<Frame>
   {
     protected override bool SceneIsApplicable(amBXScene xiNewScene)
     {
@@ -11,9 +11,10 @@ namespace Server
       return true;
     }
 
-    public override Frame GetNext()
+    public override Data<Frame> GetNext()
     {
-      return base.GetNextFrame();
+      var lFrame = base.GetNextFrame();
+      return new Data<Frame>(lFrame, 0, lFrame.Length);
     }
   }
 }

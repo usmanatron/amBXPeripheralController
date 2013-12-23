@@ -7,7 +7,7 @@ namespace Server.Communication
   {
     protected override void UpdateScene(amBXScene xiScene)
     {
-      SceneApplicator.UpdateManager(xiScene);
+      FrameApplicator.UpdateManager(xiScene);
     }
   }
 }

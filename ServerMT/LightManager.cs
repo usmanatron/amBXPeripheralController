@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Server.Managers;
 
-namespace Common.Server.Managers
+namespace ServerMT
 {
   class LightManager : ManagerBase<Light>
   {
@@ -29,12 +30,15 @@ namespace Common.Server.Managers
       return lLights.Any(light => light != null);
     }
 
-    public override Light GetNext()
+    public override Data<Light> GetNext()
     {
       var lFrame = GetNextFrame();
+
+      var lLength = lFrame.Length;
+      var lFadeTime = lFrame.Lights.FadeTime;
       var lLight = CompassDirectionConverter.GetLight(mDirection, lFrame.Lights);
 
-      return lLight;
+      return new Data<Light>(lLight, lFadeTime, lLength);
     }
 
     eComponentType mComponentType;
