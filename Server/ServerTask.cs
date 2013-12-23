@@ -33,7 +33,7 @@ namespace Server
 
     private void ActNextFrame(EngineManager xiEngine)
     {
-      var lFrame = Manager.GetNextFrame();
+      var lFrame = Manager.GetNext();
 
       if (lFrame.Lights != null)
       {

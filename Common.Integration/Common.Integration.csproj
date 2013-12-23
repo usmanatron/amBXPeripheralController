@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompassDirectionConverter.cs" />
     <Compile Include="InvalidRumbleException.cs" />
     <Compile Include="RumbleTypeConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
