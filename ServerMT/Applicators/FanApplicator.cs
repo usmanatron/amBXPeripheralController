@@ -2,9 +2,10 @@
 using Common.Server.Applicators;
 using Common.Entities;
 using Common.Server.Managers;
+using ServerMT.Managers;
 using amBXLib;
 
-namespace ServerMT
+namespace ServerMT.Applicators
 {
   class FanApplicator : ApplicatorBase<Fan>
   {

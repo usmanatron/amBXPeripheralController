@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
-using Common.Server.Applicators;
+﻿using Common.Server.Applicators;
 using Common.Entities;
 using Common.Server.Managers;
+using ServerMT.Managers;
 using amBXLib;
+using System;
 
 namespace ServerMT
 {
@@ -20,6 +21,8 @@ namespace ServerMT
 
       if (lLightData != null)
       {
+        //Debug
+        Console.WriteLine(mDirection + " - UpdateLight - " + DateTime.Now.Ticks);
         mEngine.UpdateLight(mDirection, lLightData.Item, lLightData.FadeTime);
       }
 

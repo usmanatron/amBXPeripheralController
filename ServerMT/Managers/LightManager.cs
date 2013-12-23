@@ -5,7 +5,7 @@ using System.Linq;
 using Common.Server.Managers;
 using System;
 
-namespace ServerMT
+namespace ServerMT.Managers
 {
   class LightManager : ManagerBase<Light>
   {
@@ -34,6 +34,9 @@ namespace ServerMT
 
     public override Data<Light> GetNext()
     {
+      //Debug
+      Console.WriteLine(mDirection + " - GetNext     - " + DateTime.Now.Ticks);
+
       var lFrame = GetNextFrame();
 
       var lLength = lFrame.Length;
