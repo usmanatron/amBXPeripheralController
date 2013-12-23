@@ -4,6 +4,7 @@ using System;
 using amBXLib;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Common.Server.Managers
 {
@@ -62,7 +63,7 @@ namespace Common.Server.Managers
 
     public void UpdateLight(CompassDirection xiDirection, Light xiInputLight, int xiFadeTime)
     {
-      UpdateLightInternal(mLights[xiDirection], xiInputLight, xiFadeTime);
+      ThreadPool.QueueUserWorkItem(_ => UpdateLightInternal(mLights[xiDirection], xiInputLight, xiFadeTime));
     }
 
     private void UpdateLightInternal(amBXLight xiLight, Light xiInputLight, int xiFadeTime)

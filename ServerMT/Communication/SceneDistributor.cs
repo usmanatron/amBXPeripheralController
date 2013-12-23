@@ -16,7 +16,17 @@ namespace ServerMT.Communication
 
     public void Distribute()
     {
-      throw new NotImplementedException();
+      foreach (var lLight in ServerTask.Lights)
+      {
+        lLight.Value.UpdateManager(mScene);
+      }
+
+      foreach (var lFan in ServerTask.Fans)
+      {
+        lFan.Value.UpdateManager(mScene);
+      }
+
+      //qqUMI Rumble not supported yet
     }
 
     amBXScene mScene;

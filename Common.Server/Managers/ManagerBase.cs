@@ -42,10 +42,15 @@ namespace Common.Server.Managers
 
     protected void SetupNewScene(amBXScene xiNewScene)
     {
-      if (SceneIsApplicable(xiNewScene)) //qqUMI BUG: This is called by the base constructor before we set mDirection
-      {                                  // => it defaults to .everywhere and blows up.  Need to rejig so SetupScene isn't called
-        mCurrentScene = xiNewScene;      // by the constructor?
+      if (SceneIsApplicable(xiNewScene))
+      {
+        IsDormant = false;
+        mCurrentScene = xiNewScene;
         mTicker = new AtypicalFirstRunInfiniteTicker(mCurrentScene.Frames.Count, mCurrentScene.RepeatableFrames.Count);
+      }
+      else
+      {
+        IsDormant = true;
       }
     }
 
@@ -82,6 +87,7 @@ namespace Common.Server.Managers
       }
     }
 
+    public bool IsDormant;
     protected amBXScene mCurrentScene;
     protected amBXScene mPreviousScene;
     protected AtypicalFirstRunInfiniteTicker mTicker;

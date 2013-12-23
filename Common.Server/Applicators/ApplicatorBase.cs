@@ -19,11 +19,18 @@ namespace Common.Server.Applicators
       mManager = xiManager;
     }
 
-    public void RunAsync(object sender, DoWorkEventArgs e)
+    public void RunAsync()
     {
       while (true)
       {
-        Run();
+        if (mManager.IsDormant)
+        {
+          Thread.Sleep(1000);
+        }
+        else
+        {
+          Run();
+        }
       }
     }
 
@@ -49,14 +56,13 @@ namespace Common.Server.Applicators
       mManager.AdvanceScene();
     }
 
-    //qqUMI
-    //public static void UpdateManager(amBXScene xiScene)
-    //{
-    //  lock (mManager)
-    //  {
-    //    mManager.UpdateScene(xiScene);
-    //  }
-    //}
+    public void UpdateManager(amBXScene xiScene)
+    {
+      lock (mManager)
+      {
+        mManager.UpdateScene(xiScene);
+      }
+    }
 
     protected ManagerBase<T> mManager;
     protected EngineManager mEngine;
