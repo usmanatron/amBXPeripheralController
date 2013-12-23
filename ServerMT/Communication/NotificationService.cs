@@ -8,7 +8,8 @@ namespace ServerMT.Communication
   {
     protected override void UpdateScene(amBXScene xiScene)
     {
-      throw new NotImplementedException();
+      var lDistributor = new SceneDistributor(xiScene);
+      lDistributor.Distribute();
     }
   }
 }
