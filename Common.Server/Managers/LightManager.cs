@@ -12,7 +12,7 @@ namespace Common.Server.Managers
   class LightManager : ManagerBase<Light>
   {
     public LightManager(CompassDirection xiDirection) 
-      : base(new amBXScene())//qqUMI fix!
+      : base()
     {
       mComponentType = eComponentType.Light;
       mDirection = xiDirection;
