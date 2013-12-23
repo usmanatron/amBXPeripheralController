@@ -47,11 +47,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Applicators\ApplicatorBase.cs" />
+    <Compile Include="Applicators\FrameApplicator.cs" />
     <Compile Include="AtypicalFirstRunInfiniteTicker.cs" />
     <Compile Include="Communication\CommunicationManager.cs" />
     <Compile Include="Communication\NotificationServiceBase.cs" />
     <Compile Include="Managers\Data.cs" />
     <Compile Include="Managers\EngineManager.cs" />
+    <Compile Include="Managers\FrameManager.cs" />
     <Compile Include="Managers\ManagerBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

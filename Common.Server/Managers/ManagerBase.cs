@@ -11,7 +11,7 @@ namespace Common.Server.Managers
   public abstract class ManagerBase<T>
   {
     public ManagerBase()
-      : this(new SceneAccessor().GetScene("CCNet_Green")) //qqUMI change back and fix problems
+      : this(new SceneAccessor().GetScene("Default_RedVsBlue"))
     {
     }
 
@@ -27,17 +27,20 @@ namespace Common.Server.Managers
 
     public void UpdateScene(amBXScene xiNewScene)
     {
-      if (xiNewScene.IsEvent && mCurrentScene.IsEvent)
+      lock (mSceneLock)
       {
-        // Skip updating the previous scene, to ensure that we don't get 
-        // stuck in an infinite loop of events.
-      }
-      else
-      {
-        mPreviousScene = mCurrentScene;
-      }
+        if (xiNewScene.IsEvent && mCurrentScene.IsEvent)
+        {
+          // Skip updating the previous scene, to ensure that we don't get 
+          // stuck in an infinite loop of events.
+        }
+        else
+        {
+          mPreviousScene = mCurrentScene;
+        }
 
-      SetupNewScene(xiNewScene);
+        SetupNewScene(xiNewScene);
+      }
     }
 
     protected void SetupNewScene(amBXScene xiNewScene)
@@ -60,9 +63,14 @@ namespace Common.Server.Managers
 
     protected Frame GetNextFrame()
     {
-      var lFrames = mTicker.IsFirstRun
-        ? mCurrentScene.Frames
-        : mCurrentScene.RepeatableFrames;
+      List<Frame> lFrames;
+
+      lock (mSceneLock)
+      {
+        lFrames = mTicker.IsFirstRun
+          ? mCurrentScene.Frames
+          : mCurrentScene.RepeatableFrames;
+      }
 
       if (!lFrames.Any())
       {
@@ -77,13 +85,16 @@ namespace Common.Server.Managers
 
     public void AdvanceScene()
     {
-      mTicker.Advance();
-
-      if (mCurrentScene.IsEvent && mTicker.Index == 0)
+      lock (mSceneLock)
       {
-        // The event has completed one full cycle.  Revert to
-        // previous scene
-        SetupNewScene(mPreviousScene);
+        mTicker.Advance();
+
+        if (mCurrentScene.IsEvent && mTicker.Index == 0)
+        {
+          // The event has completed one full cycle.  Revert to
+          // previous scene
+          SetupNewScene(mPreviousScene);
+        }
       }
     }
 
@@ -91,5 +102,7 @@ namespace Common.Server.Managers
     protected amBXScene mCurrentScene;
     protected amBXScene mPreviousScene;
     protected AtypicalFirstRunInfiniteTicker mTicker;
+
+    private object mSceneLock = new object();
   }
 }

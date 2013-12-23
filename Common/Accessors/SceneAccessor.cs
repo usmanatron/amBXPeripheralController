@@ -28,6 +28,8 @@ namespace Common.Accessors
 
         case "Error_Flash":
           return mDefaultScenes.Error_Flash;
+        case "Empty":
+          return mDefaultScenes.Empty;
 
         default:
           Console.WriteLine("Integrated scene with description {0} not found.", xiDescription);

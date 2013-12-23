@@ -8,6 +8,7 @@ using ServerMT.Communication;
 using System.Threading;
 using amBXLib;
 using Common.Server.Managers;
+using Common.Server.Applicators;
 using System.ComponentModel;
 
 namespace ServerMT
@@ -26,6 +27,7 @@ namespace ServerMT
       using (var lEngine = new EngineManager())
       {
         SetupApplicators(lEngine);
+        ThreadPool.QueueUserWorkItem(_ => Frame.RunAsync());
         Parallel.ForEach(Lights.Select(light => light.Value), light => { light.RunAsync(); });
 
         while (true)
@@ -37,6 +39,8 @@ namespace ServerMT
 
     private void SetupApplicators(EngineManager xiEngine)
     {
+      Frame = new FrameApplicator(xiEngine);
+
       Lights.Add(CompassDirection.North,     new LightApplicator(CompassDirection.North, xiEngine));
       Lights.Add(CompassDirection.NorthEast, new LightApplicator(CompassDirection.NorthEast, xiEngine));
       Lights.Add(CompassDirection.East,      new LightApplicator(CompassDirection.East, xiEngine));
@@ -51,6 +55,8 @@ namespace ServerMT
 
       //qqUMI Add Rumble here
     }
+
+    public static FrameApplicator Frame;
 
     public static Dictionary<CompassDirection, LightApplicator> Lights;
     public static Dictionary<CompassDirection, FanApplicator> Fans;

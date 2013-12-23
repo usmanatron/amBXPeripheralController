@@ -1,7 +1,7 @@
 ﻿using Common.Entities;
-using Common.Server.Managers;
+using System.Linq;
 
-namespace Server
+namespace Common.Server.Managers
 {
   public class FrameManager : ManagerBase<Frame>
   {
@@ -12,8 +12,14 @@ namespace Server
 
     protected override bool SceneIsApplicable(amBXScene xiNewScene)
     {
+      var lFrames = xiNewScene
+        .Frames
+        .Where(frame => frame.Lights != null || 
+                        frame.Fans   != null || 
+                        frame.Rumble != null);
+
       // All scenes are valid for this manager
-      return true;
+      return lFrames.Any(frame => frame != null);
     }
 
     public override Data<Frame> GetNext()

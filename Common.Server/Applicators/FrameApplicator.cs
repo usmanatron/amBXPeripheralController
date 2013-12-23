@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common.Server.Applicators;
 using Common.Server.Managers;
 using System.Threading;
 using Common.Entities;
 using amBXLib;
 
-namespace Server
+namespace Common.Server.Applicators
 {
   public class FrameApplicator : ApplicatorBase<Frame>
   {

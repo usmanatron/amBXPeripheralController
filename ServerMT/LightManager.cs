@@ -3,6 +3,7 @@ using Common.Entities;
 using Common.Integration;
 using System.Linq;
 using Common.Server.Managers;
+using System;
 
 namespace ServerMT
 {
@@ -17,11 +18,16 @@ namespace ServerMT
     // A scene is applicable if there is at least one non-null light in the right direction defined.
     protected override bool SceneIsApplicable(amBXScene xiNewScene)
     {
+      if (xiNewScene.IsSynchronised)
+      {
+        return false;
+      }
+
       var lLights = xiNewScene
         .Frames
         .Select(frame => frame.Lights)
-        .Where(cnt => cnt != null)
-        .Select(cnt => CompassDirectionConverter.GetLight(mDirection, cnt));
+        .Where(component => component != null)
+        .Select(component => CompassDirectionConverter.GetLight(mDirection, component));
 
       return lLights.Any(light => light != null);
     }

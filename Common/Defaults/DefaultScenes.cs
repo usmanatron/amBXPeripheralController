@@ -91,6 +91,7 @@ namespace Common.Defaults
       get
       {
         var lScene = BasicScene;
+        lScene.IsSynchronised = true;
         var lPurple = BasicFrame;
         var lDisableFans = BasicFrame;
         var lRedBlue = BasicFrame;
@@ -141,6 +142,16 @@ namespace Common.Defaults
                           };
 
         lScene.Frames = new List<Frame> {lPurple, lDisableFans, lRedBlue, lBlueRed};
+        return lScene;
+      }
+    }
+
+    public amBXScene Empty
+    {
+      get
+      {
+        var lScene = BasicScene;
+        lScene.Frames = new List<Frame>();
         return lScene;
       }
     }
