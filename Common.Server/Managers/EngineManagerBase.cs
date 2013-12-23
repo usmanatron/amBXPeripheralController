@@ -8,9 +8,9 @@ using System.Collections.Generic;
 namespace Common.Server.Managers
 {
   // Manages the amBXEngine interface - deals with adding and setting stuff etc.
-  public abstract class EngineManagerBase : IDisposable
+  public class EngineManager : IDisposable
   {
-    protected EngineManagerBase()
+    public EngineManager()
     {
       mEngine = new amBX(1, 0, "amBXNotification", "1.0");
       mLights = new Dictionary<CompassDirection, amBXLight>();
@@ -56,7 +56,7 @@ namespace Common.Server.Managers
 
     #region Updating
 
-    protected void UpdateLight(CompassDirection xiDirection, Light xiInputLight, int xiFadeTime)
+    public void UpdateLight(CompassDirection xiDirection, Light xiInputLight, int xiFadeTime)
     {
       UpdateLightInternal(mLights[xiDirection], xiInputLight, xiFadeTime);
     }
@@ -72,7 +72,7 @@ namespace Common.Server.Managers
       xiLight.FadeTime = xiFadeTime;
     }
 
-    protected void UpdateFan(CompassDirection xiDirection, Fan xiInputLight)
+    public void UpdateFan(CompassDirection xiDirection, Fan xiInputLight)
     {
       UpdateFanInternal(mFans[xiDirection], xiInputLight);
     }
@@ -86,7 +86,7 @@ namespace Common.Server.Managers
       xiFan.Intensity = xiInputFan.Intensity;
     }
 
-    protected void UpdateRumble(CompassDirection xiDirection, RumbleComponent xiInputRumble)
+    public void UpdateRumble(CompassDirection xiDirection, RumbleComponent xiInputRumble)
     {
       UpdateRumbleInternal(mRumbles[xiDirection], xiInputRumble);
     }

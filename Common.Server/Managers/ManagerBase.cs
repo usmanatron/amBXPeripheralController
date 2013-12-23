@@ -10,6 +10,11 @@ namespace Common.Server.Managers
 {
   public abstract class ManagerBase<T>
   {
+    public ManagerBase()
+      : this(new SceneAccessor().GetScene("Default_RedVsBlue"))
+    {
+    }
+
     public ManagerBase(amBXScene xiScene)
     {
       if (xiScene.IsEvent)

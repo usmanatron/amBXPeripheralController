@@ -7,10 +7,7 @@ namespace Server.Communication
   {
     protected override void UpdateScene(amBXScene xiScene)
     {
-      lock (ServerTask.Manager)
-      {
-        ServerTask.Manager.UpdateScene(xiScene);
-      }
+      SceneApplicator.UpdateManager(xiScene);
     }
   }
 }
