@@ -19,7 +19,7 @@ namespace Common.Entities
     [XmlAttribute]
     // If IsEvent = true, this scene is for an "event":
     // * Ignore IsRepeatable booleans
-    // * Once all frames have been run, return to the previous Scene defined.
+    // * Once all frames have been run, return to the previously running Scene.
     public bool IsEvent;
 
     [XmlArray("Frames")]

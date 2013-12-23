@@ -3,7 +3,6 @@ using Common.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,7 +14,7 @@ namespace Common.Server.Managers
     {
       if (xiScene.IsEvent)
       {
-        throw new ActionNotSupportedException("The intial Scene cannot be an event!"); //qqUMI Use a different exception type
+        throw new InvalidOperationException("The intial Scene cannot be an event!");
       }
       SetupNewScene(xiScene);
     }
@@ -37,9 +36,14 @@ namespace Common.Server.Managers
 
     private void SetupNewScene(amBXScene xiNewScene)
     {
-      mCurrentScene = xiNewScene;
-      mTicker = new AtypicalFirstRunInfiniteTicker(mCurrentScene.Frames.Count, mCurrentScene.RepeatableFrames.Count);
+      if (SceneIsApplicable(xiNewScene))
+      {
+        mCurrentScene = xiNewScene;
+        mTicker = new AtypicalFirstRunInfiniteTicker(mCurrentScene.Frames.Count, mCurrentScene.RepeatableFrames.Count);
+      }
     }
+
+    protected abstract bool SceneIsApplicable(amBXScene xiNewScene);
 
     public abstract T GetNext();
 

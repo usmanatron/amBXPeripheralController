@@ -11,13 +11,22 @@ namespace Common.Server.Managers
 {
   class LightManager : ManagerBase<Light>
   {
-    public LightManager(EngineManagerBase xiEngine, CompassDirection xiDirection) 
+    public LightManager(CompassDirection xiDirection) 
       : base(new amBXScene())//qqUMI fix!
     {
       mComponentType = eComponentType.Light;
       mDirection = xiDirection;
+    }
 
-      //qqUMI Setup a standard scene here by calling UpdateScene, like SceneManager
+    // A scene is applicable if there is at least one non-null light in the right direction defined.
+    protected override bool SceneIsApplicable(amBXScene xiNewScene)
+    {
+      var lLights = xiNewScene
+        .Frames
+        .Select(frame => frame.Lights)
+        .Select(cnt => CompassDirectionConverter.GetLight(mDirection, cnt));
+
+      return lLights.Any(light => light != null);
     }
 
     public override Light GetNext()

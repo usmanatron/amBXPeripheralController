@@ -34,5 +34,20 @@ namespace Common.Integration
           throw new InvalidOperationException("Unexpected Compass Direction: " + xiDirection);
       }
     }
+
+    public static Fan GetFan(CompassDirection xiDirection, FanComponent xiFans)
+    {
+      switch (xiDirection)
+      {
+        case CompassDirection.NorthEast:
+        case CompassDirection.East:
+          return xiFans.East;
+        case CompassDirection.NorthWest:
+        case CompassDirection.West:
+          return xiFans.West;
+        default:
+          return null;
+      }
+    }
   }
 }

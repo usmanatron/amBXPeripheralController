@@ -91,7 +91,6 @@ namespace Common.Server.Managers
       UpdateRumbleInternal(mRumbles[xiDirection], xiInputRumble);
     }
 
-
     protected void UpdateRumbleInternal(amBXRumble xiRumble, RumbleComponent xiInputRumble)
     {
       if (xiInputRumble == null)

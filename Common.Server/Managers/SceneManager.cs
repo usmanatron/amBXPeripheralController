@@ -10,6 +10,12 @@ namespace Common.Server.Managers
     {
     }
 
+    protected override bool SceneIsApplicable(amBXScene xiNewScene)
+    {
+      // All scenes are valid for this manager
+      return true;
+    }
+
     public override Frame GetNext()
     {
       return base.GetNextFrame();
