@@ -5,6 +5,11 @@ namespace Server
 {
   public class FrameManager : ManagerBase<Frame>
   {
+    public FrameManager() : base ()
+    {
+      SetupNewScene(mCurrentScene);
+    }
+
     protected override bool SceneIsApplicable(amBXScene xiNewScene)
     {
       // All scenes are valid for this manager

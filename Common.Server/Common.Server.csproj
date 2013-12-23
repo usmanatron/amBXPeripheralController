@@ -52,7 +52,6 @@
     <Compile Include="Communication\NotificationServiceBase.cs" />
     <Compile Include="Managers\Data.cs" />
     <Compile Include="Managers\EngineManagerBase.cs" />
-    <Compile Include="Managers\FanManager.cs" />
     <Compile Include="Managers\ManagerBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

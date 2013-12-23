@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Common.Server.Applicators;
 using Common.Entities;
 using Common.Server.Managers;
@@ -15,6 +11,7 @@ namespace ServerMT
     public LightApplicator(CompassDirection xiDirection, EngineManager xiEngine) 
       : base (xiEngine, new LightManager(xiDirection))
     {
+      mDirection = xiDirection;
     }
 
     protected override void ActNextFrame()

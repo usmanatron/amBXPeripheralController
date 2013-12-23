@@ -13,10 +13,9 @@ namespace Server
       using (var lEngine = new EngineManager())
       {
         var lApplicator = new FrameApplicator(lEngine);
-
         while (true)
         {
-          lApplicator.Apply();
+          lApplicator.Run();
         }
       }
     }

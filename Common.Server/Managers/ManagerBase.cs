@@ -11,7 +11,7 @@ namespace Common.Server.Managers
   public abstract class ManagerBase<T>
   {
     public ManagerBase()
-      : this(new SceneAccessor().GetScene("Default_RedVsBlue"))
+      : this(new SceneAccessor().GetScene("CCNet_Green")) //qqUMI change back and fix problems
     {
     }
 
@@ -21,7 +21,8 @@ namespace Common.Server.Managers
       {
         throw new InvalidOperationException("The intial Scene cannot be an event!");
       }
-      SetupNewScene(xiScene);
+
+      mCurrentScene = xiScene;
     }
 
     public void UpdateScene(amBXScene xiNewScene)
@@ -39,11 +40,11 @@ namespace Common.Server.Managers
       SetupNewScene(xiNewScene);
     }
 
-    private void SetupNewScene(amBXScene xiNewScene)
+    protected void SetupNewScene(amBXScene xiNewScene)
     {
-      if (SceneIsApplicable(xiNewScene))
-      {
-        mCurrentScene = xiNewScene;
+      if (SceneIsApplicable(xiNewScene)) //qqUMI BUG: This is called by the base constructor before we set mDirection
+      {                                  // => it defaults to .everywhere and blows up.  Need to rejig so SetupScene isn't called
+        mCurrentScene = xiNewScene;      // by the constructor?
         mTicker = new AtypicalFirstRunInfiniteTicker(mCurrentScene.Frames.Count, mCurrentScene.RepeatableFrames.Count);
       }
     }

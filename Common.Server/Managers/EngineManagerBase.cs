@@ -19,6 +19,8 @@ namespace Common.Server.Managers
       InitialiseEngine(mEngine);
     }
 
+    #region Engine Setup
+
     private void InitialiseEngine(amBX xiEngine)
     {
       CreateLight(CompassDirection.North);
@@ -54,6 +56,8 @@ namespace Common.Server.Managers
       mRumbles.Add(xiDirection, lRumble);
     }
 
+    #endregion
+
     #region Updating
 
     public void UpdateLight(CompassDirection xiDirection, Light xiInputLight, int xiFadeTime)
@@ -72,9 +76,9 @@ namespace Common.Server.Managers
       xiLight.FadeTime = xiFadeTime;
     }
 
-    public void UpdateFan(CompassDirection xiDirection, Fan xiInputLight)
+    public void UpdateFan(CompassDirection xiDirection, Fan xiInputFan)
     {
-      UpdateFanInternal(mFans[xiDirection], xiInputLight);
+      UpdateFanInternal(mFans[xiDirection], xiInputFan);
     }
 
     private void UpdateFanInternal(amBXFan xiFan, Fan xiInputFan)

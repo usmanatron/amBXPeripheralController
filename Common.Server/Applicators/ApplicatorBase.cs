@@ -7,6 +7,7 @@ using amBXLib;
 using Common.Server.Managers;
 using System.Threading;
 using Common.Entities;
+using System.ComponentModel;
 
 namespace Common.Server.Applicators
 {
@@ -18,7 +19,15 @@ namespace Common.Server.Applicators
       mManager = xiManager;
     }
 
-    public void Apply()
+    public void RunAsync(object sender, DoWorkEventArgs e)
+    {
+      while (true)
+      {
+        Run();
+      }
+    }
+
+    public void Run()
     {
       lock (mManager)
       {
@@ -40,15 +49,16 @@ namespace Common.Server.Applicators
       mManager.AdvanceScene();
     }
 
-    public static void UpdateManager(amBXScene xiScene)
-    {
-      lock (mManager)
-      {
-        mManager.UpdateScene(xiScene);
-      }
-    }
+    //qqUMI
+    //public static void UpdateManager(amBXScene xiScene)
+    //{
+    //  lock (mManager)
+    //  {
+    //    mManager.UpdateScene(xiScene);
+    //  }
+    //}
 
-    protected static ManagerBase<T> mManager;
+    protected ManagerBase<T> mManager;
     protected EngineManager mEngine;
   }
 }

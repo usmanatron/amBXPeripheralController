@@ -49,7 +49,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Communication\NotificationService.cs" />
-    <Compile Include="EngineManager.cs" />
+    <Compile Include="Communication\SceneDistributor.cs" />
+    <Compile Include="FanManager.cs" />
+    <Compile Include="FanApplicator.cs" />
+    <Compile Include="LightApplicator.cs" />
+    <Compile Include="LightManager.cs" />
     <Compile Include="ServerMT.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerTask.cs" />
