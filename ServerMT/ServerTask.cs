@@ -26,14 +26,25 @@ namespace ServerMT
       using (var lEngine = new EngineManager())
       {
         SetupApplicators(lEngine);
-        ThreadPool.QueueUserWorkItem(_ => Frame.RunAsync());
-        Parallel.ForEach(Lights.Select(light => light.Value), light => { light.RunAsync(); });
 
+        // Start them and watch
         while (true)
         {
-          Thread.Sleep(1000);
+          if (RunSynchronised())
+          {
+            Frame.Run();
+          }
+          else
+          {
+            Parallel.ForEach(Lights.Select(light => light.Value), light => { light.Run(); });
+          }
         }
       }
+    }
+
+    private bool RunSynchronised()
+    {
+      return true;
     }
 
     private void SetupApplicators(EngineManager xiEngine)
