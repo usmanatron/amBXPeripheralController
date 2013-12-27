@@ -29,13 +29,8 @@ namespace Common.Server.Communication
       try
       {
         var lAccessor = new SceneAccessor();
-
-        var lScene = lAccessor.GetScene(xiSceneName);
-        if (lScene == null)
-        {
-          // We failed to find the scene - show the error visually
-          lScene = lAccessor.GetScene("Error_Flash");
-        }
+        var lScene = lAccessor.GetScene(xiSceneName) ?? 
+                     lAccessor.GetScene("Error_Flash");
 
         UpdateScene(lScene);
       }

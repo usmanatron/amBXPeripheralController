@@ -2,7 +2,6 @@
 using Common.Integration;
 using System;
 using amBXLib;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 
@@ -17,12 +16,12 @@ namespace Common.Server.Managers
       mLights = new Dictionary<CompassDirection, amBXLight>();
       mFans = new Dictionary<CompassDirection, amBXFan>();
       mRumbles = new Dictionary<CompassDirection, amBXRumble>();
-      InitialiseEngine(mEngine);
+      InitialiseEngine();
     }
 
     #region Engine Setup
 
-    private void InitialiseEngine(amBX xiEngine)
+    private void InitialiseEngine()
     {
       CreateLight(CompassDirection.North);
       CreateLight(CompassDirection.NorthEast);
@@ -131,8 +130,8 @@ namespace Common.Server.Managers
 
     private readonly amBX mEngine;
 
-    private Dictionary<CompassDirection, amBXLight> mLights;
-    private Dictionary<CompassDirection, amBXFan> mFans;
-    private Dictionary<CompassDirection, amBXRumble> mRumbles;
+    private readonly Dictionary<CompassDirection, amBXLight> mLights;
+    private readonly Dictionary<CompassDirection, amBXFan> mFans;
+    private readonly Dictionary<CompassDirection, amBXRumble> mRumbles;
   }
 }

@@ -17,18 +17,18 @@ namespace ServerMT
 
     protected override void ActNextFrame()
     {
-      var lLightData = mManager.GetNext();
+      var lLightData = Manager.GetNext();
 
       if (lLightData != null)
       {
         //Debug
         Console.WriteLine(mDirection + " - UpdateLight - " + DateTime.Now.Ticks);
-        mEngine.UpdateLight(mDirection, lLightData.Item, lLightData.FadeTime);
+        Engine.UpdateLight(mDirection, lLightData.Item, lLightData.FadeTime);
       }
 
       WaitforInterval(lLightData.Length);
     }
 
-    private CompassDirection mDirection;
+    private readonly CompassDirection mDirection;
   }
 }

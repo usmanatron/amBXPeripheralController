@@ -1,5 +1,4 @@
-﻿using System;
-using Common.Entities;
+﻿using Common.Entities;
 using Common.Server.Communication;
 
 namespace ServerMT.Communication

@@ -2,12 +2,10 @@
 using Common.Server.Communication;
 using ServerMT.Communication;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using amBXLib;
 using Common.Server.Managers;
 using Common.Server.Applicators;
-using System.ComponentModel;
 using ServerMT.Applicators;
 
 namespace ServerMT
@@ -36,7 +34,7 @@ namespace ServerMT
           }
           else
           {
-            Parallel.ForEach(Lights.Select(light => light.Value), light => { light.Run(); });
+            Parallel.ForEach(Lights.Select(light => light.Value), light => light.Run());
           }
         }
       }

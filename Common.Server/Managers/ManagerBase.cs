@@ -3,40 +3,38 @@ using Common.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Common.Server.Managers
 {
   public abstract class ManagerBase<T>
   {
-    public ManagerBase()
+    protected ManagerBase()
       : this(new SceneAccessor().GetScene("Default_RedVsBlue"))
     {
     }
 
-    public ManagerBase(amBXScene xiScene)
+    protected ManagerBase(amBXScene xiScene)
     {
       if (xiScene.IsEvent)
       {
         throw new InvalidOperationException("The intial Scene cannot be an event!");
       }
 
-      mCurrentScene = xiScene;
+      CurrentScene = xiScene;
     }
 
     public void UpdateScene(amBXScene xiNewScene)
     {
       lock (mSceneLock)
       {
-        if (xiNewScene.IsEvent && mCurrentScene.IsEvent)
+        if (xiNewScene.IsEvent && CurrentScene.IsEvent)
         {
           // Skip updating the previous scene, to ensure that we don't get 
           // stuck in an infinite loop of events.
         }
         else
         {
-          mPreviousScene = mCurrentScene;
+          PreviousScene = CurrentScene;
         }
 
         SetupNewScene(xiNewScene);
@@ -48,8 +46,8 @@ namespace Common.Server.Managers
       if (SceneIsApplicable(xiNewScene))
       {
         IsDormant = false;
-        mCurrentScene = xiNewScene;
-        mTicker = new AtypicalFirstRunInfiniteTicker(mCurrentScene.Frames.Count, mCurrentScene.RepeatableFrames.Count);
+        CurrentScene = xiNewScene;
+        Ticker = new AtypicalFirstRunInfiniteTicker(CurrentScene.Frames.Count, CurrentScene.RepeatableFrames.Count);
       }
       else
       {
@@ -67,9 +65,9 @@ namespace Common.Server.Managers
 
       lock (mSceneLock)
       {
-        lFrames = mTicker.IsFirstRun
-          ? mCurrentScene.Frames
-          : mCurrentScene.RepeatableFrames;
+        lFrames = Ticker.IsFirstRun
+          ? CurrentScene.Frames
+          : CurrentScene.RepeatableFrames;
       }
 
       if (!lFrames.Any())
@@ -80,29 +78,29 @@ namespace Common.Server.Managers
         // Either way, return a frame which specifies everything off (as a failsafe)
         return new FrameAccessor().AllOff;
       }
-      return lFrames[mTicker.Index];
+      return lFrames[Ticker.Index];
     }
 
     public void AdvanceScene()
     {
       lock (mSceneLock)
       {
-        mTicker.Advance();
+        Ticker.Advance();
 
-        if (mCurrentScene.IsEvent && mTicker.Index == 0)
+        if (CurrentScene.IsEvent && Ticker.Index == 0)
         {
           // The event has completed one full cycle.  Revert to
           // previous scene
-          SetupNewScene(mPreviousScene);
+          SetupNewScene(PreviousScene);
         }
       }
     }
 
     public bool IsDormant;
-    protected amBXScene mCurrentScene;
-    protected amBXScene mPreviousScene;
-    protected AtypicalFirstRunInfiniteTicker mTicker;
+    protected amBXScene CurrentScene;
+    protected amBXScene PreviousScene;
+    protected AtypicalFirstRunInfiniteTicker Ticker;
 
-    private object mSceneLock = new object();
+    private readonly object mSceneLock = new object();
   }
 }

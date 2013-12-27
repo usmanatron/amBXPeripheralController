@@ -1,7 +1,6 @@
 ﻿using amBXLib;
 using Common.Entities;
 using Common.Integration;
-using System.Collections.Generic;
 using System.Linq;
 using Common.Server.Managers;
 
@@ -9,10 +8,10 @@ namespace ServerMT.Managers
 {
   class FanManager : ManagerBase<Fan>
   {
-    public FanManager(CompassDirection xiDirection) : base()
+    public FanManager(CompassDirection xiDirection)
     {
       mDirection = xiDirection;
-      base.SetupNewScene(mCurrentScene);
+      SetupNewScene(CurrentScene);
     }
 
     // A scene is applicable if there is at least one non-null fan in a "somewhat" correct direction defined.
@@ -40,6 +39,6 @@ namespace ServerMT.Managers
       return new Data<Fan>(lFan, lFrame.Fans.FadeTime, lFrame.Length);
     }
 
-    CompassDirection mDirection;
+    readonly CompassDirection mDirection;
   }
 }

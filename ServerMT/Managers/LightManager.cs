@@ -9,10 +9,10 @@ namespace ServerMT.Managers
 {
   class LightManager : ManagerBase<Light>
   {
-    public LightManager(CompassDirection xiDirection) : base()
+    public LightManager(CompassDirection xiDirection)
     {
       mDirection = xiDirection;
-      base.SetupNewScene(mCurrentScene);
+      SetupNewScene(CurrentScene);
     }
 
     // A scene is applicable if there is at least one non-null light in the right direction defined.
@@ -57,6 +57,6 @@ namespace ServerMT.Managers
       return new Data<Light>(lLight, lFadeTime, lLength);
     }
 
-    CompassDirection mDirection;
+    readonly CompassDirection mDirection;
   }
 }

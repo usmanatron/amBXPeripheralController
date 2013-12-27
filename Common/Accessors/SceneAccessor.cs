@@ -24,7 +24,7 @@ namespace Common.Accessors
         case "Default_RedVsBlue":
           return mDefaultScenes.DefaultRedVsBlue;
         case "PoolQ2_Event":
-          return mDefaultScenes.PoolQ_Event;
+          return mDefaultScenes.PoolQ2_Event;
 
         case "Error_Flash":
           return mDefaultScenes.Error_Flash;

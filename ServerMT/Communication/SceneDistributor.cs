@@ -11,7 +11,6 @@ namespace ServerMT.Communication
       mEmptyScene = new SceneAccessor().GetScene("Empty");
     }
 
-
     /*qqUMI
      * 
      * There are a number of issues here:
@@ -46,19 +45,19 @@ namespace ServerMT.Communication
     {
       foreach (var lLight in ServerTask.Lights)
       {
-        lLight.Value.UpdateManager(mScene);
+        lLight.Value.UpdateManager(xiScene);
       }
 
       foreach (var lFan in ServerTask.Fans)
       {
-        lFan.Value.UpdateManager(mScene);
+        lFan.Value.UpdateManager(xiScene);
       }
 
       //qqUMI Rumble not supported yet
     }
 
 
-    amBXScene mScene;
-    amBXScene mEmptyScene;
+    readonly amBXScene mScene;
+    readonly amBXScene mEmptyScene;
   }
 }

@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using Common.Server.Communication;
+﻿using Common.Server.Communication;
 using Common.Server.Applicators;
 using Common.Server.Managers;
 using Server.Communication;
@@ -13,12 +12,14 @@ namespace Server
       using (new CommunicationManager(new NotificationService())) 
       using (var lEngine = new EngineManager())
       {
-        var lApplicator = new FrameApplicator(lEngine);
+        Applicator = new FrameApplicator(lEngine);
         while (true)
         {
-          lApplicator.Run();
+          Applicator.Run();
         }
       }
     }
+
+    internal static FrameApplicator Applicator;
   }
 }

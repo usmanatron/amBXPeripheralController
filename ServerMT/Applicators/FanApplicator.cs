@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Common.Server.Applicators;
+﻿using Common.Server.Applicators;
 using Common.Entities;
 using Common.Server.Managers;
 using ServerMT.Managers;
@@ -17,11 +16,11 @@ namespace ServerMT.Applicators
 
     protected override void ActNextFrame()
     {
-      var lFanData = mManager.GetNext();
+      var lFanData = Manager.GetNext();
 
       if (lFanData != null)
       {
-        mEngine.UpdateFan(mDirection, lFanData.Item);
+        Engine.UpdateFan(mDirection, lFanData.Item);
       }
 
       WaitforInterval(lFanData.Length);

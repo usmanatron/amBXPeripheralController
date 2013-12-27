@@ -69,14 +69,8 @@
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="amBXLib, Version=1.0.5056.34406, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\Release\amBXLib.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Communication\NotificationService.cs" />
@@ -92,10 +86,6 @@
     <ProjectReference Include="..\Common.Communication\Common.Communication.csproj">
       <Project>{38537b40-b1fd-433b-b958-8a1b3c7b83d7}</Project>
       <Name>Common.Communication</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common.Integration\Common.Integration.csproj">
-      <Project>{8fde532f-942f-432d-8926-6f4818737d1a}</Project>
-      <Name>Common.Integration</Name>
     </ProjectReference>
     <ProjectReference Include="..\Common.Server\Common.Server.csproj">
       <Project>{2165053e-6a4d-4718-bbf9-55301ced1d28}</Project>

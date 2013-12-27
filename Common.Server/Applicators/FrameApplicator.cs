@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Common.Server.Managers;
-using System.Threading;
+﻿using Common.Server.Managers;
 using Common.Entities;
 using amBXLib;
 
@@ -16,7 +12,7 @@ namespace Common.Server.Applicators
 
     protected override void ActNextFrame()
     {
-      var lFrameData = mManager.GetNext();
+      var lFrameData = Manager.GetNext();
       var lFrame = lFrameData.Item;
 
 
@@ -40,25 +36,25 @@ namespace Common.Server.Applicators
 
     private void UpdateLights(LightComponent xiLights)
     {
-      mEngine.UpdateLight(CompassDirection.North, xiLights.North, xiLights.FadeTime);
-      mEngine.UpdateLight(CompassDirection.NorthEast, xiLights.NorthEast, xiLights.FadeTime);
-      mEngine.UpdateLight(CompassDirection.East, xiLights.East, xiLights.FadeTime);
-      mEngine.UpdateLight(CompassDirection.SouthEast, xiLights.SouthEast, xiLights.FadeTime);
-      mEngine.UpdateLight(CompassDirection.South, xiLights.South, xiLights.FadeTime);
-      mEngine.UpdateLight(CompassDirection.SouthWest, xiLights.SouthWest, xiLights.FadeTime);
-      mEngine.UpdateLight(CompassDirection.West, xiLights.West, xiLights.FadeTime);
-      mEngine.UpdateLight(CompassDirection.NorthWest, xiLights.NorthWest, xiLights.FadeTime);
+      Engine.UpdateLight(CompassDirection.North, xiLights.North, xiLights.FadeTime);
+      Engine.UpdateLight(CompassDirection.NorthEast, xiLights.NorthEast, xiLights.FadeTime);
+      Engine.UpdateLight(CompassDirection.East, xiLights.East, xiLights.FadeTime);
+      Engine.UpdateLight(CompassDirection.SouthEast, xiLights.SouthEast, xiLights.FadeTime);
+      Engine.UpdateLight(CompassDirection.South, xiLights.South, xiLights.FadeTime);
+      Engine.UpdateLight(CompassDirection.SouthWest, xiLights.SouthWest, xiLights.FadeTime);
+      Engine.UpdateLight(CompassDirection.West, xiLights.West, xiLights.FadeTime);
+      Engine.UpdateLight(CompassDirection.NorthWest, xiLights.NorthWest, xiLights.FadeTime);
     }
 
     private void UpdateFans(FanComponent xiFans)
     {
-      mEngine.UpdateFan(CompassDirection.East, xiFans.East);
-      mEngine.UpdateFan(CompassDirection.West, xiFans.West);
+      Engine.UpdateFan(CompassDirection.East, xiFans.East);
+      Engine.UpdateFan(CompassDirection.West, xiFans.West);
     }
 
     private void UpdateRumbles(RumbleComponent xiInputRumble)
     {
-      mEngine.UpdateRumble(CompassDirection.Everywhere, xiInputRumble);
+      Engine.UpdateRumble(CompassDirection.Everywhere, xiInputRumble);
     }
   }
 }

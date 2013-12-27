@@ -1,42 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using amBXLib;
-using Common.Server.Managers;
-using System.Threading;
+﻿using Common.Server.Managers;
 using Common.Entities;
-using System.ComponentModel;
+using System.Threading;
 
 namespace Common.Server.Applicators
 {
   public abstract class ApplicatorBase<T>
   {
-    public ApplicatorBase(EngineManager xiEngine, ManagerBase<T> xiManager)
+    protected ApplicatorBase(EngineManager xiEngine, ManagerBase<T> xiManager)
     {
-      mEngine = xiEngine;
-      mManager = xiManager;
-    }
-
-    public void RunAsync()
-    {
-      while (true)
-      {
-        if (mManager.IsDormant)
-        {
-          Thread.Sleep(1000);
-        }
-        else
-        {
-          Run();
-        }
-      }
+      Engine = xiEngine;
+      Manager = xiManager;
     }
 
     public void Run()
     {
-      lock (mManager)
+      lock (Manager)
       {
         ActNextFrame();
         AdvanceScene();
@@ -53,15 +31,15 @@ namespace Common.Server.Applicators
 
     protected void AdvanceScene()
     {
-      mManager.AdvanceScene();
+      Manager.AdvanceScene();
     }
 
     public void UpdateManager(amBXScene xiScene)
     {
-      mManager.UpdateScene(xiScene);
+      Manager.UpdateScene(xiScene);
     }
 
-    protected ManagerBase<T> mManager;
-    protected EngineManager mEngine;
+    protected ManagerBase<T> Manager;
+    protected EngineManager Engine;
   }
 }

@@ -5,9 +5,9 @@ namespace Common.Server.Managers
 {
   public class FrameManager : ManagerBase<Frame>
   {
-    public FrameManager() : base ()
+    public FrameManager()
     {
-      SetupNewScene(mCurrentScene);
+      SetupNewScene(CurrentScene);
     }
 
     protected override bool SceneIsApplicable(amBXScene xiNewScene)
@@ -24,7 +24,7 @@ namespace Common.Server.Managers
 
     public override Data<Frame> GetNext()
     {
-      var lFrame = base.GetNextFrame();
+      var lFrame = GetNextFrame();
       return new Data<Frame>(lFrame, 0, lFrame.Length);
     }
   }

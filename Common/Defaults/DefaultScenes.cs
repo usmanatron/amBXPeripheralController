@@ -182,7 +182,7 @@ namespace Common.Defaults
 
     #region PoolQ2
 
-    public amBXScene PoolQ_Event
+    public amBXScene PoolQ2_Event
     {
       get
       {
