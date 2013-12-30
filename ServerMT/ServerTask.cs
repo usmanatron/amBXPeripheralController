@@ -9,7 +9,6 @@ using Common.Server.Applicators;
 using ServerMT.Applicators;
 using Common.Entities;
 using Common.Accessors;
-using System.Threading;
 using System;
 
 namespace ServerMT
@@ -51,19 +50,19 @@ namespace ServerMT
 
     private void SetupApplicators(EngineManager xiEngine)
     {
-      mFrame = new FrameApplicator(xiEngine);
+      mFrame = new FrameApplicator(xiEngine, EventComplete);
 
-      mLights.Add(CompassDirection.North,     new LightApplicator(CompassDirection.North, xiEngine));
-      mLights.Add(CompassDirection.NorthEast, new LightApplicator(CompassDirection.NorthEast, xiEngine));
-      mLights.Add(CompassDirection.East,      new LightApplicator(CompassDirection.East, xiEngine));
-      mLights.Add(CompassDirection.SouthEast, new LightApplicator(CompassDirection.SouthEast, xiEngine));
-      mLights.Add(CompassDirection.South,     new LightApplicator(CompassDirection.South, xiEngine));
-      mLights.Add(CompassDirection.SouthWest, new LightApplicator(CompassDirection.SouthWest, xiEngine));
-      mLights.Add(CompassDirection.West,      new LightApplicator(CompassDirection.West, xiEngine));
-      mLights.Add(CompassDirection.NorthWest, new LightApplicator(CompassDirection.NorthWest, xiEngine));
+      mLights.Add(CompassDirection.North,     new LightApplicator(CompassDirection.North, xiEngine, EventComplete));
+      mLights.Add(CompassDirection.NorthEast, new LightApplicator(CompassDirection.NorthEast, xiEngine, EventComplete));
+      mLights.Add(CompassDirection.East,      new LightApplicator(CompassDirection.East, xiEngine, EventComplete));
+      mLights.Add(CompassDirection.SouthEast, new LightApplicator(CompassDirection.SouthEast, xiEngine, EventComplete));
+      mLights.Add(CompassDirection.South,     new LightApplicator(CompassDirection.South, xiEngine, EventComplete));
+      mLights.Add(CompassDirection.SouthWest, new LightApplicator(CompassDirection.SouthWest, xiEngine, EventComplete));
+      mLights.Add(CompassDirection.West,      new LightApplicator(CompassDirection.West, xiEngine, EventComplete));
+      mLights.Add(CompassDirection.NorthWest, new LightApplicator(CompassDirection.NorthWest, xiEngine, EventComplete));
 
-      mFans.Add(CompassDirection.East, new FanApplicator(CompassDirection.East, xiEngine));
-      mFans.Add(CompassDirection.West, new FanApplicator(CompassDirection.West, xiEngine));
+      mFans.Add(CompassDirection.East, new FanApplicator(CompassDirection.East, xiEngine, EventComplete));
+      mFans.Add(CompassDirection.West, new FanApplicator(CompassDirection.West, xiEngine, EventComplete));
 
       //qqUMI Add Rumble here
     }
@@ -79,6 +78,8 @@ namespace ServerMT
  */
     internal void Update(amBXScene xiScene)
     {
+      var lWasSynchronised = mSyncManager.IsSynchronised;
+
       if (xiScene.IsSynchronised)
       {
         mSyncManager.IsSynchronised = true;
@@ -88,9 +89,43 @@ namespace ServerMT
         mSyncManager.IsSynchronised = false;
       }
 
-      UpdateSynchronisedApplicator(xiScene);
-      UpdateUnsynchronisedElements(xiScene);
+      if (!xiScene.IsEvent)
+      {
+        UpdateSynchronisedApplicator(xiScene);
+        UpdateUnsynchronisedElements(xiScene);
+      }
+      else 
+      {
+        if (mSyncManager.IsSynchronised)
+        {
+          UpdateSynchronisedApplicator(xiScene);
+        }
+        else
+        {
+          UpdateUnsynchronisedElements(xiScene)
+        }
+      }
+    }
 
+    internal void EventComplete()
+    {
+      // If the event is sync and the previous was sync, then at this point we do nothing, as the Manager will take care of everything
+      // Similarly if the event and the previous was desync.
+
+      // If, however, one is sync and the other is desync, then it ges complicated.
+      // In this case, we change SyncManager.IsSynchronised appropriately to swap control.
+
+      /* Case 1 - Previously was desync and we run a sync event
+       *   Swapping IsScynchronised is enough, PROVIDED we change update to not add the event to the desync components.
+       * 
+       * Case 2 - Previously was sync and we run a desync event
+       *   A bit dirty - in theory the same as case 1 however it may not finish cleanly (very much a fringe case though)
+       * 
+       */
+
+      //1. check if we need to do anything by confirming we changed sync-ness due to the event
+
+      //2. If we have change IsSynchronised.  If not, do nothing.
     }
 
     private void UpdateSynchronisedApplicator(amBXScene xiScene)
