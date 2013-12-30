@@ -9,8 +9,8 @@ namespace ServerMT
 {
   class LightApplicator : ApplicatorBase<Light>
   {
-    public LightApplicator(CompassDirection xiDirection, EngineManager xiEngine) 
-      : base (xiEngine, new LightManager(xiDirection))
+    public LightApplicator(CompassDirection xiDirection, EngineManager xiEngine, Action xiEventCallback) 
+      : base (xiEngine, new LightManager(xiDirection, xiEventCallback))
     {
       mDirection = xiDirection;
     }

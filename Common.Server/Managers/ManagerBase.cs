@@ -16,6 +16,11 @@ namespace Common.Server.Managers
       CurrentScene = lScene;
     }
 
+    protected ManagerBase(Action xiEventCallback) : this()
+    {
+      mEventCallback = xiEventCallback;
+    }
+
     public void UpdateScene(amBXScene xiNewScene)
     {
       lock (mSceneLock)
@@ -92,6 +97,10 @@ namespace Common.Server.Managers
           // The event has completed one full cycle.  Revert to
           // previous scene
           SetupNewScene(PreviousScene);
+          if (mEventCallback != null)
+          {
+            mEventCallback();
+          }
         }
       }
     }
@@ -102,5 +111,6 @@ namespace Common.Server.Managers
     protected AtypicalFirstRunInfiniteTicker Ticker;
 
     private readonly object mSceneLock = new object();
+    private Action mEventCallback;
   }
 }

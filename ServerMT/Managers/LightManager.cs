@@ -9,7 +9,13 @@ namespace ServerMT.Managers
 {
   class LightManager : ManagerBase<Light>
   {
-    public LightManager(CompassDirection xiDirection)
+    public LightManager(CompassDirection xiDirection) 
+      : this(xiDirection, null)
+    {
+    }
+
+    public LightManager(CompassDirection xiDirection, Action xiEventCallback) 
+      : base(xiEventCallback)
     {
       mDirection = xiDirection;
       SetupNewScene(CurrentScene);

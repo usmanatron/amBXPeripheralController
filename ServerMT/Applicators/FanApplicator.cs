@@ -2,14 +2,15 @@
 using Common.Entities;
 using Common.Server.Managers;
 using ServerMT.Managers;
+using System;
 using amBXLib;
 
 namespace ServerMT.Applicators
 {
   class FanApplicator : ApplicatorBase<Fan>
   {
-    public FanApplicator(CompassDirection xiDirection, EngineManager xiEngine) 
-      : base (xiEngine, new FanManager(xiDirection))
+    public FanApplicator(CompassDirection xiDirection, EngineManager xiEngine, Action xiEventCallback) 
+      : base (xiEngine, new FanManager(xiDirection, xiEventCallback))
     {
       mDirection = xiDirection;
     }

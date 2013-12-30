@@ -2,6 +2,7 @@
 using Common.Entities;
 using Common.Integration;
 using System.Linq;
+using System;
 using Common.Server.Managers;
 
 namespace ServerMT.Managers
@@ -9,6 +10,12 @@ namespace ServerMT.Managers
   class FanManager : ManagerBase<Fan>
   {
     public FanManager(CompassDirection xiDirection)
+      : this(xiDirection, null)
+    {
+    }
+
+    public FanManager(CompassDirection xiDirection, Action xiEventCallback)
+      : base(xiEventCallback)
     {
       mDirection = xiDirection;
       SetupNewScene(CurrentScene);

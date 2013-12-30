@@ -1,11 +1,18 @@
 ﻿using Common.Entities;
 using System.Linq;
+using System;
 
 namespace Common.Server.Managers
 {
   public class FrameManager : ManagerBase<Frame>
   {
-    public FrameManager()
+    public FrameManager() 
+      : this(null)
+    {
+    }
+
+    public FrameManager(Action xiEventComplete)
+      : base(xiEventComplete)
     {
       SetupNewScene(CurrentScene);
     }

@@ -1,12 +1,19 @@
 ﻿using Common.Server.Managers;
 using Common.Entities;
 using amBXLib;
+using System;
 
 namespace Common.Server.Applicators
 {
   public class FrameApplicator : ApplicatorBase<Frame>
   {
-    public FrameApplicator(EngineManager xiEngine) : base (xiEngine, new FrameManager())
+    public FrameApplicator(EngineManager xiEngine) 
+      : base (xiEngine, new FrameManager())
+    {
+    }
+
+    public FrameApplicator(EngineManager xiEngine, Action xiEventComplete)
+      : base(xiEngine, new FrameManager(xiEventComplete))
     {
     }
 
