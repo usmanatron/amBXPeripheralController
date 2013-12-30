@@ -9,18 +9,11 @@ namespace Common.Server.Managers
   public abstract class ManagerBase<T>
   {
     protected ManagerBase()
-      : this(new SceneAccessor().GetScene("Default_RedVsBlue"))
     {
-    }
+      var lScene = new SceneAccessor().GetScene("Empty");
 
-    protected ManagerBase(amBXScene xiScene)
-    {
-      if (xiScene.IsEvent)
-      {
-        throw new InvalidOperationException("The intial Scene cannot be an event!");
-      }
-
-      CurrentScene = xiScene;
+      PreviousScene = lScene;
+      CurrentScene = lScene;
     }
 
     public void UpdateScene(amBXScene xiNewScene)
@@ -51,7 +44,14 @@ namespace Common.Server.Managers
       }
       else
       {
-        IsDormant = true;
+        if (SceneIsApplicable(PreviousScene))
+        {
+          return;
+        }
+        else
+        {
+          IsDormant = true;
+        }
       }
     }
 

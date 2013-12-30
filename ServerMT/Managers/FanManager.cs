@@ -17,11 +17,6 @@ namespace ServerMT.Managers
     // A scene is applicable if there is at least one non-null fan in a "somewhat" correct direction defined.
     protected override bool SceneIsApplicable(amBXScene xiNewScene)
     {
-      if (xiNewScene.IsSynchronised)
-      {
-        return false;
-      }
-
       var lFans = xiNewScene
         .Frames
         .Select(frame => frame.Fans)

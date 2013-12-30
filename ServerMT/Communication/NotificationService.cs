@@ -1,5 +1,4 @@
-﻿using Common.Accessors;
-using Common.Entities;
+﻿using Common.Entities;
 using Common.Server.Communication;
 
 namespace ServerMT.Communication
@@ -8,7 +7,7 @@ namespace ServerMT.Communication
   {
     protected override void UpdateScene(amBXScene xiScene)
     {
-      ServerMT.ServerTask.Update(xiScene, new SceneAccessor().GetScene("Empty"));
+      ServerMT.ServerTask.Update(xiScene);
     }
   }
 }

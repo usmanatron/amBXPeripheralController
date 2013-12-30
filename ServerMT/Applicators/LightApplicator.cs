@@ -24,9 +24,12 @@ namespace ServerMT
         //Debug
         Console.WriteLine(mDirection + " - UpdateLight - " + DateTime.Now.Ticks);
         Engine.UpdateLight(mDirection, lLightData.Item, lLightData.FadeTime);
+        WaitforInterval(lLightData.Length);
       }
-
-      WaitforInterval(lLightData.Length);
+      else
+      {
+        WaitforInterval(1000); //qqUMI constantify
+      }
     }
 
     private readonly CompassDirection mDirection;

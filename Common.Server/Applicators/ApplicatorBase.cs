@@ -14,10 +14,13 @@ namespace Common.Server.Applicators
 
     public void Run()
     {
-      lock (Manager)
+      if (!Manager.IsDormant)
       {
-        ActNextFrame();
-        AdvanceScene();
+        lock (Manager)
+        {
+          ActNextFrame();
+          AdvanceScene();
+        }
       }
     }
 

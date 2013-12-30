@@ -21,9 +21,12 @@ namespace ServerMT.Applicators
       if (lFanData != null)
       {
         Engine.UpdateFan(mDirection, lFanData.Item);
+        WaitforInterval(lFanData.Length);
       }
-
-      WaitforInterval(lFanData.Length);
+      else
+      {
+        WaitforInterval(1000); //qqUMI constantify
+      }
     }
 
     private CompassDirection mDirection;

@@ -18,11 +18,6 @@ namespace ServerMT.Managers
     // A scene is applicable if there is at least one non-null light in the right direction defined.
     protected override bool SceneIsApplicable(amBXScene xiNewScene)
     {
-      if (xiNewScene.IsSynchronised)
-      {
-        return false;
-      }
-
       var lLights = xiNewScene
         .Frames
         .Select(frame => frame.Lights)

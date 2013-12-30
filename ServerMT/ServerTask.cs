@@ -8,6 +8,8 @@ using Common.Server.Managers;
 using Common.Server.Applicators;
 using ServerMT.Applicators;
 using Common.Entities;
+using Common.Accessors;
+using System.Threading;
 
 namespace ServerMT
 {
@@ -26,24 +28,31 @@ namespace ServerMT
       {
         SetupApplicators(lEngine);
 
-        // Start them and watch
+        // Start the default initial scene
+        Update(new SceneAccessor().GetScene("Default_RedVsBlue"));
+
         while (true)
         {
-          if (RunSynchronised())
+          if (SynchronisationLock.IsSynchronised)
           {
             mFrame.Run();
           }
           else
           {
-            Parallel.ForEach(mLights.Select(light => light.Value), light => light.Run());
+            Parallel.ForEach(mLights, light => RunDesync(light.Value));
+
+            //qqUMI Fan \ Rumble support missing.
           }
         }
       }
     }
 
-    private bool RunSynchronised()
+    private void RunDesync(LightApplicator xiLight)
     {
-      return true;
+      while (!SynchronisationLock.IsSynchronised)
+      {
+        xiLight.Run();
+      }
     }
 
     private void SetupApplicators(EngineManager xiEngine)
@@ -65,8 +74,6 @@ namespace ServerMT
       //qqUMI Add Rumble here
     }
 
-
-
     /*qqUMI
  * 
  * There are a number of issues here:
@@ -78,18 +85,20 @@ namespace ServerMT
  * Fixing this may just be a case of changing how UpdateManager works a little bit to allow
  * us to force a value for IsDormant?
  */
-    internal void Update(amBXScene xiScene, amBXScene xiEmptyScene)
+    internal void Update(amBXScene xiScene)
     {
       if (xiScene.IsSynchronised)
       {
-        UpdateSynchronisedApplicator(xiScene);
-        UpdateUnsynchronisedElements(xiEmptyScene);
+        SynchronisationLock.IsSynchronised = true;
       }
       else
       {
-        UpdateUnsynchronisedElements(xiScene);
-        UpdateSynchronisedApplicator(xiEmptyScene);
+        SynchronisationLock.IsSynchronised = false;
       }
+
+      UpdateSynchronisedApplicator(xiScene);
+      UpdateUnsynchronisedElements(xiScene);
+
     }
 
     private void UpdateSynchronisedApplicator(amBXScene xiScene)
@@ -113,10 +122,40 @@ namespace ServerMT
     }
 
 
+    internal SynchronisationLocker SynchronisationLock = new SynchronisationLocker();
+
     private FrameApplicator mFrame;
-    
     private Dictionary<CompassDirection, LightApplicator> mLights;
     private Dictionary<CompassDirection, FanApplicator> mFans;
     //private Dictionary<CompassDirection, RumbleApplicator> mRumbles;
+  }
+
+  class SynchronisationLocker
+  {
+    public SynchronisationLocker()
+    {
+      IsSynchronised = true;
+    }
+
+    public bool IsSynchronised
+    {
+      get
+      {
+        lock (mLocker)
+        {
+          return mIsSynchronised;
+        }
+      }
+      set
+      {
+        lock (mLocker)
+        {
+          mIsSynchronised = value;
+        }
+      }
+    }
+
+    private object mLocker = new object();
+    private bool mIsSynchronised;
   }
 }
