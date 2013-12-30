@@ -4,8 +4,10 @@
   {
     private static void Main(string[] args)
     {
-      var lServer = new ServerTask();
-      lServer.Run();
+      ServerTask = new ServerTask();
+      ServerTask.Run();
     }
+
+    internal static ServerTask ServerTask;
   }
 }

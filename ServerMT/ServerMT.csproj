@@ -45,7 +45,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Communication\NotificationService.cs" />
-    <Compile Include="Communication\SceneDistributor.cs" />
     <Compile Include="Managers\FanManager.cs" />
     <Compile Include="Applicators\FanApplicator.cs" />
     <Compile Include="Applicators\LightApplicator.cs" />

@@ -7,6 +7,7 @@ using amBXLib;
 using Common.Server.Managers;
 using Common.Server.Applicators;
 using ServerMT.Applicators;
+using Common.Entities;
 
 namespace ServerMT
 {
@@ -14,11 +15,11 @@ namespace ServerMT
   {
     public ServerTask()
     {
-      Lights = new Dictionary<CompassDirection, LightApplicator>();
-      Fans = new Dictionary<CompassDirection, FanApplicator>();
+      mLights = new Dictionary<CompassDirection, LightApplicator>();
+      mFans = new Dictionary<CompassDirection, FanApplicator>();
     }
 
-    public void Run()
+    internal void Run()
     {
       using (new CommunicationManager(new NotificationService()))
       using (var lEngine = new EngineManager())
@@ -30,11 +31,11 @@ namespace ServerMT
         {
           if (RunSynchronised())
           {
-            Frame.Run();
+            mFrame.Run();
           }
           else
           {
-            Parallel.ForEach(Lights.Select(light => light.Value), light => light.Run());
+            Parallel.ForEach(mLights.Select(light => light.Value), light => light.Run());
           }
         }
       }
@@ -47,28 +48,75 @@ namespace ServerMT
 
     private void SetupApplicators(EngineManager xiEngine)
     {
-      Frame = new FrameApplicator(xiEngine);
+      mFrame = new FrameApplicator(xiEngine);
 
-      Lights.Add(CompassDirection.North,     new LightApplicator(CompassDirection.North, xiEngine));
-      Lights.Add(CompassDirection.NorthEast, new LightApplicator(CompassDirection.NorthEast, xiEngine));
-      Lights.Add(CompassDirection.East,      new LightApplicator(CompassDirection.East, xiEngine));
-      Lights.Add(CompassDirection.SouthEast, new LightApplicator(CompassDirection.SouthEast, xiEngine));
-      Lights.Add(CompassDirection.South,     new LightApplicator(CompassDirection.South, xiEngine));
-      Lights.Add(CompassDirection.SouthWest, new LightApplicator(CompassDirection.SouthWest, xiEngine));
-      Lights.Add(CompassDirection.West,      new LightApplicator(CompassDirection.West, xiEngine));
-      Lights.Add(CompassDirection.NorthWest, new LightApplicator(CompassDirection.NorthWest, xiEngine));
+      mLights.Add(CompassDirection.North,     new LightApplicator(CompassDirection.North, xiEngine));
+      mLights.Add(CompassDirection.NorthEast, new LightApplicator(CompassDirection.NorthEast, xiEngine));
+      mLights.Add(CompassDirection.East,      new LightApplicator(CompassDirection.East, xiEngine));
+      mLights.Add(CompassDirection.SouthEast, new LightApplicator(CompassDirection.SouthEast, xiEngine));
+      mLights.Add(CompassDirection.South,     new LightApplicator(CompassDirection.South, xiEngine));
+      mLights.Add(CompassDirection.SouthWest, new LightApplicator(CompassDirection.SouthWest, xiEngine));
+      mLights.Add(CompassDirection.West,      new LightApplicator(CompassDirection.West, xiEngine));
+      mLights.Add(CompassDirection.NorthWest, new LightApplicator(CompassDirection.NorthWest, xiEngine));
 
-      Fans.Add(CompassDirection.East, new FanApplicator(CompassDirection.East, xiEngine));
-      Fans.Add(CompassDirection.West, new FanApplicator(CompassDirection.West, xiEngine));
+      mFans.Add(CompassDirection.East, new FanApplicator(CompassDirection.East, xiEngine));
+      mFans.Add(CompassDirection.West, new FanApplicator(CompassDirection.West, xiEngine));
 
       //qqUMI Add Rumble here
     }
 
-    public static FrameApplicator Frame;
 
-    public static Dictionary<CompassDirection, LightApplicator> Lights;
-    public static Dictionary<CompassDirection, FanApplicator> Fans;
+
+    /*qqUMI
+ * 
+ * There are a number of issues here:
+ * * If we're in de-sync mode and run a synchronised event, we'll fall back to whatever the 
+ *   --synchronised-- previous scene was - not ideal
+ * * If we go from sync to de-sync (with, say, a de-sync scene with only one light defined), then the
+ *   other lights will stop animating.  Ideally we want to copy this all to the others
+ *   
+ * Fixing this may just be a case of changing how UpdateManager works a little bit to allow
+ * us to force a value for IsDormant?
+ */
+    internal void Update(amBXScene xiScene, amBXScene xiEmptyScene)
+    {
+      if (xiScene.IsSynchronised)
+      {
+        UpdateSynchronisedApplicator(xiScene);
+        UpdateUnsynchronisedElements(xiEmptyScene);
+      }
+      else
+      {
+        UpdateUnsynchronisedElements(xiScene);
+        UpdateSynchronisedApplicator(xiEmptyScene);
+      }
+    }
+
+    private void UpdateSynchronisedApplicator(amBXScene xiScene)
+    {
+      mFrame.UpdateManager(xiScene);
+    }
+
+    private void UpdateUnsynchronisedElements(amBXScene xiScene)
+    {
+      foreach (var lLight in mLights)
+      {
+        lLight.Value.UpdateManager(xiScene);
+      }
+
+      foreach (var lFan in mFans)
+      {
+        lFan.Value.UpdateManager(xiScene);
+      }
+
+      //qqUMI Rumble not supported yet
+    }
+
+
+    private FrameApplicator mFrame;
+    
+    private Dictionary<CompassDirection, LightApplicator> mLights;
+    private Dictionary<CompassDirection, FanApplicator> mFans;
     //private Dictionary<CompassDirection, RumbleApplicator> mRumbles;
-
   }
 }
