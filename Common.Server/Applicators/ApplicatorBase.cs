@@ -39,7 +39,10 @@ namespace Common.Server.Applicators
 
     public void UpdateManager(amBXScene xiScene)
     {
-      Manager.UpdateScene(xiScene);
+      lock (Manager)
+      {
+        Manager.UpdateScene(xiScene);
+      }
     }
 
     protected ManagerBase<T> Manager;

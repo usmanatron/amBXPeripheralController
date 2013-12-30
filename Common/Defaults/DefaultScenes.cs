@@ -162,6 +162,7 @@ namespace Common.Defaults
       {
         var lScene = BasicScene;
         lScene.IsEvent = true;
+        lScene.IsSynchronised = true;
 
         var lOff = BasicFrame;
         lOff.Length = 100;
@@ -189,6 +190,7 @@ namespace Common.Defaults
         var lScene = BasicScene;
         lScene.IsEvent = true;
         lScene.IsExclusive = true;
+        lScene.IsSynchronised = true;
 
         var lPrePink  = BasicFrame;
         lPrePink.IsRepeated = false;

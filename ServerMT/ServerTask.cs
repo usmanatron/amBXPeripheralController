@@ -67,19 +67,8 @@ namespace ServerMT
       //qqUMI Add Rumble here
     }
 
-    /*qqUMI
- * 
- * There are a number of issues here:
- * * If we're in de-sync mode and run a synchronised event, we'll fall back to whatever the 
- *   --synchronised-- previous scene was - not ideal
- *   
- * Fixing this may just be a case of changing how UpdateManager works a little bit to allow
- * us to force a value for IsDormant?
- */
     internal void Update(amBXScene xiScene)
     {
-      var lWasSynchronised = mSyncManager.IsSynchronised;
-
       if (xiScene.IsSynchronised)
       {
         mSyncManager.IsSynchronised = true;
@@ -89,6 +78,11 @@ namespace ServerMT
         mSyncManager.IsSynchronised = false;
       }
 
+      UpdateApplicators(xiScene);
+    }
+
+    private void UpdateApplicators(amBXScene xiScene)
+    {
       if (!xiScene.IsEvent)
       {
         UpdateSynchronisedApplicator(xiScene);
@@ -96,36 +90,17 @@ namespace ServerMT
       }
       else 
       {
+        mRunningEvent = true;
+
         if (mSyncManager.IsSynchronised)
         {
           UpdateSynchronisedApplicator(xiScene);
         }
         else
         {
-          UpdateUnsynchronisedElements(xiScene)
+          UpdateUnsynchronisedElements(xiScene);
         }
       }
-    }
-
-    internal void EventComplete()
-    {
-      // If the event is sync and the previous was sync, then at this point we do nothing, as the Manager will take care of everything
-      // Similarly if the event and the previous was desync.
-
-      // If, however, one is sync and the other is desync, then it ges complicated.
-      // In this case, we change SyncManager.IsSynchronised appropriately to swap control.
-
-      /* Case 1 - Previously was desync and we run a sync event
-       *   Swapping IsScynchronised is enough, PROVIDED we change update to not add the event to the desync components.
-       * 
-       * Case 2 - Previously was sync and we run a desync event
-       *   A bit dirty - in theory the same as case 1 however it may not finish cleanly (very much a fringe case though)
-       * 
-       */
-
-      //1. check if we need to do anything by confirming we changed sync-ness due to the event
-
-      //2. If we have change IsSynchronised.  If not, do nothing.
     }
 
     private void UpdateSynchronisedApplicator(amBXScene xiScene)
@@ -148,12 +123,34 @@ namespace ServerMT
       //qqUMI Rumble not supported yet
     }
 
-
-    private SynchronisationManager mSyncManager;
+    // If the event is sync and the previous was sync, then at this point we do nothing, as the Manager will take care of everything
+    // Similarly if the event and the previous was desync.
+    //
+    // If, however, one is sync and the other is desync, then we need to do something.
+    // In this case:
+    /* Case 1 - Previously was desync and we run a sync event
+     *   Swapping IsScynchronised is enough, PROVIDED we change update to not add the event to the desync components [DONE].
+     * Case 2 - Previously was sync and we run a desync event
+     *   A bit dirty - in theory the same as case 1 however it may not finish cleanly (very much a fringe case though)
+     */
+    //1. check if we need to do anything by confirming we changed sync-ness due to the event
+    //2. If we have change IsSynchronised.  If not, do nothing.
+    internal void EventComplete()
+    {
+      //Running a de-sync event may make this change rapidly (since each separate manager will call this callback
+      if (mRunningEvent && mSyncManager.WasPreviouslySynchronised != mSyncManager.IsSynchronised)
+      {
+        mRunningEvent = false;
+        mSyncManager.IsSynchronised = !mSyncManager.IsSynchronised;
+      }
+    }
 
     private FrameApplicator mFrame;
     private Dictionary<CompassDirection, LightApplicator> mLights;
     private Dictionary<CompassDirection, FanApplicator> mFans;
     //private Dictionary<CompassDirection, RumbleApplicator> mRumbles;
+
+    private SynchronisationManager mSyncManager;
+    private bool mRunningEvent;
   }
 }

@@ -38,12 +38,23 @@ namespace ServerMT
       {
         lock (mLocker)
         {
+          mWasPreviouslySynchronised = mIsSynchronised;
           mIsSynchronised = value;
         }
       }
     }
 
+    public bool WasPreviouslySynchronised
+    {
+      get
+      {
+        return mWasPreviouslySynchronised;
+      }
+    }
+
     private object mLocker = new object();
+
     private bool mIsSynchronised;
+    private bool mWasPreviouslySynchronised;
   }
 }
