@@ -7,8 +7,8 @@
     <ProjectGuid>{7F309EAF-2F1B-4887-88A8-EBF4D9388A47}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Server</RootNamespace>
-    <AssemblyName>Server</AssemblyName>
+    <RootNamespace>ServerLegacy</RootNamespace>
+    <AssemblyName>ServerLegacy</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

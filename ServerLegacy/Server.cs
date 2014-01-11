@@ -1,4 +1,4 @@
-﻿namespace Server
+﻿namespace ServerLegacy
 {
   internal class Server
   {

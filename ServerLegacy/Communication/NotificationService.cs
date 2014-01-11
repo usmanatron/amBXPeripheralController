@@ -1,7 +1,7 @@
 ﻿using Common.Entities;
 using Common.Server.Communication;
 
-namespace Server.Communication
+namespace ServerLegacy.Communication
 {
   class NotificationService : NotificationServiceBase
   {

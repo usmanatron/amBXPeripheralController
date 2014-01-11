@@ -1,9 +1,9 @@
 ﻿using Common.Server.Communication;
 using Common.Server.Applicators;
 using Common.Server.Managers;
-using Server.Communication;
+using ServerLegacy.Communication;
 
-namespace Server
+namespace ServerLegacy
 {
   class ServerTask
   {
