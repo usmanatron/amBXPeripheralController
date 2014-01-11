@@ -22,7 +22,7 @@ namespace Common.Entities
     // * Once all frames have been run, return to the previously running Scene.
     public bool IsEvent;
 
-    // Used in ServerMT to decide on the Applicator to use
+    // Used in Server to decide on the Applicator to use
     [XmlAttribute]
     public bool IsSynchronised;
 

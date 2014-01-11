@@ -1,6 +1,6 @@
-﻿namespace ServerMT
+﻿namespace Server
 {
-  class ServerMT
+  class Server
   {
     private static void Main(string[] args)
     {

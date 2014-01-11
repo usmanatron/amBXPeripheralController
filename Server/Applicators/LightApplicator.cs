@@ -1,11 +1,11 @@
 ﻿using Common.Server.Applicators;
 using Common.Entities;
 using Common.Server.Managers;
-using ServerMT.Managers;
+using Server.Managers;
 using amBXLib;
 using System;
 
-namespace ServerMT
+namespace Server
 {
   class LightApplicator : ApplicatorBase<Light>
   {

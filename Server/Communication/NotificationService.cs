@@ -1,13 +1,13 @@
 ﻿using Common.Entities;
 using Common.Server.Communication;
 
-namespace ServerMT.Communication
+namespace Server.Communication
 {
   class NotificationService : NotificationServiceBase
   {
     protected override void UpdateScene(amBXScene xiScene)
     {
-      ServerMT.ServerTask.Update(xiScene);
+      Server.ServerTask.Update(xiScene);
     }
   }
 }

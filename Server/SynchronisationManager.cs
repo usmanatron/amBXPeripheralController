@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ServerMT
+namespace Server
 {
   class SynchronisationManager
   {

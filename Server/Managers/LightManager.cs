@@ -5,7 +5,7 @@ using System.Linq;
 using Common.Server.Managers;
 using System;
 
-namespace ServerMT.Managers
+namespace Server.Managers
 {
   class LightManager : ManagerBase<Light>
   {

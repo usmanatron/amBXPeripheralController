@@ -5,7 +5,7 @@ using System.Linq;
 using System;
 using Common.Server.Managers;
 
-namespace ServerMT.Managers
+namespace Server.Managers
 {
   class FanManager : ManagerBase<Fan>
   {

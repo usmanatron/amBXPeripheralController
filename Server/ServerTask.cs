@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using Common.Server.Communication;
-using ServerMT.Communication;
+using Server.Communication;
 using System.Linq;
 using System.Threading.Tasks;
 using amBXLib;
 using Common.Server.Managers;
 using Common.Server.Applicators;
-using ServerMT.Applicators;
+using Server.Applicators;
 using Common.Entities;
 using Common.Accessors;
 using System;
 
-namespace ServerMT
+namespace Server
 {
   class ServerTask
   {
