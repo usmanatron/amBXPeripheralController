@@ -14,7 +14,11 @@ namespace Common.Server.Applicators
 
     public void Run()
     {
-      if (!Manager.IsDormant)
+      if (Manager.IsDormant)
+      {
+        WaitforInterval(500); //qqUMI Constantify
+      }
+      else
       {
         lock (Manager)
         {
