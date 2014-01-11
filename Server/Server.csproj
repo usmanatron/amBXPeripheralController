@@ -49,7 +49,7 @@
     <Compile Include="Applicators\FanApplicator.cs" />
     <Compile Include="Applicators\LightApplicator.cs" />
     <Compile Include="Managers\LightManager.cs" />
-    <Compile Include="ServerMT.cs" />
+    <Compile Include="Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerTask.cs" />
     <Compile Include="SynchronisationManager.cs" />
