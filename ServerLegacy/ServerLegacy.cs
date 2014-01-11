@@ -1,6 +1,6 @@
 ﻿namespace ServerLegacy
 {
-  internal class Server
+  internal class ServerLegacy
   {
     private static void Main(string[] args)
     {
