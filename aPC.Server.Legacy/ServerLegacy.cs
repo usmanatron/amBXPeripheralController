@@ -1,4 +1,4 @@
-﻿namespace ServerLegacy
+﻿namespace aPC.Server.Legacy
 {
   internal class ServerLegacy
   {

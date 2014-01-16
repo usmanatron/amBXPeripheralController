@@ -1,9 +1,9 @@
 ﻿using aPC.Common.Server.Communication;
 using aPC.Common.Server.Applicators;
 using aPC.Common.Server.Managers;
-using ServerLegacy.Communication;
+using aPC.Server.Legacy.Communication;
 
-namespace ServerLegacy
+namespace aPC.Server.Legacy
 {
   class ServerTask
   {
