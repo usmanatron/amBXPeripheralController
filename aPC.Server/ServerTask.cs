@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace aPC.Server
 {
@@ -19,6 +20,7 @@ namespace aPC.Server
     {
       mLights = new Dictionary<CompassDirection, LightApplicator>();
       mFans = new Dictionary<CompassDirection, FanApplicator>();
+      mRumbles = new Dictionary<CompassDirection, RumbleApplicator>();
       mSyncManager = new SynchronisationManager();
     }
 
@@ -40,11 +42,9 @@ namespace aPC.Server
           }
           else
           {
-            // qqUMI Note that Parallel.ForEach will not work when we add fan\rumble support
-            //       as it doesn't "fire and forget".  Will need to QueueUserWorkerItem or similar
-            Parallel.ForEach(mLights, light => mSyncManager.RunWhileUnSynchronised(light.Value.Run));
-            
-            //qqUMI Fan \ Rumble support missing.
+            ThreadPool.QueueUserWorkItem(_ => Parallel.ForEach(mLights, light => mSyncManager.RunWhileUnSynchronised(light.Value.Run)));
+            ThreadPool.QueueUserWorkItem(_ => Parallel.ForEach(mFans, fan => mSyncManager.RunWhileUnSynchronised(fan.Value.Run)));
+            ThreadPool.QueueUserWorkItem(_ => Parallel.ForEach(mLights, rumble => mSyncManager.RunWhileUnSynchronised(rumble.Value.Run)));
           }
         }
       }
@@ -66,7 +66,7 @@ namespace aPC.Server
       mFans.Add(CompassDirection.East, new FanApplicator(CompassDirection.East, xiEngine, EventComplete));
       mFans.Add(CompassDirection.West, new FanApplicator(CompassDirection.West, xiEngine, EventComplete));
 
-      //qqUMI Add Rumble here
+      mRumbles.Add(CompassDirection.Everywhere, new RumbleApplicator(CompassDirection.Everywhere, xiEngine, EventComplete));
     }
 
     internal void Update(amBXScene xiScene)
@@ -92,7 +92,7 @@ namespace aPC.Server
       }
       else 
       {
-        mRunningEvent = true;
+        mIsCurrentlyRunningEvent = true;
 
         if (mSyncManager.IsSynchronised)
         {
@@ -114,28 +114,21 @@ namespace aPC.Server
     {
       Parallel.ForEach<KeyValuePair<CompassDirection, LightApplicator>>(mLights, light => light.Value.UpdateManager(xiScene));
       Parallel.ForEach<KeyValuePair<CompassDirection, FanApplicator>>(mFans, fan => fan.Value.UpdateManager(xiScene));
-
-      //qqUMI Rumble not supported yet
+      Parallel.ForEach<KeyValuePair<CompassDirection, RumbleApplicator>>(mRumbles, rumble => rumble.Value.UpdateManager(xiScene));
     }
 
-    // If the event is sync and the previous was sync, then at this point we do nothing, as the Manager will take care of everything
-    // Similarly if the event and the previous was desync.
-    //
-    // If, however, one is sync and the other is desync, then we need to do something.
-    // In this case:
-    /* Case 1 - Previously was desync and we run a sync event
-     *   Swapping IsScynchronised is enough, PROVIDED we change update to not add the event to the desync components [DONE].
-     * Case 2 - Previously was sync and we run a desync event
-     *   A bit dirty - in theory the same as case 1 however it may not finish cleanly (very much a fringe case though)
-     */
-    //1. check if we need to do anything by confirming we changed sync-ness due to the event
-    //2. If we have change IsSynchronised.  If not, do nothing.
+    /// <remarks>
+    ///   This is called when an event has been completed and reinstates the previous synchronicity before the event 
+    ///   was run.  In the end, this is only important when the event causes a change in synchronicity 
+    ///   (e.g. from desynchronised to synchronised)
+    /// </remarks>
     internal void EventComplete()
     {
-      //Running a de-sync event may make this change rapidly (since each separate manager will call this callback
-      if (mRunningEvent && mSyncManager.WasPreviouslySynchronised != mSyncManager.IsSynchronised)
+      // qqUMI potential limitation: if we have a desync. event, we will hit this many times (one per light \ fan \ rumbler).
+      // May not be a problem because of mIsCurrentlyRunningEvent?
+      if (mIsCurrentlyRunningEvent && mSyncManager.WasPreviouslySynchronised != mSyncManager.IsSynchronised)
       {
-        mRunningEvent = false;
+        mIsCurrentlyRunningEvent = false;
         mSyncManager.IsSynchronised = !mSyncManager.IsSynchronised;
       }
     }
@@ -143,9 +136,9 @@ namespace aPC.Server
     private FrameApplicator mFrame;
     private Dictionary<CompassDirection, LightApplicator> mLights;
     private Dictionary<CompassDirection, FanApplicator> mFans;
-    //private Dictionary<CompassDirection, RumbleApplicator> mRumbles;
+    private Dictionary<CompassDirection, RumbleApplicator> mRumbles;
 
     private SynchronisationManager mSyncManager;
-    private bool mRunningEvent;
+    private bool mIsCurrentlyRunningEvent;
   }
 }
