@@ -7,8 +7,8 @@
     <ProjectGuid>{2165053E-6A4D-4718-BBF9-55301CED1D28}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Common.Server</RootNamespace>
-    <AssemblyName>Common.Server</AssemblyName>
+    <RootNamespace>aPC.Common.Server</RootNamespace>
+    <AssemblyName>aPC.Common.Server</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

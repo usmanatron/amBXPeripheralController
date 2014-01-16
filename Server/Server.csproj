@@ -66,16 +66,18 @@
       <Project>{8fde532f-942f-432d-8926-6f4818737d1a}</Project>
       <Name>aPC.Common.Integration</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Common.Server\Common.Server.csproj">
+    <ProjectReference Include="..\aPC.Common.Server\aPC.Common.Server.csproj">
       <Project>{2165053e-6a4d-4718-bbf9-55301ced1d28}</Project>
-      <Name>Common.Server</Name>
+      <Name>aPC.Common.Server</Name>
     </ProjectReference>
     <ProjectReference Include="..\aPC.Common\aPC.Common.csproj">
       <Project>{b6543e75-59af-4059-acf8-560e82bc72ce}</Project>
       <Name>aPC.Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

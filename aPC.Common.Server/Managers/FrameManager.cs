@@ -2,7 +2,7 @@
 using System.Linq;
 using System;
 
-namespace Common.Server.Managers
+namespace aPC.Common.Server.Managers
 {
   public class FrameManager : ManagerBase<Frame>
   {

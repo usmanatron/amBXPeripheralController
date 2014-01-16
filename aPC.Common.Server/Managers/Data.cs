@@ -1,5 +1,5 @@
 ﻿
-namespace Common.Server.Managers
+namespace aPC.Common.Server.Managers
 {
   //qqUMI Need to think of a better name - used in ManagerBase
   public class Data<T>

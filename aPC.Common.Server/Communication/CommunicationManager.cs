@@ -2,7 +2,7 @@
 using System.ServiceModel;
 using aPC.Common.Communication;
 
-namespace Common.Server.Communication
+namespace aPC.Common.Server.Communication
 {
   public class CommunicationManager : IDisposable
   {

@@ -1,9 +1,9 @@
-﻿using Common.Server.Managers;
+﻿using aPC.Common.Server.Managers;
 using aPC.Common.Entities;
 using amBXLib;
 using System;
 
-namespace Common.Server.Applicators
+namespace aPC.Common.Server.Applicators
 {
   public class FrameApplicator : ApplicatorBase<Frame>
   {

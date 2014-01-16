@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Common.Server.Managers
+namespace aPC.Common.Server.Managers
 {
   public abstract class ManagerBase<T>
   {

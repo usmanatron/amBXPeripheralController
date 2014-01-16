@@ -1,8 +1,8 @@
-﻿using Common.Server.Managers;
+﻿using aPC.Common.Server.Managers;
 using aPC.Common.Entities;
 using System.Threading;
 
-namespace Common.Server.Applicators
+namespace aPC.Common.Server.Applicators
 {
   public abstract class ApplicatorBase<T>
   {

@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.Common.Integration", "a
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{5B9C9DAD-4539-4F54-A13E-30C603F767FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Server", "Common.Server\Common.Server.csproj", "{2165053E-6A4D-4718-BBF9-55301CED1D28}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.Common.Server", "aPC.Common.Server\aPC.Common.Server.csproj", "{2165053E-6A4D-4718-BBF9-55301CED1D28}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C67A59F7-63D0-476C-93E9-08B9FA0541DF}"
 	ProjectSection(SolutionItems) = preProject

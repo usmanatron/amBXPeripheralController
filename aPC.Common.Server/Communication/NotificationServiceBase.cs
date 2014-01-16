@@ -5,7 +5,7 @@ using aPC.Common.Accessors;
 using aPC.Common.Communication;
 using aPC.Common.Entities;
 
-namespace Common.Server.Communication
+namespace aPC.Common.Server.Communication
 {
   public abstract class NotificationServiceBase : INotificationService
   {
