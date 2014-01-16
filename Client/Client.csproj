@@ -78,12 +78,6 @@
     <None Include="Client_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common.Communication\Common.Communication.csproj">
-      <Project>{38537b40-b1fd-433b-b958-8a1b3c7b83d7}</Project>
-      <Name>Common.Communication</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
@@ -99,6 +93,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\aPC.Common.Communication\aPC.Common.Communication.csproj">
+      <Project>{38537b40-b1fd-433b-b958-8a1b3c7b83d7}</Project>
+      <Name>aPC.Common.Communication</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

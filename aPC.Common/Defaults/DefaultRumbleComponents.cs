@@ -1,6 +1,6 @@
-﻿using Common.Entities;
+﻿using aPC.Common.Entities;
 
-namespace Common.Defaults
+namespace aPC.Common.Defaults
 {
   class DefaultRumbleComponents
   {

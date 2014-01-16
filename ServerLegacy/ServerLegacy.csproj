@@ -83,17 +83,17 @@
     <None Include="Server_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common.Communication\Common.Communication.csproj">
+    <ProjectReference Include="..\aPC.Common.Communication\aPC.Common.Communication.csproj">
       <Project>{38537b40-b1fd-433b-b958-8a1b3c7b83d7}</Project>
-      <Name>Common.Communication</Name>
+      <Name>aPC.Common.Communication</Name>
     </ProjectReference>
     <ProjectReference Include="..\Common.Server\Common.Server.csproj">
       <Project>{2165053e-6a4d-4718-bbf9-55301ced1d28}</Project>
       <Name>Common.Server</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Common\Common.csproj">
+    <ProjectReference Include="..\aPC.Common\aPC.Common.csproj">
       <Project>{b6543e75-59af-4059-acf8-560e82bc72ce}</Project>
-      <Name>Common</Name>
+      <Name>aPC.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

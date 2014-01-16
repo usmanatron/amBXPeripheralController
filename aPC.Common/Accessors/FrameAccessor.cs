@@ -1,6 +1,6 @@
-﻿using Common.Entities;
+﻿using aPC.Common.Entities;
 
-namespace Common.Accessors
+namespace aPC.Common.Accessors
 {
   public class FrameAccessor
   {

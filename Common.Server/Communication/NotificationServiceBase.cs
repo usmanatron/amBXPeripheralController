@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Xml.Serialization;
-using Common.Accessors;
+using aPC.Common.Accessors;
 using aPC.Common.Communication;
-using Common.Entities;
+using aPC.Common.Entities;
 
 namespace Common.Server.Communication
 {

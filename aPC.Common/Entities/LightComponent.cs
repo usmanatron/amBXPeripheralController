@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace Common.Entities
+namespace aPC.Common.Entities
 {
   public class LightComponent : ComponentBase
   {
