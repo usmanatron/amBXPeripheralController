@@ -59,13 +59,13 @@
       <Project>{38537b40-b1fd-433b-b958-8a1b3c7b83d7}</Project>
       <Name>aPC.Common.Communication</Name>
     </ProjectReference>
+    <ProjectReference Include="..\aPC.Common.Integration\aPC.Common.Integration.csproj">
+      <Project>{8fde532f-942f-432d-8926-6f4818737d1a}</Project>
+      <Name>aPC.Common.Integration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\aPC.Common\aPC.Common.csproj">
       <Project>{b6543e75-59af-4059-acf8-560e82bc72ce}</Project>
       <Name>aPC.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common.Integration\Common.Integration.csproj">
-      <Project>{8fde532f-942f-432d-8926-6f4818737d1a}</Project>
-      <Name>Common.Integration</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

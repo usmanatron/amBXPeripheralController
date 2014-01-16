@@ -1,6 +1,6 @@
 ﻿using amBXLib;
 
-namespace Common.Integration
+namespace aPC.Common.Integration
 {
   public static class RumbleTypeConverter
   {

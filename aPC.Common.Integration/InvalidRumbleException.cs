@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Common.Integration
+namespace aPC.Common.Integration
 {
   public class InvalidRumbleException : Exception
   {

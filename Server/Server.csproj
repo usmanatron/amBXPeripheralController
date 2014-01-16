@@ -62,9 +62,9 @@
       <Project>{38537B40-B1FD-433B-B958-8A1B3C7B83D7}</Project>
       <Name>aPC.Common.Communication</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Common.Integration\Common.Integration.csproj">
+    <ProjectReference Include="..\aPC.Common.Integration\aPC.Common.Integration.csproj">
       <Project>{8fde532f-942f-432d-8926-6f4818737d1a}</Project>
-      <Name>Common.Integration</Name>
+      <Name>aPC.Common.Integration</Name>
     </ProjectReference>
     <ProjectReference Include="..\Common.Server\Common.Server.csproj">
       <Project>{2165053e-6a4d-4718-bbf9-55301ced1d28}</Project>

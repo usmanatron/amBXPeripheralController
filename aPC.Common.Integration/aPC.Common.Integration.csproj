@@ -7,8 +7,8 @@
     <ProjectGuid>{8FDE532F-942F-432D-8926-6F4818737D1A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Common.Integration</RootNamespace>
-    <AssemblyName>Common.Integration</AssemblyName>
+    <RootNamespace>aPC.Common.Integration</RootNamespace>
+    <AssemblyName>aPC.Common.Integration</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
