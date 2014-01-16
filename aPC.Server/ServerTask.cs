@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using aPC.Common.Accessors;
+using aPC.Common.Entities;
 using aPC.Common.Server.Communication;
-using aPC.Server.Communication;
-using System.Linq;
-using System.Threading.Tasks;
-using amBXLib;
 using aPC.Common.Server.Managers;
 using aPC.Common.Server.Applicators;
 using aPC.Server.Applicators;
-using aPC.Common.Entities;
-using aPC.Common.Accessors;
+using aPC.Server.Communication;
+using amBXLib;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace aPC.Server
 {
@@ -40,6 +40,8 @@ namespace aPC.Server
           }
           else
           {
+            // qqUMI Note that Parallel.ForEach will not work when we add fan\rumble support
+            //       as it doesn't "fire and forget".  Will need to QueueUserWorkerItem or similar
             Parallel.ForEach(mLights, light => mSyncManager.RunWhileUnSynchronised(light.Value.Run));
             
             //qqUMI Fan \ Rumble support missing.
@@ -110,15 +112,8 @@ namespace aPC.Server
 
     private void UpdateUnsynchronisedElements(amBXScene xiScene)
     {
-      foreach (var lLight in mLights)
-      {
-        lLight.Value.UpdateManager(xiScene);
-      }
-
-      foreach (var lFan in mFans)
-      {
-        lFan.Value.UpdateManager(xiScene);
-      }
+      Parallel.ForEach<KeyValuePair<CompassDirection, LightApplicator>>(mLights, light => light.Value.UpdateManager(xiScene));
+      Parallel.ForEach<KeyValuePair<CompassDirection, FanApplicator>>(mFans, fan => fan.Value.UpdateManager(xiScene));
 
       //qqUMI Rumble not supported yet
     }
