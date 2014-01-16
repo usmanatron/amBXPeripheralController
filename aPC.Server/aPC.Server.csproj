@@ -7,8 +7,8 @@
     <ProjectGuid>{5B9C9DAD-4539-4F54-A13E-30C603F767FF}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Server</RootNamespace>
-    <AssemblyName>Server</AssemblyName>
+    <RootNamespace>aPC.Server</RootNamespace>
+    <AssemblyName>aPC.Server</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -74,9 +74,6 @@
       <Project>{b6543e75-59af-4059-acf8-560e82bc72ce}</Project>
       <Name>aPC.Common</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

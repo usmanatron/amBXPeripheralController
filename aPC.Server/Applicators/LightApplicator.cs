@@ -1,11 +1,11 @@
 ﻿using aPC.Common.Server.Applicators;
 using aPC.Common.Entities;
 using aPC.Common.Server.Managers;
-using Server.Managers;
+using aPC.Server.Managers;
 using amBXLib;
 using System;
 
-namespace Server
+namespace aPC.Server
 {
   class LightApplicator : ApplicatorBase<Light>
   {

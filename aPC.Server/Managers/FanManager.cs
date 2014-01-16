@@ -5,7 +5,7 @@ using System.Linq;
 using System;
 using aPC.Common.Server.Managers;
 
-namespace Server.Managers
+namespace aPC.Server.Managers
 {
   class FanManager : ManagerBase<Fan>
   {

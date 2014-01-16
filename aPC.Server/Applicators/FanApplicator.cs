@@ -1,11 +1,11 @@
 ﻿using aPC.Common.Server.Applicators;
 using aPC.Common.Entities;
 using aPC.Common.Server.Managers;
-using Server.Managers;
+using aPC.Server.Managers;
 using System;
 using amBXLib;
 
-namespace Server.Applicators
+namespace aPC.Server.Applicators
 {
   class FanApplicator : ApplicatorBase<Fan>
   {

@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using aPC.Common.Server.Communication;
-using Server.Communication;
+using aPC.Server.Communication;
 using System.Linq;
 using System.Threading.Tasks;
 using amBXLib;
 using aPC.Common.Server.Managers;
 using aPC.Common.Server.Applicators;
-using Server.Applicators;
+using aPC.Server.Applicators;
 using aPC.Common.Entities;
 using aPC.Common.Accessors;
 using System;
 
-namespace Server
+namespace aPC.Server
 {
   class ServerTask
   {

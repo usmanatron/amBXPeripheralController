@@ -1,4 +1,4 @@
-﻿namespace Server
+﻿namespace aPC.Server
 {
   class Server
   {

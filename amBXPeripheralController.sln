@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.Common.Communication", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.Common.Integration", "aPC.Common.Integration\aPC.Common.Integration.csproj", "{8FDE532F-942F-432D-8926-6F4818737D1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{5B9C9DAD-4539-4F54-A13E-30C603F767FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.Server", "aPC.Server\aPC.Server.csproj", "{5B9C9DAD-4539-4F54-A13E-30C603F767FF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.Common.Server", "aPC.Common.Server\aPC.Common.Server.csproj", "{2165053E-6A4D-4718-BBF9-55301CED1D28}"
 EndProject

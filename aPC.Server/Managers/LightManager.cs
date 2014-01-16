@@ -5,7 +5,7 @@ using System.Linq;
 using aPC.Common.Server.Managers;
 using System;
 
-namespace Server.Managers
+namespace aPC.Server.Managers
 {
   class LightManager : ManagerBase<Light>
   {
