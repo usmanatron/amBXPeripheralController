@@ -1,4 +1,4 @@
-﻿namespace Client
+﻿namespace aPC.Client
 {
   internal class Client
   {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.ServiceModel;
 using aPC.Common.Communication;
 
-namespace Client
+namespace aPC.Client
 {
   class ClientTask
   {

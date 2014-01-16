@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Client
+namespace aPC.Client
 {
   [Serializable]
   class UsageException : Exception
