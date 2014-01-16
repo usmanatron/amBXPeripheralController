@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
-using Common.Communication;
+using aPC.Common.Communication;
 
 namespace Client
 {

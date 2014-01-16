@@ -2,7 +2,7 @@
 using System.IO;
 using System.Xml.Serialization;
 using Common.Accessors;
-using Common.Communication;
+using aPC.Common.Communication;
 using Common.Entities;
 
 namespace Common.Server.Communication

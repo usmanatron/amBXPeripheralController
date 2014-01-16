@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ServiceModel;
-using Common.Communication;
+using aPC.Common.Communication;
 
 namespace Common.Server.Communication
 {

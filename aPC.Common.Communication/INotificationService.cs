@@ -1,6 +1,6 @@
 ﻿using System.ServiceModel;
 
-namespace Common.Communication
+namespace aPC.Common.Communication
 {
   [ServiceContract]
   public interface INotificationService

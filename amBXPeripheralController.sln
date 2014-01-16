@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{B6543E75-59AF-4059-ACF8-560E82BC72CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Communication", "Common.Communication\Common.Communication.csproj", "{38537B40-B1FD-433B-B958-8A1B3C7B83D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.Common.Communication", "aPC.Common.Communication\aPC.Common.Communication.csproj", "{38537B40-B1FD-433B-B958-8A1B3C7B83D7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Integration", "Common.Integration\Common.Integration.csproj", "{8FDE532F-942F-432D-8926-6F4818737D1A}"
 EndProject

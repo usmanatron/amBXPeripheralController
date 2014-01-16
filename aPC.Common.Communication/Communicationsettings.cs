@@ -1,4 +1,4 @@
-﻿namespace Common.Communication
+﻿namespace aPC.Common.Communication
 {
     public static class CommunicationSettings
     {
