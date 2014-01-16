@@ -90,12 +90,12 @@ namespace aPC.Common.Server.Managers
       xiFan.Intensity = xiInputFan.Intensity;
     }
 
-    public void UpdateRumble(CompassDirection xiDirection, RumbleComponent xiInputRumble)
+    public void UpdateRumble(CompassDirection xiDirection, Rumble xiInputRumble)
     {
       UpdateRumbleInternal(mRumbles[xiDirection], xiInputRumble);
     }
 
-    protected void UpdateRumbleInternal(amBXRumble xiRumble, RumbleComponent xiInputRumble)
+    protected void UpdateRumbleInternal(amBXRumble xiRumble, Rumble xiInputRumble)
     {
       if (xiInputRumble == null)
       {

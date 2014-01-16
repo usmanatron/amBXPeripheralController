@@ -14,7 +14,7 @@ namespace aPC.Common.Accessors
         {
           Lights = (LightComponent)lAccessor.GetComponent(eComponentType.Light, "Off"),
           Fans = (FanComponent)lAccessor.GetComponent(eComponentType.Fan, "Off"),
-          Rumble = (RumbleComponent)lAccessor.GetComponent(eComponentType.Rumble, "Off"),
+          Rumbles = (RumbleComponent)lAccessor.GetComponent(eComponentType.Rumble, "Off"),
           Length = 1000,
           IsRepeated = false
         };

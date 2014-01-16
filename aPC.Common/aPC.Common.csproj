@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Accessors\FrameAccessor.cs" />
     <Compile Include="Accessors\ComponentAccessor.cs" />
+    <Compile Include="Defaults\DefaultRumbles.cs" />
     <Compile Include="Defaults\DefaultRumbleComponents.cs" />
     <Compile Include="Defaults\DefaultFanComponents.cs" />
     <Compile Include="Defaults\DefaultFans.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Entities\Frame.cs" />
     <Compile Include="Entities\Light.cs" />
     <Compile Include="Entities\LightComponent.cs" />
+    <Compile Include="Entities\Rumble.cs" />
     <Compile Include="Entities\RumbleComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

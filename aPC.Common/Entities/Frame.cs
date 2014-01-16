@@ -19,6 +19,6 @@ namespace aPC.Common.Entities
     public FanComponent Fans;
 
     [XmlElement]
-    public RumbleComponent Rumble;
+    public RumbleComponent Rumbles;
   }
 }

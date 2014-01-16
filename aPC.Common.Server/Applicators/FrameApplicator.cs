@@ -33,9 +33,9 @@ namespace aPC.Common.Server.Applicators
         UpdateFans(lFrame.Fans);
       }
 
-      if (lFrame.Rumble != null)
+      if (lFrame.Rumbles != null)
       {
-        UpdateRumbles(lFrame.Rumble);
+        UpdateRumbles(lFrame.Rumbles);
       }
 
       WaitforInterval(lFrame.Length);
@@ -61,7 +61,7 @@ namespace aPC.Common.Server.Applicators
 
     private void UpdateRumbles(RumbleComponent xiInputRumble)
     {
-      Engine.UpdateRumble(CompassDirection.Everywhere, xiInputRumble);
+      Engine.UpdateRumble(CompassDirection.Everywhere, xiInputRumble.Rumble);
     }
   }
 }

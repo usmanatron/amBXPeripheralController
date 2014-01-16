@@ -23,7 +23,7 @@ namespace aPC.Common.Server.Managers
         .Frames
         .Where(frame => frame.Lights != null || 
                         frame.Fans   != null || 
-                        frame.Rumble != null);
+                        frame.Rumbles != null);
 
       // All scenes are valid for this manager
       return lFrames.Any(frame => frame != null);
