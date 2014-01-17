@@ -6,11 +6,8 @@ using aPC.Common.Server.Applicators;
 using aPC.Server.Applicators;
 using aPC.Server.Communication;
 using amBXLib;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Threading;
 
 namespace aPC.Server
 {
@@ -42,9 +39,13 @@ namespace aPC.Server
           }
           else
           {
-            ThreadPool.QueueUserWorkItem(_ => Parallel.ForEach(mLights, light => mSyncManager.RunWhileUnSynchronised(light.Value.Run)));
-            ThreadPool.QueueUserWorkItem(_ => Parallel.ForEach(mFans, fan => mSyncManager.RunWhileUnSynchronised(fan.Value.Run)));
-            ThreadPool.QueueUserWorkItem(_ => Parallel.ForEach(mLights, rumble => mSyncManager.RunWhileUnSynchronised(rumble.Value.Run)));
+            Parallel.ForEach(mLights, light => mSyncManager.RunWhileUnSynchronised(light.Value.Run));
+
+            //qqUMI - BUG:
+            // Using QueueUserWorkItem on all three causes the if to finish (and keep running Run()), which breaks everything
+            // Need to write a thing that will run all three blocks of component but only return when they've all finished.
+            //ThreadPool.QueueUserWorkItem(_ => Parallel.ForEach(mFans, fan => mSyncManager.RunWhileUnSynchronised(fan.Value.Run)));
+            //ThreadPool.QueueUserWorkItem(_ => Parallel.ForEach(mRumbles, rumble => mSyncManager.RunWhileUnSynchronised(rumble.Value.Run)));
           }
         }
       }
@@ -112,9 +113,10 @@ namespace aPC.Server
 
     private void UpdateUnsynchronisedElements(amBXScene xiScene)
     {
-      Parallel.ForEach<KeyValuePair<CompassDirection, LightApplicator>>(mLights, light => light.Value.UpdateManager(xiScene));
-      Parallel.ForEach<KeyValuePair<CompassDirection, FanApplicator>>(mFans, fan => fan.Value.UpdateManager(xiScene));
-      Parallel.ForEach<KeyValuePair<CompassDirection, RumbleApplicator>>(mRumbles, rumble => rumble.Value.UpdateManager(xiScene));
+      Parallel.ForEach(mLights, light => light.Value.UpdateManager(xiScene));
+      //qqUMI Not working yet.  See line 44
+      //Parallel.ForEach<KeyValuePair<CompassDirection, FanApplicator>>(mFans, fan => fan.Value.UpdateManager(xiScene));
+      //Parallel.ForEach<KeyValuePair<CompassDirection, RumbleApplicator>>(mRumbles, rumble => rumble.Value.UpdateManager(xiScene));
     }
 
     /// <remarks>
@@ -138,7 +140,7 @@ namespace aPC.Server
     private Dictionary<CompassDirection, FanApplicator> mFans;
     private Dictionary<CompassDirection, RumbleApplicator> mRumbles;
 
-    private SynchronisationManager mSyncManager;
+    private readonly SynchronisationManager mSyncManager;
     private bool mIsCurrentlyRunningEvent;
   }
 }
