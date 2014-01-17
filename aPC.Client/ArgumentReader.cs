@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace aPC.Client
@@ -15,13 +16,11 @@ namespace aPC.Client
       if (xiArguments[0] == @"/F")
       {
         // File passed in
-        IsIntegratedScene = false;
         SceneXml = RetrieveFile(xiArguments[1]);
       }
       else if (xiArguments[0] == @"/I")
       {
         // (Integrated) Scene passed in
-        IsIntegratedScene = true;
         SceneName = xiArguments[1];
       }
       else
@@ -41,7 +40,7 @@ namespace aPC.Client
       catch
       {
         // File not there / error
-        throw new UsageException("Input was not a valid path");
+        throw new UsageException("Input was not a valid path (a full path is required)");
       }
 
       using (var lReader = new StreamReader(lInputFilePath))
@@ -50,12 +49,25 @@ namespace aPC.Client
       }
     }
 
-    public bool IsIntegratedScene { get; private set; }
 
-    // When IsIntegrated Scene is true:
-    // * SceneName is specified
-    // * SceneXml is null
-    // this is vice versa when IsIntegratedScene is false
+    // The scene is integrated if a Scene name is specified
+    // It isn't integrated if an Xml scene is given
+    public bool IsIntegratedScene
+    {
+      get
+      {
+        if (!string.IsNullOrEmpty(SceneName))
+        {
+          return true;
+        }
+        else if (!string.IsNullOrEmpty(SceneXml))
+        {
+          return false;
+        }
+        throw new InvalidOperationException("Attempted to access scene information before any data is available");
+      }
+    }
+
     public string SceneName { get; private set; }
     public string SceneXml { get; private set; }
   }
