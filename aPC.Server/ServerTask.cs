@@ -35,15 +35,15 @@ namespace aPC.Server
           }
           else
           {
-            
             Parallel.ForEach(mDesynchronisedManager.ActorsWithType(eActorType.Light), 
                              light => mSyncManager.RunWhileUnSynchronised(light.Actor.Run));
-
-            //qqUMI - BUG:
-            // Using QueueUserWorkItem on all three causes the if to finish (and keep running Run()), which breaks everything
-            // Need to write a thing that will run all three blocks of section but only return when they've all finished.
-            //ThreadPool.QueueUserWorkItem(_ => Parallel.ForEach(mFans, fan => mSyncManager.RunWhileUnSynchronised(fan.Value.Run)));
-            //ThreadPool.QueueUserWorkItem(_ => Parallel.ForEach(mRumbles, rumble => mSyncManager.RunWhileUnSynchronised(rumble.Value.Run)));
+            /*
+              qqUMI - BUG:
+             *  In theory, we can change the above to use .AllActors and it will change everything.
+             * In practice this doesn't work.  Problem can be reproduced by running Default_RedVsBlue followed
+             * by CNet_FlashingYellow.  Currently, the FanManager blows up because the 2 repeatable frames have 
+             * null for Fan data => null ref exception.  Need to enhance so that it does something sensible.
+            */
           }
         }
       }
@@ -95,9 +95,7 @@ namespace aPC.Server
     {
       Parallel.ForEach(mDesynchronisedManager.ActorsWithType(eActorType.Light),
                        light => light.Actor.UpdateManager(xiScene));
-      //qqUMI Not working yet.  See line 44
-      //Parallel.ForEach<KeyValuePair<CompassDirection, FanActor>>(mFans, fan => fan.Value.UpdateManager(xiScene));
-      //Parallel.ForEach<KeyValuePair<CompassDirection, RumbleActor>>(mRumbles, rumble => rumble.Value.UpdateManager(xiScene));
+      //qqUMI Not working yet.  See line 40
     }
 
     /// <remarks>

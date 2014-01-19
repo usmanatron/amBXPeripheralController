@@ -27,7 +27,7 @@ namespace aPC.Server.EngineActors
 
       if (lRumbleData != null)
       {
-        Engine.UpdateRumble(mDirection, null);//qqUMI null needs to be filled in
+        Engine.UpdateRumble(mDirection, (Rumble)lRumbleData.Item);
         WaitforInterval(lRumbleData.Length);
       }
       else

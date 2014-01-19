@@ -30,7 +30,10 @@ namespace aPC.Common.Server.EngineActors
       }
     }
 
-    // qqUMI Make explicit that you need to add any waiting here!
+    /// <remarks>
+    ///   Note that this method should take into account any waiting that should be 
+    ///   done (before acting the next frame)
+    /// </remarks>
     protected abstract void ActNextFrame();
 
     protected void WaitforInterval(int xiLength)

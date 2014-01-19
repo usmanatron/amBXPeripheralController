@@ -45,6 +45,11 @@ namespace aPC.Server
         .ToList();
     }
 
+    public List<DesynchronisedActor> AllActors()
+    {
+      return mDesynchronisedActors;
+    }
+
     private List<DesynchronisedActor> mDesynchronisedActors;
   }
 }
