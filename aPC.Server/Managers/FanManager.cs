@@ -7,7 +7,7 @@ using aPC.Common.Server.Managers;
 
 namespace aPC.Server.Managers
 {
-  class FanManager : ManagerBase<Fan>
+  class FanManager : ManagerBase
   {
     public FanManager(CompassDirection xiDirection)
       : this(xiDirection, null)
@@ -33,12 +33,12 @@ namespace aPC.Server.Managers
       return lFans.Any(fan => fan != null);
     }
 
-    public override Data<Fan> GetNext()
+    public override Data GetNext()
     {
       var lFrame = GetNextFrame();
       var lFan = CompassDirectionConverter.GetFan(mDirection, lFrame.Fans);
 
-      return new Data<Fan>(lFan, lFrame.Fans.FadeTime, lFrame.Length);
+      return new ComponentData(lFan, lFrame.Fans.FadeTime, lFrame.Length);
     }
 
     readonly CompassDirection mDirection;

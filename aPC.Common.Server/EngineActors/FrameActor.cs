@@ -19,9 +19,8 @@ namespace aPC.Common.Server.EngineActors
 
     protected override void ActNextFrame()
     {
-      var lFrameData = Manager.GetNext();
-      var lFrame = lFrameData.Item;
-
+      var lFrameData = (FrameData)Manager.GetNext();
+      var lFrame = lFrameData.Frame;
 
       if (lFrame.Lights != null)
       {
@@ -37,7 +36,7 @@ namespace aPC.Common.Server.EngineActors
       {
         UpdateRumbles(lFrame.Rumbles);
       }
-
+      
       WaitforInterval(lFrame.Length);
     }
 

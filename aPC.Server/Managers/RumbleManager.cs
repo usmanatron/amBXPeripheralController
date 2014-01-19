@@ -7,7 +7,7 @@ using System;
 
 namespace aPC.Server.Managers
 {
-  class RumbleManager : ManagerBase<Rumble>
+  class RumbleManager : ManagerBase
   {
     public RumbleManager(CompassDirection xiDirection) 
       : this(xiDirection, null)
@@ -32,7 +32,7 @@ namespace aPC.Server.Managers
       return lRumbles.Any(rumble => rumble != null);
     }
 
-    public override Data<Rumble> GetNext()
+    public override Data GetNext()
     {
       var lFrame = GetNextFrame();
 
@@ -51,7 +51,7 @@ namespace aPC.Server.Managers
         lRumble = lFrame.Rumbles.Rumble;
       }
 
-      return new Data<Rumble>(lRumble, lFadeTime, lLength);
+      return new ComponentData(lRumble, lFadeTime, lLength);
     }
 
     readonly CompassDirection mDirection;

@@ -2,7 +2,7 @@
 
 namespace aPC.Common.Entities
 {
-  public class Light
+  public class Light : Component
   {
     [XmlAttribute]
     public float Intensity;
@@ -15,5 +15,10 @@ namespace aPC.Common.Entities
 
     [XmlAttribute] 
     public float Blue;
+
+    public override eSectionType ComponentType()
+    {
+      return eSectionType.Light;
+    }
   }
 }

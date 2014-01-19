@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace aPC.Common.Server.Managers
 {
-  public abstract class ManagerBase<T>
+  public abstract class ManagerBase
   {
     protected ManagerBase()
     {
@@ -62,7 +62,7 @@ namespace aPC.Common.Server.Managers
 
     protected abstract bool SceneIsApplicable(amBXScene xiNewScene);
 
-    public abstract Data<T> GetNext();
+    public abstract Data GetNext();
 
     protected Frame GetNextFrame()
     {

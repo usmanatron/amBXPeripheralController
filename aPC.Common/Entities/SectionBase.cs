@@ -8,6 +8,7 @@ namespace aPC.Common.Entities
     public int FadeTime;
   }
 
+  // qqUMI This is used by Sections AND Components.  Move to a better place
   public enum eSectionType
   {
     Light,

@@ -17,11 +17,11 @@ namespace aPC.Server.EngineActors
 
     protected override void ActNextFrame()
     {
-      var lFanData = Manager.GetNext();
+      var lFanData = (ComponentData)Manager.GetNext();
 
       if (lFanData != null)
       {
-        Engine.UpdateFan(mDirection, lFanData.Item);
+        Engine.UpdateFan(mDirection, (Fan)lFanData.Item);
         WaitforInterval(lFanData.Length);
       }
       else

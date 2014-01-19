@@ -2,7 +2,7 @@
 
 namespace aPC.Common.Entities
 {
-  public class Rumble
+  public class Rumble : Component
   {
     [XmlElement]
     public string RumbleType;
@@ -12,5 +12,10 @@ namespace aPC.Common.Entities
 
     [XmlElement]
     public float Speed;
+
+    public override eSectionType ComponentType()
+    {
+      return eSectionType.Rumble;
+    }
   }
 }

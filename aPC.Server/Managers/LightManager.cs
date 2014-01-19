@@ -7,7 +7,7 @@ using System;
 
 namespace aPC.Server.Managers
 {
-  class LightManager : ManagerBase<Light>
+  class LightManager : ManagerBase
   {
     public LightManager(CompassDirection xiDirection) 
       : this(xiDirection, null)
@@ -33,7 +33,7 @@ namespace aPC.Server.Managers
       return lLights.Any(light => light != null);
     }
 
-    public override Data<Light> GetNext()
+    public override Data GetNext()
     {
       //Debug
       Console.WriteLine(mDirection + " - GetNext     - " + DateTime.Now.Ticks);
@@ -55,7 +55,7 @@ namespace aPC.Server.Managers
         lLight = CompassDirectionConverter.GetLight(mDirection, lFrame.Lights);
       }
 
-      return new Data<Light>(lLight, lFadeTime, lLength);
+      return new ComponentData(lLight, lFadeTime, lLength);
     }
 
     readonly CompassDirection mDirection;

@@ -17,7 +17,7 @@ namespace aPC.Server.EngineActors
 
     protected override void ActNextFrame()
     {
-      var lRumbleData = Manager.GetNext();
+      var lRumbleData = (ComponentData)Manager.GetNext();
 
       if (lRumbleData != null)
       {

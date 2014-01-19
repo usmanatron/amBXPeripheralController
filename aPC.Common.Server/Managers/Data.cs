@@ -1,17 +1,16 @@
-﻿
+﻿using aPC.Common.Entities;
+
 namespace aPC.Common.Server.Managers
 {
   //qqUMI Need to think of a better name - used in ManagerBase
-  public class Data<T>
+  public abstract class Data
   {
-    public Data(T xiItem, int xiFadeTime, int xiLength)
+    public Data(int xiFadeTime, int xiLength)
     {
-      Item = xiItem;
       FadeTime = xiFadeTime;
       Length = xiLength;
     }
 
-    public T Item;
     public int FadeTime;
     public int Length;
   }

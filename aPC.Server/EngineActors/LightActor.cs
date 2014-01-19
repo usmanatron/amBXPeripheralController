@@ -17,13 +17,13 @@ namespace aPC.Server.EngineActors
 
     protected override void ActNextFrame()
     {
-      var lLightData = Manager.GetNext();
+      var lLightData = (ComponentData)Manager.GetNext();
 
       if (lLightData != null)
       {
         //Debug
         Console.WriteLine(mDirection + " - UpdateLight - " + DateTime.Now.Ticks);
-        Engine.UpdateLight(mDirection, lLightData.Item, lLightData.FadeTime);
+        Engine.UpdateLight(mDirection, (Light) lLightData.Item, lLightData.FadeTime);
         WaitforInterval(lLightData.Length);
       }
       else

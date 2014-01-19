@@ -6,7 +6,7 @@ namespace aPC.Common.Server.EngineActors
 {
   public abstract class EngineActorBase<T>
   {
-    protected EngineActorBase(EngineManager xiEngine, ManagerBase<T> xiManager)
+    protected EngineActorBase(EngineManager xiEngine, ManagerBase xiManager)
     {
       Engine = xiEngine;
       Manager = xiManager;
@@ -49,7 +49,7 @@ namespace aPC.Common.Server.EngineActors
       }
     }
 
-    protected ManagerBase<T> Manager;
+    protected ManagerBase Manager;
     protected EngineManager Engine;
   }
 }

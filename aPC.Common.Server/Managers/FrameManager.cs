@@ -4,7 +4,7 @@ using System;
 
 namespace aPC.Common.Server.Managers
 {
-  public class FrameManager : ManagerBase<Frame>
+  public class FrameManager : ManagerBase
   {
     public FrameManager() 
       : this(null)
@@ -29,10 +29,10 @@ namespace aPC.Common.Server.Managers
       return lFrames.Any(frame => frame != null);
     }
 
-    public override Data<Frame> GetNext()
+    public override Data GetNext()
     {
       var lFrame = GetNextFrame();
-      return new Data<Frame>(lFrame, 0, lFrame.Length);
+      return new FrameData(lFrame, 0, lFrame.Length);
     }
   }
 }
