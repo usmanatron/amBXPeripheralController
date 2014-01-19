@@ -8,13 +8,13 @@ namespace aPC.Common.Accessors
     {
       get
       {
-        var lAccessor = new ComponentAccessor();
+        var lAccessor = new SectionAccessor();
 
         return new Frame
         {
-          Lights = (LightComponent)lAccessor.GetComponent(eComponentType.Light, "Off"),
-          Fans = (FanComponent)lAccessor.GetComponent(eComponentType.Fan, "Off"),
-          Rumbles = (RumbleComponent)lAccessor.GetComponent(eComponentType.Rumble, "Off"),
+          Lights = (LightSection)lAccessor.GetSection(eSectionType.Light, "Off"),
+          Fans = (FanSection)lAccessor.GetSection(eSectionType.Fan, "Off"),
+          Rumbles = (RumbleSection)lAccessor.GetSection(eSectionType.Rumble, "Off"),
           Length = 1000,
           IsRepeated = false
         };

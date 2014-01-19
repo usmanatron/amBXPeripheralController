@@ -27,8 +27,8 @@ namespace aPC.Server.Managers
       var lFans = xiNewScene
         .Frames
         .Select(frame => frame.Fans)
-        .Where(component => component != null)
-        .Select(component => CompassDirectionConverter.GetFan(mDirection, component));
+        .Where(section => section != null)
+        .Select(section => CompassDirectionConverter.GetFan(mDirection, section));
 
       return lFans.Any(fan => fan != null);
     }

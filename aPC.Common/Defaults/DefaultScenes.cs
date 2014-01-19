@@ -13,7 +13,7 @@ namespace aPC.Common.Defaults
       {
         var lScene = BasicScene;
         var lFrame = BasicFrame;
-        lFrame.Lights = DefaultLightComponents.Red;
+        lFrame.Lights = DefaultLightSections.Red;
         lScene.Frames = new List<Frame> { lFrame };
         return lScene;
       }
@@ -25,7 +25,7 @@ namespace aPC.Common.Defaults
       {
         var lScene = BasicScene;
         var lFrame = BasicFrame;
-        lFrame.Lights = DefaultLightComponents.Green;
+        lFrame.Lights = DefaultLightSections.Green;
         lScene.Frames = new List<Frame> { lFrame };
         return lScene;
       }
@@ -38,8 +38,8 @@ namespace aPC.Common.Defaults
         var lScene = BasicScene;
         var lFrameOn = BasicFrame;
         var lFrameOff = BasicFrame;
-        lFrameOn.Lights = DefaultLightComponents.Yellow;
-        lFrameOff.Lights = DefaultLightComponents.Off;
+        lFrameOn.Lights = DefaultLightSections.Yellow;
+        lFrameOff.Lights = DefaultLightSections.Off;
 
         lScene.Frames = new List<Frame> { lFrameOn, lFrameOff };
         return lScene;
@@ -53,8 +53,8 @@ namespace aPC.Common.Defaults
         var lScene = BasicScene;
         var lFrameOn = BasicFrame;
         var lFrameOff = BasicFrame;
-        lFrameOn.Lights = DefaultLightComponents.Orange;
-        lFrameOff.Lights = DefaultLightComponents.Off;
+        lFrameOn.Lights = DefaultLightSections.Orange;
+        lFrameOff.Lights = DefaultLightSections.Off;
 
         lScene.Frames = new List<Frame> { lFrameOn, lFrameOff };
         return lScene;
@@ -67,7 +67,7 @@ namespace aPC.Common.Defaults
       {
         var lScene = BasicScene;
         var lFrame = BasicFrame;
-        lFrame.Lights = DefaultLightComponents.Off;
+        lFrame.Lights = DefaultLightSections.Off;
 
         lScene.Frames = new List<Frame> { lFrame };
         return lScene;
@@ -99,7 +99,7 @@ namespace aPC.Common.Defaults
 
         lPurple.IsRepeated = false;
         lPurple.Length = 2000;
-        lPurple.Lights = new LightComponent
+        lPurple.Lights = new LightSection
                          {
                            FadeTime = 100,
                            West = DefaultLights.SoftPurple,
@@ -108,7 +108,7 @@ namespace aPC.Common.Defaults
                            NorthEast = DefaultLights.SoftPurple,
                            East = DefaultLights.SoftPurple
                          };
-        lPurple.Fans = new FanComponent
+        lPurple.Fans = new FanSection
                        {
                          East = DefaultFans.FullPower,
                          West = DefaultFans.FullPower
@@ -116,13 +116,13 @@ namespace aPC.Common.Defaults
 
         lDisableFans.IsRepeated = false;
         lDisableFans.Length = 10;
-        lDisableFans.Fans = new FanComponent
+        lDisableFans.Fans = new FanSection
                             {
                               East = DefaultFans.Off,
                               West = DefaultFans.Off
                             };
 
-        lRedBlue.Lights = new LightComponent
+        lRedBlue.Lights = new LightSection
                           {
                             FadeTime = 100,
                             West = DefaultLights.Red,
@@ -131,7 +131,7 @@ namespace aPC.Common.Defaults
                             NorthEast = DefaultLights.Blue,
                             East = DefaultLights.Blue
                           };
-        lBlueRed.Lights = new LightComponent
+        lBlueRed.Lights = new LightSection
                           {
                             FadeTime = 100,
                             West = DefaultLights.Blue,
@@ -166,12 +166,12 @@ namespace aPC.Common.Defaults
 
         var lOff = BasicFrame;
         lOff.Length = 100;
-        lOff.Lights = DefaultLightComponents.Off;
+        lOff.Lights = DefaultLightSections.Off;
         lOff.Lights.FadeTime = 10;
 
         var lError = BasicFrame;
         lError.Length = 200;
-        lError.Lights = DefaultLightComponents.Red;
+        lError.Lights = DefaultLightSections.Red;
         lError.Lights.FadeTime = 10;
 
         lScene.Frames = new List<Frame> { lOff, lError, lOff, lError, lOff };
@@ -195,7 +195,7 @@ namespace aPC.Common.Defaults
         var lPrePink  = BasicFrame;
         lPrePink.IsRepeated = false;
         lPrePink.Length = 200;
-        lPrePink.Lights = new LightComponent
+        lPrePink.Lights = new LightSection
         {
           FadeTime = 100,
           West = DefaultLights.SoftPink,
@@ -204,12 +204,12 @@ namespace aPC.Common.Defaults
           NorthEast = DefaultLights.SoftPink,
           East = DefaultLights.SoftPink
         };
-        lPrePink.Rumbles = DefaultRumbleComponents.Off;
+        lPrePink.Rumbles = DefaultRumbleSections.Off;
 
         var lPurple = BasicFrame;
         lPurple.IsRepeated = false;
         lPurple.Length = 1000;
-        lPurple.Lights = new LightComponent
+        lPurple.Lights = new LightSection
         {
           FadeTime = 200,
           West = DefaultLights.StrongPurple,
@@ -218,18 +218,18 @@ namespace aPC.Common.Defaults
           NorthEast = DefaultLights.StrongPurple,
           East = DefaultLights.StrongPurple
         };
-        lPurple.Fans = new FanComponent
+        lPurple.Fans = new FanSection
         {
           East = DefaultFans.FullPower,
           West = DefaultFans.FullPower
         };
-        lPurple.Rumbles = DefaultRumbleComponents.Thunder;
+        lPurple.Rumbles = DefaultRumbleSections.Thunder;
 
 
         var lPostPink = BasicFrame;
         lPostPink.IsRepeated = false;
         lPostPink.Length = 500;
-        lPostPink.Lights = new LightComponent
+        lPostPink.Lights = new LightSection
         {
           FadeTime = 100,
           West = DefaultLights.SoftPink,
@@ -238,12 +238,12 @@ namespace aPC.Common.Defaults
           NorthEast = DefaultLights.SoftPink,
           East = DefaultLights.SoftPink
         };
-        lPostPink.Fans = new FanComponent
+        lPostPink.Fans = new FanSection
         {
           East = DefaultFans.Off,
           West = DefaultFans.Off
         };
-        lPostPink.Rumbles = DefaultRumbleComponents.Off;
+        lPostPink.Rumbles = DefaultRumbleSections.Off;
 
         lScene.Frames = new List<Frame> {lPrePink, lPurple, lPostPink};
         return lScene;

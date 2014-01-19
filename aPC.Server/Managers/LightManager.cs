@@ -27,8 +27,8 @@ namespace aPC.Server.Managers
       var lLights = xiNewScene
         .Frames
         .Select(frame => frame.Lights)
-        .Where(component => component != null)
-        .Select(component => CompassDirectionConverter.GetLight(mDirection, component));
+        .Where(section => section != null)
+        .Select(section => CompassDirectionConverter.GetLight(mDirection, section));
 
       return lLights.Any(light => light != null);
     }

@@ -2,15 +2,15 @@
 
 namespace aPC.Common.Defaults
 {
-  class DefaultFanComponents
+  class DefaultFanSections
   {
-    public static FanComponent Off = new FanComponent
+    public static FanSection Off = new FanSection
     {
       East = DefaultFans.Off,
       West = DefaultFans.Off
     };
 
-    public static FanComponent FullPower = new FanComponent
+    public static FanSection FullPower = new FanSection
     {
       East = DefaultFans.FullPower,
       West = DefaultFans.FullPower

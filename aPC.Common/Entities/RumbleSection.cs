@@ -2,7 +2,7 @@
 
 namespace aPC.Common.Entities
 {
-  public class RumbleComponent : ComponentBase
+  public class RumbleSection : SectionBase
   {
     [XmlElement]
     public Rumble Rumble;

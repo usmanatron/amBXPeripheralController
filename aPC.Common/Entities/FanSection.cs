@@ -2,7 +2,7 @@
 
 namespace aPC.Common.Entities
 {
-  public class FanComponent : ComponentBase
+  public class FanSection : SectionBase
   {
     [XmlElement]
     public Fan East;

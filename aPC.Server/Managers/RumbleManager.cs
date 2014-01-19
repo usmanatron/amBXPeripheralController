@@ -27,7 +27,7 @@ namespace aPC.Server.Managers
       var lRumbles = xiNewScene
         .Frames
         .Select(frame => frame.Rumbles)
-        .Where(component => component != null);
+        .Where(section => section != null);
 
       return lRumbles.Any(rumble => rumble != null);
     }

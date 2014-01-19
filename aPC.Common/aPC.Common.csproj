@@ -42,24 +42,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accessors\FrameAccessor.cs" />
-    <Compile Include="Accessors\ComponentAccessor.cs" />
+    <Compile Include="Accessors\SectionAccessor.cs" />
     <Compile Include="Defaults\DefaultRumbles.cs" />
-    <Compile Include="Defaults\DefaultRumbleComponents.cs" />
-    <Compile Include="Defaults\DefaultFanComponents.cs" />
+    <Compile Include="Defaults\DefaultRumbleSections.cs" />
+    <Compile Include="Defaults\DefaultFanSections.cs" />
     <Compile Include="Defaults\DefaultFans.cs" />
-    <Compile Include="Defaults\DefaultLightComponents.cs" />
+    <Compile Include="Defaults\DefaultLightSections.cs" />
     <Compile Include="Defaults\DefaultLights.cs" />
     <Compile Include="Defaults\DefaultScenes.cs" />
-    <Compile Include="Entities\ComponentBase.cs" />
+    <Compile Include="Entities\SectionBase.cs" />
     <Compile Include="Accessors\SceneAccessor.cs" />
     <Compile Include="Entities\amBXScene.cs" />
     <Compile Include="Entities\Fan.cs" />
-    <Compile Include="Entities\FanComponent.cs" />
+    <Compile Include="Entities\FanSection.cs" />
     <Compile Include="Entities\Frame.cs" />
     <Compile Include="Entities\Light.cs" />
-    <Compile Include="Entities\LightComponent.cs" />
+    <Compile Include="Entities\LightSection.cs" />
     <Compile Include="Entities\Rumble.cs" />
-    <Compile Include="Entities\RumbleComponent.cs" />
+    <Compile Include="Entities\RumbleSection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

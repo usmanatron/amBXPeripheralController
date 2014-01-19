@@ -41,7 +41,7 @@ namespace aPC.Common.Server.Applicators
       WaitforInterval(lFrame.Length);
     }
 
-    private void UpdateLights(LightComponent xiLights)
+    private void UpdateLights(LightSection xiLights)
     {
       Engine.UpdateLight(CompassDirection.North, xiLights.North, xiLights.FadeTime);
       Engine.UpdateLight(CompassDirection.NorthEast, xiLights.NorthEast, xiLights.FadeTime);
@@ -53,13 +53,13 @@ namespace aPC.Common.Server.Applicators
       Engine.UpdateLight(CompassDirection.NorthWest, xiLights.NorthWest, xiLights.FadeTime);
     }
 
-    private void UpdateFans(FanComponent xiFans)
+    private void UpdateFans(FanSection xiFans)
     {
       Engine.UpdateFan(CompassDirection.East, xiFans.East);
       Engine.UpdateFan(CompassDirection.West, xiFans.West);
     }
 
-    private void UpdateRumbles(RumbleComponent xiInputRumble)
+    private void UpdateRumbles(RumbleSection xiInputRumble)
     {
       Engine.UpdateRumble(CompassDirection.Everywhere, xiInputRumble.Rumble);
     }

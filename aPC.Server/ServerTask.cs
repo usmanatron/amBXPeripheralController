@@ -43,7 +43,7 @@ namespace aPC.Server
 
             //qqUMI - BUG:
             // Using QueueUserWorkItem on all three causes the if to finish (and keep running Run()), which breaks everything
-            // Need to write a thing that will run all three blocks of component but only return when they've all finished.
+            // Need to write a thing that will run all three blocks of section but only return when they've all finished.
             //ThreadPool.QueueUserWorkItem(_ => Parallel.ForEach(mFans, fan => mSyncManager.RunWhileUnSynchronised(fan.Value.Run)));
             //ThreadPool.QueueUserWorkItem(_ => Parallel.ForEach(mRumbles, rumble => mSyncManager.RunWhileUnSynchronised(rumble.Value.Run)));
           }

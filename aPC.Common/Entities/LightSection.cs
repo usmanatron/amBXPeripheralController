@@ -2,7 +2,7 @@
 
 namespace aPC.Common.Entities
 {
-  public class LightComponent : ComponentBase
+  public class LightSection : SectionBase
   {
     [XmlElement]
     public Light North;

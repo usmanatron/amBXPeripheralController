@@ -2,9 +2,9 @@
 
 namespace aPC.Common.Defaults
 {
-  class DefaultLightComponents
+  class DefaultLightSections
   {
-    public static LightComponent Red = new LightComponent
+    public static LightSection Red = new LightSection
     {
       FadeTime = 500,
       North = DefaultLights.Red,
@@ -17,7 +17,7 @@ namespace aPC.Common.Defaults
       NorthWest = DefaultLights.Red,
     };
 
-    public static LightComponent Green = new LightComponent
+    public static LightSection Green = new LightSection
     {
       FadeTime = 500,
       North = DefaultLights.Green,
@@ -30,7 +30,7 @@ namespace aPC.Common.Defaults
       NorthWest = DefaultLights.Green,
     };
 
-    public static LightComponent Yellow = new LightComponent
+    public static LightSection Yellow = new LightSection
     {
       FadeTime = 500,
       North = DefaultLights.Yellow,
@@ -43,7 +43,7 @@ namespace aPC.Common.Defaults
       NorthWest = DefaultLights.Yellow,
     };
 
-    public static LightComponent Orange = new LightComponent
+    public static LightSection Orange = new LightSection
     {
       FadeTime = 500,
       North = DefaultLights.Orange,
@@ -56,7 +56,7 @@ namespace aPC.Common.Defaults
       NorthWest = DefaultLights.Orange,
     };
 
-    public static LightComponent Off = new LightComponent
+    public static LightSection Off = new LightSection
     {
       FadeTime = 500,
       North = DefaultLights.Off,

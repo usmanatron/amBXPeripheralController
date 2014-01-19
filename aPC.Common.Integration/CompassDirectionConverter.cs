@@ -6,7 +6,7 @@ namespace aPC.Common.Integration
 {
   public static class CompassDirectionConverter
   {
-    public static Light GetLight(CompassDirection xiDirection, LightComponent xiLights)
+    public static Light GetLight(CompassDirection xiDirection, LightSection xiLights)
     {
       switch (xiDirection)
       {
@@ -31,7 +31,7 @@ namespace aPC.Common.Integration
       }
     }
 
-    public static Fan GetFan(CompassDirection xiDirection, FanComponent xiFans)
+    public static Fan GetFan(CompassDirection xiDirection, FanSection xiFans)
     {
       switch (xiDirection)
       {

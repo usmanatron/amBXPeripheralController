@@ -2,13 +2,13 @@
 
 namespace aPC.Common.Entities
 {
-  public class ComponentBase
+  public class SectionBase
   {
     [XmlAttribute]
     public int FadeTime;
   }
 
-  public enum eComponentType
+  public enum eSectionType
   {
     Light,
     Fan,
