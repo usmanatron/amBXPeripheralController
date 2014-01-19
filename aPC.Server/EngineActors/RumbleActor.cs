@@ -7,7 +7,7 @@ using System;
 
 namespace aPC.Server.EngineActors
 {
-  class RumbleActor : EngineActorBase<Rumble>
+  class RumbleActor : EngineActorBase
   {
     public RumbleActor(CompassDirection xiDirection, EngineManager xiEngine, Action xiEventCallback) 
       : base (xiEngine, new RumbleManager(xiDirection, xiEventCallback))
@@ -26,7 +26,7 @@ namespace aPC.Server.EngineActors
       }
       else
       {
-        WaitforInterval(1000); //qqUMI constantify
+        WaitForDefaultInterval();
       }
     }
 

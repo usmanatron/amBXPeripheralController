@@ -7,7 +7,7 @@ using System;
 
 namespace aPC.Server.EngineActors
 {
-  class LightActor : EngineActorBase<Light>
+  class LightActor : EngineActorBase
   {
     public LightActor(CompassDirection xiDirection, EngineManager xiEngine, Action xiEventCallback) 
       : base (xiEngine, new LightManager(xiDirection, xiEventCallback))
@@ -28,7 +28,7 @@ namespace aPC.Server.EngineActors
       }
       else
       {
-        WaitforInterval(1000); //qqUMI constantify
+        WaitForDefaultInterval();
       }
     }
 

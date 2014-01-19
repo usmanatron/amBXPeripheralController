@@ -7,7 +7,7 @@ using amBXLib;
 
 namespace aPC.Server.EngineActors
 {
-  class FanActor : EngineActorBase<Fan>
+  class FanActor : EngineActorBase
   {
     public FanActor(CompassDirection xiDirection, EngineManager xiEngine, Action xiEventCallback) 
       : base (xiEngine, new FanManager(xiDirection, xiEventCallback))
@@ -26,7 +26,7 @@ namespace aPC.Server.EngineActors
       }
       else
       {
-        WaitforInterval(1000); //qqUMI constantify
+        WaitForDefaultInterval();
       }
     }
 

@@ -5,7 +5,7 @@ using System;
 
 namespace aPC.Common.Server.EngineActors
 {
-  public class FrameActor : EngineActorBase<Frame>
+  public class FrameActor : EngineActorBase
   {
     public FrameActor(EngineManager xiEngine) 
       : base (xiEngine, new FrameManager())

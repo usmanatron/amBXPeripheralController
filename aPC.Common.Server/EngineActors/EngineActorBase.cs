@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace aPC.Common.Server.EngineActors
 {
-  public abstract class EngineActorBase<T>
+  public abstract class EngineActorBase
   {
     protected EngineActorBase(EngineManager xiEngine, ManagerBase xiManager)
     {
@@ -16,7 +16,7 @@ namespace aPC.Common.Server.EngineActors
     {
       if (Manager.IsDormant)
       {
-        WaitforInterval(500); //qqUMI Constantify
+        WaitForDefaultInterval();
       }
       else
       {
@@ -34,6 +34,11 @@ namespace aPC.Common.Server.EngineActors
     protected void WaitforInterval(int xiLength)
     {
       Thread.Sleep(xiLength);
+    }
+
+    protected void WaitForDefaultInterval()
+    {
+      WaitforInterval(500);
     }
 
     protected void AdvanceScene()
