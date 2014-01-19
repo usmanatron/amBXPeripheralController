@@ -2,8 +2,8 @@
 using aPC.Common.Entities;
 using aPC.Common.Server.Communication;
 using aPC.Common.Server.Managers;
-using aPC.Common.Server.Applicators;
-using aPC.Server.Applicators;
+using aPC.Common.Server.EngineActors;
+using aPC.Server.EngineActors;
 using aPC.Server.Communication;
 using amBXLib;
 using System.Collections.Generic;
@@ -15,9 +15,9 @@ namespace aPC.Server
   {
     public ServerTask()
     {
-      mLights = new Dictionary<CompassDirection, LightApplicator>();
-      mFans = new Dictionary<CompassDirection, FanApplicator>();
-      mRumbles = new Dictionary<CompassDirection, RumbleApplicator>();
+      mLights = new Dictionary<CompassDirection, LightActor>();
+      mFans = new Dictionary<CompassDirection, FanActor>();
+      mRumbles = new Dictionary<CompassDirection, RumbleActor>();
       mSyncManager = new SynchronisationManager();
     }
 
@@ -26,7 +26,7 @@ namespace aPC.Server
       using (new CommunicationManager(new NotificationService()))
       using (var lEngine = new EngineManager())
       {
-        SetupApplicators(lEngine);
+        SetupActors(lEngine);
 
         // Start the default initial scene
         Update(new SceneAccessor().GetScene("Default_RedVsBlue"));
@@ -51,23 +51,23 @@ namespace aPC.Server
       }
     }
 
-    private void SetupApplicators(EngineManager xiEngine)
+    private void SetupActors(EngineManager xiEngine)
     {
-      mFrame = new FrameApplicator(xiEngine, EventComplete);
+      mFrame = new FrameActor(xiEngine, EventComplete);
 
-      mLights.Add(CompassDirection.North,     new LightApplicator(CompassDirection.North, xiEngine, EventComplete));
-      mLights.Add(CompassDirection.NorthEast, new LightApplicator(CompassDirection.NorthEast, xiEngine, EventComplete));
-      mLights.Add(CompassDirection.East,      new LightApplicator(CompassDirection.East, xiEngine, EventComplete));
-      mLights.Add(CompassDirection.SouthEast, new LightApplicator(CompassDirection.SouthEast, xiEngine, EventComplete));
-      mLights.Add(CompassDirection.South,     new LightApplicator(CompassDirection.South, xiEngine, EventComplete));
-      mLights.Add(CompassDirection.SouthWest, new LightApplicator(CompassDirection.SouthWest, xiEngine, EventComplete));
-      mLights.Add(CompassDirection.West,      new LightApplicator(CompassDirection.West, xiEngine, EventComplete));
-      mLights.Add(CompassDirection.NorthWest, new LightApplicator(CompassDirection.NorthWest, xiEngine, EventComplete));
+      mLights.Add(CompassDirection.North,     new LightActor(CompassDirection.North, xiEngine, EventComplete));
+      mLights.Add(CompassDirection.NorthEast, new LightActor(CompassDirection.NorthEast, xiEngine, EventComplete));
+      mLights.Add(CompassDirection.East,      new LightActor(CompassDirection.East, xiEngine, EventComplete));
+      mLights.Add(CompassDirection.SouthEast, new LightActor(CompassDirection.SouthEast, xiEngine, EventComplete));
+      mLights.Add(CompassDirection.South,     new LightActor(CompassDirection.South, xiEngine, EventComplete));
+      mLights.Add(CompassDirection.SouthWest, new LightActor(CompassDirection.SouthWest, xiEngine, EventComplete));
+      mLights.Add(CompassDirection.West,      new LightActor(CompassDirection.West, xiEngine, EventComplete));
+      mLights.Add(CompassDirection.NorthWest, new LightActor(CompassDirection.NorthWest, xiEngine, EventComplete));
 
-      mFans.Add(CompassDirection.East, new FanApplicator(CompassDirection.East, xiEngine, EventComplete));
-      mFans.Add(CompassDirection.West, new FanApplicator(CompassDirection.West, xiEngine, EventComplete));
+      mFans.Add(CompassDirection.East, new FanActor(CompassDirection.East, xiEngine, EventComplete));
+      mFans.Add(CompassDirection.West, new FanActor(CompassDirection.West, xiEngine, EventComplete));
 
-      mRumbles.Add(CompassDirection.Everywhere, new RumbleApplicator(CompassDirection.Everywhere, xiEngine, EventComplete));
+      mRumbles.Add(CompassDirection.Everywhere, new RumbleActor(CompassDirection.Everywhere, xiEngine, EventComplete));
     }
 
     internal void Update(amBXScene xiScene)
@@ -81,15 +81,15 @@ namespace aPC.Server
         mSyncManager.IsSynchronised = false;
       }
 
-      UpdateApplicators(xiScene);
+      UpdateActors(xiScene);
     }
 
-    private void UpdateApplicators(amBXScene xiScene)
+    private void UpdateActors(amBXScene xiScene)
     {
       if (!xiScene.IsEvent)
       {
-        UpdateSynchronisedApplicator(xiScene);
-        UpdateUnsynchronisedElements(xiScene);
+        UpdateSynchronisedActor(xiScene);
+        UpdateUnsynchronisedActors(xiScene);
       }
       else 
       {
@@ -97,26 +97,26 @@ namespace aPC.Server
 
         if (mSyncManager.IsSynchronised)
         {
-          UpdateSynchronisedApplicator(xiScene);
+          UpdateSynchronisedActor(xiScene);
         }
         else
         {
-          UpdateUnsynchronisedElements(xiScene);
+          UpdateUnsynchronisedActors(xiScene);
         }
       }
     }
 
-    private void UpdateSynchronisedApplicator(amBXScene xiScene)
+    private void UpdateSynchronisedActor(amBXScene xiScene)
     {
       mFrame.UpdateManager(xiScene);
     }
 
-    private void UpdateUnsynchronisedElements(amBXScene xiScene)
+    private void UpdateUnsynchronisedActors(amBXScene xiScene)
     {
       Parallel.ForEach(mLights, light => light.Value.UpdateManager(xiScene));
       //qqUMI Not working yet.  See line 44
-      //Parallel.ForEach<KeyValuePair<CompassDirection, FanApplicator>>(mFans, fan => fan.Value.UpdateManager(xiScene));
-      //Parallel.ForEach<KeyValuePair<CompassDirection, RumbleApplicator>>(mRumbles, rumble => rumble.Value.UpdateManager(xiScene));
+      //Parallel.ForEach<KeyValuePair<CompassDirection, FanActor>>(mFans, fan => fan.Value.UpdateManager(xiScene));
+      //Parallel.ForEach<KeyValuePair<CompassDirection, RumbleActor>>(mRumbles, rumble => rumble.Value.UpdateManager(xiScene));
     }
 
     /// <remarks>
@@ -135,10 +135,10 @@ namespace aPC.Server
       }
     }
 
-    private FrameApplicator mFrame;
-    private Dictionary<CompassDirection, LightApplicator> mLights;
-    private Dictionary<CompassDirection, FanApplicator> mFans;
-    private Dictionary<CompassDirection, RumbleApplicator> mRumbles;
+    private FrameActor mFrame;
+    private Dictionary<CompassDirection, LightActor> mLights;
+    private Dictionary<CompassDirection, FanActor> mFans;
+    private Dictionary<CompassDirection, RumbleActor> mRumbles;
 
     private readonly SynchronisationManager mSyncManager;
     private bool mIsCurrentlyRunningEvent;

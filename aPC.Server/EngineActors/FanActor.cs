@@ -1,15 +1,15 @@
-﻿using aPC.Common.Server.Applicators;
+﻿using aPC.Common.Server.EngineActors;
 using aPC.Common.Entities;
 using aPC.Common.Server.Managers;
 using aPC.Server.Managers;
 using System;
 using amBXLib;
 
-namespace aPC.Server.Applicators
+namespace aPC.Server.EngineActors
 {
-  class FanApplicator : ApplicatorBase<Fan>
+  class FanActor : EngineActorBase<Fan>
   {
-    public FanApplicator(CompassDirection xiDirection, EngineManager xiEngine, Action xiEventCallback) 
+    public FanActor(CompassDirection xiDirection, EngineManager xiEngine, Action xiEventCallback) 
       : base (xiEngine, new FanManager(xiDirection, xiEventCallback))
     {
       mDirection = xiDirection;

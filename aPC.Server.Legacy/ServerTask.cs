@@ -1,5 +1,5 @@
 ﻿using aPC.Common.Server.Communication;
-using aPC.Common.Server.Applicators;
+using aPC.Common.Server.EngineActors;
 using aPC.Common.Server.Managers;
 using aPC.Server.Legacy.Communication;
 
@@ -12,14 +12,14 @@ namespace aPC.Server.Legacy
       using (new CommunicationManager(new NotificationService())) 
       using (var lEngine = new EngineManager())
       {
-        Applicator = new FrameApplicator(lEngine);
+        Actor = new FrameActor(lEngine);
         while (true)
         {
-          Applicator.Run();
+          Actor.Run();
         }
       }
     }
 
-    internal static FrameApplicator Applicator;
+    internal static FrameActor Actor;
   }
 }

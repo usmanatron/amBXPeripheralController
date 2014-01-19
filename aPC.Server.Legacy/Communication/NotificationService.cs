@@ -7,7 +7,7 @@ namespace aPC.Server.Legacy.Communication
   {
     protected override void UpdateScene(amBXScene xiScene)
     {
-      ServerTask.Applicator.UpdateManager(xiScene);
+      ServerTask.Actor.UpdateManager(xiScene);
     }
   }
 }

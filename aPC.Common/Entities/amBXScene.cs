@@ -22,7 +22,7 @@ namespace aPC.Common.Entities
     // * Once all frames have been run, return to the previously running Scene.
     public bool IsEvent;
 
-    // Used in Server to decide on the Applicator to use
+    // Used in Server to decide on the set of Actor/s to use
     [XmlAttribute]
     public bool IsSynchronised;
 

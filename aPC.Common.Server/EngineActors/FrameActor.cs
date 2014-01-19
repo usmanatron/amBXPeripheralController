@@ -3,16 +3,16 @@ using aPC.Common.Entities;
 using amBXLib;
 using System;
 
-namespace aPC.Common.Server.Applicators
+namespace aPC.Common.Server.EngineActors
 {
-  public class FrameApplicator : ApplicatorBase<Frame>
+  public class FrameActor : EngineActorBase<Frame>
   {
-    public FrameApplicator(EngineManager xiEngine) 
+    public FrameActor(EngineManager xiEngine) 
       : base (xiEngine, new FrameManager())
     {
     }
 
-    public FrameApplicator(EngineManager xiEngine, Action xiEventComplete)
+    public FrameActor(EngineManager xiEngine, Action xiEventComplete)
       : base(xiEngine, new FrameManager(xiEventComplete))
     {
     }

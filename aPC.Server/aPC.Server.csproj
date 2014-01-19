@@ -44,11 +44,11 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Applicators\RumbleApplicator.cs" />
+    <Compile Include="EngineActors\RumbleActor.cs" />
     <Compile Include="Communication\NotificationService.cs" />
     <Compile Include="Managers\FanManager.cs" />
-    <Compile Include="Applicators\FanApplicator.cs" />
-    <Compile Include="Applicators\LightApplicator.cs" />
+    <Compile Include="EngineActors\FanActor.cs" />
+    <Compile Include="EngineActors\LightActor.cs" />
     <Compile Include="Managers\RumbleManager.cs" />
     <Compile Include="Managers\LightManager.cs" />
     <Compile Include="Server.cs" />

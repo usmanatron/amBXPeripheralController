@@ -1,15 +1,15 @@
-﻿using aPC.Common.Server.Applicators;
+﻿using aPC.Common.Server.EngineActors;
 using aPC.Common.Entities;
 using aPC.Common.Server.Managers;
 using aPC.Server.Managers;
 using amBXLib;
 using System;
 
-namespace aPC.Server
+namespace aPC.Server.EngineActors
 {
-  class RumbleApplicator : ApplicatorBase<Rumble>
+  class RumbleActor : EngineActorBase<Rumble>
   {
-    public RumbleApplicator(CompassDirection xiDirection, EngineManager xiEngine, Action xiEventCallback) 
+    public RumbleActor(CompassDirection xiDirection, EngineManager xiEngine, Action xiEventCallback) 
       : base (xiEngine, new RumbleManager(xiDirection, xiEventCallback))
     {
       mDirection = xiDirection;
@@ -21,12 +21,12 @@ namespace aPC.Server
 
       if (lRumbleData != null)
       {
-        Engine.UpdateRumble(mDirection, null);//qqUMI null
+        Engine.UpdateRumble(mDirection, null);//qqUMI null needs to be filled in
         WaitforInterval(lRumbleData.Length);
       }
       else
       {
-        WaitforInterval(  1000); //qqUMI constantify
+        WaitforInterval(1000); //qqUMI constantify
       }
     }
 

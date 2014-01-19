@@ -1,15 +1,15 @@
-﻿using aPC.Common.Server.Applicators;
+﻿using aPC.Common.Server.EngineActors;
 using aPC.Common.Entities;
 using aPC.Common.Server.Managers;
 using aPC.Server.Managers;
 using amBXLib;
 using System;
 
-namespace aPC.Server
+namespace aPC.Server.EngineActors
 {
-  class LightApplicator : ApplicatorBase<Light>
+  class LightActor : EngineActorBase<Light>
   {
-    public LightApplicator(CompassDirection xiDirection, EngineManager xiEngine, Action xiEventCallback) 
+    public LightActor(CompassDirection xiDirection, EngineManager xiEngine, Action xiEventCallback) 
       : base (xiEngine, new LightManager(xiDirection, xiEventCallback))
     {
       mDirection = xiDirection;

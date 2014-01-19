@@ -2,11 +2,11 @@
 using aPC.Common.Entities;
 using System.Threading;
 
-namespace aPC.Common.Server.Applicators
+namespace aPC.Common.Server.EngineActors
 {
-  public abstract class ApplicatorBase<T>
+  public abstract class EngineActorBase<T>
   {
-    protected ApplicatorBase(EngineManager xiEngine, ManagerBase<T> xiManager)
+    protected EngineActorBase(EngineManager xiEngine, ManagerBase<T> xiManager)
     {
       Engine = xiEngine;
       Manager = xiManager;
