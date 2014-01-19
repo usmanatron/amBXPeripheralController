@@ -1,4 +1,5 @@
-﻿using aPC.Common.Server.EngineActors;
+﻿using aPC.Common;
+using aPC.Common.Server.EngineActors;
 using aPC.Common.Entities;
 using aPC.Common.Server.Managers;
 using aPC.Server.Managers;
@@ -13,6 +14,11 @@ namespace aPC.Server.EngineActors
       : base (xiEngine, new FanManager(xiDirection, xiEventCallback))
     {
       mDirection = xiDirection;
+    }
+
+    public override eActorType ActorType()
+    {
+      return eActorType.Fan;
     }
 
     protected override void ActNextFrame()

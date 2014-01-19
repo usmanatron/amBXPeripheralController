@@ -13,9 +13,9 @@ namespace aPC.Common.Entities
     [XmlElement]
     public float Speed;
 
-    public override eSectionType ComponentType()
+    public override eComponentType ComponentType()
     {
-      return eSectionType.Rumble;
+      return eComponentType.Rumble;
     }
   }
 }

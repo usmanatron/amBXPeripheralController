@@ -17,6 +17,11 @@ namespace aPC.Common.Server.EngineActors
     {
     }
 
+    public override eActorType ActorType()
+    {
+      return eActorType.Frame;
+    }
+
     protected override void ActNextFrame()
     {
       var lFrameData = (FrameData)Manager.GetNext();

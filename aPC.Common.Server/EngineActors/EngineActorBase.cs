@@ -12,6 +12,8 @@ namespace aPC.Common.Server.EngineActors
       Manager = xiManager;
     }
 
+    public abstract eActorType ActorType();
+
     public void Run()
     {
       if (Manager.IsDormant)

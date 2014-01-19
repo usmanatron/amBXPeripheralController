@@ -7,9 +7,9 @@ namespace aPC.Common.Entities
     [XmlAttribute]
     public float Intensity;
 
-    public override eSectionType ComponentType()
+    public override eComponentType ComponentType()
     {
-      return eSectionType.Fan;
+      return eComponentType.Fan;
     }
   }
 }

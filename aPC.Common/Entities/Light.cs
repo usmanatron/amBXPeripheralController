@@ -16,9 +16,9 @@ namespace aPC.Common.Entities
     [XmlAttribute] 
     public float Blue;
 
-    public override eSectionType ComponentType()
+    public override eComponentType ComponentType()
     {
-      return eSectionType.Light;
+      return eComponentType.Light;
     }
   }
 }
