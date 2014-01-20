@@ -218,11 +218,7 @@ namespace aPC.Common.Defaults
           NorthEast = DefaultLights.StrongPurple,
           East = DefaultLights.StrongPurple
         };
-        lPurple.Fans = new FanSection
-        {
-          East = DefaultFans.FullPower,
-          West = DefaultFans.FullPower
-        };
+        lPurple.Fans = DefaultFanSections.Full;
         lPurple.Rumbles = DefaultRumbleSections.Thunder;
 
 
@@ -238,14 +234,88 @@ namespace aPC.Common.Defaults
           NorthEast = DefaultLights.SoftPink,
           East = DefaultLights.SoftPink
         };
-        lPostPink.Fans = new FanSection
-        {
-          East = DefaultFans.Off,
-          West = DefaultFans.Off
-        };
+        lPostPink.Fans = DefaultFanSections.Off;
         lPostPink.Rumbles = DefaultRumbleSections.Off;
 
         lScene.Frames = new List<Frame> {lPrePink, lPurple, lPostPink};
+        return lScene;
+      }
+    }
+
+    #endregion
+
+    #region Shiprec
+
+    public amBXScene Shiprec_Praise
+    {
+      get
+      {
+        var lScene = BasicScene;
+        lScene.IsEvent = true;
+        lScene.IsExclusive = true;
+        lScene.IsSynchronised = true;
+
+        var lPreYellow  = BasicFrame;
+        lPreYellow.IsRepeated = false;
+        lPreYellow.Length = 200;
+        lPreYellow.Lights = new LightSection
+        {
+          FadeTime = 100,
+          West = DefaultLights.SoftYellow,
+          NorthWest = DefaultLights.SoftYellow,
+          North = DefaultLights.SoftYellow,
+          NorthEast = DefaultLights.SoftYellow,
+          East = DefaultLights.SoftYellow
+        };
+        lPreYellow.Rumbles = DefaultRumbleSections.Off;
+        lPreYellow.Fans = DefaultFanSections.Off;
+
+        var lYellowTransition = BasicFrame;
+        lYellowTransition.IsRepeated = false;
+        lYellowTransition.Length = 500;
+        lYellowTransition.Lights = new LightSection
+        {
+          FadeTime = 500,
+          West = DefaultLights.Yellow,
+          NorthWest = DefaultLights.Yellow,
+          North = DefaultLights.Yellow,
+          NorthEast = DefaultLights.Yellow,
+          East = DefaultLights.Yellow
+        };
+        lYellowTransition.Rumbles = DefaultRumbleSections.Off;
+        lYellowTransition.Rumbles.FadeTime = 1000;
+
+        var lYellow = BasicFrame;
+        lYellow.IsRepeated = false;
+        lYellow.Length = 2000;
+        lYellow.Lights = new LightSection
+        {
+          FadeTime = 0,
+          West = DefaultLights.Yellow,
+          NorthWest = DefaultLights.Yellow,
+          North = DefaultLights.Yellow,
+          NorthEast = DefaultLights.Yellow,
+          East = DefaultLights.Yellow
+        };
+        lYellow.Fans = DefaultFanSections.Quarter;
+        lYellow.Rumbles = DefaultRumbleSections.SoftThunder;
+
+        var lPostYellow = BasicFrame;
+        lPostYellow.IsRepeated = false;
+        lPostYellow.Length = 2000;
+        lPostYellow.Lights = new LightSection
+        {
+          FadeTime = 2000,
+          West = DefaultLights.SoftYellow,
+          NorthWest = DefaultLights.SoftYellow,
+          North = DefaultLights.SoftYellow,
+          NorthEast = DefaultLights.SoftYellow,
+          East = DefaultLights.SoftYellow
+        };
+        lPostYellow.Fans = DefaultFanSections.Off;
+        lPostYellow.Rumbles = DefaultRumbleSections.Off;
+
+        lScene.Frames = new List<Frame> {lPreYellow, lYellowTransition, lYellow, lPostYellow};
         return lScene;
       }
     }

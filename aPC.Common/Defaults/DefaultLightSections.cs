@@ -43,6 +43,19 @@ namespace aPC.Common.Defaults
       NorthWest = DefaultLights.Yellow,
     };
 
+    public static LightSection SoftYellow = new LightSection
+    {
+      FadeTime = 500,
+      North = DefaultLights.SoftYellow,
+      NorthEast = DefaultLights.SoftYellow,
+      East = DefaultLights.SoftYellow,
+      SouthEast = DefaultLights.SoftYellow,
+      South = DefaultLights.SoftYellow,
+      SouthWest = DefaultLights.SoftYellow,
+      West = DefaultLights.SoftYellow,
+      NorthWest = DefaultLights.SoftYellow,
+    };
+
     public static LightSection Orange = new LightSection
     {
       FadeTime = 500,

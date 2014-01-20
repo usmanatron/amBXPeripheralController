@@ -8,27 +8,29 @@ namespace aPC.Common.Accessors
   {
     public amBXScene GetScene(string xiDescription)
     {
-      switch (xiDescription)
+      switch (xiDescription.ToLower())
       {
-        case "CCNet_Red":
+        case "ccnet_red":
           return mDefaultScenes.BuildBroken;
-        case "CCNet_Green":
+        case "ccnet_green":
           return mDefaultScenes.BuildSuccess;
-        case "CCNet_FlashingYellow":
+        case "ccnet_flashingyellow":
           return mDefaultScenes.Building;
-        case "CCNet_FlashingOrange":
+        case "ccnet_flashingorange":
           return mDefaultScenes.BuildBrokenAndBuilding;
-        case "CCNet_Grey":
+        case "ccnet_grey":
           return mDefaultScenes.BuildNotConnected;
 
-        case "Default_RedVsBlue":
+        case "default_redvsblue":
           return mDefaultScenes.DefaultRedVsBlue;
-        case "PoolQ2_Event":
+        case "poolq2_event":
           return mDefaultScenes.PoolQ2_Event;
+        case "shiprec_praise":
+          return mDefaultScenes.Shiprec_Praise;
 
-        case "Error_Flash":
+        case "error_flash":
           return mDefaultScenes.Error_Flash;
-        case "Empty":
+        case "empty":
           return mDefaultScenes.Empty;
 
         default:
