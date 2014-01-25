@@ -25,15 +25,12 @@ namespace aPC.Server.EngineActors
     {
       var lRumbleData = (ComponentData)Manager.GetNext();
 
-      if (lRumbleData != null)
+      if (!lRumbleData.IsComponentNull)
       {
         Engine.UpdateRumble(mDirection, (Rumble)lRumbleData.Item);
-        WaitforInterval(lRumbleData.Length);
       }
-      else
-      {
-        WaitForDefaultInterval();
-      }
+
+      WaitforInterval(lRumbleData.Length);
     }
 
     private readonly CompassDirection mDirection;

@@ -24,18 +24,16 @@ namespace aPC.Server.EngineActors
     protected override void ActNextFrame()
     {
       var lLightData = (ComponentData)Manager.GetNext();
-
-      if (lLightData != null)
+      
+      
+      if (!lLightData.IsComponentNull)
       {
-        //Debug
+        // Temporary Debug trace:
         Console.WriteLine(mDirection + " - UpdateLight - " + DateTime.Now.Ticks);
-        Engine.UpdateLight(mDirection, (Light) lLightData.Item, lLightData.FadeTime);
-        WaitforInterval(lLightData.Length);
+        Engine.UpdateLight(mDirection, (Light)lLightData.Item, lLightData.FadeTime);
       }
-      else
-      {
-        WaitForDefaultInterval();
-      }
+
+      WaitforInterval(lLightData.Length);
     }
 
     private readonly CompassDirection mDirection;

@@ -8,6 +8,11 @@ namespace aPC.Common.Integration
   {
     public static Light GetLight(CompassDirection xiDirection, LightSection xiLights)
     {
+      if (xiFans == null)
+      {
+        return null;
+      }
+
       switch (xiDirection)
       {
         case CompassDirection.North:
@@ -33,6 +38,11 @@ namespace aPC.Common.Integration
 
     public static Fan GetFan(CompassDirection xiDirection, FanSection xiFans)
     {
+      if (xiFans == null)
+      {
+        return null;
+      }
+
       switch (xiDirection)
       {
         case CompassDirection.NorthEast:

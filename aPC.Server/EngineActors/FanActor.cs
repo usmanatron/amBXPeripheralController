@@ -25,15 +25,12 @@ namespace aPC.Server.EngineActors
     {
       var lFanData = (ComponentData)Manager.GetNext();
 
-      if (lFanData != null)
+      if (!lFanData.IsComponentNull)
       {
         Engine.UpdateFan(mDirection, (Fan)lFanData.Item);
-        WaitforInterval(lFanData.Length);
+        
       }
-      else
-      {
-        WaitForDefaultInterval();
-      }
+      WaitforInterval(lFanData.Length);
     }
 
     private CompassDirection mDirection;
