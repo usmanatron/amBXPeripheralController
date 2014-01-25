@@ -92,16 +92,29 @@ namespace aPC.Common.Server.Managers
       {
         Ticker.Advance();
 
-        if (CurrentScene.IsEvent && Ticker.Index == 0)
+        // If we've run the scene once through, we need to check for a few special circumstances
+        if (Ticker.Index == 0)
         {
-          // The event has completed one full cycle.  Revert to
-          // previous scene
-          SetupNewScene(PreviousScene);
-          if (mEventCallback != null)
-          {
-            mEventCallback();
-          }
+          DoSceneCompletedChecks();
         }
+      }
+    }
+
+    private void DoSceneCompletedChecks()
+    {
+      if (CurrentScene.IsEvent)
+      {
+        // The event has completed one full cycle.  Revert to
+        // previous scene
+        SetupNewScene(PreviousScene);
+        if (mEventCallback != null)
+        {
+          mEventCallback();
+        }
+      }
+      else if (FramesAreApplicable(CurrentScene.RepeatableFrames))
+      {
+        IsDormant = true;
       }
     }
 
