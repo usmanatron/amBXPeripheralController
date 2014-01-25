@@ -27,7 +27,7 @@ namespace aPC.Server.EngineActors
 
       if (!lRumbleData.IsComponentNull)
       {
-        Engine.UpdateRumble(mDirection, (Rumble)lRumbleData.Item);
+        Engine.UpdateRumble(mDirection, (Rumble)lRumbleData.Component);
       }
 
       WaitforInterval(lRumbleData.Length);

@@ -27,7 +27,7 @@ namespace aPC.Server.EngineActors
 
       if (!lFanData.IsComponentNull)
       {
-        Engine.UpdateFan(mDirection, (Fan)lFanData.Item);
+        Engine.UpdateFan(mDirection, (Fan)lFanData.Component);
         
       }
       WaitforInterval(lFanData.Length);

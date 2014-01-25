@@ -7,17 +7,17 @@ namespace aPC.Common.Server.Managers
     public ComponentData(Component xiItem, int xiFadeTime, int xiLength)
       : base(xiFadeTime, xiLength)
     {
-      Item = xiItem;
+      Component = xiItem;
     }
 
     public bool IsComponentNull
     {
       get
       {
-        return Item == null;
+        return Component == null;
       }
     }
 
-    public Component Item;
+    public Component Component;
   }
 }

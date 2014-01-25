@@ -30,7 +30,7 @@ namespace aPC.Server.EngineActors
       {
         // Temporary Debug trace:
         Console.WriteLine(mDirection + " - UpdateLight - " + DateTime.Now.Ticks);
-        Engine.UpdateLight(mDirection, (Light)lLightData.Item, lLightData.FadeTime);
+        Engine.UpdateLight(mDirection, (Light)lLightData.Component, lLightData.FadeTime);
       }
 
       WaitforInterval(lLightData.Length);
