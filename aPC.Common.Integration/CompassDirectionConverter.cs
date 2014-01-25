@@ -8,7 +8,7 @@ namespace aPC.Common.Integration
   {
     public static Light GetLight(CompassDirection xiDirection, LightSection xiLights)
     {
-      if (xiFans == null)
+      if (xiLights == null)
       {
         return null;
       }
