@@ -35,15 +35,8 @@ namespace aPC.Server
           }
           else
           {
-            Parallel.ForEach(mDesynchronisedManager.ActorsWithType(eActorType.Light), 
-                             light => mSyncManager.RunWhileUnSynchronised(light.Actor.Run));
-            /*
-              qqUMI - BUG:
-             *  In theory, we can change the above to use .AllActors and it will change everything.
-             * In practice this doesn't work.  Problem can be reproduced by running Default_RedVsBlue followed
-             * by CNet_FlashingYellow.  Currently, the FanManager blows up because the 2 repeatable frames have 
-             * null for Fan data => null ref exception.  Need to enhance so that it does something sensible.
-            */
+            Parallel.ForEach(mDesynchronisedManager.AllActors(), 
+                             actor => mSyncManager.RunWhileUnSynchronised(actor.Actor.Run));
           }
         }
       }
@@ -93,9 +86,8 @@ namespace aPC.Server
 
     private void UpdateUnsynchronisedActors(amBXScene xiScene)
     {
-      Parallel.ForEach(mDesynchronisedManager.ActorsWithType(eActorType.Light),
-                       light => light.Actor.UpdateManager(xiScene));
-      //qqUMI Not working yet.  See line 40
+      Parallel.ForEach(mDesynchronisedManager.AllActors(),
+                       actor => actor.Actor.UpdateManager(xiScene));
     }
 
     /// <remarks>
