@@ -1,6 +1,7 @@
 ﻿using aPC.Common.Entities;
 using System.Linq;
 using System;
+using System.Collections.Generic;
 
 namespace aPC.Common.Server.Managers
 {
@@ -17,15 +18,13 @@ namespace aPC.Common.Server.Managers
       SetupNewScene(CurrentScene);
     }
 
-    protected override bool SceneIsApplicable(amBXScene xiNewScene)
+    protected override bool FramesAreApplicable(List<Frame> xiFrames)
     {
-      var lFrames = xiNewScene
-        .Frames
+      var lFrames = xiFrames
         .Where(frame => frame.Lights != null || 
                         frame.Fans   != null || 
                         frame.Rumbles != null);
 
-      // All scenes are valid for this manager
       return lFrames.Any(frame => frame != null);
     }
 

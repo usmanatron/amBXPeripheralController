@@ -4,6 +4,7 @@ using aPC.Common.Integration;
 using System.Linq;
 using System;
 using aPC.Common.Server.Managers;
+using System.Collections.Generic;
 
 namespace aPC.Server.Managers
 {
@@ -22,10 +23,9 @@ namespace aPC.Server.Managers
     }
 
     // A scene is applicable if there is at least one non-null fan in a "somewhat" correct direction defined.
-    protected override bool SceneIsApplicable(amBXScene xiNewScene)
+    protected override bool FramesAreApplicable(List<Frame> xiFrames)
     {
-      var lFans = xiNewScene
-        .Frames
+      var lFans = xiFrames
         .Select(frame => frame.Fans)
         .Where(section => section != null)
         .Select(section => CompassDirectionConverter.GetFan(mDirection, section));

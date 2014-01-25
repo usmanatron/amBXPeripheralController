@@ -4,6 +4,7 @@ using aPC.Common.Integration;
 using System.Linq;
 using aPC.Common.Server.Managers;
 using System;
+using System.Collections.Generic;
 
 namespace aPC.Server.Managers
 {
@@ -22,10 +23,9 @@ namespace aPC.Server.Managers
     }
 
     // A scene is applicable if there is at least one non-null light in the right direction defined.
-    protected override bool SceneIsApplicable(amBXScene xiNewScene)
+    protected override bool FramesAreApplicable(List<Frame> xiFrames)
     {
-      var lLights = xiNewScene
-        .Frames
+      var lLights = xiFrames
         .Select(frame => frame.Lights)
         .Where(section => section != null)
         .Select(section => CompassDirectionConverter.GetLight(mDirection, section));

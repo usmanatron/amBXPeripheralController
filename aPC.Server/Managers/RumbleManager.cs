@@ -4,6 +4,7 @@ using aPC.Common.Server.Managers;
 using amBXLib;
 using System.Linq;
 using System;
+using System.Collections.Generic;
 
 namespace aPC.Server.Managers
 {
@@ -22,10 +23,9 @@ namespace aPC.Server.Managers
     }
 
     // A scene is applicable if there is at least one non-null light in the right direction defined.
-    protected override bool SceneIsApplicable(amBXScene xiNewScene)
+    protected override bool FramesAreApplicable(List<Frame> xiFrames)
     {
-      var lRumbles = xiNewScene
-        .Frames
+      var lRumbles = xiFrames
         .Select(frame => frame.Rumbles)
         .Where(section => section != null);
 

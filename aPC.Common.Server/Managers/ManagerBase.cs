@@ -41,7 +41,7 @@ namespace aPC.Common.Server.Managers
 
     protected void SetupNewScene(amBXScene xiNewScene)
     {
-      if (SceneIsApplicable(xiNewScene))
+      if (FramesAreApplicable(xiNewScene.Frames))
       {
         IsDormant = false;
         CurrentScene = xiNewScene;
@@ -49,7 +49,7 @@ namespace aPC.Common.Server.Managers
       }
       else
       {
-        if (SceneIsApplicable(PreviousScene))
+        if (FramesAreApplicable(PreviousScene.Frames))
         {
           return;
         }
@@ -60,7 +60,7 @@ namespace aPC.Common.Server.Managers
       }
     }
 
-    protected abstract bool SceneIsApplicable(amBXScene xiNewScene);
+    protected abstract bool FramesAreApplicable(List<Frame> xiFrames);
 
     public abstract Data GetNext();
 
