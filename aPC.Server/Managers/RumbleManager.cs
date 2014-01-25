@@ -36,22 +36,14 @@ namespace aPC.Server.Managers
     {
       var lFrame = GetNextFrame();
 
-      var lLength = lFrame.Length;
-      int lFadeTime;
-      Rumble lRumble;
+      Rumble lRumble = lFrame.Rumbles == null
+        ? null
+        : lFrame.Rumbles.Rumble;
 
-      if (lFrame.Rumbles == null)
-      {
-        lFadeTime = 0;
-        lRumble = null;
-      }
-      else
-      {
-        lFadeTime = lFrame.Rumbles.FadeTime;
-        lRumble = lFrame.Rumbles.Rumble;
-      }
+      return lRumble == null
+        ? new ComponentData(lFrame.Length)
+        : new ComponentData(lRumble, lFrame.Rumbles.FadeTime, lFrame.Length);
 
-      return new ComponentData(lRumble, lFadeTime, lLength);
     }
 
     readonly CompassDirection mDirection;

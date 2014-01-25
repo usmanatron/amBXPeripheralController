@@ -38,7 +38,9 @@ namespace aPC.Server.Managers
       var lFrame = GetNextFrame();
       var lFan = CompassDirectionConverter.GetFan(mDirection, lFrame.Fans);
 
-      return new ComponentData(lFan, lFrame.Fans.FadeTime, lFrame.Length);
+      return lFan == null
+        ? new ComponentData(lFrame.Length)
+        : new ComponentData(lFan, lFrame.Fans.FadeTime, lFrame.Length);
     }
 
     readonly CompassDirection mDirection;

@@ -35,27 +35,17 @@ namespace aPC.Server.Managers
 
     public override Data GetNext()
     {
-      //Debug
+      // Temporary debug trace
       Console.WriteLine(mDirection + " - GetNext     - " + DateTime.Now.Ticks);
 
       var lFrame = GetNextFrame();
 
-      var lLength = lFrame.Length;
       int lFadeTime;
-      Light lLight;
+      var lLight = CompassDirectionConverter.GetLight(mDirection, lFrame.Lights);
 
-      if (lFrame.Lights == null)
-      {
-        lFadeTime = 0;
-        lLight = null;
-      }
-      else
-      {
-        lFadeTime = lFrame.Lights.FadeTime;
-        lLight = CompassDirectionConverter.GetLight(mDirection, lFrame.Lights);
-      }
-
-      return new ComponentData(lLight, lFadeTime, lLength);
+      return lLight == null
+        ? new ComponentData(lFrame.Length)
+        : new ComponentData(lLight, lFrame.Lights.FadeTime, lFrame.Length);
     }
 
     readonly CompassDirection mDirection;
