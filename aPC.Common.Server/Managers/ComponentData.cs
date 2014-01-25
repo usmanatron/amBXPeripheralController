@@ -10,6 +10,14 @@ namespace aPC.Common.Server.Managers
       Item = xiItem;
     }
 
+    public bool IsComponentNull
+    {
+      get
+      {
+        return Item == null;
+      }
+    }
+
     public Component Item;
   }
 }
