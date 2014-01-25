@@ -12,7 +12,7 @@ namespace aPC.Common.Server.Managers
     {
       var lScene = new SceneAccessor().GetScene("Empty");
 
-      PreviousScene = lScene;
+      mPreviousScene = lScene;
       CurrentScene = lScene;
     }
 
@@ -32,7 +32,7 @@ namespace aPC.Common.Server.Managers
         }
         else
         {
-          PreviousScene = CurrentScene;
+          mPreviousScene = CurrentScene;
         }
 
         SetupNewScene(xiNewScene);
@@ -43,21 +43,23 @@ namespace aPC.Common.Server.Managers
     {
       if (FramesAreApplicable(xiNewScene.Frames))
       {
-        IsDormant = false;
         CurrentScene = xiNewScene;
-        Ticker = new AtypicalFirstRunInfiniteTicker(CurrentScene.Frames.Count, CurrentScene.RepeatableFrames.Count);
+        SetupCurrentScene();
+      }
+      else if (FramesAreApplicable(mPreviousScene.Frames))
+      {
+        SetupCurrentScene();
       }
       else
       {
-        if (FramesAreApplicable(PreviousScene.Frames))
-        {
-          return;
-        }
-        else
-        {
-          IsDormant = true;
-        }
+        IsDormant = true;
       }
+    }
+
+    private void SetupCurrentScene()
+    {
+      IsDormant = false;
+      Ticker = new AtypicalFirstRunInfiniteTicker(CurrentScene.Frames.Count, CurrentScene.RepeatableFrames.Count);
     }
 
     protected abstract bool FramesAreApplicable(List<Frame> xiFrames);
@@ -106,13 +108,13 @@ namespace aPC.Common.Server.Managers
       {
         // The event has completed one full cycle.  Revert to
         // previous scene
-        SetupNewScene(PreviousScene);
+        SetupNewScene(mPreviousScene);
         if (mEventCallback != null)
         {
           mEventCallback();
         }
       }
-      else if (FramesAreApplicable(CurrentScene.RepeatableFrames))
+      else if (!FramesAreApplicable(CurrentScene.RepeatableFrames))
       {
         IsDormant = true;
       }
@@ -120,9 +122,9 @@ namespace aPC.Common.Server.Managers
 
     public bool IsDormant;
     protected amBXScene CurrentScene;
-    protected amBXScene PreviousScene;
     protected AtypicalFirstRunInfiniteTicker Ticker;
 
+    private amBXScene mPreviousScene;
     private readonly object mSceneLock = new object();
     private Action mEventCallback;
   }
