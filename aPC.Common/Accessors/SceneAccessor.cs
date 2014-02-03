@@ -27,6 +27,8 @@ namespace aPC.Common.Accessors
           return mDefaultScenes.PoolQ2_Event;
         case "shiprec_praise":
           return mDefaultScenes.Shiprec_Praise;
+        case "support_jiraday":
+          return mDefaultScenes.Support_JIRADay;
 
         case "error_flash":
           return mDefaultScenes.Error_Flash;

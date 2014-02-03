@@ -14,5 +14,6 @@ namespace aPC.Common.Defaults
     public static readonly Light SoftPink = new Light { Intensity = 0.5f, Red = 0.5f, Green = 0, Blue = 1f };
     public static readonly Light StrongPurple = new Light { Intensity = 1f, Red = 1f, Green = 0.5f, Blue = 0.5f };
     public static readonly Light SoftYellow = new Light { Intensity = 1f, Red = 0.25f, Green = 0.25f, Blue = 0 };
+    public static readonly Light JiraBlue = new Light { Intensity = 1f, Red = 0.33f, Green = 0.66f, Blue = 1 };
   }
 }
