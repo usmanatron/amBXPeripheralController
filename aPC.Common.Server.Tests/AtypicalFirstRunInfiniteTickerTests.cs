@@ -7,16 +7,13 @@ namespace aPC.Common.Server.Tests
   public class AtypicalFirstRunInfiniteTickerTests
   {
     [Test]
-    public void NonPositiveArgumentsDisallowed()
+    [TestCase(-5, 6)]
+    [TestCase(0, 6)]
+    [TestCase(5, -5)]
+    [TestCase(5, 0)]
+    public void NonPositiveArgumentsDisallowed(int xiFirstRun, int xiSecondRun)
     {
-      // Invalid first value
-      Assert.Throws<InvalidOperationException>(() => CreateTicker(-5, 6));
-      Assert.Throws<InvalidOperationException>(() => CreateTicker(0, 6));
-      
-      // Invalid subsequent value
-      Assert.Throws<InvalidOperationException>(() => CreateTicker(5, -5));
-      Assert.Throws<InvalidOperationException>(() => CreateTicker(5, 0));
-
+      Assert.Throws<InvalidOperationException>(() => CreateTicker(xiFirstRun, xiSecondRun));
     }
 
     [Test]
