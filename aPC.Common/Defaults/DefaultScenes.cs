@@ -322,6 +322,54 @@ namespace aPC.Common.Defaults
 
     #endregion
 
+    public amBXScene Support_JIRADay
+    {
+      get
+      {
+        var lScene = BasicScene;
+        lScene.IsEvent = true;
+        lScene.IsExclusive = true;
+        lScene.IsSynchronised = true;
+
+        var lPreBlue  = BasicFrame;
+        lPreBlue.IsRepeated = false;
+        lPreBlue.Length = 1000;
+        lPreBlue.Lights = new LightSection
+        {
+          FadeTime = 1000,
+          West = DefaultLights.Blue,
+          NorthWest = DefaultLights.Blue,
+          North = DefaultLights.Blue,
+          NorthEast = DefaultLights.Blue,
+          East = DefaultLights.Blue
+        };
+        lPreBlue.Rumbles = DefaultRumbleSections.Off;
+        lPreBlue.Fans = DefaultFanSections.Off;
+
+        var lJiraBlue = BasicFrame;
+        lJiraBlue.IsRepeated = false;
+        lJiraBlue.Length = 5 * 1000;
+        lJiraBlue.Lights = new LightSection
+        {
+          FadeTime = 3000,
+          West = DefaultLights.JiraBlue,
+          NorthWest = DefaultLights.JiraBlue,
+          North = DefaultLights.JiraBlue,
+          NorthEast = DefaultLights.JiraBlue,
+          East = DefaultLights.JiraBlue
+        };
+        lJiraBlue.Fans = DefaultFanSections.Quarter;
+
+        var lPostBlue = BasicFrame;
+        lPostBlue.IsRepeated = false;
+        lPostBlue.Length = 10 * 1000;
+        lPostBlue.Fans = DefaultFanSections.Off;
+
+        lScene.Frames = new List<Frame> { lPreBlue, lJiraBlue, lPostBlue };
+        return lScene;
+      }
+    }
+
     #region Helpers
 
     private amBXScene BasicScene
