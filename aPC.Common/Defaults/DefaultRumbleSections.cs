@@ -1,12 +1,13 @@
-﻿using aPC.Common.Entities;
+﻿using aPC.Common.Builders;
+using aPC.Common.Entities;
 
 namespace aPC.Common.Defaults
 {
   class DefaultRumbleSections
   {
-    public static readonly RumbleSection Off = new RumbleSection { FadeTime = 500, Rumble = DefaultRumbles.Off };
-    public static readonly RumbleSection Boing = new RumbleSection { FadeTime = 500, Rumble = DefaultRumbles.Boing };
-    public static readonly RumbleSection Thunder = new RumbleSection { FadeTime = 500, Rumble = DefaultRumbles.Thunder };
-    public static readonly RumbleSection SoftThunder = new RumbleSection { FadeTime = 500, Rumble = DefaultRumbles.SoftThunder };
+    public static readonly RumbleSection Off = new RumbleSectionBuilder().WithFadeTime(500).WithRumble(DefaultRumbles.Off).Build();
+    public static readonly RumbleSection Boing = new RumbleSectionBuilder().WithFadeTime(500).WithRumble(DefaultRumbles.Boing).Build();
+    public static readonly RumbleSection Thunder = new RumbleSectionBuilder().WithFadeTime(500).WithRumble(DefaultRumbles.Thunder).Build();
+    public static readonly RumbleSection SoftThunder = new RumbleSectionBuilder().WithFadeTime(500).WithRumble(DefaultRumbles.SoftThunder).Build();
   }
 }
