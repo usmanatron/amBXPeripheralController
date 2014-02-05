@@ -57,6 +57,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Builders\FanSectionBuilderTests.cs" />
+    <Compile Include="Builders\FrameBuilderTests.cs" />
+    <Compile Include="Builders\RumbleSectionBuilderTests.cs" />
+    <Compile Include="Builders\SectionBuilderBaseTests.cs" />
     <Compile Include="Builders\LightSectionBuilderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

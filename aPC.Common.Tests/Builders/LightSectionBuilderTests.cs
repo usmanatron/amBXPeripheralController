@@ -19,7 +19,7 @@ namespace aPC.Common.Tests.Builders
     }
 
     [Test]
-    public void NewLightSection_WithNoLights_DoesNotThrowException()
+    public void NewLightSection_WithNoLights_ThrowsException()
     {
       var lSectionBuilder = new LightSectionBuilder()
       .WithFadeTime(100);
