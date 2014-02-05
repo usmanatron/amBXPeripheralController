@@ -2,7 +2,7 @@
 
 namespace aPC.Common.Defaults
 {
-  class DefaultLights
+  public class DefaultLights
   {
     public static readonly Light Red = new Light { Intensity = 1, Red = 1, Green = 0, Blue = 0 };
     public static readonly Light Green = new Light { Intensity = 1, Red = 0, Green = 1, Blue = 0 };
