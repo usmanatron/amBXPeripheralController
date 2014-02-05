@@ -40,7 +40,6 @@ namespace aPC.Server.Managers
 
       var lFrame = GetNextFrame();
 
-      int lFadeTime;
       var lLight = CompassDirectionConverter.GetLight(mDirection, lFrame.Lights);
 
       return lLight == null

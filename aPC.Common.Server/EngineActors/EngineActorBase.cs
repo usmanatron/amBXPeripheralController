@@ -41,7 +41,7 @@ namespace aPC.Common.Server.EngineActors
       Thread.Sleep(xiLength);
     }
 
-    protected void WaitForDefaultInterval()
+    private void WaitForDefaultInterval()
     {
       WaitforInterval(500);
     }

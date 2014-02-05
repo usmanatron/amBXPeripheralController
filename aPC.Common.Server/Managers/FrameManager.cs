@@ -31,7 +31,7 @@ namespace aPC.Common.Server.Managers
     public override Data GetNext()
     {
       var lFrame = GetNextFrame();
-      return new FrameData(lFrame, 0, lFrame.Length);
+      return new FrameData(lFrame, 0);
     }
   }
 }
