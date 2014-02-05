@@ -22,4 +22,16 @@
     Fan,
     Rumble
   }
+
+  public enum eDirection
+  {
+    North,
+    NorthEast,
+    East,
+    SouthEast,
+    South,
+    SouthWest,
+    West,
+    NorthWest
+  }
 }
