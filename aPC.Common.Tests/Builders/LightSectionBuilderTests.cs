@@ -1,81 +1,122 @@
 ﻿using NUnit.Framework;
 using aPC.Common.Builders;
+using aPC.Common.Defaults;
+using aPC.Common.Entities;
+using System;
 
 namespace aPC.Common.Tests.Builders
 {
   [TestFixture]
   class LightSectionBuilderTests
   {
-
-    //NEW Test.  If repeated or fade time is missing, throw an exception when building!
-
     [Test]
-    public void EmptyLightSection_IsEmpty()
+    public void NewLightSection_WithNoFadeTime_ThrowsException()
     {
-      var lSection = new LightSectionBuilder()
-        .Build();
+      var lSectionBuilder = new LightSectionBuilder()
+      .WithAllLights(mGreen);
 
-      Assert.AreEqual(default(int), lSection.FadeTime);
-      Assert.AreEqual(null, lSection.NorthEast);
+      Assert.Throws<ArgumentException>(() => lSectionBuilder.Build());
     }
 
     [Test]
-    public void FadeTimeSaved()
+    public void NewLightSection_WithNoLights_DoesNotThrowException()
+    {
+      var lSectionBuilder = new LightSectionBuilder()
+      .WithFadeTime(100);
+
+      Assert.Throws<ArgumentException>(() => lSectionBuilder.Build());
+    }
+
+    [Test]
+    public void NewLightSection_WithFadeTimeAndAtLeastOneLightSpecified_DoesNotThrowException()
+    {
+      var lSectionBuilder = new LightSectionBuilder()
+      .WithFadeTime(100)
+      .WithLightInDirection(eDirection.East, mGreen);
+
+      Assert.DoesNotThrow(() => lSectionBuilder.Build());
+    }
+
+    [Test]
+    public void NewLightSection_HasValidFadeTime()
     {
       var lSection = new LightSectionBuilder()
         .WithFadeTime(100)
+        .WithLightInDirection(eDirection.East, mGreen)
         .Build();
 
       Assert.AreEqual(100, lSection.FadeTime);
     }
 
     [Test]
-    //qqUMI Would ideally have different cases here for different lights
-    // and directions except I can't do this (as Light isn't a constant at compile time.
-    public void NewLightSection_OneLightSpecified_OnTheRightPlace()
+    [TestCase(eDirection.North)]
+    [TestCase(eDirection.NorthEast)]
+    [TestCase(eDirection.East)]
+    [TestCase(eDirection.SouthEast)]
+    [TestCase(eDirection.South)]
+    [TestCase(eDirection.SouthWest)]
+    [TestCase(eDirection.West)]
+    [TestCase(eDirection.NorthWest)]
+    public void NewLightSection_HasValidLightInRightDirection(eDirection xiDirection)
     {
       var lSection = new LightSectionBuilder()
-        .WithLightInDirection(eDirection.North, Defaults.DefaultLights.Green)
+        .WithFadeTime(100)
+        .WithLightInDirection(xiDirection, mGreen)
         .Build();
 
-      Assert.AreEqual(Defaults.DefaultLights.Green, lSection.North);
+      Assert.AreEqual(mGreen, GetLightForDirection(lSection, xiDirection));
+    }
+
+    //qqUMI TODO: Consider if this is the best way to do this
+    private Light GetLightForDirection(LightSection xiSection, eDirection xiDirection)
+    {
+      var lSectionBuilderBase = new SectionBuilderBase();
+      var lFieldInfo = lSectionBuilderBase.GetComponentInfoInDirection(xiSection, xiDirection);
+      return lFieldInfo.GetValue(xiSection) as Light;
     }
 
     [Test]
-    public void NewLightSection_AllLightsSpecifiedInOneGo_OnTheRightPlace()
+    public void NewLightSection_AllLightsSpecifiedInOneGo_AllLightsSpecified()
     {
       var lSection = new LightSectionBuilder()
-        .WithAllLights(Defaults.DefaultLights.Blue)
+        .WithFadeTime(100)
+        .WithAllLights(mGreen)
         .Build();
 
-      Assert.AreEqual(Defaults.DefaultLights.Blue, lSection.North);
-      Assert.AreEqual(Defaults.DefaultLights.Blue, lSection.NorthEast);
-      Assert.AreEqual(Defaults.DefaultLights.Blue, lSection.East);
-      Assert.AreEqual(Defaults.DefaultLights.Blue, lSection.SouthEast);
-      Assert.AreEqual(Defaults.DefaultLights.Blue, lSection.South);
-      Assert.AreEqual(Defaults.DefaultLights.Blue, lSection.SouthWest);
-      Assert.AreEqual(Defaults.DefaultLights.Blue, lSection.West);
-      Assert.AreEqual(Defaults.DefaultLights.Blue, lSection.NorthWest);
+      Assert.AreEqual(mGreen, lSection.North);
+      Assert.AreEqual(mGreen, lSection.NorthEast);
+      Assert.AreEqual(mGreen, lSection.East);
+      Assert.AreEqual(mGreen, lSection.SouthEast);
+      Assert.AreEqual(mGreen, lSection.South);
+      Assert.AreEqual(mGreen, lSection.SouthWest);
+      Assert.AreEqual(mGreen, lSection.West);
+      Assert.AreEqual(mGreen, lSection.NorthWest);
     }
 
     [Test]
     public void NewLightSection_DifferentLightsInDifferentPlaces_OnTheRightPlaces()
     {
       var lSection = new LightSectionBuilder()
-        .WithLightInDirection(eDirection.North, Defaults.DefaultLights.Green)
-        .WithLightInDirection(eDirection.East, Defaults.DefaultLights.Blue)
-        .WithLightInDirection(eDirection.SouthWest, Defaults.DefaultLights.Red)
-        .WithLightInDirection(eDirection.NorthWest, Defaults.DefaultLights.Orange)
+        .WithFadeTime(100)
+        .WithLightInDirection(eDirection.North, mGreen)
+        .WithLightInDirection(eDirection.East, mBlue)
+        .WithLightInDirection(eDirection.SouthWest, mRed)
+        .WithLightInDirection(eDirection.NorthWest, mOrange)
         .Build();
 
-      Assert.AreEqual(Defaults.DefaultLights.Green, lSection.North);
+      Assert.AreEqual(mGreen, lSection.North);
       Assert.AreEqual(null, lSection.NorthEast);
-      Assert.AreEqual(Defaults.DefaultLights.Blue, lSection.East);
+      Assert.AreEqual(mBlue, lSection.East);
       Assert.AreEqual(null, lSection.SouthEast);
       Assert.AreEqual(null, lSection.South);
-      Assert.AreEqual(Defaults.DefaultLights.Red, lSection.SouthWest);
+      Assert.AreEqual(mRed, lSection.SouthWest);
       Assert.AreEqual(null, lSection.West);
-      Assert.AreEqual(Defaults.DefaultLights.Orange, lSection.NorthWest);
+      Assert.AreEqual(mOrange, lSection.NorthWest);
     }
+
+    private Light mOrange = DefaultLights.Orange;
+    private Light mGreen = DefaultLights.Green;
+    private Light mBlue = DefaultLights.Blue;
+    private Light mRed = DefaultLights.Red;
   }
 }
