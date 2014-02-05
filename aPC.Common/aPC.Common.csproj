@@ -41,8 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Accessors\FrameAccessor.cs" />
-    <Compile Include="Accessors\SectionAccessor.cs" />
     <Compile Include="Builders\FanSectionBuilder.cs" />
     <Compile Include="Builders\LightSectionBuilder.cs" />
     <Compile Include="Builders\RumbleSectionBuilder.cs" />
@@ -58,7 +56,7 @@
     <Compile Include="DirectionAttribute.cs" />
     <Compile Include="Entities\Component.cs" />
     <Compile Include="Entities\SectionBase.cs" />
-    <Compile Include="Accessors\SceneAccessor.cs" />
+    <Compile Include="SceneAccessor.cs" />
     <Compile Include="Entities\amBXScene.cs" />
     <Compile Include="Entities\Fan.cs" />
     <Compile Include="Entities\FanSection.cs" />

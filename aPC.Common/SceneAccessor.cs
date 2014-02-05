@@ -2,7 +2,7 @@
 using aPC.Common.Defaults;
 using aPC.Common.Entities;
 
-namespace aPC.Common.Accessors
+namespace aPC.Common
 {
   public class SceneAccessor
   {
