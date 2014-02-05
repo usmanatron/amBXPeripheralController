@@ -11,27 +11,27 @@ namespace aPC.Common.Server.Tests
     [TestCase(0, 6)]
     [TestCase(5, -5)]
     [TestCase(5, 0)]
-    public void NonPositiveArgumentsDisallowed(int xiFirstRun, int xiSecondRun)
+    public void NonPositiveArguments_ThrowsException(int xiFirstRun, int xiSecondRun)
     {
       Assert.Throws<InvalidOperationException>(() => CreateTicker(xiFirstRun, xiSecondRun));
     }
 
     [Test]
-    public void IndexIsZeroBased()
+    public void NewTicker_StartsAtZero()
     {
       var lTicker = CreateDefaultTicker();
       Assert.AreEqual(0, lTicker.Index);
     }
 
     [Test]
-    public void NewTickerHasFirstRunTrue()
+    public void NewTicker_HasFirstRunTrue()
     {
       var lTicker = CreateDefaultTicker();
       Assert.AreEqual(true, lTicker.IsFirstRun);
     }
 
     [Test]
-    public void TickingIncreasesByOne()
+    public void NewTicker_TickedOnce_IncreasesByOne()
     {
       var lTicker = CreateDefaultTicker();
       lTicker.Advance();
@@ -39,7 +39,7 @@ namespace aPC.Common.Server.Tests
     }
 
     [Test]
-    public void AdvancingThroughFirstRunReturnsToZero()
+    public void NewTicker_AdvancingThroughFirstRun_ReturnsToZero()
     {
       var lTicker = CreateDefaultTicker();
 
@@ -52,7 +52,7 @@ namespace aPC.Common.Server.Tests
     }
 
     [Test]
-    public void AdvancingThroughFirstRunChangesFirstRunFalse()
+    public void NewTicker_AdvancingThroughFirstRun_ChangesFirstRunFalse()
     {
       var lTicker = CreateDefaultTicker();
 
@@ -65,7 +65,7 @@ namespace aPC.Common.Server.Tests
     }
 
     [Test]
-    public void SecondRunHasDifferentSize()
+    public void NewTickerWithDifferentSubsequentSize_AdvancingThroughTwoFullRuns_ReturnsToZero()
     {
       var lTicker = CreateDefaultTicker();
 
