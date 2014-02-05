@@ -1,10 +1,8 @@
-﻿using System.Linq;
-using System.Reflection;
-using aPC.Common.Entities;
+﻿using aPC.Common.Entities;
 
 namespace aPC.Common.Builders
 {
-  public class LightSectionBuilder
+  public class LightSectionBuilder : SectionBuilderBase
   {
     public LightSectionBuilder()
     {
@@ -13,7 +11,7 @@ namespace aPC.Common.Builders
 
     public LightSectionBuilder WithFadeTime(int xiFadeTime)
     {
-      mLightSection.FadeTime = xiFadeTime;
+      SetFadeTime(mLightSection, xiFadeTime);
       return this;
     }
 
@@ -33,23 +31,10 @@ namespace aPC.Common.Builders
 
     public LightSectionBuilder WithLightInDirection(eDirection xiDirection, Light xiLight)
     {
-      var lSectionInfo = mLightSection
-        .GetType()
-        .GetFields()
-        .SingleOrDefault(field => MatchesDirection(field, xiDirection));
-
-      lSectionInfo.SetValue(mLightSection, xiLight);
+      var lFieldInfo = GetComponentFieldInfoInDirection(mLightSection, xiDirection);
+      lFieldInfo.SetValue(mLightSection, xiLight);
 
       return this;
-    }
-
-    private bool MatchesDirection(FieldInfo xiPropertyInfo, eDirection xiDescription)
-    {
-      var lAttribute = xiPropertyInfo.GetCustomAttribute<DirectionAttribute>();
-
-      if (lAttribute == null) return false;
-
-      return lAttribute.Direction == xiDescription;
     }
 
     public LightSection Build()

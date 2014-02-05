@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Reflection;
 
 namespace aPC.Common
 {
-  [AttributeUsage(AttributeTargets.All)]
+  [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
   class DirectionAttribute : Attribute
   {
     public DirectionAttribute(eDirection xiDirection)
@@ -15,6 +16,12 @@ namespace aPC.Common
       get { return mDirection; }
     }
 
-    private eDirection mDirection;
+    public static bool MatchesDirection(FieldInfo xiFieldInfo, eDirection xiDirection)
+    {
+      var lAttribute = xiFieldInfo.GetCustomAttribute<DirectionAttribute>();
+      return lAttribute != null && lAttribute.Direction == xiDirection;
+    }
+
+    private readonly eDirection mDirection;
   }
 }
