@@ -6,7 +6,7 @@ namespace aPC.Common.Builders
 {
   public class SectionBuilderBase
   {
-    protected FieldInfo GetComponentFieldInfoInDirection(SectionBase xiSection, eDirection xiDirection)
+    public FieldInfo GetComponentInfoInDirection(SectionBase xiSection, eDirection xiDirection)
     {
       return xiSection
         .GetType()
