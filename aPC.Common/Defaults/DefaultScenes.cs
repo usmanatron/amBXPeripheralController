@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using aPC.Common.Builders;
 using aPC.Common.Entities;
 
@@ -12,13 +13,12 @@ namespace aPC.Common.Defaults
     {
       get
       {
-        var lScene = BasicScene;
+        var lScene = new amBXScene();
         lScene.Frames = new FrameBuilder()
+          .AddFrame()
           .WithRepeated(true)
           .WithFrameLength(1000)
-          .WithLightSection(new LightSectionBuilder()
-            .WithAllLights(DefaultLights.Red)
-            .Build())
+          .WithLightSection(DefaultLightSections.Red)
           .Build();
 
         return lScene;
@@ -29,13 +29,12 @@ namespace aPC.Common.Defaults
     {
       get
       {
-        var lScene = BasicScene;
+        var lScene = new amBXScene();
         lScene.Frames = new FrameBuilder()
+          .AddFrame()
           .WithRepeated(true)
           .WithFrameLength(1000)
-          .WithLightSection(new LightSectionBuilder()
-            .WithAllLights(DefaultLights.Green)
-            .Build())
+          .WithLightSection(DefaultLightSections.Green)
           .Build();
         return lScene;
       }
@@ -45,20 +44,17 @@ namespace aPC.Common.Defaults
     {
       get
       {
-        var lScene = BasicScene;
+        var lScene = new amBXScene();
         lScene.Frames = new FrameBuilder()
+          .AddFrame()
           .WithRepeated(true)
           .WithFrameLength(1000)
-          .WithLightSection(new LightSectionBuilder()
-            .WithAllLights(DefaultLights.Yellow)
-            .Build())
+          .WithLightSection(DefaultLightSections.Yellow)
 
           .AddFrame()
           .WithRepeated(true)
           .WithFrameLength(1000)
-          .WithLightSection(new LightSectionBuilder()
-            .WithAllLights(DefaultLights.Off)
-            .Build())
+          .WithLightSection(DefaultLightSections.Green)
           .Build();
 
         return lScene;
@@ -69,13 +65,19 @@ namespace aPC.Common.Defaults
     {
       get
       {
-        var lScene = BasicScene;
-        var lFrameOn = BasicFrame;
-        var lFrameOff = BasicFrame;
-        lFrameOn.Lights = DefaultLightSections.Orange;
-        lFrameOff.Lights = DefaultLightSections.Off;
+        var lScene = new amBXScene();
+        lScene.Frames = new FrameBuilder()
+          .AddFrame()
+          .WithRepeated(true)
+          .WithFrameLength(1000)
+          .WithLightSection(DefaultLightSections.Orange)
 
-        lScene.Frames = new List<Frame> { lFrameOn, lFrameOff };
+          .AddFrame()
+          .WithRepeated(true)
+          .WithFrameLength(1000)
+          .WithLightSection(DefaultLightSections.Red)
+          .Build();
+
         return lScene;
       }
     }
@@ -84,11 +86,14 @@ namespace aPC.Common.Defaults
     {
       get
       {
-        var lScene = BasicScene;
-        var lFrame = BasicFrame;
-        lFrame.Lights = DefaultLightSections.Off;
+        var lScene = new amBXScene();
+        lScene.Frames = new FrameBuilder()
+          .AddFrame()
+          .WithRepeated(true)
+          .WithFrameLength(1000)
+          .WithLightSection(DefaultLightSections.Off)
+          .Build();
 
-        lScene.Frames = new List<Frame> { lFrame };
         return lScene;
       }
     }
@@ -109,58 +114,55 @@ namespace aPC.Common.Defaults
     {
       get
       {
-        var lScene = BasicScene;
-        lScene.IsSynchronised = true;
-        var lPurple = BasicFrame;
-        var lDisableFans = BasicFrame;
-        var lRedBlue = BasicFrame;
-        var lBlueRed = BasicFrame;
+        var lScene = new amBXScene
+                     {
+                       IsSynchronised = true
+                     };
 
-        lPurple.IsRepeated = false;
-        lPurple.Length = 2000;
-        lPurple.Lights = new LightSection
-                         {
-                           FadeTime = 100,
-                           West = DefaultLights.SoftPurple,
-                           NorthWest = DefaultLights.SoftPurple,
-                           North = DefaultLights.SoftPurple,
-                           NorthEast = DefaultLights.SoftPurple,
-                           East = DefaultLights.SoftPurple
-                         };
-        lPurple.Fans = new FanSection
-                       {
-                         East = DefaultFans.FullPower,
-                         West = DefaultFans.FullPower
-                       };
+        lScene.Frames = new FrameBuilder()
+          .AddFrame()
+          .WithRepeated(false)
+          .WithFrameLength(2000)
+          .WithLightSection(new LightSectionBuilder()
+            .WithFadeTime(100)
+            .WithLightInDirection(eDirection.West, DefaultLights.SoftPurple)
+            .WithLightInDirection(eDirection.NorthWest, DefaultLights.SoftPurple)
+            .WithLightInDirection(eDirection.North, DefaultLights.SoftPurple)
+            .WithLightInDirection(eDirection.NorthEast, DefaultLights.SoftPurple)
+            .WithLightInDirection(eDirection.East, DefaultLights.SoftPurple)
+            .Build())
+          .WithFanSection(DefaultFanSections.Full)
 
-        lDisableFans.IsRepeated = false;
-        lDisableFans.Length = 10;
-        lDisableFans.Fans = new FanSection
-                            {
-                              East = DefaultFans.Off,
-                              West = DefaultFans.Off
-                            };
+          .AddFrame()
+          .WithRepeated(false)
+          .WithFrameLength(10)
+          .WithFanSection(DefaultFanSections.Off)
 
-        lRedBlue.Lights = new LightSection
-                          {
-                            FadeTime = 100,
-                            West = DefaultLights.Red,
-                            NorthWest = DefaultLights.Red,
-                            North = DefaultLights.SoftPurple,
-                            NorthEast = DefaultLights.Blue,
-                            East = DefaultLights.Blue
-                          };
-        lBlueRed.Lights = new LightSection
-                          {
-                            FadeTime = 100,
-                            West = DefaultLights.Blue,
-                            NorthWest = DefaultLights.Blue,
-                            North = DefaultLights.SoftPurple,
-                            NorthEast = DefaultLights.Red,
-                            East = DefaultLights.Red
-                          };
+          .AddFrame()
+          .WithRepeated(true)
+          .WithFrameLength(1000)
+          .WithLightSection(new LightSectionBuilder()
+            .WithFadeTime(100)
+            .WithLightInDirection(eDirection.West, DefaultLights.Red)
+            .WithLightInDirection(eDirection.NorthWest, DefaultLights.Red)
+            .WithLightInDirection(eDirection.North, DefaultLights.SoftPurple)
+            .WithLightInDirection(eDirection.NorthEast, DefaultLights.Blue)
+            .WithLightInDirection(eDirection.East, DefaultLights.Blue)
+            .Build())
 
-        lScene.Frames = new List<Frame> {lPurple, lDisableFans, lRedBlue, lBlueRed};
+          .AddFrame()
+          .WithRepeated(true)
+          .WithFrameLength(1000)
+          .WithLightSection(new LightSectionBuilder()
+            .WithFadeTime(100)
+            .WithLightInDirection(eDirection.West, DefaultLights.Blue)
+            .WithLightInDirection(eDirection.NorthWest, DefaultLights.Blue)
+            .WithLightInDirection(eDirection.North, DefaultLights.SoftPurple)
+            .WithLightInDirection(eDirection.NorthEast, DefaultLights.Red)
+            .WithLightInDirection(eDirection.East, DefaultLights.Red)
+            .Build())
+          .Build();
+
         return lScene;
       }
     }
@@ -169,7 +171,7 @@ namespace aPC.Common.Defaults
     {
       get
       {
-        var lScene = BasicScene;
+        var lScene = new amBXScene();
         lScene.Frames = new List<Frame>();
         return lScene;
       }
@@ -179,20 +181,32 @@ namespace aPC.Common.Defaults
     {
       get
       {
-        var lScene = BasicScene;
-        lScene.IsEvent = true;
-        lScene.IsSynchronised = true;
+        var lScene = new amBXScene
+                     {
+                       IsEvent = true,
+                       IsSynchronised = true
+                     };
 
-        var lOff = BasicFrame;
-        lOff.Length = 100;
-        lOff.Lights = DefaultLightSections.Off;
-        lOff.Lights.FadeTime = 10;
-
-        var lError = BasicFrame;
-        lError.Length = 200;
-        lError.Lights = DefaultLightSections.Red;
-        lError.Lights.FadeTime = 10;
-
+        var lOff = new FrameBuilder()
+          .AddFrame()
+          .WithFrameLength(100)
+          .WithLightSection(new LightSectionBuilder()
+            .WithFadeTime(10)
+            .WithAllLights(DefaultLights.Off)
+            .Build())
+          .Build()
+          .Single();
+        
+        var lError = new FrameBuilder()
+          .AddFrame()
+          .WithFrameLength(200)
+          .WithLightSection(new LightSectionBuilder()
+            .WithFadeTime(10)
+            .WithAllLights(DefaultLights.Red)
+            .Build())
+          .Build()
+          .Single();
+        
         lScene.Frames = new List<Frame> { lOff, lError, lOff, lError, lOff };
         return lScene;
       }
@@ -206,43 +220,35 @@ namespace aPC.Common.Defaults
     {
       get
       {
-        var lScene = BasicScene;
-        lScene.IsEvent = true;
-        lScene.IsExclusive = true;
-        lScene.IsSynchronised = true;
+        var lScene = new amBXScene
+                     {
+                       IsEvent = true,
+                       IsExclusive = true,
+                       IsSynchronised = true
+                     };
 
-        var lPrePink  = BasicFrame;
-        lPrePink.IsRepeated = false;
-        lPrePink.Length = 200;
-        lPrePink.Lights = new LightSectionBuilder()
-          .WithFadeTime(100)
-          .WithAllLights(DefaultLights.SoftPink)
-          .Build(); 
-        lPrePink.Rumbles = DefaultRumbleSections.Off;
-
-        var lPurple = BasicFrame;
-        lPurple.IsRepeated = false;
-        lPurple.Length = 1000;
-        lPurple.Lights = new LightSectionBuilder()
-          .WithFadeTime(200)
-          .WithAllLights(DefaultLights.StrongPurple)
+        lScene.Frames = new FrameBuilder()
+          .AddFrame()
+          .WithRepeated(false)
+          .WithFrameLength(200)
+          .WithLightSection(DefaultLightSections.SoftPink)
+          .WithRumbleSection(DefaultRumbleSections.Off)
+          
+          .AddFrame()
+          .WithRepeated(false)
+          .WithFrameLength(1000)
+          .WithLightSection(DefaultLightSections.StrongPurple)
+          .WithFanSection(DefaultFanSections.Full)
+          .WithRumbleSection(DefaultRumbleSections.Thunder)
+          
+          .AddFrame()
+          .WithRepeated(false)
+          .WithFrameLength(500)
+          .WithLightSection(DefaultLightSections.SoftPink)
+          .WithFanSection(DefaultFanSections.Off)
+          .WithRumbleSection(DefaultRumbleSections.Off)
           .Build();
 
-        lPurple.Fans = DefaultFanSections.Full;
-        lPurple.Rumbles = DefaultRumbleSections.Thunder;
-
-
-        var lPostPink = BasicFrame;
-        lPostPink.IsRepeated = false;
-        lPostPink.Length = 500;
-        lPostPink.Lights = new LightSectionBuilder()
-          .WithFadeTime(100)
-          .WithAllLights(DefaultLights.SoftPink)
-          .Build(); 
-        lPostPink.Fans = DefaultFanSections.Off;
-        lPostPink.Rumbles = DefaultRumbleSections.Off;
-
-        lScene.Frames = new List<Frame> {lPrePink, lPurple, lPostPink};
         return lScene;
       }
     }
@@ -255,56 +261,45 @@ namespace aPC.Common.Defaults
     {
       get
       {
-        var lScene = BasicScene;
-        lScene.IsEvent = true;
-        lScene.IsExclusive = true;
-        lScene.IsSynchronised = true;
+        var lScene = new amBXScene
+                     {
+                       IsEvent = true, 
+                       IsExclusive = true, 
+                       IsSynchronised = true
+                     };
 
-        var lPreYellow  = BasicFrame;
-        lPreYellow.IsRepeated = false;
-        lPreYellow.Length = 200;
-        lPreYellow.Lights = new LightSectionBuilder()
-          .WithFadeTime(100)
-          .WithAllLights(DefaultLights.SoftYellow)
+        lScene.Frames = new FrameBuilder()
+          .AddFrame()
+          .WithRepeated(false)
+          .WithFrameLength(200)
+          .WithLightSection(new LightSectionBuilder(DefaultLightSections.SoftYellow)
+            .WithFadeTime(100)
+            .Build())
+          .WithFanSection(DefaultFanSections.Off)
+          .WithRumbleSection(DefaultRumbleSections.Off)
+
+          .AddFrame()
+          .WithRepeated(false)
+          .WithFrameLength(500)
+          .WithLightSection(DefaultLightSections.Yellow)
+
+          .AddFrame()
+          .WithRepeated(false)
+          .WithFrameLength(2000)
+          .WithLightSection(new LightSectionBuilder(DefaultLightSections.Yellow)
+            .WithFadeTime(0)
+            .Build())
+          .WithFanSection(DefaultFanSections.Quarter)
+          .WithRumbleSection(DefaultRumbleSections.SoftThunder)
+
+          .AddFrame()
+          .WithRepeated(false)
+          .WithFrameLength(2000)
+          .WithLightSection(new LightSectionBuilder(DefaultLightSections.SoftYellow).WithFadeTime(2000).Build())
+          .WithFanSection(DefaultFanSections.Off)
+          .WithRumbleSection(DefaultRumbleSections.Off)
           .Build();
 
-        lPreYellow.Rumbles = DefaultRumbleSections.Off;
-        lPreYellow.Fans = DefaultFanSections.Off;
-
-        var lYellowTransition = BasicFrame;
-        lYellowTransition.IsRepeated = false;
-        lYellowTransition.Length = 500;
-        lYellowTransition.Lights = new LightSectionBuilder()
-          .WithFadeTime(500)
-          .WithAllLights(DefaultLights.Yellow)
-          .Build();
-
-        lYellowTransition.Rumbles = DefaultRumbleSections.Off;
-        lYellowTransition.Rumbles.FadeTime = 1000;
-
-        var lYellow = BasicFrame;
-        lYellow.IsRepeated = false;
-        lYellow.Length = 2000;
-        lYellow.Lights = new LightSectionBuilder()
-          .WithFadeTime(0)
-          .WithAllLights(DefaultLights.Yellow)
-          .Build();
-
-        lYellow.Fans = DefaultFanSections.Quarter;
-        lYellow.Rumbles = DefaultRumbleSections.SoftThunder;
-
-        var lPostYellow = BasicFrame;
-        lPostYellow.IsRepeated = false;
-        lPostYellow.Length = 2000;
-        lPostYellow.Lights = new LightSectionBuilder()
-          .WithFadeTime(2000)
-          .WithAllLights(DefaultLights.SoftYellow)
-          .Build();
-
-        lPostYellow.Fans = DefaultFanSections.Off;
-        lPostYellow.Rumbles = DefaultRumbleSections.Off;
-
-        lScene.Frames = new List<Frame> {lPreYellow, lYellowTransition, lYellow, lPostYellow};
         return lScene;
       }
     }
@@ -315,66 +310,34 @@ namespace aPC.Common.Defaults
     {
       get
       {
-        var lScene = BasicScene;
-        lScene.IsEvent = true;
-        lScene.IsExclusive = true;
-        lScene.IsSynchronised = true;
+        var lScene = new amBXScene
+                     {
+                       IsEvent = true,
+                       IsExclusive = true,
+                       IsSynchronised = true
+                     };
+        lScene.Frames = new FrameBuilder()
+          .AddFrame()
+          .WithRepeated(false)
+          .WithFrameLength(1000)
+          .WithLightSection(DefaultLightSections.Blue)
+          .WithRumbleSection(DefaultRumbleSections.Off)
+          .WithFanSection(DefaultFanSections.Off)
 
-        var lPreBlue  = BasicFrame;
-        lPreBlue.IsRepeated = false;
-        lPreBlue.Length = 1000;
-        lPreBlue.Lights = new LightSectionBuilder()
-          .WithFadeTime(1000)
-          .WithAllLights(DefaultLights.Blue)
+          .AddFrame()
+          .WithRepeated(false)
+          .WithFrameLength(5*1000)
+          .WithLightSection(DefaultLightSections.JiraBlue)
+          .WithFanSection(DefaultFanSections.Quarter)
+
+          .AddFrame()
+          .WithRepeated(false)
+          .WithFrameLength(10*1000)
+          .WithFanSection(DefaultFanSections.Off)
           .Build();
-        lPreBlue.Rumbles = DefaultRumbleSections.Off;
-        lPreBlue.Fans = DefaultFanSections.Off;
 
-        var lJiraBlue = BasicFrame;
-        lJiraBlue.IsRepeated = false;
-        lJiraBlue.Length = 5 * 1000;
-        lJiraBlue.Lights = new LightSectionBuilder()
-          .WithFadeTime(3000)
-          .WithAllLights(DefaultLights.JiraBlue)
-          .Build();
-        lJiraBlue.Fans = DefaultFanSections.Quarter;
-
-        var lPostBlue = BasicFrame;
-        lPostBlue.IsRepeated = false;
-        lPostBlue.Length = 10 * 1000;
-        lPostBlue.Fans = DefaultFanSections.Off;
-
-        lScene.Frames = new List<Frame> { lPreBlue, lJiraBlue, lPostBlue };
         return lScene;
       }
     }
-
-    #region Helpers
-
-    private amBXScene BasicScene
-    {
-      get
-      {
-        return new amBXScene
-        {
-          IsExclusive = true,
-          Frames = new List<Frame>()
-        };
-      }
-    }
-
-    private Frame BasicFrame
-    {
-      get
-      {
-        return new Frame
-        {
-          IsRepeated = true,
-          Length = 1000
-        };
-      }
-    }
-
-    #endregion
   }
 }

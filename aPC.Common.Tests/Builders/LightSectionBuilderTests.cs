@@ -6,6 +6,9 @@ namespace aPC.Common.Tests.Builders
   [TestFixture]
   class LightSectionBuilderTests
   {
+
+    //NEW Test.  If repeated or fade time is missing, throw an exception when building!
+
     [Test]
     public void EmptyLightSection_IsEmpty()
     {

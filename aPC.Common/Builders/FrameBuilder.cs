@@ -8,12 +8,14 @@ namespace aPC.Common.Builders
     public FrameBuilder()
     {
       mFrames = new List<Frame>();
-      mCurrentFrame = new Frame();
     }
 
     public FrameBuilder AddFrame()
     {
-      mFrames.Add(mCurrentFrame);
+      if (mCurrentFrame != null)
+      {
+        mFrames.Add(mCurrentFrame);
+      }
       mCurrentFrame  = new Frame();
       return this;
     }

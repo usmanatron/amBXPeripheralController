@@ -4,10 +4,16 @@ namespace aPC.Common.Builders
 {
   public class LightSectionBuilder : SectionBuilderBase
   {
-    public LightSectionBuilder()
+
+    public LightSectionBuilder() : this(new LightSection())
     {
-      mLightSection = new LightSection();
     }
+
+    public LightSectionBuilder(LightSection xiLightSection)
+    {
+      mLightSection = xiLightSection;
+    }
+
 
     public LightSectionBuilder WithFadeTime(int xiFadeTime)
     {
