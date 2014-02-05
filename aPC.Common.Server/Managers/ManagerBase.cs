@@ -82,8 +82,8 @@ namespace aPC.Common.Server.Managers
         // This can only happen in one of two cases:
         // * This isn't an event and all frames are not repeatable.
         // * There aren't any frames at all (though this should never happen)
-        // Either way, return a frame which specifies everything off (as a failsafe)
-        return new FrameAccessor().AllOff;
+        // Either way, set to dormant (as a failsafe) and return an empty frame
+        return new Frame { Lights = null, Fans = null, Rumbles = null, Length = 1000, IsRepeated = false };
       }
       return lFrames[Ticker.Index];
     }
