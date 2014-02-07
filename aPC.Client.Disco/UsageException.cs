@@ -4,7 +4,7 @@ namespace aPC.Client.Disco
 {
   //qqUMI - This is a carbon copy of the one in aPC.Client (except for the usage statement).  Ideally should commonise!
   [Serializable]
-  class UsageException : Exception
+  public class UsageException : Exception
   {
     public UsageException(Exception xiException, string xiDescription)
     {
