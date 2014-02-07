@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using aPC.Common.Entities;
 using aPC.Common.Communication;
 using System.ServiceModel;
@@ -13,19 +9,19 @@ namespace aPC.Client.Disco.Communication
 {
   class NotificationService
   {
-
-
-    public void Push(amBXScene xiScene)
+    public NotificationService()
     {
       //This client only supports pushing to localhost
-      var lClient = new ChannelFactory<INotificationService>(
+      mClient = new ChannelFactory<INotificationService>(
         new BasicHttpBinding(),
         CommunicationSettings.ServiceUrlTemplate
         .Replace(CommunicationSettings.HostnameHolder, "localhost"));
+    }
 
+    public void Push(amBXScene xiScene)
+    {
       var lScene = SerialiseScene(xiScene);
-
-      var lOutput = lClient.CreateChannel().RunCustomScene(lScene);
+      var lOutput = mClient.CreateChannel().RunCustomScene(lScene);
 
       if (!string.IsNullOrEmpty(lOutput))
       {
@@ -39,11 +35,12 @@ namespace aPC.Client.Disco.Communication
     {
       using (var lWriter = new StringWriter())
       {
-
         var lSerializer = new XmlSerializer(typeof(amBXScene));
         lSerializer.Serialize(lWriter, xiScene);
         return lWriter.ToString();
       }
     }
+
+    private ChannelFactory<INotificationService> mClient;
   }
 }
