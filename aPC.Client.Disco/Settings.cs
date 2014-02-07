@@ -12,10 +12,12 @@ namespace aPC.Client.Disco
     private void SetupDefaultValues()
     {
       BPM = 150;
-      RedGenerator = new CustomScaleRandomNumberGenerator(0, 1);
-      BlueGenerator = new CustomScaleRandomNumberGenerator(0, 1);
-      GreenGenerator = new CustomScaleRandomNumberGenerator(0, 1);
-      FanSpeedGenerator = new CustomScaleRandomNumberGenerator(0, 0);
+      RedColourWidth = new Range(0, 1);
+      BlueColourWidth = new Range(0, 1);
+      GreenColourWidth = new Range(0, 1);
+      FanWidth = new Range(0, 0);
+      LightIntensityWidth = new Range(0, 1);
+    }
     }
 
     public int PushInterval
@@ -28,9 +30,10 @@ namespace aPC.Client.Disco
     }
 
     public int BPM { private get; set; }
-    public CustomScaleRandomNumberGenerator RedGenerator;
-    public CustomScaleRandomNumberGenerator BlueGenerator;
-    public CustomScaleRandomNumberGenerator GreenGenerator;
-    public CustomScaleRandomNumberGenerator FanSpeedGenerator;
+    public Range RedColourWidth;
+    public Range BlueColourWidth;
+    public Range GreenColourWidth;
+    public Range LightIntensityWidth;
+    public Range FanWidth;
   }
 }

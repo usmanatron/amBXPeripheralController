@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace aPC.Client.Disco
 {
-  class ArgumentReader
+  public class ArgumentReader
   {
     public ArgumentReader(List<string> xiArgs)
     {
@@ -15,7 +12,7 @@ namespace aPC.Client.Disco
 
     public Settings ParseArguments()
     {
-      var lArguments = new Settings();
+      var lSettings = new Settings();
 
       foreach (string lArg in mArgs)
       {
@@ -23,43 +20,44 @@ namespace aPC.Client.Disco
 
         switch (lDeconstructedArgument[0].ToLower())
         {
-          case "BPM":
-            lArguments.BPM = int.Parse(lDeconstructedArgument[1]);
+          case "bpm":
+            lSettings.BPM = int.Parse(lDeconstructedArgument[1]);
+            break;
+          case "lightintensity":
+            lSettings.LightIntensityWidth = GetRange(lDeconstructedArgument[1]);
             break;
           case "red":
-            lArguments.RedGenerator = GetColourWidth(lDeconstructedArgument[1]);
+            lSettings.RedColourWidth = GetRange(lDeconstructedArgument[1]);
             break;
           case "blue":
-            lArguments.BlueGenerator = GetColourWidth(lDeconstructedArgument[1]);
+            lSettings.BlueColourWidth = GetRange(lDeconstructedArgument[1]);
             break;
           case "green":
-            lArguments.GreenGenerator = GetColourWidth(lDeconstructedArgument[1]);
+            lSettings.GreenColourWidth = GetRange(lDeconstructedArgument[1]);
             break;
           case "fan":
-            lArguments.GreenGenerator = GetColourWidth(lDeconstructedArgument[1]);
+            lSettings.FanWidth = GetRange(lDeconstructedArgument[1]);
             break;
           default:
             throw new UsageException("Unknown argument: " + lDeconstructedArgument);
         }
-
       }
 
-      return lArguments;
+      return lSettings;
     }
 
-    private CustomScaleRandomNumberGenerator GetColourWidth(string xiWidth)
+    private Range GetRange(string xiRange)
     {
-      var lDeconstructedWidth = xiWidth.Split(',');
+      var lDeconstructedWidth = xiRange.Split(',');
       if (lDeconstructedWidth.Count() != 2)
       {
-        throw new UsageException("Invalid # of args in colour width");
+        throw new UsageException("Invalid number of arguments when calculating a range: " + xiRange);
       }
 
-      return new CustomScaleRandomNumberGenerator(float.Parse(lDeconstructedWidth[0]),
-                             float.Parse(lDeconstructedWidth[1]));
+      return new Range(float.Parse(lDeconstructedWidth[0]),
+                       float.Parse(lDeconstructedWidth[1]));
     }
 
     private List<string> mArgs;
-
   }
 }

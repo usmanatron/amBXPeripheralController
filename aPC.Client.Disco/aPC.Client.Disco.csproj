@@ -45,7 +45,7 @@
   <ItemGroup>
     <Compile Include="ArgumentReader.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="CustomScaleRandomNumberGenerator.cs" />
+    <Compile Include="Range.cs" />
     <Compile Include="Communication\NotificationService.cs" />
     <Compile Include="DiscoTask.cs" />
     <Compile Include="Disco.cs" />
