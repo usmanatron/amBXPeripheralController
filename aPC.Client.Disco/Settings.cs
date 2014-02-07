@@ -40,6 +40,7 @@ namespace aPC.Client.Disco
     public Range GreenColourWidth;
     public Range LightIntensityWidth;
     public Range FanWidth;
+
     public double ChangeThreshold;
     public int FadeTime;
   }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using aPC.Common.Entities;
 using aPC.Client.Disco.Generators;
+using aPC.Client.Disco.Communication;
 
 namespace aPC.Client.Disco
 {
@@ -11,7 +12,9 @@ namespace aPC.Client.Disco
     public DiscoTask(Settings xiSettings)
     {
       mSettings = xiSettings;
-      mRandomSceneGenerator = new RandomSceneGenerator(mSettings);
+      mRandom = new Random();
+      mRandomSceneGenerator = new RandomSceneGenerator(mSettings, mRandom);
+      mNotificationService = new NotificationService();
     }
 
     public void Run()
@@ -26,21 +29,22 @@ namespace aPC.Client.Disco
 
     private amBXScene GenerateScene()
     {
-      //qqUMI 
-      return new amBXScene();
+      return mRandomSceneGenerator.Get();
     }
 
     private void PushScene(amBXScene xiScene)
     {
-      //qqUMI
+      mNotificationService.Push(xiScene);
     }
 
     private void WaitForInterval()
     {
       Thread.Sleep(mSettings.PushInterval);
     }
-
-    private RandomSceneGenerator mRandomSceneGenerator;
+    
     private Settings mSettings;
+    private Random mRandom;
+    private RandomSceneGenerator mRandomSceneGenerator;
+    private NotificationService mNotificationService;
   }
 }
