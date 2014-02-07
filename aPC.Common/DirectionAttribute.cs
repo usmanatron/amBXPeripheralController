@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 
 namespace aPC.Common
@@ -18,8 +19,8 @@ namespace aPC.Common
 
     public static bool MatchesDirection(FieldInfo xiFieldInfo, eDirection xiDirection)
     {
-      var lAttribute = xiFieldInfo.GetCustomAttribute<DirectionAttribute>();
-      return lAttribute != null && lAttribute.Direction == xiDirection;
+      var lAttributes = xiFieldInfo.GetCustomAttributes<DirectionAttribute>();
+      return lAttributes != null && lAttributes.Any(attr => attr.Direction == xiDirection);
     }
 
     private readonly eDirection mDirection;
