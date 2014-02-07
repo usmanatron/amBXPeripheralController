@@ -5,7 +5,7 @@ namespace aPC.Client.Disco
 {
   class Disco
   {
-    static void Main(string[] xiArgs)
+    public static void Main(string[] xiArgs)
     {
       var lSettings = new ArgumentReader(xiArgs.ToList()).ParseArguments();
       new DiscoTask(lSettings).Run();

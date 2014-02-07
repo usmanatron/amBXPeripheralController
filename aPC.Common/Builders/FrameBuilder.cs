@@ -3,7 +3,7 @@ using aPC.Common.Entities;
 
 namespace aPC.Common.Builders
 {
-  class FrameBuilder
+  public class FrameBuilder
   {
     public FrameBuilder()
     {
