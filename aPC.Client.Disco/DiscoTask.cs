@@ -10,6 +10,7 @@ namespace aPC.Client.Disco
     public DiscoTask(Settings xiSettings)
     {
       mSettings = xiSettings;
+      mRandomSceneGenerator = new RandomSceneGenerator();
     }
 
     public void Run()
@@ -38,6 +39,7 @@ namespace aPC.Client.Disco
       Thread.Sleep(mSettings.PushInterval);
     }
 
-    Settings mSettings;
+    private RandomSceneGenerator mRandomSceneGenerator;
+    private Settings mSettings;
   }
 }

@@ -2,14 +2,15 @@
 
 namespace aPC.Client.Disco
 {
-  class Settings
+  public class Settings
   {
     public Settings()
     {
-      SetupDefaultValues();
+      SetConfigurableDefaultValues();
+      SetConstantValues();
     }
 
-    private void SetupDefaultValues()
+    private void SetConfigurableDefaultValues()
     {
       BPM = 150;
       RedColourWidth = new Range(0, 1);
@@ -18,6 +19,11 @@ namespace aPC.Client.Disco
       FanWidth = new Range(0, 0);
       LightIntensityWidth = new Range(0, 1);
     }
+
+    private void SetConstantValues()
+    {
+      ChangeThreshold = 0.5d;
+      FadeTime = 10;
     }
 
     public int PushInterval
@@ -25,7 +31,6 @@ namespace aPC.Client.Disco
       get
       {
         return (1000 * 60) / BPM;
-
       }
     }
 
@@ -35,5 +40,7 @@ namespace aPC.Client.Disco
     public Range GreenColourWidth;
     public Range LightIntensityWidth;
     public Range FanWidth;
+    public double ChangeThreshold;
+    public int FadeTime;
   }
 }
