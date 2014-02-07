@@ -10,7 +10,7 @@ namespace aPC.Client.Disco
     public DiscoTask(Settings xiSettings)
     {
       mSettings = xiSettings;
-      mRandomSceneGenerator = new RandomSceneGenerator();
+      mRandomSceneGenerator = new RandomSceneGenerator(mSettings);
     }
 
     public void Run()
