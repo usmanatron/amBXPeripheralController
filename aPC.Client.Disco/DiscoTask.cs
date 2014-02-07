@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using aPC.Common.Entities;
+using aPC.Client.Disco.Generators;
 
 namespace aPC.Client.Disco
 {

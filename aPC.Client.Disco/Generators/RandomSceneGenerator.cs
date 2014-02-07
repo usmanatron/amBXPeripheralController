@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 using aPC.Common.Entities;
 using aPC.Common.Builders;
 
-namespace aPC.Client.Disco
+namespace aPC.Client.Disco.Generators
 {
   class RandomSceneGenerator
   {
-    public RandomSceneGenerator(Settings xiSettings)
+    public RandomSceneGenerator(Settings xiSettings, Random xiRandom)
     {
       mSettings = xiSettings;
-      mRandom = new Random();
+      mRandom = xiRandom;
       mRandomLightSectionGenerator = new RandomLightSectionGenerator(mSettings, mRandom);
     }
 
@@ -32,7 +32,7 @@ namespace aPC.Client.Disco
         AddNewFrame(lFrames);
       }
 
-      lScene.Frames = new FrameBuilder().Build();
+      lScene.Frames = lFrames.Build();
       return lScene;
     }
 

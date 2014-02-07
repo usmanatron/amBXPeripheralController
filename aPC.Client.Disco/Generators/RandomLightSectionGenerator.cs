@@ -7,7 +7,7 @@ using aPC.Common;
 using aPC.Common.Builders;
 using aPC.Common.Entities;
 
-namespace aPC.Client.Disco
+namespace aPC.Client.Disco.Generators
 {
   class RandomLightSectionGenerator
   {
