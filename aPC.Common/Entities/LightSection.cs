@@ -6,14 +6,17 @@ namespace aPC.Common.Entities
   {
     [XmlElement]
     [Direction(eDirection.North)]
+    [PhysicalComponent]
     public Light North;
 
     [XmlElement]
     [Direction(eDirection.NorthEast)]
+    [PhysicalComponent]
     public Light NorthEast;
 
     [XmlElement]
     [Direction(eDirection.East)]
+    [PhysicalComponent]
     public Light East;
 
     [XmlElement]
@@ -30,10 +33,12 @@ namespace aPC.Common.Entities
 
     [XmlElement]
     [Direction(eDirection.West)]
+    [PhysicalComponent]
     public Light West;
 
     [XmlElement]
     [Direction(eDirection.NorthWest)]
+    [PhysicalComponent]
     public Light NorthWest;
   }
 }

@@ -1,5 +1,7 @@
 ﻿using aPC.Common.Entities;
 using System;
+using System.Linq;
+using System.Reflection;
 
 namespace aPC.Common.Builders
 {
@@ -35,9 +37,26 @@ namespace aPC.Common.Builders
     public LightSectionBuilder WithLightInDirection(eDirection xiDirection, Light xiLight)
     {
       var lFieldInfo = GetComponentInfoInDirection(mLightSection, xiDirection);
-      lFieldInfo.SetValue(mLightSection, xiLight);
-      mLightSpecified = true;
+      SetLight(lFieldInfo, xiLight);
       return this;
+    }
+
+    //qqUMI Needs testing!
+    public LightSectionBuilder WithLightInDirectionIfPhysical(eDirection xiDirection, Light xiLight)
+    {
+      var lFieldInfo = GetPhysicalComponentInfoInDirection(mLightSection, xiDirection);
+      if (lFieldInfo != null)
+      {
+        SetLight(lFieldInfo, xiLight);
+      }
+
+      return this;
+    }
+
+    private void SetLight(FieldInfo xiFieldInfo, Light xiLight)
+    {
+      xiFieldInfo.SetValue(mLightSection, xiLight);
+      mLightSpecified = true;
     }
 
     public LightSection Build()

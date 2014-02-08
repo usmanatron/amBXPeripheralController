@@ -25,21 +25,13 @@
 
   public enum eDirection
   {
-    [PhysicalDirection]
     North,
-    [PhysicalDirection]
     NorthEast,
-    [PhysicalDirection]
     East,
-
     SouthEast,
-    
     South,
-    
     SouthWest,
-    [PhysicalDirection]
     West,
-    [PhysicalDirection]
     NorthWest
   }
 }

@@ -15,28 +15,19 @@ namespace aPC.Client.Disco.Generators
     {
       mSettings = xiSettings;
       mRandom = xiRandom;
-      mDirections = GetDirectionsToApply();
-    }
-
-    private List<eDirection> GetDirectionsToApply()
-    {
-      return Enum.GetValues(typeof(eDirection))
-        .Cast<eDirection>()
-        .Where(direction => PhysicalDirectionAttribute.IsPhysicalDirection(direction))
-        .ToList();
     }
 
     public LightSection Generate()
     {
-      var lSection = new LightSectionBuilder()
+      var lSectionBuilder = new LightSectionBuilder()
         .WithFadeTime(mSettings.FadeTime);
 
-      foreach (eDirection lDirection in mDirections)
+      foreach (eDirection lDirection in Enum.GetValues(typeof(eDirection)).Cast<eDirection>())
       {
-        lSection.WithLightInDirection(lDirection, GetRandomLight());
+        lSectionBuilder.WithLightInDirectionIfPhysical(lDirection, GetRandomLight()); //qqUMI is this a bad way for perf.?
       }
 
-      return lSection.Build();
+      return lSectionBuilder.Build();
     }
 
     private Light GetRandomLight()
@@ -54,6 +45,5 @@ namespace aPC.Client.Disco.Generators
 
     private Random mRandom;
     private Settings mSettings;
-    private List<eDirection> mDirections;
   }
 }

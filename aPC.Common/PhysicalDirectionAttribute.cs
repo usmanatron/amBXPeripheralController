@@ -1,28 +1,23 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 
 namespace aPC.Common
 {
   /// <summary>
-  /// An attribute used to decorate eDirection enums.  Adding this to
-  /// a direction signifies that, under normal circumstances, this direction
-  /// has a physical component associated with it.
+  /// Adding this to
+  /// a component signifies that, under normal circumstances, this compnent
+  /// has a physical item (e.g. a light, fan) associated with it.
   /// This is useful for cases where performance concerns force the lights 
   /// used to be limited.
   /// </summary>
-  [AttributeUsage(AttributeTargets.All)]  //qqUMI fix this to be specific - not "all"
-  public class PhysicalDirectionAttribute : Attribute
+  [AttributeUsage(AttributeTargets.Field)]  //qqUMI fix this to be specific - not "all".  change to not look at the enum
+  public class PhysicalComponentAttribute : Attribute
   {
-    public static bool IsPhysicalDirection(eDirection xiDirection)
+    public static bool IsPhysicalDirection(FieldInfo xiFieldInfo)
     {
-      var lAttributes = xiDirection
-        .GetType()
-        .GetField(xiDirection.ToString())
-        .GetCustomAttributes(typeof(PhysicalDirectionAttribute), false);
-
-      return lAttributes != null && lAttributes.Any();
+      var lAttribute = xiFieldInfo.GetCustomAttribute<PhysicalComponentAttribute>();
+      return lAttribute != null;
     }
-
-
   }
 }
