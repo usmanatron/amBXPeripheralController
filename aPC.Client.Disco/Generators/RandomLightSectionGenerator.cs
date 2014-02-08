@@ -15,6 +15,15 @@ namespace aPC.Client.Disco.Generators
     {
       mSettings = xiSettings;
       mRandom = xiRandom;
+      mDirections = GetDirectionsToApply();
+    }
+
+    private List<eDirection> GetDirectionsToApply()
+    {
+      return Enum.GetValues(typeof(eDirection))
+        .Cast<eDirection>()
+        .Where(direction => PhysicalDirectionAttribute.IsPhysicalDirection(direction))
+        .ToList();
     }
 
     public LightSection Generate()
@@ -22,7 +31,7 @@ namespace aPC.Client.Disco.Generators
       var lSection = new LightSectionBuilder()
         .WithFadeTime(mSettings.FadeTime);
 
-      foreach (eDirection lDirection in (eDirection[]) Enum.GetValues(typeof(eDirection)))
+      foreach (eDirection lDirection in mDirections)
       {
         lSection.WithLightInDirection(lDirection, GetRandomLight());
       }
@@ -45,5 +54,6 @@ namespace aPC.Client.Disco.Generators
 
     private Random mRandom;
     private Settings mSettings;
+    private List<eDirection> mDirections;
   }
 }
