@@ -54,8 +54,16 @@ namespace aPC.Client.Disco
         throw new UsageException("Invalid number of arguments when calculating a range: " + xiRange);
       }
 
-      return new Range(float.Parse(lDeconstructedWidth[0]),
-                       float.Parse(lDeconstructedWidth[1]));
+      var lMinimum = float.Parse(lDeconstructedWidth[0]);
+      var lMaximum = float.Parse(lDeconstructedWidth[1]);
+
+      if (lMinimum < 0 || lMaximum > 1)
+      {
+        var lMessage = string.Format("Invalid input range {0} - must be between 0 and 1", xiRange);
+        throw new UsageException(lMessage);
+      }
+
+      return new Range(lMinimum, lMaximum);
     }
 
     private List<string> mArgs;
