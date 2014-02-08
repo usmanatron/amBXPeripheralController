@@ -1,20 +1,68 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using aPC.Common;
+using aPC.Common.Builders;
+using aPC.Common.Entities;
+using NUnit.Framework;
 
 namespace aPC.Common.Tests.Builders
 {
+  [TestFixture]
   class SectionBuilderBaseTests
   {
-    /* Fixture Setup - create a class that has one direction on a set of fields
-     * Check it works - e.g. eDir.North gives the one specified north
+    [Test]
+    public void FindingByDirection_GivesCorrectMember()
+    {
+      var lBuilder = new SectionBuilderBase();
+      var lObject = new SingleDirectionTest();
+      var lField = lBuilder.GetComponentInfoInDirection(lObject, eDirection.North);
+
+      Assert.AreEqual(lObject.GetType().GetField("Up"), lField);
+    }
+
+    [Test]
+    public void FindingByDirection_WhereFieldHasMultipleDifferentDirections_GivesCorrectMember()
+    {
+      var lBuilder = new SectionBuilderBase();
+      var lObject = new SingleDirectionTest();
+      var lNorthEast = lBuilder.GetComponentInfoInDirection(lObject, eDirection.NorthEast);
+      var lEast = lBuilder.GetComponentInfoInDirection(lObject, eDirection.East);
+      var lSouthEast = lBuilder.GetComponentInfoInDirection(lObject, eDirection.SouthEast);
+
+      Assert.AreEqual(lObject.GetType().GetField("Right"), lNorthEast);
+      Assert.AreEqual(lObject.GetType().GetField("Right"), lEast);
+      Assert.AreEqual(lObject.GetType().GetField("Right"), lSouthEast);
+    }
+
+    [Test]
+    public void MultipleFieldsSharingTheSameDirection_ThrowsException()
+    {
+      var lBuilder = new SectionBuilderBase();
+      var lObject = new SingleDirectionTest();
+      Assert.Throws<InvalidOperationException>(() => lBuilder.GetComponentInfoInDirection(lObject, eDirection.South));
+    }
+
+    /* 
+     * Fixture Setup - Some Physical ones
+     * Show that the other method works against this
      * 
-     * Fixture Setup - create class that has some fields where same direction is shared between fields (e.g. North on 2 fields)
-     * Check it blows up - should never have the same dir'n on > 1 field
-     * 
-     *Check FadeTime correctly saved on a SectionBase 
+     * Check FadeTime correctly saved on a SectionBase 
      */
+
+  }
+  class SingleDirectionTest : SectionBase
+  {
+    [Direction(eDirection.North)]
+    public int Up;
+
+    [Direction(eDirection.NorthEast)]
+    [Direction(eDirection.East)]
+    [Direction(eDirection.SouthEast)]
+    public string Right;
+
+    [Direction(eDirection.South)]
+    public bool Down;
+
+    [Direction(eDirection.South)]
+    public bool DownClone;
   }
 }

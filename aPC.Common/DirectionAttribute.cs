@@ -5,7 +5,7 @@ using System.Reflection;
 namespace aPC.Common
 {
   [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
-  class DirectionAttribute : Attribute
+  public class DirectionAttribute : Attribute
   {
     public DirectionAttribute(eDirection xiDirection)
     {
