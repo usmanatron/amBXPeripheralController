@@ -1,0 +1,5 @@
+language: csharp
+csharp:
+     - dotNet40
+build_environment: win2012
+before_install: msbuild amBXPeripheralController.sln
