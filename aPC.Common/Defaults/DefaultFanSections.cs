@@ -3,7 +3,7 @@ using aPC.Common.Entities;
 
 namespace aPC.Common.Defaults
 {
-  class DefaultFanSections
+  public class DefaultFanSections
   {
     public static FanSection Off = new FanSectionBuilder().WithAllFans(DefaultFans.Off).Build();
     public static FanSection Quarter = new FanSectionBuilder().WithAllFans(DefaultFans.QuarterPower).Build();

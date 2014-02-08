@@ -3,7 +3,7 @@ using aPC.Common.Entities;
 
 namespace aPC.Common.Defaults
 {
-  class DefaultLightSections
+  public class DefaultLightSections
   {
     public static LightSection Red = new LightSectionBuilder().WithFadeTime(500).WithAllLights(DefaultLights.Red).Build();
     public static LightSection Green = new LightSectionBuilder().WithFadeTime(500).WithAllLights(DefaultLights.Green).Build();

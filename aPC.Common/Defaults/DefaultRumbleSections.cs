@@ -3,7 +3,7 @@ using aPC.Common.Entities;
 
 namespace aPC.Common.Defaults
 {
-  class DefaultRumbleSections
+  public class DefaultRumbleSections
   {
     public static readonly RumbleSection Off = new RumbleSectionBuilder().WithFadeTime(500).WithRumble(DefaultRumbles.Off).Build();
     public static readonly RumbleSection Boing = new RumbleSectionBuilder().WithFadeTime(500).WithRumble(DefaultRumbles.Boing).Build();

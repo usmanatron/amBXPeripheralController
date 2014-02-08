@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using aPC.Common.Entities;
+using System;
+using System.Linq;
 
 namespace aPC.Common.Builders
 {
@@ -14,9 +16,9 @@ namespace aPC.Common.Builders
     {
       if (mCurrentFrame != null)
       {
-        mFrames.Add(mCurrentFrame);
+        AddCurrentFrame();
       }
-      mCurrentFrame  = new Frame();
+      SetupCurrentFrame();
       return this;
     }
 
@@ -29,6 +31,7 @@ namespace aPC.Common.Builders
     public FrameBuilder WithRepeated(bool xiIsRepeated)
     {
       mCurrentFrame.IsRepeated = xiIsRepeated;
+      mIsRepeatedSpecified = true;
       return this;
     }
 
@@ -52,11 +55,47 @@ namespace aPC.Common.Builders
 
     public List<Frame> Build()
     {
-      mFrames.Add(mCurrentFrame);
+      AddCurrentFrame();
       return mFrames;
+    }
+
+    private void AddCurrentFrame()
+    {
+      if (CurrentFrameIsInvalid)
+      {
+        throw new ArgumentException("The last frame passed into FrameBuilder is invalid - please check and try again.");
+      }
+      mFrames.Add(mCurrentFrame);
+    }
+
+    private bool CurrentFrameIsInvalid
+    {
+      get
+      {
+        return !mIsRepeatedSpecified ||
+               mCurrentFrame.Length == default(int) ||
+               AllSectionsOnCurrentFrameUnSpecified;
+      }
+    }
+
+    private bool AllSectionsOnCurrentFrameUnSpecified
+    {
+      get
+      {
+        return mCurrentFrame.Lights == null &&
+               mCurrentFrame.Fans == null &&
+               mCurrentFrame.Rumbles == null;
+      }
+    }
+
+    private void SetupCurrentFrame()
+    {
+      mCurrentFrame  = new Frame();
+      mIsRepeatedSpecified = false;
     }
 
     private readonly List<Frame> mFrames;
     private Frame mCurrentFrame;
+    private bool mIsRepeatedSpecified;
   }
 }
