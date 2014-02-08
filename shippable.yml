@@ -10,6 +10,7 @@ before_script:
  - cmd /c ".nuget\nuget.exe install .nuget\packages.config -Output packages"
 script: 
  - msbuild amBXPeripheralController.sln
+ - cmd /c "packages\OpenCover.4.5.2316\OpenCover.Console.exe -register:user -target:".\runTests.cmd" -output:shippable\codecoverage\coveragereport.xml -log:All"
 notifications:
   email:
     - usmanatron@hotmail.com
