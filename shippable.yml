@@ -7,6 +7,7 @@ before_script:
  - cmd /c "IF NOT EXIST shippable mkdir shippable"
  - cmd /c "IF NOT EXIST shippable\testresults mkdir shippable\testresults" 
  - cmd /c "IF NOT EXIST shippable\codecoverage mkdir shippable\codecoverage"
+ - cmd /c ".nuget\nuget.exe install .nuget\packages.config -Output packages"
 script: 
  - msbuild amBXPeripheralController.sln
 notifications:
