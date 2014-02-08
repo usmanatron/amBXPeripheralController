@@ -62,8 +62,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Managers\FanManagerTester.cs" />
-    <Compile Include="Managers\FanManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +80,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Managers\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
