@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using NUnit.Framework;
 using aPC.Common.Builders;
 using aPC.Common.Defaults;
@@ -66,8 +67,6 @@ namespace aPC.Common.Tests.Builders
       xiAddSection(lBuilder);
 
       Assert.DoesNotThrow(() => lBuilder.Build());
-
-
     }
 
     private readonly object[] AddSectionCases = 
@@ -79,15 +78,24 @@ namespace aPC.Common.Tests.Builders
 
     public delegate FrameBuilder AddSection(FrameBuilder xiBuilder);
     
+    [Test]
+    public void NewlyBuiltFrame_HasExpectedData()
+    {
+      var lFrame = new FrameBuilder()
+      .AddFrame()
+      .WithFrameLength(1000)
+      .WithRepeated(true)
+      .WithLightSection(mLightSection)
+      .WithFanSection(mFanSection)
+      .WithRumbleSection(mRumbleSection)
+      .Build()
+      .Single();
 
+      Assert.AreEqual(mLightSection, lFrame.Lights);
+      Assert.AreEqual(mFanSection, lFrame.Fans);
+      Assert.AreEqual(mRumbleSection, lFrame.Rumbles);
+    }
 
-    /* Trying to manipulate a frame without calling AddFrame blows up
-     * Need Repeated / FrameLength specified and one of Fans, Rumbles, Lights
-     *  * Will be 4 tests?  
-     *  WithLight actually adds a lightSection
-     *  * similarly FansSection and RumbleSection
-     *  
-     */
     private static readonly LightSection mLightSection = DefaultLightSections.JiraBlue;
     private static readonly FanSection mFanSection = DefaultFanSections.Half;
     private static readonly RumbleSection mRumbleSection = DefaultRumbleSections.Boing;
