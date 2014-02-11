@@ -41,7 +41,6 @@ namespace aPC.Common.Builders
       return this;
     }
 
-    //qqUMI Needs testing!
     public LightSectionBuilder WithLightInDirectionIfPhysical(eDirection xiDirection, Light xiLight)
     {
       var lFieldInfo = GetPhysicalComponentInfoInDirection(mLightSection, xiDirection);
