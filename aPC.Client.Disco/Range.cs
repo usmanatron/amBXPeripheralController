@@ -71,7 +71,7 @@ namespace aPC.Client.Disco
              lOther.mMaximum == mMaximum;
     }
 
-    private float mMinimum;
-    private float mMaximum;
+    private readonly float mMinimum;
+    private readonly float mMaximum;
   }
 }
