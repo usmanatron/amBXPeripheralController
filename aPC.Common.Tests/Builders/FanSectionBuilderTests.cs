@@ -1,22 +1,96 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using aPC.Common.Builders;
+using aPC.Common.Defaults;
+using aPC.Common.Entities;
+using NUnit.Framework;
 
 namespace aPC.Common.Tests.Builders
 {
+  [TestFixture]
   class FanSectionBuilderTests
   {
-    /* Missing FadeTime on Build throws exception
-     * FadeTime but no fans throws exception
-     * Nothing specified throws exception
-     * (i.e. we need fade time and at least one fan!)
-     * Trying to specify a fan in a dodgy dirn like South throws an exception
-     * Updating East then NEast will overwrite East with NEast => Both directions affect each other
-     * Can update both fans at same time successfully
-     * A FanSection with two different fans specified have them correctly specified
-     */
+    [Test]
+    public void NewFanSection_WithNoFadeTime_ThrowsException()
+    {
+      var lSectionBuilder = new FanSectionBuilder()
+      .WithAllFans(mFull);
 
+      Assert.Throws<ArgumentException>(() => lSectionBuilder.Build());
+    }
+
+    [Test]
+    public void NewFanSection_WithNoFans_ThrowsException()
+    {
+      var lSectionBuilder = new FanSectionBuilder()
+      .WithFadeTime(100);
+
+      Assert.Throws<ArgumentException>(() => lSectionBuilder.Build());
+    }
+
+    [Test]
+    public void TryingtoSpecifyAFanInAnUnsupportedDirection_ThrowsException()
+    {
+      var lSectionBuilder = new FanSectionBuilder();
+      Assert.Throws<InvalidOperationException>(() => lSectionBuilder.WithFanInDirection(eDirection.South, mFull));
+    }
+
+    [Test]
+    public void NewFanSection_CanUpdateAllFansAtSametime()
+    {
+      var lSection = new FanSectionBuilder()
+      .WithFadeTime(100)
+      .WithAllFans(mHalf)
+      .Build();
+
+      Assert.AreEqual(mHalf, lSection.East);
+      Assert.AreEqual(mHalf, lSection.West);
+    }
+
+    [Test]
+    public void FanSection_WithDifferentFanTypesOnEachFan_Correctlyspecified()
+    {
+      var lSection = new FanSectionBuilder()
+      .WithFadeTime(100)
+      .WithFanInDirection(eDirection.East, mFull)
+      .WithFanInDirection(eDirection.West, mHalf)
+      .Build();
+
+      Assert.AreEqual(mFull, lSection.East);
+      Assert.AreEqual(mHalf, lSection.West);
+    }
+
+    [Test]
+    [TestCase(eDirection.East, eDirection.NorthEast)]
+    [TestCase(eDirection.West, eDirection.NorthWest)]
+    public void SpecifyingFanRepeatedly_InComplimentaryDirections_UsesTheLastAssignment(eDirection xiFirst, eDirection xiSecond)
+    {
+      var lSection = new FanSectionBuilder()
+      .WithFadeTime(100)
+      .WithFanInDirection(xiFirst, mFull)
+      .WithFanInDirection(xiSecond, mHalf)
+      .Build();
+
+      var lSectionBuilderBase = new SectionBuilderBase();
+
+      Assert.AreEqual(mHalf, GetFanInDirection(lSection, xiSecond));
+    }
+
+    private Fan GetFanInDirection(FanSection xiFanSection, eDirection xiDirection)
+    {
+      switch (xiDirection)
+      {
+        case eDirection.East:
+        case eDirection.NorthEast:
+          return xiFanSection.East;
+        case eDirection.West:
+        case eDirection.NorthWest:
+          return xiFanSection.West;
+        default:
+          throw new InvalidOperationException("Unexpected Direction");
+      }
+    }
+
+    private Fan mFull = DefaultFans.FullPower;
+    private Fan mHalf = DefaultFans.HalfPower;
   }
 }

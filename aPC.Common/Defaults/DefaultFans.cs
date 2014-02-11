@@ -2,7 +2,7 @@
 
 namespace aPC.Common.Defaults
 {
-  class DefaultFans
+  public class DefaultFans
   {
     public static readonly Fan Off = new Fan { Intensity = 0 };
     public static readonly Fan QuarterPower = new Fan { Intensity = 0.25f };

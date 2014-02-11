@@ -3,11 +3,12 @@ using aPC.Common.Entities;
 
 namespace aPC.Common.Builders
 {
-  class FanSectionBuilder : SectionBuilderBase
+  public class FanSectionBuilder : SectionBuilderBase
   {
     public FanSectionBuilder()
     {
       mFanSection = new FanSection();
+      mFanSpecified = false;
     }
 
     public FanSectionBuilder WithFadeTime(int xiFadeTime)
@@ -32,14 +33,29 @@ namespace aPC.Common.Builders
       }
 
       lFieldInfo.SetValue(mFanSection, xiFan);
+      mFanSpecified = true;
       return this;
     }
 
     public FanSection Build()
     {
+      if (!FanSectionIsValid)
+      {
+        throw new ArgumentException("Incomplete FanSection built.  At least one fan and the Fade Time must be specified.");
+      }
+
       return mFanSection;
     }
 
+    private bool FanSectionIsValid
+    {
+      get
+      {
+        return mFanSection.FadeTime != default(int) && mFanSpecified;
+      }
+    }
+
     private readonly FanSection mFanSection;
+    private bool mFanSpecified;
   }
 }
