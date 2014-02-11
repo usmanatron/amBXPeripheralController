@@ -4,13 +4,10 @@ csharp:
 build_environment: win2012
 env: EnableNuGetPackageRestore=true
 before_script:
- - cmd /c "IF NOT EXIST Shippable mkdir shippable"
- - cmd /c "IF NOT EXIST Shippable\testresults mkdir Shippable\testresults" 
- - cmd /c "IF NOT EXIST Shippable\codecoverage mkdir Shippable\codecoverage"
- - cmd /c ".nuget\nuget.exe install .nuget\packages.config -Output packages"
+ - SetupSolution.cmd
 script: 
  - msbuild amBXPeripheralController.sln
- - cmd /c "packages\OpenCover.4.5.2316\OpenCover.Console.exe -register:user -target:".\runTests.cmd" -output:Shippable\codecoverage\coveragereport.xml -log:All"
+ - GenerateOpenCoverReports.cmd
 notifications:
   email:
     - usmanatron@hotmail.com
