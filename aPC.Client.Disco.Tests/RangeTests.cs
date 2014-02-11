@@ -41,8 +41,20 @@ namespace aPC.Client.Disco.Tests
     [TestCase(3d, 4)]
     public void OutOfRangeInputToGetScaledValue_ReturnsClippedscaledValue(double xiValue, float xiScaledValue)
     {
-      var lRange = new Range(2, 4);
+      var lRange = GetStandardRange();
       Assert.AreEqual(xiScaledValue, lRange.GetScaledValue(xiValue));
+    }
+
+    [Test]
+    public void RangeIsNotEqualToNull()
+    {
+      var lRange = GetStandardRange();
+      Assert.AreEqual(false, lRange.Equals(null));
+    }
+
+    private Range GetStandardRange()
+    {
+      return new Range(2, 4);
     }
     
 /* qqUMI
