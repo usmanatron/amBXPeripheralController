@@ -4,7 +4,7 @@ using System.IO;
 
 namespace aPC.Client
 {
-  class ArgumentReader
+  public class ArgumentReader
   {
     public ArgumentReader(List<string> xiArguments)
     {

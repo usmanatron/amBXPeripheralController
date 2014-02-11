@@ -3,7 +3,7 @@
 namespace aPC.Client
 {
   [Serializable]
-  class UsageException : Exception
+  public class UsageException : Exception
   {
     public UsageException(Exception xiException, string xiDescription)
     {
