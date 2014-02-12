@@ -66,6 +66,7 @@
     <Compile Include="Builders\LightSectionBuilderTests.cs" />
     <Compile Include="Defaults\DefaultSceneTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SceneAccessorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\aPC.Common\aPC.Common.csproj">
