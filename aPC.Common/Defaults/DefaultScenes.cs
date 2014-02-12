@@ -5,10 +5,12 @@ using aPC.Common.Entities;
 
 namespace aPC.Common.Defaults
 {
-  class DefaultScenes
+  public class DefaultScenes
   {
+
     #region CruiseControl.NET Defaults
 
+    [SceneName("ccnet_red")]
     public amBXScene BuildBroken
     {
       get
@@ -25,6 +27,7 @@ namespace aPC.Common.Defaults
       }
     }
 
+    [SceneName("ccnet_green")]
     public amBXScene BuildSuccess
     {
       get
@@ -39,7 +42,8 @@ namespace aPC.Common.Defaults
         return lScene;
       }
     }
-
+    
+    [SceneName("ccnet_flashingyellow")]
     public amBXScene Building
     {
       get
@@ -61,6 +65,7 @@ namespace aPC.Common.Defaults
       }
     }
 
+    [SceneName("ccnet_flashingorange")]
     public amBXScene BuildBrokenAndBuilding
     {
       get
@@ -82,6 +87,7 @@ namespace aPC.Common.Defaults
       }
     }
 
+    [SceneName("ccnet_grey")]
     public amBXScene BuildNotConnected
     {
       get
@@ -110,6 +116,7 @@ namespace aPC.Common.Defaults
       }
     }
 
+    [SceneName("default_redvsblue")]
     public amBXScene DefaultRedVsBlue
     {
       get
@@ -167,6 +174,7 @@ namespace aPC.Common.Defaults
       }
     }
 
+    [SceneName("empty")]
     public amBXScene Empty
     {
       get
@@ -177,6 +185,7 @@ namespace aPC.Common.Defaults
       }
     }
 
+    [SceneName("error_flash")]
     public amBXScene Error_Flash
     {
       get
@@ -216,6 +225,7 @@ namespace aPC.Common.Defaults
 
     #region PoolQ2
 
+    [SceneName("poolq2_event")]
     public amBXScene PoolQ2_Event
     {
       get
@@ -257,6 +267,7 @@ namespace aPC.Common.Defaults
 
     #region Shiprec
 
+    [SceneName("shiprec_praise")]
     public amBXScene Shiprec_Praise
     {
       get
@@ -311,6 +322,7 @@ namespace aPC.Common.Defaults
 
     #endregion
 
+    [SceneName("support_jiraday")]
     public amBXScene Support_JIRADay
     {
       get
