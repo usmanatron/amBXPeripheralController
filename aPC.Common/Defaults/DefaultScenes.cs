@@ -108,14 +108,6 @@ namespace aPC.Common.Defaults
 
     #region Misc
 
-    public amBXScene LightsOff
-    {
-      get
-      {
-        return BuildNotConnected;
-      }
-    }
-
     [SceneName("default_redvsblue")]
     public amBXScene DefaultRedVsBlue
     {
