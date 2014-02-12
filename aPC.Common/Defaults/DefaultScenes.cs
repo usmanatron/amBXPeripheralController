@@ -198,6 +198,7 @@ namespace aPC.Common.Defaults
 
         var lOff = new FrameBuilder()
           .AddFrame()
+          .WithRepeated(false)
           .WithFrameLength(100)
           .WithLightSection(new LightSectionBuilder()
             .WithFadeTime(10)
@@ -208,6 +209,7 @@ namespace aPC.Common.Defaults
         
         var lError = new FrameBuilder()
           .AddFrame()
+          .WithRepeated(false)
           .WithFrameLength(200)
           .WithLightSection(new LightSectionBuilder()
             .WithFadeTime(10)
@@ -300,7 +302,7 @@ namespace aPC.Common.Defaults
           .WithFrameLength(2000)
           .WithLightSection(new LightSectionBuilder()
             .WithAllLights(DefaultLights.Yellow)
-            .WithFadeTime(0)
+            .WithFadeTime(10)
             .Build())
           .WithFanSection(DefaultFanSections.Quarter)
           .WithRumbleSection(DefaultRumbleSections.SoftThunder)
