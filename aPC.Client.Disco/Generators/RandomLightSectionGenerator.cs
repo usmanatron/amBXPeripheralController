@@ -9,7 +9,7 @@ using aPC.Common.Entities;
 
 namespace aPC.Client.Disco.Generators
 {
-  class RandomLightSectionGenerator
+  public class RandomLightSectionGenerator
   {
     public RandomLightSectionGenerator(Settings xiSettings, Random xiRandom)
     {
@@ -24,7 +24,7 @@ namespace aPC.Client.Disco.Generators
 
       foreach (eDirection lDirection in Enum.GetValues(typeof(eDirection)).Cast<eDirection>())
       {
-        lSectionBuilder.WithLightInDirectionIfPhysical(lDirection, GetRandomLight()); //qqUMI is this a bad way for perf.?
+        lSectionBuilder.WithLightInDirectionIfPhysical(lDirection, GetRandomLight());
       }
 
       return lSectionBuilder.Build();
