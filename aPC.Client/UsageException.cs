@@ -5,12 +5,6 @@ namespace aPC.Client
   [Serializable]
   public class UsageException : Exception
   {
-    public UsageException(Exception xiException, string xiDescription)
-    {
-      mException = xiException;
-      mUserDescription = xiDescription;
-    }
-
     public UsageException(string xiDescription)
     {
       mUserDescription = xiDescription;
@@ -20,17 +14,9 @@ namespace aPC.Client
     {
       Console.WriteLine("Error: " + mUserDescription);
       Console.WriteLine(Environment.NewLine + Environment.NewLine);
-
-      if (mException != null)
-      {
-        Console.WriteLine("Underlying Exception: " + 
-                          Environment.NewLine + mException.Message +
-                          Environment.NewLine + mException.StackTrace);
-      }
       Console.WriteLine(mUsage);
     }
 
-    private readonly Exception mException;
     private readonly string mUserDescription;
 
     private const string mUsage = 
