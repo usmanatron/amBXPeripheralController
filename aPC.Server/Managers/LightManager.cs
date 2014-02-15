@@ -49,8 +49,7 @@ namespace aPC.Server.Managers
 
     private Light GetLight(eDirection xiDirection, LightSection xiLights)
     {
-      var lComponentInfo = xiLights.GetComponentInfoInDirection(xiDirection);
-      return (Light)lComponentInfo.GetValue(xiLights);
+      return xiLights.GetComponentValueInDirection(xiDirection);
     }
 
     readonly eDirection mDirection;

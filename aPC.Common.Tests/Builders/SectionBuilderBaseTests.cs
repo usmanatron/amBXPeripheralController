@@ -12,8 +12,8 @@ namespace aPC.Common.Tests.Builders
     [Test]
     public void FindingByDirection_GivesCorrectMember()
     {
-      var lObject = new SingleDirectionTest();
-      var lField = lObject.GetComponentInfoInDirection(eDirection.North);
+      var lObject = new TestSection();
+      var lField = lObject.GetComponentValueInDirection(eDirection.North);
 
       Assert.AreEqual(lObject.GetType().GetField("Up"), lField);
     }
@@ -21,10 +21,10 @@ namespace aPC.Common.Tests.Builders
     [Test]
     public void FindingByDirection_WhereFieldHasMultipleDifferentDirections_GivesCorrectMember()
     {
-      var lObject = new SingleDirectionTest();
-      var lNorthEast = lObject.GetComponentInfoInDirection(eDirection.NorthEast);
-      var lEast = lObject.GetComponentInfoInDirection(eDirection.East);
-      var lSouthEast = lObject.GetComponentInfoInDirection(eDirection.SouthEast);
+      var lObject = new TestSection();
+      var lNorthEast = lObject.GetComponentValueInDirection(eDirection.NorthEast);
+      var lEast = lObject.GetComponentValueInDirection(eDirection.East);
+      var lSouthEast = lObject.GetComponentValueInDirection(eDirection.SouthEast);
 
       Assert.AreEqual(lObject.GetType().GetField("Right"), lNorthEast);
       Assert.AreEqual(lObject.GetType().GetField("Right"), lEast);
@@ -34,8 +34,8 @@ namespace aPC.Common.Tests.Builders
     [Test]
     public void MultipleFieldsSharingTheSameDirection_ThrowsException()
     {
-      var lObject = new SingleDirectionTest();
-      Assert.Throws<InvalidOperationException>(() => lObject.GetComponentInfoInDirection(eDirection.South));
+      var lObject = new TestSection();
+      Assert.Throws<InvalidOperationException>(() => lObject.GetComponentValueInDirection(eDirection.South));
     }
 
     /* 
@@ -43,10 +43,12 @@ namespace aPC.Common.Tests.Builders
      * Show that the other method works against this
      * 
      * Check FadeTime correctly saved on a SectionBase 
+     * 
+     * Test the Set methods!
      */
 
   }
-  class SingleDirectionTest : SectionBase<TestComponent>
+  class TestSection : SectionBase<TestComponent>
   {
     [Direction(eDirection.North)]
     public TestComponent Up;

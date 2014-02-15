@@ -8,7 +8,20 @@ namespace aPC.Common.Entities
 {
   public static class SectionBaseExtensions
   {
-    public static FieldInfo GetComponentInfoInDirection<T>(this SectionBase<T> xiSection, eDirection xiDirection) where T : Component
+    public static T GetComponentValueInDirection<T>(this SectionBase<T> xiSection, eDirection xiDirection) 
+      where T : Component
+    {
+      var lField = xiSection.GetComponentInfoInDirection(xiDirection);
+      if (lField == null)
+      {
+        return null;
+      }
+
+      return (T)lField.GetValue(xiSection);
+    }
+
+    private static FieldInfo GetComponentInfoInDirection<T>(this SectionBase<T> xiSection, eDirection xiDirection) 
+      where T : Component
     {
       if (xiSection == null)
       {

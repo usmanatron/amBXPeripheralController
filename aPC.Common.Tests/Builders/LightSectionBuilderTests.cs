@@ -70,8 +70,7 @@ namespace aPC.Common.Tests.Builders
     //qqUMI TODO: Consider if this is the best way to do this
     private Light GetLightForDirection(LightSection xiSection, eDirection xiDirection)
     {
-      var lFieldInfo = xiSection.GetComponentInfoInDirection(xiDirection);
-      return lFieldInfo.GetValue(xiSection) as Light;
+      return xiSection.GetComponentValueInDirection(xiDirection);
     }
 
     [Test]
