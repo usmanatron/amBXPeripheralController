@@ -1,26 +1,19 @@
-﻿using System;
+﻿using aPC.Common.Communication;
+using System;
 
 namespace aPC.Client.Disco
 {
-  //qqUMI - This is a carbon copy of the one in aPC.Client (except for the usage statement).  Ideally should commonise!
   [Serializable]
-  public class UsageException : Exception
+  public class UsageException : UsageExceptionBase
   {
     public UsageException(string xiDescription)
+      : base(xiDescription)
     {
-      mUserDescription = xiDescription;
     }
 
-    public void DisplayUsage()
+    protected override string Usage()
     {
-      Console.WriteLine("Error: " + mUserDescription);
-      Console.WriteLine(Environment.NewLine + Environment.NewLine);
-      Console.WriteLine(mUsage);
-    }
-
-    private readonly string mUserDescription;
-
-    private const string mUsage =
+      return 
 @"Usage: Disco [Arguments]
 
 All arguments of the form A:B where A is the name and B is the value.
@@ -33,5 +26,6 @@ red, blue, green, fan
 qqUMI
 
 ";
+    }
   }
 }

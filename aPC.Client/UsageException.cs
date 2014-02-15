@@ -1,25 +1,19 @@
-﻿using System;
+﻿using aPC.Common.Communication;
+using System;
 
 namespace aPC.Client
 {
   [Serializable]
-  public class UsageException : Exception
+  public class UsageException : UsageExceptionBase
   {
     public UsageException(string xiDescription)
+      : base(xiDescription)
     {
-      mUserDescription = xiDescription;
     }
 
-    public void DisplayUsage()
+    protected override string Usage()
     {
-      Console.WriteLine("Error: " + mUserDescription);
-      Console.WriteLine(Environment.NewLine + Environment.NewLine);
-      Console.WriteLine(mUsage);
-    }
-
-    private readonly string mUserDescription;
-
-    private const string mUsage = 
+      return 
 @"Usage: Client [/I | /F] argument
 
 One of either /I or /F MUST be given.
@@ -38,5 +32,6 @@ Examples:
 
 Client.exe /I CCNet_Green
 Client.exe /F C:\path\to\scene\Scene.xml";
+    }
   }
 }
