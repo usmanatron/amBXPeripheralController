@@ -47,7 +47,7 @@ namespace aPC.Common.Builders
 
     public LightSectionBuilder WithLightInDirectionIfPhysical(eDirection xiDirection, Light xiLight)
     {
-      var lLightExists = mLightSection.SetPhysicalComponentValueInDirection(xiDirection);
+      var lLightExists = mLightSection.SetPhysicalComponentValueInDirection(xiLight, xiDirection);
       if (!lLightExists)
       {
         throw new InvalidOperationException("Attempted to update a light which does not exist");
