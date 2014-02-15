@@ -26,13 +26,7 @@ namespace aPC.Common.Builders
 
     public FanSectionBuilder WithFanInDirection(eDirection xiDirection, Fan xiFan)
     {
-      var lFieldInfo = mFanSection.GetComponentInfoInDirection(xiDirection);
-      if (lFieldInfo == null)
-      {
-        throw new InvalidOperationException("Attempted to specify an unsupported Fan");
-      }
-
-      lFieldInfo.SetValue(mFanSection, xiFan);
+      mFanSection.SetComponentValueInDirection(xiFan, xiDirection);
       mFanSpecified = true;
       return this;
     }

@@ -36,8 +36,8 @@ namespace aPC.Common.Builders
 
     public LightSectionBuilder WithLightInDirection(eDirection xiDirection, Light xiLight)
     {
-      var lFieldInfo = mLightSection.GetComponentInfoInDirection(xiDirection);
-      SetLight(lFieldInfo, xiLight);
+      mLightSection.SetComponentValueInDirection(xiLight, xiDirection);
+      mLightSpecified = true;
       return this;
     }
 

@@ -20,6 +20,18 @@ namespace aPC.Common.Entities
       return (T)lField.GetValue(xiSection);
     }
 
+    public static void SetComponentValueInDirection<T>(this SectionBase<T> xiSection, T xiComponent, eDirection xiDirection) 
+      where T : Component
+    {
+      var lField = xiSection.GetComponentInfoInDirection(xiDirection);
+      if (lField == null)
+      {
+        return;
+      }
+
+      lField.SetValue(xiSection, xiComponent);
+    }
+
     private static FieldInfo GetComponentInfoInDirection<T>(this SectionBase<T> xiSection, eDirection xiDirection) 
       where T : Component
     {
