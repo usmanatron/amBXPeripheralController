@@ -15,7 +15,7 @@ namespace aPC.Common.Tests.Builders
       var lObject = new TestSection();
       var lField = lObject.GetComponentValueInDirection(eDirection.North);
 
-      Assert.AreEqual(lObject.GetType().GetField("Up"), lField);
+      Assert.AreEqual(lObject.Up, lField);
     }
 
     [Test]
@@ -26,9 +26,9 @@ namespace aPC.Common.Tests.Builders
       var lEast = lObject.GetComponentValueInDirection(eDirection.East);
       var lSouthEast = lObject.GetComponentValueInDirection(eDirection.SouthEast);
 
-      Assert.AreEqual(lObject.GetType().GetField("Right"), lNorthEast);
-      Assert.AreEqual(lObject.GetType().GetField("Right"), lEast);
-      Assert.AreEqual(lObject.GetType().GetField("Right"), lSouthEast);
+      Assert.AreEqual(lObject.Right, lNorthEast);
+      Assert.AreEqual(lObject.Right, lEast);
+      Assert.AreEqual(lObject.Right, lSouthEast);
     }
 
     [Test]

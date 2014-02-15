@@ -36,7 +36,11 @@ namespace aPC.Common.Builders
 
     public LightSectionBuilder WithLightInDirection(eDirection xiDirection, Light xiLight)
     {
-      mLightSection.SetComponentValueInDirection(xiLight, xiDirection);
+      var lLightExists = mLightSection.SetComponentValueInDirection(xiLight, xiDirection);
+      if (!lLightExists)
+      {
+        throw new InvalidOperationException("Attempted to update a light which does not exist");
+      }
       mLightSpecified = true;
       return this;
     }

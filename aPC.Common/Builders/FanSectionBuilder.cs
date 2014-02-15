@@ -26,7 +26,11 @@ namespace aPC.Common.Builders
 
     public FanSectionBuilder WithFanInDirection(eDirection xiDirection, Fan xiFan)
     {
-      mFanSection.SetComponentValueInDirection(xiFan, xiDirection);
+      var lFanExists = mFanSection.SetComponentValueInDirection(xiFan, xiDirection);
+      if (!lFanExists)
+      {
+        throw new InvalidOperationException("Attempted to update a fan which does not exist");
+      }
       mFanSpecified = true;
       return this;
     }
