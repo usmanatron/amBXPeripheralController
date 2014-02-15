@@ -37,13 +37,4 @@ namespace aPC.Client.Disco.Tests.Generators
 
     private RandomLightSectionGenerator mGenerator;
   }
-
-  class TestRandom : Random
-  {
-    public override double NextDouble()
-    {
-      // Specifically selected to ensure that its less than the default Change threshold.
-      return 0.25;
-    }
-  }
 }
