@@ -42,8 +42,10 @@ namespace aPC.Client.Disco.Generators
         .AddFrame()
         .WithFrameLength(mSettings.PushInterval)
         .WithRepeated(true)
-        .WithLightSection(mRandomLightSectionGenerator.Generate());
-
+        .WithLightSection(mRandomLightSectionGenerator.Generate())
+        // Both fans and rumble are currently unsupported
+        .WithFanSection(aPC.Common.Defaults.DefaultFanSections.Off)
+        .WithRumbleSection(aPC.Common.Defaults.DefaultRumbleSections.Off);
     }
 
     private Settings mSettings;
