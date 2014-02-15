@@ -9,15 +9,7 @@
     Rumble
   }
 
-  public enum eSectionType
-  {
-    Light,
-    Fan,
-    Rumble
-  }
-
   #region amBXLib-equivalent enums
-
 
   //qqUMI Write a unit test that forces equivalence
   // between these and the amBXLib equivalents
