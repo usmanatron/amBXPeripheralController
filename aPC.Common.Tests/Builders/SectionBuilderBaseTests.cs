@@ -46,20 +46,28 @@ namespace aPC.Common.Tests.Builders
      */
 
   }
-  class SingleDirectionTest : SectionBase
+  class SingleDirectionTest : SectionBase<TestComponent>
   {
     [Direction(eDirection.North)]
-    public int Up;
+    public TestComponent Up;
 
     [Direction(eDirection.NorthEast)]
     [Direction(eDirection.East)]
     [Direction(eDirection.SouthEast)]
-    public string Right;
+    public TestComponent Right;
 
     [Direction(eDirection.South)]
-    public bool Down;
+    public TestComponent Down;
 
     [Direction(eDirection.South)]
-    public bool DownClone;
+    public TestComponent DownClone;
+  }
+
+  class TestComponent : Component
+  {
+    public override eComponentType ComponentType()
+    {
+      throw new NotImplementedException();
+    }
   }
 }

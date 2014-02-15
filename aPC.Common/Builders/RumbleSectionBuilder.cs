@@ -2,7 +2,7 @@
 
 namespace aPC.Common.Builders
 {
-  class RumbleSectionBuilder : SectionBuilderBase
+  class RumbleSectionBuilder : SectionBuilderBase<Rumble>
   {
     public RumbleSectionBuilder()
     {

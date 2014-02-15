@@ -3,7 +3,7 @@ using aPC.Common.Entities;
 
 namespace aPC.Common.Builders
 {
-  public class FanSectionBuilder : SectionBuilderBase
+  public class FanSectionBuilder : SectionBuilderBase<Fan>
   {
     public FanSectionBuilder()
     {

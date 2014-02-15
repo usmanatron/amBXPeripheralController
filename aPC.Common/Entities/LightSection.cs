@@ -2,7 +2,7 @@
 
 namespace aPC.Common.Entities
 {
-  public class LightSection : SectionBase
+  public class LightSection : SectionBase<Light>
   {
     [XmlElement]
     [Direction(eDirection.North)]

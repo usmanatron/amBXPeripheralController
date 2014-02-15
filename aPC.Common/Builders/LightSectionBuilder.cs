@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace aPC.Common.Builders
 {
-  public class LightSectionBuilder : SectionBuilderBase
+  public class LightSectionBuilder : SectionBuilderBase<Light>
   {
     public LightSectionBuilder()
     {

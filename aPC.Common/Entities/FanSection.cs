@@ -2,7 +2,7 @@
 
 namespace aPC.Common.Entities
 {
-  public class FanSection : SectionBase
+  public class FanSection : SectionBase<Fan>
   {
     [XmlElement]
     [Direction(eDirection.East)]
