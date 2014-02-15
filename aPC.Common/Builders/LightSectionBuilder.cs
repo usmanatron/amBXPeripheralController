@@ -47,12 +47,12 @@ namespace aPC.Common.Builders
 
     public LightSectionBuilder WithLightInDirectionIfPhysical(eDirection xiDirection, Light xiLight)
     {
-      var lFieldInfo = mLightSection.GetPhysicalComponentInfoInDirection(xiDirection);
-      if (lFieldInfo != null)
+      var lLightExists = mLightSection.SetPhysicalComponentValueInDirection(xiDirection);
+      if (!lLightExists)
       {
-        SetLight(lFieldInfo, xiLight);
+        throw new InvalidOperationException("Attempted to update a light which does not exist");
       }
-
+      mLightSpecified = true;
       return this;
     }
 

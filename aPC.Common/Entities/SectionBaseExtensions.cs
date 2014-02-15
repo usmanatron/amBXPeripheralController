@@ -46,12 +46,34 @@ namespace aPC.Common.Entities
     }
 
 
+    public static T GetPhysicalComponentValueInDirection<T>(this SectionBase<T> xiSection, eDirection xiDirection)
+  where T : Component
+    {
+      var lField = xiSection.GetPhysicalComponentInfoInDirection(xiDirection);
+      if (lField == null)
+      {
+        return null;
+      }
 
+      return (T)lField.GetValue(xiSection);
+    }
 
-    public static FieldInfo GetPhysicalComponentInfoInDirection<T>(this SectionBase<T> xiSection, eDirection xiDirection) where T : Component
+    public static bool SetPhysicalComponentValueInDirection<T>(this SectionBase<T> xiSection, T xiComponent, eDirection xiDirection)
+      where T : Component
+    {
+      var lField = xiSection.GetPhysicalComponentInfoInDirection(xiDirection);
+      if (lField == null)
+      {
+        return false;
+      }
+
+      lField.SetValue(xiSection, xiComponent);
+      return true;
+    }
+
+    private static FieldInfo GetPhysicalComponentInfoInDirection<T>(this SectionBase<T> xiSection, eDirection xiDirection) where T : Component
     {
       var lFieldInDirection = GetComponentInfoInDirection(xiSection, xiDirection);
-
       if (lFieldInDirection == null)
       {
         return null;
