@@ -19,12 +19,8 @@ namespace aPC.Common.Entities
         .SingleOrDefault(field => DirectionAttribute.MatchesDirection(field, xiDirection));
     }
 
-    private static IEnumerable<FieldInfo> GetSectionFields<T>(this SectionBase<T> xiSection) where T : Component
-    {
-      return xiSection
-        .GetType()
-        .GetFields();
-    }
+
+
 
     public static FieldInfo GetPhysicalComponentInfoInDirection<T>(this SectionBase<T> xiSection, eDirection xiDirection) where T : Component
     {
@@ -38,6 +34,13 @@ namespace aPC.Common.Entities
       return PhysicalComponentAttribute.IsPhysicalDirection(lFieldInDirection)
         ? lFieldInDirection
         : null;
+    }
+
+    private static IEnumerable<FieldInfo> GetSectionFields<T>(this SectionBase<T> xiSection) where T : Component
+    {
+      return xiSection
+        .GetType()
+        .GetFields();
     }
   }
 }
