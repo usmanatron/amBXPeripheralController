@@ -5,6 +5,5 @@
   /// </summary>
   public abstract class Component
   {
-    public abstract eComponentType ComponentType(); 
   }
 }

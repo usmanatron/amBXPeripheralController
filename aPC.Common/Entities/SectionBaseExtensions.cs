@@ -91,7 +91,6 @@ namespace aPC.Common.Entities
       {
         return false;
       }
-
       return true;
     }
 

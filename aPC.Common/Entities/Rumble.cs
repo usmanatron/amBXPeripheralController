@@ -12,10 +12,5 @@ namespace aPC.Common.Entities
 
     [XmlElement]
     public float Speed;
-
-    public override eComponentType ComponentType()
-    {
-      return eComponentType.Rumble;
-    }
   }
 }

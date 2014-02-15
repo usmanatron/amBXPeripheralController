@@ -16,13 +16,6 @@
     Rumble
   }
 
-  public enum eComponentType
-  {
-    Light,
-    Fan,
-    Rumble
-  }
-
   #region amBXLib-equivalent enums
 
 

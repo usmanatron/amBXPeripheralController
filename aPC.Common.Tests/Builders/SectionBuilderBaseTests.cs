@@ -67,9 +67,5 @@ namespace aPC.Common.Tests.Builders
 
   class TestComponent : Component
   {
-    public override eComponentType ComponentType()
-    {
-      throw new NotImplementedException();
-    }
   }
 }
