@@ -3,6 +3,7 @@ using aPC.Common.Entities;
 using aPC.Common.Integration;
 using System.Linq;
 using aPC.Common.Server.Managers;
+using aPC.Common;
 using System;
 using System.Collections.Generic;
 
@@ -10,12 +11,12 @@ namespace aPC.Server.Managers
 {
   class LightManager : ManagerBase
   {
-    public LightManager(CompassDirection xiDirection) 
+    public LightManager(eDirection xiDirection) 
       : this(xiDirection, null)
     {
     }
 
-    public LightManager(CompassDirection xiDirection, Action xiEventCallback) 
+    public LightManager(eDirection xiDirection, Action xiEventCallback) 
       : base(xiEventCallback)
     {
       mDirection = xiDirection;
@@ -52,6 +53,6 @@ namespace aPC.Server.Managers
       return (Light)GetComponentInDirection(xiDirection, xiLights);
     }
 
-    readonly CompassDirection mDirection;
+    readonly eDirection mDirection;
   }
 }

@@ -10,7 +10,7 @@ namespace aPC.Server.EngineActors
 {
   class RumbleActor : EngineActorBase
   {
-    public RumbleActor(CompassDirection xiDirection, EngineManager xiEngine, Action xiEventCallback) 
+    public RumbleActor(eDirection xiDirection, EngineManager xiEngine, Action xiEventCallback) 
       : base (xiEngine, new RumbleManager(xiDirection, xiEventCallback))
     {
       mDirection = xiDirection;
@@ -33,6 +33,6 @@ namespace aPC.Server.EngineActors
       WaitforInterval(lRumbleData.Length);
     }
 
-    private readonly CompassDirection mDirection;
+    private readonly eDirection mDirection;
   }
 }

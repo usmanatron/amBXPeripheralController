@@ -10,7 +10,7 @@ namespace aPC.Server.EngineActors
 {
   class LightActor : EngineActorBase
   {
-    public LightActor(CompassDirection xiDirection, EngineManager xiEngine, Action xiEventCallback) 
+    public LightActor(eDirection xiDirection, EngineManager xiEngine, Action xiEventCallback) 
       : base (xiEngine, new LightManager(xiDirection, xiEventCallback))
     {
       mDirection = xiDirection;
@@ -36,6 +36,6 @@ namespace aPC.Server.EngineActors
       WaitforInterval(lLightData.Length);
     }
 
-    private readonly CompassDirection mDirection;
+    private readonly eDirection mDirection;
   }
 }

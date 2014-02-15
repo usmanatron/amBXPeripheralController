@@ -10,7 +10,7 @@ namespace aPC.Server.EngineActors
 {
   class FanActor : EngineActorBase
   {
-    public FanActor(CompassDirection xiDirection, EngineManager xiEngine, Action xiEventCallback) 
+    public FanActor(eDirection xiDirection, EngineManager xiEngine, Action xiEventCallback) 
       : base (xiEngine, new FanManager(xiDirection, xiEventCallback))
     {
       mDirection = xiDirection;
@@ -33,6 +33,6 @@ namespace aPC.Server.EngineActors
       WaitforInterval(lFanData.Length);
     }
 
-    private CompassDirection mDirection;
+    private eDirection mDirection;
   }
 }

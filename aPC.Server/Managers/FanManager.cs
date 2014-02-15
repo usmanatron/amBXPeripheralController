@@ -5,17 +5,18 @@ using System.Linq;
 using System;
 using aPC.Common.Server.Managers;
 using System.Collections.Generic;
+using aPC.Common;
 
 namespace aPC.Server.Managers
 {
   class FanManager : ManagerBase
   {
-    public FanManager(CompassDirection xiDirection)
+    public FanManager(eDirection xiDirection)
       : this(xiDirection, null)
     {
     }
 
-    public FanManager(CompassDirection xiDirection, Action xiEventCallback)
+    public FanManager(eDirection xiDirection, Action xiEventCallback)
       : base(xiEventCallback)
     {
       mDirection = xiDirection;
@@ -48,6 +49,6 @@ namespace aPC.Server.Managers
       return (Fan)GetComponentInDirection(xiDirection, xiFans);
     }
 
-    readonly CompassDirection mDirection;
+    readonly eDirection mDirection;
   }
 }

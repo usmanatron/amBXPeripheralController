@@ -23,19 +23,19 @@ namespace aPC.Server
     {
       mDesynchronisedActors = new List<DesynchronisedActor>();
 
-      mDesynchronisedActors.Add(new DesynchronisedActor(CompassDirection.North,     new LightActor(CompassDirection.North, xiEngine, xiAction)));
-      mDesynchronisedActors.Add(new DesynchronisedActor(CompassDirection.NorthEast, new LightActor(CompassDirection.NorthEast, xiEngine, xiAction)));
-      mDesynchronisedActors.Add(new DesynchronisedActor(CompassDirection.East,      new LightActor(CompassDirection.East, xiEngine, xiAction)));
-      mDesynchronisedActors.Add(new DesynchronisedActor(CompassDirection.SouthEast, new LightActor(CompassDirection.SouthEast, xiEngine, xiAction)));
-      mDesynchronisedActors.Add(new DesynchronisedActor(CompassDirection.South,     new LightActor(CompassDirection.South, xiEngine, xiAction)));
-      mDesynchronisedActors.Add(new DesynchronisedActor(CompassDirection.SouthWest, new LightActor(CompassDirection.SouthWest, xiEngine, xiAction)));
-      mDesynchronisedActors.Add(new DesynchronisedActor(CompassDirection.West,      new LightActor(CompassDirection.West, xiEngine, xiAction)));
-      mDesynchronisedActors.Add(new DesynchronisedActor(CompassDirection.NorthWest, new LightActor(CompassDirection.NorthWest, xiEngine, xiAction)));
+      mDesynchronisedActors.Add(new DesynchronisedActor(eDirection.North,     new LightActor(eDirection.North, xiEngine, xiAction)));
+      mDesynchronisedActors.Add(new DesynchronisedActor(eDirection.NorthEast, new LightActor(eDirection.NorthEast, xiEngine, xiAction)));
+      mDesynchronisedActors.Add(new DesynchronisedActor(eDirection.East,      new LightActor(eDirection.East, xiEngine, xiAction)));
+      mDesynchronisedActors.Add(new DesynchronisedActor(eDirection.SouthEast, new LightActor(eDirection.SouthEast, xiEngine, xiAction)));
+      mDesynchronisedActors.Add(new DesynchronisedActor(eDirection.South,     new LightActor(eDirection.South, xiEngine, xiAction)));
+      mDesynchronisedActors.Add(new DesynchronisedActor(eDirection.SouthWest, new LightActor(eDirection.SouthWest, xiEngine, xiAction)));
+      mDesynchronisedActors.Add(new DesynchronisedActor(eDirection.West,      new LightActor(eDirection.West, xiEngine, xiAction)));
+      mDesynchronisedActors.Add(new DesynchronisedActor(eDirection.NorthWest, new LightActor(eDirection.NorthWest, xiEngine, xiAction)));
 
-      mDesynchronisedActors.Add(new DesynchronisedActor(CompassDirection.East, new FanActor(CompassDirection.East, xiEngine, xiAction)));
-      mDesynchronisedActors.Add(new DesynchronisedActor(CompassDirection.West, new FanActor(CompassDirection.West, xiEngine, xiAction)));
-
-      mDesynchronisedActors.Add(new DesynchronisedActor(CompassDirection.Everywhere, new RumbleActor(CompassDirection.Everywhere, xiEngine, xiAction)));
+      mDesynchronisedActors.Add(new DesynchronisedActor(eDirection.East, new FanActor(eDirection.East, xiEngine, xiAction)));
+      mDesynchronisedActors.Add(new DesynchronisedActor(eDirection.West, new FanActor(eDirection.West, xiEngine, xiAction)));
+                                                        
+      mDesynchronisedActors.Add(new DesynchronisedActor(eDirection.Everywhere, new RumbleActor(eDirection.Everywhere, xiEngine, xiAction)));
     }
 
     public List<DesynchronisedActor> ActorsWithType(eActorType xiActorType)

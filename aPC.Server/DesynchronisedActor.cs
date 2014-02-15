@@ -11,7 +11,7 @@ namespace aPC.Server
 {
   class DesynchronisedActor
   {
-    public DesynchronisedActor(CompassDirection xiDirection, EngineActorBase xiActor)
+    public DesynchronisedActor(eDirection xiDirection, EngineActorBase xiActor)
     {
       mDirection = xiDirection;
       Actor = xiActor;
@@ -26,6 +26,6 @@ namespace aPC.Server
     }
 
     public EngineActorBase Actor;
-    private CompassDirection mDirection; 
+    private eDirection mDirection; 
   }
 }

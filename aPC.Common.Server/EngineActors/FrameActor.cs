@@ -47,25 +47,25 @@ namespace aPC.Common.Server.EngineActors
 
     private void UpdateLights(LightSection xiLights)
     {
-      Engine.UpdateLight(CompassDirection.North, xiLights.North, xiLights.FadeTime);
-      Engine.UpdateLight(CompassDirection.NorthEast, xiLights.NorthEast, xiLights.FadeTime);
-      Engine.UpdateLight(CompassDirection.East, xiLights.East, xiLights.FadeTime);
-      Engine.UpdateLight(CompassDirection.SouthEast, xiLights.SouthEast, xiLights.FadeTime);
-      Engine.UpdateLight(CompassDirection.South, xiLights.South, xiLights.FadeTime);
-      Engine.UpdateLight(CompassDirection.SouthWest, xiLights.SouthWest, xiLights.FadeTime);
-      Engine.UpdateLight(CompassDirection.West, xiLights.West, xiLights.FadeTime);
-      Engine.UpdateLight(CompassDirection.NorthWest, xiLights.NorthWest, xiLights.FadeTime);
+      Engine.UpdateLight(eDirection.North, xiLights.North, xiLights.FadeTime);
+      Engine.UpdateLight(eDirection.NorthEast, xiLights.NorthEast, xiLights.FadeTime);
+      Engine.UpdateLight(eDirection.East, xiLights.East, xiLights.FadeTime);
+      Engine.UpdateLight(eDirection.SouthEast, xiLights.SouthEast, xiLights.FadeTime);
+      Engine.UpdateLight(eDirection.South, xiLights.South, xiLights.FadeTime);
+      Engine.UpdateLight(eDirection.SouthWest, xiLights.SouthWest, xiLights.FadeTime);
+      Engine.UpdateLight(eDirection.West, xiLights.West, xiLights.FadeTime);
+      Engine.UpdateLight(eDirection.NorthWest, xiLights.NorthWest, xiLights.FadeTime);
     }
 
     private void UpdateFans(FanSection xiFans)
     {
-      Engine.UpdateFan(CompassDirection.East, xiFans.East);
-      Engine.UpdateFan(CompassDirection.West, xiFans.West);
+      Engine.UpdateFan(eDirection.East, xiFans.East);
+      Engine.UpdateFan(eDirection.West, xiFans.West);
     }
 
     private void UpdateRumbles(RumbleSection xiInputRumble)
     {
-      Engine.UpdateRumble(CompassDirection.Everywhere, xiInputRumble.Rumble);
+      Engine.UpdateRumble(eDirection.Everywhere, xiInputRumble.Rumble);
     }
   }
 }

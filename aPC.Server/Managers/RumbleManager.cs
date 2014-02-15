@@ -2,6 +2,7 @@
 using aPC.Common.Integration;
 using aPC.Common.Server.Managers;
 using amBXLib;
+using aPC.Common;
 using System.Linq;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,12 @@ namespace aPC.Server.Managers
 {
   class RumbleManager : ManagerBase
   {
-    public RumbleManager(CompassDirection xiDirection) 
+    public RumbleManager(eDirection xiDirection) 
       : this(xiDirection, null)
     {
     }
 
-    public RumbleManager(CompassDirection xiDirection, Action xiEventCallback) 
+    public RumbleManager(eDirection xiDirection, Action xiEventCallback) 
       : base(xiEventCallback)
     {
       mDirection = xiDirection;
@@ -46,6 +47,6 @@ namespace aPC.Server.Managers
 
     }
 
-    readonly CompassDirection mDirection;
+    readonly eDirection mDirection;
   }
 }
