@@ -11,7 +11,7 @@ namespace aPC.Common
   /// This is useful for cases where performance concerns force the lights 
   /// used to be limited.
   /// </summary>
-  [AttributeUsage(AttributeTargets.Field)]  //qqUMI fix this to be specific - not "all".  change to not look at the enum
+  [AttributeUsage(AttributeTargets.Field)] 
   public class PhysicalComponentAttribute : Attribute
   {
     public static bool IsPhysicalDirection(FieldInfo xiFieldInfo)

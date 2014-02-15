@@ -1,6 +1,5 @@
 ﻿namespace aPC.Common
 {
-  // qqUMI TODO: Merge these in such a way that makes sense!
   public enum eActorType
   {
     Frame,
