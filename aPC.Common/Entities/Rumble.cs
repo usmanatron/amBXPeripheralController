@@ -5,7 +5,7 @@ namespace aPC.Common.Entities
   public class Rumble : Component
   {
     [XmlElement]
-    public string RumbleType;
+    public eRumbleType RumbleType;
 
     [XmlElement]
     public float Intensity;

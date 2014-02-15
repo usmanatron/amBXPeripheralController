@@ -56,4 +56,6 @@
     Thud = 9,
     Thunder = 10,
   }
+
+  #endregion
 }

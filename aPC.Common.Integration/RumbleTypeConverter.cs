@@ -4,31 +4,31 @@ namespace aPC.Common.Integration
 {
   public static class RumbleTypeConverter
   {
-    public static RumbleType GetRumbleType(string xiRumbleType)
+    public static RumbleType GetRumbleType(eRumbleType xiRumbleType)
     {
-      switch (xiRumbleType.ToLower())
+      switch (xiRumbleType)
       {
-        case "boing":
+        case eRumbleType.Boing:
           return RumbleType.Boing;
-        case "crash":
+        case eRumbleType.Crash:
           return RumbleType.Crash;
-        case "engine":
+        case eRumbleType.Engine:
           return RumbleType.Engine;
-        case "explosion":
+        case eRumbleType.Explosion:
           return RumbleType.Explosion;
-        case "hit":
+        case eRumbleType.Hit:
           return RumbleType.Hit;
-        case "quake":
+        case eRumbleType.Quake:
           return RumbleType.Quake;
-        case "rattle":
+        case eRumbleType.Rattle:
           return RumbleType.Rattle;
-        case "road":
+        case eRumbleType.Road:
           return RumbleType.Road;
-        case "shot":
+        case eRumbleType.Shot:
           return RumbleType.Shot;
-        case "thud":
+        case eRumbleType.Thud:
           return RumbleType.Thud;
-        case "thunder":
+        case eRumbleType.Thunder:
           return RumbleType.Thunder;
       }
 
