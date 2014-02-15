@@ -45,7 +45,8 @@ namespace aPC.Server.Managers
 
     private Fan GetFan(eDirection xiDirection, FanSection xiFans)
     {
-      return (Fan)GetComponentInDirection(xiDirection, xiFans);
+      var lComponentInfo = xiFans.GetComponentInfoInDirection(xiDirection);
+      return (Fan)lComponentInfo.GetValue(xiFans);
     }
 
     readonly eDirection mDirection;
