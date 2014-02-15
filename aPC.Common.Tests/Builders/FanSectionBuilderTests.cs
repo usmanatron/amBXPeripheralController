@@ -70,8 +70,6 @@ namespace aPC.Common.Tests.Builders
       .WithFanInDirection(xiSecond, mHalf)
       .Build();
 
-      var lSectionBuilderBase = new SectionBuilderBase();
-
       Assert.AreEqual(mHalf, GetFanInDirection(lSection, xiSecond));
     }
 
