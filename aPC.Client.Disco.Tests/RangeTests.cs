@@ -51,26 +51,22 @@ namespace aPC.Client.Disco.Tests
       var lRange = GetStandardRange();
       Assert.AreEqual(false, lRange.Equals(null));
     }
+    
+    [Test]
+    [TestCase(2, 4, 3, 5)]
+    [TestCase(2, 4, 1, 4)]
+    [TestCase(0, 0, -1, 0)]
+    public void GetHashCode_WorksAsExpected(int xiMin1, int xiMax1, int xiMin2, int xiMax2)
+    {
+      var lFirstRange = new Range(xiMin1, xiMax1);
+      var lSecondRange = new Range(xiMin2, xiMax2);
+
+      Assert.AreNotEqual(lFirstRange.GetHashCode(), lSecondRange.GetHashCode());
+    }
 
     private Range GetStandardRange()
     {
       return new Range(2, 4);
     }
-    
-/* qqUMI
- * Need to write a load of tests:
- * Settings can't be tested, but I should create a test Settings thing with specific data hard-coded.  Maybe just the defaults?
- * DiscoTask isn't worth it (I claim), because it actually does very little.  Everything else though is worth testing
- * 
- * Finish Argumentreader - check that specific arguments work by passing one in and making sure it no longer is
- * equal to the default in Settings.
- * NotificationService - Mock out the communication part?  Just check it serialises and passes the string I guess>
- * 
- * RandomSceneGenerator - check it builds a valid scene => serialisable?  Could mock out systems Random to make it always 
- * return 0.5 (say), as I can test against that then!
- * 
- * RandomLSGenerator - same as above.  Probably mock out Random and Settings and confirm it creates something I expect?
- * 
- */
   }
 }
