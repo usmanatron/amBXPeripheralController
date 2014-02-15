@@ -14,21 +14,25 @@ namespace aPC.Common.Entities
         .SingleOrDefault(field => DirectionAttribute.MatchesDirection(field, xiDirection));
     }
 
-    public static FieldInfo GetPhysicalComponentInfoInDirection(this SectionBase xiSection, eDirection xiDirection)
-    {
-      var lFieldInrightDirection = GetComponentInfoInDirection(xiSection, xiDirection);
-
-      return PhysicalComponentAttribute.IsPhysicalDirection(lFieldInrightDirection)
-        ? lFieldInrightDirection
-        :
-        null;
-    }
-
     private static IEnumerable<FieldInfo> GetSectionFields(this SectionBase xiSection)
     {
       return xiSection
         .GetType()
         .GetFields();
+    }
+
+    public static FieldInfo GetPhysicalComponentInfoInDirection(this SectionBase xiSection, eDirection xiDirection)
+    {
+      var lFieldInDirection = GetComponentInfoInDirection(xiSection, xiDirection);
+
+      if (lFieldInDirection == null)
+      {
+        return null;
+      }
+
+      return PhysicalComponentAttribute.IsPhysicalDirection(lFieldInDirection)
+        ? lFieldInDirection
+        : null;
     }
   }
 }
