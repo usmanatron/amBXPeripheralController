@@ -55,12 +55,6 @@ namespace aPC.Common.Builders
       return this;
     }
 
-    private void SetLight(FieldInfo xiFieldInfo, Light xiLight)
-    {
-      xiFieldInfo.SetValue(mLightSection, xiLight);
-      mLightSpecified = true;
-    }
-
     public LightSection Build()
     {
       if (!LightSectionIsValid)

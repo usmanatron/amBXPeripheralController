@@ -64,13 +64,7 @@ namespace aPC.Common.Tests.Builders
         .WithLightInDirection(xiDirection, mGreen)
         .Build();
 
-      Assert.AreEqual(mGreen, GetLightForDirection(lSection, xiDirection));
-    }
-
-    //qqUMI TODO: Consider if this is the best way to do this
-    private Light GetLightForDirection(LightSection xiSection, eDirection xiDirection)
-    {
-      return xiSection.GetComponentValueInDirection(xiDirection);
+      Assert.AreEqual(mGreen, lSection.GetComponentValueInDirection(xiDirection));
     }
 
     [Test]
@@ -110,6 +104,15 @@ namespace aPC.Common.Tests.Builders
       Assert.AreEqual(mRed, lSection.SouthWest);
       Assert.AreEqual(null, lSection.West);
       Assert.AreEqual(mOrange, lSection.NorthWest);
+    }
+
+    [Test]
+    public void NewLightSection_SpecifyingALightInAnInvalidDirection_ThrowsException()
+    {
+      var lSection = new LightSectionBuilder()
+        .WithFadeTime(100);
+
+      Assert.Throws<InvalidOperationException>(() => lSection.WithLightInDirection(eDirection.Center, mBlue));
     }
 
     /// <remarks>
