@@ -16,7 +16,10 @@ namespace aPC.Client.Disco.Tests
         //qqUMI finish
       };
     }
-
+    /* Finish Argumentreader - check that specific arguments work by passing one in and making sure it no longer is
+     * equal to the default in Settings.
+     * NotificationService - Mock out the communication part?  Just check it serialises and passes the string I guess>
+     */
     [Test]
     public void NoGivenArguments_GivesDefaultSettings()
     {
