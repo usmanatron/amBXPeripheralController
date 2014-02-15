@@ -4,10 +4,10 @@ using aPC.Common.Builders;
 using aPC.Common.Entities;
 using NUnit.Framework;
 
-namespace aPC.Common.Tests.Builders
+namespace aPC.Common.Tests
 {
   [TestFixture]
-  class SectionBuilderBaseTests
+  class SectionBaseTests
   {
     [Test]
     public void FindingByDirection_GivesCorrectMember()
