@@ -12,28 +12,33 @@ namespace aPC.Common.Entities
       where T : Component
     {
       var lField = xiSection.GetComponentInfoInDirection(xiDirection);
-      if (lField == null)
-      {
-        return null;
-      }
-
-      return (T)lField.GetValue(xiSection);
+      return xiSection.GetComponent(lField);
     }
 
     public static bool SetComponentValueInDirection<T>(this SectionBase<T> xiSection, T xiComponent, eDirection xiDirection) 
       where T : Component
     {
       var lField = xiSection.GetComponentInfoInDirection(xiDirection);
-      if (lField == null)
-      {
-        return false;
-      }
-
-      lField.SetValue(xiSection, xiComponent);
-      return true;
+      return xiSection.TrySetComponent(lField, xiComponent);
     }
 
-    private static FieldInfo GetComponentInfoInDirection<T>(this SectionBase<T> xiSection, eDirection xiDirection) 
+    public static T GetPhysicalComponentValueInDirection<T>(this SectionBase<T> xiSection, eDirection xiDirection)
+      where T : Component
+    {
+      var lField = xiSection.GetPhysicalComponentInfoInDirection(xiDirection);
+      return xiSection.GetComponent(lField);
+    }
+
+    public static bool SetPhysicalComponentValueInDirection<T>(this SectionBase<T> xiSection, T xiComponent, eDirection xiDirection)
+      where T : Component
+    {
+      var lField = xiSection.GetPhysicalComponentInfoInDirection(xiDirection);
+      return xiSection.TrySetComponent(lField, xiComponent);
+    }
+
+    #region Private Helper methods
+
+    private static FieldInfo GetComponentInfoInDirection<T>(this SectionBase<T> xiSection, eDirection xiDirection)
       where T : Component
     {
       if (xiSection == null)
@@ -45,33 +50,8 @@ namespace aPC.Common.Entities
         .SingleOrDefault(field => DirectionAttribute.MatchesDirection(field, xiDirection));
     }
 
-
-    public static T GetPhysicalComponentValueInDirection<T>(this SectionBase<T> xiSection, eDirection xiDirection)
-  where T : Component
-    {
-      var lField = xiSection.GetPhysicalComponentInfoInDirection(xiDirection);
-      if (lField == null)
-      {
-        return null;
-      }
-
-      return (T)lField.GetValue(xiSection);
-    }
-
-    public static bool SetPhysicalComponentValueInDirection<T>(this SectionBase<T> xiSection, T xiComponent, eDirection xiDirection)
+    private static FieldInfo GetPhysicalComponentInfoInDirection<T>(this SectionBase<T> xiSection, eDirection xiDirection) 
       where T : Component
-    {
-      var lField = xiSection.GetPhysicalComponentInfoInDirection(xiDirection);
-      if (lField == null)
-      {
-        return false;
-      }
-
-      lField.SetValue(xiSection, xiComponent);
-      return true;
-    }
-
-    private static FieldInfo GetPhysicalComponentInfoInDirection<T>(this SectionBase<T> xiSection, eDirection xiDirection) where T : Component
     {
       var lFieldInDirection = GetComponentInfoInDirection(xiSection, xiDirection);
       if (lFieldInDirection == null)
@@ -84,11 +64,44 @@ namespace aPC.Common.Entities
         : null;
     }
 
+    private static T GetComponent<T>(this SectionBase<T> xiSection, FieldInfo xiFieldInfo)
+      where T : Component
+    {
+      if (xiFieldInfo == null)
+      {
+        return default(T);
+      }
+
+      return (T)xiFieldInfo.GetValue(xiSection);
+    }
+
+    private static bool TrySetComponent<T>(this SectionBase<T> xiSection, FieldInfo xiFieldInfo, T xiComponent)
+      where T : Component
+    {
+      if (xiFieldInfo == null)
+      {
+        return false;
+      }
+
+      try
+      {
+        xiFieldInfo.SetValue(xiSection, xiComponent);
+      }
+      catch
+      {
+        return false;
+      }
+
+      return true;
+    }
+
     private static IEnumerable<FieldInfo> GetSectionFields<T>(this SectionBase<T> xiSection) where T : Component
     {
       return xiSection
         .GetType()
         .GetFields();
     }
+
+    #endregion
   }
 }
