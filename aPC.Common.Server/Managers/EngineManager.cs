@@ -109,9 +109,9 @@ namespace aPC.Common.Server.Managers
 
       try
       {
-        lRumbleType = RumbleTypeConverter.GetRumbleType(xiInputRumble.RumbleType);
+        lRumbleType = GetRumbleType(xiInputRumble.RumbleType);
       }
-      catch (InvalidRumbleException)
+      catch (InvalidOperationException)
       {
         return;
       }
@@ -125,6 +125,8 @@ namespace aPC.Common.Server.Managers
     }
 
     #endregion
+
+    #region Engine Helpers
 
     private CompassDirection GetDirection(eDirection xiDirection)
     {
@@ -152,6 +154,39 @@ namespace aPC.Common.Server.Managers
           return CompassDirection.Everywhere;
       }
     }
+
+    private RumbleType GetRumbleType(eRumbleType xiRumbleType)
+    {
+      switch (xiRumbleType)
+      {
+        case eRumbleType.Boing:
+          return RumbleType.Boing;
+        case eRumbleType.Crash:
+          return RumbleType.Crash;
+        case eRumbleType.Engine:
+          return RumbleType.Engine;
+        case eRumbleType.Explosion:
+          return RumbleType.Explosion;
+        case eRumbleType.Hit:
+          return RumbleType.Hit;
+        case eRumbleType.Quake:
+          return RumbleType.Quake;
+        case eRumbleType.Rattle:
+          return RumbleType.Rattle;
+        case eRumbleType.Road:
+          return RumbleType.Road;
+        case eRumbleType.Shot:
+          return RumbleType.Shot;
+        case eRumbleType.Thud:
+          return RumbleType.Thud;
+        case eRumbleType.Thunder:
+          return RumbleType.Thunder;
+      }
+
+      throw new InvalidOperationException();
+    }
+
+    #endregion
 
     public void Dispose()
     {
