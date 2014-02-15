@@ -28,7 +28,7 @@ namespace aPC.Server.Managers
       var lFans = xiFrames
         .Select(frame => frame.Fans)
         .Where(section => section != null)
-        .Select(section => CompassDirectionConverter.GetFan(mDirection, section));
+        .Select(section => GetFan(mDirection, section));
 
       return lFans.Any(fan => fan != null);
     }
@@ -36,11 +36,16 @@ namespace aPC.Server.Managers
     public override Data GetNext()
     {
       var lFrame = GetNextFrame();
-      var lFan = CompassDirectionConverter.GetFan(mDirection, lFrame.Fans);
+      var lFan = GetFan(mDirection, lFrame.Fans);
 
       return lFan == null
         ? new ComponentData(lFrame.Length)
         : new ComponentData(lFan, lFrame.Fans.FadeTime, lFrame.Length);
+    }
+
+    private Fan GetFan(eDirection xiDirection, FanSection xiFans)
+    {
+      return (Fan)GetComponentInDirection(xiDirection, xiFans);
     }
 
     readonly CompassDirection mDirection;

@@ -101,6 +101,22 @@ namespace aPC.Common.Server.Managers
       }
     }
 
+    protected Component GetComponentInDirection(eDirection xiDirection, SectionBase xiSection)
+    {
+      if (xiSection == null)
+      {
+        return null;
+      }
+
+      var lFieldInfo = xiSection.GetComponentInfoInDirection(xiDirection);
+      if (lFieldInfo == null)
+      {
+        return null;
+      }
+
+      return (Component)lFieldInfo.GetValue(xiSection);
+    }
+
     private void DoSceneCompletedChecks()
     {
       if (CurrentScene.IsEvent)

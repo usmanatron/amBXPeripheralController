@@ -28,7 +28,7 @@ namespace aPC.Server.Managers
       var lLights = xiFrames
         .Select(frame => frame.Lights)
         .Where(section => section != null)
-        .Select(section => CompassDirectionConverter.GetLight(mDirection, section));
+        .Select(section => GetLight(mDirection, section));
 
       return lLights.Any(light => light != null);
     }
@@ -40,11 +40,16 @@ namespace aPC.Server.Managers
 
       var lFrame = GetNextFrame();
 
-      var lLight = CompassDirectionConverter.GetLight(mDirection, lFrame.Lights);
+      var lLight = GetLight(mDirection, lFrame.Lights);
 
       return lLight == null
         ? new ComponentData(lFrame.Length)
         : new ComponentData(lLight, lFrame.Lights.FadeTime, lFrame.Length);
+    }
+
+    private Light GetLight(eDirection xiDirection, LightSection xiLights)
+    {
+      return (Light)GetComponentInDirection(xiDirection, xiLights);
     }
 
     readonly CompassDirection mDirection;
