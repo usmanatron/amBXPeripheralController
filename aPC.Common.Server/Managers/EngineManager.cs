@@ -11,7 +11,7 @@ namespace aPC.Common.Server.Managers
   {
     public EngineManager()
     {
-      mEngine = new amBX(1, 0, "amBXNotification", "1.0");
+      mEngine = new amBX(1, 0, "amBXPeripheralController", "1.0");
       mLights = new Dictionary<CompassDirection, amBXLight>();
       mFans = new Dictionary<CompassDirection, amBXFan>();
       mRumbles = new Dictionary<CompassDirection, amBXRumble>();
