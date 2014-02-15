@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using aPC.Client.Disco.Generators;
+using aPC.Client.Disco.Tests;
 using aPC.Common.Entities;
 using NUnit.Framework;
 
