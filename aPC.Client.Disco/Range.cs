@@ -71,6 +71,11 @@ namespace aPC.Client.Disco
              lOther.mMaximum == mMaximum;
     }
 
+    public override int GetHashCode()
+    {
+      return mMinimum.GetHashCode() ^ mMaximum.GetHashCode();
+    }
+
     private readonly float mMinimum;
     private readonly float mMaximum;
   }
