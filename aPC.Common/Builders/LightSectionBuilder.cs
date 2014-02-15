@@ -36,14 +36,14 @@ namespace aPC.Common.Builders
 
     public LightSectionBuilder WithLightInDirection(eDirection xiDirection, Light xiLight)
     {
-      var lFieldInfo = GetComponentInfoInDirection(mLightSection, xiDirection);
+      var lFieldInfo = mLightSection.GetComponentInfoInDirection(xiDirection);
       SetLight(lFieldInfo, xiLight);
       return this;
     }
 
     public LightSectionBuilder WithLightInDirectionIfPhysical(eDirection xiDirection, Light xiLight)
     {
-      var lFieldInfo = GetPhysicalComponentInfoInDirection(mLightSection, xiDirection);
+      var lFieldInfo = mLightSection.GetPhysicalComponentInfoInDirection(xiDirection);
       if (lFieldInfo != null)
       {
         SetLight(lFieldInfo, xiLight);

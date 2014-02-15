@@ -71,7 +71,7 @@ namespace aPC.Common.Tests.Builders
     private Light GetLightForDirection(LightSection xiSection, eDirection xiDirection)
     {
       var lSectionBuilderBase = new SectionBuilderBase();
-      var lFieldInfo = lSectionBuilderBase.GetComponentInfoInDirection(xiSection, xiDirection);
+      var lFieldInfo = xiSection.GetComponentInfoInDirection(xiDirection);
       return lFieldInfo.GetValue(xiSection) as Light;
     }
 

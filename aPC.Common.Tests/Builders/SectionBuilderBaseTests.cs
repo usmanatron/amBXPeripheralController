@@ -12,9 +12,8 @@ namespace aPC.Common.Tests.Builders
     [Test]
     public void FindingByDirection_GivesCorrectMember()
     {
-      var lBuilder = new SectionBuilderBase();
       var lObject = new SingleDirectionTest();
-      var lField = lBuilder.GetComponentInfoInDirection(lObject, eDirection.North);
+      var lField = lObject.GetComponentInfoInDirection(eDirection.North);
 
       Assert.AreEqual(lObject.GetType().GetField("Up"), lField);
     }
@@ -22,11 +21,10 @@ namespace aPC.Common.Tests.Builders
     [Test]
     public void FindingByDirection_WhereFieldHasMultipleDifferentDirections_GivesCorrectMember()
     {
-      var lBuilder = new SectionBuilderBase();
       var lObject = new SingleDirectionTest();
-      var lNorthEast = lBuilder.GetComponentInfoInDirection(lObject, eDirection.NorthEast);
-      var lEast = lBuilder.GetComponentInfoInDirection(lObject, eDirection.East);
-      var lSouthEast = lBuilder.GetComponentInfoInDirection(lObject, eDirection.SouthEast);
+      var lNorthEast = lObject.GetComponentInfoInDirection(eDirection.NorthEast);
+      var lEast = lObject.GetComponentInfoInDirection(eDirection.East);
+      var lSouthEast = lObject.GetComponentInfoInDirection(eDirection.SouthEast);
 
       Assert.AreEqual(lObject.GetType().GetField("Right"), lNorthEast);
       Assert.AreEqual(lObject.GetType().GetField("Right"), lEast);
@@ -36,9 +34,8 @@ namespace aPC.Common.Tests.Builders
     [Test]
     public void MultipleFieldsSharingTheSameDirection_ThrowsException()
     {
-      var lBuilder = new SectionBuilderBase();
       var lObject = new SingleDirectionTest();
-      Assert.Throws<InvalidOperationException>(() => lBuilder.GetComponentInfoInDirection(lObject, eDirection.South));
+      Assert.Throws<InvalidOperationException>(() => lObject.GetComponentInfoInDirection(eDirection.South));
     }
 
     /* 

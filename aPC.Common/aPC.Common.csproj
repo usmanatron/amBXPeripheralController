@@ -57,6 +57,7 @@
     <Compile Include="DirectionAttribute.cs" />
     <Compile Include="Entities\Component.cs" />
     <Compile Include="Entities\SectionBase.cs" />
+    <Compile Include="Entities\SectionBaseExtensions.cs" />
     <Compile Include="PhysicalComponentAttribute.cs" />
     <Compile Include="SceneAccessor.cs" />
     <Compile Include="Entities\amBXScene.cs" />
