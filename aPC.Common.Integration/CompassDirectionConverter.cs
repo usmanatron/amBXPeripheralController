@@ -55,5 +55,30 @@ namespace aPC.Common.Integration
           return null;
       }
     }
+
+    public static CompassDirection GetDirection(eDirection xiDirection)
+    {
+      switch (xiDirection)
+      {
+        case eDirection.North:
+          return CompassDirection.North;
+        case eDirection.NorthEast:
+          return CompassDirection.NorthEast;
+        case eDirection.East:
+          return CompassDirection.East;
+        case eDirection.SouthEast:
+          return CompassDirection.SouthEast;
+        case eDirection.South:
+          return CompassDirection.South;
+        case eDirection.SouthWest:
+          return CompassDirection.SouthWest;
+        case eDirection.West:
+          return CompassDirection.West;
+        case eDirection.NorthWest:
+          return CompassDirection.NorthWest;
+        default:
+          return CompassDirection.Everywhere;
+      }
+    }
   }
 }
