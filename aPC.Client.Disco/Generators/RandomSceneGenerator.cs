@@ -8,7 +8,7 @@ using aPC.Common.Builders;
 
 namespace aPC.Client.Disco.Generators
 {
-  class RandomSceneGenerator
+  public class RandomSceneGenerator
   {
     public RandomSceneGenerator(Settings xiSettings, Random xiRandom)
     {
@@ -27,7 +27,7 @@ namespace aPC.Client.Disco.Generators
 
       var lFrames = new FrameBuilder();
 
-      for (int i = 0; i < 2; i++ )
+      for (int i = 0; i < mSettings.FramesPerScene; i++ )
       {
         AddNewFrame(lFrames);
       }

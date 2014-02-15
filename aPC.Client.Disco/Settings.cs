@@ -23,6 +23,7 @@ namespace aPC.Client.Disco
     private void SetConstantValues()
     {
       ChangeThreshold = 0.5d;
+      FramesPerScene = 4;
       FadeTime = 10;
     }
 
@@ -42,6 +43,7 @@ namespace aPC.Client.Disco
     public Range FanWidth;
 
     public double ChangeThreshold;
+    public int FramesPerScene;
     public int FadeTime;
   }
 }
