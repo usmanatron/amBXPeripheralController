@@ -12,52 +12,7 @@ namespace aPC.Common.Server.EngineActors
       Manager = xiManager;
     }
 
-    public abstract eActorType ActorType();
-
-    public void Run()
-    {
-      if (Manager.IsDormant)
-      {
-        WaitForDefaultInterval();
-      }
-      else
-      {
-        lock (Manager)
-        {
-          ActNextFrame();
-          AdvanceScene();
-        }
-      }
-    }
-
-    /// <remarks>
-    ///   Note that this method should take into account any waiting that should be 
-    ///   done (before acting the next frame)
-    /// </remarks>
-    protected abstract void ActNextFrame();
-
-    protected void WaitforInterval(int xiLength)
-    {
-      Thread.Sleep(xiLength);
-    }
-
-    private void WaitForDefaultInterval()
-    {
-      WaitforInterval(500);
-    }
-
-    protected void AdvanceScene()
-    {
-      Manager.AdvanceScene();
-    }
-
-    public void UpdateManager(amBXScene xiScene)
-    {
-      lock (Manager)
-      {
-        Manager.UpdateScene(xiScene);
-      }
-    }
+    public abstract void ActNextFrame(Data xiData);
 
     protected ManagerBase Manager;
     protected EngineManager Engine;

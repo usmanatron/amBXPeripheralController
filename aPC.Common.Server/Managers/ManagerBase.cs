@@ -1,5 +1,7 @@
 ﻿using aPC.Common.Entities;
+using aPC.Common.Server.EngineActors;
 using System;
+using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,17 +9,46 @@ namespace aPC.Common.Server.Managers
 {
   public abstract class ManagerBase
   {
-    protected ManagerBase()
+    protected ManagerBase(EngineActorBase xiActor)
     {
+      mActor = xiActor;
       var lScene = new SceneAccessor().GetScene("Empty");
-
       mPreviousScene = lScene;
       CurrentScene = lScene;
     }
 
-    protected ManagerBase(Action xiEventCallback) : this()
+    protected ManagerBase(EngineActorBase xiActor, Action xiEventCallback) : this(xiActor)
     {
       mEventCallback = xiEventCallback;
+    }
+
+    public void Run()
+    {
+      if (IsDormant)
+      {
+        return;
+      }
+      else
+      {
+        Data lData;
+
+        lock (mSceneLock) //qqUMI This is crappy - change
+        {
+          lData = GetNextData();
+          mActor.ActNextFrame(lData);
+        }
+        if (lData == null)
+        {
+          throw new InvalidOperationException("Something bad happened - should never happen qqUMI");
+        }
+        AdvanceScene();
+        WaitforInterval(lData.Length);
+      }
+    }
+
+    protected void WaitforInterval(int xiLength)
+    {
+      Thread.Sleep(xiLength);
     }
 
     public void UpdateScene(amBXScene xiNewScene)
@@ -63,7 +94,13 @@ namespace aPC.Common.Server.Managers
 
     protected abstract bool FramesAreApplicable(List<Frame> xiFrames);
 
-    public abstract Data GetNext();
+
+
+
+
+
+
+    public abstract Data GetNextData();
 
     protected Frame GetNextFrame()
     {
@@ -87,7 +124,7 @@ namespace aPC.Common.Server.Managers
       return lFrames[Ticker.Index];
     }
 
-    public void AdvanceScene()
+    private void AdvanceScene()
     {
       lock (mSceneLock)
       {
@@ -119,10 +156,13 @@ namespace aPC.Common.Server.Managers
       }
     }
 
+    public abstract eActorType ActorType();
+
     public bool IsDormant;
     protected amBXScene CurrentScene;
     protected AtypicalFirstRunInfiniteTicker Ticker;
 
+    private EngineActorBase mActor;
     private amBXScene mPreviousScene;
     private readonly object mSceneLock = new object();
     private Action mEventCallback;
