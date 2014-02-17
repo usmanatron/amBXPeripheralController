@@ -12,5 +12,7 @@ namespace aPC.Common.Server.Managers
     }
 
     public abstract eComponentType ComponentType();
+
+    protected eDirection Direction;
   }
 }

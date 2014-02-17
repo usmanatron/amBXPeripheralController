@@ -15,7 +15,7 @@ namespace aPC.Server.EngineActors
       mDirection = xiDirection;
     }
 
-    protected override void ActNextFrame(Data xiData)
+    public override void ActNextFrame(Data xiData)
     {
       var lLightData = (ComponentData) xiData;
       

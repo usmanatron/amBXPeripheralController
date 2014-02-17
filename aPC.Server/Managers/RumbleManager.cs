@@ -1,28 +1,28 @@
 ﻿using aPC.Common.Entities;
 using aPC.Common.Server.Managers;
-using amBXLib;
 using aPC.Common;
 using System.Linq;
 using System;
 using System.Collections.Generic;
+using aPC.Server.EngineActors;
 
 namespace aPC.Server.Managers
 {
-  class RumbleManager : ManagerBase
+  class RumbleManager : ComponentManager
   {
-    public RumbleManager(eDirection xiDirection) 
-      : this(xiDirection, null)
+    public RumbleManager(eDirection xiDirection, RumbleActor xiActor) 
+      : this(xiDirection, xiActor, null)
     {
     }
 
-    public RumbleManager(eDirection xiDirection, Action xiEventCallback) 
-      : base(xiEventCallback)
+    public RumbleManager(eDirection xiDirection, RumbleActor xiActor, Action xiEventCallback) 
+      : base(xiActor, xiEventCallback)
     {
-      mDirection = xiDirection;
+      Direction = xiDirection;
       SetupNewScene(CurrentScene);
     }
 
-    // A scene is applicable if there is at least one non-null light in the right direction defined.
+    // A scene is applicable if there is at least one non-null rumble in the right direction defined.
     protected override bool FramesAreApplicable(List<Frame> xiFrames)
     {
       var lRumbles = xiFrames
@@ -32,7 +32,7 @@ namespace aPC.Server.Managers
       return lRumbles.Any(rumble => rumble != null);
     }
 
-    public override Data GetNext()
+    public override Data GetNextData()
     {
       var lFrame = GetNextFrame();
 
@@ -43,9 +43,11 @@ namespace aPC.Server.Managers
       return lRumble == null
         ? new ComponentData(lFrame.Length)
         : new ComponentData(lRumble, lFrame.Rumbles.FadeTime, lFrame.Length);
-
     }
 
-    readonly eDirection mDirection;
+    public override eComponentType ComponentType()
+    {
+      return eComponentType.Rumble;
+    }
   }
 }

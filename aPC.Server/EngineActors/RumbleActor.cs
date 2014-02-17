@@ -3,34 +3,26 @@ using aPC.Common.Server.EngineActors;
 using aPC.Common.Entities;
 using aPC.Common.Server.Managers;
 using aPC.Server.Managers;
-using amBXLib;
 using System;
 
 namespace aPC.Server.EngineActors
 {
   class RumbleActor : EngineActorBase
   {
-    public RumbleActor(eDirection xiDirection, EngineManager xiEngine, Action xiEventCallback) 
-      : base (xiEngine, new RumbleManager(xiDirection, xiEventCallback))
+    public RumbleActor(eDirection xiDirection, EngineManager xiEngine, RumbleManager xiManager) 
+      : base (xiEngine, xiManager)
     {
       mDirection = xiDirection;
     }
 
-    public override eActorType ActorType()
+    public override void ActNextFrame(Data xiData)
     {
-      return eActorType.Rumble;
-    }
-
-    protected override void ActNextFrame()
-    {
-      var lRumbleData = (ComponentData)Manager.GetNext();
+      var lRumbleData = (ComponentData)xiData;
 
       if (!lRumbleData.IsComponentNull)
       {
         Engine.UpdateRumble(mDirection, (Rumble)lRumbleData.Component);
       }
-
-      WaitforInterval(lRumbleData.Length);
     }
 
     private readonly eDirection mDirection;

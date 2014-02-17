@@ -19,7 +19,7 @@ namespace aPC.Server.Managers
     public LightManager(eDirection xiDirection, LightActor xiActor,  Action xiEventCallback) 
       : base(xiActor, xiEventCallback)
     {
-      mDirection = xiDirection;
+      Direction = xiDirection;
       SetupNewScene(CurrentScene);
     }
 
@@ -29,7 +29,7 @@ namespace aPC.Server.Managers
       var lLights = xiFrames
         .Select(frame => frame.Lights)
         .Where(section => section != null)
-        .Select(section => GetLight(mDirection, section));
+        .Select(section => GetLight(Direction, section));
 
       return lLights.Any(light => light != null);
     }
@@ -37,7 +37,7 @@ namespace aPC.Server.Managers
     public override Data GetNextData()
     {
       var lFrame = GetNextFrame();
-      var lLight = GetLight(mDirection, lFrame.Lights);
+      var lLight = GetLight(Direction, lFrame.Lights);
 
       return lLight == null
         ? new ComponentData(lFrame.Length)
@@ -53,7 +53,5 @@ namespace aPC.Server.Managers
     {
       return eComponentType.Light;
     }
-
-    readonly eDirection mDirection;
   }
 }

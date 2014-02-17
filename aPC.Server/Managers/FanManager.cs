@@ -4,21 +4,22 @@ using System.Linq;
 using System;
 using aPC.Common.Server.Managers;
 using System.Collections.Generic;
+using aPC.Server.EngineActors;
 using aPC.Common;
 
 namespace aPC.Server.Managers
 {
-  class FanManager : ManagerBase
+  class FanManager : ComponentManager
   {
-    public FanManager(eDirection xiDirection)
-      : this(xiDirection, null)
+    public FanManager(eDirection xiDirection, FanActor xiActor)
+      : this(xiDirection, xiActor, null)
     {
     }
 
-    public FanManager(eDirection xiDirection, Action xiEventCallback)
-      : base(xiEventCallback)
+    public FanManager(eDirection xiDirection, FanActor xiActor, Action xiEventCallback)
+      : base (xiActor, xiEventCallback)
     {
-      mDirection = xiDirection;
+      Direction = xiDirection;
       SetupNewScene(CurrentScene);
     }
 
@@ -28,15 +29,15 @@ namespace aPC.Server.Managers
       var lFans = xiFrames
         .Select(frame => frame.Fans)
         .Where(section => section != null)
-        .Select(section => GetFan(mDirection, section));
+        .Select(section => GetFan(Direction, section));
 
       return lFans.Any(fan => fan != null);
     }
 
-    public override Data GetNext()
+    public override Data GetNextData()
     {
       var lFrame = GetNextFrame();
-      var lFan = GetFan(mDirection, lFrame.Fans);
+      var lFan = GetFan(Direction, lFrame.Fans);
 
       return lFan == null
         ? new ComponentData(lFrame.Length)
@@ -48,6 +49,9 @@ namespace aPC.Server.Managers
       return xiFans.GetComponentValueInDirection(xiDirection);
     }
 
-    readonly eDirection mDirection;
+    public override eComponentType ComponentType()
+    {
+      return eComponentType.Fan;
+    }
   }
 }

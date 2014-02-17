@@ -4,33 +4,25 @@ using aPC.Common.Entities;
 using aPC.Common.Server.Managers;
 using aPC.Server.Managers;
 using System;
-using amBXLib;
 
 namespace aPC.Server.EngineActors
 {
   class FanActor : EngineActorBase
   {
-    public FanActor(eDirection xiDirection, EngineManager xiEngine, Action xiEventCallback) 
-      : base (xiEngine, new FanManager(xiDirection, xiEventCallback))
+    public FanActor(eDirection xiDirection, EngineManager xiEngine, FanManager xiManager) 
+      : base (xiEngine, xiManager)
     {
       mDirection = xiDirection;
     }
 
-    public override eActorType ActorType()
+    public override void ActNextFrame(Data xiData)
     {
-      return eActorType.Fan;
-    }
-
-    protected override void ActNextFrame()
-    {
-      var lFanData = (ComponentData)Manager.GetNext();
+      var lFanData = (ComponentData)xiData;
 
       if (!lFanData.IsComponentNull)
       {
         Engine.UpdateFan(mDirection, (Fan)lFanData.Component);
-        
       }
-      WaitforInterval(lFanData.Length);
     }
 
     private eDirection mDirection;
