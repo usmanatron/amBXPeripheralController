@@ -44,7 +44,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DesynchronisedActorManager.cs" />
+    <Compile Include="ComponentManagerCollection.cs" />
     <Compile Include="EngineActors\RumbleActor.cs" />
     <Compile Include="Communication\NotificationService.cs" />
     <Compile Include="Managers\FanManager.cs" />
