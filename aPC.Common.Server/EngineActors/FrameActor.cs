@@ -53,7 +53,7 @@ namespace aPC.Common.Server.EngineActors
 
     private void UpdateRumbles(RumbleSection xiInputRumble)
     {
-      Engine.UpdateRumble(eDirection.Everywhere, xiInputRumble.Rumble);
+      Engine.UpdateRumble(eDirection.Center, xiInputRumble.Rumble);
     }
   }
 }

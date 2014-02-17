@@ -34,7 +34,7 @@ namespace aPC.Common.Server.Managers
       CreateFan(CompassDirection.East);
       CreateFan(CompassDirection.West);
 
-      CreateRumble(CompassDirection.Everywhere);
+      CreateRumble(CompassDirection.Center);
     }
 
     private void CreateLight(CompassDirection xiDirection)
