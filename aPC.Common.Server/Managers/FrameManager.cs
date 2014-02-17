@@ -34,10 +34,5 @@ namespace aPC.Common.Server.Managers
       var lFrame = GetNextFrame();
       return new FrameData(lFrame, 0);
     }
-
-    public override eActorType ActorType()
-    {
-      return eActorType.Frame;
-    }
   }
 }
