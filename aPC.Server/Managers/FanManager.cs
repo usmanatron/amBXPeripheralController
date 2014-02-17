@@ -11,13 +11,8 @@ namespace aPC.Server.Managers
 {
   class FanManager : ComponentManager
   {
-    public FanManager(eDirection xiDirection, FanActor xiActor)
-      : this(xiDirection, xiActor, null)
-    {
-    }
-
     public FanManager(eDirection xiDirection, FanActor xiActor, Action xiEventCallback)
-      : base (xiActor, xiEventCallback)
+      : base (xiDirection, xiActor, xiEventCallback)
     {
       Direction = xiDirection;
       SetupNewScene(CurrentScene);

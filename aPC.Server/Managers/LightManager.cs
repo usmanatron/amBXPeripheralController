@@ -11,13 +11,8 @@ namespace aPC.Server.Managers
 {
   class LightManager : ComponentManager
   {
-    public LightManager(eDirection xiDirection, LightActor xiActor) 
-      : this(xiDirection, xiActor, null)
-    {
-    }
-
     public LightManager(eDirection xiDirection, LightActor xiActor,  Action xiEventCallback) 
-      : base(xiActor, xiEventCallback)
+      : base(xiDirection, xiActor, xiEventCallback)
     {
       Direction = xiDirection;
       SetupNewScene(CurrentScene);

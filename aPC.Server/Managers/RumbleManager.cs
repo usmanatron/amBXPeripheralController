@@ -10,13 +10,8 @@ namespace aPC.Server.Managers
 {
   class RumbleManager : ComponentManager
   {
-    public RumbleManager(eDirection xiDirection, RumbleActor xiActor) 
-      : this(xiDirection, xiActor, null)
-    {
-    }
-
     public RumbleManager(eDirection xiDirection, RumbleActor xiActor, Action xiEventCallback) 
-      : base(xiActor, xiEventCallback)
+      : base(xiDirection, xiActor, xiEventCallback)
     {
       Direction = xiDirection;
       SetupNewScene(CurrentScene);

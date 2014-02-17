@@ -6,9 +6,10 @@ namespace aPC.Common.Server.Managers
 {
   public abstract class ComponentManager : ManagerBase
   {
-    public ComponentManager(EngineActorBase xiActor, Action xiEventComplete)
+    public ComponentManager(eDirection xiDirection, EngineActorBase xiActor, Action xiEventComplete)
       : base(xiActor, xiEventComplete)
     {
+      Direction = xiDirection;
     }
 
     public abstract eComponentType ComponentType();
