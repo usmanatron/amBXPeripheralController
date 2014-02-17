@@ -43,12 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EngineActors\ComponentActor.cs" />
     <Compile Include="EngineActors\EngineActorBase.cs" />
     <Compile Include="EngineActors\FrameActor.cs" />
     <Compile Include="AtypicalFirstRunInfiniteTicker.cs" />
     <Compile Include="Communication\CommunicationManager.cs" />
     <Compile Include="Communication\NotificationServiceBase.cs" />
     <Compile Include="Managers\ComponentData.cs" />
+    <Compile Include="Managers\ComponentManager.cs" />
     <Compile Include="Managers\Data.cs" />
     <Compile Include="Managers\EngineManager.cs" />
     <Compile Include="Managers\FrameData.cs" />
