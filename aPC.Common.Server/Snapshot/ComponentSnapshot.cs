@@ -2,7 +2,7 @@
 
 namespace aPC.Common.Server.Managers
 {
-  public class ComponentSnapshot : Snapshot
+  public class ComponentSnapshot : SnapshotBase
   {
     /// <summary>
     /// Used when a component is not available
