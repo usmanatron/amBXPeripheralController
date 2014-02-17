@@ -9,21 +9,19 @@ namespace aPC.Common.Server.Managers
 {
   public abstract class ManagerBase
   {
-    protected ManagerBase(EngineActorBase xiActor)
+    protected ManagerBase(EngineActorBase xiActor, Action xiEventCallback)
     {
       mActor = xiActor;
+      mEventCallback = xiEventCallback;
+
       var lScene = new SceneAccessor().GetScene("Empty");
       mPreviousScene = lScene;
       CurrentScene = lScene;
     }
 
-    protected ManagerBase(EngineActorBase xiActor, Action xiEventCallback) : this(xiActor)
-    {
-      mEventCallback = xiEventCallback;
-    }
-
     public void Run()
     {
+      //qqUMI This is how we should do it.  HOWEVER This causes 100% CPU atm...
       if (IsDormant)
       {
         return;
@@ -94,12 +92,6 @@ namespace aPC.Common.Server.Managers
 
     protected abstract bool FramesAreApplicable(List<Frame> xiFrames);
 
-
-
-
-
-
-
     public abstract Data GetNextData();
 
     protected Frame GetNextFrame()
@@ -115,11 +107,8 @@ namespace aPC.Common.Server.Managers
 
       if (!lFrames.Any())
       {
-        // This can only happen in one of two cases:
-        // * This isn't an event and all frames are not repeatable.
-        // * There aren't any frames at all (though this should never happen)
-        // Either way, set to dormant (as a failsafe) and return an empty frame
-        return new Frame { Lights = null, Fans = null, Rumbles = null, Length = 1000, IsRepeated = false };
+        // This should never happen
+        throw new InvalidOperationException("qqUMI ManagerBase returned no frames");
       }
       return lFrames[Ticker.Index];
     }
@@ -156,10 +145,10 @@ namespace aPC.Common.Server.Managers
       }
     }
 
-    public bool IsDormant;
     protected amBXScene CurrentScene;
-    protected AtypicalFirstRunInfiniteTicker Ticker;
 
+    private bool IsDormant;
+    private AtypicalFirstRunInfiniteTicker Ticker;
     private EngineActorBase mActor;
     private amBXScene mPreviousScene;
     private readonly object mSceneLock = new object();
