@@ -29,14 +29,14 @@ namespace aPC.Server.Managers
       return lLights.Any(light => light != null);
     }
 
-    public override Data GetNextData()
+    public override Snapshot GetNextData()
     {
       var lFrame = GetNextFrame();
       var lLight = GetLight(Direction, lFrame.Lights);
 
       return lLight == null
-        ? new ComponentData(lFrame.Length)
-        : new ComponentData(lLight, lFrame.Lights.FadeTime, lFrame.Length);
+        ? new ComponentSnapshot(lFrame.Length)
+        : new ComponentSnapshot(lLight, lFrame.Lights.FadeTime, lFrame.Length);
     }
 
     private Light GetLight(eDirection xiDirection, LightSection xiLights)

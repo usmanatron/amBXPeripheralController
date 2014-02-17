@@ -2,16 +2,16 @@
 
 namespace aPC.Common.Server.Managers
 {
-  public class ComponentData : Data
+  public class ComponentSnapshot : Snapshot
   {
     /// <summary>
     /// Used when a component is not available
     /// </summary>
-    public ComponentData(int xiLength) : this(null, 0, xiLength)
+    public ComponentSnapshot(int xiLength) : this(null, 0, xiLength)
     {
     }
 
-    public ComponentData(Component xiItem, int xiFadeTime, int xiLength)
+    public ComponentSnapshot(Component xiItem, int xiFadeTime, int xiLength)
       : base(xiFadeTime, xiLength)
     {
       Component = xiItem;

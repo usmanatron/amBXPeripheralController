@@ -14,9 +14,9 @@ namespace aPC.Server.EngineActors
     {
     }
 
-    public override void ActNextFrame(Data xiData)
+    public override void ActNextFrame(Snapshot xiData)
     {
-      var lLightData = (ComponentData) xiData;
+      var lLightData = (ComponentSnapshot) xiData;
       
       if (!lLightData.IsComponentNull)
       {

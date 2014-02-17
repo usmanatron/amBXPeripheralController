@@ -28,7 +28,7 @@ namespace aPC.Common.Server.Managers
       }
       else
       {
-        Data lData;
+        Snapshot lData;
 
         lock (mSceneLock) //qqUMI This is crappy - change
         {
@@ -92,7 +92,7 @@ namespace aPC.Common.Server.Managers
 
     protected abstract bool FramesAreApplicable(List<Frame> xiFrames);
 
-    public abstract Data GetNextData();
+    public abstract Snapshot GetNextData();
 
     protected Frame GetNextFrame()
     {

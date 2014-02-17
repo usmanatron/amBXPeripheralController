@@ -14,9 +14,9 @@ namespace aPC.Server.EngineActors
     {
     }
 
-    public override void ActNextFrame(Data xiData)
+    public override void ActNextFrame(Snapshot xiData)
     {
-      var lRumbleData = (ComponentData)xiData;
+      var lRumbleData = (ComponentSnapshot)xiData;
 
       if (!lRumbleData.IsComponentNull)
       {

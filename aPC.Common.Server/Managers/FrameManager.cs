@@ -29,10 +29,10 @@ namespace aPC.Common.Server.Managers
       return lFrames.Any(frame => frame != null);
     }
 
-    public override Data GetNextData()
+    public override Snapshot GetNextData()
     {
       var lFrame = GetNextFrame();
-      return new FrameData(lFrame, 0);
+      return new FrameSnapshot(lFrame, 0);
     }
   }
 }

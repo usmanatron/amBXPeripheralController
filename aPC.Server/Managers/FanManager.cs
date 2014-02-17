@@ -29,14 +29,14 @@ namespace aPC.Server.Managers
       return lFans.Any(fan => fan != null);
     }
 
-    public override Data GetNextData()
+    public override Snapshot GetNextData()
     {
       var lFrame = GetNextFrame();
       var lFan = GetFan(Direction, lFrame.Fans);
 
       return lFan == null
-        ? new ComponentData(lFrame.Length)
-        : new ComponentData(lFan, lFrame.Fans.FadeTime, lFrame.Length);
+        ? new ComponentSnapshot(lFrame.Length)
+        : new ComponentSnapshot(lFan, lFrame.Fans.FadeTime, lFrame.Length);
     }
 
     private Fan GetFan(eDirection xiDirection, FanSection xiFans)

@@ -27,7 +27,7 @@ namespace aPC.Server.Managers
       return lRumbles.Any(rumble => rumble != null);
     }
 
-    public override Data GetNextData()
+    public override Snapshot GetNextData()
     {
       var lFrame = GetNextFrame();
 
@@ -36,8 +36,8 @@ namespace aPC.Server.Managers
         : lFrame.Rumbles.Rumble;
 
       return lRumble == null
-        ? new ComponentData(lFrame.Length)
-        : new ComponentData(lRumble, lFrame.Rumbles.FadeTime, lFrame.Length);
+        ? new ComponentSnapshot(lFrame.Length)
+        : new ComponentSnapshot(lRumble, lFrame.Rumbles.FadeTime, lFrame.Length);
     }
 
     public override eComponentType ComponentType()
