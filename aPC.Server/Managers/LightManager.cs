@@ -5,18 +5,19 @@ using aPC.Common.Server.Managers;
 using aPC.Common;
 using System;
 using System.Collections.Generic;
+using aPC.Server.EngineActors;
 
 namespace aPC.Server.Managers
 {
-  class LightManager : ManagerBase
+  class LightManager : ComponentManager
   {
-    public LightManager(eDirection xiDirection) 
-      : this(xiDirection, null)
+    public LightManager(eDirection xiDirection, LightActor xiActor) 
+      : this(xiDirection, xiActor, null)
     {
     }
 
-    public LightManager(eDirection xiDirection, Action xiEventCallback) 
-      : base(xiEventCallback)
+    public LightManager(eDirection xiDirection, LightActor xiActor,  Action xiEventCallback) 
+      : base(xiActor, xiEventCallback)
     {
       mDirection = xiDirection;
       SetupNewScene(CurrentScene);
@@ -33,13 +34,9 @@ namespace aPC.Server.Managers
       return lLights.Any(light => light != null);
     }
 
-    public override Data GetNext()
+    public override Data GetNextData()
     {
-      // Temporary debug trace
-      Console.WriteLine(mDirection + " - GetNext     - " + DateTime.Now.Ticks);
-
       var lFrame = GetNextFrame();
-
       var lLight = GetLight(mDirection, lFrame.Lights);
 
       return lLight == null
@@ -50,6 +47,11 @@ namespace aPC.Server.Managers
     private Light GetLight(eDirection xiDirection, LightSection xiLights)
     {
       return xiLights.GetComponentValueInDirection(xiDirection);
+    }
+
+    public override eComponentType ComponentType()
+    {
+      return eComponentType.Light;
     }
 
     readonly eDirection mDirection;
