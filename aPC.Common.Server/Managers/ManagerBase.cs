@@ -156,8 +156,6 @@ namespace aPC.Common.Server.Managers
       }
     }
 
-    public abstract eActorType ActorType();
-
     public bool IsDormant;
     protected amBXScene CurrentScene;
     protected AtypicalFirstRunInfiniteTicker Ticker;

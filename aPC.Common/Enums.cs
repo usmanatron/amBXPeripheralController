@@ -1,8 +1,7 @@
 ﻿namespace aPC.Common
 {
-  public enum eActorType
+  public enum eComponentType
   {
-    Frame,
     Light,
     Fan,
     Rumble
