@@ -7,24 +7,14 @@ namespace aPC.Common.Server.EngineActors
 {
   public class FrameActor : EngineActorBase
   {
-    public FrameActor(EngineManager xiEngine) 
-      : base (xiEngine, new FrameManager())
+    public FrameActor(EngineManager xiEngine, FrameManager xiManager) 
+      : base (xiEngine, xiManager)
     {
     }
 
-    public FrameActor(EngineManager xiEngine, Action xiEventComplete)
-      : base(xiEngine, new FrameManager(xiEventComplete))
+    public override void ActNextFrame(Data xiFrameData)
     {
-    }
-
-    public override eActorType ActorType()
-    {
-      return eActorType.Frame;
-    }
-
-    protected override void ActNextFrame()
-    {
-      var lFrameData = (FrameData)Manager.GetNext();
+      var lFrameData = (FrameData)xiFrameData;
       var lFrame = lFrameData.Frame;
 
       if (lFrame.Lights != null)
@@ -41,8 +31,6 @@ namespace aPC.Common.Server.EngineActors
       {
         UpdateRumbles(lFrame.Rumbles);
       }
-      
-      WaitforInterval(lFrame.Length);
     }
 
     private void UpdateLights(LightSection xiLights)

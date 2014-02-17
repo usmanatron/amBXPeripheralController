@@ -1,4 +1,5 @@
 ﻿using aPC.Common.Entities;
+using aPC.Common.Server.EngineActors;
 using System.Linq;
 using System;
 using System.Collections.Generic;
@@ -7,13 +8,13 @@ namespace aPC.Common.Server.Managers
 {
   public class FrameManager : ManagerBase
   {
-    public FrameManager() 
-      : this(null)
+    public FrameManager(EngineActorBase xiActor) 
+      : this(xiActor, null)
     {
     }
 
-    public FrameManager(Action xiEventComplete)
-      : base(xiEventComplete)
+    public FrameManager(EngineActorBase xiActor, Action xiEventComplete)
+      : base(xiActor, xiEventComplete)
     {
       SetupNewScene(CurrentScene);
     }
@@ -21,17 +22,22 @@ namespace aPC.Common.Server.Managers
     protected override bool FramesAreApplicable(List<Frame> xiFrames)
     {
       var lFrames = xiFrames
-        .Where(frame => frame.Lights != null || 
-                        frame.Fans   != null || 
+        .Where(frame => frame.Lights  != null || 
+                        frame.Fans    != null || 
                         frame.Rumbles != null);
 
       return lFrames.Any(frame => frame != null);
     }
 
-    public override Data GetNext()
+    public override Data GetNextData()
     {
       var lFrame = GetNextFrame();
       return new FrameData(lFrame, 0);
+    }
+
+    public override eActorType ActorType()
+    {
+      return eActorType.Frame;
     }
   }
 }
