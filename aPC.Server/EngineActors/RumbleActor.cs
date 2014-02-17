@@ -7,12 +7,11 @@ using System;
 
 namespace aPC.Server.EngineActors
 {
-  class RumbleActor : EngineActorBase
+  class RumbleActor : ComponentActor
   {
     public RumbleActor(eDirection xiDirection, EngineManager xiEngine) 
-      : base (xiEngine)
+      : base (xiDirection, xiEngine)
     {
-      mDirection = xiDirection;
     }
 
     public override void ActNextFrame(Data xiData)
@@ -24,7 +23,5 @@ namespace aPC.Server.EngineActors
         Engine.UpdateRumble(mDirection, (Rumble)lRumbleData.Component);
       }
     }
-
-    private readonly eDirection mDirection;
   }
 }

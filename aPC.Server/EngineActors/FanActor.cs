@@ -7,12 +7,11 @@ using System;
 
 namespace aPC.Server.EngineActors
 {
-  class FanActor : EngineActorBase
+  class FanActor : ComponentActor
   {
     public FanActor(eDirection xiDirection, EngineManager xiEngine) 
-      : base (xiEngine)
+      : base (xiDirection, xiEngine)
     {
-      mDirection = xiDirection;
     }
 
     public override void ActNextFrame(Data xiData)
@@ -24,7 +23,5 @@ namespace aPC.Server.EngineActors
         Engine.UpdateFan(mDirection, (Fan)lFanData.Component);
       }
     }
-
-    private eDirection mDirection;
   }
 }

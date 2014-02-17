@@ -7,12 +7,11 @@ using System;
 
 namespace aPC.Server.EngineActors
 {
-  class LightActor : EngineActorBase
+  class LightActor : ComponentActor
   {
     public LightActor(eDirection xiDirection, EngineManager xiEngine) 
-      : base (xiEngine)
+      : base (xiDirection, xiEngine)
     {
-      mDirection = xiDirection;
     }
 
     public override void ActNextFrame(Data xiData)
@@ -24,7 +23,5 @@ namespace aPC.Server.EngineActors
         Engine.UpdateLight(mDirection, (Light)lLightData.Component, lLightData.FadeTime);
       }
     }
-
-    private readonly eDirection mDirection;
   }
 }
