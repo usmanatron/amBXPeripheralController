@@ -8,7 +8,7 @@ namespace aPC.Common.Server.Managers
 {
   public class FrameManager : ManagerBase
   {
-    public FrameManager(EngineActorBase xiActor) 
+    public FrameManager(FrameActor xiActor) 
       : this(xiActor, null)
     {
     }
