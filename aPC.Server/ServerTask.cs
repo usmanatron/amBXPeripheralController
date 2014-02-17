@@ -20,8 +20,8 @@ namespace aPC.Server
       using (new CommunicationManager(new NotificationService()))
       using (var lEngine = new EngineManager())
       {
-        mFrame = new FrameActor(lEngine, EventComplete);
-        mDesynchronisedManager = new DesynchronisedActorManager(lEngine, EventComplete);
+        SetupSynchronisedManager(lEngine);
+        mDesynchronisedManager = new ComponentManagerCollection(lEngine, EventComplete);
 
         // Start the default initial scene
         Update(new SceneAccessor().GetScene("Default_RedVsBlue"));
@@ -34,13 +34,18 @@ namespace aPC.Server
           }
           else
           {
-            Parallel.ForEach(mDesynchronisedManager.AllActors(), 
-                             actor => mSyncManager.RunWhileUnSynchronised(actor.Actor.Run));
+            Parallel.ForEach(mDesynchronisedManager.AllManagers(), 
+                             manager => mSyncManager.RunWhileUnSynchronised(manager.Run));
           }
         }
       }
     }
 
+    private void SetupSynchronisedManager(EngineManager xiEngine)
+    {
+      var lActor = new FrameActor(xiEngine);
+      mFrame = new FrameManager(lActor);
+    }
 
     internal void Update(amBXScene xiScene)
     {
@@ -80,13 +85,13 @@ namespace aPC.Server
 
     private void UpdateSynchronisedActor(amBXScene xiScene)
     {
-      mFrame.UpdateManager(xiScene);
+      mFrame.UpdateScene(xiScene);
     }
 
     private void UpdateUnsynchronisedActors(amBXScene xiScene)
     {
-      Parallel.ForEach(mDesynchronisedManager.AllActors(),
-                       actor => actor.Actor.UpdateManager(xiScene));
+      Parallel.ForEach(mDesynchronisedManager.AllManagers(),
+                       manager => manager.UpdateScene(xiScene));
     }
 
     /// <remarks>
@@ -106,8 +111,8 @@ namespace aPC.Server
       }
     }
 
-    private FrameActor mFrame;
-    private DesynchronisedActorManager mDesynchronisedManager;
+    private FrameManager mFrame;
+    private ComponentManagerCollection mDesynchronisedManager;
 
     private readonly SynchronisationManager mSyncManager;
     private bool mIsCurrentlyRunningEvent;
