@@ -27,7 +27,7 @@ namespace aPC.Server.Managers
       return lRumbles.Any(rumble => rumble != null);
     }
 
-    public override Snapshot GetNextData()
+    public override SnapshotBase GetNextData()
     {
       var lFrame = GetNextFrame();
 

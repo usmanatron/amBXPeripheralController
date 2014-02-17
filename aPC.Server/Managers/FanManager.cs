@@ -29,7 +29,7 @@ namespace aPC.Server.Managers
       return lFans.Any(fan => fan != null);
     }
 
-    public override Snapshot GetNextData()
+    public override SnapshotBase GetNextData()
     {
       var lFrame = GetNextFrame();
       var lFan = GetFan(Direction, lFrame.Fans);

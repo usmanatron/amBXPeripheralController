@@ -29,7 +29,7 @@ namespace aPC.Server.Managers
       return lLights.Any(light => light != null);
     }
 
-    public override Snapshot GetNextData()
+    public override SnapshotBase GetNextData()
     {
       var lFrame = GetNextFrame();
       var lLight = GetLight(Direction, lFrame.Lights);

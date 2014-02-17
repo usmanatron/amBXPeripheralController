@@ -11,7 +11,7 @@ namespace aPC.Common.Server.EngineActors
       Engine = xiEngine;
     }
 
-    public abstract void ActNextFrame(Snapshot xiData);
+    public abstract void ActNextFrame(SnapshotBase xiData);
 
     protected EngineManager Engine;
   }

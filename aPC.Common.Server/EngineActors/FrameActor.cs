@@ -12,7 +12,7 @@ namespace aPC.Common.Server.EngineActors
     {
     }
 
-    public override void ActNextFrame(Snapshot xiFrameData)
+    public override void ActNextFrame(SnapshotBase xiFrameData)
     {
       var lFrameData = (FrameSnapshot)xiFrameData;
       var lFrame = lFrameData.Frame;

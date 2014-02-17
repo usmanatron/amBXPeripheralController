@@ -14,7 +14,7 @@ namespace aPC.Server.EngineActors
     {
     }
 
-    public override void ActNextFrame(Snapshot xiData)
+    public override void ActNextFrame(SnapshotBase xiData)
     {
       var lLightData = (ComponentSnapshot) xiData;
       
