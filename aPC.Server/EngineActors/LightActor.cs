@@ -9,8 +9,8 @@ namespace aPC.Server.EngineActors
 {
   class LightActor : EngineActorBase
   {
-    public LightActor(eDirection xiDirection, EngineManager xiEngine, LightManager xiManager) 
-      : base (xiEngine, xiManager)
+    public LightActor(eDirection xiDirection, EngineManager xiEngine) 
+      : base (xiEngine)
     {
       mDirection = xiDirection;
     }

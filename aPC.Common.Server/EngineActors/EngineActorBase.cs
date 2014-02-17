@@ -6,15 +6,13 @@ namespace aPC.Common.Server.EngineActors
 {
   public abstract class EngineActorBase
   {
-    protected EngineActorBase(EngineManager xiEngine, ManagerBase xiManager)
+    protected EngineActorBase(EngineManager xiEngine)
     {
       Engine = xiEngine;
-      Manager = xiManager;
     }
 
     public abstract void ActNextFrame(Data xiData);
 
-    protected ManagerBase Manager;
     protected EngineManager Engine;
   }
 }

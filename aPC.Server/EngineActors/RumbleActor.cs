@@ -9,8 +9,8 @@ namespace aPC.Server.EngineActors
 {
   class RumbleActor : EngineActorBase
   {
-    public RumbleActor(eDirection xiDirection, EngineManager xiEngine, RumbleManager xiManager) 
-      : base (xiEngine, xiManager)
+    public RumbleActor(eDirection xiDirection, EngineManager xiEngine) 
+      : base (xiEngine)
     {
       mDirection = xiDirection;
     }

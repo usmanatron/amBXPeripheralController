@@ -9,8 +9,8 @@ namespace aPC.Server.EngineActors
 {
   class FanActor : EngineActorBase
   {
-    public FanActor(eDirection xiDirection, EngineManager xiEngine, FanManager xiManager) 
-      : base (xiEngine, xiManager)
+    public FanActor(eDirection xiDirection, EngineManager xiEngine) 
+      : base (xiEngine)
     {
       mDirection = xiDirection;
     }
