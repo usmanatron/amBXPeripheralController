@@ -49,11 +49,11 @@
     <Compile Include="AtypicalFirstRunInfiniteTicker.cs" />
     <Compile Include="Communication\CommunicationManager.cs" />
     <Compile Include="Communication\NotificationServiceBase.cs" />
-    <Compile Include="Managers\ComponentData.cs" />
+    <Compile Include="Snapshot\ComponentSnapshot.cs" />
     <Compile Include="Managers\ComponentManager.cs" />
-    <Compile Include="Managers\Data.cs" />
+    <Compile Include="Snapshot\Snapshot.cs" />
     <Compile Include="Managers\EngineManager.cs" />
-    <Compile Include="Managers\FrameData.cs" />
+    <Compile Include="Snapshot\FrameSnapshot.cs" />
     <Compile Include="Managers\FrameManager.cs" />
     <Compile Include="Managers\ManagerBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
