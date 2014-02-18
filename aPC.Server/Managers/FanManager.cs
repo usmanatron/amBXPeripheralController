@@ -1,8 +1,8 @@
-﻿using amBXLib;
-using aPC.Common.Entities;
+﻿using aPC.Common.Entities;
 using System.Linq;
 using System;
 using aPC.Common.Server.Managers;
+using aPC.Common.Server.Snapshot;
 using System.Collections.Generic;
 using aPC.Server.EngineActors;
 using aPC.Common;
@@ -29,7 +29,7 @@ namespace aPC.Server.Managers
       return lFans.Any(fan => fan != null);
     }
 
-    public override SnapshotBase GetNextData()
+    public override SnapshotBase GetNextSnapshot()
     {
       var lFrame = GetNextFrame();
       var lFan = GetFan(Direction, lFrame.Fans);

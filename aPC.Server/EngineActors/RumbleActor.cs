@@ -2,6 +2,7 @@
 using aPC.Common.Server.EngineActors;
 using aPC.Common.Entities;
 using aPC.Common.Server.Managers;
+using aPC.Common.Server.Snapshot;
 using aPC.Server.Managers;
 using System;
 
@@ -14,13 +15,13 @@ namespace aPC.Server.EngineActors
     {
     }
 
-    public override void ActNextFrame(SnapshotBase xiData)
+    public override void ActNextFrame(SnapshotBase xiSnapshot)
     {
-      var lRumbleData = (ComponentSnapshot)xiData;
+      var lSnapshot = (ComponentSnapshot)xiSnapshot;
 
-      if (!lRumbleData.IsComponentNull)
+      if (!lSnapshot.IsComponentNull)
       {
-        Engine.UpdateRumble(mDirection, (Rumble)lRumbleData.Component);
+        Engine.UpdateRumble(mDirection, (Rumble)lSnapshot.Component);
       }
     }
   }

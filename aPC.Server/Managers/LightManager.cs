@@ -2,6 +2,7 @@
 using aPC.Common.Entities;
 using System.Linq;
 using aPC.Common.Server.Managers;
+using aPC.Common.Server.Snapshot;
 using aPC.Common;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace aPC.Server.Managers
       return lLights.Any(light => light != null);
     }
 
-    public override SnapshotBase GetNextData()
+    public override SnapshotBase GetNextSnapshot()
     {
       var lFrame = GetNextFrame();
       var lLight = GetLight(Direction, lFrame.Lights);

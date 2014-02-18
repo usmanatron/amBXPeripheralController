@@ -1,5 +1,6 @@
 ﻿using aPC.Common.Entities;
 using aPC.Common.Server.Managers;
+using aPC.Common.Server.Snapshot;
 using aPC.Common;
 using System.Linq;
 using System;
@@ -27,7 +28,7 @@ namespace aPC.Server.Managers
       return lRumbles.Any(rumble => rumble != null);
     }
 
-    public override SnapshotBase GetNextData()
+    public override SnapshotBase GetNextSnapshot()
     {
       var lFrame = GetNextFrame();
 

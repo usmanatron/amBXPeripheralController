@@ -51,7 +51,7 @@
     <Compile Include="Communication\NotificationServiceBase.cs" />
     <Compile Include="Snapshot\ComponentSnapshot.cs" />
     <Compile Include="Managers\ComponentManager.cs" />
-    <Compile Include="Snapshot\Snapshot.cs" />
+    <Compile Include="Snapshot\SnapshotBase.cs" />
     <Compile Include="Managers\EngineManager.cs" />
     <Compile Include="Snapshot\FrameSnapshot.cs" />
     <Compile Include="Managers\FrameManager.cs" />
