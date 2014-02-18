@@ -1,5 +1,5 @@
 ﻿using aPC.Common.Server.Managers;
-using aPC.Common.Server.Snapshot;
+using aPC.Common.Server.Snapshots;
 using aPC.Common.Entities;
 using amBXLib;
 using System;
