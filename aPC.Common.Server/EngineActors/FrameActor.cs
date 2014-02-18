@@ -1,4 +1,5 @@
 ﻿using aPC.Common.Server.Managers;
+using aPC.Common.Server.Snapshot;
 using aPC.Common.Entities;
 using amBXLib;
 using System;
@@ -12,24 +13,23 @@ namespace aPC.Common.Server.EngineActors
     {
     }
 
-    public override void ActNextFrame(SnapshotBase xiFrameData)
+    public override void ActNextFrame(SnapshotBase xiFrame)
     {
-      var lFrameData = (FrameSnapshot)xiFrameData;
-      var lFrame = lFrameData.Frame;
+      var lFrame = (FrameSnapshot) xiFrame;
 
-      if (lFrame.Lights != null)
+      if (lFrame.Frame.Lights != null)
       {
-        UpdateLights(lFrame.Lights);
+        UpdateLights(lFrame.Frame.Lights);
       }
 
-      if (lFrame.Fans != null)
+      if (lFrame.Frame.Fans != null)
       {
-        UpdateFans(lFrame.Fans);
+        UpdateFans(lFrame.Frame.Fans);
       }
 
-      if (lFrame.Rumbles != null)
+      if (lFrame.Frame.Rumbles != null)
       {
-        UpdateRumbles(lFrame.Rumbles);
+        UpdateRumbles(lFrame.Frame.Rumbles);
       }
     }
 

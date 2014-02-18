@@ -1,20 +1,21 @@
 ﻿using aPC.Common.Entities;
 
-namespace aPC.Common.Server.Managers
+namespace aPC.Common.Server.Snapshot
 {
   public class ComponentSnapshot : SnapshotBase
   {
     /// <summary>
     /// Used when a component is not available
     /// </summary>
-    public ComponentSnapshot(int xiLength) : this(null, 0, xiLength)
+    public ComponentSnapshot(int xiLength)
+      : this(null, 0, xiLength)
     {
     }
 
-    public ComponentSnapshot(Component xiItem, int xiFadeTime, int xiLength)
+    public ComponentSnapshot(Component xiComponent, int xiFadeTime, int xiLength)
       : base(xiFadeTime, xiLength)
     {
-      Component = xiItem;
+      Component = xiComponent;
     }
 
     public bool IsComponentNull

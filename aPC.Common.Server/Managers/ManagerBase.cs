@@ -1,5 +1,6 @@
 ﻿using aPC.Common.Entities;
 using aPC.Common.Server.EngineActors;
+using aPC.Common.Server.Snapshot;
 using System;
 using System.Threading;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ namespace aPC.Common.Server.Managers
 
         lock (mSceneLock) //qqUMI This is crappy - change
         {
-          lData = GetNextData();
+          lData = GetNextSnapshot();
           mActor.ActNextFrame(lData);
         }
         if (lData == null)
@@ -92,7 +93,7 @@ namespace aPC.Common.Server.Managers
 
     protected abstract bool FramesAreApplicable(List<Frame> xiFrames);
 
-    public abstract SnapshotBase GetNextData();
+    public abstract SnapshotBase GetNextSnapshot();
 
     protected Frame GetNextFrame()
     {

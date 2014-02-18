@@ -1,5 +1,6 @@
 ﻿using aPC.Common.Entities;
 using aPC.Common.Server.EngineActors;
+using aPC.Common.Server.Snapshot;
 using System.Linq;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace aPC.Common.Server.Managers
       return lFrames.Any(frame => frame != null);
     }
 
-    public override SnapshotBase GetNextData()
+    public override SnapshotBase GetNextSnapshot()
     {
       var lFrame = GetNextFrame();
       return new FrameSnapshot(lFrame, 0);
