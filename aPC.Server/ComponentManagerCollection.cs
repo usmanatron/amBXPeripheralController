@@ -25,23 +25,23 @@ namespace aPC.Server
 
     private void SetupManagers(EngineManager xiEngine, Action xiAction)
     {
-      mLightManagers = new List<LightManager>();
-      mFanManagers = new List<FanManager>();
-      mRumbleManagers = new List<RumbleManager>();
+      mLightManagers = new List<LightConductor>();
+      mFanManagers = new List<FanConductor>();
+      mRumbleManagers = new List<RumbleConductor>();
 
-      mLightManagers.Add(new LightManager(eDirection.North, new LightActor(eDirection.North, xiEngine), xiAction));
-      mLightManagers.Add(new LightManager(eDirection.NorthEast, new LightActor(eDirection.NorthEast, xiEngine), xiAction));
-      mLightManagers.Add(new LightManager(eDirection.East, new LightActor(eDirection.East, xiEngine), xiAction));
-      mLightManagers.Add(new LightManager(eDirection.SouthEast, new LightActor(eDirection.SouthEast, xiEngine), xiAction));
-      mLightManagers.Add(new LightManager(eDirection.South, new LightActor(eDirection.South, xiEngine), xiAction));
-      mLightManagers.Add(new LightManager(eDirection.SouthWest, new LightActor(eDirection.SouthWest, xiEngine), xiAction));
-      mLightManagers.Add(new LightManager(eDirection.West, new LightActor(eDirection.West, xiEngine), xiAction));
-      mLightManagers.Add(new LightManager(eDirection.NorthWest, new LightActor(eDirection.NorthWest, xiEngine), xiAction));
+      mLightManagers.Add(new LightConductor(eDirection.North, new LightActor(eDirection.North, xiEngine), xiAction));
+      mLightManagers.Add(new LightConductor(eDirection.NorthEast, new LightActor(eDirection.NorthEast, xiEngine), xiAction));
+      mLightManagers.Add(new LightConductor(eDirection.East, new LightActor(eDirection.East, xiEngine), xiAction));
+      mLightManagers.Add(new LightConductor(eDirection.SouthEast, new LightActor(eDirection.SouthEast, xiEngine), xiAction));
+      mLightManagers.Add(new LightConductor(eDirection.South, new LightActor(eDirection.South, xiEngine), xiAction));
+      mLightManagers.Add(new LightConductor(eDirection.SouthWest, new LightActor(eDirection.SouthWest, xiEngine), xiAction));
+      mLightManagers.Add(new LightConductor(eDirection.West, new LightActor(eDirection.West, xiEngine), xiAction));
+      mLightManagers.Add(new LightConductor(eDirection.NorthWest, new LightActor(eDirection.NorthWest, xiEngine), xiAction));
 
-      mFanManagers.Add(new FanManager(eDirection.East, new FanActor(eDirection.East, xiEngine), xiAction));
-      mFanManagers.Add(new FanManager(eDirection.West, new FanActor(eDirection.West, xiEngine), xiAction));
+      mFanManagers.Add(new FanConductor(eDirection.East, new FanActor(eDirection.East, xiEngine), xiAction));
+      mFanManagers.Add(new FanConductor(eDirection.West, new FanActor(eDirection.West, xiEngine), xiAction));
 
-      mRumbleManagers.Add(new RumbleManager(eDirection.Center , new RumbleActor(eDirection.Center, xiEngine), xiAction));
+      mRumbleManagers.Add(new RumbleConductor(eDirection.Center , new RumbleActor(eDirection.Center, xiEngine), xiAction));
     }
 
     public void RunAllManagersDeSynchronised(SynchronisationManager xiSyncManager)
@@ -72,26 +72,26 @@ namespace aPC.Server
       }
     }
 
-    private bool RunTaskOnLights(Action<LightManager> xiAction)
+    private bool RunTaskOnLights(Action<LightConductor> xiAction)
     {
       Parallel.ForEach(mLightManagers, manager => xiAction(manager));
       return true;
     }
 
-    private bool RunTaskOnFans(Action<FanManager> xiAction)
+    private bool RunTaskOnFans(Action<FanConductor> xiAction)
     {
       Parallel.ForEach(mFanManagers, manager => xiAction(manager));
       return true;
     }
 
-    private bool RunTaskOnRumbles(Action<RumbleManager> xiAction)
+    private bool RunTaskOnRumbles(Action<RumbleConductor> xiAction)
     {
       Parallel.ForEach(mRumbleManagers, manager => xiAction(manager));
       return true;
     }
 
-    private List<LightManager> mLightManagers;
-    private List<FanManager> mFanManagers;
-    private List<RumbleManager> mRumbleManagers;
+    private List<LightConductor> mLightManagers;
+    private List<FanConductor> mFanManagers;
+    private List<RumbleConductor> mRumbleManagers;
   }
 }

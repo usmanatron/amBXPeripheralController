@@ -9,9 +9,9 @@ using aPC.Server.EngineActors;
 
 namespace aPC.Server.Managers
 {
-  class RumbleManager : ComponentConductor<Rumble>
+  class RumbleConductor : ComponentConductor<Rumble>
   {
-    public RumbleManager(eDirection xiDirection, RumbleActor xiActor, Action xiEventCallback) 
+    public RumbleConductor(eDirection xiDirection, RumbleActor xiActor, Action xiEventCallback) 
       : base(xiDirection, xiActor, xiEventCallback)
     {
       Direction = xiDirection;
