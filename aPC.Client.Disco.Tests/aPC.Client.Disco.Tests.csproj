@@ -59,6 +59,7 @@
     <Compile Include="Generators\RandomLightSectionGeneratorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RangeTests.cs" />
+    <Compile Include="TestRandom.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

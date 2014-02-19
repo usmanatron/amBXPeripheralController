@@ -14,28 +14,14 @@ namespace aPC.Common.Tests.Defaults
     [Test]
     public void DefaultScenesAreValid()
     {
-      Assert.DoesNotThrow(() => BuildAllDefaultScenes());
-    }
-
-    private void BuildAllDefaultScenes()
-    {
-      amBXScene lScene;
-
-      foreach (var lDefaultScene in GetScenes())
-      {
-        lScene = lDefaultScene;
-      }
-    }
-
-    private IEnumerable<amBXScene> GetScenes()
-    {
-      var lDefaultScenes = new DefaultScenes();
-
-      return lDefaultScenes
+      var lScenes = new DefaultScenes()
         .GetType()
         .GetProperties()
         .Where(property => property.GetCustomAttribute<SceneNameAttribute>() != null)
-        .Select(property => property.GetValue(lDefaultScenes) as amBXScene);
+        .Select(property => property.GetValue(new DefaultScenes()) as amBXScene)
+        .ToList();
+
+      Assert.IsNotEmpty(lScenes);
     }
   }
 }

@@ -13,7 +13,7 @@ namespace aPC.Common.Tests.Builders
     public void NewFanSection_WithNoFadeTime_ThrowsException()
     {
       var lSectionBuilder = new FanSectionBuilder()
-      .WithAllFans(mFull);
+        .WithAllFans(mFull);
 
       Assert.Throws<ArgumentException>(() => lSectionBuilder.Build());
     }
@@ -22,7 +22,7 @@ namespace aPC.Common.Tests.Builders
     public void NewFanSection_WithNoFans_ThrowsException()
     {
       var lSectionBuilder = new FanSectionBuilder()
-      .WithFadeTime(100);
+        .WithFadeTime(100);
 
       Assert.Throws<ArgumentException>(() => lSectionBuilder.Build());
     }
@@ -38,22 +38,22 @@ namespace aPC.Common.Tests.Builders
     public void NewFanSection_CanUpdateAllFansAtSametime()
     {
       var lSection = new FanSectionBuilder()
-      .WithFadeTime(100)
-      .WithAllFans(mHalf)
-      .Build();
+        .WithFadeTime(100)
+        .WithAllFans(mHalf)
+        .Build();
 
       Assert.AreEqual(mHalf, lSection.East);
       Assert.AreEqual(mHalf, lSection.West);
     }
 
     [Test]
-    public void FanSection_WithDifferentFanTypesOnEachFan_Correctlyspecified()
+    public void FanSection_WithDifferentFanTypesOnEachFan_CorrectlySpecified()
     {
       var lSection = new FanSectionBuilder()
-      .WithFadeTime(100)
-      .WithFanInDirection(eDirection.East, mFull)
-      .WithFanInDirection(eDirection.West, mHalf)
-      .Build();
+        .WithFadeTime(100)
+        .WithFanInDirection(eDirection.East, mFull)
+        .WithFanInDirection(eDirection.West, mHalf)
+        .Build();
 
       Assert.AreEqual(mFull, lSection.East);
       Assert.AreEqual(mHalf, lSection.West);
@@ -65,12 +65,10 @@ namespace aPC.Common.Tests.Builders
     public void SpecifyingFanRepeatedly_InComplimentaryDirections_UsesTheLastAssignment(eDirection xiFirst, eDirection xiSecond)
     {
       var lSection = new FanSectionBuilder()
-      .WithFadeTime(100)
-      .WithFanInDirection(xiFirst, mFull)
-      .WithFanInDirection(xiSecond, mHalf)
-      .Build();
-
-      var lSectionBuilderBase = new SectionBuilderBase();
+        .WithFadeTime(100)
+        .WithFanInDirection(xiFirst, mFull)
+        .WithFanInDirection(xiSecond, mHalf)
+        .Build();
 
       Assert.AreEqual(mHalf, GetFanInDirection(lSection, xiSecond));
     }
@@ -90,7 +88,7 @@ namespace aPC.Common.Tests.Builders
       }
     }
 
-    private Fan mFull = DefaultFans.FullPower;
-    private Fan mHalf = DefaultFans.HalfPower;
+    private readonly Fan mFull = DefaultFans.FullPower;
+    private readonly Fan mHalf = DefaultFans.HalfPower;
   }
 }

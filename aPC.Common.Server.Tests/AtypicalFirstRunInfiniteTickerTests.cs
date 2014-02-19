@@ -41,9 +41,9 @@ namespace aPC.Common.Server.Tests
     [Test]
     public void NewTicker_AdvancingThroughFirstRun_ReturnsToZero()
     {
-      var lTicker = CreateDefaultTicker();
+      var lTicker = CreateTicker(ExampleFirstRunTickerSize);
 
-      for (int lTicks = 0; lTicks < mDefaultFirstRunTickerSize; lTicks++)
+      for (int lTicks = 0; lTicks < ExampleFirstRunTickerSize; lTicks++)
       {
         lTicker.Advance();
       }
@@ -54,9 +54,9 @@ namespace aPC.Common.Server.Tests
     [Test]
     public void NewTicker_AdvancingThroughFirstRun_ChangesFirstRunFalse()
     {
-      var lTicker = CreateDefaultTicker();
+      var lTicker = CreateTicker(ExampleFirstRunTickerSize);
 
-      for (int lTicks = 0; lTicks < mDefaultFirstRunTickerSize; lTicks++)
+      for (int lTicks = 0; lTicks < ExampleFirstRunTickerSize; lTicks++)
       {
         lTicker.Advance();
       }
@@ -67,10 +67,10 @@ namespace aPC.Common.Server.Tests
     [Test]
     public void NewTickerWithDifferentSubsequentSize_AdvancingThroughTwoFullRuns_ReturnsToZero()
     {
-      var lTicker = CreateDefaultTicker();
+      var lTicker = CreateTicker(ExampleFirstRunTickerSize, ExampleSubsequentTickerSize);
 
       // The following should complete two full runs: One at the smaller initial size and one at the larger subsequent one.
-      for (int lTicks = 0; lTicks < mDefaultFirstRunTickerSize + mDefaultSubsequentTickerSize; lTicks++)
+      for (int lTicks = 0; lTicks < ExampleFirstRunTickerSize + ExampleSubsequentTickerSize; lTicks++)
       {
         lTicker.Advance();
       }
@@ -78,18 +78,18 @@ namespace aPC.Common.Server.Tests
       Assert.AreEqual(0, lTicker.Index);
     }
 
-    private AtypicalFirstRunInfiniteTicker CreateTicker(int xiFirstRun, int xiSubsequentRun)
+    private AtypicalFirstRunInfiniteTicker CreateTicker(int xiFirstRun, int xiSubsequentRun = 42)
     {
       return new AtypicalFirstRunInfiniteTicker(xiFirstRun, xiSubsequentRun);
     }
 
     private AtypicalFirstRunInfiniteTicker CreateDefaultTicker()
     {
-      return CreateTicker(mDefaultFirstRunTickerSize, mDefaultSubsequentTickerSize);
+      return CreateTicker(42);
     }
 
     // Note: the tests above assume these to be non equal
-    private const int mDefaultFirstRunTickerSize = 3;
-    private const int mDefaultSubsequentTickerSize = 7;
+    private const int ExampleFirstRunTickerSize = 3;
+    private const int ExampleSubsequentTickerSize = 7;
   }
 }

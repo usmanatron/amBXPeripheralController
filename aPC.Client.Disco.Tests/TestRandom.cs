@@ -4,10 +4,16 @@ namespace aPC.Client.Disco.Tests
 {
   class TestRandom : Random
   {
+    private readonly double mRandomNumber;
+
+    public TestRandom(double xiRandomNumber)
+    {
+      mRandomNumber = xiRandomNumber;
+    }
+
     public override double NextDouble()
     {
-      // Specifically selected to ensure that its less than the default Change threshold.
-      return 0.25;
+      return mRandomNumber;
     }
   }
 }

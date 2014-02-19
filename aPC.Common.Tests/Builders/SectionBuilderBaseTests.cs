@@ -48,21 +48,25 @@ namespace aPC.Common.Tests.Builders
      * Check FadeTime correctly saved on a SectionBase 
      */
 
+    class SingleDirectionTest : SectionBase
+    {
+#pragma warning disable 169 // Fields are used exclusively by reflection
+      [Direction(eDirection.North)]
+      public int Up;
+
+      [Direction(eDirection.NorthEast)]
+      [Direction(eDirection.East)]
+      [Direction(eDirection.SouthEast)]
+      public string Right;
+
+      [Direction(eDirection.South)]
+      public bool Down;
+
+      [Direction(eDirection.South)]
+      public bool DownClone;
+#pragma warning restore 169
+    }
+
   }
-  class SingleDirectionTest : SectionBase
-  {
-    [Direction(eDirection.North)]
-    public int Up;
 
-    [Direction(eDirection.NorthEast)]
-    [Direction(eDirection.East)]
-    [Direction(eDirection.SouthEast)]
-    public string Right;
-
-    [Direction(eDirection.South)]
-    public bool Down;
-
-    [Direction(eDirection.South)]
-    public bool DownClone;
-  }
 }

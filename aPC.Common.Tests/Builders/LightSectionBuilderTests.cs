@@ -7,13 +7,13 @@ using System;
 namespace aPC.Common.Tests.Builders
 {
   [TestFixture]
-  class LightSectionBuilderTests
+  internal class LightSectionBuilderTests
   {
     [Test]
     public void NewLightSection_WithNoFadeTime_ThrowsException()
     {
       var lSectionBuilder = new LightSectionBuilder()
-      .WithAllLights(mGreen);
+        .WithAllLights(mAribitraryColour);
 
       Assert.Throws<ArgumentException>(() => lSectionBuilder.Build());
     }
@@ -22,7 +22,7 @@ namespace aPC.Common.Tests.Builders
     public void NewLightSection_WithNoLights_ThrowsException()
     {
       var lSectionBuilder = new LightSectionBuilder()
-      .WithFadeTime(100);
+        .WithFadeTime(100);
 
       Assert.Throws<ArgumentException>(() => lSectionBuilder.Build());
     }
@@ -31,8 +31,8 @@ namespace aPC.Common.Tests.Builders
     public void NewLightSection_WithFadeTimeAndAtLeastOneLightSpecified_DoesNotThrowException()
     {
       var lSectionBuilder = new LightSectionBuilder()
-      .WithFadeTime(100)
-      .WithLightInDirection(eDirection.East, mGreen);
+        .WithFadeTime(100)
+        .WithLightInDirection(eDirection.East, mAribitraryColour);
 
       Assert.DoesNotThrow(() => lSectionBuilder.Build());
     }
@@ -42,7 +42,7 @@ namespace aPC.Common.Tests.Builders
     {
       var lSection = new LightSectionBuilder()
         .WithFadeTime(100)
-        .WithLightInDirection(eDirection.East, mGreen)
+        .WithLightInDirection(eDirection.East, mAribitraryColour)
         .Build();
 
       Assert.AreEqual(100, lSection.FadeTime);
@@ -61,10 +61,10 @@ namespace aPC.Common.Tests.Builders
     {
       var lSection = new LightSectionBuilder()
         .WithFadeTime(100)
-        .WithLightInDirection(xiDirection, mGreen)
+        .WithLightInDirection(xiDirection, mAribitraryColour)
         .Build();
 
-      Assert.AreEqual(mGreen, GetLightForDirection(lSection, xiDirection));
+      Assert.AreEqual(mAribitraryColour, GetLightForDirection(lSection, xiDirection));
     }
 
     //qqUMI TODO: Consider if this is the best way to do this
@@ -80,17 +80,17 @@ namespace aPC.Common.Tests.Builders
     {
       var lSection = new LightSectionBuilder()
         .WithFadeTime(100)
-        .WithAllLights(mGreen)
+        .WithAllLights(mAribitraryColour)
         .Build();
 
-      Assert.AreEqual(mGreen, lSection.North);
-      Assert.AreEqual(mGreen, lSection.NorthEast);
-      Assert.AreEqual(mGreen, lSection.East);
-      Assert.AreEqual(mGreen, lSection.SouthEast);
-      Assert.AreEqual(mGreen, lSection.South);
-      Assert.AreEqual(mGreen, lSection.SouthWest);
-      Assert.AreEqual(mGreen, lSection.West);
-      Assert.AreEqual(mGreen, lSection.NorthWest);
+      Assert.AreEqual(mAribitraryColour, lSection.North);
+      Assert.AreEqual(mAribitraryColour, lSection.NorthEast);
+      Assert.AreEqual(mAribitraryColour, lSection.East);
+      Assert.AreEqual(mAribitraryColour, lSection.SouthEast);
+      Assert.AreEqual(mAribitraryColour, lSection.South);
+      Assert.AreEqual(mAribitraryColour, lSection.SouthWest);
+      Assert.AreEqual(mAribitraryColour, lSection.West);
+      Assert.AreEqual(mAribitraryColour, lSection.NorthWest);
     }
 
     [Test]
@@ -124,7 +124,7 @@ namespace aPC.Common.Tests.Builders
       var lSectionBuilder = new LightSectionBuilder()
         .WithFadeTime(100)
         .WithLightInDirectionIfPhysical(eDirection.South, mBlue);
-      
+
       Assert.Throws<ArgumentException>(() => lSectionBuilder.Build());
     }
 
@@ -133,11 +133,11 @@ namespace aPC.Common.Tests.Builders
     {
       var lSection = new LightSectionBuilder()
         .WithFadeTime(100)
-        .WithLightInDirection(eDirection.South, mGreen)
+        .WithLightInDirection(eDirection.South, mAribitraryColour)
         .WithLightInDirectionIfPhysical(eDirection.South, mBlue)
         .Build();
 
-      Assert.AreEqual(mGreen, lSection.South);
+      Assert.AreEqual(mAribitraryColour, lSection.South);
     }
 
     [Test]
@@ -145,18 +145,17 @@ namespace aPC.Common.Tests.Builders
     {
       var lSectionBuilder = new LightSectionBuilder()
         .WithFadeTime(100)
-        .WithLightInDirectionIfPhysical(eDirection.North, mGreen);
-
-      Assert.DoesNotThrow(() => lSectionBuilder.Build());
+        .WithLightInDirectionIfPhysical(eDirection.North, mAribitraryColour);
 
       var lSection = lSectionBuilder.Build();
 
-      Assert.AreEqual(mGreen, lSection.North);
+      Assert.AreEqual(mAribitraryColour, lSection.North);
     }
 
-    private Light mOrange = DefaultLights.Orange;
-    private Light mGreen = DefaultLights.Green;
-    private Light mBlue = DefaultLights.Blue;
-    private Light mRed = DefaultLights.Red;
+    private readonly Light mAribitraryColour = DefaultLights.Green;
+    private readonly Light mOrange = DefaultLights.Orange;
+    private readonly Light mGreen = DefaultLights.Green;
+    private readonly Light mBlue = DefaultLights.Blue;
+    private readonly Light mRed = DefaultLights.Red;
   }
 }

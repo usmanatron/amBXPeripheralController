@@ -39,7 +39,7 @@ namespace aPC.Client.Disco.Tests
     [Test]
     [TestCase(-0.5d, 2)]
     [TestCase(3d, 4)]
-    public void OutOfRangeInputToGetScaledValue_ReturnsClippedscaledValue(double xiValue, float xiScaledValue)
+    public void OutOfRangeInputToGetScaledValue_ReturnsClippedScaledValue(double xiValue, float xiScaledValue)
     {
       var lRange = GetStandardRange();
       Assert.AreEqual(xiScaledValue, lRange.GetScaledValue(xiValue));
@@ -59,8 +59,12 @@ namespace aPC.Client.Disco.Tests
     
 /* qqUMI
  * Need to write a load of tests:
- * Settings can't be tested, but I should create a test Settings thing with specific data hard-coded.  Maybe just the defaults?
- * DiscoTask isn't worth it (I claim), because it actually does very little.  Everything else though is worth testing
+ * Settings can't be tested (and doesn't need to be because it's just a data structure), but I should create a test 
+ * Settings thing with specific data hard-coded.  Maybe just the defaults?
+ * 
+ * DiscoTask could be tested by injecting mock scene generator and notification service - check that if we run it for 1 second
+ * then the number of scenes pushed to the notification service is within some tolerance, and that they are all the same scenes
+ * returned by the generator.
  * 
  * Finish Argumentreader - check that specific arguments work by passing one in and making sure it no longer is
  * equal to the default in Settings.
