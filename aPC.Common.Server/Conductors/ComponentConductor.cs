@@ -9,13 +9,11 @@ namespace aPC.Common.Server.Conductors
 {
   public abstract class ComponentConductor<T> : ConductorBase<ComponentSnapshot<T>> where T : IComponent
   {
-    public ComponentConductor(eDirection xiDirection, ComponentActor<T> xiActor, ComponentHandler<T> xiHandler)
+    public ComponentConductor(ComponentActor<T> xiActor, ComponentHandler<T> xiHandler)
       : base(xiActor, xiHandler)
     {
-      Direction = xiDirection;
     }
 
     public abstract eComponentType ComponentType();
-    protected eDirection Direction;
   }
 }
