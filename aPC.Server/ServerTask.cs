@@ -6,6 +6,7 @@ using aPC.Common.Server.Conductors;
 using aPC.Common.Server.EngineActors;
 using aPC.Server.Communication;
 using System.Threading.Tasks;
+using aPC.Common.Server.SceneHandlers;
 
 namespace aPC.Server
 {
@@ -44,7 +45,7 @@ namespace aPC.Server
     private void SetupSynchronisedManager(EngineManager xiEngine)
     {
       var lActor = new FrameActor(xiEngine);
-      mFrame = new FrameConductor(lActor);
+      mFrame = new FrameConductor(lActor, new FrameHandler());
     }
 
     internal void Update(amBXScene xiScene)
