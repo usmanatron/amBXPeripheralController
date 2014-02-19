@@ -6,7 +6,7 @@ using System;
 
 namespace aPC.Common.Server.Managers
 {
-  public abstract class ComponentManager<T> : ManagerBase<ComponentSnapshot<T>> where T : IComponent
+  public abstract class ComponentManager<T> : ConductorBase<ComponentSnapshot<T>> where T : IComponent
   {
     public ComponentManager(eDirection xiDirection, ComponentActor<T> xiActor, Action xiEventComplete)
       : base(xiActor, xiEventComplete)

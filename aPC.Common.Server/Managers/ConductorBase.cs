@@ -8,9 +8,9 @@ using System.Linq;
 
 namespace aPC.Common.Server.Managers
 {
-  public abstract class ManagerBase<T> where T : SnapshotBase
+  public abstract class ConductorBase<T> where T : SnapshotBase
   {
-    protected ManagerBase(EngineActorBase<T> xiActor, Action xiEventCallback)
+    protected ConductorBase(EngineActorBase<T> xiActor, Action xiEventCallback)
     {
       mActor = xiActor;
       mEventCallback = xiEventCallback;
@@ -24,7 +24,7 @@ namespace aPC.Common.Server.Managers
     {
       if (IsDormant)
       {
-        // qqUMI Ideally, we would just return here and disable the Manager (should be more performant etc.
+        // qqUMI Ideally, we would just return here and disable the Conductor (should be more performant etc.
         // at the moment, this won't work, so for now we sleep
         Thread.Sleep(1000);
         // return;

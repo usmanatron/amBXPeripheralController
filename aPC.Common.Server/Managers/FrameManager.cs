@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace aPC.Common.Server.Managers
 {
-  public class FrameManager : ManagerBase<FrameSnapshot>
+  public class FrameManager : ConductorBase<FrameSnapshot>
   {
     public FrameManager(FrameActor xiActor) 
       : this(xiActor, null)

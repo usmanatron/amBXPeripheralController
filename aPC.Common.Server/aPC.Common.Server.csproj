@@ -55,7 +55,7 @@
     <Compile Include="EngineManager.cs" />
     <Compile Include="Snapshots\FrameSnapshot.cs" />
     <Compile Include="Managers\FrameManager.cs" />
-    <Compile Include="Managers\ManagerBase.cs" />
+    <Compile Include="Managers\ConductorBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
