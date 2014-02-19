@@ -22,24 +22,21 @@ namespace aPC.Common.Server.Managers
 
     public void Run()
     {
-      //qqUMI This is how we should do it.  HOWEVER This causes 100% CPU atm...
       if (IsDormant)
       {
-        return;
+        // qqUMI Ideally, we would just return here and disable the Manager (should be more performant etc.
+        // at the moment, this won't work, so for now we sleep
+        Thread.Sleep(1000);
+        // return;
       }
       else
       {
-        SnapshotBase lData;
-
-        lock (mSceneLock) //qqUMI This is crappy - change
-        {
-          lData = GetNextSnapshot();
-          mActor.ActNextFrame(lData);
-        }
+        var lData = GetNextSnapshot();
         if (lData == null)
         {
           throw new InvalidOperationException("An error occured when retrieving the next snapshot");
         }
+        mActor.ActNextFrame(lData);
         AdvanceScene();
         WaitforInterval(lData.Length);
       }
