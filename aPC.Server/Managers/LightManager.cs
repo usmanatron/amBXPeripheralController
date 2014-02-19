@@ -10,7 +10,7 @@ using aPC.Server.EngineActors;
 
 namespace aPC.Server.Managers
 {
-  class LightManager : ComponentManager<Light>
+  class LightManager : ComponentConductor<Light>
   {
     public LightManager(eDirection xiDirection, LightActor xiActor,  Action xiEventCallback) 
       : base(xiDirection, xiActor, xiEventCallback)

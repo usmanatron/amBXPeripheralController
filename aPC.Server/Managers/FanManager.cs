@@ -9,7 +9,7 @@ using aPC.Common;
 
 namespace aPC.Server.Managers
 {
-  class FanManager : ComponentManager<Fan>
+  class FanManager : ComponentConductor<Fan>
   {
     public FanManager(eDirection xiDirection, FanActor xiActor, Action xiEventCallback)
       : base (xiDirection, xiActor, xiEventCallback)
