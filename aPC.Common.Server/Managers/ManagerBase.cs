@@ -106,7 +106,7 @@ namespace aPC.Common.Server.Managers
       if (!lFrames.Any())
       {
         // This should never happen
-        throw new InvalidOperationException("No more applicable framescould be found - this implies the Manager should have been made dormant but was not");
+        throw new InvalidOperationException("No more applicable frames could be found - this implies the Manager should have been made dormant but was not");
       }
       return lFrames[Ticker.Index];
     }
