@@ -38,7 +38,7 @@ namespace aPC.Common.Server.Managers
         }
         if (lData == null)
         {
-          throw new InvalidOperationException("Something bad happened - should never happen qqUMI");
+          throw new InvalidOperationException("An error occured when retrieving the next snapshot");
         }
         AdvanceScene();
         WaitforInterval(lData.Length);
@@ -109,7 +109,7 @@ namespace aPC.Common.Server.Managers
       if (!lFrames.Any())
       {
         // This should never happen
-        throw new InvalidOperationException("qqUMI ManagerBase returned no frames");
+        throw new InvalidOperationException("No more applicable framescould be found - this implies the Manager should have been made dormant but was not");
       }
       return lFrames[Ticker.Index];
     }
