@@ -52,7 +52,7 @@
     <Compile Include="Snapshots\ComponentSnapshot.cs" />
     <Compile Include="Managers\ComponentManager.cs" />
     <Compile Include="Snapshots\SnapshotBase.cs" />
-    <Compile Include="Managers\EngineManager.cs" />
+    <Compile Include="EngineManager.cs" />
     <Compile Include="Snapshots\FrameSnapshot.cs" />
     <Compile Include="Managers\FrameManager.cs" />
     <Compile Include="Managers\ManagerBase.cs" />

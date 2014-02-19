@@ -4,7 +4,7 @@ using amBXLib;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace aPC.Common.Server.Managers
+namespace aPC.Common.Server
 {
   // Manages the amBXEngine interface - deals with adding and setting stuff etc.
   public class EngineManager : IDisposable
