@@ -6,7 +6,7 @@ using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace aPC.Common.Server.Managers
+namespace aPC.Common.Server.Conductors
 {
   public abstract class ConductorBase<T> where T : SnapshotBase
   {

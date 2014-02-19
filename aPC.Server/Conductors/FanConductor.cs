@@ -1,13 +1,13 @@
 ﻿using aPC.Common.Entities;
 using System.Linq;
 using System;
-using aPC.Common.Server.Managers;
+using aPC.Common.Server.Conductors;
 using aPC.Common.Server.Snapshots;
 using System.Collections.Generic;
 using aPC.Server.EngineActors;
 using aPC.Common;
 
-namespace aPC.Server.Managers
+namespace aPC.Server.Conductors
 {
   class FanConductor : ComponentConductor<Fan>
   {

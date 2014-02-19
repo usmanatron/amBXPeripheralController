@@ -4,7 +4,7 @@ using aPC.Common.Server.EngineActors;
 using aPC.Common.Server.Snapshots;
 using System;
 
-namespace aPC.Common.Server.Managers
+namespace aPC.Common.Server.Conductors
 {
   public abstract class ComponentConductor<T> : ConductorBase<ComponentSnapshot<T>> where T : IComponent
   {

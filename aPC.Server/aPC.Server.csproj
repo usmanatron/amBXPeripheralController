@@ -47,11 +47,11 @@
     <Compile Include="ComponentManagerCollection.cs" />
     <Compile Include="EngineActors\RumbleActor.cs" />
     <Compile Include="Communication\NotificationService.cs" />
-    <Compile Include="Managers\FanConductor.cs" />
+    <Compile Include="Conductors\FanConductor.cs" />
     <Compile Include="EngineActors\FanActor.cs" />
     <Compile Include="EngineActors\LightActor.cs" />
-    <Compile Include="Managers\RumbleConductor.cs" />
-    <Compile Include="Managers\LightConductor.cs" />
+    <Compile Include="Conductors\RumbleConductor.cs" />
+    <Compile Include="Conductors\LightConductor.cs" />
     <Compile Include="Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerTask.cs" />

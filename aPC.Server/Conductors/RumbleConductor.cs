@@ -1,5 +1,5 @@
 ﻿using aPC.Common.Entities;
-using aPC.Common.Server.Managers;
+using aPC.Common.Server.Conductors;
 using aPC.Common.Server.Snapshots;
 using aPC.Common;
 using System.Linq;
@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using aPC.Server.EngineActors;
 
-namespace aPC.Server.Managers
+namespace aPC.Server.Conductors
 {
   class RumbleConductor : ComponentConductor<Rumble>
   {

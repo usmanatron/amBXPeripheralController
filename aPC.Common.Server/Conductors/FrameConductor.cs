@@ -5,7 +5,7 @@ using System.Linq;
 using System;
 using System.Collections.Generic;
 
-namespace aPC.Common.Server.Managers
+namespace aPC.Common.Server.Conductors
 {
   public class FrameConductor : ConductorBase<FrameSnapshot>
   {
