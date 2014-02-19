@@ -8,20 +8,18 @@ using System;
 
 namespace aPC.Server.EngineActors
 {
-  class FanActor : ComponentActor
+  class FanActor : ComponentActor<Fan>
   {
     public FanActor(eDirection xiDirection, EngineManager xiEngine) 
       : base (xiDirection, xiEngine)
     {
     }
 
-    public override void ActNextFrame(SnapshotBase xiSnapshot)
+    public override void ActNextFrame(ComponentSnapshot<Fan> xiSnapshot)
     {
-      var lSnapshot = (ComponentSnapshot<Fan>)xiSnapshot;
-
-      if (!lSnapshot.IsComponentNull)
+      if (!xiSnapshot.IsComponentNull)
       {
-        Engine.UpdateFan(mDirection, lSnapshot.Item);
+        Engine.UpdateFan(mDirection, xiSnapshot.Item);
       }
     }
   }

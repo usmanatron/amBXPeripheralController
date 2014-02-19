@@ -10,7 +10,7 @@ using aPC.Server.EngineActors;
 
 namespace aPC.Server.Managers
 {
-  class LightManager : ComponentManager
+  class LightManager : ComponentManager<Light>
   {
     public LightManager(eDirection xiDirection, LightActor xiActor,  Action xiEventCallback) 
       : base(xiDirection, xiActor, xiEventCallback)
@@ -30,7 +30,7 @@ namespace aPC.Server.Managers
       return lLights.Any(light => light != null);
     }
 
-    public override SnapshotBase GetNextSnapshot()
+    public override ComponentSnapshot<Light> GetNextSnapshot()
     {
       var lFrame = GetNextFrame();
       var lLight = GetLight(Direction, lFrame.Lights);

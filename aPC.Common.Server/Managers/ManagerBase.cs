@@ -8,9 +8,9 @@ using System.Linq;
 
 namespace aPC.Common.Server.Managers
 {
-  public abstract class ManagerBase
+  public abstract class ManagerBase<T> where T : SnapshotBase
   {
-    protected ManagerBase(EngineActorBase xiActor, Action xiEventCallback)
+    protected ManagerBase(EngineActorBase<T> xiActor, Action xiEventCallback)
     {
       mActor = xiActor;
       mEventCallback = xiEventCallback;
@@ -90,7 +90,7 @@ namespace aPC.Common.Server.Managers
 
     protected abstract bool FramesAreApplicable(List<Frame> xiFrames);
 
-    public abstract SnapshotBase GetNextSnapshot();
+    public abstract T GetNextSnapshot();
 
     protected Frame GetNextFrame()
     {
@@ -147,7 +147,7 @@ namespace aPC.Common.Server.Managers
 
     private bool IsDormant;
     private AtypicalFirstRunInfiniteTicker Ticker;
-    private EngineActorBase mActor;
+    private EngineActorBase<T> mActor;
     private amBXScene mPreviousScene;
     private readonly object mSceneLock = new object();
     private Action mEventCallback;

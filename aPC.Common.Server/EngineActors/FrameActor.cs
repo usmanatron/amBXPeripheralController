@@ -6,30 +6,28 @@ using System;
 
 namespace aPC.Common.Server.EngineActors
 {
-  public class FrameActor : EngineActorBase
+  public class FrameActor : EngineActorBase<FrameSnapshot>
   {
     public FrameActor(EngineManager xiEngine) 
       : base (xiEngine)
     {
     }
 
-    public override void ActNextFrame(SnapshotBase xiFrame)
+    public override void ActNextFrame(FrameSnapshot xiFrame)
     {
-      var lFrame = (FrameSnapshot) xiFrame;
-
-      if (lFrame.Frame.Lights != null)
+      if (xiFrame.Frame.Lights != null)
       {
-        UpdateLights(lFrame.Frame.Lights);
+        UpdateLights(xiFrame.Frame.Lights);
       }
 
-      if (lFrame.Frame.Fans != null)
+      if (xiFrame.Frame.Fans != null)
       {
-        UpdateFans(lFrame.Frame.Fans);
+        UpdateFans(xiFrame.Frame.Fans);
       }
 
-      if (lFrame.Frame.Rumbles != null)
+      if (xiFrame.Frame.Rumbles != null)
       {
-        UpdateRumbles(lFrame.Frame.Rumbles);
+        UpdateRumbles(xiFrame.Frame.Rumbles);
       }
     }
 

@@ -7,14 +7,14 @@ using System.Collections.Generic;
 
 namespace aPC.Common.Server.Managers
 {
-  public class FrameManager : ManagerBase
+  public class FrameManager : ManagerBase<FrameSnapshot>
   {
     public FrameManager(FrameActor xiActor) 
       : this(xiActor, null)
     {
     }
 
-    public FrameManager(EngineActorBase xiActor, Action xiEventComplete)
+    public FrameManager(FrameActor xiActor, Action xiEventComplete)
       : base(xiActor, xiEventComplete)
     {
       SetupNewScene(CurrentScene);
@@ -30,7 +30,7 @@ namespace aPC.Common.Server.Managers
       return lFrames.Any(frame => frame != null);
     }
 
-    public override SnapshotBase GetNextSnapshot()
+    public override FrameSnapshot GetNextSnapshot()
     {
       var lFrame = GetNextFrame();
       return new FrameSnapshot(lFrame, 0);

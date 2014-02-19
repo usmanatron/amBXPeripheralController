@@ -22,7 +22,7 @@ namespace aPC.Server
 
     private void SetupActors(EngineManager xiEngine, Action xiAction)
     {
-      mComponentManagers = new List<ComponentManager>();
+      mComponentManagers = new List<ComponentManager<Component>>();
 
       mComponentManagers.Add(new LightManager(eDirection.North, new LightActor(eDirection.North, xiEngine), xiAction));
       mComponentManagers.Add(new LightManager(eDirection.NorthEast, new LightActor(eDirection.NorthEast, xiEngine), xiAction));
@@ -40,17 +40,17 @@ namespace aPC.Server
     }
 
 
-    public IEnumerable<ComponentManager> ActorsWithType(eComponentType xiComponentType)
+    public IEnumerable<ComponentManager<Component>> ActorsWithType(eComponentType xiComponentType)
     {
       return mComponentManagers
         .Where(manager => manager.ComponentType() == xiComponentType);
     }
 
-    public List<ComponentManager> AllManagers()
+    public List<ComponentManager<Component>> AllManagers()
     {
       return mComponentManagers;
     }
 
-    private List<ComponentManager> mComponentManagers;
+    private List<ComponentManager<Component>> mComponentManagers;
   }
 }

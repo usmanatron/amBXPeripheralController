@@ -9,7 +9,7 @@ using aPC.Server.EngineActors;
 
 namespace aPC.Server.Managers
 {
-  class RumbleManager : ComponentManager
+  class RumbleManager : ComponentManager<Rumble>
   {
     public RumbleManager(eDirection xiDirection, RumbleActor xiActor, Action xiEventCallback) 
       : base(xiDirection, xiActor, xiEventCallback)
@@ -28,7 +28,7 @@ namespace aPC.Server.Managers
       return lRumbles.Any(rumble => rumble != null);
     }
 
-    public override SnapshotBase GetNextSnapshot()
+    public override ComponentSnapshot<Rumble> GetNextSnapshot()
     {
       var lFrame = GetNextFrame();
 

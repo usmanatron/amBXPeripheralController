@@ -8,20 +8,18 @@ using System;
 
 namespace aPC.Server.EngineActors
 {
-  class LightActor : ComponentActor
+  class LightActor : ComponentActor<Light>
   {
     public LightActor(eDirection xiDirection, EngineManager xiEngine) 
       : base (xiDirection, xiEngine)
     {
     }
 
-    public override void ActNextFrame(SnapshotBase xiSnapshot)
+    public override void ActNextFrame(ComponentSnapshot<Light> xiSnapshot)
     {
-      var lSnapshot = (ComponentSnapshot<Light>)xiSnapshot;
-
-      if (!lSnapshot.IsComponentNull)
+      if (!xiSnapshot.IsComponentNull)
       {
-        Engine.UpdateLight(mDirection, lSnapshot.Item, lSnapshot.FadeTime);
+        Engine.UpdateLight(mDirection, xiSnapshot.Item, xiSnapshot.FadeTime);
       }
     }
   }

@@ -9,7 +9,7 @@ using aPC.Common;
 
 namespace aPC.Server.Managers
 {
-  class FanManager : ComponentManager
+  class FanManager : ComponentManager<Fan>
   {
     public FanManager(eDirection xiDirection, FanActor xiActor, Action xiEventCallback)
       : base (xiDirection, xiActor, xiEventCallback)
@@ -29,7 +29,7 @@ namespace aPC.Server.Managers
       return lFans.Any(fan => fan != null);
     }
 
-    public override SnapshotBase GetNextSnapshot()
+    public override ComponentSnapshot<Fan> GetNextSnapshot()
     {
       var lFrame = GetNextFrame();
       var lFan = GetFan(Direction, lFrame.Fans);

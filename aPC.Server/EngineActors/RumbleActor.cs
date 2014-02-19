@@ -8,20 +8,18 @@ using System;
 
 namespace aPC.Server.EngineActors
 {
-  class RumbleActor : ComponentActor
+  class RumbleActor : ComponentActor<Rumble>
   {
     public RumbleActor(eDirection xiDirection, EngineManager xiEngine) 
       : base (xiDirection, xiEngine)
     {
     }
 
-    public override void ActNextFrame(SnapshotBase xiSnapshot)
+    public override void ActNextFrame(ComponentSnapshot<Rumble> xiSnapshot)
     {
-      var lSnapshot = (ComponentSnapshot<Rumble>)xiSnapshot;
-
-      if (!lSnapshot.IsComponentNull)
+      if (!xiSnapshot.IsComponentNull)
       {
-        Engine.UpdateRumble(mDirection, lSnapshot.Item);
+        Engine.UpdateRumble(mDirection, xiSnapshot.Item);
       }
     }
   }
