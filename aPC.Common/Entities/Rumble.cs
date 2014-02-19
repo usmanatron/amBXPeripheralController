@@ -2,7 +2,7 @@
 
 namespace aPC.Common.Entities
 {
-  public class Rumble : Component
+  public class Rumble : IComponent
   {
     [XmlElement]
     public eRumbleType RumbleType;

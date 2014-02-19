@@ -2,7 +2,7 @@
 
 namespace aPC.Common.Entities
 {
-  public class Light : Component
+  public class Light : IComponent
   {
     [XmlAttribute]
     public float Intensity;

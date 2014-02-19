@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace aPC.Common.Server.EngineActors
 {
-  public abstract class ComponentActor<T> : EngineActorBase<ComponentSnapshot<T>> where T : Component
+  public abstract class ComponentActor<T> : EngineActorBase<ComponentSnapshot<T>> where T : IComponent
   {
     protected ComponentActor(eDirection xiDirection, EngineManager xiEngine)
       : base (xiEngine)

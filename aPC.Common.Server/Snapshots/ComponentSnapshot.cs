@@ -2,13 +2,13 @@
 
 namespace aPC.Common.Server.Snapshots
 {
-  public class ComponentSnapshot<T> : SnapshotBase where T : Component
+  public class ComponentSnapshot<T> : SnapshotBase where T : IComponent
   {
     /// <summary>
     /// Used when a component is not available
     /// </summary>
     public ComponentSnapshot(int xiLength)
-      : this(null, 10, xiLength)
+      : this(default(T), 10, xiLength)
     {
     }
 

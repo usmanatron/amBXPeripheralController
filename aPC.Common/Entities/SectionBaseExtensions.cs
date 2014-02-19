@@ -9,28 +9,28 @@ namespace aPC.Common.Entities
   public static class SectionBaseExtensions
   {
     public static T GetComponentValueInDirection<T>(this SectionBase<T> xiSection, eDirection xiDirection) 
-      where T : Component
+      where T : IComponent
     {
       var lField = xiSection.GetComponentInfoInDirection(xiDirection);
       return xiSection.GetComponent(lField);
     }
 
     public static bool SetComponentValueInDirection<T>(this SectionBase<T> xiSection, T xiComponent, eDirection xiDirection) 
-      where T : Component
+      where T : IComponent
     {
       var lField = xiSection.GetComponentInfoInDirection(xiDirection);
       return xiSection.TrySetComponent(lField, xiComponent);
     }
 
     public static T GetPhysicalComponentValueInDirection<T>(this SectionBase<T> xiSection, eDirection xiDirection)
-      where T : Component
+      where T : IComponent
     {
       var lField = xiSection.GetPhysicalComponentInfoInDirection(xiDirection);
       return xiSection.GetComponent(lField);
     }
 
     public static bool SetPhysicalComponentValueInDirection<T>(this SectionBase<T> xiSection, T xiComponent, eDirection xiDirection)
-      where T : Component
+      where T : IComponent
     {
       var lField = xiSection.GetPhysicalComponentInfoInDirection(xiDirection);
       return xiSection.TrySetComponent(lField, xiComponent);
@@ -39,7 +39,7 @@ namespace aPC.Common.Entities
     #region Private Helper methods
 
     private static FieldInfo GetComponentInfoInDirection<T>(this SectionBase<T> xiSection, eDirection xiDirection)
-      where T : Component
+      where T : IComponent
     {
       if (xiSection == null)
       {
@@ -51,7 +51,7 @@ namespace aPC.Common.Entities
     }
 
     private static FieldInfo GetPhysicalComponentInfoInDirection<T>(this SectionBase<T> xiSection, eDirection xiDirection) 
-      where T : Component
+      where T : IComponent
     {
       var lFieldInDirection = GetComponentInfoInDirection(xiSection, xiDirection);
       if (lFieldInDirection == null)
@@ -65,7 +65,7 @@ namespace aPC.Common.Entities
     }
 
     private static T GetComponent<T>(this SectionBase<T> xiSection, FieldInfo xiFieldInfo)
-      where T : Component
+      where T : IComponent
     {
       if (xiFieldInfo == null)
       {
@@ -76,7 +76,7 @@ namespace aPC.Common.Entities
     }
 
     private static bool TrySetComponent<T>(this SectionBase<T> xiSection, FieldInfo xiFieldInfo, T xiComponent)
-      where T : Component
+      where T : IComponent
     {
       if (xiFieldInfo == null)
       {
@@ -94,7 +94,7 @@ namespace aPC.Common.Entities
       return true;
     }
 
-    private static IEnumerable<FieldInfo> GetSectionFields<T>(this SectionBase<T> xiSection) where T : Component
+    private static IEnumerable<FieldInfo> GetSectionFields<T>(this SectionBase<T> xiSection) where T : IComponent
     {
       return xiSection
         .GetType()

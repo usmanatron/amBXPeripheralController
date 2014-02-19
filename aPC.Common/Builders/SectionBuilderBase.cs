@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace aPC.Common.Builders
 {
-  public class SectionBuilderBase<T> where T : Component
+  public class SectionBuilderBase<T> where T : IComponent
   {
     protected void SetFadeTime(SectionBase<T> xiSection, int xiFadeTime)
     {

@@ -2,7 +2,7 @@
 
 namespace aPC.Common.Entities
 {
-  public class SectionBase<T> where T : Component
+  public class SectionBase<T> where T : IComponent
   {
     [XmlAttribute]
     public int FadeTime;

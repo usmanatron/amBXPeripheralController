@@ -2,7 +2,7 @@
 
 namespace aPC.Common.Entities
 {
-  public class Fan : Component
+  public class Fan : IComponent
   {
     [XmlAttribute]
     public float Intensity;

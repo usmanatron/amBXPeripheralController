@@ -126,7 +126,7 @@ namespace aPC.Common.Tests
     public TestComponent DownClone;
   }
 
-  class TestComponent : Component
+  class TestComponent : IComponent
   {
     public string Value;
   }
