@@ -55,7 +55,7 @@
     <Compile Include="Defaults\DefaultScenes.cs" />
     <Compile Include="Defaults\SceneNameAttribute.cs" />
     <Compile Include="DirectionAttribute.cs" />
-    <Compile Include="Entities\Component.cs" />
+    <Compile Include="Entities\IComponent.cs" />
     <Compile Include="Entities\SectionBase.cs" />
     <Compile Include="Entities\SectionBaseExtensions.cs" />
     <Compile Include="PhysicalComponentAttribute.cs" />

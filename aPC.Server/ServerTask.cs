@@ -34,8 +34,7 @@ namespace aPC.Server
           }
           else
           {
-            Parallel.ForEach(mDesynchronisedManager.AllManagers(), 
-                             manager => mSyncManager.RunWhileUnSynchronised(manager.Run));
+            mDesynchronisedManager.RunAllManagersDeSynchronised(mSyncManager);
           }
         }
       }
@@ -90,8 +89,7 @@ namespace aPC.Server
 
     private void UpdateUnsynchronisedActors(amBXScene xiScene)
     {
-      Parallel.ForEach(mDesynchronisedManager.AllManagers(),
-                       manager => manager.UpdateScene(xiScene));
+      mDesynchronisedManager.UpdateAllManagers(xiScene);
     }
 
     /// <remarks>
