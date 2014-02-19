@@ -8,7 +8,8 @@ namespace aPC.Common.Server
   {
     public AtypicalFirstRunInfiniteTicker(int xiInitialCount, int xiSubsequentCount)
     {
-      if (xiInitialCount <= 0 || xiSubsequentCount <= 0)
+      // It's fine to have a scene with no repeatble frames
+      if (xiInitialCount <= 0 || xiSubsequentCount < 0)
       {
         var lError = string.Format("Attempted to create a ticker with non-positive inputs: {0}, {1}", 
           xiInitialCount,

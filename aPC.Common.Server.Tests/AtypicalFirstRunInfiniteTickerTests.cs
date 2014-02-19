@@ -7,13 +7,25 @@ namespace aPC.Common.Server.Tests
   public class AtypicalFirstRunInfiniteTickerTests
   {
     [Test]
-    [TestCase(-5, 6)]
-    [TestCase(0, 6)]
-    [TestCase(5, -5)]
-    [TestCase(5, 0)]
-    public void NonPositiveArguments_ThrowsException(int xiFirstRun, int xiSecondRun)
+    [TestCase(-5, 3)]
+    [TestCase(0, 3)]
+    public void NonPositiveInitialCount_ThrowsException(int xiInitial, int xiSubsequent)
     {
-      Assert.Throws<InvalidOperationException>(() => CreateTicker(xiFirstRun, xiSecondRun));
+      Assert.Throws<InvalidOperationException>(() => CreateTicker(xiInitial, xiSubsequent));
+    }
+
+    [Test]
+    [TestCase(7, -5)]
+    [TestCase(7, -1)]
+    public void NegativeSubsequentCount_ThrowsException(int xiInitial, int xiSubsequent)
+    {
+      Assert.Throws<InvalidOperationException>(() => CreateTicker(xiInitial, xiSubsequent));
+    }
+
+    [Test]
+    public void NewTicker_WithZeroSubsequentCount_DoesNotThrow()
+    {
+      Assert.DoesNotThrow(() => CreateTicker(5, 0));
     }
 
     [Test]
