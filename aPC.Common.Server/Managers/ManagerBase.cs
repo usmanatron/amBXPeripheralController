@@ -31,14 +31,14 @@ namespace aPC.Common.Server.Managers
       }
       else
       {
-        var lData = GetNextSnapshot();
-        if (lData == null)
+        var lSnapshot = GetNextSnapshot();
+        if (lSnapshot == null)
         {
           throw new InvalidOperationException("An error occured when retrieving the next snapshot");
         }
-        mActor.ActNextFrame(lData);
+        mActor.ActNextFrame(lSnapshot);
         AdvanceScene();
-        WaitforInterval(lData.Length);
+        WaitforInterval(lSnapshot.Length);
       }
     }
 
