@@ -39,6 +39,11 @@ namespace aPC.Common.Server.Conductors
       }
     }
 
+    public void UpdateScene(amBXScene xiScene)
+    {
+      mHandler.UpdateScene(xiScene);
+    }
+
     protected void WaitforInterval(int xiLength)
     {
       Thread.Sleep(xiLength);
