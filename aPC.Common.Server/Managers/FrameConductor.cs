@@ -7,14 +7,14 @@ using System.Collections.Generic;
 
 namespace aPC.Common.Server.Managers
 {
-  public class FrameManager : ConductorBase<FrameSnapshot>
+  public class FrameConductor : ConductorBase<FrameSnapshot>
   {
-    public FrameManager(FrameActor xiActor) 
+    public FrameConductor(FrameActor xiActor) 
       : this(xiActor, null)
     {
     }
 
-    public FrameManager(FrameActor xiActor, Action xiEventComplete)
+    public FrameConductor(FrameActor xiActor, Action xiEventComplete)
       : base(xiActor, xiEventComplete)
     {
       SetupNewScene(CurrentScene);

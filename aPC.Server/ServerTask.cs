@@ -44,7 +44,7 @@ namespace aPC.Server
     private void SetupSynchronisedManager(EngineManager xiEngine)
     {
       var lActor = new FrameActor(xiEngine);
-      mFrame = new FrameManager(lActor);
+      mFrame = new FrameConductor(lActor);
     }
 
     internal void Update(amBXScene xiScene)
@@ -110,7 +110,7 @@ namespace aPC.Server
       }
     }
 
-    private FrameManager mFrame;
+    private FrameConductor mFrame;
     private ComponentManagerCollection mDesynchronisedManager;
 
     private readonly SynchronisationManager mSyncManager;
