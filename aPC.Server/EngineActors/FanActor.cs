@@ -17,11 +17,11 @@ namespace aPC.Server.EngineActors
 
     public override void ActNextFrame(SnapshotBase xiSnapshot)
     {
-      var lSnapshot = (ComponentSnapshot)xiSnapshot;
+      var lSnapshot = (ComponentSnapshot<Fan>)xiSnapshot;
 
       if (!lSnapshot.IsComponentNull)
       {
-        Engine.UpdateFan(mDirection, (Fan)lSnapshot.Component);
+        Engine.UpdateFan(mDirection, lSnapshot.Item);
       }
     }
   }

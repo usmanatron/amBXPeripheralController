@@ -37,8 +37,8 @@ namespace aPC.Server.Managers
         : lFrame.Rumbles.Rumble;
 
       return lRumble == null
-        ? new ComponentSnapshot(lFrame.Length)
-        : new ComponentSnapshot(lRumble, lFrame.Rumbles.FadeTime, lFrame.Length);
+        ? new ComponentSnapshot<Rumble>(lFrame.Length)
+        : new ComponentSnapshot<Rumble>(lRumble, lFrame.Rumbles.FadeTime, lFrame.Length);
     }
 
     public override eComponentType ComponentType()

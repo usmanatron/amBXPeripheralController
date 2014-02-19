@@ -36,8 +36,8 @@ namespace aPC.Server.Managers
       var lLight = GetLight(Direction, lFrame.Lights);
 
       return lLight == null
-        ? new ComponentSnapshot(lFrame.Length)
-        : new ComponentSnapshot(lLight, lFrame.Lights.FadeTime, lFrame.Length);
+        ? new ComponentSnapshot<Light>(lFrame.Length)
+        : new ComponentSnapshot<Light>(lLight, lFrame.Lights.FadeTime, lFrame.Length);
     }
 
     private Light GetLight(eDirection xiDirection, LightSection xiLights)

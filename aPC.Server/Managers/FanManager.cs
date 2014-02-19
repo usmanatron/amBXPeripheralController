@@ -35,8 +35,8 @@ namespace aPC.Server.Managers
       var lFan = GetFan(Direction, lFrame.Fans);
 
       return lFan == null
-        ? new ComponentSnapshot(lFrame.Length)
-        : new ComponentSnapshot(lFan, lFrame.Fans.FadeTime, lFrame.Length);
+        ? new ComponentSnapshot<Fan>(lFrame.Length)
+        : new ComponentSnapshot<Fan>(lFan, lFrame.Fans.FadeTime, lFrame.Length);
     }
 
     private Fan GetFan(eDirection xiDirection, FanSection xiFans)

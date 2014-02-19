@@ -17,11 +17,11 @@ namespace aPC.Server.EngineActors
 
     public override void ActNextFrame(SnapshotBase xiSnapshot)
     {
-      var lSnapshot = (ComponentSnapshot)xiSnapshot;
+      var lSnapshot = (ComponentSnapshot<Rumble>)xiSnapshot;
 
       if (!lSnapshot.IsComponentNull)
       {
-        Engine.UpdateRumble(mDirection, (Rumble)lSnapshot.Component);
+        Engine.UpdateRumble(mDirection, lSnapshot.Item);
       }
     }
   }

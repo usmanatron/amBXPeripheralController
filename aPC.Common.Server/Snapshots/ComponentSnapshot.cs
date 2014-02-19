@@ -2,30 +2,30 @@
 
 namespace aPC.Common.Server.Snapshots
 {
-  public class ComponentSnapshot : SnapshotBase
+  public class ComponentSnapshot<T> : SnapshotBase where T : Component
   {
     /// <summary>
     /// Used when a component is not available
     /// </summary>
     public ComponentSnapshot(int xiLength)
-      : this(null, 0, xiLength)
+      : this(null, 10, xiLength)
     {
     }
 
-    public ComponentSnapshot(Component xiComponent, int xiFadeTime, int xiLength)
+    public ComponentSnapshot(T xiComponent, int xiFadeTime, int xiLength)
       : base(xiFadeTime, xiLength)
     {
-      Component = xiComponent;
+      Item = xiComponent;
     }
 
     public bool IsComponentNull
     {
       get
       {
-        return Component == null;
+        return Item == null;
       }
     }
 
-    public Component Component;
+    public T Item;
   }
 }
