@@ -1,20 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
-using aPC.Common.Entities;
 using aPC.Client.Disco.Generators;
 using aPC.Client.Disco.Communication;
+using aPC.Common;
+using aPC.Common.Entities;
 
 namespace aPC.Client.Disco
 {
   class DiscoTask
   {
-    public DiscoTask(Settings xiSettings)
+    public DiscoTask(Settings xiSettings, INotificationClient xiNotificationService)
     {
       mSettings = xiSettings;
       mRandom = new Random();
       mRandomSceneGenerator = new RandomSceneGenerator(mSettings, mRandom);
-      mNotificationService = new NotificationService();
+      mNotificationService = xiNotificationService;
     }
 
     public void Run()
@@ -34,7 +34,7 @@ namespace aPC.Client.Disco
 
     private void PushScene(amBXScene xiScene)
     {
-      mNotificationService.Push(xiScene);
+      mNotificationService.PushCustomScene(xiScene);
     }
 
     private void WaitForInterval()
@@ -45,6 +45,6 @@ namespace aPC.Client.Disco
     private Settings mSettings;
     private Random mRandom;
     private RandomSceneGenerator mRandomSceneGenerator;
-    private NotificationService mNotificationService;
+    private INotificationClient mNotificationService;
   }
 }

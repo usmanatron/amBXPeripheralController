@@ -63,6 +63,7 @@
     <Compile Include="Entities\IComponent.cs" />
     <Compile Include="Entities\SectionBase.cs" />
     <Compile Include="Entities\SectionBaseExtensions.cs" />
+    <Compile Include="INotificationClient.cs" />
     <Compile Include="NinjectKernelHandlerBase.cs" />
     <Compile Include="PhysicalComponentAttribute.cs" />
     <Compile Include="SceneAccessor.cs" />

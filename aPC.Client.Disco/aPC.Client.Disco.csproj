@@ -51,6 +51,7 @@
     <Compile Include="ArgumentReader.cs" />
     <Compile Include="Generators\RandomLightSectionGenerator.cs" />
     <Compile Include="Generators\RandomSceneGenerator.cs" />
+    <Compile Include="NinjectKernelHandler.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Range.cs" />
     <Compile Include="Communication\NotificationService.cs" />

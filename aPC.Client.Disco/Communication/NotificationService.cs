@@ -4,10 +4,12 @@ using aPC.Common.Communication;
 using System.ServiceModel;
 using System.Xml.Serialization;
 using System.IO;
+using aPC.Client.Disco;
+using aPC.Common;
 
 namespace aPC.Client.Disco.Communication
 {
-  class NotificationService
+  class NotificationService : INotificationClient
   {
     public NotificationService()
     {
@@ -18,7 +20,7 @@ namespace aPC.Client.Disco.Communication
         .Replace(CommunicationSettings.HostnameHolder, "localhost"));
     }
 
-    public void Push(amBXScene xiScene)
+    public void PushCustomScene(amBXScene xiScene)
     {
       var lScene = SerialiseScene(xiScene);
       var lOutput = mClient.CreateChannel().RunCustomScene(lScene);
@@ -29,6 +31,11 @@ namespace aPC.Client.Disco.Communication
         Console.WriteLine(Environment.NewLine);
         Console.WriteLine(lOutput);
       }
+    }
+
+    public void PushIntegratedScene(string xiScene)
+    {
+      throw new NotImplementedException("The disco task does not use integrated scenes");
     }
 
     private string SerialiseScene(amBXScene xiScene)

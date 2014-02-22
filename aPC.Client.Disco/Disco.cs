@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
+using aPC.Client.Disco.Communication;
+using Ninject;
+using aPC.Common.Entities;
 
 namespace aPC.Client.Disco
 {
@@ -7,19 +11,25 @@ namespace aPC.Client.Disco
   {
     public static void Main(string[] xiArgs)
     {
-      Settings lSettings;
+      var lSettings = GetSettings(xiArgs.ToList());
+      var lKernel = new NinjectKernelHandler(lSettings);
+      
+      var lTask = lKernel.Get<DiscoTask>();
+      lTask.Run();
+    }
+
+    private static Settings GetSettings(IEnumerable<string> xiArgs)
+    {
       try
       {
-        lSettings = new ArgumentReader(xiArgs.ToList()).ParseArguments();
+        return new ArgumentReader(xiArgs.ToList()).ParseArguments();
       }
       catch (UsageException e)
       {
         e.DisplayUsage();
         Environment.Exit(1);
-        return;
+        throw;
       }
-      
-      new DiscoTask(lSettings).Run();
     }
   }
 }
