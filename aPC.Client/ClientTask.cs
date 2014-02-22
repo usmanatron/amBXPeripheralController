@@ -1,42 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel;
-using aPC.Common.Communication;
+﻿using aPC.Client.Communication;
 using aPC.Common;
+using aPC.Common.Communication;
 
 namespace aPC.Client
 {
   class ClientTask
   {
-    public ClientTask(IEnumerable<string> xiArguments)
+    public ClientTask(Settings xiSettings)
     {
-      mNotificationClient = new Communication.NotificationClient();
-
-      try
-      {
-        mArgs = new ArgumentReader(xiArguments.ToList());
-      }
-      catch (UsageException e)
-      {
-        e.DisplayUsage();
-        Environment.Exit(1);
-      }
+      mNotificationClient = new NotificationClient();
+      mSettings = xiSettings;
     }
 
     public void Push()
     {
-      if (mArgs.IsIntegratedScene)
+      if (mSettings.IsIntegratedScene)
       {
-        mNotificationClient.PushIntegratedScene(mArgs.SceneName);
+        mNotificationClient.PushIntegratedScene(mSettings.SceneData);
       }
       else
       {
-        mNotificationClient.PushCustomScene(mArgs.SceneXml);
+        mNotificationClient.PushCustomScene(mSettings.SceneData);
       }
     }
 
-    private readonly ArgumentReader mArgs;
+    private readonly Settings mSettings;
     private INotificationClient mNotificationClient;
   }
 }

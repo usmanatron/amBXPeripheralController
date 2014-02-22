@@ -8,25 +8,31 @@ namespace aPC.Client
   {
     public ArgumentReader(List<string> xiArguments)
     {
-      if (xiArguments.Count != 2)
+      mArgs = xiArguments;
+    }
+
+    public Settings ParseArguments()
+    {
+      if (mArgs.Count != 2)
       {
         throw new UsageException("Unexpected number of arguments");
       }
 
-      if (xiArguments[0] == @"/F")
+      Settings lSettings;
+
+      switch (mArgs[0].ToLower())
       {
-        // File passed in
-        SceneXml = RetrieveFile(xiArguments[1]);
+        case @"/i":
+          lSettings = new Settings(false, mArgs[1]);
+          break;
+        case @"/f":
+          lSettings = new Settings(false, RetrieveFile(mArgs[1]));
+          break;
+        default:
+          throw new UsageException("Unexpected first argument");
       }
-      else if (xiArguments[0] == @"/I")
-      {
-        // (Integrated) Scene passed in
-        SceneName = xiArguments[1];
-      }
-      else
-      {
-        throw new UsageException("Unexpected first argument");
-      }
+
+      return lSettings;
     }
 
     private string RetrieveFile(string xifilePath)
@@ -49,26 +55,6 @@ namespace aPC.Client
       }
     }
 
-
-    // The scene is integrated if a Scene name is specified
-    // It isn't integrated if an Xml scene is given
-    public bool IsIntegratedScene
-    {
-      get
-      {
-        if (!string.IsNullOrEmpty(SceneName))
-        {
-          return true;
-        }
-        else if (!string.IsNullOrEmpty(SceneXml))
-        {
-          return false;
-        }
-        throw new InvalidOperationException("Attempted to access scene information before any data is available");
-      }
-    }
-
-    public string SceneName { get; private set; }
-    public string SceneXml { get; private set; }
+    private readonly List<string> mArgs;
   }
 }
