@@ -1,8 +1,10 @@
 ﻿using System;
+using System.IO;
+using System.Xml.Serialization;
 using System.Threading;
 using aPC.Client.Disco.Generators;
 using aPC.Client.Disco.Communication;
-using aPC.Common;
+using aPC.Common.Communication;
 using aPC.Common.Entities;
 
 namespace aPC.Client.Disco
@@ -34,7 +36,17 @@ namespace aPC.Client.Disco
 
     private void PushScene(amBXScene xiScene)
     {
-      mNotificationService.PushCustomScene(xiScene);
+      mNotificationService.PushCustomScene(SerialiseScene(xiScene));
+    }
+
+    private string SerialiseScene(amBXScene xiScene)
+    {
+      using (var lWriter = new StringWriter())
+      {
+        var lSerializer = new XmlSerializer(typeof(amBXScene));
+        lSerializer.Serialize(lWriter, xiScene);
+        return lWriter.ToString();
+      }
     }
 
     private void WaitForInterval()
