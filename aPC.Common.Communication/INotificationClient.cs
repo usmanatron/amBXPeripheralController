@@ -1,11 +1,9 @@
-﻿using aPC.Common.Entities;
-
-namespace aPC.Common
+﻿namespace aPC.Common.Communication
 {
   // Used to communicate with INotificationService
   public interface INotificationClient
   {
-    void PushCustomScene(amBXScene xiScene);
+    void PushCustomScene(string xiScene);
 
     void PushIntegratedScene(string xiScene);
   }
