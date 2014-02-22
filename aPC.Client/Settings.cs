@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace aPC.Client
 {
-  class Settings
+  public class Settings
   {
     public Settings(bool xiIsIntegratedScene, string xiSceneData)
     {
