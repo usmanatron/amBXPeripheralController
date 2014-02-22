@@ -13,7 +13,7 @@ namespace aPC.Client.Disco
 
     protected override void SetupBindings(params object[] xiParams)
     {
-      mKernel.Bind<INotificationClient>().To<NotificationService>();
+      mKernel.Bind<INotificationClient>().To<NotificationClient>();
       mKernel.Bind<Settings>().ToConstant((Settings) xiParams.Single());
     }
   }

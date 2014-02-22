@@ -9,9 +9,9 @@ using aPC.Common;
 
 namespace aPC.Client.Disco.Communication
 {
-  class NotificationService : INotificationClient
+  class NotificationClient : INotificationClient
   {
-    public NotificationService()
+    public NotificationClient()
     {
       //This client only supports pushing to localhost
       mClient = new ChannelFactory<INotificationService>(
