@@ -23,7 +23,7 @@ namespace aPC.Client
       switch (mArgs[0].ToLower())
       {
         case @"/i":
-          lSettings = new Settings(false, mArgs[1]);
+          lSettings = new Settings(true, mArgs[1]);
           break;
         case @"/f":
           lSettings = new Settings(false, RetrieveFile(mArgs[1]));
