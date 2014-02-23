@@ -9,7 +9,7 @@ using aPC.Common.Entities;
 
 namespace aPC.Client.Disco.Generators
 {
-  public class RandomLightSectionGenerator
+  public class RandomLightSectionGenerator : IGenerator<LightSection>
   {
     public RandomLightSectionGenerator(Settings xiSettings, Random xiRandom)
     {

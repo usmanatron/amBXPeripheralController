@@ -1,7 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using aPC.Common.Communication;
 using aPC.Common;
 using aPC.Client.Disco.Communication;
+using aPC.Client.Disco.Generators;
+using aPC.Common.Entities;
 
 namespace aPC.Client.Disco
 {
@@ -15,6 +18,8 @@ namespace aPC.Client.Disco
     protected override void SetupBindings()
     {
       mKernel.Bind<INotificationClient>().To<NotificationClient>();
+      mKernel.Bind<IGenerator<amBXScene>>().To<RandomSceneGenerator>();
+      mKernel.Bind<IGenerator<LightSection>>().To<RandomLightSectionGenerator>();
     }
 
     private void SetupSettingsBinding(Settings xiSettings)

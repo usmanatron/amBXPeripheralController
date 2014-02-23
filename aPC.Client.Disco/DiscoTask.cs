@@ -11,11 +11,13 @@ namespace aPC.Client.Disco
 {
   public class DiscoTask
   {
-    public DiscoTask(Settings xiSettings, INotificationClient xiNotificationService)
+    public DiscoTask(Settings xiSettings, Random xiRandom, 
+      IGenerator<amBXScene> xiRandomSceneGenerator, 
+      INotificationClient xiNotificationService)
     {
       mSettings = xiSettings;
-      mRandom = new Random();
-      mRandomSceneGenerator = new RandomSceneGenerator(mSettings, mRandom);
+      mRandom = xiRandom;
+      mRandomSceneGenerator = xiRandomSceneGenerator;
       mNotificationService = xiNotificationService;
     }
 
@@ -31,7 +33,7 @@ namespace aPC.Client.Disco
 
     private amBXScene GenerateScene()
     {
-      return mRandomSceneGenerator.Get();
+      return mRandomSceneGenerator.Generate();
     }
 
     private void PushScene(amBXScene xiScene)
@@ -56,7 +58,7 @@ namespace aPC.Client.Disco
     
     private Settings mSettings;
     private Random mRandom;
-    private RandomSceneGenerator mRandomSceneGenerator;
+    private IGenerator<amBXScene> mRandomSceneGenerator;
     private INotificationClient mNotificationService;
   }
 }

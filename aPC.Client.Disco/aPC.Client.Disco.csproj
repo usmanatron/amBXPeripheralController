@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArgumentReader.cs" />
+    <Compile Include="Generators\IGenerator.cs" />
     <Compile Include="Generators\RandomLightSectionGenerator.cs" />
     <Compile Include="Generators\RandomSceneGenerator.cs" />
     <Compile Include="NinjectKernelHandler.cs" />

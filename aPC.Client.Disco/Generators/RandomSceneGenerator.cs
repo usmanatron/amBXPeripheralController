@@ -8,16 +8,16 @@ using aPC.Common.Builders;
 
 namespace aPC.Client.Disco.Generators
 {
-  public class RandomSceneGenerator
+  public class RandomSceneGenerator : IGenerator<amBXScene>
   {
-    public RandomSceneGenerator(Settings xiSettings, Random xiRandom)
+    public RandomSceneGenerator(Settings xiSettings, Random xiRandom, IGenerator<LightSection> xiLightSectionGenerator)
     {
       mSettings = xiSettings;
       mRandom = xiRandom;
-      mRandomLightSectionGenerator = new RandomLightSectionGenerator(mSettings, mRandom);
+      mRandomLightSectionGenerator = xiLightSectionGenerator;
     }
 
-    public amBXScene Get()
+    public amBXScene Generate()
     {
       var lScene = new amBXScene
       {
@@ -50,6 +50,6 @@ namespace aPC.Client.Disco.Generators
 
     private Settings mSettings;
     private Random mRandom;
-    private RandomLightSectionGenerator mRandomLightSectionGenerator;
+    private IGenerator<LightSection> mRandomLightSectionGenerator;
   }
 }
