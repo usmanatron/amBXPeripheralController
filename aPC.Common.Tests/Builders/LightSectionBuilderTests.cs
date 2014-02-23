@@ -64,7 +64,7 @@ namespace aPC.Common.Tests.Builders
         .WithLightInDirection(xiDirection, mAribitraryColour)
         .Build();
 
-      Assert.AreEqual(mAribitraryColour, GetLightForDirection(lSection, xiDirection));
+      Assert.AreEqual(mAribitraryColour, lSection.GetComponentValueInDirection(xiDirection));
     }
 
     [Test]
