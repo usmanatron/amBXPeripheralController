@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using NUnit.Framework;
 using aPC.Client.Disco;
+using aPC.Client.Disco.Generators;
 
 namespace aPC.Client.Disco.Tests
 {
@@ -15,8 +14,12 @@ namespace aPC.Client.Disco.Tests
     [Test]
     public void RunningFor2Seconds_With150BPM_Pushes5Scenes()
     {
+      var lSettings = new Settings();
+      var lRandom = new TestRandom(0.25);
+      var lSceneGenerator = new RandomSceneGenerator(lSettings, lRandom, new RandomLightSectionGenerator(lSettings, lRandom));
       var lNotificationClient = new TestNotificationClient();
-      var lTask = new DiscoTask(new Settings(), lNotificationClient);
+
+      var lTask = new DiscoTask(lSettings, lRandom, lSceneGenerator, lNotificationClient);
 
       var lThread = new Thread(_ => lTask.Run());
       lThread.Start();
@@ -40,4 +43,10 @@ namespace aPC.Client.Disco.Tests
  * 
  */
   }
+  //qqUMI Move to separate files
+  class TestRandomSceneGenerator
+  {
+
+  }
+
 }
