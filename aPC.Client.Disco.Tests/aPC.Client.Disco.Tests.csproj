@@ -59,10 +59,12 @@
   <ItemGroup>
     <Compile Include="ArgumentReaderTests.cs" />
     <Compile Include="Communication\NotificationServiceTests.cs" />
+    <Compile Include="DiscoTaskTests.cs" />
     <Compile Include="Generators\RandomSceneGeneratorTests.cs" />
     <Compile Include="Generators\RandomLightSectionGeneratorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RangeTests.cs" />
+    <Compile Include="TestNotificationClient.cs" />
     <Compile Include="TestRandom.cs" />
   </ItemGroup>
   <ItemGroup>

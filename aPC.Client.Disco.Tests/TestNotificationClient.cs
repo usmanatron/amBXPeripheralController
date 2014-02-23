@@ -10,12 +10,12 @@ namespace aPC.Client.Disco.Tests
       mCustomScenesPushed = 0;
     }
 
-    public override void PushCustomScene(string xiScene)
+    public void PushCustomScene(string xiScene)
     {
       mCustomScenesPushed++;
     }
 
-    public override void PushIntegratedScene(string xiScene)
+    public void PushIntegratedScene(string xiScene)
     {
       mIntegratedScenesPushed++;
     }

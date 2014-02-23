@@ -4,8 +4,6 @@ namespace aPC.Client.Disco.Tests
 {
   class TestRandom : Random
   {
-    private readonly double mRandomNumber;
-
     public TestRandom(double xiRandomNumber)
     {
       mRandomNumber = xiRandomNumber;
@@ -15,5 +13,7 @@ namespace aPC.Client.Disco.Tests
     {
       return mRandomNumber;
     }
+
+    private readonly double mRandomNumber;
   }
 }
