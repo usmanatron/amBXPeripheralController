@@ -9,7 +9,7 @@ using aPC.Common.Entities;
 
 namespace aPC.Client.Disco
 {
-  class DiscoTask
+  public class DiscoTask
   {
     public DiscoTask(Settings xiSettings, INotificationClient xiNotificationService)
     {
