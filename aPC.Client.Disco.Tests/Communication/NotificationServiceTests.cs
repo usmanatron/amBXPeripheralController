@@ -1,12 +1,51 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NUnit.Framework;
+using aPC.Client.Disco.Communication;
+using aPC.Common.Communication;
+using aPC.Common.Defaults;
+using aPC.Common.Entities;
 
 namespace aPC.Client.Disco.Tests.Communication
 {
+  [TestFixture]
   class NotificationServiceTests
   {
+    [TestFixtureSetUp]
+    public void SetupTests()
+    {
+      var lUrl = CommunicationSettings.ServiceUrlTemplate
+        .Replace(CommunicationSettings.HostnameHolder, "localhost")
+        .Replace("amBXPeripheralController", "aPCTest");
+
+      mHost = new TestNotificationService(lUrl);
+      mClient = new NotificationClient(lUrl);
+      mArbitraryScene = new DefaultScenes().DefaultRedVsBlue;
+    }
+
+    [TestFixtureTearDown]
+    public void TearDownTests()
+    {
+      mHost.Dispose();
+    }
+
+    [Test]
+    public void PushingAnIntegratedScene_ThrowsException()
+    {
+      Assert.Throws<NotImplementedException>(() => mClient.PushIntegratedScene("ccnet_green"));
+    }
+
+    [Test]
+    public void PushingACustomScene_SendsTheExpectedScene()
+    {
+      mClient.PushCustomScene("scene");
+
+      Assert.AreEqual(1, mHost.Scenes.Count);
+      Assert.AreEqual(false, mHost.Scenes[0].Item1);
+      Assert.AreEqual("scene", mHost.Scenes[0].Item2);
+    }
+
+    private amBXScene mArbitraryScene;
+    private NotificationClient mClient;
+    private TestNotificationService mHost;
   }
 }
