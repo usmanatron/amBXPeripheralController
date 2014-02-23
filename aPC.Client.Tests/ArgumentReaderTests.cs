@@ -14,7 +14,7 @@ namespace aPC.Client.Tests
     public void NotHavingTwoArguments_ThrowsException(string xiArguments)
     {
       var lArguments = xiArguments.Split('|').ToList();
-      Assert.Throws<UsageException>(() => new ArgumentReader(lArguments));
+      Assert.Throws<UsageException>(() => new ArgumentReader(lArguments).ParseArguments());
     }
 
     /*
