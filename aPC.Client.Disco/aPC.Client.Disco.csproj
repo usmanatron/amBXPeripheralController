@@ -55,7 +55,7 @@
     <Compile Include="NinjectKernelHandler.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Range.cs" />
-    <Compile Include="Communication\NotificationService.cs" />
+    <Compile Include="Communication\NotificationClient.cs" />
     <Compile Include="DiscoTask.cs" />
     <Compile Include="Disco.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
