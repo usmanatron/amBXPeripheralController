@@ -11,7 +11,7 @@ namespace aPC.Client.Disco.Tests
   [TestFixture]
   class DiscoTaskTests
   {
-    //qqUMI - This is an unstable test (due to the QueueUserWorkItem part).  Need to write to make it more stable!
+    //qqUMI - This is an unstable test - first run always seems to fail?
     [Test]
     public void RunningFor2Seconds_With150BPM_Pushes5Scenes()
     {
@@ -21,11 +21,12 @@ namespace aPC.Client.Disco.Tests
       var lThread = new Thread(_ => lTask.Run());
       lThread.Start();
       Thread.Sleep(5 * 400); //The standard settings pushes a scene every 400msec
-      lThread.Suspend();
+      lThread.Abort();
 
       Assert.AreEqual(5, lNotificationClient.NumberOfCustomScenesPushed);
       Assert.AreEqual(0, lNotificationClient.NumberOfIntegratedScenesPushed);
     }
+
 
 
     /* qqUMI
