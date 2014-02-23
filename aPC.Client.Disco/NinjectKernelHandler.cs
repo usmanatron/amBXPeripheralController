@@ -9,13 +9,17 @@ namespace aPC.Client.Disco
   {
     public NinjectKernelHandler(Settings xiSettings) : base ()
     {
-      SetupBindings(xiSettings);
+      SetupSettingsBinding(xiSettings);
     }
 
-    protected override void SetupBindings(params object[] xiParams)
+    protected override void SetupBindings()
     {
       mKernel.Bind<INotificationClient>().To<NotificationClient>();
-      mKernel.Bind<Settings>().ToConstant((Settings) xiParams.Single());
+    }
+
+    private void SetupSettingsBinding(Settings xiSettings)
+    {
+      mKernel.Bind<Settings>().ToConstant(xiSettings);
     }
   }
 }

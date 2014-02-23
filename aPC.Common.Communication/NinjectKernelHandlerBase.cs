@@ -1,16 +1,16 @@
 ﻿using Ninject;
 
-namespace aPC.Common
+namespace aPC.Common.Communication
 {
   public abstract class NinjectKernelHandlerBase
   {
     public NinjectKernelHandlerBase()
     {
       mKernel = new StandardKernel();
+      SetupBindings();
     }
 
-    //qqUMI consider if object is alright?
-    protected abstract void SetupBindings(params object[] xiParams);
+    protected abstract void SetupBindings();
 
     public T Get<T>()
     {

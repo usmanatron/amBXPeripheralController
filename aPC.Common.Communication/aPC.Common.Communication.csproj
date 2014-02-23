@@ -46,6 +46,7 @@
     <Compile Include="Communicationsettings.cs" />
     <Compile Include="INotificationClient.cs" />
     <Compile Include="INotificationService.cs" />
+    <Compile Include="NinjectKernelHandlerBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UsageExceptionBase.cs" />
   </ItemGroup>
