@@ -10,6 +10,7 @@ namespace aPC.Client.Tests
   public class ArgumentReaderTests
   {
     [Test]
+    [TestCase("One")]
     [TestCase("One|Two|Three")]
     public void NotHavingTwoArguments_ThrowsException(string xiArguments)
     {

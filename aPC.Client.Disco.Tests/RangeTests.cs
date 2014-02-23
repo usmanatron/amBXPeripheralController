@@ -39,7 +39,7 @@ namespace aPC.Client.Disco.Tests
     [Test]
     [TestCase(-0.5d, 2)]
     [TestCase(3d, 4)]
-    public void OutOfRangeInputToGetScaledValue_ReturnsClippedscaledValue(double xiValue, float xiScaledValue)
+    public void OutOfRangeInputToGetScaledValue_ReturnsClippedScaledValue(double xiValue, float xiScaledValue)
     {
       var lRange = GetStandardRange();
       Assert.AreEqual(xiScaledValue, lRange.GetScaledValue(xiValue));
@@ -68,5 +68,25 @@ namespace aPC.Client.Disco.Tests
     {
       return new Range(2, 4);
     }
+    
+/* qqUMI
+ * Need to write a load of tests:
+ * Settings can't be tested (and doesn't need to be because it's just a data structure), but I should create a test 
+ * Settings thing with specific data hard-coded.  Maybe just the defaults?
+ * 
+ * DiscoTask could be tested by injecting mock scene generator and notification service - check that if we run it for 1 second
+ * then the number of scenes pushed to the notification service is within some tolerance, and that they are all the same scenes
+ * returned by the generator.
+ * 
+ * Finish Argumentreader - check that specific arguments work by passing one in and making sure it no longer is
+ * equal to the default in Settings.
+ * NotificationService - Mock out the communication part?  Just check it serialises and passes the string I guess>
+ * 
+ * RandomSceneGenerator - check it builds a valid scene => serialisable?  Could mock out systems Random to make it always 
+ * return 0.5 (say), as I can test against that then!
+ * 
+ * RandomLSGenerator - same as above.  Probably mock out Random and Settings and confirm it creates something I expect?
+ * 
+ */
   }
 }

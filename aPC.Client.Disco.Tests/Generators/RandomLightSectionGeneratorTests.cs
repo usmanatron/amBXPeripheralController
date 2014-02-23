@@ -15,7 +15,8 @@ namespace aPC.Client.Disco.Tests.Generators
     [TestFixtureSetUp]
     public void SetupGenerator()
     {
-      mGenerator = new RandomLightSectionGenerator(new Settings(), new TestRandom());
+      var lSettings = new Settings();
+      mGenerator = new RandomLightSectionGenerator(lSettings, new TestRandom(lSettings.ChangeThreshold / 2));
     }
 
     [Test]

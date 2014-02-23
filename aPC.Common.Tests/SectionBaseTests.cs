@@ -110,6 +110,7 @@ namespace aPC.Common.Tests
 
   class TestSection : SectionBase<TestComponent>
   {
+#pragma warning disable 169 // Fields are used exclusively by reflection
     [PhysicalComponent]
     [Direction(eDirection.North)]
     public TestComponent Up;
@@ -124,6 +125,7 @@ namespace aPC.Common.Tests
 
     [Direction(eDirection.South)]
     public TestComponent DownClone;
+#pragma warning restore 169
   }
 
   class TestComponent : IComponent

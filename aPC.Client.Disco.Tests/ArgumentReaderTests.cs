@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using NUnit.Framework;
 using aPC.Client.Disco;
 using System.Collections.Generic;
@@ -26,9 +27,10 @@ namespace aPC.Client.Disco.Tests
       var lArgumentSettings = new ArgumentReader(new List<string>()).ParseArguments();
       var lDefaultSettings = new Settings();
 
-      Assert.AreEqual(lDefaultSettings.BlueColourWidth, lArgumentSettings.BlueColourWidth);
-      Assert.AreEqual(lDefaultSettings.PushInterval, lArgumentSettings.PushInterval);
-      //qqUMI finish
+      foreach (FieldInfo lField in typeof (Settings).GetFields(BindingFlags.Public | BindingFlags.Instance))
+      {
+        Assert.AreEqual(lField.GetValue(lDefaultSettings), lField.GetValue(lArgumentSettings));
+      }
     }
 
     [Test]
