@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using aPC.Client.Disco.Generators;
+﻿using aPC.Client.Disco.Generators;
 using aPC.Common.Entities;
 using aPC.Common.Defaults;
 using aPC.Client.Disco.Tests;
