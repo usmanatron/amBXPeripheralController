@@ -6,7 +6,7 @@ env: EnableNuGetPackageRestore=true
 before_script:
  - cmd /c ".\SetupSolution.cmd"
 script: 
- - msbuild amBXPeripheralController.sln
+ - msbuild /m amBXPeripheralController.sln
  - cmd /c ".\GenerateOpenCoverReports.cmd"
 notifications:
   email:
