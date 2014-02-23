@@ -1,21 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using aPC.Common.Communication;
+﻿using aPC.Common.Communication;
+using aPC.Client.Communication;
 
 namespace aPC.Client
 {
   class NinjectKernelHandler : NinjectKernelHandlerBase
   {
-    public NinjectKernelHandler() :base()
+    public NinjectKernelHandler(Settings xiSettings) :base()
     {
-
+      SetupSettingsBinding(xiSettings);
     }
 
     protected override void SetupBindings()
     {
+      mKernel.Bind<INotificationClient>().To<NotificationClient>();
+    }
+
+    private void SetupSettingsBinding(Settings xiSettings)
+    {
+      mKernel.Bind<Settings>().ToConstant(xiSettings);
     }
   }
 }

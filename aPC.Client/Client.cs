@@ -9,8 +9,9 @@ namespace aPC.Client
     private static void Main(string[] xiArgs)
     {
       var lSettings = GetSettings(xiArgs.ToList());
-      var lClientTask = new ClientTask(lSettings);
-      lClientTask.Push();
+      var lKernel = new NinjectKernelHandler(lSettings);
+      var lTask = lKernel.Get<ClientTask>();
+      lTask.Push();
     }
 
     private static Settings GetSettings(IEnumerable<string> xiArgs)
