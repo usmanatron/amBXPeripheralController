@@ -1,9 +1,19 @@
 ﻿using System.Threading;
+using System.Threading.Tasks;
+using aPC.Client.Disco.Tests.Generators;
 using NUnit.Framework;
-using aPC.Client.Disco.Generators;
 
 namespace aPC.Client.Disco.Tests
 {
+  /* qqUMI
+* Need to write a load of tests:
+* 
+* DiscoTask could be tested by injecting mock scene generator and notification service - check that if we run it for 1 second
+* then the number of scenes pushed to the notification service is within some tolerance, 
+    * 
+    * and that they are all the same scenes
+* returned by the generator.
+*/
   [TestFixture]
   class DiscoTaskTests
   {
@@ -12,38 +22,17 @@ namespace aPC.Client.Disco.Tests
     public void RunningFor2Seconds_With150BPM_Pushes5Scenes()
     {
       var lSettings = new Settings();
-      var lRandom = new TestRandom(0.25);
-      var lSceneGenerator = new RandomSceneGenerator(lSettings, new RandomLightSectionGenerator(lSettings, lRandom));
+      var lSceneGenerator = new TestRandomSceneGenerator(new TestLightSectionGenerator());
       var lNotificationClient = new TestNotificationClient();
 
-      var lTask = new DiscoTask(lSettings, lSceneGenerator, lNotificationClient);
+      var lDiscoTask = new DiscoTask(lSettings, lSceneGenerator, lNotificationClient);
 
-      var lThread = new Thread(_ => lTask.Run());
-      lThread.Start();
+      var lTask = new Task(lDiscoTask.Run);
+      lTask.Start();
       Thread.Sleep(5 * 400); //The standard settings pushes a scene every 400msec
-      lThread.Abort();
-
+      
       Assert.AreEqual(5, lNotificationClient.NumberOfCustomScenesPushed);
       Assert.AreEqual(0, lNotificationClient.NumberOfIntegratedScenesPushed);
     }
-
-
-
-    /* qqUMI
- * Need to write a load of tests:
- * 
- * DiscoTask could be tested by injecting mock scene generator and notification service - check that if we run it for 1 second
- * then the number of scenes pushed to the notification service is within some tolerance, 
-     * 
-     * and that they are all the same scenes
- * returned by the generator.
- * 
- */
   }
-  //qqUMI Move to separate files
-  class TestRandomSceneGenerator
-  {
-
-  }
-
 }
