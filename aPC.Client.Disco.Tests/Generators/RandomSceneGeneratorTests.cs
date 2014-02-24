@@ -11,8 +11,7 @@ namespace aPC.Client.Disco.Tests.Generators
     public void SetupGenerator()
     {
       mSettings = new Settings();
-      var lRandom = new TestRandom(0.25);
-      mGenerator = new RandomSceneGenerator(mSettings, new RandomLightSectionGenerator(mSettings, lRandom));
+      mGenerator = new RandomSceneGenerator(mSettings, new TestLightSectionGenerator());
     }
 
     [Test]
