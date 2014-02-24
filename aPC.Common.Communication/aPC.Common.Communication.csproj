@@ -43,7 +43,7 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Communicationsettings.cs" />
+    <Compile Include="CommunicationSettings.cs" />
     <Compile Include="INotificationClient.cs" />
     <Compile Include="INotificationService.cs" />
     <Compile Include="NinjectKernelHandlerBase.cs" />
