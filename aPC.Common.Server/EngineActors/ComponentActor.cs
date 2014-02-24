@@ -1,7 +1,5 @@
 ﻿using aPC.Common.Server.Snapshots;
-using System;
 using aPC.Common.Entities;
-using System.Collections.Generic;
 
 namespace aPC.Common.Server.EngineActors
 {
@@ -10,9 +8,9 @@ namespace aPC.Common.Server.EngineActors
     protected ComponentActor(eDirection xiDirection, EngineManager xiEngine)
       : base (xiEngine)
     {
-      mDirection = xiDirection;
+      Direction = xiDirection;
     }
 
-    protected readonly eDirection mDirection;
+    protected readonly eDirection Direction;
   }
 }

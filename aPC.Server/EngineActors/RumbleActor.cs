@@ -3,7 +3,6 @@ using aPC.Common.Server.EngineActors;
 using aPC.Common.Entities;
 using aPC.Common.Server;
 using aPC.Common.Server.Snapshots;
-using System;
 
 namespace aPC.Server.EngineActors
 {
@@ -18,7 +17,7 @@ namespace aPC.Server.EngineActors
     {
       if (!xiSnapshot.IsComponentNull)
       {
-        Engine.UpdateRumble(mDirection, xiSnapshot.Item);
+        Engine.UpdateRumble(Direction, xiSnapshot.Item);
       }
     }
   }

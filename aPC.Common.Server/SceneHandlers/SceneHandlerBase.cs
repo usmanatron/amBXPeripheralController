@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using aPC.Common.Entities;
 using aPC.Common.Server.Snapshots;
 
@@ -10,7 +9,7 @@ namespace aPC.Common.Server.SceneHandlers
   //Handles the amBXScene object(s) and any interactions.
   public abstract class SceneHandlerBase<T> where T : SnapshotBase
   {
-    public SceneHandlerBase(Action xiEventCallback)
+    protected SceneHandlerBase(Action xiEventCallback)
     {
       mEventCallback = xiEventCallback;
 
@@ -58,7 +57,7 @@ namespace aPC.Common.Server.SceneHandlers
     private void SetupCurrentScene()
     {
       IsDormant = false;
-      Ticker = new AtypicalFirstRunInfiniteTicker(CurrentScene.Frames.Count, CurrentScene.RepeatableFrames.Count);
+      mTicker = new AtypicalFirstRunInfiniteTicker(CurrentScene.Frames.Count, CurrentScene.RepeatableFrames.Count);
     }
 
     protected abstract bool FramesAreApplicable(List<Frame> xiFrames);
@@ -71,7 +70,7 @@ namespace aPC.Common.Server.SceneHandlers
 
       lock (mSceneLock)
       {
-        lFrames = Ticker.IsFirstRun
+        lFrames = mTicker.IsFirstRun
           ? CurrentScene.Frames
           : CurrentScene.RepeatableFrames;
       }
@@ -81,17 +80,17 @@ namespace aPC.Common.Server.SceneHandlers
         // This should never happen
         throw new InvalidOperationException("No more applicable frames could be found - this implies the Manager should have been made dormant but was not");
       }
-      return lFrames[Ticker.Index];
+      return lFrames[mTicker.Index];
     }
 
     public void AdvanceScene()
     {
       lock (mSceneLock)
       {
-        Ticker.Advance();
+        mTicker.Advance();
 
         // If we've run the scene once through, we need to check for a few special circumstances
-        if (Ticker.Index == 0)
+        if (mTicker.Index == 0)
         {
           DoSceneCompletedChecks();
         }
@@ -119,9 +118,9 @@ namespace aPC.Common.Server.SceneHandlers
     protected amBXScene CurrentScene;
     public bool IsDormant { get; private set; }
 
-    private Action mEventCallback;
+    private readonly Action mEventCallback;
 
-    private AtypicalFirstRunInfiniteTicker Ticker;
+    private AtypicalFirstRunInfiniteTicker mTicker;
     private amBXScene mPreviousScene;
     private readonly object mSceneLock = new object();
 

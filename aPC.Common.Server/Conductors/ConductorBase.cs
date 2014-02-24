@@ -4,8 +4,6 @@ using aPC.Common.Server.Snapshots;
 using aPC.Common.Server.SceneHandlers;
 using System;
 using System.Threading;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace aPC.Common.Server.Conductors
 {
@@ -49,7 +47,7 @@ namespace aPC.Common.Server.Conductors
       Thread.Sleep(xiLength);
     }
 
-    private EngineActorBase<T> mActor;
-    private SceneHandlerBase<T> mHandler;
+    private readonly EngineActorBase<T> mActor;
+    private readonly SceneHandlerBase<T> mHandler;
   }
 }

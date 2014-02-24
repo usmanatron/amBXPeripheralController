@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Xml.Serialization;
 using aPC.Common.Communication;
 using aPC.Common.Entities;

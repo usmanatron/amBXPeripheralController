@@ -1,6 +1,4 @@
-﻿using aPC.Common.Entities;
-
-namespace aPC.Common.Server.Snapshots
+﻿namespace aPC.Common.Server.Snapshots
 {
   public abstract class SnapshotBase
   {

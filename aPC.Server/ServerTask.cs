@@ -5,7 +5,6 @@ using aPC.Common.Server.Communication;
 using aPC.Common.Server.Conductors;
 using aPC.Common.Server.EngineActors;
 using aPC.Server.Communication;
-using System.Threading.Tasks;
 using aPC.Common.Server.SceneHandlers;
 
 namespace aPC.Server
@@ -50,15 +49,7 @@ namespace aPC.Server
 
     internal void Update(amBXScene xiScene)
     {
-      if (xiScene.IsSynchronised)
-      {
-        mSyncManager.IsSynchronised = true;
-      }
-      else
-      {
-        mSyncManager.IsSynchronised = false;
-      }
-
+      mSyncManager.IsSynchronised = xiScene.IsSynchronised;
       UpdateActors(xiScene);
     }
 

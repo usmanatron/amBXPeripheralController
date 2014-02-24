@@ -3,8 +3,6 @@ using aPC.Common.Server.EngineActors;
 using aPC.Common.Entities;
 using aPC.Common.Server;
 using aPC.Common.Server.Snapshots;
-using aPC.Server.Conductors;
-using System;
 
 namespace aPC.Server.EngineActors
 {
@@ -19,7 +17,7 @@ namespace aPC.Server.EngineActors
     {
       if (!xiSnapshot.IsComponentNull)
       {
-        Engine.UpdateLight(mDirection, xiSnapshot.Item, xiSnapshot.FadeTime);
+        Engine.UpdateLight(Direction, xiSnapshot.Item, xiSnapshot.FadeTime);
       }
     }
   }
