@@ -1,7 +1,5 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using NUnit.Framework;
-using aPC.Client.Disco;
 using System.Collections.Generic;
 
 namespace aPC.Client.Disco.Tests

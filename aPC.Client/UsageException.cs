@@ -1,4 +1,4 @@
-﻿using aPC.Common.Communication;
+﻿using aPC.Common.Client;
 using System;
 
 namespace aPC.Client

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using aPC.Common.Client;
 using aPC.Common.Communication;
-using aPC.Common;
 using aPC.Client.Disco.Communication;
 using aPC.Client.Disco.Generators;
 using aPC.Common.Entities;
@@ -10,7 +8,7 @@ namespace aPC.Client.Disco
 {
   class NinjectKernelHandler : NinjectKernelHandlerBase
   {
-    public NinjectKernelHandler(Settings xiSettings) : base ()
+    public NinjectKernelHandler(Settings xiSettings)
     {
       SetupSettingsBinding(xiSettings);
     }
