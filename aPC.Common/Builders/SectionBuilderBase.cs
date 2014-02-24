@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using System.Reflection;
-using aPC.Common.Entities;
-using System.Collections.Generic;
+﻿using aPC.Common.Entities;
 
 namespace aPC.Common.Builders
 {

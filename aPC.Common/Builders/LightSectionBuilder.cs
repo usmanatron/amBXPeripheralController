@@ -1,7 +1,5 @@
 ﻿using aPC.Common.Entities;
 using System;
-using System.Linq;
-using System.Reflection;
 
 namespace aPC.Common.Builders
 {
