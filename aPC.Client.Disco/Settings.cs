@@ -1,13 +1,11 @@
-﻿using System.Threading;
-
-namespace aPC.Client.Disco
+﻿namespace aPC.Client.Disco
 {
   public class Settings
   {
     public Settings()
     {
-      SetConfigurableDefaultValues();
       SetConstantValues();
+      SetConfigurableDefaultValues();
     }
 
     private void SetConfigurableDefaultValues()
@@ -24,7 +22,6 @@ namespace aPC.Client.Disco
     {
       ChangeThreshold = 0.5d;
       FramesPerScene = 4;
-      FadeTime = 10;
     }
 
     public int PushInterval
@@ -35,15 +32,31 @@ namespace aPC.Client.Disco
       }
     }
 
-    public int BPM { private get; set; }
+    public int BPM
+    {
+      private get
+      {
+        return mBPM;
+      }
+      set
+      {
+        mBPM = value;
+
+        var lMaximumFadeLength = PushInterval / (FramesPerScene - 1);
+        FadeTime = new Range(10, lMaximumFadeLength);
+      }
+    }
+
+    private int mBPM;
+
     public Range RedColourWidth;
     public Range BlueColourWidth;
     public Range GreenColourWidth;
     public Range LightIntensityWidth;
     public Range FanWidth;
+    public Range FadeTime;
 
     public double ChangeThreshold;
     public int FramesPerScene;
-    public int FadeTime;
   }
 }
