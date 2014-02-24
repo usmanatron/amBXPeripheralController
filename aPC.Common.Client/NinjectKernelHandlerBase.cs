@@ -4,7 +4,7 @@ namespace aPC.Common.Client
 {
   public abstract class NinjectKernelHandlerBase
   {
-    public NinjectKernelHandlerBase()
+    protected NinjectKernelHandlerBase()
     {
       mKernel = new StandardKernel();
       SetupBindings();

@@ -38,6 +38,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4AF0D9
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.Common.Client", "aPC.Common.Client\aPC.Common.Client.csproj", "{20941C53-9669-4BF2-B354-AFF8023C1A1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -158,6 +160,16 @@ Global
 		{468C25C5-2CF1-4E7D-A6F6-BB70CF212D8B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{468C25C5-2CF1-4E7D-A6F6-BB70CF212D8B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{468C25C5-2CF1-4E7D-A6F6-BB70CF212D8B}.Release|Win32.ActiveCfg = Release|Any CPU
+		{20941C53-9669-4BF2-B354-AFF8023C1A1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20941C53-9669-4BF2-B354-AFF8023C1A1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20941C53-9669-4BF2-B354-AFF8023C1A1E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{20941C53-9669-4BF2-B354-AFF8023C1A1E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{20941C53-9669-4BF2-B354-AFF8023C1A1E}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{20941C53-9669-4BF2-B354-AFF8023C1A1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20941C53-9669-4BF2-B354-AFF8023C1A1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20941C53-9669-4BF2-B354-AFF8023C1A1E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{20941C53-9669-4BF2-B354-AFF8023C1A1E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{20941C53-9669-4BF2-B354-AFF8023C1A1E}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

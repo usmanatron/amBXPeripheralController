@@ -5,7 +5,7 @@ namespace aPC.Common.Client
   [Serializable]
   public abstract class UsageExceptionBase : Exception
   {
-    public UsageExceptionBase(string xiDescription)
+    protected UsageExceptionBase(string xiDescription)
     {
       mUserDescription = xiDescription;
     }
