@@ -1,8 +1,6 @@
 ﻿using System;
 using aPC.Common.Communication;
 using System.ServiceModel;
-using aPC.Client.Disco;
-using aPC.Common;
 
 namespace aPC.Client.Disco.Communication
 {
@@ -37,6 +35,6 @@ namespace aPC.Client.Disco.Communication
       throw new NotImplementedException("The disco task does not use integrated scenes");
     }
 
-    private ChannelFactory<INotificationService> mClient;
+    private readonly ChannelFactory<INotificationService> mClient;
   }
 }
