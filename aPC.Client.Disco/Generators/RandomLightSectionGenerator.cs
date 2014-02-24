@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using aPC.Common;
 using aPC.Common.Builders;
 using aPC.Common.Entities;
@@ -43,7 +40,7 @@ namespace aPC.Client.Disco.Generators
       };
     }
 
-    private Random mRandom;
-    private Settings mSettings;
+    private readonly Random mRandom;
+    private readonly Settings mSettings;
   }
 }

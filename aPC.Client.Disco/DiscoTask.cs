@@ -1,9 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Xml.Serialization;
 using System.Threading;
 using aPC.Client.Disco.Generators;
-using aPC.Client.Disco.Communication;
 using aPC.Common.Communication;
 using aPC.Common.Entities;
 
@@ -55,8 +53,8 @@ namespace aPC.Client.Disco
       Thread.Sleep(mSettings.PushInterval);
     }
     
-    private Settings mSettings;
-    private IGenerator<amBXScene> mRandomSceneGenerator;
-    private INotificationClient mNotificationService;
+    private readonly Settings mSettings;
+    private readonly IGenerator<amBXScene> mRandomSceneGenerator;
+    private readonly INotificationClient mNotificationService;
   }
 }

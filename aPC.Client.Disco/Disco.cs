@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using aPC.Client.Disco.Communication;
-using Ninject;
-using aPC.Common.Entities;
 
 namespace aPC.Client.Disco
 {

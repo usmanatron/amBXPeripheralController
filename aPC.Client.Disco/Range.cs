@@ -42,7 +42,7 @@ namespace aPC.Client.Disco
       {
         return 0;
       }
-      else if (1 < xiValue)
+      if (1 < xiValue)
       {
         return 1;
       }

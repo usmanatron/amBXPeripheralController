@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using aPC.Common.Entities;
+﻿using aPC.Common.Entities;
 using aPC.Common.Builders;
 
 namespace aPC.Client.Disco.Generators
@@ -43,11 +38,11 @@ namespace aPC.Client.Disco.Generators
         .WithRepeated(true)
         .WithLightSection(mRandomLightSectionGenerator.Generate())
         // Both fans and rumble are currently unsupported
-        .WithFanSection(aPC.Common.Defaults.DefaultFanSections.Off)
-        .WithRumbleSection(aPC.Common.Defaults.DefaultRumbleSections.Off);
+        .WithFanSection(Common.Defaults.DefaultFanSections.Off)
+        .WithRumbleSection(Common.Defaults.DefaultRumbleSections.Off);
     }
 
-    private Settings mSettings;
-    private IGenerator<LightSection> mRandomLightSectionGenerator;
+    private readonly Settings mSettings;
+    private readonly IGenerator<LightSection> mRandomLightSectionGenerator;
   }
 }
