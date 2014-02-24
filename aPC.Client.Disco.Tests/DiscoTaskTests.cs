@@ -16,10 +16,10 @@ namespace aPC.Client.Disco.Tests
     {
       var lSettings = new Settings();
       var lRandom = new TestRandom(0.25);
-      var lSceneGenerator = new RandomSceneGenerator(lSettings, lRandom, new RandomLightSectionGenerator(lSettings, lRandom));
+      var lSceneGenerator = new RandomSceneGenerator(lSettings, new RandomLightSectionGenerator(lSettings, lRandom));
       var lNotificationClient = new TestNotificationClient();
 
-      var lTask = new DiscoTask(lSettings, lRandom, lSceneGenerator, lNotificationClient);
+      var lTask = new DiscoTask(lSettings, lSceneGenerator, lNotificationClient);
 
       var lThread = new Thread(_ => lTask.Run());
       lThread.Start();

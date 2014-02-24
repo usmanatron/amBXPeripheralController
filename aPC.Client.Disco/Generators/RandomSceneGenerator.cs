@@ -10,10 +10,9 @@ namespace aPC.Client.Disco.Generators
 {
   public class RandomSceneGenerator : IGenerator<amBXScene>
   {
-    public RandomSceneGenerator(Settings xiSettings, Random xiRandom, IGenerator<LightSection> xiLightSectionGenerator)
+    public RandomSceneGenerator(Settings xiSettings, IGenerator<LightSection> xiLightSectionGenerator)
     {
       mSettings = xiSettings;
-      mRandom = xiRandom;
       mRandomLightSectionGenerator = xiLightSectionGenerator;
     }
 
@@ -49,7 +48,6 @@ namespace aPC.Client.Disco.Generators
     }
 
     private Settings mSettings;
-    private Random mRandom;
     private IGenerator<LightSection> mRandomLightSectionGenerator;
   }
 }
