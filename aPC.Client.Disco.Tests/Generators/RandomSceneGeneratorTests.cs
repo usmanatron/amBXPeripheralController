@@ -1,7 +1,5 @@
 ﻿using aPC.Client.Disco.Generators;
-using aPC.Common.Entities;
 using aPC.Common.Defaults;
-using aPC.Client.Disco.Tests;
 using NUnit.Framework;
 
 namespace aPC.Client.Disco.Tests.Generators

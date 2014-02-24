@@ -1,8 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using NUnit.Framework;
-using aPC.Client.Disco;
 using aPC.Client.Disco.Generators;
 
 namespace aPC.Client.Disco.Tests

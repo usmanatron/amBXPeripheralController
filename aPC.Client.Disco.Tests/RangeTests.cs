@@ -1,6 +1,5 @@
 ﻿using System;
 using NUnit.Framework;
-using aPC.Client.Disco;
 
 namespace aPC.Client.Disco.Tests
 {

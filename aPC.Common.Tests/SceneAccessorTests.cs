@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using aPC.Common;
-using aPC.Common.Entities;
+﻿using aPC.Common.Entities;
 using NUnit.Framework;
 
 namespace aPC.Common.Tests

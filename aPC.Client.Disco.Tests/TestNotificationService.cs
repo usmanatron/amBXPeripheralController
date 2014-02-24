@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using aPC.Common.Communication;
 using System.ServiceModel;
 using System.ServiceModel.Description;
@@ -31,7 +30,7 @@ namespace aPC.Client.Disco.Tests
       if (debug == null)
       {
         xiHost.Description.Behaviors.Add(
-             new ServiceDebugBehavior() { IncludeExceptionDetailInFaults = true });
+             new ServiceDebugBehavior { IncludeExceptionDetailInFaults = true });
       }
       else
       {
@@ -60,6 +59,6 @@ namespace aPC.Client.Disco.Tests
 
     // Item1 is a boolean specifying if the item pushed was an integrated scene
     public List<Tuple<bool, string>> Scenes { get; private set; }
-    private ServiceHost mHost;
+    private readonly ServiceHost mHost;
   }
 }

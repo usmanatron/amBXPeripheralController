@@ -2,8 +2,6 @@
 using NUnit.Framework;
 using aPC.Client.Disco.Communication;
 using aPC.Common.Communication;
-using aPC.Common.Defaults;
-using aPC.Common.Entities;
 
 namespace aPC.Client.Disco.Tests.Communication
 {
@@ -19,7 +17,6 @@ namespace aPC.Client.Disco.Tests.Communication
 
       mHost = new TestNotificationService(lUrl);
       mClient = new NotificationClient(lUrl);
-      mArbitraryScene = new DefaultScenes().DefaultRedVsBlue;
     }
 
     [TestFixtureTearDown]
@@ -44,7 +41,6 @@ namespace aPC.Client.Disco.Tests.Communication
       Assert.AreEqual("scene", mHost.Scenes[0].Item2);
     }
 
-    private amBXScene mArbitraryScene;
     private NotificationClient mClient;
     private TestNotificationService mHost;
   }
