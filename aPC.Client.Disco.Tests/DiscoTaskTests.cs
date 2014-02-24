@@ -17,22 +17,42 @@ namespace aPC.Client.Disco.Tests
   [TestFixture]
   class DiscoTaskTests
   {
+    [SetUp]
+    public void Setup()
+    {
+      var lSettings = new Settings();
+      mLightSectionGenerator = new TestLightSectionGenerator();
+      var lSceneGenerator = new TestRandomSceneGenerator(mLightSectionGenerator);
+      mNotificationClient = new TestNotificationClient();
+
+      mDiscoTask = new DiscoTask(lSettings, lSceneGenerator, mNotificationClient);
+    }
+
     //qqUMI - This is an unstable test - first run always seems to fail?
     [Test]
     public void RunningFor2Seconds_With150BPM_Pushes5Scenes()
     {
-      var lSettings = new Settings();
-      var lSceneGenerator = new TestRandomSceneGenerator(new TestLightSectionGenerator());
-      var lNotificationClient = new TestNotificationClient();
-
-      var lDiscoTask = new DiscoTask(lSettings, lSceneGenerator, lNotificationClient);
-
-      var lTask = new Task(lDiscoTask.Run);
+      var lTask = new Task(mDiscoTask.Run);
       lTask.Start();
       Thread.Sleep(5 * 400); //The standard settings pushes a scene every 400msec
       
-      Assert.AreEqual(5, lNotificationClient.NumberOfCustomScenesPushed);
-      Assert.AreEqual(0, lNotificationClient.NumberOfIntegratedScenesPushed);
+      Assert.AreEqual(5, mNotificationClient.NumberOfCustomScenesPushed);
+      Assert.AreEqual(0, mNotificationClient.NumberOfIntegratedScenesPushed);
     }
+
+    //[Test] //qqUMI Currently broken due to serialisation issues
+    public void PushingAScene_SendsTheExpectedConfiguration()
+    {
+      var lTask = new Task(mDiscoTask.Run);
+      lTask.Start();
+      Thread.Sleep(400); //The standard settings pushes a scene every 400msec
+
+      Assert.AreEqual(1, mNotificationClient.NumberOfCustomScenesPushed);
+      Assert.AreEqual(mLightSectionGenerator.Generate(), mNotificationClient.CustomScenesPushed[0]);
+    }
+
+    private TestLightSectionGenerator mLightSectionGenerator;
+    private TestNotificationClient mNotificationClient;
+    private DiscoTask mDiscoTask;
   }
 }
