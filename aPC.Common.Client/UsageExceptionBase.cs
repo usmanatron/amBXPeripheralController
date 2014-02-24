@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace aPC.Common.Communication
+namespace aPC.Common.Client
 {
   [Serializable]
   public abstract class UsageExceptionBase : Exception

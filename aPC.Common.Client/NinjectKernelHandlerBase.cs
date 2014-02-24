@@ -1,6 +1,6 @@
 ﻿using Ninject;
 
-namespace aPC.Common.Communication
+namespace aPC.Common.Client
 {
   public abstract class NinjectKernelHandlerBase
   {
