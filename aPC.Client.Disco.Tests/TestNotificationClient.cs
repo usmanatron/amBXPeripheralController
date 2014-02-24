@@ -1,4 +1,5 @@
-﻿using aPC.Common.Communication;
+﻿using System.Collections.Generic;
+using aPC.Common.Communication;
 
 namespace aPC.Client.Disco.Tests
 {
@@ -6,31 +7,31 @@ namespace aPC.Client.Disco.Tests
   {
     public TestNotificationClient()
     {
-      mIntegratedScenesPushed = 0;
-      mCustomScenesPushed = 0;
+      mIntegratedScenesPushed = new List<string>();
+      mCustomScenesPushed = new List<string>();
     }
 
     public void PushCustomScene(string xiScene)
     {
-      mCustomScenesPushed++;
+      mCustomScenesPushed.Add(xiScene);
     }
 
     public void PushIntegratedScene(string xiScene)
     {
-      mIntegratedScenesPushed++;
+      mIntegratedScenesPushed.Add(xiScene);
     }
 
     public int NumberOfCustomScenesPushed
     {
-      get { return mCustomScenesPushed; }
+      get { return mCustomScenesPushed.Count; }
     }
 
     public int NumberOfIntegratedScenesPushed
     {
-      get { return mIntegratedScenesPushed; }
+      get { return mIntegratedScenesPushed.Count; }
     }
 
-    private int mIntegratedScenesPushed;
-    private int mCustomScenesPushed;
+    private readonly List<string> mIntegratedScenesPushed;
+    private readonly List<string> mCustomScenesPushed;
   }
 }
