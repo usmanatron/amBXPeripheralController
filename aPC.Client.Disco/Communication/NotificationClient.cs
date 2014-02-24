@@ -20,13 +20,13 @@ namespace aPC.Client.Disco.Communication
 
     public void PushCustomScene(string xiScene)
     {
-      var lOutput = mClient.CreateChannel().RunCustomScene(xiScene);
-
-      if (!string.IsNullOrEmpty(lOutput))
+      try
       {
-        Console.WriteLine("An error occurred when communicating to the server:");
-        Console.WriteLine(Environment.NewLine);
-        Console.WriteLine(lOutput);
+        mClient.CreateChannel().RunCustomScene(xiScene);
+      }
+      catch (Exception e)
+      {
+        Console.WriteLine(e.ToString());
       }
     }
 

@@ -43,16 +43,14 @@ namespace aPC.Client.Disco.Tests
       }
     }
 
-    public string RunCustomScene(string xiSceneXml)
+    public void RunCustomScene(string xiSceneXml)
     {
       Scenes.Add(new Tuple<bool, string>(false, xiSceneXml));
-      return "";
     }
 
-    public string RunIntegratedScene(string xiSceneName)
+    public void RunIntegratedScene(string xiSceneName)
     {
       Scenes.Add(new Tuple<bool, string>(true, xiSceneName));
-      return "";
     }
 
     public void Dispose()

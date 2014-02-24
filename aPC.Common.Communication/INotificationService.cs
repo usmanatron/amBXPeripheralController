@@ -6,9 +6,9 @@ namespace aPC.Common.Communication
   public interface INotificationService
   {
     [OperationContract]
-    string RunCustomScene(string xiSceneXml);
+    void RunCustomScene(string xiSceneXml);
 
     [OperationContract]
-    string RunIntegratedScene(string xiSceneName);
+    void RunIntegratedScene(string xiSceneName);
   }
 }

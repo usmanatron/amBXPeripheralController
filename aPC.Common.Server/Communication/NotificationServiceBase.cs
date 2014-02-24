@@ -8,37 +8,19 @@ namespace aPC.Common.Server.Communication
 {
   public abstract class NotificationServiceBase : INotificationService
   {
-    public string RunCustomScene(string xiSceneXml)
+    public void RunCustomScene(string xiSceneXml)
     {
-      try
-      {
-        var lScene = DeserialiseScene(xiSceneXml);
-        UpdateScene(lScene);
-      }
-      catch (Exception e)
-      {
-        return e.ToString();
-      }
-
-      return "";
+      var lScene = DeserialiseScene(xiSceneXml);
+      UpdateScene(lScene);
     }
 
-    public string RunIntegratedScene(string xiSceneName)
+    public void RunIntegratedScene(string xiSceneName)
     {
-      try
-      {
-        var lAccessor = new SceneAccessor();
-        var lScene = lAccessor.GetScene(xiSceneName) ?? 
-                     lAccessor.GetScene("Error_Flash");
+      var lAccessor = new SceneAccessor();
+      var lScene = lAccessor.GetScene(xiSceneName) ?? 
+                   lAccessor.GetScene("Error_Flash");
 
-        UpdateScene(lScene);
-      }
-      catch (Exception e)
-      {
-        return e.ToString();
-      }
-
-      return "";
+      UpdateScene(lScene);
     }
 
     private amBXScene DeserialiseScene(string xiSceneXml)
