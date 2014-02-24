@@ -1,8 +1,5 @@
-﻿using System;
-using aPC.Common.Communication;
+﻿using aPC.Common.Communication;
 using System.ServiceModel;
-using System.IO;
-using aPC.Common;
 
 namespace aPC.Client.Communication
 {

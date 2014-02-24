@@ -1,5 +1,4 @@
 ﻿using aPC.Client.Communication;
-using aPC.Common;
 using aPC.Common.Communication;
 
 namespace aPC.Client
@@ -25,6 +24,6 @@ namespace aPC.Client
     }
 
     private readonly Settings mSettings;
-    private INotificationClient mNotificationClient;
+    private readonly INotificationClient mNotificationClient;
   }
 }
