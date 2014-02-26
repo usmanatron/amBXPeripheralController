@@ -14,17 +14,6 @@ namespace aPC.Server.SceneHandlers
     { 
     }
 
-    // A scene is applicable if there is at least one non-null light in the right direction defined.
-    protected override bool FramesAreApplicable(List<Frame> xiFrames)
-    {
-      var lLights = xiFrames
-        .Select(frame => frame.Lights)
-        .Where(section => section != null)
-        .Select(section => GetLight(Direction, section));
-
-      return lLights.Any(light => light != null);
-    }
-
     public override ComponentSnapshot<Light> GetNextSnapshot(eDirection xiDirection)
     {
       var lFrame = GetNextFrame();

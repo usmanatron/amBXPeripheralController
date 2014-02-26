@@ -14,16 +14,6 @@ namespace aPC.Server.SceneHandlers
     { 
     }
 
-    // A scene is applicable if there is at least one non-null rumble in the right direction defined.
-    protected override bool FramesAreApplicable(List<Frame> xiFrames)
-    {
-      var lRumbles = xiFrames
-        .Select(frame => frame.Rumbles)
-        .Where(section => section != null);
-
-      return lRumbles.Any(rumble => rumble != null);
-    }
-
     public override ComponentSnapshot<Rumble> GetNextSnapshot(eDirection xiDirection)
     {
       var lFrame = GetNextFrame();

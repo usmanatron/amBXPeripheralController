@@ -39,28 +39,10 @@ namespace aPC.Common.Server.SceneHandlers
 
     protected void SetupNewScene(amBXScene xiNewScene)
     {
-      if (FramesAreApplicable(xiNewScene.Frames))
-      {
-        CurrentScene = xiNewScene;
-        SetupCurrentScene();
-      }
-      else if (FramesAreApplicable(mPreviousScene.Frames))
-      {
-        SetupCurrentScene();
-      }
-      else
-      {
-        IsDormant = true;
-      }
-    }
-
-    private void SetupCurrentScene()
-    {
       IsDormant = false;
+      CurrentScene = xiNewScene;
       mTicker = new AtypicalFirstRunInfiniteTicker(CurrentScene.Frames.Count, CurrentScene.RepeatableFrames.Count);
     }
-
-    protected abstract bool FramesAreApplicable(List<Frame> xiFrames);
 
     public abstract T GetNextSnapshot(eDirection xiDirection);
 

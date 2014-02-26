@@ -18,16 +18,6 @@ namespace aPC.Common.Server.SceneHandlers
     {
     }
 
-    protected override bool FramesAreApplicable(List<Frame> xiFrames)
-    {
-      var lFrames = xiFrames
-        .Where(frame => frame.Lights != null ||
-                        frame.Fans != null ||
-                        frame.Rumbles != null);
-
-      return lFrames.Any(frame => frame != null);
-    }
-
     public override FrameSnapshot GetNextSnapshot(eDirection xiDirection)
     {
       var lFrame = GetNextFrame();
