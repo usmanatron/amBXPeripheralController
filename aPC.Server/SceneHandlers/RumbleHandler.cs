@@ -10,8 +10,7 @@ namespace aPC.Server.SceneHandlers
 {
   class RumbleHandler : ComponentHandler<Rumble>
   {
-    public RumbleHandler(eDirection xiDirection, Action xiEventcomplete)
-      : base(xiDirection, xiEventcomplete)
+    public RumbleHandler(Action xiEventcomplete) : base(xiEventcomplete)
     { 
     }
 
@@ -25,7 +24,7 @@ namespace aPC.Server.SceneHandlers
       return lRumbles.Any(rumble => rumble != null);
     }
 
-    public override ComponentSnapshot<Rumble> GetNextSnapshot()
+    public override ComponentSnapshot<Rumble> GetNextSnapshot(eDirection xiDirection)
     {
       var lFrame = GetNextFrame();
 

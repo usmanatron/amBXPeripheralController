@@ -62,7 +62,7 @@ namespace aPC.Common.Server.SceneHandlers
 
     protected abstract bool FramesAreApplicable(List<Frame> xiFrames);
 
-    public abstract T GetNextSnapshot();
+    public abstract T GetNextSnapshot(eDirection xiDirection);
 
     protected Frame GetNextFrame()
     {
@@ -117,7 +117,6 @@ namespace aPC.Common.Server.SceneHandlers
 
     protected amBXScene CurrentScene;
     public bool IsDormant { get; private set; }
-
     private readonly Action mEventCallback;
 
     private AtypicalFirstRunInfiniteTicker mTicker;

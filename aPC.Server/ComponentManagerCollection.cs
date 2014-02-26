@@ -24,33 +24,33 @@ namespace aPC.Server
       mFanConductors = new List<FanConductor>();
       mRumbleConductors = new List<RumbleConductor>();
 
-      mLightConductors.Add(new LightConductor(eDirection.North, new LightActor(xiEngine), new LightHandler(eDirection.North, xiAction)));
-      mLightConductors.Add(new LightConductor(eDirection.NorthEast, new LightActor(xiEngine), new LightHandler(eDirection.NorthEast, xiAction)));
-      mLightConductors.Add(new LightConductor(eDirection.East, new LightActor(xiEngine), new LightHandler(eDirection.East, xiAction)));
-      mLightConductors.Add(new LightConductor(eDirection.SouthEast, new LightActor(xiEngine), new LightHandler(eDirection.SouthEast, xiAction)));
-      mLightConductors.Add(new LightConductor(eDirection.South, new LightActor(xiEngine), new LightHandler(eDirection.South, xiAction)));
-      mLightConductors.Add(new LightConductor(eDirection.SouthWest, new LightActor(xiEngine), new LightHandler(eDirection.SouthWest, xiAction)));
-      mLightConductors.Add(new LightConductor(eDirection.West, new LightActor(xiEngine), new LightHandler(eDirection.West, xiAction)));
-      mLightConductors.Add(new LightConductor(eDirection.NorthWest, new LightActor(xiEngine), new LightHandler(eDirection.NorthWest, xiAction)));
+      mLightConductors.Add(new LightConductor(eDirection.North, new LightActor(xiEngine), new LightHandler(xiAction)));
+      mLightConductors.Add(new LightConductor(eDirection.NorthEast, new LightActor(xiEngine), new LightHandler(xiAction)));
+      mLightConductors.Add(new LightConductor(eDirection.East, new LightActor(xiEngine), new LightHandler(xiAction)));
+      mLightConductors.Add(new LightConductor(eDirection.SouthEast, new LightActor(xiEngine), new LightHandler(xiAction)));
+      mLightConductors.Add(new LightConductor(eDirection.South, new LightActor(xiEngine), new LightHandler(xiAction)));
+      mLightConductors.Add(new LightConductor(eDirection.SouthWest, new LightActor(xiEngine), new LightHandler(xiAction)));
+      mLightConductors.Add(new LightConductor(eDirection.West, new LightActor(xiEngine), new LightHandler(xiAction)));
+      mLightConductors.Add(new LightConductor(eDirection.NorthWest, new LightActor(xiEngine), new LightHandler(xiAction)));
 
-      mFanConductors.Add(new FanConductor(eDirection.East, new FanActor(xiEngine), new FanHandler(eDirection.East, xiAction)));
-      mFanConductors.Add(new FanConductor(eDirection.West, new FanActor(xiEngine), new FanHandler(eDirection.West, xiAction)));
+      mFanConductors.Add(new FanConductor(eDirection.East, new FanActor(xiEngine), new FanHandler(xiAction)));
+      mFanConductors.Add(new FanConductor(eDirection.West, new FanActor(xiEngine), new FanHandler(xiAction)));
 
-      mRumbleConductors.Add(new RumbleConductor(eDirection.Center, new RumbleActor(xiEngine), new RumbleHandler(eDirection.Center, xiAction)));
+      mRumbleConductors.Add(new RumbleConductor(eDirection.Center, new RumbleActor(xiEngine), new RumbleHandler(xiAction)));
     }
 
     public void RunAllManagersDeSynchronised(SynchronisationManager xiSyncManager)
     {
       Parallel.ForEach(mLightConductors, conductor => xiSyncManager.RunWhileUnSynchronised(conductor.Run));
-      Parallel.ForEach(mFanConductors, conductor => xiSyncManager.RunWhileUnSynchronised(manager.Run));
-      Parallel.ForEach(mRumbleConductors, conductor => xiSyncManager.RunWhileUnSynchronised(manager.Run));
+      Parallel.ForEach(mFanConductors, conductor => xiSyncManager.RunWhileUnSynchronised(conductor.Run));
+      Parallel.ForEach(mRumbleConductors, conductor => xiSyncManager.RunWhileUnSynchronised(conductor.Run));
     }
 
     public void UpdateAllManagers(amBXScene xiScene)
     {
       Parallel.ForEach(mLightConductors, conductor => UpdateSceneIfRelevant<Light>(conductor, xiScene));
-      Parallel.ForEach(mFanConductors, conductor => UpdateSceneIfRelevant(conductor, xiScene));
-      Parallel.ForEach(mRumbleConductors, conductor => UpdateSceneIfRelevant(conductor, xiScene));
+      Parallel.ForEach(mFanConductors, conductor => UpdateSceneIfRelevant<Fan>(conductor, xiScene));
+      Parallel.ForEach(mRumbleConductors, conductor => UpdateSceneIfRelevant<Rumble>(conductor, xiScene));
     }
 
     private void UpdateSceneIfRelevant<T>(LightConductor xiConductor, amBXScene xiScene)

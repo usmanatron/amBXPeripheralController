@@ -10,8 +10,7 @@ namespace aPC.Server.SceneHandlers
 {
   class FanHandler : ComponentHandler<Fan>
   {
-    public FanHandler(eDirection xiDirection, Action xiEventcomplete)
-      : base(xiDirection, xiEventcomplete)
+    public FanHandler(Action xiEventcomplete) : base(xiEventcomplete)
     { 
     }
     // A scene is applicable if there is at least one non-null fan in a "somewhat" correct direction defined.
@@ -25,10 +24,10 @@ namespace aPC.Server.SceneHandlers
       return lFans.Any(fan => fan != null);
     }
 
-    public override ComponentSnapshot<Fan> GetNextSnapshot()
+    public override ComponentSnapshot<Fan> GetNextSnapshot(eDirection xiDirection)
     {
       var lFrame = GetNextFrame();
-      var lFan = GetFan(Direction, lFrame.Fans);
+      var lFan = GetFan(xiDirection, lFrame.Fans);
 
       return lFan == null
         ? new ComponentSnapshot<Fan>(lFrame.Length)

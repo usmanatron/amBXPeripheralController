@@ -28,7 +28,7 @@ namespace aPC.Common.Server.SceneHandlers
       return lFrames.Any(frame => frame != null);
     }
 
-    public override FrameSnapshot GetNextSnapshot()
+    public override FrameSnapshot GetNextSnapshot(eDirection xiDirection)
     {
       var lFrame = GetNextFrame();
       return new FrameSnapshot(lFrame, 0);

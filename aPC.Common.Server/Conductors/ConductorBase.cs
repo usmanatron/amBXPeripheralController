@@ -27,7 +27,7 @@ namespace aPC.Common.Server.Conductors
       }
       else
       {
-        var lSnapshot = mHandler.GetNextSnapshot();
+        var lSnapshot = mHandler.GetNextSnapshot(mDirection);
         if (lSnapshot == null)
         {
           throw new InvalidOperationException("An error occured when retrieving the next snapshot");
