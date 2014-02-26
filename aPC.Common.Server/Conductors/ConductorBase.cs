@@ -9,8 +9,9 @@ namespace aPC.Common.Server.Conductors
 {
   public abstract class ConductorBase<T> where T : SnapshotBase
   {
-    protected ConductorBase(EngineActorBase<T> xiActor, SceneHandlerBase<T> xiHandler)
+    protected ConductorBase(eDirection xiDirection, EngineActorBase<T> xiActor, SceneHandlerBase<T> xiHandler)
     {
+      mDirection = xiDirection;
       mActor = xiActor;
       mHandler = xiHandler;
     }
@@ -31,7 +32,7 @@ namespace aPC.Common.Server.Conductors
         {
           throw new InvalidOperationException("An error occured when retrieving the next snapshot");
         }
-        mActor.ActNextFrame(lSnapshot);
+        mActor.ActNextFrame(mDirection, lSnapshot);
         mHandler.AdvanceScene();
         WaitforInterval(lSnapshot.Length);
       }
@@ -46,6 +47,8 @@ namespace aPC.Common.Server.Conductors
     {
       Thread.Sleep(xiLength);
     }
+
+    protected eDirection mDirection;
 
     private readonly EngineActorBase<T> mActor;
     private readonly SceneHandlerBase<T> mHandler;

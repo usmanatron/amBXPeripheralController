@@ -8,8 +8,8 @@ namespace aPC.Server.Conductors
 {
   class RumbleConductor : ComponentConductor<Rumble>
   {
-    public RumbleConductor(RumbleActor xiActor, RumbleHandler xiHandler) 
-      : base(xiActor, xiHandler)
+    public RumbleConductor(eDirection xiDirection, RumbleActor xiActor, RumbleHandler xiHandler) 
+      : base(xiDirection, xiActor, xiHandler)
     {
     }
 

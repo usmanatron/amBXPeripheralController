@@ -7,7 +7,7 @@ namespace aPC.Common.Server.Conductors
   public class FrameConductor : ConductorBase<FrameSnapshot>
   {
     public FrameConductor(FrameActor xiActor, FrameHandler xiHandler)
-      : base(xiActor, xiHandler)
+      : base(eDirection.Everywhere, xiActor, xiHandler)
     {
     }
   }

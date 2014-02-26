@@ -8,8 +8,8 @@ namespace aPC.Server.Conductors
 {
   class FanConductor : ComponentConductor<Fan>
   {
-    public FanConductor(FanActor xiActor, FanHandler xiHandler)
-      : base (xiActor, xiHandler)
+    public FanConductor(eDirection xiDirection, FanActor xiActor, FanHandler xiHandler)
+      : base (xiDirection, xiActor, xiHandler)
     {
     }
 

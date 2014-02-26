@@ -7,8 +7,8 @@ namespace aPC.Common.Server.Conductors
 {
   public abstract class ComponentConductor<T> : ConductorBase<ComponentSnapshot<T>> where T : IComponent
   {
-    protected ComponentConductor(ComponentActor<T> xiActor, ComponentHandler<T> xiHandler)
-      : base(xiActor, xiHandler)
+    protected ComponentConductor(eDirection xiDirection, ComponentActor<T> xiActor, ComponentHandler<T> xiHandler)
+      : base(xiDirection, xiActor, xiHandler)
     {
     }
 

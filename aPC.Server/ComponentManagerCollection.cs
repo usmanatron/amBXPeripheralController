@@ -24,19 +24,19 @@ namespace aPC.Server
       mFanConductors = new List<FanConductor>();
       mRumbleConductors = new List<RumbleConductor>();
 
-      mLightConductors.Add(new LightConductor(new LightActor(eDirection.North, xiEngine), new LightHandler(eDirection.North, xiAction)));
-      mLightConductors.Add(new LightConductor(new LightActor(eDirection.NorthEast, xiEngine), new LightHandler(eDirection.NorthEast, xiAction)));
-      mLightConductors.Add(new LightConductor(new LightActor(eDirection.East, xiEngine), new LightHandler(eDirection.East, xiAction)));
-      mLightConductors.Add(new LightConductor(new LightActor(eDirection.SouthEast, xiEngine), new LightHandler(eDirection.SouthEast, xiAction)));
-      mLightConductors.Add(new LightConductor(new LightActor(eDirection.South, xiEngine), new LightHandler(eDirection.South, xiAction)));
-      mLightConductors.Add(new LightConductor(new LightActor(eDirection.SouthWest, xiEngine), new LightHandler(eDirection.SouthWest, xiAction)));
-      mLightConductors.Add(new LightConductor(new LightActor(eDirection.West, xiEngine), new LightHandler(eDirection.West, xiAction)));
-      mLightConductors.Add(new LightConductor(new LightActor(eDirection.NorthWest, xiEngine), new LightHandler(eDirection.NorthWest, xiAction)));
+      mLightConductors.Add(new LightConductor(eDirection.North, new LightActor(xiEngine), new LightHandler(eDirection.North, xiAction)));
+      mLightConductors.Add(new LightConductor(eDirection.NorthEast, new LightActor(xiEngine), new LightHandler(eDirection.NorthEast, xiAction)));
+      mLightConductors.Add(new LightConductor(eDirection.East, new LightActor(xiEngine), new LightHandler(eDirection.East, xiAction)));
+      mLightConductors.Add(new LightConductor(eDirection.SouthEast, new LightActor(xiEngine), new LightHandler(eDirection.SouthEast, xiAction)));
+      mLightConductors.Add(new LightConductor(eDirection.South, new LightActor(xiEngine), new LightHandler(eDirection.South, xiAction)));
+      mLightConductors.Add(new LightConductor(eDirection.SouthWest, new LightActor(xiEngine), new LightHandler(eDirection.SouthWest, xiAction)));
+      mLightConductors.Add(new LightConductor(eDirection.West, new LightActor(xiEngine), new LightHandler(eDirection.West, xiAction)));
+      mLightConductors.Add(new LightConductor(eDirection.NorthWest, new LightActor(xiEngine), new LightHandler(eDirection.NorthWest, xiAction)));
 
-      mFanConductors.Add(new FanConductor(new FanActor(eDirection.East, xiEngine), new FanHandler(eDirection.East, xiAction)));
-      mFanConductors.Add(new FanConductor(new FanActor(eDirection.West, xiEngine), new FanHandler(eDirection.West, xiAction)));
+      mFanConductors.Add(new FanConductor(eDirection.East, new FanActor(xiEngine), new FanHandler(eDirection.East, xiAction)));
+      mFanConductors.Add(new FanConductor(eDirection.West, new FanActor(xiEngine), new FanHandler(eDirection.West, xiAction)));
 
-      mRumbleConductors.Add(new RumbleConductor(new RumbleActor(eDirection.Center, xiEngine), new RumbleHandler(eDirection.Center, xiAction)));
+      mRumbleConductors.Add(new RumbleConductor(eDirection.Center, new RumbleActor(xiEngine), new RumbleHandler(eDirection.Center, xiAction)));
     }
 
     public void RunAllManagersDeSynchronised(SynchronisationManager xiSyncManager)

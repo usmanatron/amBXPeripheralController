@@ -8,16 +8,15 @@ namespace aPC.Server.EngineActors
 {
   class LightActor : ComponentActor<Light>
   {
-    public LightActor(eDirection xiDirection, EngineManager xiEngine) 
-      : base (xiDirection, xiEngine)
+    public LightActor(EngineManager xiEngine) : base (xiEngine)
     {
     }
 
-    public override void ActNextFrame(ComponentSnapshot<Light> xiSnapshot)
+    public override void ActNextFrame(eDirection xiDirection, ComponentSnapshot<Light> xiSnapshot)
     {
       if (!xiSnapshot.IsComponentNull)
       {
-        Engine.UpdateLight(Direction, xiSnapshot.Item, xiSnapshot.FadeTime);
+        Engine.UpdateLight(xiDirection, xiSnapshot.Item, xiSnapshot.FadeTime);
       }
     }
   }

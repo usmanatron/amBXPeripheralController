@@ -8,8 +8,8 @@ namespace aPC.Server.Conductors
 {
   class LightConductor : ComponentConductor<Light>
   {
-    public LightConductor(LightActor xiActor, LightHandler xiHandler) 
-      : base(xiActor, xiHandler)
+    public LightConductor(eDirection xiDirection, LightActor xiActor, LightHandler xiHandler) 
+      : base(xiDirection, xiActor, xiHandler)
     {
     }
 

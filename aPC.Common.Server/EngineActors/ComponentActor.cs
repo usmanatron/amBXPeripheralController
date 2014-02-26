@@ -5,12 +5,9 @@ namespace aPC.Common.Server.EngineActors
 {
   public abstract class ComponentActor<T> : EngineActorBase<ComponentSnapshot<T>> where T : IComponent
   {
-    protected ComponentActor(eDirection xiDirection, EngineManager xiEngine)
+    protected ComponentActor(EngineManager xiEngine)
       : base (xiEngine)
     {
-      Direction = xiDirection;
     }
-
-    protected readonly eDirection Direction;
   }
 }

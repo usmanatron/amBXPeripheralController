@@ -5,12 +5,11 @@ namespace aPC.Common.Server.EngineActors
 {
   public class FrameActor : EngineActorBase<FrameSnapshot>
   {
-    public FrameActor(EngineManager xiEngine) 
-      : base (xiEngine)
+    public FrameActor(EngineManager xiEngine) : base (xiEngine)
     {
     }
 
-    public override void ActNextFrame(FrameSnapshot xiFrame)
+    public override void ActNextFrame(eDirection xiDirection, FrameSnapshot xiFrame)
     {
       if (xiFrame.Frame.Lights != null)
       {
