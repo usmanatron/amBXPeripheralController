@@ -43,41 +43,41 @@ namespace aPC.Common.Entities
     ///    AddDirectionalComponent(new T(), lDirection);
     ///  }
     /// </remarks>
-    private void ProcessComponent<T>(SectionBase<T> xiSection) where T : IComponent, new()
+    private void ProcessComponent<T>(SectionBase<T> xiSection) where T : IComponent
     {
       foreach (eDirection lDirection in Enum.GetValues(typeof(eDirection)))
       {
         var lComponent = xiSection.GetComponentValueInDirection(lDirection);
         if (lComponent != null)
         {
-          AddDirectionalComponent(lComponent, lDirection);
+          AddDirectionalComponent(lComponent.ComponentType(), lDirection);
         }
       }
     }
 
-    private void AddDirectionalComponent(IComponent xiComponent, eDirection xiDirection)
+    private void AddDirectionalComponent(eComponentType xiComponentType, eDirection xiDirection)
     {
-      if (!AreEnabledForComponentAndDirection(xiComponent, xiDirection));
+      if (!AreEnabledForComponentAndDirection(xiComponentType, xiDirection));
       {
-        mEnabledDirectionalComponents.Add(new Tuple<eComponentType, eDirection>(xiComponent.ComponentType(), xiDirection));
+        mEnabledDirectionalComponents.Add(new Tuple<eComponentType, eDirection>(xiComponentType, xiDirection));
       }
     }
 
-    public bool AreEnabledForComponent(IComponent xiComponent)
+    public bool AreEnabledForComponent(eComponentType xiComponent)
     {
       return mEnabledDirectionalComponents
         .Any(c => HasComponentType(c, xiComponent));
     }
 
-    public bool AreEnabledForComponentAndDirection(IComponent xiComponent, eDirection xiDirection)
+    public bool AreEnabledForComponentAndDirection(eComponentType xiComponent, eDirection xiDirection)
     {
       return mEnabledDirectionalComponents
         .Any(c => HasComponentType(c, xiComponent) &&
                   HasDirection(c, xiDirection));
     }
 
-    private Func<Tuple<eComponentType, eDirection>, IComponent, bool> HasComponentType = 
-      (item, component) => item.Item1 == component.ComponentType();
+    private Func<Tuple<eComponentType, eDirection>, eComponentType, bool> HasComponentType = 
+      (item, componentType) => item.Item1 == componentType;
 
     private Func<Tuple<eComponentType, eDirection>, eDirection, bool> HasDirection =
       (item, direction) => item.Item2 == direction;
