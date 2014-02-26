@@ -14,7 +14,7 @@ namespace aPC.Common.Entities
     /// </remarks>
     public FrameStatistics(List<Frame> xiFrames)
     {
-      mEnabledDirectionalComponents = new List<Tuple<IComponent, eDirection>>();
+      mEnabledDirectionalComponents = new List<Tuple<eComponentType, eDirection>>();
 
       foreach (var lFrame in xiFrames)
       {
@@ -47,10 +47,10 @@ namespace aPC.Common.Entities
     {
       foreach (eDirection lDirection in Enum.GetValues(typeof(eDirection)))
       {
-        var lBlah = xiSection.GetComponentValueInDirection(lDirection);
-        if (lBlah != null)
+        var lComponent = xiSection.GetComponentValueInDirection(lDirection);
+        if (lComponent != null)
         {
-          AddDirectionalComponent(lBlah, lDirection);
+          AddDirectionalComponent(lComponent, lDirection);
         }
       }
     }
@@ -59,7 +59,7 @@ namespace aPC.Common.Entities
     {
       if (!AreEnabledForComponentAndDirection(xiComponent, xiDirection));
       {
-        mEnabledDirectionalComponents.Add(new Tuple<IComponent,eDirection>(xiComponent, xiDirection));
+        mEnabledDirectionalComponents.Add(new Tuple<eComponentType, eDirection>(xiComponent.ComponentType(), xiDirection));
       }
     }
 
@@ -76,12 +76,12 @@ namespace aPC.Common.Entities
                   HasDirection(c, xiDirection));
     }
 
-    private Func<Tuple<IComponent, eDirection>, IComponent, bool> HasComponentType = 
-      (item, component) => item.Item1.ComponentType() == component.ComponentType();
+    private Func<Tuple<eComponentType, eDirection>, IComponent, bool> HasComponentType = 
+      (item, component) => item.Item1 == component.ComponentType();
 
-    private Func<Tuple<IComponent, eDirection>, eDirection, bool> HasDirection =
+    private Func<Tuple<eComponentType, eDirection>, eDirection, bool> HasDirection =
       (item, direction) => item.Item2 == direction;
 
-    private readonly List<Tuple<IComponent, eDirection>> mEnabledDirectionalComponents;
+    private readonly List<Tuple<eComponentType, eDirection>> mEnabledDirectionalComponents;
   }
 }
