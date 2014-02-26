@@ -6,5 +6,10 @@ namespace aPC.Common.Entities
   {
     [XmlAttribute]
     public float Intensity;
+
+    public eComponentType ComponentType()
+    {
+      return eComponentType.Fan;
+    }
   }
 }

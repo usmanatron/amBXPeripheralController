@@ -129,5 +129,10 @@ namespace aPC.Common.Tests
   class TestComponent : IComponent
   {
     public string Value;
+
+    public eComponentType ComponentType()
+    {
+      return eComponentType.Light;
+    }
   }
 }

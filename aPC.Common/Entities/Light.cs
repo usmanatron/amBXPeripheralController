@@ -15,5 +15,10 @@ namespace aPC.Common.Entities
 
     [XmlAttribute] 
     public float Blue;
+
+    public eComponentType ComponentType()
+    {
+      return eComponentType.Light;
+    }
   }
 }
