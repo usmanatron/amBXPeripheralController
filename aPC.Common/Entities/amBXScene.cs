@@ -16,10 +16,11 @@ namespace aPC.Common.Entities
     [XmlAttribute]
     public bool IsExclusive;
 
-    [XmlAttribute]
+    
     // If IsEvent = true, this scene is for an "event":
     // * Ignore IsRepeatable booleans
     // * Once all frames have been run, return to the previously running Scene.
+    [XmlAttribute]
     public bool IsEvent;
 
     // Used in Server to decide on the set of Actor/s to use
@@ -28,7 +29,19 @@ namespace aPC.Common.Entities
 
     [XmlArray("Frames")]
     [XmlArrayItem("Frame")]
-    public List<Frame> Frames;
+    public List<Frame> Frames
+    {
+      get
+      {
+        return mFrames;
+      }
+      set
+      {
+        mFrames = value;
+        // Clear the statistics
+        mFrameStatistics = null;
+      }
+    }
 
     #region Helper Properties
 
@@ -42,6 +55,25 @@ namespace aPC.Common.Entities
       }
     }
 
+    [XmlIgnore]
+    public FrameStatistics FrameStatistics
+    {
+      get
+      {
+        if (mFrameStatistics == null)
+        {
+          mFrameStatistics = new FrameStatistics(Frames);
+        }
+        return mFrameStatistics;
+      }
+    }
+
     #endregion
+
+    [XmlIgnore]
+    private List<Frame> mFrames;
+
+    [XmlIgnore]
+    private FrameStatistics mFrameStatistics;
   }
 }
