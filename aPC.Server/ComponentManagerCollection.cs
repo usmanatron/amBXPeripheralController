@@ -48,14 +48,30 @@ namespace aPC.Server
 
     public void UpdateAllManagers(amBXScene xiScene)
     {
-      Parallel.ForEach(mLightConductors, conductor => UpdateSceneIfRelevant<Light>(conductor, xiScene));
-      Parallel.ForEach(mFanConductors, conductor => UpdateSceneIfRelevant<Fan>(conductor, xiScene));
-      Parallel.ForEach(mRumbleConductors, conductor => UpdateSceneIfRelevant<Rumble>(conductor, xiScene));
+      Parallel.ForEach(mLightConductors, conductor => UpdateSceneIfRelevant(conductor, xiScene));
+      Parallel.ForEach(mFanConductors, conductor => UpdateSceneIfRelevant(conductor, xiScene));
+      Parallel.ForEach(mRumbleConductors, conductor => UpdateSceneIfRelevant(conductor, xiScene));
     }
 
-    private void UpdateSceneIfRelevant<T>(LightConductor xiConductor, amBXScene xiScene)
+    private void UpdateSceneIfRelevant(LightConductor xiConductor, amBXScene xiScene)
     {
-      if (IsApplicableForConductor(xiScene.FrameStatistics, xiConductor.ComponentType, xiConductor.Direction))
+      if (IsApplicableForConductor(xiScene.FrameStatistics, xiConductor.ComponentType(), xiConductor.Direction))
+      {
+        xiConductor.UpdateScene(xiScene);
+      }
+    }
+
+    private void UpdateSceneIfRelevant(FanConductor xiConductor, amBXScene xiScene)
+    {
+      if (IsApplicableForConductor(xiScene.FrameStatistics, xiConductor.ComponentType(), xiConductor.Direction))
+      {
+        xiConductor.UpdateScene(xiScene);
+      }
+    }
+
+    private void UpdateSceneIfRelevant(RumbleConductor xiConductor, amBXScene xiScene)
+    {
+      if (IsApplicableForConductor(xiScene.FrameStatistics, xiConductor.ComponentType(), xiConductor.Direction))
       {
         xiConductor.UpdateScene(xiScene);
       }

@@ -13,7 +13,7 @@ namespace aPC.Common.Server.SceneHandlers
     {
       mEventCallback = xiEventCallback;
 
-      var lScene = new SceneAccessor().GetScene("Empty");
+      var lScene = new SceneAccessor().GetScene("default_redvsblue");
       mPreviousScene = lScene;
       CurrentScene = lScene;
       SetupNewScene(CurrentScene);
@@ -59,8 +59,9 @@ namespace aPC.Common.Server.SceneHandlers
 
       if (!lFrames.Any())
       {
-        // This should never happen
-        throw new InvalidOperationException("No more applicable frames could be found - this implies the Manager should have been made dormant but was not");
+        // qqUMI Add a comment here about the fact that we can get here if there are no repeatable frames
+        IsDormant = false;
+        return new Frame();
       }
       return lFrames[mTicker.Index];
     }
@@ -90,10 +91,6 @@ namespace aPC.Common.Server.SceneHandlers
         {
           mEventCallback();
         }
-      }
-      else if (!FramesAreApplicable(CurrentScene.RepeatableFrames))
-      {
-        IsDormant = true;
       }
     }
 

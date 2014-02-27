@@ -65,6 +65,7 @@
     <Compile Include="Builders\FanSectionBuilderTests.cs" />
     <Compile Include="Builders\FrameBuilderTests.cs" />
     <Compile Include="Builders\RumbleSectionBuilderTests.cs" />
+    <Compile Include="FrameStatisticsTests.cs" />
     <Compile Include="SectionBaseTests.cs" />
     <Compile Include="Builders\LightSectionBuilderTests.cs" />
     <Compile Include="Defaults\DefaultSceneTests.cs" />

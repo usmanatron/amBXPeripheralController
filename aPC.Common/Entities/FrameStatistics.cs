@@ -57,7 +57,7 @@ namespace aPC.Common.Entities
 
     private void AddDirectionalComponent(eComponentType xiComponentType, eDirection xiDirection)
     {
-      if (!AreEnabledForComponentAndDirection(xiComponentType, xiDirection));
+      if (!AreEnabledForComponentAndDirection(xiComponentType, xiDirection))
       {
         mEnabledDirectionalComponents.Add(new Tuple<eComponentType, eDirection>(xiComponentType, xiDirection));
       }
@@ -82,6 +82,7 @@ namespace aPC.Common.Entities
     private Func<Tuple<eComponentType, eDirection>, eDirection, bool> HasDirection =
       (item, direction) => item.Item2 == direction;
 
-    private readonly List<Tuple<eComponentType, eDirection>> mEnabledDirectionalComponents;
+    //qqUMI public for testing - do something better?
+    public readonly List<Tuple<eComponentType, eDirection>> mEnabledDirectionalComponents;
   }
 }

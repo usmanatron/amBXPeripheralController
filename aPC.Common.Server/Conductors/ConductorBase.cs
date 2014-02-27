@@ -11,7 +11,7 @@ namespace aPC.Common.Server.Conductors
   {
     protected ConductorBase(eDirection xiDirection, EngineActorBase<T> xiActor, SceneHandlerBase<T> xiHandler)
     {
-      mDirection = xiDirection;
+      Direction = xiDirection;
       mActor = xiActor;
       mHandler = xiHandler;
     }
@@ -27,12 +27,12 @@ namespace aPC.Common.Server.Conductors
       }
       else
       {
-        var lSnapshot = mHandler.GetNextSnapshot(mDirection);
+        var lSnapshot = mHandler.GetNextSnapshot(Direction);
         if (lSnapshot == null)
         {
           throw new InvalidOperationException("An error occured when retrieving the next snapshot");
         }
-        mActor.ActNextFrame(mDirection, lSnapshot);
+        mActor.ActNextFrame(Direction, lSnapshot);
         mHandler.AdvanceScene();
         WaitforInterval(lSnapshot.Length);
       }
@@ -48,7 +48,7 @@ namespace aPC.Common.Server.Conductors
       Thread.Sleep(xiLength);
     }
 
-    protected eDirection mDirection;
+    public eDirection Direction;
 
     private readonly EngineActorBase<T> mActor;
     private readonly SceneHandlerBase<T> mHandler;
