@@ -21,10 +21,10 @@ namespace aPC.Client
 
       switch (mArgs[0].ToLower())
       {
-        case @"/i":
+        case @"\i":
           lSettings = new Settings(true, mArgs[1]);
           break;
-        case @"/f":
+        case @"\f":
           lSettings = new Settings(false, RetrieveFile(mArgs[1]));
           break;
         default:
