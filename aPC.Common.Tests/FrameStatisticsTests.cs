@@ -25,7 +25,7 @@ namespace aPC.Common.Tests
       var lStats = new FrameStatistics(new List<Frame> { lFrame });
 
       lStats.AreEnabledForComponentAndDirection(eComponentType.Light, eDirection.North);
-      Assert.AreEqual(1, lStats.mEnabledDirectionalComponents.Count());
+      Assert.AreEqual(1, lStats.EnabledDirectionalComponents.Count());
     }
   }
 }

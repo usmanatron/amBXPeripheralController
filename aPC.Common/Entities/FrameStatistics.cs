@@ -14,7 +14,7 @@ namespace aPC.Common.Entities
     /// </remarks>
     public FrameStatistics(List<Frame> xiFrames)
     {
-      mEnabledDirectionalComponents = new List<Tuple<eComponentType, eDirection>>();
+      EnabledDirectionalComponents = new List<Tuple<eComponentType, eDirection>>();
 
       foreach (var lFrame in xiFrames)
       {
@@ -31,7 +31,7 @@ namespace aPC.Common.Entities
 
     /// <remarks>
     ///   qqUMI The following commented out portion is an alternative method which *may*
-    ///         be more efficient (as it'll be looking at less directions
+    ///         be more efficient (as it'll be looking at less directions).  though it isn't as clean.
     ///  var lDirections = xiSection
     ///    .GetType()
     ///    .GetFields()
@@ -59,20 +59,20 @@ namespace aPC.Common.Entities
     {
       if (!AreEnabledForComponentAndDirection(xiComponentType, xiDirection))
       {
-        mEnabledDirectionalComponents.Add(new Tuple<eComponentType, eDirection>(xiComponentType, xiDirection));
+        EnabledDirectionalComponents.Add(new Tuple<eComponentType, eDirection>(xiComponentType, xiDirection));
       }
     }
 
-    public bool AreEnabledForComponent(eComponentType xiComponent)
+    public bool AreEnabledForComponent(eComponentType xiComponentType)
     {
-      return mEnabledDirectionalComponents
-        .Any(c => HasComponentType(c, xiComponent));
+      return EnabledDirectionalComponents
+        .Any(c => HasComponentType(c, xiComponentType));
     }
 
-    public bool AreEnabledForComponentAndDirection(eComponentType xiComponent, eDirection xiDirection)
+    public bool AreEnabledForComponentAndDirection(eComponentType xiComponentType, eDirection xiDirection)
     {
-      return mEnabledDirectionalComponents
-        .Any(c => HasComponentType(c, xiComponent) &&
+      return EnabledDirectionalComponents
+        .Any(c => HasComponentType(c, xiComponentType) &&
                   HasDirection(c, xiDirection));
     }
 
@@ -82,7 +82,6 @@ namespace aPC.Common.Entities
     private Func<Tuple<eComponentType, eDirection>, eDirection, bool> HasDirection =
       (item, direction) => item.Item2 == direction;
 
-    //qqUMI public for testing - do something better?
-    public readonly List<Tuple<eComponentType, eDirection>> mEnabledDirectionalComponents;
+    public readonly List<Tuple<eComponentType, eDirection>> EnabledDirectionalComponents;
   }
 }
