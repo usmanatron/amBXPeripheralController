@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using aPC.Client.Disco.Communication;
 using aPC.Common.Communication;
+using aPC.Common.Communication.Tests;
 
 namespace aPC.Client.Disco.Tests.Communication
 {

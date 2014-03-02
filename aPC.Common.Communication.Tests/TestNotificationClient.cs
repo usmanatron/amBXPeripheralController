@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using aPC.Common.Communication;
 
-namespace aPC.Client.Disco.Tests
+namespace aPC.Common.Communication.Tests
 {
-  class TestNotificationClient : INotificationClient
+  public class TestNotificationClient : INotificationClient
   {
     public TestNotificationClient()
     {

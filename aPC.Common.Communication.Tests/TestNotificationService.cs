@@ -4,11 +4,10 @@ using aPC.Common.Communication;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 
-namespace aPC.Client.Disco.Tests
+namespace aPC.Common.Communication.Tests
 {
-  //qqUMI Move this to aPC.Common.Communication.Tests?
   [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
-  class TestNotificationService : INotificationService, IDisposable
+  public class TestNotificationService : INotificationService, IDisposable
   {
     public TestNotificationService(string xiUrl)
     {
