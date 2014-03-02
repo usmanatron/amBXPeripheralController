@@ -11,6 +11,7 @@ namespace aPC.Client.Disco.Communication
     {
     }
 
+    // Overriding of the Url is used by tests
     public NotificationClient(string xiUrl)
     {
       mClient = new ChannelFactory<INotificationService>(
