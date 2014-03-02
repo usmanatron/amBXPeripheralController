@@ -20,39 +20,44 @@ namespace aPC.Client.Disco.Tests
     [SetUp]
     public void Setup()
     {
-      var lSettings = new Settings();
+      mSettings = new Settings() { BPM = 240 };
       mLightSectionGenerator = new TestLightSectionGenerator();
       var lSceneGenerator = new TestRandomSceneGenerator(mLightSectionGenerator);
       mNotificationClient = new TestNotificationClient();
 
-      mDiscoTask = new DiscoTask(lSettings, lSceneGenerator, mNotificationClient);
+      mDiscoTask = new DiscoTask(mSettings, lSceneGenerator, mNotificationClient);
     }
 
-    //qqUMI - This is an unstable test - first run always seems to fail?
     [Test]
-    public void RunningFor2Seconds_With150BPM_Pushes5Scenes()
+    public void RunningFor1Second_With240BPM_PushesAround4Scenes()
     {
       var lTask = new Task(mDiscoTask.Run);
       lTask.Start();
-      Thread.Sleep(5 * 400); //The standard settings pushes a scene every 400msec
+      Thread.Sleep(4 * mSettings.PushInterval);
       
-      Assert.AreEqual(5, mNotificationClient.NumberOfCustomScenesPushed);
+      // Randomly generating the scenes each time takes a bit of time, which means that it may
+      // not be exact (hence checking the value is around what we expect.
+      Assert.LessOrEqual(3, mNotificationClient.NumberOfCustomScenesPushed);
+      Assert.GreaterOrEqual(5, mNotificationClient.NumberOfCustomScenesPushed);
       Assert.AreEqual(0, mNotificationClient.NumberOfIntegratedScenesPushed);
     }
 
-    //[Test] //qqUMI Currently broken due to serialisation issues
+    [Test] //- qqUMI Currently broken due to serialisation issues
     public void PushingAScene_SendsTheExpectedConfiguration()
     {
+      int lInterval = (int)(2.5 * mSettings.PushInterval);
       var lTask = new Task(mDiscoTask.Run);
+      
       lTask.Start();
-      Thread.Sleep(400); //The standard settings pushes a scene every 400msec
+      Thread.Sleep(mSettings.PushInterval);
 
       Assert.AreEqual(1, mNotificationClient.NumberOfCustomScenesPushed);
-      Assert.AreEqual(mLightSectionGenerator.Generate(), mNotificationClient.CustomScenesPushed[0]);
+      Assert.AreEqual(mLightSectionGenerator.GeneratedScene(), mNotificationClient.CustomScenesPushed[0]);
     }
 
     private TestLightSectionGenerator mLightSectionGenerator;
     private TestNotificationClient mNotificationClient;
     private DiscoTask mDiscoTask;
+    private Settings mSettings;
   }
 }
