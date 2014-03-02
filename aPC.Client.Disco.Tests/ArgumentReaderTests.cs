@@ -7,14 +7,6 @@ namespace aPC.Client.Disco.Tests
   [TestFixture]
   public class ArgumentReaderTests
   {
-    [TestFixtureSetUp]
-    public void SetupTestSettings()
-    {
-      mTestSettings = new Settings
-      {
-        //qqUMI finish
-      };
-    }
     /* Finish Argumentreader - check that specific arguments work by passing one in and making sure it no longer is
      * equal to the default in Settings.
      * NotificationService - Mock out the communication part?  Just check it serialises and passes the string I guess>
@@ -55,8 +47,8 @@ namespace aPC.Client.Disco.Tests
       new SettingsTester(new Range(0.3f, 0.7f), "red:0.3,0.7", settings => settings.RedColourWidth),
       new SettingsTester(new Range(0.21f, 0.89f), "green:0.21,0.89", settings => settings.GreenColourWidth),
       new SettingsTester(new Range(0.1f, 0.55f), "blue:0.1,0.55", settings => settings.BlueColourWidth),
-      new SettingsTester(new Range(0, 1), "lightintensity:0,1", settings => settings.LightIntensityWidth),
-      new SettingsTester(500, "bpm:120", settings => settings.PushInterval)
+      new SettingsTester(new Range(0, 1), "intensity:0,1", settings => settings.LightIntensityWidth),
+      new SettingsTester(200, "bpm:300", settings => settings.PushInterval)
     };
 
 
@@ -74,8 +66,6 @@ namespace aPC.Client.Disco.Tests
       var lArgumentReader = new ArgumentReader(lArgument);
       Assert.Throws<UsageException>(() => lArgumentReader.ParseArguments());
     }
-
-    private Settings mTestSettings;
   }
 
   public class SettingsTester

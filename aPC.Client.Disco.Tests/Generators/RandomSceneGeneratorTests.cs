@@ -22,13 +22,12 @@ namespace aPC.Client.Disco.Tests.Generators
     }
 
     [Test]
-    // Currently fans and rumbles are not supported
-    public void NewScene_DisablesFansAndRumble()
+    public void NewScene_DoesNotSpecifyFansOrRumbles()
     {
       var lScene = mGenerator.Generate();
 
-      Assert.AreEqual(DefaultFanSections.Off, lScene.Frames[0].Fans);
-      Assert.AreEqual(DefaultRumbleSections.Off, lScene.Frames[0].Rumbles);
+      Assert.IsNull(lScene.Frames[0].Fans);
+      Assert.IsNull(lScene.Frames[0].Rumbles);
     }
 
     private Settings mSettings;
