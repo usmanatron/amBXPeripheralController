@@ -7,7 +7,7 @@ namespace aPC.Common.Communication.Tests
   {
     public TestNotificationClient()
     {
-      mIntegratedScenesPushed = new List<string>();
+      IntegratedScenesPushed = new List<string>();
       CustomScenesPushed = new List<string>();
     }
 
@@ -18,7 +18,7 @@ namespace aPC.Common.Communication.Tests
 
     public void PushIntegratedScene(string xiScene)
     {
-      mIntegratedScenesPushed.Add(xiScene);
+      IntegratedScenesPushed.Add(xiScene);
     }
 
     public int NumberOfCustomScenesPushed
@@ -28,10 +28,10 @@ namespace aPC.Common.Communication.Tests
 
     public int NumberOfIntegratedScenesPushed
     {
-      get { return mIntegratedScenesPushed.Count; }
+      get { return IntegratedScenesPushed.Count; }
     }
 
-    private readonly List<string> mIntegratedScenesPushed;
+    public readonly List<string> IntegratedScenesPushed;
     public readonly List<string> CustomScenesPushed;
   }
 }

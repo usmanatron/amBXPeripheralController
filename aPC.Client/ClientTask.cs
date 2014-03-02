@@ -3,7 +3,7 @@ using aPC.Common.Communication;
 
 namespace aPC.Client
 {
-  class ClientTask
+  public class ClientTask
   {
     public ClientTask(Settings xiSettings, INotificationClient xiNotificationClient)
     {
