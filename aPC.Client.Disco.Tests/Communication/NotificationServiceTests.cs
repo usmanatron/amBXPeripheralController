@@ -32,6 +32,12 @@ namespace aPC.Client.Disco.Tests.Communication
     }
 
     [Test]
+    public void PushingADodgyCustomScene_ExceptionsHandled()
+    {
+      Assert.DoesNotThrow(() => mClient.PushCustomScene("ThrowException"));
+    }
+
+    [Test]
     public void PushingACustomScene_SendsTheExpectedScene()
     {
       mClient.PushCustomScene("scene");

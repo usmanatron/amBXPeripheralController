@@ -44,12 +44,22 @@ namespace aPC.Client.Disco.Tests
 
     public void RunCustomScene(string xiSceneXml)
     {
+      ThrowExceptionIfSpecified(xiSceneXml);
       Scenes.Add(new Tuple<bool, string>(false, xiSceneXml));
     }
 
     public void RunIntegratedScene(string xiSceneName)
     {
+      ThrowExceptionIfSpecified(xiSceneName);
       Scenes.Add(new Tuple<bool, string>(true, xiSceneName));
+    }
+
+    private void ThrowExceptionIfSpecified(string xiContent)
+    {
+      if (xiContent == "ThrowException")
+      {
+        throw new InvalidOperationException("Test exception");
+      }
     }
 
     public void Dispose()
@@ -58,6 +68,7 @@ namespace aPC.Client.Disco.Tests
     }
 
     // Item1 is a boolean specifying if the item pushed was an integrated scene
+    // Item2 is the information sent
     public List<Tuple<bool, string>> Scenes { get; private set; }
     private readonly ServiceHost mHost;
   }
