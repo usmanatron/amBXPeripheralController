@@ -3,15 +3,19 @@ using System.ServiceModel;
 
 namespace aPC.Client.Communication
 {
-  class NotificationClient : INotificationClient
+  public class NotificationClient : INotificationClient
   {
     public NotificationClient()
+      : this(CommunicationSettings.ServiceUrlTemplate.Replace(CommunicationSettings.HostnameHolder, "localhost"))
     {
-      //This client only supports pushing to localhost
+    }
+
+    // Overriding of the Url is used by tests
+    public NotificationClient(string xiUrl)
+    {
       mClient = new ChannelFactory<INotificationService>(
         new BasicHttpBinding(),
-        CommunicationSettings.ServiceUrlTemplate
-        .Replace(CommunicationSettings.HostnameHolder, "localhost"));
+        xiUrl);
     }
 
     public void PushCustomScene(string xiScene)
