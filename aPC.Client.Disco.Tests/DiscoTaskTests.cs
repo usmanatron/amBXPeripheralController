@@ -42,7 +42,7 @@ namespace aPC.Client.Disco.Tests
       Assert.AreEqual(0, mNotificationClient.NumberOfIntegratedScenesPushed);
     }
 
-    [Test] //- qqUMI Currently broken due to serialisation issues
+    [Test]
     public void PushingAScene_SendsTheExpectedConfiguration()
     {
       int lInterval = (int)(2.5 * mSettings.PushInterval);
