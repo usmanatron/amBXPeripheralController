@@ -5,9 +5,9 @@ namespace aPC.Client
 {
   class ClientTask
   {
-    public ClientTask(Settings xiSettings)
+    public ClientTask(Settings xiSettings, INotificationClient xiNotificationClient)
     {
-      mNotificationClient = new NotificationClient();
+      mNotificationClient = xiNotificationClient;
       mSettings = xiSettings;
     }
 
