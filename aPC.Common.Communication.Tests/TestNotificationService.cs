@@ -11,8 +11,7 @@ namespace aPC.Common.Communication.Tests
   {
     public TestNotificationService(string xiUrl)
     {
-      Scenes = new List<Tuple<bool, string>>();
-
+      ClearScenes();
       mHost = new ServiceHost(this);
       mHost.AddServiceEndpoint(typeof(INotificationService),
                                  new BasicHttpBinding(),
@@ -39,6 +38,11 @@ namespace aPC.Common.Communication.Tests
           debug.IncludeExceptionDetailInFaults = true;
         }
       }
+    }
+
+    public void ClearScenes()
+    {
+      Scenes = new List<Tuple<bool, string>>();
     }
 
     public void RunCustomScene(string xiSceneXml)
