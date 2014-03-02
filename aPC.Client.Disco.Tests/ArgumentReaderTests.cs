@@ -56,7 +56,6 @@ namespace aPC.Client.Disco.Tests
       new SettingsTester(new Range(0.21f, 0.89f), "green:0.21,0.89", settings => settings.GreenColourWidth),
       new SettingsTester(new Range(0.1f, 0.55f), "blue:0.1,0.55", settings => settings.BlueColourWidth),
       new SettingsTester(new Range(0, 1), "lightintensity:0,1", settings => settings.LightIntensityWidth),
-      new SettingsTester(new Range(0.4f, 0.9f), "fan:0.4,0.9", settings => settings.FanWidth),
       new SettingsTester(500, "bpm:120", settings => settings.PushInterval)
     };
 

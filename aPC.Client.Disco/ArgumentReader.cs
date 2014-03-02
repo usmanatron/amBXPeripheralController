@@ -35,9 +35,6 @@ namespace aPC.Client.Disco
           case "green":
             lSettings.GreenColourWidth = GetRange(lDeconstructedArgument[1]);
             break;
-          case "fan":
-            lSettings.FanWidth = GetRange(lDeconstructedArgument[1]);
-            break;
           default:
             throw new UsageException("Unknown argument: " + lDeconstructedArgument);
         }

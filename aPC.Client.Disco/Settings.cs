@@ -14,7 +14,6 @@
       RedColourWidth = new Range(0, 1);
       BlueColourWidth = new Range(0, 1);
       GreenColourWidth = new Range(0, 1);
-      FanWidth = new Range(0, 0);
       LightIntensityWidth = new Range(0, 1);
     }
 
@@ -53,7 +52,6 @@
     public Range BlueColourWidth;
     public Range GreenColourWidth;
     public Range LightIntensityWidth;
-    public Range FanWidth;
     public Range FadeTime;
 
     public double ChangeThreshold;
