@@ -7,7 +7,7 @@ using System.Threading;
 namespace aPC.Common.Server
 {
   // Manages the amBXEngine interface - deals with adding and setting stuff etc.
-  public class EngineManager : IDisposable
+  public class EngineManager : IDisposable, IEngine
   {
     public EngineManager()
     {
