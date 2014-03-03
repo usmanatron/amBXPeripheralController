@@ -6,6 +6,7 @@ namespace aPC.Common.Entities
   {
     [XmlElement]
     [PhysicalComponent]
+    [Direction(eDirection.Center)]
     public Rumble Rumble;
   }
 }
