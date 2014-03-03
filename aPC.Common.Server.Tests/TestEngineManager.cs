@@ -13,6 +13,10 @@ namespace aPC.Common.Server.Tests
         Fans = new FanSection(),
         Rumbles = new RumbleSection()
       };
+      Updated = new Dictionary<eComponentType, bool>()
+        {
+          {eComponentType.Light, false}, {eComponentType.Fan, false}, {eComponentType.Rumble, false}
+        };
     }
 
     public void UpdateLight(eDirection xiDirection, Light xiLight, int xiFadeTime)
