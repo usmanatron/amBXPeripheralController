@@ -5,7 +5,7 @@ namespace aPC.Common.Server.EngineActors
 {
   public class FrameActor : EngineActorBase<FrameSnapshot>
   {
-    public FrameActor(EngineManager xiEngine) : base (xiEngine)
+    public FrameActor(IEngine xiEngine) : base (xiEngine)
     {
     }
 

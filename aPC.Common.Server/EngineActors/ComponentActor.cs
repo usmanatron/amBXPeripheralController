@@ -5,7 +5,7 @@ namespace aPC.Common.Server.EngineActors
 {
   public abstract class ComponentActor<T> : EngineActorBase<ComponentSnapshot<T>> where T : IComponent
   {
-    protected ComponentActor(EngineManager xiEngine)
+    protected ComponentActor(IEngine xiEngine)
       : base (xiEngine)
     {
     }

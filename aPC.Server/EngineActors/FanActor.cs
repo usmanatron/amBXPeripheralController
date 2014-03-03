@@ -8,7 +8,7 @@ namespace aPC.Server.EngineActors
 {
   class FanActor : ComponentActor<Fan>
   {
-    public FanActor(EngineManager xiEngine) : base (xiEngine)
+    public FanActor(IEngine xiEngine) : base (xiEngine)
     {
     }
 

@@ -4,13 +4,13 @@ namespace aPC.Common.Server.EngineActors
 {
   public abstract class EngineActorBase<T> where T : SnapshotBase
   {
-    protected EngineActorBase(EngineManager xiEngine)
+    protected EngineActorBase(IEngine xiEngine)
     {
       Engine = xiEngine;
     }
 
     public abstract void ActNextFrame(eDirection xiDirection, T xiSnapshot);
 
-    protected EngineManager Engine;
+    protected IEngine Engine;
   }
 }

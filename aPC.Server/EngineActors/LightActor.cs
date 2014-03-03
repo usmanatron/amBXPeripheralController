@@ -8,7 +8,7 @@ namespace aPC.Server.EngineActors
 {
   class LightActor : ComponentActor<Light>
   {
-    public LightActor(EngineManager xiEngine) : base (xiEngine)
+    public LightActor(IEngine xiEngine) : base (xiEngine)
     {
     }
 

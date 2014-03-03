@@ -8,7 +8,7 @@ namespace aPC.Server.EngineActors
 {
   class RumbleActor : ComponentActor<Rumble>
   {
-    public RumbleActor(EngineManager xiEngine) : base (xiEngine)
+    public RumbleActor(IEngine xiEngine) : base (xiEngine)
     {
     }
 
