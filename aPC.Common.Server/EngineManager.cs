@@ -59,10 +59,10 @@ namespace aPC.Common.Server
 
     #region Updating
 
-    public void UpdateLight(eDirection xiDirection, Light xiInputLight, int xiFadeTime)
+    public void UpdateLight(eDirection xiDirection, Light xiLight, int xiFadeTime)
     {
       var lDirection = GetDirection(xiDirection);
-      ThreadPool.QueueUserWorkItem(_ => UpdateLightInternal(mLights[lDirection], xiInputLight, xiFadeTime));
+      ThreadPool.QueueUserWorkItem(_ => UpdateLightInternal(mLights[lDirection], xiLight, xiFadeTime));
     }
 
     private void UpdateLightInternal(amBXLight xiLight, Light xiInputLight, int xiFadeTime)
@@ -76,10 +76,10 @@ namespace aPC.Common.Server
       xiLight.FadeTime = xiFadeTime;
     }
 
-    public void UpdateFan(eDirection xiDirection, Fan xiInputFan)
+    public void UpdateFan(eDirection xiDirection, Fan xiFan)
     {
       var lDirection = GetDirection(xiDirection);
-      UpdateFanInternal(mFans[lDirection], xiInputFan);
+      UpdateFanInternal(mFans[lDirection], xiFan);
     }
 
     private void UpdateFanInternal(amBXFan xiFan, Fan xiInputFan)
@@ -91,13 +91,13 @@ namespace aPC.Common.Server
       xiFan.Intensity = xiInputFan.Intensity;
     }
 
-    public void UpdateRumble(eDirection xiDirection, Rumble xiInputRumble)
+    public void UpdateRumble(eDirection xiDirection, Rumble xiRumble)
     {
       var lDirection = GetDirection(xiDirection);
-      UpdateRumbleInternal(mRumbles[lDirection], xiInputRumble);
+      UpdateRumbleInternal(mRumbles[lDirection], xiRumble);
     }
 
-    protected void UpdateRumbleInternal(amBXRumble xiRumble, Rumble xiInputRumble)
+    private void UpdateRumbleInternal(amBXRumble xiRumble, Rumble xiInputRumble)
     {
       if (xiInputRumble == null)
       {
