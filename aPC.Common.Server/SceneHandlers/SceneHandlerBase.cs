@@ -59,7 +59,7 @@ namespace aPC.Common.Server.SceneHandlers
       if (!lFrames.Any())
       {
         // qqUMI Add a comment here about the fact that we can get here if there are no repeatable frames
-        IsDormant = false;
+        IsDormant = true;
         return new Frame();
       }
       return lFrames[mTicker.Index];
