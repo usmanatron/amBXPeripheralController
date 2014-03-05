@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="AtypicalFirstRunInfiniteTickerTests.cs" />
     <Compile Include="EngineActors\FrameActorTests.cs" />
+    <Compile Include="EngineManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SceneHandlers\SceneHandlerBaseTests.cs" />
     <Compile Include="SceneHandlers\TestFrameHandler.cs" />
