@@ -14,6 +14,7 @@ namespace aPC.Server
     public ServerTask()
     {
       mSyncManager = new SynchronisationManager();
+      mInitialScene = new SceneAccessor().GetScene("Default_RedVsBlue");
     }
 
     internal void Run()
@@ -22,10 +23,7 @@ namespace aPC.Server
       using (var lEngine = new EngineManager())
       {
         SetupSynchronisedManager(lEngine);
-        mDesynchronisedManager = new ComponentManagerCollection(lEngine, EventComplete);
-
-        // Start the default initial scene
-        Update(new SceneAccessor().GetScene("Default_RedVsBlue"));
+        mDesynchronisedManager = new ComponentManagerCollection(lEngine, mInitialScene, EventComplete);
 
         while (true)
         {
@@ -44,7 +42,7 @@ namespace aPC.Server
     private void SetupSynchronisedManager(EngineManager xiEngine)
     {
       var lActor = new FrameActor(xiEngine);
-      mFrame = new FrameConductor(lActor, new FrameHandler());
+      mFrame = new FrameConductor(lActor, new FrameHandler(mInitialScene));
     }
 
     internal void Update(amBXScene xiScene)
@@ -104,6 +102,7 @@ namespace aPC.Server
 
     private FrameConductor mFrame;
     private ComponentManagerCollection mDesynchronisedManager;
+    private amBXScene mInitialScene;
 
     private readonly SynchronisationManager mSyncManager;
     private bool mIsCurrentlyRunningEvent;

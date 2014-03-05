@@ -10,7 +10,7 @@ namespace aPC.Server.SceneHandlers
 {
   class FanHandler : ComponentHandler<Fan>
   {
-    public FanHandler(Action xiEventcomplete) : base(xiEventcomplete)
+    public FanHandler(amBXScene xiScene, Action xiEventcomplete) : base(xiScene, xiEventcomplete)
     { 
     }
 

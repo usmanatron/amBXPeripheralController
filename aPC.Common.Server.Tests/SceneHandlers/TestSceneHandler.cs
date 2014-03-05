@@ -7,11 +7,12 @@ namespace aPC.Common.Server.Tests.SceneHandlers
 {
   class TestSceneHandler : SceneHandlerBase<TestSnapshot>
   {
-    public TestSceneHandler() : this (null)
+    public TestSceneHandler(amBXScene xiScene)
+      : this(xiScene, null)
     {
     }
 
-    public TestSceneHandler(Action xiAction) : base (xiAction)
+    public TestSceneHandler(amBXScene xiScene, Action xiAction) : base (xiScene, xiAction)
     {
     }
 

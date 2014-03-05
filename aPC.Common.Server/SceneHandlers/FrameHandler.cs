@@ -8,13 +8,13 @@ namespace aPC.Common.Server.SceneHandlers
 {
   public class FrameHandler : SceneHandlerBase<FrameSnapshot>
   {
-    public FrameHandler()
-      : this(null)
+    public FrameHandler(amBXScene xiScene)
+      : this(xiScene, null)
     {
     }
     
-    public FrameHandler(Action xiEventComplete) 
-      : base (xiEventComplete)
+    public FrameHandler(amBXScene xiScene, Action xiEventComplete) 
+      : base (xiScene, xiEventComplete)
     {
     }
 

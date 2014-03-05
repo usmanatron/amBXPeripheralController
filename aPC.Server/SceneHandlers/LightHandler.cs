@@ -10,7 +10,7 @@ namespace aPC.Server.SceneHandlers
 {
   class LightHandler : ComponentHandler<Light>
   {
-    public LightHandler(Action xiEventcomplete) : base(xiEventcomplete)
+    public LightHandler(amBXScene xiScene, Action xiEventcomplete) : base(xiScene, xiEventcomplete)
     { 
     }
 

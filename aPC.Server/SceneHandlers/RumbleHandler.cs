@@ -10,7 +10,7 @@ namespace aPC.Server.SceneHandlers
 {
   class RumbleHandler : ComponentHandler<Rumble>
   {
-    public RumbleHandler(Action xiEventcomplete) : base(xiEventcomplete)
+    public RumbleHandler(amBXScene xiScene, Action xiEventcomplete) : base(xiScene, xiEventcomplete)
     { 
     }
 

@@ -9,13 +9,12 @@ namespace aPC.Common.Server.SceneHandlers
   //Handles the amBXScene object(s) and any interactions.
   public abstract class SceneHandlerBase<T> where T : SnapshotBase
   {
-    protected SceneHandlerBase(Action xiEventCallback)
+    protected SceneHandlerBase(amBXScene xiScene, Action xiEventCallback)
     {
       mEventCallback = xiEventCallback;
 
-      var lScene = new SceneAccessor().GetScene("default_redvsblue");
-      mPreviousScene = lScene;
-      CurrentScene = lScene;
+      mPreviousScene = xiScene;
+      CurrentScene = xiScene;
       SetupNewScene(CurrentScene);
     }
 

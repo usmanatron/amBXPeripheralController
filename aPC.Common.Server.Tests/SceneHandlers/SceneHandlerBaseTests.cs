@@ -20,14 +20,14 @@ namespace aPC.Common.Server.Tests.SceneHandlers
     [Test]
     public void NewSceneHandler_IsNotDormant()
     {
-      var lHandler = new TestSceneHandler();
+      var lHandler = new TestSceneHandler(mInitialScene);
       Assert.IsFalse(lHandler.IsDormant);
     }
 
     //[Test] //qqUMI - doesn't work yet.  Need to override equals
     public void GetNextFrame_GetsExpectedData()
     {
-      var lHandler = new TestSceneHandler();
+      var lHandler = new TestSceneHandler(mInitialScene);
       
       var lFrame = lHandler.NextFrame;
       var lExpectedFrame = mInitialScene.Frames.First();
