@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using NUnit.Framework;
 using aPC.Common.Defaults;
 using aPC.Common.Server.Tests;
@@ -30,8 +31,8 @@ namespace aPC.Common.Server.Tests.Conductors
         .WithFrameLength(50)
         .WithLightSection(DefaultLightSections.Blue)
         .Build();
-        
-      mHandler = new TestSceneHandler(mInitialScene);
+
+      mHandler = new TestSceneHandler(mInitialScene, new Action(() => { }));
       mActor = new TestEngineActor(new TestEngineManager());
     }
 

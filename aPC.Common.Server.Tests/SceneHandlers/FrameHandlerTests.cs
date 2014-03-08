@@ -13,12 +13,13 @@ namespace aPC.Common.Server.Tests.SceneHandlers
     public void FixtureSetup()
     {
       mScene = new DefaultScenes().Building;
+      mAction = new Action(() => { });
     }
 
     [Test]
     public void NextFrame_IsAsExpected()
     {
-      var lHandler = new FrameHandler(mScene);
+      var lHandler = new FrameHandler(mScene, mAction);
       
       var lSnapshot = lHandler.GetNextSnapshot(eDirection.North);
       var lExpectedFrame = mScene.Frames[0];
@@ -32,7 +33,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
     [TestCaseSource("Directions")]
     public void GetNextSnapshot_ReturnsExpectedFrame_RegardlessOfDirection(eDirection xiDirection)
     {
-      var lHandler = new FrameHandler(mScene);
+      var lHandler = new FrameHandler(mScene, mAction);
 
       var lSnapshot = lHandler.GetNextSnapshot(xiDirection);
       var lExpectedFrame = mScene.Frames[0];
@@ -45,5 +46,6 @@ namespace aPC.Common.Server.Tests.SceneHandlers
 
     private readonly eDirection[] Directions = (eDirection[])Enum.GetValues(typeof(eDirection));
     private amBXScene mScene;
+    private Action mAction;
   }
 }

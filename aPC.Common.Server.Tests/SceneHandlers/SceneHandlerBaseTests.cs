@@ -74,19 +74,21 @@ namespace aPC.Common.Server.Tests.SceneHandlers
         IsExclusive = false,
         Frames = lUnrepeatedFrames
       };
+
+      mAction = new Action(() => { });
     }
 
     [Test]
     public void NewSceneHandler_IsNotDormant()
     {
-      var lHandler = new TestSceneHandler(mInitialScene);
+      var lHandler = new TestSceneHandler(mInitialScene, mAction);
       Assert.IsTrue(lHandler.IsEnabled);
     }
 
     [Test]
     public void GetNextFrame_GetsExpectedData()
     {
-      var lHandler = new TestSceneHandler(mInitialScene);
+      var lHandler = new TestSceneHandler(mInitialScene, mAction);
       
       var lFrame = lHandler.NextFrame;
       var lExpectedFrame = mInitialScene.Frames[0];
@@ -99,7 +101,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
     [Test]
     public void AdvancingHandlerOnFirstRun_GivesSecondFrame()
     {
-      var lHandler = new TestSceneHandler(mInitialScene);
+      var lHandler = new TestSceneHandler(mInitialScene, mAction);
       
       lHandler.AdvanceScene();
       var lFrame = lHandler.NextFrame;
@@ -113,7 +115,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
     [Test]
     public void AdvancingHandlerThreeTimes_ReturnsToFirstRepeatableFrame()
     {
-      var lHandler = new TestSceneHandler(mInitialScene);
+      var lHandler = new TestSceneHandler(mInitialScene, mAction);
 
       lHandler.AdvanceScene();
       lHandler.AdvanceScene();
@@ -130,7 +132,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
     [Test]
     public void AfterRunningThroughAnEvent_RevertsToPreviousScene()
     {
-      var lHandler = new TestSceneHandler(mInitialScene);
+      var lHandler = new TestSceneHandler(mInitialScene, mAction);
       lHandler.UpdateScene(mBlueEvent);
 
       lHandler.AdvanceScene();
@@ -157,7 +159,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
     [Test]
     public void NoMoreApplicableScenes_MarksHandlerAsDormant()
     {
-      var lHandler = new TestSceneHandler(mUnrepeatedScene);
+      var lHandler = new TestSceneHandler(mUnrepeatedScene, mAction);
       lHandler.AdvanceScene();
 
       var lFrame = lHandler.NextFrame;
@@ -171,7 +173,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
     [Test]
     public void HandlerWithEvent_PushingAnotherEvent_DoesNotUpdatePreviousScene()
     {
-      var lHandler = new TestSceneHandler(mInitialScene);
+      var lHandler = new TestSceneHandler(mInitialScene, mAction);
       lHandler.UpdateScene(mBlueEvent);
       lHandler.UpdateScene(mPurpleEvent);
 
@@ -194,5 +196,6 @@ namespace aPC.Common.Server.Tests.SceneHandlers
     private amBXScene mBlueEvent;
     private amBXScene mPurpleEvent;
     private amBXScene mUnrepeatedScene;
+    private Action mAction;
   }
 }

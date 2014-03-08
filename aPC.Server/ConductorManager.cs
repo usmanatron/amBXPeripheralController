@@ -28,7 +28,7 @@ namespace aPC.Server
 
     private void SetupManagers(EngineManager xiEngine, amBXScene xiScene, Action xiAction)
     {
-      mFrameConductor = new FrameConductor(new FrameActor(xiEngine), new FrameHandler(xiScene));      
+      mFrameConductor = new FrameConductor(new FrameActor(xiEngine), new FrameHandler(xiScene, xiAction));      
 
       mLightConductors.Add(new LightConductor(eDirection.North, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
       mLightConductors.Add(new LightConductor(eDirection.NorthEast, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
