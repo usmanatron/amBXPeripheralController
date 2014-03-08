@@ -2,7 +2,7 @@
 <!--
 A test event scene
 -->
-<amBXScene IsExclusive="true" IsEvent="true">
+<amBXScene IsExclusive="true" SceneType="Event">
   <Frames>
     <Frame Length="200" IsRepeated="false">
       <Lights FadeTime="100">

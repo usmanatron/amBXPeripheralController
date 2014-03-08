@@ -113,6 +113,13 @@
       <Name>aPC.Common.Communication</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Profiles\DesyncTest-Multiple.xml" />
+    <Content Include="Profiles\DesyncTest.xml" />
+    <Content Include="Profiles\Event.xml" />
+    <Content Include="Profiles\EventFans.xml" />
+    <Content Include="Profiles\RedVsBlue.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

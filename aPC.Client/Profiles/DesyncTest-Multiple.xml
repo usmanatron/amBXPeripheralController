@@ -2,7 +2,7 @@
 <!--
 A test Unsynchronised scene to see what happens in certain cases
 -->
-<amBXScene IsExclusive="true" IsEvent="false" IsSynchronised="false">
+<amBXScene IsExclusive="true" SceneType="Desync">
   <Frames>
     <Frame Length="500" IsRepeated="false">
       <Lights FadeTime="200">

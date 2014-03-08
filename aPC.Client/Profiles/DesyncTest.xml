@@ -2,7 +2,7 @@
 <!--
 A test event scene
 -->
-<amBXScene IsExclusive="true" IsEvent="false" IsSynchronised="false">
+<amBXScene IsExclusive="true" SceneType="Desync">
   <Frames>
     <Frame Length="500" IsRepeated="true">
       <Lights FadeTime="200">
