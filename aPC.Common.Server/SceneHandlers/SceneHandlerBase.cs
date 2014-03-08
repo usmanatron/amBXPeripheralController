@@ -94,7 +94,7 @@ namespace aPC.Common.Server.SceneHandlers
     }
 
     protected amBXScene CurrentScene;
-    public bool IsDormant { get; private set; }
+    public bool IsDormant { get; protected set; }
     private readonly Action mEventCallback;
 
     private AtypicalFirstRunInfiniteTicker mTicker;

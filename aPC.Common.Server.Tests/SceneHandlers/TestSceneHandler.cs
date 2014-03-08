@@ -18,7 +18,8 @@ namespace aPC.Common.Server.Tests.SceneHandlers
 
     public override TestSnapshot GetNextSnapshot(eDirection xiDirection)
     {
-      return new TestSnapshot();
+      var lFrame = GetNextFrame();
+      return new TestSnapshot(lFrame.Length);
     }
 
     public Frame NextFrame
@@ -34,6 +35,18 @@ namespace aPC.Common.Server.Tests.SceneHandlers
       get
       {
         return CurrentScene;
+      }
+    }
+
+    public bool IsDormant
+    {
+      get
+      {
+        return base.IsDormant;
+      }
+      set
+      {
+        base.IsDormant = value;
       }
     }
   }
