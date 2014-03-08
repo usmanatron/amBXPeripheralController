@@ -40,6 +40,10 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="amBXLib, Version=1.0.5075.24159, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Release\amBXLib.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.0.1.10\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
@@ -59,6 +63,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AtypicalFirstRunInfiniteTickerTests.cs" />
+    <Compile Include="ConversionHelperTests.cs" />
     <Compile Include="EngineActors\FrameActorTests.cs" />
     <Compile Include="EngineManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
