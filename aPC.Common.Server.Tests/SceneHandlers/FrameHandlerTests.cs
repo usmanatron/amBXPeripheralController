@@ -7,7 +7,7 @@ using System;
 namespace aPC.Common.Server.Tests.SceneHandlers
 {
   [TestFixture]
-  class TestFrameHandler
+  class FrameHandlerTests
   {
     [TestFixtureSetUp]
     public void FixtureSetup()
