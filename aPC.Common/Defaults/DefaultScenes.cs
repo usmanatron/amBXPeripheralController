@@ -115,7 +115,7 @@ namespace aPC.Common.Defaults
       {
         var lScene = new amBXScene
                      {
-                       IsSynchronised = true
+                       SceneType = eSceneType.Sync
                      };
 
         lScene.Frames = new FrameBuilder()
@@ -184,8 +184,7 @@ namespace aPC.Common.Defaults
       {
         var lScene = new amBXScene
                      {
-                       IsEvent = true,
-                       IsSynchronised = true
+                       SceneType = eSceneType.Event
                      };
 
         var lOff = new FrameBuilder()
@@ -226,9 +225,8 @@ namespace aPC.Common.Defaults
       {
         var lScene = new amBXScene
                      {
-                       IsEvent = true,
+                       SceneType = eSceneType.Event,
                        IsExclusive = true,
-                       IsSynchronised = true
                      };
 
         lScene.Frames = new FrameBuilder()
@@ -268,9 +266,8 @@ namespace aPC.Common.Defaults
       {
         var lScene = new amBXScene
                      {
-                       IsEvent = true, 
-                       IsExclusive = true, 
-                       IsSynchronised = true
+                       SceneType = eSceneType.Event,
+                       IsExclusive = true,
                      };
 
         lScene.Frames = new FrameBuilder()
@@ -323,9 +320,8 @@ namespace aPC.Common.Defaults
       {
         var lScene = new amBXScene
                      {
-                       IsEvent = true,
+                       SceneType = eSceneType.Event,
                        IsExclusive = true,
-                       IsSynchronised = true
                      };
         lScene.Frames = new FrameBuilder()
           .AddFrame()

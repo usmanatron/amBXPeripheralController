@@ -22,9 +22,9 @@ namespace aPC.Common.Server.SceneHandlers
     {
       lock (mSceneLock)
       {
-        if (CurrentScene.IsEvent)
+        if (CurrentScene.SceneType == eSceneType.Event)
         {
-          if (xiNewScene.IsEvent)
+          if (xiNewScene.SceneType == eSceneType.Event)
           {
             // Skip updating the previous scene, to ensure that we don't get 
             // stuck in an infinite loop of events.
@@ -40,9 +40,8 @@ namespace aPC.Common.Server.SceneHandlers
         else
         {
           mPreviousScene = CurrentScene;
-
         }
-
+        
         SetupNewScene(xiNewScene);
       }
     }
@@ -69,7 +68,7 @@ namespace aPC.Common.Server.SceneHandlers
 
       if (!lFrames.Any())
       {
-        // This can happen if there are no repeatable frames.  Mark as dormant and
+        // This can happen if there are no repeatable frames.  Mark as disabled and
         // pass through an empty frame.
         Disable();
         return new Frame();
@@ -98,7 +97,7 @@ namespace aPC.Common.Server.SceneHandlers
 
     private void DoSceneCompletedChecks()
     {
-      if (CurrentScene.IsEvent)
+      if (CurrentScene.SceneType == eSceneType.Event)
       {
         // The event has completed one full cycle.  Revert to
         // previous scene

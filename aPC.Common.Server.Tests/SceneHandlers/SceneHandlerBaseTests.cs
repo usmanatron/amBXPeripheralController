@@ -49,32 +49,28 @@ namespace aPC.Common.Server.Tests.SceneHandlers
 
       mInitialScene = new amBXScene
       {
-        IsEvent = false,
-        IsSynchronised = false,
+        SceneType = eSceneType.Desync,
         IsExclusive = false,
         Frames = lInitialSceneFrames
       };
 
       mBlueEvent = new amBXScene
       {
-        IsEvent = true,
-        IsSynchronised = true,
+        SceneType = eSceneType.Event,
         IsExclusive = false,
         Frames = lBlueEventFrames
       };
 
       mPurpleEvent = new amBXScene
       {
-        IsEvent = true,
-        IsSynchronised = true,
+        SceneType = eSceneType.Event,
         IsExclusive = false,
         Frames = lPurpleEventFrames
       };
 
       mUnrepeatedScene = new amBXScene
       {
-        IsEvent = false,
-        IsSynchronised = false,
+        SceneType = eSceneType.Desync,
         IsExclusive = false,
         Frames = lUnrepeatedFrames
       };

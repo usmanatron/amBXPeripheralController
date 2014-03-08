@@ -7,6 +7,21 @@
     Rumble
   }
 
+  /// <summary>
+  /// Desync - Allow all components to run by themselves
+  /// Sync  - Force all sections to be in sync with each other
+  /// Event - Ignore IsRepeatable.  Once all frames have been run, return to the previously running Scene.
+  /// </summary>
+  /// <remarks>
+  ///   Being an event implies that your also Sync (i.e. a desync event doesn't make sense)
+  /// </remarks>
+  public enum eSceneType
+  {
+    Desync,
+    Sync,
+    Event
+  }
+
   #region amBXLib-equivalent enums
 
   //qqUMI Write a unit test that forces equivalence

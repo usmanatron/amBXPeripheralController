@@ -17,8 +17,7 @@ namespace aPC.Common.Server.Tests.Conductors
     {
       mInitialScene = new amBXScene()
       {
-        IsEvent = false,
-        IsSynchronised = false,
+        SceneType = eSceneType.Desync,
         IsExclusive = false
       };
       mInitialScene.Frames = new FrameBuilder()
@@ -40,7 +39,7 @@ namespace aPC.Common.Server.Tests.Conductors
     public void RunningOnce_ActsFrame()
     {
       var lConductor = new TestConductor(eDirection.Everywhere, mActor, mHandler);
-      lConductor.Run();
+      lConductor.RunOnce();
 
       Assert.AreEqual(1, mActor.TimesInvoked);
     }
@@ -49,7 +48,7 @@ namespace aPC.Common.Server.Tests.Conductors
     public void RunningOnce_AdvancesScene()
     {
       var lConductor = new TestConductor(eDirection.Everywhere, mActor, mHandler);
-      lConductor.Run();
+      lConductor.RunOnce();
 
       Assert.AreEqual(mInitialScene.Frames[1], mHandler.NextFrame);
     }
@@ -62,15 +61,15 @@ namespace aPC.Common.Server.Tests.Conductors
       var lFirstFrameLength = mInitialScene.Frames[0].Length;
 
       lStopwatch.Start();
-      lConductor.Run();
+      lConductor.RunOnce();
       lStopwatch.Stop();
 
-      Assert.GreaterOrEqual(lStopwatch.ElapsedMilliseconds, lFirstFrameLength);
-      Assert.LessOrEqual(lStopwatch.ElapsedMilliseconds, lFirstFrameLength + 50);
+      Assert.GreaterOrEqual(lStopwatch.ElapsedMilliseconds, lFirstFrameLength - 5);
+      Assert.LessOrEqual(lStopwatch.ElapsedMilliseconds, lFirstFrameLength + 5);
     }
 
     [Test]
-    public void RunningOnce_WithDormantHandler_WaitsForASecond()
+    public void Running_WithDormantHandler_ReturnsImmediately()
     {
       mHandler.IsEnabled = false;
       var lConductor = new TestConductor(eDirection.Everywhere, mActor, mHandler);
@@ -80,8 +79,7 @@ namespace aPC.Common.Server.Tests.Conductors
       lConductor.Run();
       lStopwatch.Stop();
 
-      Assert.GreaterOrEqual(lStopwatch.ElapsedMilliseconds, 1000);
-      Assert.LessOrEqual(lStopwatch.ElapsedMilliseconds, 1000 + 50);
+      Assert.LessOrEqual(lStopwatch.ElapsedMilliseconds, 50);
     }
 
     [Test]

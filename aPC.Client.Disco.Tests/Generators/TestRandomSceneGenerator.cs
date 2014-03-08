@@ -1,6 +1,7 @@
 ﻿using aPC.Client.Disco.Generators;
 using aPC.Common.Builders;
 using aPC.Common.Entities;
+using aPC.Common;
 
 namespace aPC.Client.Disco.Tests.Generators
 {
@@ -23,9 +24,8 @@ namespace aPC.Client.Disco.Tests.Generators
       return new amBXScene
       {
         Frames = lFrames,
-        IsEvent = false,
         IsExclusive = false,
-        IsSynchronised = false
+        SceneType = eSceneType.Desync
       };
     }
 

@@ -1,5 +1,6 @@
 ﻿using aPC.Common.Entities;
 using aPC.Common.Builders;
+using aPC.Common;
 
 namespace aPC.Client.Disco.Generators
 {
@@ -15,8 +16,7 @@ namespace aPC.Client.Disco.Generators
     {
       var lScene = new amBXScene
       {
-        IsEvent = false,
-        IsSynchronised = false
+        SceneType = eSceneType.Desync
       };
 
       var lFrames = new FrameBuilder();

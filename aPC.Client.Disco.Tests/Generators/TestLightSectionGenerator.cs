@@ -19,7 +19,7 @@ namespace aPC.Client.Disco.Tests.Generators
     public string GeneratedScene()
     {
       return @"<?xml version=""1.0"" encoding=""utf-16""?>
-<amBXScene xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" IsExclusive=""false"" IsEvent=""false"" IsSynchronised=""false"">
+<amBXScene xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" IsExclusive=""false"" SceneType=""Desync"">
   <Frames>
     <Frame Length=""1000"" IsRepeated=""true"">
       <Lights FadeTime=""500"">
