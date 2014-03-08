@@ -83,9 +83,9 @@ namespace aPC.Common.Server.SceneHandlers
         mTicker.Advance();
 
         // If we've run the scene once through, we need to check for a few special circumstances
-        if (mTicker.Index == 0)
+        if (mTicker.Index == 0 && CurrentScene.SceneType == eSceneType.Event)
         {
-          DoSceneCompletedChecks();
+          EventComplete();
         }
       }
     }
@@ -95,18 +95,11 @@ namespace aPC.Common.Server.SceneHandlers
       IsEnabled = false;
     }
 
-    private void DoSceneCompletedChecks()
+    private void EventComplete()
     {
-      if (CurrentScene.SceneType == eSceneType.Event)
-      {
-        // The event has completed one full cycle.  Revert to
-        // previous scene
-        SetupNewScene(mPreviousScene);
-        if (mEventCallback != null)
-        {
-          mEventCallback();
-        }
-      }
+      SetupNewScene(mPreviousScene);
+      IsEnabled = false;
+      mEventCallback();
     }
 
     protected amBXScene CurrentScene;

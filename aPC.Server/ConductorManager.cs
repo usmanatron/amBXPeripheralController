@@ -4,25 +4,31 @@ using aPC.Common.Server;
 using aPC.Common.Entities;
 using aPC.Common;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
 using aPC.Server.SceneHandlers;
+using aPC.Common.Server.Conductors;
+using aPC.Common.Server.EngineActors;
+using aPC.Common.Server.SceneHandlers;
 
 namespace aPC.Server
 {
-  class ComponentManagerCollection
+  class ConductorManager
   {
-    public ComponentManagerCollection(EngineManager xiEngine, amBXScene xiScene, Action xiEventComplete)
+    public ConductorManager(EngineManager xiEngine, amBXScene xiScene, Action xiEventComplete)
     {
+      mLightConductors = new List<LightConductor>();
+      mFanConductors = new List<FanConductor>();
+      mRumbleConductors = new List<RumbleConductor>();
+
       SetupManagers(xiEngine, xiScene, xiEventComplete);
     }
 
     private void SetupManagers(EngineManager xiEngine, amBXScene xiScene, Action xiAction)
     {
-      mLightConductors = new List<LightConductor>();
-      mFanConductors = new List<FanConductor>();
-      mRumbleConductors = new List<RumbleConductor>();
+      mFrameConductor = new FrameConductor(new FrameActor(xiEngine), new FrameHandler(xiScene));      
 
       mLightConductors.Add(new LightConductor(eDirection.North, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
       mLightConductors.Add(new LightConductor(eDirection.NorthEast, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
@@ -39,14 +45,26 @@ namespace aPC.Server
       mRumbleConductors.Add(new RumbleConductor(eDirection.Center, new RumbleActor(xiEngine), new RumbleHandler(xiScene, xiAction)));
     }
 
-    public void RunAllManagersDeSynchronised(SynchronisationManager xiSyncManager)
+    public void RunSynchronised()
     {
-      Parallel.ForEach(mLightConductors, conductor => xiSyncManager.RunWhileUnSynchronised(conductor.Run));
-      Parallel.ForEach(mFanConductors, conductor => xiSyncManager.RunWhileUnSynchronised(conductor.Run));
-      Parallel.ForEach(mRumbleConductors, conductor => xiSyncManager.RunWhileUnSynchronised(conductor.Run));
+      ThreadPool.QueueUserWorkItem(_ => mFrameConductor.Run());
     }
 
-    public void UpdateAllManagers(amBXScene xiScene)
+    public void RunAllManagersDeSynchronised()
+    {
+      mLightConductors.ForEach(light => ThreadPool.QueueUserWorkItem(_ => light.Run()));
+      mFanConductors.ForEach(fan => ThreadPool.QueueUserWorkItem(_ => fan.Run()));
+      mRumbleConductors.ForEach(rumble => ThreadPool.QueueUserWorkItem(_ => rumble.Run()));
+    }
+
+    #region Update Scene
+
+    public void UpdateSync(amBXScene xiScene)
+    {
+      mFrameConductor.UpdateScene(xiScene);
+    }
+    
+    public void UpdateDeSync(amBXScene xiScene)
     {
       Parallel.ForEach(mLightConductors, conductor => UpdateSceneIfRelevant(conductor, xiScene));
       Parallel.ForEach(mFanConductors, conductor => UpdateSceneIfRelevant(conductor, xiScene));
@@ -77,22 +95,20 @@ namespace aPC.Server
       }
     }
 
+    #endregion
+
+    public void DisableAll()
+    {
+      mFrameConductor.Disable();
+      mLightConductors.ForEach(light => ThreadPool.QueueUserWorkItem(_ => light.Disable()));
+      mFanConductors.ForEach(fan => ThreadPool.QueueUserWorkItem(_ => fan.Disable()));
+      mRumbleConductors.ForEach(rumble => ThreadPool.QueueUserWorkItem(_ => rumble.Disable()));
+    }
+
     private Func<FrameStatistics, eComponentType, eDirection, bool> IsApplicableForConductor =
       (statistics, componentType, direction) => statistics.AreEnabledForComponentAndDirection(componentType, direction);
 
-
-    private bool RunTaskOnFans(Action<FanConductor> xiAction)
-    {
-      Parallel.ForEach(mFanConductors, xiAction);
-      return true;
-    }
-
-    private bool RunTaskOnRumbles(Action<RumbleConductor> xiAction)
-    {
-      Parallel.ForEach(mRumbleConductors, xiAction);
-      return true;
-    }
-
+    private FrameConductor mFrameConductor;
     private List<LightConductor> mLightConductors;
     private List<FanConductor> mFanConductors;
     private List<RumbleConductor> mRumbleConductors;

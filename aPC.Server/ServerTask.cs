@@ -6,6 +6,7 @@ using aPC.Common.Server.Conductors;
 using aPC.Common.Server.EngineActors;
 using aPC.Server.Communication;
 using aPC.Common.Server.SceneHandlers;
+using System.Threading;
 
 namespace aPC.Server
 {
@@ -13,8 +14,8 @@ namespace aPC.Server
   {
     public ServerTask()
     {
-      mSyncManager = new SynchronisationManager();
       mInitialScene = new SceneAccessor().GetScene("Default_RedVsBlue");
+      CurrentSceneType = mInitialScene.SceneType;
     }
 
     internal void Run()
@@ -22,65 +23,36 @@ namespace aPC.Server
       using (new CommunicationManager(new NotificationService()))
       using (var lEngine = new EngineManager())
       {
-        SetupSynchronisedManager(lEngine);
-        mDesynchronisedManager = new ComponentManagerCollection(lEngine, mInitialScene, EventComplete);
+        mConductorManager = new ConductorManager(lEngine, mInitialScene, EventComplete);
+
+        KickOffConductors();
 
         while (true)
         {
-          if (mSyncManager.IsSynchronised)
-          {
-            mSyncManager.RunWhileSynchronised(mFrame.Run);
-          }
-          else
-          {
-            mDesynchronisedManager.RunAllManagersDeSynchronised(mSyncManager);
-          }
+          Thread.Sleep(1000);
         }
       }
     }
 
-    private void SetupSynchronisedManager(EngineManager xiEngine)
+    private void KickOffConductors()
     {
-      var lActor = new FrameActor(xiEngine);
-      mFrame = new FrameConductor(lActor, new FrameHandler(mInitialScene));
+      if (mCurrentSceneType == eSceneType.Desync)
+      {
+        mConductorManager.RunAllManagersDeSynchronised();
+      }
+      else
+      {
+        mConductorManager.RunSynchronised();
+      }
     }
 
     internal void Update(amBXScene xiScene)
     {
-      mSyncManager.IsSynchronised = xiScene.IsSynchronised;
-      UpdateActors(xiScene);
-    }
-
-    private void UpdateActors(amBXScene xiScene)
-    {
-      if (!xiScene.IsEvent)
-      {
-        UpdateSynchronisedActor(xiScene);
-        UpdateUnsynchronisedActors(xiScene);
-      }
-      else 
-      {
-        mIsCurrentlyRunningEvent = true;
-
-        if (mSyncManager.IsSynchronised)
-        {
-          UpdateSynchronisedActor(xiScene);
-        }
-        else
-        {
-          UpdateUnsynchronisedActors(xiScene);
-        }
-      }
-    }
-
-    private void UpdateSynchronisedActor(amBXScene xiScene)
-    {
-      mFrame.UpdateScene(xiScene);
-    }
-
-    private void UpdateUnsynchronisedActors(amBXScene xiScene)
-    {
-      mDesynchronisedManager.UpdateAllManagers(xiScene);
+      var lUpdateHandler = new SceneUpdateHandler(mConductorManager, xiScene);
+      lUpdateHandler.Update();
+      
+      CurrentSceneType = xiScene.SceneType;
+      KickOffConductors();
     }
 
     /// <remarks>
@@ -93,18 +65,35 @@ namespace aPC.Server
     /// </remarks>
     internal void EventComplete()
     {
-      if (mIsCurrentlyRunningEvent && mSyncManager.WasPreviouslySynchronised != mSyncManager.IsSynchronised)
+      CurrentSceneType = mPreviousSceneType;
+      // Look at SceneType and start the right set again
+      if (CurrentSceneType == eSceneType.Desync)
       {
-        mIsCurrentlyRunningEvent = false;
-        mSyncManager.IsSynchronised = !mSyncManager.IsSynchronised;
+        // Start the desync ones
+      }
+      else
+      {
+        // start the sync ones
       }
     }
 
-    private FrameConductor mFrame;
-    private ComponentManagerCollection mDesynchronisedManager;
+    private ConductorManager mConductorManager;
     private amBXScene mInitialScene;
 
-    private readonly SynchronisationManager mSyncManager;
-    private bool mIsCurrentlyRunningEvent;
+    private eSceneType CurrentSceneType
+    {
+      get
+      {
+        return mCurrentSceneType;
+      }
+      set
+      {
+        mPreviousSceneType = mCurrentSceneType;
+        mCurrentSceneType = value;
+      }
+    }
+
+    private eSceneType mCurrentSceneType;
+    private eSceneType mPreviousSceneType;
   }
 }

@@ -18,7 +18,7 @@ namespace aPC.Common.Defaults
         var lScene = new amBXScene();
         lScene.Frames = new FrameBuilder()
           .AddFrame()
-          .WithRepeated(true)
+          .WithRepeated(false)
           .WithFrameLength(1000)
           .WithLightSection(DefaultLightSections.Red)
           .Build();
@@ -35,7 +35,7 @@ namespace aPC.Common.Defaults
         var lScene = new amBXScene();
         lScene.Frames = new FrameBuilder()
           .AddFrame()
-          .WithRepeated(true)
+          .WithRepeated(false)
           .WithFrameLength(1000)
           .WithLightSection(DefaultLightSections.Green)
           .Build();
@@ -95,7 +95,7 @@ namespace aPC.Common.Defaults
         var lScene = new amBXScene();
         lScene.Frames = new FrameBuilder()
           .AddFrame()
-          .WithRepeated(true)
+          .WithRepeated(false)
           .WithFrameLength(1000)
           .WithLightSection(DefaultLightSections.Off)
           .Build();

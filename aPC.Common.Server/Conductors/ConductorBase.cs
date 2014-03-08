@@ -18,23 +18,23 @@ namespace aPC.Common.Server.Conductors
 
     public void Run()
     {
-      if (mHandler.IsEnabled)
+      while (mHandler.IsEnabled)
       {
-        var lSnapshot = mHandler.GetNextSnapshot(Direction);
-        if (lSnapshot == null)
-        {
-          throw new InvalidOperationException("An error occured when retrieving the next snapshot");
-        }
-        mActor.ActNextFrame(Direction, lSnapshot);
-        mHandler.AdvanceScene();
-        WaitforInterval(lSnapshot.Length);
+        RunOnce();
       }
-      else
+    }
+
+    public void RunOnce()
+    {
+      var lSnapshot = mHandler.GetNextSnapshot(Direction);
+      if (lSnapshot == null)
       {
-        // qqUMI Ideally, we would just return here and disable the Conductor (should be more performant etc.
-        // at the moment, this won't work, so for now we sleep
-        Thread.Sleep(1000);
+        throw new InvalidOperationException("An error occured when retrieving the next snapshot");
       }
+      
+      mActor.ActNextFrame(Direction, lSnapshot);
+      mHandler.AdvanceScene();
+      WaitforInterval(lSnapshot.Length);
     }
 
     public void UpdateScene(amBXScene xiScene)
@@ -45,6 +45,11 @@ namespace aPC.Common.Server.Conductors
     protected void WaitforInterval(int xiLength)
     {
       Thread.Sleep(xiLength);
+    }
+
+    public void Disable()
+    {
+      mHandler.Disable();
     }
 
     public eDirection Direction;
