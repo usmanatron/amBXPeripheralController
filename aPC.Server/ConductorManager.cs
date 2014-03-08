@@ -50,7 +50,7 @@ namespace aPC.Server
       ThreadPool.QueueUserWorkItem(_ => mFrameConductor.Run());
     }
 
-    public void RunAllManagersDeSynchronised()
+    public void RunDesynchronised()
     {
       mLightConductors.ForEach(light => ThreadPool.QueueUserWorkItem(_ => light.Run()));
       mFanConductors.ForEach(fan => ThreadPool.QueueUserWorkItem(_ => fan.Run()));
@@ -97,9 +97,13 @@ namespace aPC.Server
 
     #endregion
 
-    public void DisableAll()
+    public void DisableSync()
     {
       mFrameConductor.Disable();
+    }
+
+    public void DisableDesync()
+    {
       mLightConductors.ForEach(light => ThreadPool.QueueUserWorkItem(_ => light.Disable()));
       mFanConductors.ForEach(fan => ThreadPool.QueueUserWorkItem(_ => fan.Disable()));
       mRumbleConductors.ForEach(rumble => ThreadPool.QueueUserWorkItem(_ => rumble.Disable()));

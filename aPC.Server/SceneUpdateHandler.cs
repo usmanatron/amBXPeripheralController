@@ -10,30 +10,18 @@ namespace aPC.Server
 {
   class SceneUpdateHandler
   {
-    public SceneUpdateHandler(ConductorManager xiConductorManager)
+    public SceneUpdateHandler(ConductorManager xiConductorManager, SceneStatus xiStatus)
     {
       mConductorManager = xiConductorManager;
+      mStatus = xiStatus;
     }
 
     public void UpdateScene(amBXScene xiScene)
     {
-      DisableAllConductors();
       UpdateActors(xiScene);
+      mStatus.CurrentSceneType = xiScene.SceneType;
+      KickOffConductors();
     }
-
-    private void DisableAllConductors()
-    {
-      mConductorManager.DisableAll();
-    }
-
-
-
-
-
-
-
-
-
 
     private void UpdateActors(amBXScene xiScene)
     {
@@ -60,6 +48,27 @@ namespace aPC.Server
       mConductorManager.UpdateDeSync(xiScene);
     }
 
+    public void KickOffConductors()
+    {
+      if (mStatus.CurrentSceneType == mStatus.PreviousSceneType)
+      {
+        // Still running!
+        return;
+      }
+
+      if (mStatus.CurrentSceneType == eSceneType.Desync)
+      {
+        mConductorManager.DisableSync();
+        mConductorManager.RunDesynchronised();
+      }
+      else
+      {
+        mConductorManager.DisableDesync();
+        mConductorManager.RunSynchronised();
+      }
+    }
+
     private ConductorManager mConductorManager;
+    private SceneStatus mStatus;
   }
 }
