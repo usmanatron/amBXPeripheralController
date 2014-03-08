@@ -22,14 +22,25 @@ namespace aPC.Common.Server.SceneHandlers
     {
       lock (mSceneLock)
       {
-        if (xiNewScene.IsEvent && CurrentScene.IsEvent)
+        if (CurrentScene.IsEvent)
         {
-          // Skip updating the previous scene, to ensure that we don't get 
-          // stuck in an infinite loop of events.
+          if (xiNewScene.IsEvent)
+          {
+            // Skip updating the previous scene, to ensure that we don't get 
+            // stuck in an infinite loop of events.
+          }
+          else
+          {
+            // Don't interrupt the currently playing scene - instead quietly update 
+            // the previous scene so that we fall back to this when the event is done.
+            mPreviousScene = xiNewScene;
+            return;
+          }
         }
         else
         {
           mPreviousScene = CurrentScene;
+
         }
 
         SetupNewScene(xiNewScene);
@@ -58,7 +69,8 @@ namespace aPC.Common.Server.SceneHandlers
 
       if (!lFrames.Any())
       {
-        // qqUMI Add a comment here about the fact that we can get here if there are no repeatable frames
+        // This can happen if there are no repeatable frames.  Mark as dormant and
+        // pass through an empty frame.
         IsDormant = true;
         return new Frame();
       }

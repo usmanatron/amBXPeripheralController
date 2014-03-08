@@ -5,6 +5,7 @@ using aPC.Common.Server.Tests;
 using aPC.Common.Server.Tests.EngineActors;
 using aPC.Common.Server.Tests.SceneHandlers;
 using aPC.Common.Entities;
+using aPC.Common.Builders;
 
 namespace aPC.Common.Server.Tests.Conductors
 {
@@ -14,7 +15,23 @@ namespace aPC.Common.Server.Tests.Conductors
     [SetUp]
     public void FixtureSetup()
     {
-      mInitialScene = new DefaultScenes().Shiprec_Praise;
+      mInitialScene = new amBXScene()
+      {
+        IsEvent = false,
+        IsSynchronised = false,
+        IsExclusive = false
+      };
+      mInitialScene.Frames = new FrameBuilder()
+        .AddFrame()
+        .WithRepeated(true)
+        .WithFrameLength(50)
+        .WithLightSection(DefaultLightSections.JiraBlue)
+        .AddFrame()
+        .WithRepeated(true)
+        .WithFrameLength(50)
+        .WithLightSection(DefaultLightSections.Blue)
+        .Build();
+        
       mHandler = new TestSceneHandler(mInitialScene);
       mActor = new TestEngineActor(new TestEngineManager());
     }
