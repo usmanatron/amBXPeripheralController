@@ -1,2 +1,2 @@
-.\packages\OpenCover.4.5.2316\OpenCover.Console.exe -register:user -target:".\runTests.cmd" -output:.\Shippable\codecoverage\coveragereport.xml -log:All
+.\packages\OpenCover.4.5.2316\OpenCover.Console.exe -register:user -target:".\runTests.cmd" -output:.\Shippable\codecoverage\coveragereport.xml -log:All -filter:"+[*]* -[aPC.*.Tests]* -[amBXLib]*"
 .\packages\ReportGenerator.1.9.1.0\ReportGenerator.exe -reports:.\shippable\codecoverage\coveragereport.xml -targetdir:.\shippable\codecoveragereport
