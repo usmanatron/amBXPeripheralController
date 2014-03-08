@@ -72,7 +72,7 @@ namespace aPC.Common.Server.Tests.Conductors
     [Test]
     public void RunningOnce_WithDormantHandler_WaitsForASecond()
     {
-      mHandler.IsDormant = true;
+      mHandler.IsEnabled = false;
       var lConductor = new TestConductor(eDirection.Everywhere, mActor, mHandler);
       var lStopwatch = new Stopwatch();
 

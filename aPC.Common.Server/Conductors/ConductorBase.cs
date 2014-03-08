@@ -18,14 +18,7 @@ namespace aPC.Common.Server.Conductors
 
     public void Run()
     {
-      if (mHandler.IsDormant)
-      {
-        // qqUMI Ideally, we would just return here and disable the Conductor (should be more performant etc.
-        // at the moment, this won't work, so for now we sleep
-        Thread.Sleep(1000);
-        // return;
-      }
-      else
+      if (mHandler.IsEnabled)
       {
         var lSnapshot = mHandler.GetNextSnapshot(Direction);
         if (lSnapshot == null)
@@ -35,6 +28,12 @@ namespace aPC.Common.Server.Conductors
         mActor.ActNextFrame(Direction, lSnapshot);
         mHandler.AdvanceScene();
         WaitforInterval(lSnapshot.Length);
+      }
+      else
+      {
+        // qqUMI Ideally, we would just return here and disable the Conductor (should be more performant etc.
+        // at the moment, this won't work, so for now we sleep
+        Thread.Sleep(1000);
       }
     }
 

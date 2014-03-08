@@ -49,7 +49,7 @@ namespace aPC.Common.Server.SceneHandlers
 
     protected void SetupNewScene(amBXScene xiNewScene)
     {
-      IsDormant = false;
+      IsEnabled = true;
       CurrentScene = xiNewScene;
       mTicker = new AtypicalFirstRunInfiniteTicker(CurrentScene.Frames.Count, CurrentScene.RepeatableFrames.Count);
     }
@@ -71,7 +71,7 @@ namespace aPC.Common.Server.SceneHandlers
       {
         // This can happen if there are no repeatable frames.  Mark as dormant and
         // pass through an empty frame.
-        IsDormant = true;
+        Disable();
         return new Frame();
       }
       return lFrames[mTicker.Index];
@@ -91,6 +91,11 @@ namespace aPC.Common.Server.SceneHandlers
       }
     }
 
+    public void Disable()
+    {
+      IsEnabled = false;
+    }
+
     private void DoSceneCompletedChecks()
     {
       if (CurrentScene.IsEvent)
@@ -106,7 +111,7 @@ namespace aPC.Common.Server.SceneHandlers
     }
 
     protected amBXScene CurrentScene;
-    public bool IsDormant { get; protected set; }
+    public bool IsEnabled { get; protected set; }
     private readonly Action mEventCallback;
 
     private AtypicalFirstRunInfiniteTicker mTicker;

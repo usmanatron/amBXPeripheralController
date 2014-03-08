@@ -84,7 +84,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
     public void NewSceneHandler_IsNotDormant()
     {
       var lHandler = new TestSceneHandler(mInitialScene);
-      Assert.IsFalse(lHandler.IsDormant);
+      Assert.IsTrue(lHandler.IsEnabled);
     }
 
     [Test]
@@ -166,7 +166,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
 
       var lFrame = lHandler.NextFrame;
 
-      Assert.IsTrue(lHandler.IsDormant);
+      Assert.IsFalse(lHandler.IsEnabled);
       Assert.AreEqual(default(int), lFrame.Length);
       Assert.AreEqual(default(bool), lFrame.IsRepeated);
       Assert.IsNull(lFrame.Lights);

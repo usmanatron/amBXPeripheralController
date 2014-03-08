@@ -38,15 +38,15 @@ namespace aPC.Common.Server.Tests.SceneHandlers
       }
     }
 
-    public bool IsDormant
+    public bool IsEnabled
     {
       get
       {
-        return base.IsDormant;
+        return base.IsEnabled;
       }
       set
       {
-        base.IsDormant = value;
+        base.IsEnabled = value;
       }
     }
   }
