@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConversionHelpers.cs" />
     <Compile Include="EngineActors\ComponentActor.cs" />
     <Compile Include="EngineActors\EngineActorBase.cs" />
     <Compile Include="EngineActors\FrameActor.cs" />

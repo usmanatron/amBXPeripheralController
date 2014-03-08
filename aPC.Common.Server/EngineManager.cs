@@ -61,7 +61,7 @@ namespace aPC.Common.Server
 
     public void UpdateLight(eDirection xiDirection, Light xiLight, int xiFadeTime)
     {
-      var lDirection = GetDirection(xiDirection);
+      var lDirection = ConversionHelpers.GetDirection(xiDirection);
       ThreadPool.QueueUserWorkItem(_ => UpdateLightInternal(mLights[lDirection], xiLight, xiFadeTime));
     }
 
@@ -78,7 +78,7 @@ namespace aPC.Common.Server
 
     public void UpdateFan(eDirection xiDirection, Fan xiFan)
     {
-      var lDirection = GetDirection(xiDirection);
+      var lDirection = ConversionHelpers.GetDirection(xiDirection);
       UpdateFanInternal(mFans[lDirection], xiFan);
     }
 
@@ -93,7 +93,7 @@ namespace aPC.Common.Server
 
     public void UpdateRumble(eDirection xiDirection, Rumble xiRumble)
     {
-      var lDirection = GetDirection(xiDirection);
+      var lDirection = ConversionHelpers.GetDirection(xiDirection);
       UpdateRumbleInternal(mRumbles[lDirection], xiRumble);
     }
 
@@ -108,7 +108,7 @@ namespace aPC.Common.Server
 
       try
       {
-        lRumbleType = GetRumbleType(xiInputRumble.RumbleType);
+        lRumbleType = ConversionHelpers.GetRumbleType(xiInputRumble.RumbleType);
       }
       catch (InvalidOperationException)
       {
@@ -121,68 +121,6 @@ namespace aPC.Common.Server
         Speed = xiInputRumble.Speed,
         Type = lRumbleType
       };
-    }
-
-    #endregion
-
-    #region Engine Helpers
-
-    private CompassDirection GetDirection(eDirection xiDirection)
-    {
-      switch (xiDirection)
-      {
-        case eDirection.North:
-          return CompassDirection.North;
-        case eDirection.NorthEast:
-          return CompassDirection.NorthEast;
-        case eDirection.East:
-          return CompassDirection.East;
-        case eDirection.SouthEast:
-          return CompassDirection.SouthEast;
-        case eDirection.South:
-          return CompassDirection.South;
-        case eDirection.SouthWest:
-          return CompassDirection.SouthWest;
-        case eDirection.West:
-          return CompassDirection.West;
-        case eDirection.NorthWest:
-          return CompassDirection.NorthWest;
-        case eDirection.Center:
-          return CompassDirection.Center;
-        default:
-          return CompassDirection.Everywhere;
-      }
-    }
-
-    private RumbleType GetRumbleType(eRumbleType xiRumbleType)
-    {
-      switch (xiRumbleType)
-      {
-        case eRumbleType.Boing:
-          return RumbleType.Boing;
-        case eRumbleType.Crash:
-          return RumbleType.Crash;
-        case eRumbleType.Engine:
-          return RumbleType.Engine;
-        case eRumbleType.Explosion:
-          return RumbleType.Explosion;
-        case eRumbleType.Hit:
-          return RumbleType.Hit;
-        case eRumbleType.Quake:
-          return RumbleType.Quake;
-        case eRumbleType.Rattle:
-          return RumbleType.Rattle;
-        case eRumbleType.Road:
-          return RumbleType.Road;
-        case eRumbleType.Shot:
-          return RumbleType.Shot;
-        case eRumbleType.Thud:
-          return RumbleType.Thud;
-        case eRumbleType.Thunder:
-          return RumbleType.Thunder;
-      }
-
-      throw new InvalidOperationException();
     }
 
     #endregion
