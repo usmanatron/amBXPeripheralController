@@ -18,8 +18,8 @@ namespace aPC.Server
 
     public void UpdateScene(amBXScene xiScene)
     {
-      UpdateActors(xiScene);
       mStatus.CurrentSceneType = xiScene.SceneType;
+      UpdateActors(xiScene);
       KickOffConductors();
     }
 
@@ -30,11 +30,13 @@ namespace aPC.Server
         case eSceneType.Desync:
         case eSceneType.Sync:
           UpdateSynchronisedActor(xiScene);
-          UpdateUnsynchronisedActors(xiScene);
+          UpdateDesynchronisedActors(xiScene);
           break;
         case eSceneType.Event:
           UpdateSynchronisedActor(xiScene);
           break;
+        default:
+          throw new InvalidOperationException("Unexpected Scene Type.");
       }
     }
 
@@ -43,7 +45,7 @@ namespace aPC.Server
       mConductorManager.UpdateSync(xiScene);
     }
 
-    private void UpdateUnsynchronisedActors(amBXScene xiScene)
+    private void UpdateDesynchronisedActors(amBXScene xiScene)
     {
       mConductorManager.UpdateDeSync(xiScene);
     }
