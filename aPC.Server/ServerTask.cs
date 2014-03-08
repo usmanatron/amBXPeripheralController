@@ -15,7 +15,7 @@ namespace aPC.Server
     public ServerTask()
     {
       mInitialScene = new SceneAccessor().GetScene("Default_RedVsBlue");
-      CurrentSceneType = mInitialScene.SceneType;
+      mStatus = new SceneStatus(mInitialScene.SceneType);
     }
 
     internal void Run()
@@ -24,19 +24,20 @@ namespace aPC.Server
       using (var lEngine = new EngineManager())
       {
         mConductorManager = new ConductorManager(lEngine, mInitialScene, EventComplete);
+        mSceneUpdateHandler = new SceneUpdateHandler(mConductorManager);
 
         KickOffConductors();
 
         while (true)
         {
-          Thread.Sleep(1000);
+          Thread.Sleep(10000);
         }
       }
     }
 
     private void KickOffConductors()
     {
-      if (mCurrentSceneType == eSceneType.Desync)
+      if (mStatus.CurrentSceneType == eSceneType.Desync)
       {
         mConductorManager.RunAllManagersDeSynchronised();
       }
@@ -48,10 +49,9 @@ namespace aPC.Server
 
     internal void Update(amBXScene xiScene)
     {
-      var lUpdateHandler = new SceneUpdateHandler(mConductorManager, xiScene);
-      lUpdateHandler.Update();
+      mSceneUpdateHandler.UpdateScene(xiScene);
       
-      CurrentSceneType = xiScene.SceneType;
+      mStatus.CurrentSceneType = xiScene.SceneType;
       KickOffConductors();
     }
 
@@ -65,9 +65,9 @@ namespace aPC.Server
     /// </remarks>
     internal void EventComplete()
     {
-      CurrentSceneType = mPreviousSceneType;
+      mStatus.CurrentSceneType = mStatus.PreviousSceneType;
       // Look at SceneType and start the right set again
-      if (CurrentSceneType == eSceneType.Desync)
+      if (mStatus.CurrentSceneType == eSceneType.Desync)
       {
         // Start the desync ones
       }
@@ -79,21 +79,7 @@ namespace aPC.Server
 
     private ConductorManager mConductorManager;
     private amBXScene mInitialScene;
-
-    private eSceneType CurrentSceneType
-    {
-      get
-      {
-        return mCurrentSceneType;
-      }
-      set
-      {
-        mPreviousSceneType = mCurrentSceneType;
-        mCurrentSceneType = value;
-      }
-    }
-
-    private eSceneType mCurrentSceneType;
-    private eSceneType mPreviousSceneType;
+    private SceneUpdateHandler mSceneUpdateHandler;
+    private SceneStatus mStatus;
   }
 }

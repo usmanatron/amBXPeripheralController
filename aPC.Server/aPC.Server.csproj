@@ -54,6 +54,7 @@
     <Compile Include="SceneHandlers\RumbleHandler.cs" />
     <Compile Include="SceneHandlers\FanHandler.cs" />
     <Compile Include="SceneHandlers\LightHandler.cs" />
+    <Compile Include="SceneStatus.cs" />
     <Compile Include="SceneUpdateHandler.cs" />
     <Compile Include="Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
