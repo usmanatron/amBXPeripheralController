@@ -109,6 +109,18 @@ namespace aPC.Server
       mRumbleConductors.ForEach(rumble => ThreadPool.QueueUserWorkItem(_ => rumble.Disable()));
     }
 
+    public void EnableSync()
+    {
+      mFrameConductor.Enable();
+    }
+
+    public void EnableDesync()
+    {
+      mLightConductors.ForEach(light => ThreadPool.QueueUserWorkItem(_ => light.Enable()));
+      mFanConductors.ForEach(fan => ThreadPool.QueueUserWorkItem(_ => fan.Enable()));
+      mRumbleConductors.ForEach(rumble => ThreadPool.QueueUserWorkItem(_ => rumble.Enable()));
+    }
+
     private Func<FrameStatistics, eComponentType, eDirection, bool> IsApplicableForConductor =
       (statistics, componentType, direction) => statistics.AreEnabledForComponentAndDirection(componentType, direction);
 
