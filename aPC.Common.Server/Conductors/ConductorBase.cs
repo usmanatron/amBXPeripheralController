@@ -11,6 +11,7 @@ namespace aPC.Common.Server.Conductors
   {
     protected ConductorBase(eDirection xiDirection, EngineActorBase<T> xiActor, SceneHandlerBase<T> xiHandler)
     {
+      mIsRunningLocker = new object();
       Direction = xiDirection;
       mActor = xiActor;
       mHandler = xiHandler;
@@ -66,6 +67,11 @@ namespace aPC.Common.Server.Conductors
     public void Disable()
     {
       mHandler.Disable();
+    }
+
+    public void Enable()
+    {
+      mHandler.Enable();
     }
 
     public eDirection Direction;

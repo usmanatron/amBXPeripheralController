@@ -48,7 +48,6 @@ namespace aPC.Common.Server.SceneHandlers
 
     protected void SetupNewScene(amBXScene xiNewScene)
     {
-      IsEnabled = true;
       CurrentScene = xiNewScene;
       mTicker = new AtypicalFirstRunInfiniteTicker(CurrentScene.Frames.Count, CurrentScene.RepeatableFrames.Count);
     }
@@ -95,15 +94,20 @@ namespace aPC.Common.Server.SceneHandlers
       IsEnabled = false;
     }
 
+    public void Enable()
+    {
+      IsEnabled = true;
+    }
+
     private void EventComplete()
     {
       SetupNewScene(mPreviousScene);
-      IsEnabled = false;
+      Disable();
       mEventCallback();
     }
 
     protected amBXScene CurrentScene;
-    public bool IsEnabled { get; protected set; }
+    public bool IsEnabled { get; set; }
     private readonly Action mEventCallback;
 
     private AtypicalFirstRunInfiniteTicker mTicker;
