@@ -45,8 +45,7 @@ namespace aPC.Server
     /// </remarks>
     internal void EventComplete()
     {
-      mStatus.CurrentSceneType = mStatus.PreviousSceneType;
-      mSceneUpdateHandler.KickOffConductors();
+      mSceneUpdateHandler.UpdatePostEvent();
     }
 
     private ConductorManager mConductorManager;
