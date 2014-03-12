@@ -44,12 +44,12 @@ namespace aPC.Server
             case eSceneType.Sync:
               UpdateDesynchronisedActors(xiScene);
               UpdateSynchronisedActor(xiScene);
-              EnableSynchronisedActors();
+              EnableSynchronisedActor();
               DisableDesynchronisedActors();
               break;
             case eSceneType.Event:
               UpdateSynchronisedActor(xiScene);
-              EnableSynchronisedActors();
+              EnableSynchronisedActor();
               DisableDesynchronisedActors();
               break;
           }
@@ -60,14 +60,17 @@ namespace aPC.Server
             case eSceneType.Desync:
               UpdateDesynchronisedActors(xiScene);
               EnableDesynchronisedActors();
-              DisableSynchronisedActors();
+              DisableSynchronisedActor();
+              break;
             case eSceneType.Sync:
               UpdateSynchronisedActor(xiScene);
               UpdateDesynchronisedActors(xiScene);
               EnableSynchronisedActor();
+              break;
             case eSceneType.Event:
               UpdateSynchronisedActor(xiScene);
               EnableSynchronisedActor();
+              break;
           }
           break;
         case eSceneType.Event:
@@ -75,27 +78,59 @@ namespace aPC.Server
           {
             case eSceneType.Desync:
               EnableDesynchronisedActors();
-              DisableSynchronisedActors();
+              DisableSynchronisedActor();
+              break;
             case eSceneType.Sync:
-              EnableSynchronisedActors();
+              EnableSynchronisedActor();
+              break;
             case eSceneType.Event:
               // Event -> Event is allowed and overwrites the previous event
               UpdateSynchronisedActor(xiScene);
-              EnableSynchronisedActors();
+              EnableSynchronisedActor();
+              break;
           }
           break;
       }
     }
+
+    #region Sync \ Events
 
     private void UpdateSynchronisedActor(amBXScene xiScene)
     {
       mConductorManager.UpdateSync(xiScene);
     }
 
+    private void EnableSynchronisedActor()
+    {
+      mConductorManager.EnableSync();
+
+    }
+
+    private void DisableSynchronisedActor()
+    {
+      mConductorManager.DisableSync();
+    }
+
+    #endregion
+
+    #region Desync
+
     private void UpdateDesynchronisedActors(amBXScene xiScene)
     {
       mConductorManager.UpdateDeSync(xiScene);
     }
+
+    private void EnableDesynchronisedActors()
+    {
+      mConductorManager.EnableDesync();
+    }
+
+    private void DisableDesynchronisedActors()
+    {
+      mConductorManager.DisableDesync();
+    }
+
+    #endregion
 
     private ConductorManager mConductorManager;
     private SceneStatus mStatus;
