@@ -19,24 +19,73 @@ namespace aPC.Server
     public void UpdateScene(amBXScene xiScene)
     {
       mStatus.CurrentSceneType = xiScene.SceneType;
+      Update(xiScene);
       UpdateActors(xiScene);
       KickOffConductors();
     }
 
-    private void UpdateActors(amBXScene xiScene)
+    /// <summary>
+    /// Does the necessary update steps
+    /// </summary>
+    /// <remarks>
+    /// Fairly complex, as heavily dependent on the previous and (now)
+    /// current scene types.  The method used for writing this out
+    /// is a bit long-winded (hopefully to mkae it a bit clearer!)
+    /// </remarks>
+    private void Update(amBXScene xiScene)
     {
-      switch (xiScene.SceneType)
+      switch (mStatus.PreviousSceneType)
       {
         case eSceneType.Desync:
+          switch (mStatus.CurrentSceneType)
+          {
+            case eSceneType.Desync:
+              UpdateDesynchronisedActors(xiScene);
+              EnableDesynchronisedActors();
+              break;
+            case eSceneType.Sync:
+              UpdateDesynchronisedActors(xiScene);
+              UpdateSynchronisedActor(xiScene);
+              EnableSynchronisedActors();
+              DisableDesynchronisedActors();
+              break;
+            case eSceneType.Event:
+              UpdateSynchronisedActor(xiScene);
+              EnableSynchronisedActors();
+              DisableDesynchronisedActors();
+              break;
+          }
+          break;
         case eSceneType.Sync:
-          UpdateSynchronisedActor(xiScene);
-          UpdateDesynchronisedActors(xiScene);
+          switch (mStatus.CurrentSceneType)
+          {
+            case eSceneType.Desync:
+              UpdateDesynchronisedActors(xiScene);
+              EnableDesynchronisedActors();
+              DisableSynchronisedActors();
+            case eSceneType.Sync:
+              UpdateSynchronisedActor(xiScene);
+              UpdateDesynchronisedActors(xiScene);
+              EnableSynchronisedActor();
+            case eSceneType.Event:
+              UpdateSynchronisedActor(xiScene);
+              EnableSynchronisedActor();
+          }
           break;
         case eSceneType.Event:
-          UpdateSynchronisedActor(xiScene);
+          switch (mStatus.CurrentSceneType)
+          {
+            case eSceneType.Desync:
+              EnableDesynchronisedActors();
+              DisableSynchronisedActors();
+            case eSceneType.Sync:
+              EnableSynchronisedActors();
+            case eSceneType.Event:
+              // Event -> Event is allowed and overwrites the previous event
+              UpdateSynchronisedActor(xiScene);
+              EnableSynchronisedActors();
+          }
           break;
-        default:
-          throw new InvalidOperationException("Unexpected Scene Type.");
       }
     }
 
