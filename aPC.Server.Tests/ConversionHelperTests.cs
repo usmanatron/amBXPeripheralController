@@ -1,8 +1,9 @@
-﻿using System;
+﻿using aPC.Common;
+using aPC.Server.Engine;
+using System;
 using NUnit.Framework;
-using aPC.Common.Server;
 
-namespace aPC.Common.Server.Tests
+namespace aPC.Server.Tests
 {
   //qqUMI These tests are dependent on amBXLib => they require ambxrt.
   // It's not possible to include this in source control and they will fail

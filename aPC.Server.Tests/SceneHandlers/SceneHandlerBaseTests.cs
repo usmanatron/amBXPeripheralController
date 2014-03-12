@@ -1,13 +1,15 @@
-﻿using System;
+﻿using aPC.Common;
+using aPC.Common.Builders;
+using aPC.Common.Defaults;
+using aPC.Common.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using aPC.Common.Entities;
-using aPC.Common.Builders;
 
-namespace aPC.Common.Server.Tests.SceneHandlers
+namespace aPC.Server.Tests.SceneHandlers
 {
   [TestFixture]
   class SceneHandlerBaseTests
@@ -19,32 +21,32 @@ namespace aPC.Common.Server.Tests.SceneHandlers
         .AddFrame()
         .WithRepeated(false)
         .WithFrameLength(1000)
-        .WithLightSection(Defaults.DefaultLightSections.SoftPink)
+        .WithLightSection(DefaultLightSections.SoftPink)
         .AddFrame()
         .WithRepeated(true)
         .WithFrameLength(2000)
-        .WithLightSection(Defaults.DefaultLightSections.Orange)
+        .WithLightSection(DefaultLightSections.Orange)
         .Build();
 
       var lBlueEventFrames = new FrameBuilder()
         .AddFrame()
         .WithRepeated(true)
         .WithFrameLength(500)
-        .WithLightSection(Defaults.DefaultLightSections.JiraBlue)
+        .WithLightSection(DefaultLightSections.JiraBlue)
         .Build();
 
       var lPurpleEventFrames = new FrameBuilder()
         .AddFrame()
         .WithRepeated(true)
         .WithFrameLength(250)
-        .WithLightSection(Defaults.DefaultLightSections.StrongPurple)
+        .WithLightSection(DefaultLightSections.StrongPurple)
         .Build();
 
       var lUnrepeatedFrames = new FrameBuilder()
       .AddFrame()
         .WithRepeated(false)
         .WithFrameLength(125)
-        .WithLightSection(Defaults.DefaultLightSections.Red)
+        .WithLightSection(DefaultLightSections.Red)
         .Build();
 
       mInitialScene = new amBXScene

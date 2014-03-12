@@ -1,9 +1,10 @@
-﻿using aPC.Common.Entities;
-using aPC.Common.Server.SceneHandlers;
-using aPC.Common.Server.Tests.Snapshots;
+﻿using aPC.Common;
+using aPC.Common.Entities;
+using aPC.Server.SceneHandlers;
+using aPC.Server.Tests.Snapshots;
 using System;
 
-namespace aPC.Common.Server.Tests.SceneHandlers
+namespace aPC.Server.Tests.SceneHandlers
 {
   class TestSceneHandler : SceneHandlerBase<TestSnapshot>
   {

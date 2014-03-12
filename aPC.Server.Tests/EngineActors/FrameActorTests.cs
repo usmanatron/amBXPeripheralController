@@ -1,12 +1,13 @@
-﻿using System;
+﻿using aPC.Common;
+using System;
 using System.Linq;
 using NUnit.Framework;
-using aPC.Common.Server.EngineActors;
-using aPC.Common.Server.Snapshots;
+using aPC.Server.EngineActors;
+using aPC.Server.Snapshots;
 using aPC.Common.Builders;
 using aPC.Common.Defaults;
 
-namespace aPC.Common.Server.Tests.EngineActors
+namespace aPC.Server.Tests.EngineActors
 {
   [TestFixture]
   class FrameActorTests

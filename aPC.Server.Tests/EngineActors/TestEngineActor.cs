@@ -1,7 +1,9 @@
-﻿using aPC.Common.Server.EngineActors;
-using aPC.Common.Server.Tests.Snapshots;
+﻿using aPC.Common;
+using aPC.Server.Engine;
+using aPC.Server.EngineActors;
+using aPC.Server.Tests.Snapshots;
 
-namespace aPC.Common.Server.Tests.EngineActors
+namespace aPC.Server.Tests.EngineActors
 {
   class TestEngineActor : EngineActorBase<TestSnapshot>
   {

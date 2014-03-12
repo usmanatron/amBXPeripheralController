@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
-namespace aPC.Common.Server.Tests.Communication
+namespace aPC.Server.Tests.Communication
 {
   [TestFixture]
   class NotificationServiceBaseTests

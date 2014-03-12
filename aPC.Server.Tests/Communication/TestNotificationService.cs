@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using aPC.Common.Server.Communication;
+using aPC.Server.Communication;
 using aPC.Common.Entities;
 
-namespace aPC.Common.Server.Tests.Communication
+namespace aPC.Server.Tests.Communication
 {
   class TestNotificationService : NotificationServiceBase
   {

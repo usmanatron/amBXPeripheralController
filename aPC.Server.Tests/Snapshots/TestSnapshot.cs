@@ -1,7 +1,7 @@
-﻿using aPC.Common.Server.Snapshots;
+﻿using aPC.Server.Snapshots;
 using aPC.Common.Entities;
 
-namespace aPC.Common.Server.Tests.Snapshots
+namespace aPC.Server.Tests.Snapshots
 {
   class TestSnapshot : SnapshotBase
   {

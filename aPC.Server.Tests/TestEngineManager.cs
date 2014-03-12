@@ -1,7 +1,9 @@
-﻿using aPC.Common.Entities;
+﻿using aPC.Common;
+using aPC.Common.Entities;
+using aPC.Server.Engine;
 using System.Collections.Generic;
 
-namespace aPC.Common.Server.Tests
+namespace aPC.Server.Tests
 {
   class TestEngineManager : IEngine
   {

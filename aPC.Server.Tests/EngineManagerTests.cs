@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aPC.Common.Server.Tests
+namespace aPC.Server.Tests
 {
   class EngineManagerTests
   {

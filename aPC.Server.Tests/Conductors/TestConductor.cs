@@ -1,9 +1,10 @@
-﻿using aPC.Common.Server.Conductors;
-using aPC.Common.Server.Tests.Snapshots;
-using aPC.Common.Server.Tests.EngineActors;
-using aPC.Common.Server.Tests.SceneHandlers;
+﻿using aPC.Common;
+using aPC.Server.Conductors;
+using aPC.Server.Tests.Snapshots;
+using aPC.Server.Tests.EngineActors;
+using aPC.Server.Tests.SceneHandlers;
 
-namespace aPC.Common.Server.Tests.Conductors
+namespace aPC.Server.Tests.Conductors
 {
   class TestConductor : ConductorBase<TestSnapshot>
   {

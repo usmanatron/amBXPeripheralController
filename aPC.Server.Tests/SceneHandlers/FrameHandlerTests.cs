@@ -1,10 +1,11 @@
-﻿using NUnit.Framework;
-using aPC.Common.Server.SceneHandlers;
+﻿using aPC.Common;
+using aPC.Server.SceneHandlers;
 using aPC.Common.Entities;
 using aPC.Common.Defaults;
+using NUnit.Framework;
 using System;
 
-namespace aPC.Common.Server.Tests.SceneHandlers
+namespace aPC.Server.Tests.SceneHandlers
 {
   [TestFixture]
   class FrameHandlerTests

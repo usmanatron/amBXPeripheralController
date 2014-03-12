@@ -61,12 +61,26 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="AtypicalFirstRunInfiniteTickerTests.cs" />
+    <Compile Include="Communication\NotificationServiceBaseTests.cs" />
+    <Compile Include="Communication\TestNotificationService.cs" />
+    <Compile Include="Conductors\ConductorBaseTests.cs" />
+    <Compile Include="Conductors\TestConductor.cs" />
+    <Compile Include="ConversionHelperTests.cs" />
+    <Compile Include="EngineActors\FrameActorTests.cs" />
+    <Compile Include="EngineActors\TestEngineActor.cs" />
+    <Compile Include="EngineManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SceneHandlers\FrameHandlerTests.cs" />
+    <Compile Include="SceneHandlers\SceneHandlerBaseTests.cs" />
+    <Compile Include="SceneHandlers\TestSceneHandler.cs" />
+    <Compile Include="Snapshots\TestSnapshot.cs" />
+    <Compile Include="TestEngineManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\aPC.Common.Server\aPC.Common.Server.csproj">
-      <Project>{2165053e-6a4d-4718-bbf9-55301ced1d28}</Project>
-      <Name>aPC.Common.Server</Name>
+    <ProjectReference Include="..\aPC.Common.Communication\aPC.Common.Communication.csproj">
+      <Project>{38537b40-b1fd-433b-b958-8a1b3c7b83d7}</Project>
+      <Name>aPC.Common.Communication</Name>
     </ProjectReference>
     <ProjectReference Include="..\aPC.Common\aPC.Common.csproj">
       <Project>{b6543e75-59af-4059-acf8-560e82bc72ce}</Project>
@@ -80,8 +94,11 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Managers\" />
+    <Content Include="ExampleScene.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
