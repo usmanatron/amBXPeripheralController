@@ -79,9 +79,17 @@ namespace aPC.Common.Server.Tests.SceneHandlers
     }
 
     [Test]
-    public void NewSceneHandler_IsNotDormant()
+    public void NewSceneHandler_IsDisabledByDefault()
     {
       var lHandler = new TestSceneHandler(mInitialScene, mAction);
+      Assert.IsFalse(lHandler.IsEnabled);
+    }
+
+    [Test]
+    public void NewSceneHandler_IsEnabledWhenDoneExplicitly()
+    {
+      var lHandler = new TestSceneHandler(mInitialScene, mAction);
+      lHandler.Enable();
       Assert.IsTrue(lHandler.IsEnabled);
     }
 
