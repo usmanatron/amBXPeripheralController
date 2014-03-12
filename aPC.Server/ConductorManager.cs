@@ -89,9 +89,9 @@ namespace aPC.Server
 
     public void EnableDesync()
     {
-      mLightConductors.ForEach(light => ThreadPool.QueueUserWorkItem(_ => light.Enable()));
-      mFanConductors.ForEach(fan => ThreadPool.QueueUserWorkItem(_ => fan.Enable()));
-      mRumbleConductors.ForEach(rumble => ThreadPool.QueueUserWorkItem(_ => rumble.Enable()));
+      mLightConductors.ForEach(light => ThreadPool.QueueUserWorkItem(_ => EnableAndRunIfRequired(light)));
+      mFanConductors.ForEach(fan => ThreadPool.QueueUserWorkItem(_ => EnableAndRunIfRequired(fan)));
+      mRumbleConductors.ForEach(rumble => ThreadPool.QueueUserWorkItem(_ => EnableAndRunIfRequired(rumble)));
     }
 
     public void DisableDesync()

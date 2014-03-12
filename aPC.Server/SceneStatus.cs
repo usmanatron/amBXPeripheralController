@@ -27,7 +27,7 @@ namespace aPC.Server
     {
       get
       {
-        return mCurrentSceneType;
+        return mPreviousSceneType;
       }
     }
 
