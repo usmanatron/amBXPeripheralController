@@ -25,7 +25,7 @@ namespace aPC.Server
       {
         mConductorManager = new ConductorManager(lEngine, mInitialScene, EventComplete);
         mSceneUpdateHandler = new SceneUpdateHandler(mConductorManager, mStatus);
-        mConductorManager.RunSynchronised();
+        mSceneUpdateHandler.UpdateScene(mInitialScene);
 
         while (true)
         {
