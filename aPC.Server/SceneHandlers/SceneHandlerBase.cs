@@ -1,10 +1,11 @@
-﻿using System;
+﻿using aPC.Common;
+using aPC.Common.Entities;
+using aPC.Server.Snapshots;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using aPC.Common.Entities;
-using aPC.Common.Server.Snapshots;
 
-namespace aPC.Common.Server.SceneHandlers
+namespace aPC.Server.SceneHandlers
 {
   //Handles the amBXScene object(s) and any interactions.
   public abstract class SceneHandlerBase<T> where T : SnapshotBase

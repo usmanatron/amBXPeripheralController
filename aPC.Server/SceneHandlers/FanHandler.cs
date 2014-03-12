@@ -1,7 +1,7 @@
 ﻿using aPC.Common;
 using aPC.Common.Entities;
-using aPC.Common.Server.SceneHandlers;
-using aPC.Common.Server.Snapshots;
+using aPC.Server.SceneHandlers;
+using aPC.Server.Snapshots;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,7 +1,9 @@
-﻿using aPC.Common.Server.Snapshots;
+﻿using aPC.Common;
 using aPC.Common.Entities;
+using aPC.Server.Engine;
+using aPC.Server.Snapshots;
 
-namespace aPC.Common.Server.EngineActors
+namespace aPC.Server.EngineActors
 {
   public class FrameActor : EngineActorBase<FrameSnapshot>
   {

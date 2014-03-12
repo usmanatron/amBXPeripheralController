@@ -1,4 +1,4 @@
-﻿namespace aPC.Common.Server.Snapshots
+﻿namespace aPC.Server.Snapshots
 {
   public abstract class SnapshotBase
   {

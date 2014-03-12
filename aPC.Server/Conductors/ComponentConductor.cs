@@ -1,9 +1,10 @@
-﻿using aPC.Common.Entities;
-using aPC.Common.Server.EngineActors;
-using aPC.Common.Server.Snapshots;
-using aPC.Common.Server.SceneHandlers;
+﻿using aPC.Common;
+using aPC.Common.Entities;
+using aPC.Server.EngineActors;
+using aPC.Server.Snapshots;
+using aPC.Server.SceneHandlers;
 
-namespace aPC.Common.Server.Conductors
+namespace aPC.Server.Conductors
 {
   public abstract class ComponentConductor<T> : ConductorBase<ComponentSnapshot<T>> where T : IComponent
   {

@@ -1,6 +1,6 @@
 ﻿using aPC.Common.Entities;
 
-namespace aPC.Common.Server.Snapshots
+namespace aPC.Server.Snapshots
 {
   public class FrameSnapshot : SnapshotBase
   {

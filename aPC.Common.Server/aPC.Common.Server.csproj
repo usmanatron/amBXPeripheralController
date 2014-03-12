@@ -48,24 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConversionHelpers.cs" />
-    <Compile Include="EngineActors\ComponentActor.cs" />
-    <Compile Include="EngineActors\EngineActorBase.cs" />
-    <Compile Include="EngineActors\FrameActor.cs" />
-    <Compile Include="AtypicalFirstRunInfiniteTicker.cs" />
-    <Compile Include="Communication\CommunicationManager.cs" />
-    <Compile Include="Communication\NotificationServiceBase.cs" />
-    <Compile Include="IEngine.cs" />
-    <Compile Include="SceneHandlers\ComponentHandler.cs" />
-    <Compile Include="SceneHandlers\FrameHandler.cs" />
-    <Compile Include="SceneHandlers\SceneHandlerBase.cs" />
-    <Compile Include="Snapshots\ComponentSnapshot.cs" />
-    <Compile Include="Conductors\ComponentConductor.cs" />
-    <Compile Include="Snapshots\SnapshotBase.cs" />
-    <Compile Include="EngineManager.cs" />
-    <Compile Include="Snapshots\FrameSnapshot.cs" />
-    <Compile Include="Conductors\FrameConductor.cs" />
-    <Compile Include="Conductors\ConductorBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

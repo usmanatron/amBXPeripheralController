@@ -1,6 +1,6 @@
 ﻿using aPC.Common.Entities;
 
-namespace aPC.Common.Server.Snapshots
+namespace aPC.Server.Snapshots
 {
   public class ComponentSnapshot<T> : SnapshotBase where T : IComponent
   {

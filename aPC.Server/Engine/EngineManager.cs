@@ -1,10 +1,11 @@
-﻿using aPC.Common.Entities;
+﻿using amBXLib;
+using aPC.Common;
+using aPC.Common.Entities;
 using System;
-using amBXLib;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace aPC.Common.Server
+namespace aPC.Server.Engine
 {
   // Manages the amBXEngine interface - deals with adding and setting stuff etc.
   public class EngineManager : IDisposable, IEngine

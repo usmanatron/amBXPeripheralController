@@ -1,9 +1,10 @@
 ﻿using System.IO;
 using System.Xml.Serialization;
+using aPC.Common;
 using aPC.Common.Communication;
 using aPC.Common.Entities;
 
-namespace aPC.Common.Server.Communication
+namespace aPC.Server.Communication
 {
   public abstract class NotificationServiceBase : INotificationService
   {

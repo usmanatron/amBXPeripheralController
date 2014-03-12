@@ -38,12 +38,27 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="amBXLib, Version=1.0.5075.24159, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Release\amBXLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AtypicalFirstRunInfiniteTicker.cs" />
+    <Compile Include="Communication\CommunicationManager.cs" />
+    <Compile Include="Communication\NotificationServiceBase.cs" />
     <Compile Include="ConductorManager.cs" />
+    <Compile Include="Conductors\ComponentConductor.cs" />
+    <Compile Include="Conductors\ConductorBase.cs" />
+    <Compile Include="Conductors\FrameConductor.cs" />
+    <Compile Include="EngineActors\ComponentActor.cs" />
+    <Compile Include="EngineActors\EngineActorBase.cs" />
+    <Compile Include="EngineActors\FrameActor.cs" />
     <Compile Include="EngineActors\RumbleActor.cs" />
     <Compile Include="Communication\NotificationService.cs" />
     <Compile Include="Conductors\FanConductor.cs" />
@@ -51,14 +66,23 @@
     <Compile Include="EngineActors\LightActor.cs" />
     <Compile Include="Conductors\RumbleConductor.cs" />
     <Compile Include="Conductors\LightConductor.cs" />
+    <Compile Include="Engine\ConversionHelpers.cs" />
+    <Compile Include="Engine\EngineManager.cs" />
+    <Compile Include="Engine\IEngine.cs" />
+    <Compile Include="SceneHandlers\ComponentHandler.cs" />
+    <Compile Include="SceneHandlers\FrameHandler.cs" />
     <Compile Include="SceneHandlers\RumbleHandler.cs" />
     <Compile Include="SceneHandlers\FanHandler.cs" />
     <Compile Include="SceneHandlers\LightHandler.cs" />
+    <Compile Include="SceneHandlers\SceneHandlerBase.cs" />
     <Compile Include="SceneStatus.cs" />
     <Compile Include="SceneUpdateHandler.cs" />
     <Compile Include="Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerTask.cs" />
+    <Compile Include="Snapshots\ComponentSnapshot.cs" />
+    <Compile Include="Snapshots\FrameSnapshot.cs" />
+    <Compile Include="Snapshots\SnapshotBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -68,10 +92,6 @@
     <ProjectReference Include="..\aPC.Common.Communication\aPC.Common.Communication.csproj">
       <Project>{38537B40-B1FD-433B-B958-8A1B3C7B83D7}</Project>
       <Name>aPC.Common.Communication</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\aPC.Common.Server\aPC.Common.Server.csproj">
-      <Project>{2165053e-6a4d-4718-bbf9-55301ced1d28}</Project>
-      <Name>aPC.Common.Server</Name>
     </ProjectReference>
     <ProjectReference Include="..\aPC.Common\aPC.Common.csproj">
       <Project>{b6543e75-59af-4059-acf8-560e82bc72ce}</Project>

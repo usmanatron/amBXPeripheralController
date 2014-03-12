@@ -1,11 +1,12 @@
-﻿using aPC.Common.Entities;
-using aPC.Common.Server.EngineActors;
-using aPC.Common.Server.Snapshots;
-using aPC.Common.Server.SceneHandlers;
+﻿using aPC.Common;
+using aPC.Common.Entities;
+using aPC.Server.EngineActors;
+using aPC.Server.Snapshots;
+using aPC.Server.SceneHandlers;
 using System;
 using System.Threading;
 
-namespace aPC.Common.Server.Conductors
+namespace aPC.Server.Conductors
 {
   public abstract class ConductorBase<T> where T : SnapshotBase
   {

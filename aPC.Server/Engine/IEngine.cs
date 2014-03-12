@@ -1,6 +1,7 @@
-﻿using aPC.Common.Entities;
+﻿using aPC.Common;
+using aPC.Common.Entities;
 
-namespace aPC.Common.Server
+namespace aPC.Server.Engine
 {
   public interface IEngine
   {

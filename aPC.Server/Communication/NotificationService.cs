@@ -1,5 +1,5 @@
 ﻿using aPC.Common.Entities;
-using aPC.Common.Server.Communication;
+using aPC.Server.Communication;
 
 namespace aPC.Server.Communication
 {
