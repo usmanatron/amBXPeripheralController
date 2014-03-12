@@ -20,8 +20,6 @@ namespace aPC.Server
     {
       mStatus.CurrentSceneType = xiScene.SceneType;
       Update(xiScene);
-      UpdateActors(xiScene);
-      KickOffConductors();
     }
 
     /// <summary>
@@ -97,26 +95,6 @@ namespace aPC.Server
     private void UpdateDesynchronisedActors(amBXScene xiScene)
     {
       mConductorManager.UpdateDeSync(xiScene);
-    }
-
-    public void KickOffConductors()
-    {
-      if (mStatus.CurrentSceneType == mStatus.PreviousSceneType)
-      {
-        // Still running!
-        return;
-      }
-
-      if (mStatus.CurrentSceneType == eSceneType.Desync)
-      {
-        mConductorManager.DisableSync();
-        mConductorManager.RunDesynchronised();
-      }
-      else
-      {
-        mConductorManager.DisableDesync();
-        mConductorManager.RunSynchronised();
-      }
     }
 
     private ConductorManager mConductorManager;
