@@ -18,9 +18,25 @@ namespace aPC.Common.Server.Conductors
 
     public void Run()
     {
-      while (mHandler.IsEnabled)
+      IsRunning = true;
+
+      while (true)
       {
-        RunOnce();
+        if (mHandler.IsEnabled)
+        {
+          RunOnce();
+        }
+        else
+        {
+          IsRunning = false;
+          break;
+        }
+      }
+
+      // May possibly change in between
+      if (IsRunning)
+      {
+        ThreadPool.QueueUserWorkItem(_ => Run());
       }
     }
 
@@ -53,6 +69,27 @@ namespace aPC.Common.Server.Conductors
     }
 
     public eDirection Direction;
+
+    public bool IsRunning
+    {
+      get
+      {
+        lock (mIsRunningLocker)
+        {
+          return mIsRunning;
+        }
+      }
+      set
+      {
+        lock (mIsRunningLocker)
+        {
+          mIsRunning = value;
+        }
+      }
+    }
+
+    private object mIsRunningLocker;
+    private bool mIsRunning;
 
     private readonly EngineActorBase<T> mActor;
     private readonly SceneHandlerBase<T> mHandler;
