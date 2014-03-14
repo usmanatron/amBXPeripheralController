@@ -67,6 +67,7 @@
     <Compile Include="AtypicalFirstRunInfiniteTickerTests.cs" />
     <Compile Include="Communication\NotificationServiceBaseTests.cs" />
     <Compile Include="Communication\TestNotificationService.cs" />
+    <Compile Include="ConductorManagerTests.cs" />
     <Compile Include="Conductors\ConductorBaseTests.cs" />
     <Compile Include="Conductors\TestConductor.cs" />
     <Compile Include="ConversionHelperTests.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="SceneHandlers\SceneHandlerBaseTests.cs" />
     <Compile Include="SceneHandlers\TestSceneHandler.cs" />
     <Compile Include="Snapshots\TestSnapshot.cs" />
+    <Compile Include="TestConductorManager.cs" />
     <Compile Include="TestEngineManager.cs" />
   </ItemGroup>
   <ItemGroup>
