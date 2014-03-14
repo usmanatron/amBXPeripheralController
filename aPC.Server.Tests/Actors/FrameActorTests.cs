@@ -7,7 +7,7 @@ using aPC.Server.Snapshots;
 using aPC.Common.Builders;
 using aPC.Common.Defaults;
 
-namespace aPC.Server.Tests.EngineActors
+namespace aPC.Server.Tests.Actors
 {
   [TestFixture]
   class FrameActorTests

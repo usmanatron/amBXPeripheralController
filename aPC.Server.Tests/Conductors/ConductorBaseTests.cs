@@ -4,7 +4,7 @@ using System.Diagnostics;
 using NUnit.Framework;
 using aPC.Common.Defaults;
 using aPC.Server.Tests;
-using aPC.Server.Tests.EngineActors;
+using aPC.Server.Tests.Actors;
 using aPC.Server.Tests.SceneHandlers;
 using aPC.Common.Entities;
 using aPC.Common.Builders;
@@ -34,7 +34,7 @@ namespace aPC.Server.Tests.Conductors
         .Build();
 
       mHandler = new TestSceneHandler(mInitialScene, new Action(() => { }));
-      mActor = new TestEngineActor(new TestEngineManager());
+      mActor = new TestActor(new TestEngineManager());
     }
 
     [Test]
@@ -97,6 +97,6 @@ namespace aPC.Server.Tests.Conductors
 
     private amBXScene mInitialScene;
     private TestSceneHandler mHandler;
-    private TestEngineActor mActor;
+    private TestActor mActor;
   }
 }

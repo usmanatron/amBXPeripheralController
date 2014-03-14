@@ -67,8 +67,8 @@
     <Compile Include="Conductors\ConductorBaseTests.cs" />
     <Compile Include="Conductors\TestConductor.cs" />
     <Compile Include="ConversionHelperTests.cs" />
-    <Compile Include="EngineActors\FrameActorTests.cs" />
-    <Compile Include="EngineActors\TestEngineActor.cs" />
+    <Compile Include="Actors\FrameActorTests.cs" />
+    <Compile Include="Actors\TestEngineActor.cs" />
     <Compile Include="EngineManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SceneHandlers\FrameHandlerTests.cs" />
