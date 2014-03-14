@@ -5,7 +5,7 @@ using aPC.Server.Tests.Snapshots;
 
 namespace aPC.Server.Tests.EngineActors
 {
-  class TestEngineActor : EngineActorBase<TestSnapshot>
+  class TestEngineActor : ActorBase<TestSnapshot>
   {
     public TestEngineActor(IEngine xiEngine) : base(xiEngine)
     {

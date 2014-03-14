@@ -5,7 +5,7 @@ using aPC.Server.Snapshots;
 
 namespace aPC.Server.EngineActors
 {
-  public class FrameActor : EngineActorBase<FrameSnapshot>
+  public class FrameActor : ActorBase<FrameSnapshot>
   {
     public FrameActor(IEngine xiEngine) : base (xiEngine)
     {

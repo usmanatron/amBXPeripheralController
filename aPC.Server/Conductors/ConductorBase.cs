@@ -10,7 +10,7 @@ namespace aPC.Server.Conductors
 {
   public abstract class ConductorBase<T> where T : SnapshotBase
   {
-    protected ConductorBase(eDirection xiDirection, EngineActorBase<T> xiActor, SceneHandlerBase<T> xiHandler)
+    protected ConductorBase(eDirection xiDirection, ActorBase<T> xiActor, SceneHandlerBase<T> xiHandler)
     {
       mIsRunningLocker = new object();
       Direction = xiDirection;
@@ -98,7 +98,7 @@ namespace aPC.Server.Conductors
     private object mIsRunningLocker;
     private bool mIsRunning;
 
-    private readonly EngineActorBase<T> mActor;
+    private readonly ActorBase<T> mActor;
     private readonly SceneHandlerBase<T> mHandler;
   }
 }

@@ -4,7 +4,7 @@ using aPC.Server.Snapshots;
 
 namespace aPC.Server.EngineActors
 {
-  public abstract class ComponentActor<T> : EngineActorBase<ComponentSnapshot<T>> where T : IComponent
+  public abstract class ComponentActor<T> : ActorBase<ComponentSnapshot<T>> where T : IComponent
   {
     protected ComponentActor(IEngine xiEngine)
       : base (xiEngine)

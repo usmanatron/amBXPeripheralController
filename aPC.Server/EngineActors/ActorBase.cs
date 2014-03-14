@@ -4,9 +4,9 @@ using aPC.Server.Snapshots;
 
 namespace aPC.Server.EngineActors
 {
-  public abstract class EngineActorBase<T> where T : SnapshotBase
+  public abstract class ActorBase<T> where T : SnapshotBase
   {
-    protected EngineActorBase(IEngine xiEngine)
+    protected ActorBase(IEngine xiEngine)
     {
       Engine = xiEngine;
     }
