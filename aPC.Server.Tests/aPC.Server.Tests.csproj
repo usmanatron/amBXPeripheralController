@@ -61,6 +61,9 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Actors\FanActorTests.cs" />
+    <Compile Include="Actors\LightActorTests.cs" />
+    <Compile Include="Actors\RumbleActorTests.cs" />
     <Compile Include="AtypicalFirstRunInfiniteTickerTests.cs" />
     <Compile Include="Communication\NotificationServiceBaseTests.cs" />
     <Compile Include="Communication\TestNotificationService.cs" />

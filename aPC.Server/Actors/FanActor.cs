@@ -6,7 +6,7 @@ using aPC.Server.Snapshots;
 
 namespace aPC.Server.Actors
 {
-  class FanActor : ComponentActor<Fan>
+  public class FanActor : ComponentActor<Fan>
   {
     public FanActor(IEngine xiEngine) : base (xiEngine)
     {

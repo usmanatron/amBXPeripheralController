@@ -6,7 +6,7 @@ using aPC.Server.Snapshots;
 
 namespace aPC.Server.Actors
 {
-  class LightActor : ComponentActor<Light>
+  public class LightActor : ComponentActor<Light>
   {
     public LightActor(IEngine xiEngine) : base (xiEngine)
     {

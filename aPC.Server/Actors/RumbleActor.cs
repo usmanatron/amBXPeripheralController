@@ -6,7 +6,7 @@ using aPC.Server.Snapshots;
 
 namespace aPC.Server.Actors
 {
-  class RumbleActor : ComponentActor<Rumble>
+  public class RumbleActor : ComponentActor<Rumble>
   {
     public RumbleActor(IEngine xiEngine) : base (xiEngine)
     {

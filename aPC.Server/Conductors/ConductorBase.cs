@@ -75,8 +75,6 @@ namespace aPC.Server.Conductors
       mHandler.Enable();
     }
 
-    public eDirection Direction;
-
     public bool IsRunning
     {
       get
@@ -95,9 +93,10 @@ namespace aPC.Server.Conductors
       }
     }
 
+    public eDirection Direction;
+
     private object mIsRunningLocker;
     private bool mIsRunning;
-
     private readonly ActorBase<T> mActor;
     private readonly SceneHandlerBase<T> mHandler;
   }
