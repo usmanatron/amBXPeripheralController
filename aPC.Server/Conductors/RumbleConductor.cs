@@ -6,7 +6,7 @@ using aPC.Server.SceneHandlers;
 
 namespace aPC.Server.Conductors
 {
-  class RumbleConductor : ComponentConductor<Rumble>
+  public class RumbleConductor : ComponentConductor<Rumble>
   {
     public RumbleConductor(eDirection xiDirection, RumbleActor xiActor, RumbleHandler xiHandler) 
       : base(xiDirection, xiActor, xiHandler)

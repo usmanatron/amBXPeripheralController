@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace aPC.Server.SceneHandlers
 {
-  class LightHandler : ComponentHandler<Light>
+  public class LightHandler : ComponentHandler<Light>
   {
     public LightHandler(amBXScene xiScene, Action xiEventcomplete) : base(xiScene, xiEventcomplete)
     { 

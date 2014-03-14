@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace aPC.Server.SceneHandlers
 {
-  class RumbleHandler : ComponentHandler<Rumble>
+  public class RumbleHandler : ComponentHandler<Rumble>
   {
     public RumbleHandler(amBXScene xiScene, Action xiEventcomplete) : base(xiScene, xiEventcomplete)
     { 

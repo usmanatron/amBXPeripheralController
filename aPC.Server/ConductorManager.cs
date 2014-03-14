@@ -13,9 +13,9 @@ using aPC.Server.SceneHandlers;
 
 namespace aPC.Server
 {
-  class ConductorManager
+  public class ConductorManager
   {
-    public ConductorManager(EngineManager xiEngine, amBXScene xiScene, Action xiEventComplete)
+    public ConductorManager(IEngine xiEngine, amBXScene xiScene, Action xiEventComplete)
     {
       mLightConductors = new List<LightConductor>();
       mFanConductors = new List<FanConductor>();
@@ -24,7 +24,7 @@ namespace aPC.Server
       SetupManagers(xiEngine, xiScene, xiEventComplete);
     }
 
-    private void SetupManagers(EngineManager xiEngine, amBXScene xiScene, Action xiAction)
+    private void SetupManagers(IEngine xiEngine, amBXScene xiScene, Action xiAction)
     {
       mFrameConductor = new FrameConductor(new FrameActor(xiEngine), new FrameHandler(xiScene, xiAction));      
 
@@ -158,9 +158,9 @@ namespace aPC.Server
     private Func<FrameStatistics, eComponentType, eDirection, bool> IsApplicableForConductor =
       (statistics, componentType, direction) => statistics.AreEnabledForComponentAndDirection(componentType, direction);
 
-    private FrameConductor mFrameConductor;
-    private List<LightConductor> mLightConductors;
-    private List<FanConductor> mFanConductors;
-    private List<RumbleConductor> mRumbleConductors;
+    protected FrameConductor mFrameConductor;
+    protected List<LightConductor> mLightConductors;
+    protected List<FanConductor> mFanConductors;
+    protected List<RumbleConductor> mRumbleConductors;
   }
 }

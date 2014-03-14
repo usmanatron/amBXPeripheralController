@@ -6,7 +6,7 @@ using aPC.Common;
 
 namespace aPC.Server.Conductors
 {
-  class LightConductor : ComponentConductor<Light>
+  public class LightConductor : ComponentConductor<Light>
   {
     public LightConductor(eDirection xiDirection, LightActor xiActor, LightHandler xiHandler) 
       : base(xiDirection, xiActor, xiHandler)

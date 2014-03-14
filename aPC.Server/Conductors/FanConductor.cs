@@ -6,7 +6,7 @@ using aPC.Server.SceneHandlers;
 
 namespace aPC.Server.Conductors
 {
-  class FanConductor : ComponentConductor<Fan>
+  public class FanConductor : ComponentConductor<Fan>
   {
     public FanConductor(eDirection xiDirection, FanActor xiActor, FanHandler xiHandler)
       : base (xiDirection, xiActor, xiHandler)

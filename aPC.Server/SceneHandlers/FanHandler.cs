@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace aPC.Server.SceneHandlers
 {
-  class FanHandler : ComponentHandler<Fan>
+  public class FanHandler : ComponentHandler<Fan>
   {
     public FanHandler(amBXScene xiScene, Action xiEventcomplete) : base(xiScene, xiEventcomplete)
     { 
