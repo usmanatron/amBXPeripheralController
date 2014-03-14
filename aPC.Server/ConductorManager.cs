@@ -43,18 +43,6 @@ namespace aPC.Server
       mRumbleConductors.Add(new RumbleConductor(eDirection.Center, new RumbleActor(xiEngine), new RumbleHandler(xiScene, xiAction)));
     }
 
-    public void RunSynchronised()
-    {
-      ThreadPool.QueueUserWorkItem(_ => mFrameConductor.Run());
-    }
-
-    public void RunDesynchronised()
-    {
-      mLightConductors.ForEach(light => ThreadPool.QueueUserWorkItem(_ => light.Run()));
-      mFanConductors.ForEach(fan => ThreadPool.QueueUserWorkItem(_ => fan.Run()));
-      mRumbleConductors.ForEach(rumble => ThreadPool.QueueUserWorkItem(_ => rumble.Run()));
-    }
-
     #region Update Scene
 
     public void UpdateSync(amBXScene xiScene)
