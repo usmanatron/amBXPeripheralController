@@ -2,7 +2,7 @@
 using aPC.Server.Engine;
 using aPC.Server.Snapshots;
 
-namespace aPC.Server.EngineActors
+namespace aPC.Server.Actors
 {
   public abstract class ActorBase<T> where T : SnapshotBase
   {

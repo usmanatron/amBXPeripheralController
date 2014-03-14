@@ -1,6 +1,6 @@
 ﻿using aPC.Common;
 using aPC.Server.Engine;
-using aPC.Server.EngineActors;
+using aPC.Server.Actors;
 using aPC.Server.Tests.Snapshots;
 
 namespace aPC.Server.Tests.EngineActors

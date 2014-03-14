@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 using NUnit.Framework;
-using aPC.Server.EngineActors;
+using aPC.Server.Actors;
 using aPC.Server.Snapshots;
 using aPC.Common.Builders;
 using aPC.Common.Defaults;

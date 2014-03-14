@@ -3,7 +3,7 @@ using aPC.Common.Entities;
 using aPC.Server.Engine;
 using aPC.Server.Snapshots;
 
-namespace aPC.Server.EngineActors
+namespace aPC.Server.Actors
 {
   public class FrameActor : ActorBase<FrameSnapshot>
   {

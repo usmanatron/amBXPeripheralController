@@ -2,10 +2,9 @@
 using aPC.Common.Entities;
 using aPC.Server;
 using aPC.Server.Engine;
-using aPC.Server.EngineActors;
 using aPC.Server.Snapshots;
 
-namespace aPC.Server.EngineActors
+namespace aPC.Server.Actors
 {
   class RumbleActor : ComponentActor<Rumble>
   {
