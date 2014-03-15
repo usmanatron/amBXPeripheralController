@@ -76,6 +76,7 @@
     <Compile Include="EngineManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SceneHandlers\FrameHandlerTests.cs" />
+    <Compile Include="SceneHandlers\LightHandlerTests.cs" />
     <Compile Include="SceneHandlers\SceneHandlerBaseTests.cs" />
     <Compile Include="SceneHandlers\TestSceneHandler.cs" />
     <Compile Include="Snapshots\TestSnapshot.cs" />
