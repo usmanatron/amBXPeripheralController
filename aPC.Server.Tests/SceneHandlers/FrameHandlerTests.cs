@@ -25,9 +25,9 @@ namespace aPC.Server.Tests.SceneHandlers
       var lSnapshot = lHandler.GetNextSnapshot(eDirection.North);
       var lExpectedFrame = mScene.Frames[0];
 
-      Assert.AreEqual(lSnapshot.Frame.Length, lExpectedFrame.Length);
-      Assert.AreEqual(lSnapshot.Frame.IsRepeated, lExpectedFrame.IsRepeated);
-      Assert.AreEqual(lSnapshot.Frame.Lights, lExpectedFrame.Lights);
+      Assert.AreEqual(lExpectedFrame.Length, lSnapshot.Frame.Length);
+      Assert.AreEqual(lExpectedFrame.IsRepeated, lSnapshot.Frame.IsRepeated);
+      Assert.AreEqual(lExpectedFrame.Lights, lSnapshot.Frame.Lights);
     }
 
     [Test]
@@ -39,9 +39,9 @@ namespace aPC.Server.Tests.SceneHandlers
       var lSnapshot = lHandler.GetNextSnapshot(xiDirection);
       var lExpectedFrame = mScene.Frames[0];
 
-      Assert.AreEqual(lSnapshot.Frame.Length, lExpectedFrame.Length);
-      Assert.AreEqual(lSnapshot.Frame.IsRepeated, lExpectedFrame.IsRepeated);
-      Assert.AreEqual(lSnapshot.Frame.Lights, lExpectedFrame.Lights);
+      Assert.AreEqual(lExpectedFrame.Length, lSnapshot.Frame.Length);
+      Assert.AreEqual(lExpectedFrame.IsRepeated, lSnapshot.Frame.IsRepeated);
+      Assert.AreEqual(lExpectedFrame.Lights, lSnapshot.Frame.Lights);
     }
 
 
