@@ -2,7 +2,7 @@
 
 namespace aPC.Server
 {
-  class SceneStatus
+  public class SceneStatus
   {
     public SceneStatus(eSceneType xiSceneType)
     {
