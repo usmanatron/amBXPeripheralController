@@ -202,6 +202,28 @@ namespace aPC.Server.Tests.SceneHandlers
       Assert.AreEqual(lExpectedFrame.Lights, lPreviousFrame.Lights);
     }
 
+    [Test]
+    public void HandlerWithEvent_PushingNonEvent_QuietlyUpdatesPreviousScene()
+    {
+      var lHandler = new TestSceneHandler(mInitialScene, mAction);
+      lHandler.UpdateScene(mBlueEvent);
+      lHandler.UpdateScene(mUnrepeatedScene);
+
+      // Confirm the current Scene is still the event
+      var lFirstFrame = lHandler.NextFrame;
+      Assert.AreEqual(lFirstFrame.Lights, mBlueEvent.Frames.Single().Lights);
+
+      lHandler.AdvanceScene();
+
+      // Confirm the previous scene has changed
+      var lPreviousFrame = lHandler.NextFrame;
+      var lExpectedFrame = mUnrepeatedScene.Frames[0];
+
+      Assert.AreEqual(lExpectedFrame.Length, lPreviousFrame.Length);
+      Assert.AreEqual(lExpectedFrame.IsRepeated, lPreviousFrame.IsRepeated);
+      Assert.AreEqual(lExpectedFrame.Lights, lPreviousFrame.Lights);
+    }
+
     private amBXScene mInitialScene;
     private amBXScene mBlueEvent;
     private amBXScene mPurpleEvent;
