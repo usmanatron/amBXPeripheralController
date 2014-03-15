@@ -78,6 +78,7 @@
     <Compile Include="SceneHandlers\FanHandlerTests.cs" />
     <Compile Include="SceneHandlers\FrameHandlerTests.cs" />
     <Compile Include="SceneHandlers\LightHandlerTests.cs" />
+    <Compile Include="SceneHandlers\RumbleHandlerTests.cs" />
     <Compile Include="SceneHandlers\SceneHandlerBaseTests.cs" />
     <Compile Include="SceneHandlers\TestSceneHandler.cs" />
     <Compile Include="Snapshots\TestSnapshot.cs" />
