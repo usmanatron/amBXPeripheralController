@@ -214,6 +214,26 @@ namespace aPC.Common.Defaults
       }
     }
 
+    [SceneName("fans_quarter")]
+    public amBXScene QuarterFans
+    {
+      get
+      {
+        var lScene = new amBXScene()
+          {
+            SceneType = eSceneType.Desync
+          };
+        lScene.Frames = new FrameBuilder()
+          .AddFrame()
+          .WithRepeated(true)
+          .WithFrameLength(2000)
+          .WithFanSection(DefaultFanSections.Quarter)
+          .Build();
+
+        return lScene;
+      }
+    }
+
     #endregion
 
     #region PoolQ2
