@@ -2,7 +2,13 @@
 
 namespace aPC.Server
 {
-  public class SceneStatus
+  public interface ISceneStatus
+  {
+    eSceneType CurrentSceneType { get; set; }
+    eSceneType PreviousSceneType { get; }
+  }
+
+  public class SceneStatus : ISceneStatus
   {
     public SceneStatus(eSceneType xiSceneType)
     {
