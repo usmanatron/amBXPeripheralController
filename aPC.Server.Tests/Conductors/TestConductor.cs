@@ -12,5 +12,10 @@ namespace aPC.Server.Tests.Conductors
       : base (xiDirection, xiActor, xiHandler)
     {
     }
+ 
+    public override eComponentType ComponentType
+    {
+      get { throw new System.NotImplementedException(); }
+    }
   }
 }

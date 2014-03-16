@@ -11,5 +11,10 @@ namespace aPC.Server.Conductors
       : base(eDirection.Everywhere, xiActor, xiHandler)
     {
     }
+
+    public override eComponentType ComponentType
+    {
+      get { throw new System.InvalidOperationException("The FrameConductor doesn't have a component!"); }
+    }
   }
 }

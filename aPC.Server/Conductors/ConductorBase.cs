@@ -101,6 +101,7 @@ namespace aPC.Server.Conductors
       }
     }
 
+    public abstract eComponentType ComponentType { get; }
 
     private eDirection mDirection;
     private object mIsRunningLocker;

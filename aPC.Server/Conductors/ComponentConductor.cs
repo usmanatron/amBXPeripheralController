@@ -12,7 +12,5 @@ namespace aPC.Server.Conductors
       : base(xiDirection, xiActor, xiHandler)
     {
     }
-
-    public abstract eComponentType ComponentType();
   }
 }

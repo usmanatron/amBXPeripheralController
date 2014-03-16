@@ -13,9 +13,12 @@ namespace aPC.Server.Conductors
     {
     }
 
-    public override eComponentType ComponentType()
+    public override eComponentType ComponentType
     {
-      return eComponentType.Fan;
+      get
+      {
+        return eComponentType.Fan;
+      }
     }
   }
 }
