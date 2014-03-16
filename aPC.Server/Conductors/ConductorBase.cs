@@ -8,12 +8,12 @@ using System.Threading;
 
 namespace aPC.Server.Conductors
 {
-  public abstract class ConductorBase<T> where T : SnapshotBase
+  public abstract class ConductorBase<T> : IConductor where T : SnapshotBase
   {
     protected ConductorBase(eDirection xiDirection, ActorBase<T> xiActor, SceneHandlerBase<T> xiHandler)
     {
       mIsRunningLocker = new object();
-      Direction = xiDirection;
+      mDirection = xiDirection;
       mActor = xiActor;
       mHandler = xiHandler;
     }
@@ -60,7 +60,7 @@ namespace aPC.Server.Conductors
       mHandler.UpdateScene(xiScene);
     }
 
-    protected void WaitforInterval(int xiLength)
+    private void WaitforInterval(int xiLength)
     {
       Thread.Sleep(xiLength);
     }
@@ -93,8 +93,16 @@ namespace aPC.Server.Conductors
       }
     }
 
-    public eDirection Direction;
+    public eDirection Direction
+    {
+      get
+      {
+        return mDirection;
+      }
+    }
 
+
+    private eDirection mDirection;
     private object mIsRunningLocker;
     private bool mIsRunning;
     private readonly ActorBase<T> mActor;
