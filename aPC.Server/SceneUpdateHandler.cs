@@ -10,7 +10,7 @@ namespace aPC.Server
 {
   class SceneUpdateHandler
   {
-    public SceneUpdateHandler(ConductorManager xiConductorManager, SceneStatus xiStatus)
+    public SceneUpdateHandler(ConductorManager xiConductorManager, ISceneStatus xiStatus)
     {
       mConductorManager = xiConductorManager;
       mStatus = xiStatus;
@@ -147,6 +147,6 @@ namespace aPC.Server
     #endregion
 
     private ConductorManager mConductorManager;
-    private SceneStatus mStatus;
+    private ISceneStatus mStatus;
   }
 }

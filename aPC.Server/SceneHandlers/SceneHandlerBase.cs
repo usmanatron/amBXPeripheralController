@@ -8,7 +8,7 @@ using System.Linq;
 namespace aPC.Server.SceneHandlers
 {
   //Handles the amBXScene object(s) and any interactions.
-  public abstract class SceneHandlerBase<T> where T : SnapshotBase
+  public abstract class SceneHandlerBase<T> : ISceneHandler<T> where T : SnapshotBase
   {
     protected SceneHandlerBase(amBXScene xiScene, Action xiEventCallback)
     {
