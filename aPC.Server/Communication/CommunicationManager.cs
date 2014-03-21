@@ -6,13 +6,13 @@ namespace aPC.Server.Communication
 {
   public class CommunicationManager : IDisposable
   {
-    public CommunicationManager(NotificationServiceBase xiNotificationService)
+    public CommunicationManager(INotificationService xiNotificationService)
     {
       SetupHost(xiNotificationService);
       mHost.Open();
     }
 
-    private void SetupHost(NotificationServiceBase xiNotificationService)
+    private void SetupHost(INotificationService xiNotificationService)
     {
       mHost = new ServiceHost(xiNotificationService.GetType());
 

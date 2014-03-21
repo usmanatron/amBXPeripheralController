@@ -52,9 +52,9 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actors\IActor.cs" />
     <Compile Include="AtypicalFirstRunInfiniteTicker.cs" />
     <Compile Include="Communication\CommunicationManager.cs" />
-    <Compile Include="Communication\NotificationServiceBase.cs" />
     <Compile Include="ConductorManager.cs" />
     <Compile Include="Conductors\ComponentConductor.cs" />
     <Compile Include="Conductors\ConductorBase.cs" />
