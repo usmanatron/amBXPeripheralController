@@ -7,23 +7,30 @@ using aPC.Server.Engine;
 using aPC.Server.Actors;
 using aPC.Server.SceneHandlers;
 using System.Threading;
+using aPC.Common.Communication;
 
 namespace aPC.Server
 {
   class ServerTask
   {
-    public ServerTask()
+    public ServerTask(
+      amBXScene xiInitialScene, 
+      ISceneStatus xiStatus, 
+      INotificationService xiNotificationService,
+      IEngine xiEngine)
     {
-      mInitialScene = new SceneAccessor().GetScene("Default_RedVsBlue");
-      mStatus = new SceneStatus(mInitialScene.SceneType);
+      mInitialScene = xiInitialScene;
+      mStatus = xiStatus;
+      mNotificationService = xiNotificationService;
+      mEngine = xiEngine;
     }
 
     internal void Run()
     {
-      using (new CommunicationManager(new NotificationService()))
-      using (var lEngine = new EngineManager())
+      using (new CommunicationManager(mNotificationService))
+      using (mEngine)
       {
-        mConductorManager = new ConductorManager(lEngine, mInitialScene, EventComplete);
+        mConductorManager = new ConductorManager(mEngine, mInitialScene, EventComplete);
         mSceneUpdateHandler = new SceneUpdateHandler(mConductorManager, mStatus);
         mSceneUpdateHandler.UpdateScene(mInitialScene);
 
@@ -51,6 +58,8 @@ namespace aPC.Server
     private ConductorManager mConductorManager;
     private amBXScene mInitialScene;
     private SceneUpdateHandler mSceneUpdateHandler;
-    private SceneStatus mStatus;
+    private ISceneStatus mStatus;
+    private INotificationService mNotificationService;
+    private IEngine mEngine;
   }
 }

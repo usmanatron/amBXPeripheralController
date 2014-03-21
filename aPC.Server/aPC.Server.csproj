@@ -75,6 +75,7 @@
     <Compile Include="Engine\IEngine.cs" />
     <Compile Include="SceneHandlers\ComponentHandler.cs" />
     <Compile Include="SceneHandlers\FrameHandler.cs" />
+    <Compile Include="SceneHandlers\ISceneHandler.cs" />
     <Compile Include="SceneHandlers\RumbleHandler.cs" />
     <Compile Include="SceneHandlers\FanHandler.cs" />
     <Compile Include="SceneHandlers\LightHandler.cs" />
