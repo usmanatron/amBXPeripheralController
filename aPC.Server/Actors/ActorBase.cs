@@ -4,7 +4,7 @@ using aPC.Server.Snapshots;
 
 namespace aPC.Server.Actors
 {
-  public abstract class ActorBase<T> where T : SnapshotBase
+  public abstract class ActorBase<T> : IActor<T> where T : SnapshotBase
   {
     protected ActorBase(IEngine xiEngine)
     {
