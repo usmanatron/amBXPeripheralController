@@ -56,8 +56,8 @@ namespace aPC.Server.Conductors
       }
       
       mActor.ActNextFrame(Direction, lSnapshot);
-      mHandler.AdvanceScene();
       WaitforInterval(lSnapshot.Length);
+      mHandler.AdvanceScene();
     }
 
     public void UpdateScene(amBXScene xiScene)
