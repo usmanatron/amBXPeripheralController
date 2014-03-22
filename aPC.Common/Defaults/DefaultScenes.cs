@@ -108,6 +108,86 @@ namespace aPC.Common.Defaults
 
     #region Misc
 
+    [SceneName("Server_Startup")]
+    public amBXScene ServerStartup
+    {
+      get
+      {
+        var lScene = new amBXScene
+                     {
+                       SceneType = eSceneType.Event,
+                       IsExclusive = true
+                     };
+
+        lScene.Frames = new FrameBuilder()
+          .AddFrame()
+          .WithRepeated(false)
+          .WithFrameLength(500)
+          .WithLightSection(DefaultLightSections.JiraBlue)
+          .WithFanSection(DefaultFanSections.Half)
+          .AddFrame()
+          .WithRepeated(false)
+          .WithFrameLength(750)
+          .WithLightSection(DefaultLightSections.Blue)
+          .WithFanSection(DefaultFanSections.Off)
+          .WithRumbleSection(DefaultRumbleSections.SoftThunder)
+          .AddFrame()
+          .WithRepeated(true)
+          .WithFrameLength(1000)
+          .WithLightSection(DefaultLightSections.Violet)
+          .WithRumbleSection(DefaultRumbleSections.Off)
+          .Build();
+
+        return lScene;
+      }
+    }
+
+    [SceneName("rainbow")]
+    public amBXScene Rainbow
+    {
+      get
+      {
+        var lScene = new amBXScene
+                     {
+                       SceneType = eSceneType.Desync,
+                       IsExclusive = true
+                     };
+
+        lScene.Frames = new FrameBuilder()
+          .AddFrame()
+          .WithRepeated(true)
+          .WithFrameLength(1000)
+          .WithLightSection(DefaultLightSections.Red)
+          .AddFrame()
+          .WithRepeated(true)
+          .WithFrameLength(1000)
+          .WithLightSection(DefaultLightSections.Orange)
+          .AddFrame()
+          .WithRepeated(true)
+          .WithFrameLength(1000)
+          .WithLightSection(DefaultLightSections.Yellow)
+          .AddFrame()
+          .WithRepeated(true)
+          .WithFrameLength(1000)
+          .WithLightSection(DefaultLightSections.Green)
+          .AddFrame()
+          .WithRepeated(true)
+          .WithFrameLength(1000)
+          .WithLightSection(DefaultLightSections.Blue)
+          .AddFrame()
+          .WithRepeated(true)
+          .WithFrameLength(1000)
+          .WithLightSection(DefaultLightSections.Indigo)
+          .AddFrame()
+          .WithRepeated(true)
+          .WithFrameLength(1000)
+          .WithLightSection(DefaultLightSections.Violet)
+          .Build();
+
+        return lScene;
+      }
+    }
+
     [SceneName("default_redvsblue")]
     public amBXScene DefaultRedVsBlue
     {
@@ -333,38 +413,5 @@ namespace aPC.Common.Defaults
 
     #endregion
 
-    [SceneName("support_jiraday")]
-    public amBXScene Support_JIRADay
-    {
-      get
-      {
-        var lScene = new amBXScene
-                     {
-                       SceneType = eSceneType.Event,
-                       IsExclusive = true,
-                     };
-        lScene.Frames = new FrameBuilder()
-          .AddFrame()
-          .WithRepeated(false)
-          .WithFrameLength(1000)
-          .WithLightSection(DefaultLightSections.Blue)
-          .WithRumbleSection(DefaultRumbleSections.Off)
-          .WithFanSection(DefaultFanSections.Off)
-
-          .AddFrame()
-          .WithRepeated(false)
-          .WithFrameLength(5*1000)
-          .WithLightSection(DefaultLightSections.JiraBlue)
-          .WithFanSection(DefaultFanSections.Quarter)
-
-          .AddFrame()
-          .WithRepeated(false)
-          .WithFrameLength(10*1000)
-          .WithFanSection(DefaultFanSections.Off)
-          .Build();
-
-        return lScene;
-      }
-    }
   }
 }
