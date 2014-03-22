@@ -2,6 +2,7 @@
 using aPC.Server.Actors;
 using aPC.Server.Snapshots;
 using aPC.Server.SceneHandlers;
+using log4net;
 
 namespace aPC.Server.Conductors
 {
@@ -12,9 +13,16 @@ namespace aPC.Server.Conductors
     {
     }
 
+    protected override void Log(string xiNotification)
+    {
+      mLog.Info(xiNotification);
+    }
+
     public override eComponentType ComponentType
     {
       get { throw new System.InvalidOperationException("The FrameConductor doesn't have a component!"); }
     }
+
+    private static ILog mLog = LogManager.GetLogger(typeof(FrameConductor));
   }
 }

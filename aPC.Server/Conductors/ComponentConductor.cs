@@ -3,6 +3,7 @@ using aPC.Common.Entities;
 using aPC.Server.Actors;
 using aPC.Server.Snapshots;
 using aPC.Server.SceneHandlers;
+using log4net;
 
 namespace aPC.Server.Conductors
 {
@@ -12,5 +13,12 @@ namespace aPC.Server.Conductors
       : base(xiDirection, xiActor, xiHandler)
     {
     }
+
+    protected override void Log(string xiNotification)
+    {
+      mLog.InfoFormat("Component:{0}, Direction:{1}, Message:{2}", ComponentType, Direction, xiNotification);
+    }
+
+    private static ILog mLog = LogManager.GetLogger("ComponentConductor");
   }
 }

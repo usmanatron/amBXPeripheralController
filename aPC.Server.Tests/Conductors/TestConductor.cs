@@ -17,5 +17,10 @@ namespace aPC.Server.Tests.Conductors
     {
       get { throw new System.NotImplementedException(); }
     }
+
+    // Don't need to log anything here.
+    protected override void Log(string xiNotification)
+    {
+    }
   }
 }

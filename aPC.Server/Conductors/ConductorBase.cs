@@ -103,6 +103,8 @@ namespace aPC.Server.Conductors
 
     public abstract eComponentType ComponentType { get; }
 
+    protected abstract void Log(string xiNotification);
+
     private eDirection mDirection;
     private object mIsRunningLocker;
     private bool mIsRunning;
