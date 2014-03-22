@@ -20,6 +20,7 @@ namespace aPC.Server.Conductors
 
     public void Run()
     {
+      Log("About to run");
       IsRunning = true;
 
       while (true)
@@ -30,6 +31,7 @@ namespace aPC.Server.Conductors
         }
         else
         {
+          Log("Handler disabled - Disabling conductor.");
           IsRunning = false;
           break;
         }
@@ -38,8 +40,11 @@ namespace aPC.Server.Conductors
       // May possibly change in between
       if (IsRunning)
       {
+        Log("Conductor externally re-enabled - restarting run");
         ThreadPool.QueueUserWorkItem(_ => Run());
       }
+
+      Log("Run complete");
     }
 
     public void RunOnce()
