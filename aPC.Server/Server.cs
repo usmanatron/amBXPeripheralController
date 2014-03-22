@@ -9,7 +9,6 @@ namespace aPC.Server
   {
     private static void Main(string[] args)
     {
-      ServerTask = new ServerTask();
       var lInitialScene = new SceneAccessor().GetScene("Default_RedVsBlue");
       var lStatus = new SceneStatus(lInitialScene.SceneType);
       ServerTask = new ServerTask(lInitialScene, lStatus, new NotificationService(), new EngineManager());
