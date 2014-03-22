@@ -17,10 +17,7 @@ namespace aPC.Server
   {
     public ConductorManager(IEngine xiEngine, amBXScene xiScene, Action xiEventComplete)
     {
-      mLightConductors = new List<LightConductor>();
-      mFanConductors = new List<FanConductor>();
-      mRumbleConductors = new List<RumbleConductor>();
-
+      mDesyncConductors = new List<IConductor>();
       SetupManagers(xiEngine, xiScene, xiEventComplete);
     }
 
@@ -28,19 +25,19 @@ namespace aPC.Server
     {
       mFrameConductor = new FrameConductor(new FrameActor(xiEngine), new FrameHandler(xiScene, xiAction));      
 
-      mLightConductors.Add(new LightConductor(eDirection.North, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
-      mLightConductors.Add(new LightConductor(eDirection.NorthEast, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
-      mLightConductors.Add(new LightConductor(eDirection.East, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
-      mLightConductors.Add(new LightConductor(eDirection.SouthEast, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
-      mLightConductors.Add(new LightConductor(eDirection.South, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
-      mLightConductors.Add(new LightConductor(eDirection.SouthWest, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
-      mLightConductors.Add(new LightConductor(eDirection.West, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
-      mLightConductors.Add(new LightConductor(eDirection.NorthWest, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
+      mDesyncConductors.Add(new LightConductor(eDirection.North, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
+      mDesyncConductors.Add(new LightConductor(eDirection.NorthEast, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
+      mDesyncConductors.Add(new LightConductor(eDirection.East, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
+      mDesyncConductors.Add(new LightConductor(eDirection.SouthEast, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
+      mDesyncConductors.Add(new LightConductor(eDirection.South, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
+      mDesyncConductors.Add(new LightConductor(eDirection.SouthWest, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
+      mDesyncConductors.Add(new LightConductor(eDirection.West, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
+      mDesyncConductors.Add(new LightConductor(eDirection.NorthWest, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
 
-      mFanConductors.Add(new FanConductor(eDirection.East, new FanActor(xiEngine), new FanHandler(xiScene, xiAction)));
-      mFanConductors.Add(new FanConductor(eDirection.West, new FanActor(xiEngine), new FanHandler(xiScene, xiAction)));
+      mDesyncConductors.Add(new FanConductor(eDirection.East, new FanActor(xiEngine), new FanHandler(xiScene, xiAction)));
+      mDesyncConductors.Add(new FanConductor(eDirection.West, new FanActor(xiEngine), new FanHandler(xiScene, xiAction)));
 
-      mRumbleConductors.Add(new RumbleConductor(eDirection.Center, new RumbleActor(xiEngine), new RumbleHandler(xiScene, xiAction)));
+      mDesyncConductors.Add(new RumbleConductor(eDirection.Center, new RumbleActor(xiEngine), new RumbleHandler(xiScene, xiAction)));
     }
 
     #region Update Scene
@@ -52,9 +49,7 @@ namespace aPC.Server
     
     public void UpdateDeSync(amBXScene xiScene)
     {
-      Parallel.ForEach(mLightConductors, conductor => UpdateSceneIfRelevant(conductor, xiScene));
-      Parallel.ForEach(mFanConductors, conductor => UpdateSceneIfRelevant(conductor, xiScene));
-      Parallel.ForEach(mRumbleConductors, conductor => UpdateSceneIfRelevant(conductor, xiScene));
+      Parallel.ForEach(mDesyncConductors, conductor => UpdateSceneIfRelevant(conductor, xiScene));
     }
 
     private void UpdateSceneIfRelevant(IConductor xiConductor, amBXScene xiScene)
@@ -77,9 +72,7 @@ namespace aPC.Server
 
     public void EnableDesync()
     {
-      mLightConductors.ForEach(light => ThreadPool.QueueUserWorkItem(_ => EnableAndRunIfRequired(light)));
-      mFanConductors.ForEach(fan => ThreadPool.QueueUserWorkItem(_ => EnableAndRunIfRequired(fan)));
-      mRumbleConductors.ForEach(rumble => ThreadPool.QueueUserWorkItem(_ => EnableAndRunIfRequired(rumble)));
+      mDesyncConductors.ForEach(light => EnableAndRunIfRequired(light));
     }
 
     private void EnableAndRunIfRequired(IConductor xiConductor)
@@ -98,14 +91,10 @@ namespace aPC.Server
 
     public void DisableDesync()
     {
-      mLightConductors.ForEach(light => ThreadPool.QueueUserWorkItem(_ => light.Disable()));
-      mFanConductors.ForEach(fan => ThreadPool.QueueUserWorkItem(_ => fan.Disable()));
-      mRumbleConductors.ForEach(rumble => ThreadPool.QueueUserWorkItem(_ => rumble.Disable()));
+      mDesyncConductors.ForEach(light => light.Disable());
     }
 
     protected FrameConductor mFrameConductor;
-    protected List<LightConductor> mLightConductors;
-    protected List<FanConductor> mFanConductors;
-    protected List<RumbleConductor> mRumbleConductors;
+    protected List<IConductor> mDesyncConductors;
   }
 }

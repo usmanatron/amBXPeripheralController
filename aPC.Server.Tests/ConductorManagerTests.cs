@@ -49,9 +49,9 @@ namespace aPC.Server.Tests
       mConductorManager.EnableDesync();
       Thread.Sleep(200);
 
-      mConductorManager.LightConductors.ForEach(light => Assert.IsTrue(light.IsRunning));
-      mConductorManager.FanConductors.ForEach(fan => Assert.IsTrue(fan.IsRunning));
-      mConductorManager.RumbleConductors.ForEach(rumble => Assert.IsTrue(rumble.IsRunning));
+      mConductorManager.LightConductors.ToList().ForEach(light => Assert.IsTrue(light.IsRunning));
+      mConductorManager.FanConductors.ToList().ForEach(fan => Assert.IsTrue(fan.IsRunning));
+      mConductorManager.RumbleConductors.ToList().ForEach(rumble => Assert.IsTrue(rumble.IsRunning));
     }
 
     private TestEngineManager mEngine;

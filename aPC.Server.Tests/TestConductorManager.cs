@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using aPC.Common;
 using aPC.Server;
 using aPC.Server.Conductors;
 using aPC.Server.Engine;
@@ -17,19 +19,19 @@ namespace aPC.Server.Tests
       get { return mFrameConductor; }
     }
 
-    public List<LightConductor> LightConductors
+    public IEnumerable<LightConductor> LightConductors
     {
-      get { return mLightConductors; }
+      get { return mDesyncConductors.Where(conductor => conductor.ComponentType == eComponentType.Light).Cast<LightConductor>(); }
     }
 
-    public List<FanConductor> FanConductors
+    public IEnumerable<FanConductor> FanConductors
     {
-      get { return mFanConductors; }
+      get { return mDesyncConductors.Where(conductor => conductor.ComponentType == eComponentType.Fan).Cast<FanConductor>(); }
     }
 
-    public List<RumbleConductor> RumbleConductors
+    public IEnumerable<RumbleConductor> RumbleConductors
     {
-      get { return mRumbleConductors; }
+      get { return mDesyncConductors.Where(conductor => conductor.ComponentType == eComponentType.Rumble).Cast<RumbleConductor>(); }
     }
   }
 }
