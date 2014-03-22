@@ -14,12 +14,14 @@ namespace aPC.Server
   class ServerTask
   {
     public ServerTask(
-      amBXScene xiInitialScene, 
+      amBXScene xiInitialScene,
+      amBXScene xiInitialEvent, 
       ISceneStatus xiStatus, 
       INotificationService xiNotificationService,
       IEngine xiEngine)
     {
       mInitialScene = xiInitialScene;
+      mInitialEvent = xiInitialEvent;
       mStatus = xiStatus;
       mNotificationService = xiNotificationService;
       mEngine = xiEngine;
@@ -31,8 +33,7 @@ namespace aPC.Server
       using (mEngine)
       {
         mConductorManager = new ConductorManager(mEngine, mInitialScene, EventComplete);
-        mSceneUpdateHandler = new SceneUpdateHandler(mConductorManager, mStatus);
-        mSceneUpdateHandler.UpdateScene(mInitialScene);
+        mSceneUpdateHandler = new SceneUpdateHandler(mInitialScene, mInitialEvent, mConductorManager, mStatus);
 
         while (true)
         {
@@ -57,6 +58,7 @@ namespace aPC.Server
 
     private ConductorManager mConductorManager;
     private amBXScene mInitialScene;
+    private amBXScene mInitialEvent;
     private SceneUpdateHandler mSceneUpdateHandler;
     private ISceneStatus mStatus;
     private INotificationService mNotificationService;

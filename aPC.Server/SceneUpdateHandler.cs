@@ -10,10 +10,25 @@ namespace aPC.Server
 {
   class SceneUpdateHandler
   {
-    public SceneUpdateHandler(ConductorManager xiConductorManager, ISceneStatus xiStatus)
+    public SceneUpdateHandler(amBXScene xiInitialScene, amBXScene xiInitialEvent, 
+      ConductorManager xiConductorManager, ISceneStatus xiStatus)
     {
       mConductorManager = xiConductorManager;
       mStatus = xiStatus;
+      InitialiseConductors(xiInitialScene, xiInitialEvent);
+    }
+
+    /// <summary>
+    /// Starts up all conductors and pushes the intial scenes:
+    /// * An event to be played on the Sync Conductor, followed by
+    /// * A repeated scene to be played on the Desync Conductors
+    /// </summary>
+    private void InitialiseConductors(amBXScene xiInitialScene, amBXScene xiInitialEvent)
+    {
+      UpdateDesynchronisedActors(xiInitialScene);
+      EnableDesynchronisedActors();
+
+      UpdateScene(xiInitialEvent);
     }
 
     public void UpdateScene(amBXScene xiScene)
@@ -28,7 +43,7 @@ namespace aPC.Server
     /// <remarks>
     /// Fairly complex, as heavily dependent on the previous and (now)
     /// current scene types.  The method used for writing this out
-    /// is a bit long-winded (hopefully to mkae it a bit clearer!)
+    /// is a bit long-winded (hopefully to make it a bit clearer!)
     /// </remarks>
     private void Update(amBXScene xiScene)
     {
@@ -89,7 +104,7 @@ namespace aPC.Server
     }
 
     /// <summary>
-    /// Do the required operations to get everything moving post-scene
+    /// Do the required operations to get everything moving post-event
     /// </summary>
     public void UpdatePostEvent()
     {
