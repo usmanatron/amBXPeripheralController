@@ -41,6 +41,11 @@ namespace aPC.Server.Tests
       Status.Rumbles.SetComponentValueInDirection(xiRumble, xiDirection);
     }
 
+    // Nothing to dispose.
+    public void Dispose()
+    {
+    }
+
     public Frame Status;
     public Dictionary<eComponentType, bool> Updated;
   }
