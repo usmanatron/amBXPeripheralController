@@ -7,12 +7,14 @@ namespace aPC.Client.Morse
   {
     public Settings()
     {
+      Message = "";
       Colour = DefaultLights.White;
       LightsEnabled = true;
       RumblesEnabled = false;
       RepeatMessage = false;
     }
 
+    public string Message;
     public Light Colour;
     public bool LightsEnabled;
     public bool RumblesEnabled;

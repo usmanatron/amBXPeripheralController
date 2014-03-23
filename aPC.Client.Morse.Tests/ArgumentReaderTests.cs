@@ -7,7 +7,7 @@ using aPC.Client.Morse;
 using NUnit.Framework;
 using aPC.Common.Defaults;
 
-namespace aPC.Client.Morse
+namespace aPC.Client.Morse.Tests
 {
   [TestFixture]
   class ArgumentReaderTests
@@ -17,13 +17,13 @@ namespace aPC.Client.Morse
     [TestCase("")]
     public void EmptyArguments_ThrowsUsageException(string xiArguments)
     {
-      Assert.Throws<UsageException>(() => new ArgumentReader(xiArguments));
+      Assert.Throws<UsageException>(() => new TestArgumentReader(xiArguments));
     }
 
     [Test]
     public void ValidArguments_ReturnsSettings()
     {
-      var lArgumentReader = new ArgumentReader(@"/M:Valid Arguments");
+      var lArgumentReader = new TestArgumentReader(@"/M:An example of valid arguments");
       var lSettings = lArgumentReader.Read();
 
       Assert.AreEqual(typeof(Settings), lSettings.GetType());
@@ -33,7 +33,7 @@ namespace aPC.Client.Morse
     public void ArgumentString_CorrectlyBrokenIntoSeparateArguments()
     {
       var lArgumentString = @"/D /R /C:0,0,1 /M:Message";
-      var lArgumentReader = new ArgumentReader(lArgumentString);
+      var lArgumentReader = new TestArgumentReader (lArgumentString);
 
       var lSwitches = lArgumentReader.Switches;
 
@@ -47,7 +47,7 @@ namespace aPC.Client.Morse
     [Test]
     public void SpecifyingNoMessage_ThrowsException()
     {
-      var lArgumentReader = new ArgumentReader(@"/D /R");
+      var lArgumentReader = new TestArgumentReader(@"/D /R");
       Assert.Throws<UsageException>(() => lArgumentReader.Read());
     }
 
@@ -57,7 +57,7 @@ namespace aPC.Client.Morse
     [TestCase(@"/D /M:A")]
     public void Specifying_D_SetsRepeatable(string xiArg)
     {
-      var lArgumentReader = new ArgumentReader(xiArg);
+      var lArgumentReader = new TestArgumentReader(xiArg);
       var lSettings = lArgumentReader.Read();
 
       Assert.AreEqual(true, lSettings.RepeatMessage);
@@ -68,7 +68,7 @@ namespace aPC.Client.Morse
     [TestCase(@"/R /M:A")]
     public void Specifying_R_EnablesRumbles(string xiArg)
     {
-      var lArgumentReader = new ArgumentReader(xiArg);
+      var lArgumentReader = new TestArgumentReader(xiArg);
       var lSettings = lArgumentReader.Read();
 
       Assert.AreEqual(true, lSettings.RumblesEnabled);
@@ -79,7 +79,7 @@ namespace aPC.Client.Morse
     [TestCase(@"/-L /M:A")]
     public void Specifying_L_DisablesLights(string xiArg)
     {
-      var lArgumentReader = new ArgumentReader(xiArg);
+      var lArgumentReader = new TestArgumentReader(xiArg);
       var lSettings = lArgumentReader.Read();
 
       Assert.AreEqual(false, lSettings.LightsEnabled);
@@ -90,7 +90,7 @@ namespace aPC.Client.Morse
     [TestCase(@"/C:0,0.25,1 /M:A")]
     public void Specifying_C_SetsColour(string xiArg)
     {
-      var lArgumentReader = new ArgumentReader(xiArg);
+      var lArgumentReader = new TestArgumentReader(xiArg);
       var lSettings = lArgumentReader.Read();
 
       Assert.AreEqual(0, lSettings.Colour.Red);
@@ -103,7 +103,7 @@ namespace aPC.Client.Morse
     [TestCase(@"/C:0.2,0.4,0.6,0.8 /M:A")]
     public void Specifying_C_WithIncorrectNumberOfValues_Throws(string xiArg)
     {
-      var lArgumentReader = new ArgumentReader(xiArg);
+      var lArgumentReader = new TestArgumentReader(xiArg);
       Assert.Throws<UsageException>(() => lArgumentReader.Read());
     }
 
@@ -111,7 +111,7 @@ namespace aPC.Client.Morse
     [TestCase(@"/C:0.1,0.3,bob /m:A")]
     public void Specifying_C_WithInvalidFloats_Throws(string xiArg)
     {
-      var lArgumentReader = new ArgumentReader(xiArg);
+      var lArgumentReader = new TestArgumentReader(xiArg);
       Assert.Throws<UsageException>(() => lArgumentReader.Read());
     }
 
@@ -120,27 +120,54 @@ namespace aPC.Client.Morse
     [TestCase(@"/C:-0.1,0.3,1 /m:A")]
     public void Specifying_C_WithValuesOutOfRange_Throws(string xiArg)
     {
-      var lArgumentReader = new ArgumentReader(xiArg);
+      var lArgumentReader = new TestArgumentReader(xiArg);
       Assert.Throws<UsageException>(() => lArgumentReader.Read());
     }
 
     [Test]
-    public void SpecufyingOnlyMessage_DoesNotThrow()
+    public void SpecifyingOnlyMessage_DoesNotThrow()
     {
-      var lArgumentReader = new ArgumentReader(@"/M:Message");
+      var lArgumentReader = new TestArgumentReader(@"/M:Message");
       Assert.DoesNotThrow(() => lArgumentReader.Read());
     }
 
     [Test]
-    public void SpecufyingOnlyMessage_PopulatesDefaultValues()
+    public void SpecifyingOnlyMessage_PopulatesDefaultValues()
     {
-      var lArgumentReader = new ArgumentReader(@"/M:Message");
+      var lArgumentReader = new TestArgumentReader(@"/M:Message");
       var lSettings = lArgumentReader.Read();
 
       Assert.AreEqual(true, lSettings.LightsEnabled);
       Assert.AreEqual(false, lSettings.RumblesEnabled);
       Assert.AreEqual(DefaultLights.White, lSettings.Colour);
       Assert.AreEqual(false, lSettings.RepeatMessage);
+    }
+
+    [Test]
+    public void SpecifyingMessage_PopulatesSettings()
+    {
+      var lArgumentReader = new TestArgumentReader(@"/M:Message");
+      var lSettings = lArgumentReader.Read();
+
+      Assert.AreEqual("Message", lSettings.Message);
+    }
+
+    /// <remarks>
+    ///   the following characters are supported:
+    ///   * the Alphabet A - Z
+    ///   * The numbers 0 - 9
+    ///   * The following other symbols:
+    ///     . , ? ' ! / ( ) & : ; = + _ " $ @ 
+    ///     
+    /// </remarks>
+    [Test]
+    [TestCase(@"/M:£")]
+    [TestCase(@"/M:Valid except for the last %")]
+    [TestCase(@"/M:_ - _")]
+    public void SpecifyingMessage_WithInvalidCharacters_Throws(string xiArg)
+    {
+      var lArgumentReader = new TestArgumentReader(xiArg);
+      Assert.Throws<UsageException>(() => lArgumentReader.Read());
     }
   }
 }

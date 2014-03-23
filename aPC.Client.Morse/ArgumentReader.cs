@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace aPC.Client.Morse
@@ -16,7 +17,7 @@ namespace aPC.Client.Morse
         throw new UsageException("No arguments specified");
       }
 
-      Switches = new List<string>();
+      mSwitches = new List<string>();
       SplitArguments(xiArguments);
     }
 
@@ -41,42 +42,83 @@ namespace aPC.Client.Morse
         }
         else if (lArgument.StartsWith(@"/"))
         {
-          Switches.Add(lArgument);
+          mSwitches.Add(lArgument);
         }
       }
 
-      Message = lMessage;
+      mMessage = lMessage;
     }
 
     public Settings Read()
     {
-      if (string.IsNullOrEmpty(Message))
-      {
-        throw new UsageException("Invalid Arguments");
-      }
-
       var lSettings = new Settings();
 
-      foreach (var lArgument in Switches)
+      PopulateMessage(lSettings);
+      PopulateSwitches(lSettings);
+
+      return lSettings;
+    }
+
+    private void PopulateMessage(Settings xiSettings)
+    {
+      if (!IsMessageValid())
+      {
+        throw new UsageException("Invalid message specified: " + mMessage);
+      }
+
+      xiSettings.Message = mMessage;
+    }
+
+    /// <summary>
+    ///   Checks to ensure the message is present and
+    ///   valid.
+    /// </summary>
+    /// <remarks>
+    ///   The following characters are supported in Morse
+    ///   code:
+    ///   * The letters A-Z and numbers 0-9
+    ///   * Space
+    ///   * The following other symbols:
+    ///     . , ? ' ! / ( ) & : ; = + _ " $ @ 
+    /// </remarks>
+    private bool IsMessageValid()
+    {
+      if (string.IsNullOrEmpty(mMessage))
+      {
+        return false;
+      }
+
+      var lMatch = mMorsePattern.Match(mMessage);
+
+      if (!lMatch.Success || lMatch.Length != mMessage.Length)
+      {
+        return false;
+      }
+      return true;
+    }
+
+    private void PopulateSwitches(Settings xiSettings)
+    {
+      foreach (var lArgument in mSwitches)
       {
         switch (lArgument.ToLower())
         {
           case @"/d":
-            lSettings.RepeatMessage = true;
+            xiSettings.RepeatMessage = true;
             break;
           case @"/r":
-            lSettings.RumblesEnabled = true;
+            xiSettings.RumblesEnabled = true;
             break;
           case @"/-l":
-            lSettings.LightsEnabled = false;
+            xiSettings.LightsEnabled = false;
             break;
         }
-        
+
         if (lArgument.ToLower().StartsWith(@"/c"))
         {
           try
           {
-            lSettings.Colour = ParseColour(lArgument);
+            xiSettings.Colour = ParseColour(lArgument);
           }
           catch (Exception e)
           {
@@ -84,8 +126,6 @@ namespace aPC.Client.Morse
           }
         }
       }
-
-      return lSettings;
     }
 
     private Light ParseColour(string xiLight)
@@ -94,12 +134,8 @@ namespace aPC.Client.Morse
         .Remove(0, 3).Split(',')
         .Select(colour => float.Parse(colour)).ToList();
 
-      if (lLightComponents.Count != 3)
-      {
-        throw new ArgumentOutOfRangeException();
-      }
-
-      if (lLightComponents.Any(colour => IsOutOfRange(colour)))
+      if (lLightComponents.Count != 3 || 
+          lLightComponents.Any(colour => IsOutOfRange(colour)))
       {
         throw new ArgumentOutOfRangeException();
       }
@@ -117,7 +153,9 @@ namespace aPC.Client.Morse
       return xiColour < 0 || xiColour > 1;
     }
 
-    public List<string> Switches;
-    public string Message;
+    protected List<string> mSwitches;
+    protected string mMessage;
+
+    private Regex mMorsePattern = new Regex(@"[\w\s\.\,\?\'\!\/\(\)\&\:\;\=\+\""\$\@]+", RegexOptions.Compiled);
   }
 }
