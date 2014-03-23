@@ -1,10 +1,11 @@
 ﻿<NUnitProject>
-  <Settings activeconfig="Debug" processModel="Default" domainUsage="Default" />
+  <Settings activeconfig="Debug" />
   <Config name="Debug" binpathtype="Auto" runtimeFramework="net-4.0">
     <assembly path="aPC.Common.Tests\bin\Debug\aPC.Common.Tests.dll" />
     <assembly path="aPC.Server.Tests\bin\Debug\aPC.Server.Tests.dll" />
     <assembly path="aPC.Client.Disco.Tests\bin\Debug\aPC.Client.Disco.Tests.dll" />
     <assembly path="aPC.Client.Tests\bin\Debug\aPC.Client.Tests.dll" />
+    <assembly path="aPC.Client.Morse.Tests\bin\Debug\aPC.Client.Morse.Tests.dll" />
   </Config>
   <Config name="Release" binpathtype="Auto" />
 </NUnitProject>
