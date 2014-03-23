@@ -31,7 +31,13 @@ Arguments:
 /-L      : Disable light support
 /M       : The message to display.  All international Morse 
            code characters are supported (excluding prosigns).
-           
+
+The following characters are supported in messages:
+ * The characters A-Z
+ * The numbers 0-9
+ * Spaces
+ * The following other characters
+   . , ? ' ! / ( ) & : ; = + _ "" $ @ 
 
 Examples:
 aPC.Client.Morse.exe /R /C:1,0,0 /M:Single Red Message With Rumble

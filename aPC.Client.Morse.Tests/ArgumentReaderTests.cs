@@ -153,12 +153,8 @@ namespace aPC.Client.Morse.Tests
     }
 
     /// <remarks>
-    ///   the following characters are supported:
-    ///   * the Alphabet A - Z
-    ///   * The numbers 0 - 9
-    ///   * The following other symbols:
-    ///     . , ? ' ! / ( ) & : ; = + _ " $ @ 
-    ///     
+    ///   See ArgumentReader for details on the list
+    ///   of supported characters.
     /// </remarks>
     [Test]
     [TestCase(@"/M:£")]
