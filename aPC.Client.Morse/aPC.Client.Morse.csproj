@@ -43,6 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArgumentReader.cs" />
+    <Compile Include="Codes\CharacterSeparator.cs" />
+    <Compile Include="Codes\Dash.cs" />
+    <Compile Include="Codes\Dot.cs" />
+    <Compile Include="Codes\DotDashSeparator.cs" />
+    <Compile Include="Codes\IMorseBlock.cs" />
+    <Compile Include="Codes\WordSeparator.cs" />
     <Compile Include="Morse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
