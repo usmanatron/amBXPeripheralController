@@ -32,15 +32,16 @@ namespace aPC.Client.Morse.Tests
     [Test]
     public void ArgumentString_CorrectlyBrokenIntoSeparateArguments()
     {
-      var lArgumentString = @"/D /R /C:0,0,1 /M:Message";
+      var lArgumentString = @"/D /R /C:0,0,1 /U:250 /M:Message";
       var lArgumentReader = new TestArgumentReader (lArgumentString);
 
       var lSwitches = lArgumentReader.Switches;
 
-      Assert.AreEqual(3, lSwitches.Count());
+      Assert.AreEqual(4, lSwitches.Count());
       Assert.AreEqual(@"/D", lSwitches[0]);
       Assert.AreEqual(@"/R", lSwitches[1]);
       Assert.AreEqual(@"/C:0,0,1", lSwitches[2]);
+      Assert.AreEqual(@"/U:250", lSwitches[3]);
       Assert.AreEqual(@"Message", lArgumentReader.Message);
     }
 
@@ -75,14 +76,33 @@ namespace aPC.Client.Morse.Tests
     }
 
     [Test]
-    [TestCase(@"/-l /m:A")]
-    [TestCase(@"/-L /M:A")]
+    [TestCase(@"/l /m:A")]
+    [TestCase(@"/L /M:A")]
     public void Specifying_L_DisablesLights(string xiArg)
     {
       var lArgumentReader = new TestArgumentReader(xiArg);
       var lSettings = lArgumentReader.Read();
 
       Assert.AreEqual(false, lSettings.LightsEnabled);
+    }
+
+    [Test]
+    [TestCase(@"/u:200 /m:A")]
+    [TestCase(@"/U:200 /M:A")]
+    public void Specifying_U_SetsUnitLength(string xiArg)
+    {
+      var lArgumentReader = new TestArgumentReader(xiArg);
+      var lSettings = lArgumentReader.Read();
+
+      Assert.AreEqual(200, lSettings.UnitLength);
+    }
+
+    [Test]
+    [TestCase(@"/U:blah /m:A")]
+    public void Specifying_U_WithInvalidLength_Throws(string xiArg)
+    {
+      var lArgumentReader = new TestArgumentReader(xiArg);
+      Assert.Throws<UsageException>(() => lArgumentReader.Read());
     }
 
     [Test]
@@ -140,6 +160,7 @@ namespace aPC.Client.Morse.Tests
       Assert.AreEqual(true, lSettings.LightsEnabled);
       Assert.AreEqual(false, lSettings.RumblesEnabled);
       Assert.AreEqual(DefaultLights.White, lSettings.Colour);
+      Assert.AreEqual(100, lSettings.UnitLength);
       Assert.AreEqual(false, lSettings.RepeatMessage);
     }
 

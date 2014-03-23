@@ -28,7 +28,7 @@ Arguments:
            specified int he order denoted and be separated 
            by commas.  For example: /C:1,1,0
 /R       : Include rumble support
-/-L      : Disable light support
+/L       : Disable light support
 /M       : The message to display.  All international Morse 
            code characters are supported (excluding prosigns).
 

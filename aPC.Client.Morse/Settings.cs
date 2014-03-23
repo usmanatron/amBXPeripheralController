@@ -9,6 +9,7 @@ namespace aPC.Client.Morse
     {
       Message = "";
       Colour = DefaultLights.White;
+      UnitLength = 100;
       LightsEnabled = true;
       RumblesEnabled = false;
       RepeatMessage = false;
@@ -16,6 +17,7 @@ namespace aPC.Client.Morse
 
     public string Message;
     public Light Colour;
+    public int UnitLength;
     public bool LightsEnabled;
     public bool RumblesEnabled;
     public bool RepeatMessage;

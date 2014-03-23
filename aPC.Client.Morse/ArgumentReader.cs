@@ -16,6 +16,8 @@ namespace aPC.Client.Morse
       }
 
       mSwitches = new List<string>();
+      mSettings = new Settings();
+
       SplitArguments(xiArguments);
     }
 
@@ -49,22 +51,19 @@ namespace aPC.Client.Morse
 
     public Settings Read()
     {
-      var lSettings = new Settings();
-
-      PopulateMessage(lSettings);
-      PopulateSwitches(lSettings);
-
-      return lSettings;
+      ReadMessage();
+      ReadSwitches();
+      return mSettings;
     }
 
-    private void PopulateMessage(Settings xiSettings)
+    private void ReadMessage()
     {
       if (!IsMessageValid())
       {
         throw new UsageException("Invalid message specified: " + mMessage);
       }
 
-      xiSettings.Message = mMessage;
+      mSettings.Message = mMessage;
     }
 
     /// <summary>
@@ -95,40 +94,46 @@ namespace aPC.Client.Morse
       return true;
     }
 
-    private void PopulateSwitches(Settings xiSettings)
+    private void ReadSwitches()
     {
-      foreach (var lArgument in mSwitches)
+      foreach (var lSwitch in mSwitches)
       {
-        switch (lArgument.ToLower())
+        try
         {
-          case @"/d":
-            xiSettings.RepeatMessage = true;
-            break;
-          case @"/r":
-            xiSettings.RumblesEnabled = true;
-            break;
-          case @"/-l":
-            xiSettings.LightsEnabled = false;
-            break;
+          ReadSwitch(lSwitch);
         }
-
-        if (lArgument.ToLower().StartsWith(@"/c"))
+        catch (Exception e)
         {
-          try
-          {
-            xiSettings.Colour = ParseColour(lArgument);
-          }
-          catch (Exception e)
-          {
-            throw new UsageException("Exception when parsing light (" + lArgument + @"): " + e.Message);
-          }
+          throw new UsageException("Error when reading Switch " + lSwitch + " : " + e);
         }
       }
     }
 
-    private Light ParseColour(string xiLight)
+    private void ReadSwitch(string xiSwitch)
     {
-      var lLightComponents = xiLight
+      switch (xiSwitch.Substring(0, 2).ToLower())
+      {
+        case @"/d":
+          mSettings.RepeatMessage = true;
+          break;
+        case @"/r":
+          mSettings.RumblesEnabled = true;
+          break;
+        case @"/l":
+          mSettings.LightsEnabled = false;
+          break;
+        case @"/c":
+          mSettings.Colour = ParseColour(xiSwitch);
+          break;
+        case @"/u":
+          mSettings.UnitLength = ParseUnitLength(xiSwitch);
+          break;
+      }
+    }
+
+    private Light ParseColour(string xiArgument)
+    {
+      var lLightComponents = xiArgument
         .Remove(0, 3).Split(',')
         .Select(colour => float.Parse(colour)).ToList();
 
@@ -151,6 +156,13 @@ namespace aPC.Client.Morse
       return xiColour < 0 || xiColour > 1;
     }
 
+    private int ParseUnitLength(string xiArgument)
+    {
+      var lLength = xiArgument.Remove(0, 3);
+      return int.Parse(lLength);
+    }
+
+    private Settings mSettings;
     protected List<string> mSwitches;
     protected string mMessage;
 
