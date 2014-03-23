@@ -1,6 +1,6 @@
 ﻿namespace aPC.Client.Morse.Codes
 {
-  class WordSeparator : IMorseBlock
+  public class WordSeparator : IMorseBlock
   {
     public int Length
     {

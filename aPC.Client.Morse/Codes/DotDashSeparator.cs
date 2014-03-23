@@ -1,6 +1,6 @@
 ﻿namespace aPC.Client.Morse.Codes
 {
-  class DotDashSeparator : IMorseBlock
+  public class DotDashSeparator : IMorseBlock
   {
     public int Length
     {

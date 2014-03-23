@@ -1,6 +1,6 @@
 ﻿namespace aPC.Client.Morse.Codes
 {
-  interface IMorseBlock
+  public interface IMorseBlock
   {
     /// <summary>
     ///   Length in units.
