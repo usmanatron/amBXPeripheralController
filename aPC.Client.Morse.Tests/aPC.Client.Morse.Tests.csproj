@@ -61,6 +61,7 @@
     <Compile Include="TestArgumentReader.cs" />
     <Compile Include="Translators\TestTranslator.cs" />
     <Compile Include="Translators\TranslatorBaseTests.cs" />
+    <Compile Include="Translators\WordTranslatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
