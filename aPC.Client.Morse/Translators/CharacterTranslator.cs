@@ -1,9 +1,6 @@
 ﻿using aPC.Client.Morse.Codes;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace aPC.Client.Morse.Translators
 {
@@ -16,9 +13,9 @@ namespace aPC.Client.Morse.Translators
 
     public override List<IMorseBlock> Translate()
     {
+      var lSeparator = new DotDashSeparator();
       var lRawCharacter = RawCharacters[Char.ToLower(mCharacter)];
-      
-      return AddSeparatorsToList(lRawCharacter, typeof(DotDashSeparator));
+      return AddSeparatorsToList(lRawCharacter, lSeparator);
     }
 
     private char mCharacter;
@@ -27,6 +24,11 @@ namespace aPC.Client.Morse.Translators
     ///   Gives the Morse Code equivalent of every available character 
     ///   * WITHOUT THE SEPARATORS* between dots and dashes.
     /// </summary>
+    /// <remarks>
+    ///   Would it be better to just have one actual instance of Dot 
+    ///   and Dash and just reuse it?  Something worth considering,
+    ///   especially once the client runs end-to-end.
+    /// </remarks>
     private static Dictionary<char, List<IMorseBlock>> RawCharacters = new Dictionary<char, List<IMorseBlock>>
     {
       {'a', new List<IMorseBlock>(){new Dot(), new Dash()}},

@@ -59,6 +59,8 @@
     <Compile Include="Translators\TestCharacterData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestArgumentReader.cs" />
+    <Compile Include="Translators\TestTranslator.cs" />
+    <Compile Include="Translators\TranslatorBaseTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

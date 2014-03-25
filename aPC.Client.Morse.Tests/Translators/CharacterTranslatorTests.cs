@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using aPC.Client.Morse.Codes;
 using aPC.Client.Morse.Translators;
@@ -12,6 +10,13 @@ namespace aPC.Client.Morse.Tests.Codes
   [TestFixture]
   class CharacterTranslatorTests
   {
+    [Test]
+    public void TranslateMessage_ReturnsListOfIMorseBlocks()
+    {
+      var lTranslatedMessage = new CharacterTranslator('A').Translate();
+      Assert.AreEqual(typeof(List<IMorseBlock>), lTranslatedMessage.GetType());
+    }
+
     [Test]
     [TestCaseSource("TestCharacters")]
     public void TranslatingOneCharacter_GivesExpectedMorseCode(TestCharacterData xiData)
@@ -39,6 +44,7 @@ namespace aPC.Client.Morse.Tests.Codes
     //  }
     //}
 
+    // The case doesn't matter
     private TestCharacterData[] TestCharacters = new TestCharacterData[]
     {
       new TestCharacterData('A', new List<IMorseBlock> {new Dot(), new DotDashSeparator(), new Dash()}),
@@ -47,13 +53,12 @@ namespace aPC.Client.Morse.Tests.Codes
       new TestCharacterData('a', new List<IMorseBlock> {new Dot(), new DotDashSeparator(), new Dash()}),
       new TestCharacterData('c', new List<IMorseBlock> {new Dash(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), 
                                                         new Dash(), new DotDashSeparator(), new Dot()}),
+      new TestCharacterData('?', new List<IMorseBlock> {new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), 
+                                                        new Dash(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), 
+                                                        new Dot(), new DotDashSeparator(), new Dot()}),
+      new TestCharacterData('_', new List<IMorseBlock> {new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), 
+                                                        new Dash(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), 
+                                                        new Dot(), new DotDashSeparator(), new Dash()})
     };
-
-    [Test]
-    public void TranslateMessage_ReturnsListOfIMorseBlocks()
-    {
-      var lTranslatedMessage = new CharacterTranslator('A').Translate();
-      Assert.AreEqual(typeof(List<IMorseBlock>), lTranslatedMessage.GetType());
-    }
   }
 }
