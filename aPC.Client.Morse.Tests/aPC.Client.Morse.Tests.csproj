@@ -55,9 +55,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ArgumentReaderTests.cs" />
-    <Compile Include="Codes\MessageTranslatorTests.cs" />
-    <Compile Include="Codes\TestCharacterData.cs" />
-    <Compile Include="Codes\TestMessageTranslator.cs" />
+    <Compile Include="Translators\CharacterTranslatorTests.cs" />
+    <Compile Include="Translators\TestCharacterData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestArgumentReader.cs" />
   </ItemGroup>
