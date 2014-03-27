@@ -11,9 +11,6 @@ namespace aPC.Client.Morse.Tests.Codes
       ExpectedCode = xiExpectedCode;
     }
 
-    public readonly char Character;
-    public readonly List<IMorseBlock> ExpectedCode;
-    
     public int ExpectedCodeCount
     {
       get
@@ -21,5 +18,13 @@ namespace aPC.Client.Morse.Tests.Codes
         return ExpectedCode.Count;
       }
     }
+
+    public override string ToString()
+    {
+      return Character.ToString();
+    }
+
+    public readonly char Character;
+    public readonly List<IMorseBlock> ExpectedCode;
   }
 }

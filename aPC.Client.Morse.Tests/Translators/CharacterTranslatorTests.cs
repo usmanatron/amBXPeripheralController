@@ -31,19 +31,6 @@ namespace aPC.Client.Morse.Tests.Codes
       }
     }
 
-    //[Test]
-    //public void TranslatingOneCharacter_GivesExpectedMorseCode2_qqUMI(TestCharacterData xiData)
-    //{
-    //  var lTranslatedCharacter = new CharacterTranslator(xiData.Character).Translate();
-
-    //  Assert.AreEqual(xiData.ExpectedCodeCount, lTranslatedCharacter.Count);
-
-    //  for (int i = 0; i < xiData.ExpectedCodeCount; i++)
-    //  {
-    //    Assert.AreEqual(xiData.ExpectedCode[i].GetType(), lTranslatedCharacter[i].GetType());
-    //  }
-    //}
-
     // The case doesn't matter
     private TestCharacterData[] TestCharacters = new TestCharacterData[]
     {
