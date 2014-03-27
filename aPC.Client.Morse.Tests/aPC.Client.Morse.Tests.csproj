@@ -62,6 +62,7 @@
     <Compile Include="Translators\TestTranslator.cs" />
     <Compile Include="Translators\TestWordData.cs" />
     <Compile Include="Translators\TranslatorBaseTests.cs" />
+    <Compile Include="Translators\MessageTranslatorTests.cs" />
     <Compile Include="Translators\WordTranslatorTests.cs" />
   </ItemGroup>
   <ItemGroup>

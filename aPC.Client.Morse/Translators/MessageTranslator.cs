@@ -1,34 +1,29 @@
-﻿using System;
+﻿using aPC.Client.Morse.Codes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using aPC.Client.Morse.Codes;
 
 namespace aPC.Client.Morse.Translators
 {
-  public class MessageTranslator
+  public class MessageTranslator : TranslatorBase
   {
     public MessageTranslator(string xiMessage)
     {
       mMessage = xiMessage;
     }
 
-
-    public List<IMorseBlock> Translate()
+    public override List<IMorseBlock> Translate()
     {
-      return new List<IMorseBlock>();
+      var lTranslatedMessage = new List<List<IMorseBlock>>();
+
+      foreach (var lWord in mMessage.Split(' '))
+      {
+        lTranslatedMessage.Add(new WordTranslator(lWord).Translate());
+      }
+
+      return AddSeparatorsToList(lTranslatedMessage, new WordSeparator());
     }
-
-
-
-
+    
     private string mMessage;
   }
-  // qqUMI Current Idea:
-  /*
-   * Break into words by space and Run TranslateWord ->
-   * Break into character and run translate character -> 
-   * Turns into character and adds spacers.  Speacers also added by TransC and TransW
-   */
 }
