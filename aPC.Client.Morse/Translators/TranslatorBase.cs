@@ -27,7 +27,6 @@ namespace aPC.Client.Morse.Translators
       return lNewList;
     }
 
-
     /// <remarks>
     ///   Calls the method above, first breaking each item into a separate list
     ///   (i.e. we add a separator in between each element of xiList).

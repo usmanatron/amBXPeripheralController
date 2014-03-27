@@ -2,20 +2,20 @@
 {
   public class DotDashSeparator : IMorseBlock
   {
-    public int Length
-    {
-      get
-      {
-        return 1;
-      }
-    }
+    //public int Length
+    //{
+    //  get
+    //  {
+    //    return 1;
+    //  }
+    //}
 
-    public bool Enabled
-    {
-      get
-      {
-        return false;
-      }
-    }
+    //public bool Enabled
+    //{
+    //  get
+    //  {
+    //    return false;
+    //  }
+    //}
   }
 }
