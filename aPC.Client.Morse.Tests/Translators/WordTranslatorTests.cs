@@ -54,7 +54,7 @@ namespace aPC.Client.Morse.Tests.Translators
 
     [Test]
     [TestCaseSource("TestWords")]
-    public void SomeExampleWords_ReturnExpectedMorseCode(TestWordData xiData)
+    public void SomeExampleWords_ReturnExpectedMorseCode(TestMultiCharacterData xiData)
     {
       var lTranslatedWord = new WordTranslator(xiData.Word).Translate();
 
@@ -66,23 +66,23 @@ namespace aPC.Client.Morse.Tests.Translators
       }
     }
 
-    private TestWordData[] TestWords = new TestWordData[]
+    private TestMultiCharacterData[] TestWords = new TestMultiCharacterData[]
     {
-      new TestWordData("CAR6", new List<IMorseBlock> 
+      new TestMultiCharacterData("CAR6", new List<IMorseBlock> 
       {
         new Dash(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dot(), new CharacterSeparator(), 
         new Dot(), new DotDashSeparator(), new Dash(), new CharacterSeparator(), 
         new Dot(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dot(), new CharacterSeparator(), 
         new Dash(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot() 
       }),
-      new TestWordData("BLOB", new List<IMorseBlock> 
+      new TestMultiCharacterData("BLOB", new List<IMorseBlock> 
       {
         new Dash(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new CharacterSeparator(),
         new Dot(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new CharacterSeparator(),
         new Dash(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dash(), new CharacterSeparator(),
         new Dash(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot()
       }),
-      new TestWordData("WHY?", new List<IMorseBlock> 
+      new TestMultiCharacterData("WHY?", new List<IMorseBlock> 
       {
         new Dot(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dash(), new CharacterSeparator(),
         new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new CharacterSeparator(),

@@ -56,11 +56,12 @@
   <ItemGroup>
     <Compile Include="ArgumentReaderTests.cs" />
     <Compile Include="Translators\CharacterTranslatorTests.cs" />
-    <Compile Include="Translators\TestCharacterData.cs" />
+    <Compile Include="Translators\TestCharacterBase.cs" />
+    <Compile Include="Translators\TestSingleCharacterData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestArgumentReader.cs" />
     <Compile Include="Translators\TestTranslator.cs" />
-    <Compile Include="Translators\TestWordData.cs" />
+    <Compile Include="Translators\TestMultiCharacterData.cs" />
     <Compile Include="Translators\TranslatorBaseTests.cs" />
     <Compile Include="Translators\MessageTranslatorTests.cs" />
     <Compile Include="Translators\WordTranslatorTests.cs" />

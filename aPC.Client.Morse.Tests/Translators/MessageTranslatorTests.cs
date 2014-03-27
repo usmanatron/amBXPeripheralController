@@ -48,7 +48,7 @@ namespace aPC.Client.Morse.Tests.Translators
 
     [Test]
     [TestCaseSource("TestMessages")]
-    public void SomeExampleWords_ReturnExpectedMorseCode(TestWordData xiData)
+    public void SomeExampleWords_ReturnExpectedMorseCode(TestMultiCharacterData xiData)
     {
       var lTranslatedWord = new MessageTranslator(xiData.Word).Translate();
 
@@ -60,9 +60,9 @@ namespace aPC.Client.Morse.Tests.Translators
       }
     }
 
-    private TestWordData[] TestMessages = new TestWordData[]
+    private TestMultiCharacterData[] TestMessages = new TestMultiCharacterData[]
     {
-      new TestWordData("1 2 3", new List<IMorseBlock> 
+      new TestMultiCharacterData("1 2 3", new List<IMorseBlock> 
       {
         new Dot(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dash(),  new DotDashSeparator(),new Dash(), new DotDashSeparator(), new Dash(),
         new WordSeparator(), 
@@ -70,7 +70,7 @@ namespace aPC.Client.Morse.Tests.Translators
         new WordSeparator(), 
         new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dash()
       }),
-      new TestWordData("Its A-B", new List<IMorseBlock> 
+      new TestMultiCharacterData("Its A-B", new List<IMorseBlock> 
       {
         new Dot(), new DotDashSeparator(), new Dot(), new CharacterSeparator(),
         new Dash(), new CharacterSeparator(),

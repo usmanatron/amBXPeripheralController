@@ -5,7 +5,7 @@ using NUnit.Framework;
 using aPC.Client.Morse.Codes;
 using aPC.Client.Morse.Translators;
 
-namespace aPC.Client.Morse.Tests.Codes
+namespace aPC.Client.Morse.Tests.Translators
 {
   [TestFixture]
   class CharacterTranslatorTests
@@ -19,7 +19,7 @@ namespace aPC.Client.Morse.Tests.Codes
 
     [Test]
     [TestCaseSource("TestCharacters")]
-    public void TranslatingOneCharacter_GivesExpectedMorseCode(TestCharacterData xiData)
+    public void TranslatingOneCharacter_GivesExpectedMorseCode(TestSingleCharacterData xiData)
     {
       var lTranslatedCharacter = new CharacterTranslator(xiData.Character).Translate();
 
@@ -32,18 +32,18 @@ namespace aPC.Client.Morse.Tests.Codes
     }
 
     // The case doesn't matter
-    private TestCharacterData[] TestCharacters = new TestCharacterData[]
+    private TestSingleCharacterData[] TestCharacters = new TestSingleCharacterData[]
     {
-      new TestCharacterData('A', new List<IMorseBlock> {new Dot(), new DotDashSeparator(), new Dash()}),
-      new TestCharacterData('C', new List<IMorseBlock> {new Dash(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), 
+      new TestSingleCharacterData('A', new List<IMorseBlock> {new Dot(), new DotDashSeparator(), new Dash()}),
+      new TestSingleCharacterData('C', new List<IMorseBlock> {new Dash(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), 
                                                         new Dash(), new DotDashSeparator(), new Dot()}),
-      new TestCharacterData('a', new List<IMorseBlock> {new Dot(), new DotDashSeparator(), new Dash()}),
-      new TestCharacterData('c', new List<IMorseBlock> {new Dash(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), 
+      new TestSingleCharacterData('a', new List<IMorseBlock> {new Dot(), new DotDashSeparator(), new Dash()}),
+      new TestSingleCharacterData('c', new List<IMorseBlock> {new Dash(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), 
                                                         new Dash(), new DotDashSeparator(), new Dot()}),
-      new TestCharacterData('?', new List<IMorseBlock> {new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), 
+      new TestSingleCharacterData('?', new List<IMorseBlock> {new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), 
                                                         new Dash(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), 
                                                         new Dot(), new DotDashSeparator(), new Dot()}),
-      new TestCharacterData('_', new List<IMorseBlock> {new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), 
+      new TestSingleCharacterData('_', new List<IMorseBlock> {new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), 
                                                         new Dash(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), 
                                                         new Dot(), new DotDashSeparator(), new Dash()})
     };
