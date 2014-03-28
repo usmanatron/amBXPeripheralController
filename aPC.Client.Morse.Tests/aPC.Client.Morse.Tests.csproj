@@ -55,6 +55,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ArgumentReaderTests.cs" />
+    <Compile Include="SceneGeneratorTests.cs" />
     <Compile Include="Translators\CharacterTranslatorTests.cs" />
     <Compile Include="Translators\TestCharacterBase.cs" />
     <Compile Include="Translators\TestSingleCharacterData.cs" />

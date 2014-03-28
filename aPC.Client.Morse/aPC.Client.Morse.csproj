@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArgumentReader.cs" />
+    <Compile Include="SceneGenerator.cs" />
     <Compile Include="Translators\CharacterTranslator.cs" />
     <Compile Include="Codes\CharacterSeparator.cs" />
     <Compile Include="Codes\Dash.cs" />

@@ -2,7 +2,7 @@
 
 namespace aPC.Common.Defaults
 {
-  class DefaultRumbles
+  public class DefaultRumbles
   {
     // Note that "Off" has an intensity of 0, which makes it actually off!
     public static readonly Rumble Off = new Rumble { Intensity = 0, RumbleType = eRumbleType.Boing, Speed = 0 };
