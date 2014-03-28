@@ -5,9 +5,10 @@ namespace aPC.Client.Morse
 {
   public class Settings
   {
-    public Settings()
+    public Settings(string xiMessage)
     {
-      Message = "";
+      Message = xiMessage;
+
       Colour = DefaultLights.White;
       UnitLength = 100;
       LightsEnabled = true;

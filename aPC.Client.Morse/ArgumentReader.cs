@@ -16,8 +16,6 @@ namespace aPC.Client.Morse
       }
 
       mSwitches = new List<string>();
-      mSettings = new Settings();
-
       SplitArguments(xiArguments);
     }
 
@@ -51,19 +49,20 @@ namespace aPC.Client.Morse
 
     public Settings Read()
     {
-      ReadMessage();
-      ReadSwitches();
-      return mSettings;
+      var lMessage = ReadMessage();
+      var lSettings = new Settings(lMessage);
+      ReadSwitchesIntoSettings(lSettings);
+      return lSettings;
     }
 
-    private void ReadMessage()
+    private string ReadMessage()
     {
       if (!IsMessageValid())
       {
         throw new UsageException("Invalid message specified: " + mMessage);
       }
 
-      mSettings.Message = mMessage;
+      return mMessage;
     }
 
     /// <summary>
@@ -94,13 +93,13 @@ namespace aPC.Client.Morse
       return true;
     }
 
-    private void ReadSwitches()
+    private void ReadSwitchesIntoSettings(Settings xiSettings)
     {
       foreach (var lSwitch in mSwitches)
       {
         try
         {
-          ReadSwitch(lSwitch);
+          ReadSwitchIntoSettings(xiSettings, lSwitch);
         }
         catch (Exception e)
         {
@@ -109,24 +108,24 @@ namespace aPC.Client.Morse
       }
     }
 
-    private void ReadSwitch(string xiSwitch)
+    private void ReadSwitchIntoSettings(Settings xiSettings, string xiSwitch)
     {
       switch (xiSwitch.Substring(0, 2).ToLower())
       {
         case @"/d":
-          mSettings.RepeatMessage = true;
+          xiSettings.RepeatMessage = true;
           break;
         case @"/r":
-          mSettings.RumblesEnabled = true;
+          xiSettings.RumblesEnabled = true;
           break;
         case @"/l":
-          mSettings.LightsEnabled = false;
+          xiSettings.LightsEnabled = false;
           break;
         case @"/c":
-          mSettings.Colour = ParseColour(xiSwitch);
+          xiSettings.Colour = ParseColour(xiSwitch);
           break;
         case @"/u":
-          mSettings.UnitLength = ParseUnitLength(xiSwitch);
+          xiSettings.UnitLength = ParseUnitLength(xiSwitch);
           break;
       }
     }
@@ -162,7 +161,6 @@ namespace aPC.Client.Morse
       return int.Parse(lLength);
     }
 
-    private Settings mSettings;
     protected List<string> mSwitches;
     protected string mMessage;
 
