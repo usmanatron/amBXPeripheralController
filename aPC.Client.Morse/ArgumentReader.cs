@@ -1,4 +1,5 @@
-﻿using aPC.Common.Entities;
+﻿using aPC.Common.Defaults;
+using aPC.Common.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,6 +53,8 @@ namespace aPC.Client.Morse
       var lMessage = ReadMessage();
       var lSettings = new Settings(lMessage);
       ReadSwitchesIntoSettings(lSettings);
+
+      ThrowIfSettingsAreInvalid(lSettings);
       return lSettings;
     }
 
@@ -146,7 +149,8 @@ namespace aPC.Client.Morse
       {
         Red = lLightComponents[0],
         Green = lLightComponents[1],
-        Blue = lLightComponents[2]
+        Blue = lLightComponents[2],
+        Intensity = 1
       };
     }
 
@@ -159,6 +163,21 @@ namespace aPC.Client.Morse
     {
       var lLength = xiArgument.Remove(0, 3);
       return int.Parse(lLength);
+    }
+
+    private void ThrowIfSettingsAreInvalid(Settings xiSettings)
+    {
+      if (!xiSettings.LightsEnabled && !xiSettings.RumblesEnabled)
+      {
+        throw new UsageException("Both lights and rumbles are disabled - nothing to show");
+      }
+
+      if (xiSettings.Colour.Red == 0 &&
+          xiSettings.Colour.Green == 0 &&
+          xiSettings.Colour.Blue == 0)
+      {
+        throw new UsageException("Invalid colour specified");
+      }
     }
 
     protected List<string> mSwitches;

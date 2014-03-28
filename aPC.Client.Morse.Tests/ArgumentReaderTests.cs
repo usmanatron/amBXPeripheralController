@@ -33,7 +33,7 @@ namespace aPC.Client.Morse.Tests
     public void ArgumentString_CorrectlyBrokenIntoSeparateArguments()
     {
       var lArgumentString = @"/D /R /C:0,0,1 /U:250 /M:Message";
-      var lArgumentReader = new TestArgumentReader (lArgumentString);
+      var lArgumentReader = new TestArgumentReader(lArgumentString);
 
       var lSwitches = lArgumentReader.Switches;
 
@@ -49,6 +49,13 @@ namespace aPC.Client.Morse.Tests
     public void SpecifyingNoMessage_ThrowsException()
     {
       var lArgumentReader = new TestArgumentReader(@"/D /R");
+      Assert.Throws<UsageException>(() => lArgumentReader.Read());
+    }
+
+    [Test]
+    public void DisablingLightsAndRumbles_ThrowsException()
+    {
+      var lArgumentReader = new TestArgumentReader(@"/L /M:A");
       Assert.Throws<UsageException>(() => lArgumentReader.Read());
     }
 
@@ -76,8 +83,8 @@ namespace aPC.Client.Morse.Tests
     }
 
     [Test]
-    [TestCase(@"/l /m:A")]
-    [TestCase(@"/L /M:A")]
+    [TestCase(@"/l /r /m:A")]
+    [TestCase(@"/L /R /M:A")]
     public void Specifying_L_DisablesLights(string xiArg)
     {
       var lArgumentReader = new TestArgumentReader(xiArg);
@@ -141,6 +148,13 @@ namespace aPC.Client.Morse.Tests
     public void Specifying_C_WithValuesOutOfRange_Throws(string xiArg)
     {
       var lArgumentReader = new TestArgumentReader(xiArg);
+      Assert.Throws<UsageException>(() => lArgumentReader.Read());
+    }
+
+    [Test]
+    public void Specifying_C_WithAllValuesZero_Throws()
+    {
+      var lArgumentReader = new TestArgumentReader(@"/C:-0,0,0 /m:A");
       Assert.Throws<UsageException>(() => lArgumentReader.Read());
     }
 
