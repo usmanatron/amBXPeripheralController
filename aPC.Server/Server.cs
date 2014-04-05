@@ -17,7 +17,11 @@ namespace aPC.Server
       var lInitialScene = lAccessor.GetScene("Rainbow");
       var lStatus = new SceneStatus(lInitialScene.SceneType);
 
-      ServerTask = new ServerTask(lInitialScene, lInitialEvent, lStatus, new NotificationService(), new EngineManager());
+      ServerTask = new ServerTask(lInitialScene, 
+                                  lInitialEvent, 
+                                  lStatus, 
+                                  new NotificationService(),
+                                  new EngineManager());
 
       Log.Info("Server Ready.");
       ServerTask.Run();

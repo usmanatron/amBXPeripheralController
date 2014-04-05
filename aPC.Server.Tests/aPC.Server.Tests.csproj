@@ -62,8 +62,7 @@
     <Compile Include="Actors\LightActorTests.cs" />
     <Compile Include="Actors\RumbleActorTests.cs" />
     <Compile Include="AtypicalFirstRunInfiniteTickerTests.cs" />
-    <Compile Include="Communication\NotificationServiceBaseTests.cs" />
-    <Compile Include="Communication\TestNotificationService.cs" />
+    <Compile Include="Communication\NotificationServiceTests.cs" />
     <Compile Include="ConductorManagerTests.cs" />
     <Compile Include="Conductors\ConductorBaseTests.cs" />
     <Compile Include="Conductors\TestConductor.cs" />

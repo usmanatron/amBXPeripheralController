@@ -2,13 +2,24 @@
 using aPC.Common.Communication;
 using aPC.Common.Entities;
 using aPC.Server.Communication;
+using System;
 using System.IO;
 using System.Xml.Serialization;
 
 namespace aPC.Server.Communication
 {
-  class NotificationService : INotificationService
+  public class NotificationService : INotificationService
   {
+    public NotificationService() : this(scene => Server.ServerTask.Update(scene))
+    {
+    }
+
+    // Used for tests
+    public NotificationService(Action<amBXScene> xiUpdateScene)
+    {
+      mAction = xiUpdateScene;
+    }
+
     public void RunCustomScene(string xiSceneXml)
     {
       var lScene = DeserialiseScene(xiSceneXml);
@@ -35,7 +46,9 @@ namespace aPC.Server.Communication
 
     protected void UpdateScene(amBXScene xiScene)
     {
-      Server.ServerTask.Update(xiScene);
+      mAction(xiScene);
     }
+
+    private Action<amBXScene> mAction;
   }
 }
