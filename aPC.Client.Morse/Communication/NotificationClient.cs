@@ -1,9 +1,10 @@
 ﻿using aPC.Common.Client.Communication;
+using System;
 using System.ServiceModel;
 
-namespace aPC.Client.Communication
+namespace aPC.Client.Morse.Communication
 {
-  public class NotificationClient : NotificationClientBase
+  class NotificationClient : NotificationClientBase
   {
     public NotificationClient() : base()
     {
@@ -21,7 +22,7 @@ namespace aPC.Client.Communication
 
     public override void PushIntegratedScene(string xiScene)
     {
-      mClient.CreateChannel().RunIntegratedScene(xiScene);
+      throw new InvalidOperationException("The Morse Client does not support pushing integrated scenes.");
     }
   }
 }

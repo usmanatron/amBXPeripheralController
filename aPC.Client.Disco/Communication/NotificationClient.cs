@@ -1,25 +1,21 @@
 ﻿using System;
-using aPC.Common.Communication;
+using aPC.Common.Client.Communication;
 using System.ServiceModel;
 
 namespace aPC.Client.Disco.Communication
 {
-  public class NotificationClient : INotificationClient
+  public class NotificationClient : NotificationClientBase
   {
-    public NotificationClient() 
-      : this(CommunicationSettings.ServiceUrlTemplate.Replace(CommunicationSettings.HostnameHolder, "localhost"))
+    public NotificationClient() : base ()
     {
     }
 
     // Overriding of the Url is used by tests
-    public NotificationClient(string xiUrl)
+    public NotificationClient(string xiUrl) : base(xiUrl)
     {
-      mClient = new ChannelFactory<INotificationService>(
-        new BasicHttpBinding(),
-        xiUrl);
     }
 
-    public void PushCustomScene(string xiScene)
+    public override void PushCustomScene(string xiScene)
     {
       try
       {
@@ -31,11 +27,9 @@ namespace aPC.Client.Disco.Communication
       }
     }
 
-    public void PushIntegratedScene(string xiScene)
+    public override void PushIntegratedScene(string xiScene)
     {
       throw new NotImplementedException("The disco task does not use integrated scenes");
     }
-
-    private readonly ChannelFactory<INotificationService> mClient;
   }
 }
