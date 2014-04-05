@@ -43,6 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArgumentReader.cs" />
+    <Compile Include="Codes\MessageEndMarker.cs" />
+    <Compile Include="MorseFrameBuilder.cs" />
+    <Compile Include="MorseTask.cs" />
     <Compile Include="SceneGenerator.cs" />
     <Compile Include="Translators\CharacterTranslator.cs" />
     <Compile Include="Codes\CharacterSeparator.cs" />

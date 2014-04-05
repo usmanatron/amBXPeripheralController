@@ -8,6 +8,7 @@ using aPC.Client.Morse;
 using aPC.Common;
 using aPC.Common.Entities;
 using aPC.Common.Defaults;
+using aPC.Client.Morse.Codes;
 
 namespace aPC.Client.Morse.Tests
 {
@@ -60,7 +61,7 @@ namespace aPC.Client.Morse.Tests
     public void GeneratedScene_WithDefaultSettings_HasWhiteLights()
     {
       var lWhiteLight = DefaultLights.White;
-      var lGeneratedScene = new SceneGenerator(new Settings("Test")).Generate();
+      var lGeneratedScene = new SceneGenerator(new Settings("T")).Generate();
       
       foreach (var lLight in lGeneratedScene.Frames.Select(frame => frame.Lights))
       {
@@ -129,7 +130,7 @@ namespace aPC.Client.Morse.Tests
     [Test]
     public void GeneratedScene_WithDifferentColouredLights_IsPropogatedToScene()
     {
-      var lSettings = new Settings("Test");
+      var lSettings = new Settings("T");
       lSettings.Colour = DefaultLights.Red;
       var lGeneratedScene = new SceneGenerator(lSettings).Generate();
 
@@ -155,12 +156,77 @@ namespace aPC.Client.Morse.Tests
       }
     }
 
+    [Test]
+    public void GeneratedScene_WithMessageRepeated_EndsWithMessageEndMarker()
+    {
+      var lSettings = new Settings("Test");
+      lSettings.RepeatMessage = true;
+      var lGeneratedScene = new SceneGenerator(lSettings).Generate();
+
+      var lScene = lGeneratedScene.Frames.Last();
+      var lExpectedBlock = new MessageEndMarker();
+
+      Assert.AreEqual(lExpectedBlock.Enabled, lScene.Lights.North == lSettings.Colour);
+      Assert.AreEqual(lExpectedBlock.Length * lSettings.UnitLength, lScene.Length);
+    }
+
+    [Test]
+    public void GeneratedScene_WithMessageNotRepeated_DoesNotEndWithMessageEndMarker()
+    {
+      var lSettings = new Settings("Test");
+      var lGeneratedScene = new SceneGenerator(lSettings).Generate();
+
+      var lScene = lGeneratedScene.Frames.Last();
+      var lExpectedBlock = new MessageEndMarker();
+
+      Assert.AreNotEqual(lExpectedBlock.Enabled, lScene.Lights.North == lSettings.Colour);
+      Assert.AreNotEqual(lExpectedBlock.Length * lSettings.UnitLength, lScene.Length);
+    }
+
     #endregion
 
-    //qqUMI Test the actual message now!
+    #region Message Tests
+
+    [Test]
+    public void GeneratedScene_WithSingleCharacterMessage_AndMessageIsNotRepeated_ReturnsCharacter()
+    {
+      var lSettings = new Settings("T");
+      var lGeneratedScene = new SceneGenerator(lSettings).Generate();
+
+      Assert.AreEqual(1, lGeneratedScene.Frames.Count);
+      var lFrame = lGeneratedScene.Frames.Single();
+
+      Assert.IsNotNull(lFrame.Lights);
+      Assert.AreEqual(lSettings.Colour, lFrame.Lights.North); // Sufficient to just test North
+      Assert.AreEqual(new Dash().Length * lSettings.UnitLength, lFrame.Length);
+    }
+
+    [Test]
+    public void GeneratedScene_WithSingleCharacterMessage_AndMessageIsRepeated_ReturnsCharacterAndMessageEndMarker()
+    {
+      var lSettings = new Settings("T");
+      lSettings.RepeatMessage = true;
+      var lGeneratedScene = new SceneGenerator(lSettings).Generate();
+
+      Assert.AreEqual(2, lGeneratedScene.Frames.Count);
+
+      // First frame should be a dash (which is T)
+      // Second frame should be the "end of message" marker
+      var lFirstExpectedFrame = new Dash();
+      var lSecondExpectedFrame = new MessageEndMarker();
+
+      Assert.IsNotNull(lGeneratedScene.Frames[0].Lights);
+      Assert.AreEqual(lSettings.Colour, lGeneratedScene.Frames[0].Lights.North); // Sufficient to just test North
+      Assert.AreEqual(lFirstExpectedFrame.Length * lSettings.UnitLength, lGeneratedScene.Frames[0].Length);
+      Assert.IsNotNull(lGeneratedScene.Frames[1].Lights);
+      Assert.AreEqual(DefaultLights.Off, lGeneratedScene.Frames[1].Lights.North);
+      Assert.AreEqual(lSecondExpectedFrame.Length * lSettings.UnitLength, lGeneratedScene.Frames[1].Length);
+    }
+    #endregion
 
 
 
+    //qqUMI Consider moving this idea into SectionBaseExtensions and call it RealDirections or similar (non-compound)
     private List<eDirection> ApplicableLightDirections
     {
       get

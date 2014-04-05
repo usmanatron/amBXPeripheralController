@@ -14,6 +14,9 @@ namespace aPC.Client.Morse
       LightsEnabled = true;
       RumblesEnabled = false;
       RepeatMessage = false;
+
+      // The following settings cannot be overridden:
+      Rumble = DefaultRumbles.Thunder;
     }
 
     public string Message;
@@ -22,5 +25,7 @@ namespace aPC.Client.Morse
     public bool LightsEnabled;
     public bool RumblesEnabled;
     public bool RepeatMessage;
+
+    public Rumble Rumble { get; private set; }
   }
 }

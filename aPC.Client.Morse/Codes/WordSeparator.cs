@@ -2,20 +2,20 @@
 {
   public class WordSeparator : IMorseBlock
   {
-    //public int Length
-    //{
-    //  get
-    //  {
-    //    return 7;
-    //  }
-    //}
+    public int Length
+    {
+      get
+      {
+        return 7;
+      }
+    }
 
-    //public bool Enabled
-    //{
-    //  get
-    //  {
-    //    return false;
-    //  }
-    //}
+    public bool Enabled
+    {
+      get
+      {
+        return false;
+      }
+    }
   }
 }

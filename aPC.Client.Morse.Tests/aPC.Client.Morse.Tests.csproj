@@ -55,6 +55,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ArgumentReaderTests.cs" />
+    <Compile Include="MorseFrameBuilderTests.cs" />
     <Compile Include="SceneGeneratorTests.cs" />
     <Compile Include="Translators\CharacterTranslatorTests.cs" />
     <Compile Include="Translators\TestCharacterBase.cs" />
@@ -84,6 +85,7 @@
       <Name>aPC.Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
