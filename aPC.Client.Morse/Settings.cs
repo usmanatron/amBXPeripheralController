@@ -10,7 +10,7 @@ namespace aPC.Client.Morse
       Message = xiMessage;
 
       Colour = DefaultLights.White;
-      UnitLength = 100;
+      UnitLength = 200;
       LightsEnabled = true;
       RumblesEnabled = false;
       RepeatMessage = false;

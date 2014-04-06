@@ -174,7 +174,7 @@ namespace aPC.Client.Morse.Tests
       Assert.AreEqual(true, lSettings.LightsEnabled);
       Assert.AreEqual(false, lSettings.RumblesEnabled);
       Assert.AreEqual(DefaultLights.White, lSettings.Colour);
-      Assert.AreEqual(100, lSettings.UnitLength);
+      Assert.AreEqual(200, lSettings.UnitLength);
       Assert.AreEqual(false, lSettings.RepeatMessage);
     }
 
