@@ -4,7 +4,7 @@ using System.ServiceModel;
 
 namespace aPC.Client.Morse.Communication
 {
-  class NotificationClient : NotificationClientBase
+  public class NotificationClient : NotificationClientBase
   {
     public NotificationClient() : base()
     {
