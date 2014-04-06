@@ -90,6 +90,31 @@ namespace aPC.Server.Tests
       Assert.AreEqual(0, lTicker.Index);
     }
 
+    [Test]
+    public void RefreshTicker_ResetsIndex()
+    {
+      var lTicker = CreateTicker(2, 1);
+      lTicker.Advance();
+
+      lTicker.Refresh();
+
+      Assert.AreEqual(0, lTicker.Index);
+    }
+
+    [Test]
+    public void RefreshTicker_SetsBackToFirstRun()
+    {
+      var lTicker = CreateTicker(2, 1);
+      lTicker.Advance();
+      lTicker.Advance();
+
+      Assert.IsFalse(lTicker.IsFirstRun);
+
+      lTicker.Refresh();
+
+      Assert.IsTrue(lTicker.IsFirstRun);
+    }
+
     private AtypicalFirstRunInfiniteTicker CreateTicker(int xiFirstRun, int xiSubsequentRun = 42)
     {
       return new AtypicalFirstRunInfiniteTicker(xiFirstRun, xiSubsequentRun);

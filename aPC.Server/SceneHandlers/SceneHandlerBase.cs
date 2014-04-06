@@ -7,7 +7,10 @@ using System.Linq;
 
 namespace aPC.Server.SceneHandlers
 {
-  //Handles the amBXScene object(s) and any interactions.
+  /// <summary>
+  ///   Handles the amBXScene object(s) and any interactions.
+  /// </summary>
+  /// <typeparam name="T">A snapshot</typeparam>
   public abstract class SceneHandlerBase<T> : ISceneHandler<T> where T : SnapshotBase
   {
     protected SceneHandlerBase(amBXScene xiScene, Action xiEventCallback)
@@ -21,30 +24,27 @@ namespace aPC.Server.SceneHandlers
 
     public void UpdateScene(amBXScene xiNewScene)
     {
-      lock (mSceneLock)
+      if (CurrentScene.SceneType == eSceneType.Event)
       {
-        if (CurrentScene.SceneType == eSceneType.Event)
+        if (xiNewScene.SceneType == eSceneType.Event)
         {
-          if (xiNewScene.SceneType == eSceneType.Event)
-          {
-            // Skip updating the previous scene, to ensure that we don't get 
-            // stuck in an infinite loop of events.
-          }
-          else
-          {
-            // Don't interrupt the currently playing scene - instead quietly update 
-            // the previous scene so that we fall back to this when the event is done.
-            mPreviousScene = xiNewScene;
-            return;
-          }
+          // Skip updating the previous scene, to ensure that we don't get 
+          // stuck in an infinite loop of events.
         }
         else
         {
-          mPreviousScene = CurrentScene;
+          // Don't interrupt the currently playing scene - instead quietly update 
+          // the previous scene so that we fall back to this when the event is done.
+          mPreviousScene = xiNewScene;
+          return;
         }
-        
-        SetupNewScene(xiNewScene);
       }
+      else
+      {
+        mPreviousScene = CurrentScene;
+      }
+
+      SetupNewScene(xiNewScene);
     }
 
     protected void SetupNewScene(amBXScene xiNewScene)
@@ -59,12 +59,9 @@ namespace aPC.Server.SceneHandlers
     {
       List<Frame> lFrames;
 
-      lock (mSceneLock)
-      {
-        lFrames = mTicker.IsFirstRun
-          ? CurrentScene.Frames
-          : CurrentScene.RepeatableFrames;
-      }
+      lFrames = mTicker.IsFirstRun
+        ? CurrentScene.Frames
+        : CurrentScene.RepeatableFrames;
 
       if (!lFrames.Any())
       {
@@ -73,20 +70,18 @@ namespace aPC.Server.SceneHandlers
         Disable();
         return new Frame();
       }
+
       return lFrames[mTicker.Index];
     }
 
     public void AdvanceScene()
     {
-      lock (mSceneLock)
-      {
-        mTicker.Advance();
+      mTicker.Advance();
 
-        // If we've run the scene once through, we need to check for a few special circumstances
-        if (mTicker.Index == 0 && CurrentScene.SceneType == eSceneType.Event)
-        {
-          EventComplete();
-        }
+      // If we've run the scene once through, we need to check for a few special circumstances
+      if (mTicker.Index == 0 && CurrentScene.SceneType == eSceneType.Event)
+      {
+        EventComplete();
       }
     }
 
@@ -98,6 +93,7 @@ namespace aPC.Server.SceneHandlers
     public void Enable()
     {
       IsEnabled = true;
+      mTicker.Refresh();
     }
 
     private void EventComplete()
@@ -113,7 +109,5 @@ namespace aPC.Server.SceneHandlers
 
     private AtypicalFirstRunInfiniteTicker mTicker;
     private amBXScene mPreviousScene;
-    private readonly object mSceneLock = new object();
-
   }
 }

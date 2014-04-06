@@ -135,6 +135,7 @@ namespace aPC.Common.Defaults
           .WithRepeated(true)
           .WithFrameLength(1000)
           .WithLightSection(DefaultLightSections.Violet)
+          .WithFanSection(DefaultFanSections.Off)
           .WithRumbleSection(DefaultRumbleSections.Off)
           .Build();
 

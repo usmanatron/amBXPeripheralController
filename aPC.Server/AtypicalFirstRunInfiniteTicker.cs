@@ -36,11 +36,16 @@ namespace aPC.Server
       }
     }
 
+    public void Refresh()
+    {
+      Index = 0;
+      IsFirstRun = true;
+    }
+
     public int Index { get; private set; }
     public bool IsFirstRun { get; private set; }
 
     private readonly int mInitialCount;
     private readonly int mSubsequentCount;
-
   }
 }

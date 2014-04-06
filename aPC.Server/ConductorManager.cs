@@ -72,12 +72,13 @@ namespace aPC.Server
 
     public void EnableDesync()
     {
-      mDesyncConductors.ForEach(light => EnableAndRunIfRequired(light));
+      mDesyncConductors.ForEach(conductor => EnableAndRunIfRequired(conductor));
     }
 
     private void EnableAndRunIfRequired(IConductor xiConductor)
     {
       xiConductor.Enable();
+
       if (!xiConductor.IsRunning)
       {
         ThreadPool.QueueUserWorkItem(_ => xiConductor.Run());
@@ -91,7 +92,7 @@ namespace aPC.Server
 
     public void DisableDesync()
     {
-      mDesyncConductors.ForEach(light => light.Disable());
+      mDesyncConductors.ForEach(conductor => conductor.Disable());
     }
 
     protected FrameConductor mFrameConductor;

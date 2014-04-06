@@ -49,20 +49,28 @@ namespace aPC.Server.Conductors
 
     public void RunOnce()
     {
-      var lSnapshot = mHandler.GetNextSnapshot(Direction);
-      if (lSnapshot == null)
+      lock (mSceneLock)
       {
-        throw new InvalidOperationException("An error occured when retrieving the next snapshot");
+        var lSnapshot = mHandler.GetNextSnapshot(Direction);
+        if (lSnapshot == null)
+        {
+          throw new InvalidOperationException("An error occured when retrieving the next snapshot");
+        }
+
+        mActor.ActNextFrame(Direction, lSnapshot);
+        WaitforInterval(lSnapshot.Length);
+        mHandler.AdvanceScene();
       }
-      
-      mActor.ActNextFrame(Direction, lSnapshot);
-      WaitforInterval(lSnapshot.Length);
-      mHandler.AdvanceScene();
     }
+
+
 
     public void UpdateScene(amBXScene xiScene)
     {
-      mHandler.UpdateScene(xiScene);
+      lock (mSceneLock)
+      {
+        mHandler.UpdateScene(xiScene);
+      }
     }
 
     private void WaitforInterval(int xiLength)
@@ -115,5 +123,6 @@ namespace aPC.Server.Conductors
     private bool mIsRunning;
     private readonly ActorBase<T> mActor;
     private readonly SceneHandlerBase<T> mHandler;
+    private readonly object mSceneLock = new object();
   }
 }
