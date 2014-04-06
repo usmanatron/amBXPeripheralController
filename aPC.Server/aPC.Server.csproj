@@ -76,6 +76,7 @@
     <Compile Include="Engine\ConversionHelpers.cs" />
     <Compile Include="Engine\EngineManager.cs" />
     <Compile Include="Engine\IEngine.cs" />
+    <Compile Include="LockedBool.cs" />
     <Compile Include="SceneHandlers\ComponentHandler.cs" />
     <Compile Include="SceneHandlers\FrameHandler.cs" />
     <Compile Include="SceneHandlers\ISceneHandler.cs" />
