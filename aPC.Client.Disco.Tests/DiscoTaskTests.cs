@@ -51,7 +51,7 @@ namespace aPC.Client.Disco.Tests
       var lTask = new Task(mDiscoTask.Run);
       
       lTask.Start();
-      Thread.Sleep(mSettings.PushInterval);
+      Thread.Sleep(lInterval);
 
       Assert.AreEqual(1, mNotificationClient.NumberOfCustomScenesPushed);
       Assert.AreEqual(mLightSectionGenerator.GeneratedScene(), mNotificationClient.CustomScenesPushed[0]);
