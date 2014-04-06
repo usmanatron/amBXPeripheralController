@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="ArgumentReaderTests.cs" />
     <Compile Include="MorseFrameBuilderTests.cs" />
+    <Compile Include="MorseTests.cs" />
     <Compile Include="SceneGeneratorTests.cs" />
     <Compile Include="Translators\CharacterTranslatorTests.cs" />
     <Compile Include="Translators\TestCharacterBase.cs" />

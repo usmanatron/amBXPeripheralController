@@ -1,8 +1,7 @@
-﻿using System;
+﻿using aPC.Common.Entities;
+using aPC.Client.Morse.Communication;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace aPC.Client.Morse
 {
@@ -11,8 +10,8 @@ namespace aPC.Client.Morse
     static void Main(string[] xiArgs)
     {
       var lSettings = GetSettings(xiArgs);
-      var lGenerator = new SceneGenerator(lSettings).Generate();
-      //PushScene(lGenerator);
+      var lGeneratedScene = new SceneGenerator(lSettings).Generate();
+      new NotificationClient().PushCustomScene(lGeneratedScene);
     }
 
     private static Settings GetSettings(string[] xiArgs)

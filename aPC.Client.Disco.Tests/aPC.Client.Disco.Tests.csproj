@@ -82,10 +82,6 @@
       <Project>{20941C53-9669-4BF2-B354-AFF8023C1A1E}</Project>
       <Name>aPC.Common.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\aPC.Common.Communication.Tests\aPC.Common.Communication.Tests.csproj">
-      <Project>{8eca9aee-b9e3-4d37-81e1-e6806f2f4f3f}</Project>
-      <Name>aPC.Common.Communication.Tests</Name>
-    </ProjectReference>
     <ProjectReference Include="..\aPC.Common.Communication\aPC.Common.Communication.csproj">
       <Project>{38537b40-b1fd-433b-b958-8a1b3c7b83d7}</Project>
       <Name>aPC.Common.Communication</Name>
