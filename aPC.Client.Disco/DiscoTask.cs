@@ -4,6 +4,7 @@ using System.Threading;
 using aPC.Client.Disco.Generators;
 using aPC.Common.Communication;
 using aPC.Common.Entities;
+using aPC.Common.Client.Communication;
 
 namespace aPC.Client.Disco
 {
@@ -11,7 +12,7 @@ namespace aPC.Client.Disco
   {
     public DiscoTask(Settings xiSettings,
       IGenerator<amBXScene> xiRandomSceneGenerator, 
-      INotificationClient xiNotificationService)
+      NotificationClientBase xiNotificationService)
     {
       mSettings = xiSettings;
       mRandomSceneGenerator = xiRandomSceneGenerator;
@@ -35,17 +36,7 @@ namespace aPC.Client.Disco
 
     private void PushScene(amBXScene xiScene)
     {
-      mNotificationService.PushCustomScene(SerialiseScene(xiScene));
-    }
-
-    private string SerialiseScene(amBXScene xiScene)
-    {
-      using (var lWriter = new StringWriter())
-      {
-        var lSerializer = new XmlSerializer(typeof(amBXScene));
-        lSerializer.Serialize(lWriter, xiScene);
-        return lWriter.ToString();
-      }
+      mNotificationService.PushCustomScene(xiScene);
     }
 
     private void WaitForInterval()
@@ -55,6 +46,6 @@ namespace aPC.Client.Disco
     
     private readonly Settings mSettings;
     private readonly IGenerator<amBXScene> mRandomSceneGenerator;
-    private readonly INotificationClient mNotificationService;
+    private readonly NotificationClientBase mNotificationService;
   }
 }
