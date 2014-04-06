@@ -76,6 +76,10 @@
       <Project>{1eca3eda-1d9e-464e-9a6a-9bf702712e72}</Project>
       <Name>aPC.Client.Morse</Name>
     </ProjectReference>
+    <ProjectReference Include="..\aPC.Common.Client.Tests\aPC.Common.Client.Tests.csproj">
+      <Project>{c43479ea-8919-4ad4-8a85-c26145168afc}</Project>
+      <Name>aPC.Common.Client.Tests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\aPC.Common.Client\aPC.Common.Client.csproj">
       <Project>{20941c53-9669-4bf2-b354-aff8023c1a1e}</Project>
       <Name>aPC.Common.Client</Name>

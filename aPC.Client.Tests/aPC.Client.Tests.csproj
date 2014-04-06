@@ -68,6 +68,10 @@
       <Project>{315aae4d-8524-4993-9d40-2c2e2ec1b50d}</Project>
       <Name>aPC.Client</Name>
     </ProjectReference>
+    <ProjectReference Include="..\aPC.Common.Client.Tests\aPC.Common.Client.Tests.csproj">
+      <Project>{c43479ea-8919-4ad4-8a85-c26145168afc}</Project>
+      <Name>aPC.Common.Client.Tests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\aPC.Common.Client\aPC.Common.Client.csproj">
       <Project>{20941C53-9669-4BF2-B354-AFF8023C1A1E}</Project>
       <Name>aPC.Common.Client</Name>
@@ -79,6 +83,10 @@
     <ProjectReference Include="..\aPC.Common.Communication\aPC.Common.Communication.csproj">
       <Project>{38537b40-b1fd-433b-b958-8a1b3c7b83d7}</Project>
       <Name>aPC.Common.Communication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\aPC.Common\aPC.Common.csproj">
+      <Project>{b6543e75-59af-4059-acf8-560e82bc72ce}</Project>
+      <Name>aPC.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

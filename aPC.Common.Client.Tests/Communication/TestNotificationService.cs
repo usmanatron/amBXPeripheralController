@@ -4,7 +4,7 @@ using aPC.Common.Communication;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 
-namespace aPC.Common.Communication.Tests
+namespace aPC.Common.Client.Test.Communication
 {
   [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
   public class TestNotificationService : INotificationService, IDisposable

@@ -3,6 +3,7 @@ using aPC.Common.Communication;
 using aPC.Client.Disco.Communication;
 using aPC.Client.Disco.Generators;
 using aPC.Common.Entities;
+using aPC.Common.Client.Communication;
 
 namespace aPC.Client.Disco
 {
@@ -15,7 +16,7 @@ namespace aPC.Client.Disco
 
     protected override void SetupBindings()
     {
-      mKernel.Bind<INotificationClient>().To<NotificationClient>();
+      mKernel.Bind<NotificationClientBase>().To<NotificationClient>();
       mKernel.Bind<IGenerator<amBXScene>>().To<RandomSceneGenerator>();
       mKernel.Bind<IGenerator<LightSection>>().To<RandomLightSectionGenerator>();
     }

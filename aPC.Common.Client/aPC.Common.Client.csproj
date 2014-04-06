@@ -42,6 +42,7 @@
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Communication\NotificationClientBase.cs" />
@@ -56,6 +57,10 @@
     <ProjectReference Include="..\aPC.Common.Communication\aPC.Common.Communication.csproj">
       <Project>{38537b40-b1fd-433b-b958-8a1b3c7b83d7}</Project>
       <Name>aPC.Common.Communication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\aPC.Common\aPC.Common.csproj">
+      <Project>{b6543e75-59af-4059-acf8-560e82bc72ce}</Project>
+      <Name>aPC.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

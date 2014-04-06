@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using aPC.Client.Disco.Tests.Generators;
 using aPC.Common.Communication;
-using aPC.Common.Communication.Tests;
+using aPC.Common.Client.Tests.Communication;
 using NUnit.Framework;
 
 namespace aPC.Client.Disco.Tests

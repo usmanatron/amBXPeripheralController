@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8ECA9AEE-B9E3-4D37-81E1-E6806F2F4F3F}</ProjectGuid>
+    <ProjectGuid>{C43479EA-8919-4AD4-8A85-C26145168AFC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>aPC.Common.Communication.Tests</RootNamespace>
-    <AssemblyName>aPC.Common.Communication.Tests</AssemblyName>
+    <RootNamespace>aPC.Common.Client.Tests</RootNamespace>
+    <AssemblyName>aPC.Common.Client.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -50,14 +50,22 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="TestNotificationClient.cs" />
-    <Compile Include="TestNotificationService.cs" />
+    <Compile Include="Communication\TestNotificationClient.cs" />
+    <Compile Include="Communication\TestNotificationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\aPC.Common.Client\aPC.Common.Client.csproj">
+      <Project>{20941c53-9669-4bf2-b354-aff8023c1a1e}</Project>
+      <Name>aPC.Common.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\aPC.Common.Communication\aPC.Common.Communication.csproj">
       <Project>{38537b40-b1fd-433b-b958-8a1b3c7b83d7}</Project>
       <Name>aPC.Common.Communication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\aPC.Common\aPC.Common.csproj">
+      <Project>{b6543e75-59af-4059-acf8-560e82bc72ce}</Project>
+      <Name>aPC.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

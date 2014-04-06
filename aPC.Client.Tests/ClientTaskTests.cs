@@ -1,5 +1,5 @@
 ﻿using aPC.Client;
-using aPC.Common.Communication.Tests;
+using aPC.Common.Client.Tests.Communication;
 using NUnit.Framework;
 
 namespace aPC.Client.Tests

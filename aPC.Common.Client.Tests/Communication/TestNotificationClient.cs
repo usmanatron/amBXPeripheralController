@@ -1,22 +1,22 @@
 ﻿using System.Collections.Generic;
-using aPC.Common.Communication;
+using aPC.Common.Client.Communication;
 
-namespace aPC.Common.Communication.Tests
+namespace aPC.Common.Client.Tests.Communication
 {
-  public class TestNotificationClient : INotificationClient
+  public class TestNotificationClient : NotificationClientBase
   {
-    public TestNotificationClient()
+    public TestNotificationClient() : base()
     {
       IntegratedScenesPushed = new List<string>();
       CustomScenesPushed = new List<string>();
     }
 
-    public void PushCustomScene(string xiScene)
+    public override void PushCustomScene(string xiScene)
     {
       CustomScenesPushed.Add(xiScene);
     }
 
-    public void PushIntegratedScene(string xiScene)
+    public override void PushIntegratedScene(string xiScene)
     {
       IntegratedScenesPushed.Add(xiScene);
     }
