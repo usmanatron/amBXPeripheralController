@@ -15,9 +15,8 @@ namespace aPC.Common.Defaults
     public static LightSection Indigo = new LightSectionBuilder().WithFadeTime(500).WithAllLights(DefaultLights.Indigo).Build();
     public static LightSection Violet = new LightSectionBuilder().WithFadeTime(500).WithAllLights(DefaultLights.Violet).Build();
 
+    public static LightSection JiraBlue = new LightSectionBuilder().WithFadeTime(100).WithAllLights(DefaultLights.JiraBlue).Build();
     public static LightSection SoftPink = new LightSectionBuilder().WithFadeTime(100).WithAllLights(DefaultLights.SoftPink).Build();
     public static LightSection StrongPurple = new LightSectionBuilder().WithFadeTime(200).WithAllLights(DefaultLights.StrongPurple).Build();
-    public static LightSection JiraBlue = new LightSectionBuilder().WithFadeTime(3000).WithAllLights(DefaultLights.JiraBlue).Build();
-
   }
 }
