@@ -11,10 +11,10 @@ namespace aPC.Server.Conductors
 
     void UpdateScene(amBXScene xiScene);
 
-    bool IsRunning { get; set; }
     void Enable();
     void Disable();
 
+    LockedBool IsRunning { get; }
     eDirection Direction { get; }
     eComponentType ComponentType { get; }
   }

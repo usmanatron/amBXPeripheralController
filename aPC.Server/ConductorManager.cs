@@ -79,7 +79,7 @@ namespace aPC.Server
     {
       xiConductor.Enable();
 
-      if (!xiConductor.IsRunning)
+      if (!xiConductor.IsRunning.Get)
       {
         ThreadPool.QueueUserWorkItem(_ => xiConductor.Run());
       }

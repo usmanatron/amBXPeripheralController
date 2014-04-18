@@ -12,7 +12,7 @@ namespace aPC.Server.Conductors
   {
     protected ConductorBase(eDirection xiDirection, ActorBase<T> xiActor, SceneHandlerBase<T> xiHandler)
     {
-      mIsRunningLocker = new object();
+      mIsRunning = new LockedBool();
       mDirection = xiDirection;
       mActor = xiActor;
       mHandler = xiHandler;
@@ -21,7 +21,7 @@ namespace aPC.Server.Conductors
     public void Run()
     {
       Log("About to run");
-      IsRunning = true;
+      IsRunning.SetTrue();
 
       while (true)
       {
@@ -32,13 +32,13 @@ namespace aPC.Server.Conductors
         else
         {
           Log("Handler disabled - Disabling conductor.");
-          IsRunning = false;
+          IsRunning.SetFalse();
           break;
         }
       }
 
       // May possibly change in between
-      if (IsRunning)
+      if (IsRunning.Get)
       {
         Log("Conductor externally re-enabled - restarting run");
         ThreadPool.QueueUserWorkItem(_ => Run());
@@ -63,8 +63,6 @@ namespace aPC.Server.Conductors
       }
     }
 
-
-
     public void UpdateScene(amBXScene xiScene)
     {
       lock (mSceneLock)
@@ -88,21 +86,11 @@ namespace aPC.Server.Conductors
       mHandler.Enable();
     }
 
-    public bool IsRunning
+    public LockedBool IsRunning
     {
       get
       {
-        lock (mIsRunningLocker)
-        {
-          return mIsRunning;
-        }
-      }
-      set
-      {
-        lock (mIsRunningLocker)
-        {
-          mIsRunning = value;
-        }
+        return mIsRunning;
       }
     }
 
@@ -118,9 +106,8 @@ namespace aPC.Server.Conductors
 
     protected abstract void Log(string xiNotification);
 
-    private eDirection mDirection;
-    private object mIsRunningLocker;
-    private bool mIsRunning;
+    private readonly LockedBool mIsRunning;
+    private readonly eDirection mDirection;
     private readonly ActorBase<T> mActor;
     private readonly SceneHandlerBase<T> mHandler;
     private readonly object mSceneLock = new object();

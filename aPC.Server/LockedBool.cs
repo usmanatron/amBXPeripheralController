@@ -5,7 +5,7 @@
   /// </summary>
   public class LockedBool
   {
-    public bool Value
+    public bool Get
     {
       get
       {
@@ -14,12 +14,21 @@
           return mValue;
         }
       }
-      set
+    }
+
+    public void SetTrue()
+    {
+      lock (mValueLocker)
       {
-        lock (mValueLocker)
-        {
-          mValue = value;
-        }
+        mValue = true;
+      }
+    }
+
+    public void SetFalse()
+    {
+      lock (mValueLocker)
+      {
+        mValue = false;
       }
     }
 
