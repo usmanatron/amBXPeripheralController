@@ -1,0 +1,97 @@
+FORMAT: 1A
+HOST: http://www.google.com
+
+# amBX Peripheral Controller
+A web-aware means to control a local instance of amBX Peripheral Controller (aPC) Server.
+
+# Summary
+the main usage of this API is to get the following:
+* Information about the currently running scene(s)
+* An indication of the supported integrated scenes
+* the ability to push scenes
+
+
+
+
+# Group Integrated Scenes
+
+## Integrated Scenes Collection [/integrated/]
+Used to work collectively with all integrated scenes.
+
++ Model (application/json)
+
+    + Body
+    
+            {
+                "scenes": [
+                    {
+                        "SceneType" : Scene Type
+                    }
+                ]
+            }
+    
+
+## Get details of all defined integrated scenes [GET]
++ Response 200 
+
+    [Integrated Scenes Collection][]
+
+
+## Integrated Scene [/integrated/{name}]
+Used to manipulate specific integrated scenes.
+
++ Parameters
+  + name (string) ... The name of the integrated scene
+
++ Model (application/json)
+
+    The full details of the integrated scene.
+
+    + Body
+
+            {
+                "SceneType" : "The type of scene"
+            }
+
+## Get the definition of the scene [GET]
++ Response 200
+
+    [Integrated Scene][]
+
++ Response 404
+
+## Run the given scene [POST]
++ Response 200
++ Response 404
+
+
+# Group Custom Scenes
+Handling custom-built scenes
+
+## Parse custom Scene [/custom/parse]
+Confirm if a given custom scene is correctly formed
+
+## Parse given scene [POST]
++ Request (text/plain)
+
+        {
+            "Xml representation of scene"
+        }
+
++ Response 200
++ Response 500
+
+
+
+## Run custom Scene [/custom/run]
+Confirm if a given custom scene is correctly formed
+
+## Run given scene [POST]
++ Request (text/plain)
+
+        {
+            "Xml representation of scene"
+        }
+
++ Response 200
++ Response 500
