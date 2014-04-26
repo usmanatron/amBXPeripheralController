@@ -23,9 +23,17 @@ namespace aPC.API.Controllers
     }
 
     // GET api/integrated/{name}
-    public IEnumerable<string> Get(string xiSceneName)
+    [Route("api/integrated/{name}", Name="")]
+    public amBXScene Get(string name)
     {
-      return new string[] { "value1", "value2" };
+      var lScene = new SceneAccessor().GetScene(name);
+
+      if (lScene == null)
+      {
+        throw new HttpResponseException(HttpStatusCode.NotFound);
+      }
+
+      return lScene;
     }
 
     // POST api/values
