@@ -6,13 +6,13 @@ using System.Web.Mvc;
 
 namespace aPC.API.Controllers
 {
-    public class HomeController : Controller
+  public class HomeController : Controller
+  {
+    public ActionResult Index()
     {
-        public ActionResult Index()
-        {
-            ViewBag.Title = "Home Page";
+      ViewBag.Title = "Home Page";
 
-            return View();
-        }
+      return View();
     }
+  }
 }
