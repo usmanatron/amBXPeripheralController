@@ -62,6 +62,28 @@ namespace aPC.Common.Tests
       Assert.AreEqual(8, lStats.EnabledDirectionalComponents.Count);
     }
 
+    [Test]
+    public void FrameStatistics_RecordsSceneLength()
+    {
+      var lLightSection = new LightSectionBuilder()
+        .WithFadeTime(100)
+        .WithAllLights(mArbitraryLight)
+        .Build();
+      var lFrames = new FrameBuilder()
+        .AddFrame()
+        .WithFrameLength(1000)
+        .WithRepeated(false)
+        .WithLightSection(lLightSection)
+        .AddFrame()
+        .WithFrameLength(500)
+        .WithRepeated(false)
+        .WithLightSection(lLightSection)
+        .Build();
+      var lStats = new FrameStatistics(lFrames);
+
+      Assert.AreEqual(lFrames.Sum(frame => frame.Length), lStats.SceneLength);
+    }
+
     private Light mArbitraryLight;
   }
 }

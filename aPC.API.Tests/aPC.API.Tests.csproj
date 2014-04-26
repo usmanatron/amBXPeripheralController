@@ -108,6 +108,10 @@
       <Project>{5A031DB4-9B75-41D9-A6E7-6967D20F083F}</Project>
       <Name>aPC.API</Name>
     </ProjectReference>
+    <ProjectReference Include="..\aPC.Common\aPC.Common.csproj">
+      <Project>{b6543e75-59af-4059-acf8-560e82bc72ce}</Project>
+      <Name>aPC.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

@@ -4,15 +4,22 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using aPC.API.Helpers;
+using aPC.Common;
+using aPC.Common.Entities;
+using aPC.API.Models;
+
 
 namespace aPC.API.Controllers
 {
   public class IntegratedController : ApiController
   {
     // GET api/integrated
-    public IEnumerable<string> Get()
+    public IEnumerable<amBXSceneSummary> Get()
     {
-      return new string[] { "value1", "value2" };
+      return new SceneAccessor()
+        .GetAllScenes()
+        .Select(scene => new amBXSceneSummary(scene));
     }
 
     // GET api/integrated/{name}

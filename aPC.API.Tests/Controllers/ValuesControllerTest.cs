@@ -7,75 +7,53 @@ using System.Web.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using aPC.API;
 using aPC.API.Controllers;
+using aPC.API.Models;
+using aPC.Common.Entities;
 
 namespace aPC.API.Tests.Controllers
 {
-    [TestClass]
-    public class ValuesControllerTest
+  [TestClass]
+  public class ValuesControllerTest
+  {
+    [TestMethod]
+    public void Get()
     {
-        [TestMethod]
-        public void Get()
-        {
-            // Arrange
-            IntegratedController controller = new IntegratedController();
+      // Arrange
+      IntegratedController controller = new IntegratedController();
 
-            // Act
-            IEnumerable<string> result = controller.Get();
+      // Act
+      IEnumerable<amBXSceneSummary> result = controller.Get();
 
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(2, result.Count());
-            Assert.AreEqual("value1", result.ElementAt(0));
-            Assert.AreEqual("value2", result.ElementAt(1));
-        }
-
-        [TestMethod]
-        public void GetById()
-        {
-            // Arrange
-            IntegratedController controller = new IntegratedController();
-
-            // Act
-            string result = controller.Get(5);
-
-            // Assert
-            Assert.AreEqual("value", result);
-        }
-
-        [TestMethod]
-        public void Post()
-        {
-            // Arrange
-            IntegratedController controller = new IntegratedController();
-
-            // Act
-            controller.Post("value");
-
-            // Assert
-        }
-
-        [TestMethod]
-        public void Put()
-        {
-            // Arrange
-            IntegratedController controller = new IntegratedController();
-
-            // Act
-            controller.Put(5, "value");
-
-            // Assert
-        }
-
-        [TestMethod]
-        public void Delete()
-        {
-            // Arrange
-            IntegratedController controller = new IntegratedController();
-
-            // Act
-            controller.Delete(5);
-
-            // Assert
-        }
+      // Assert
+      Assert.IsNotNull(result);
+      Assert.AreEqual(2, result.Count());
+      Assert.AreEqual("value1", result.ElementAt(0));
+      Assert.AreEqual("value2", result.ElementAt(1));
     }
+
+    [TestMethod]
+    public void GetById()
+    {
+      // Arrange
+      IntegratedController controller = new IntegratedController();
+
+      // Act
+      amBXScene result = controller.Get("5");
+
+      // Assert
+      Assert.AreEqual("value", result);
+    }
+
+    [TestMethod]
+    public void Post()
+    {
+      // Arrange
+      IntegratedController controller = new IntegratedController();
+
+      // Act
+      controller.Post("value");
+
+      // Assert
+    }
+  }
 }
