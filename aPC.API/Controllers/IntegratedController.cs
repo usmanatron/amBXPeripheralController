@@ -36,10 +36,19 @@ namespace aPC.API.Controllers
       return lScene;
     }
 
-    // POST api/values
-    public void Post([FromBody]string xiSceneName)
+    // POST api/integrated/{name}
+    public void Post(string xiSceneName)
     {
-
+      try
+      {
+        var lNotificationClient = new NotificationClient();
+        lNotificationClient.PushIntegratedScene(xiSceneName);
+      }
+      catch (Exception e)
+      {
+        //qqUMI Not sure about this - ideally want to say why it failed?
+        throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.InternalServerError));
+      }
     }
   }
 }
