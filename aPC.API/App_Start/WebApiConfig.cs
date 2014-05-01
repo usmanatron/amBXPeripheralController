@@ -19,12 +19,6 @@ namespace aPC.API
           routeTemplate: "api/{controller}/{name}",
           defaults: new { name = RouteParameter.Optional }
       );
-
-      config.Routes.MapHttpRoute(
-          name: "DefaultApiWithAction",
-          routeTemplate: "api/{controller}/{action}/{name}",
-          defaults: new { name = RouteParameter.Optional }
-      );
     }
   }
 }
