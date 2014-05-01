@@ -5,7 +5,7 @@ using aPC.Common.Entities;
 using aPC.Common;
 using System.Xml.Serialization;
 
-namespace aPC.API.Models
+namespace aPC.Web.Areas.API.Models
 {
   /// <summary>
   /// Represents summary information from a given amBXScene

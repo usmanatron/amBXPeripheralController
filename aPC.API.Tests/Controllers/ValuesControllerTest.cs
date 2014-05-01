@@ -5,12 +5,12 @@ using System.Net.Http;
 using System.Text;
 using System.Web.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using aPC.API;
-using aPC.API.Controllers;
-using aPC.API.Models;
+using aPC.Web;
+using aPC.Web.Areas.API.Controllers;
+using aPC.Web.Areas.API.Models;
 using aPC.Common.Entities;
 
-namespace aPC.API.Tests.Controllers
+namespace aPC.Web.Tests.Controllers
 {
   [TestClass]
   public class ValuesControllerTest

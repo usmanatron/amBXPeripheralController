@@ -9,8 +9,8 @@
     <ProjectGuid>{BDE1804F-95C4-4A10-9203-FE0B6EA32FDB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>aPC.API.Tests</RootNamespace>
-    <AssemblyName>aPC.API.Tests</AssemblyName>
+    <RootNamespace>aPC.Web.Tests</RootNamespace>
+    <AssemblyName>aPC.Web.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -104,9 +104,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\aPC.API\aPC.API.csproj">
+    <ProjectReference Include="..\aPC.API\aPC.Web.csproj">
       <Project>{5A031DB4-9B75-41D9-A6E7-6967D20F083F}</Project>
-      <Name>aPC.API</Name>
+      <Name>aPC.Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\aPC.Common\aPC.Common.csproj">
       <Project>{b6543e75-59af-4059-acf8-560e82bc72ce}</Project>

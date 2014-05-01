@@ -4,13 +4,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using aPC.API.Helpers;
+using aPC.Web.Areas.API.Helpers;
 using aPC.Common;
 using aPC.Common.Entities;
-using aPC.API.Models;
+using aPC.Web.Areas.API.Models;
 
 
-namespace aPC.API.Controllers
+namespace aPC.Web.Areas.API.Controllers
 {
   public class IntegratedController : ApiController
   {
@@ -43,7 +43,7 @@ namespace aPC.API.Controllers
         var lNotificationClient = new NotificationClient();
         lNotificationClient.PushIntegratedScene(name);
       }
-      catch (Exception e)
+      catch (Exception)
       {
         throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.InternalServerError));
       }

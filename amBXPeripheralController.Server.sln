@@ -26,9 +26,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4AF0D9
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.API", "aPC.API\aPC.API.csproj", "{5A031DB4-9B75-41D9-A6E7-6967D20F083F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.Web", "aPC.API\aPC.Web.csproj", "{5A031DB4-9B75-41D9-A6E7-6967D20F083F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.API.Tests", "aPC.API.Tests\aPC.API.Tests.csproj", "{BDE1804F-95C4-4A10-9203-FE0B6EA32FDB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.Web.Tests", "aPC.API.Tests\aPC.Web.Tests.csproj", "{BDE1804F-95C4-4A10-9203-FE0B6EA32FDB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.Common.Client", "aPC.Common.Client\aPC.Common.Client.csproj", "{20941C53-9669-4BF2-B354-AFF8023C1A1E}"
 EndProject
