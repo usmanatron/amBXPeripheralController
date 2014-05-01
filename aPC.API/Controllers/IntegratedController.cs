@@ -23,7 +23,6 @@ namespace aPC.API.Controllers
     }
 
     // GET api/integrated/{name}
-    [Route("api/integrated/{name}", Name="")]
     public amBXScene Get(string name)
     {
       var lScene = new SceneAccessor().GetScene(name);
@@ -37,16 +36,15 @@ namespace aPC.API.Controllers
     }
 
     // POST api/integrated/{name}
-    public void Post(string xiSceneName)
+    public void Post([FromUri] string name)
     {
       try
       {
         var lNotificationClient = new NotificationClient();
-        lNotificationClient.PushIntegratedScene(xiSceneName);
+        lNotificationClient.PushIntegratedScene(name);
       }
       catch (Exception e)
       {
-        //qqUMI Not sure about this - ideally want to say why it failed?
         throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.InternalServerError));
       }
     }

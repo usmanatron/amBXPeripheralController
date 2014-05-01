@@ -15,6 +15,7 @@ namespace aPC.API
     {
       AreaRegistration.RegisterAllAreas();
       GlobalConfiguration.Configure(WebApiConfig.Register);
+      GlobalConfiguration.Configuration.Formatters.XmlFormatter.UseXmlSerializer = true;
       FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
       RouteConfig.RegisterRoutes(RouteTable.Routes);
       BundleConfig.RegisterBundles(BundleTable.Bundles);

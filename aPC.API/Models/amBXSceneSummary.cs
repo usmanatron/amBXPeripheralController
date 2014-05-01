@@ -1,74 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using System.Web;
 using aPC.Common.Entities;
 using aPC.Common;
+using System.Xml.Serialization;
 
 namespace aPC.API.Models
 {
-  // represents summary information from a given amBXScene
-  [DataContractAttribute]
+  /// <summary>
+  /// Represents summary information from a given amBXScene
+  /// </summary>
+  [XmlRoot]
+  [Serializable]
   public class amBXSceneSummary
   {
     public amBXSceneSummary(KeyValuePair<string, amBXScene> xiScene)
     {
-      this.mSceneName = xiScene.Key;
-      this.mSceneType = xiScene.Value.SceneType;
-      this.mFrameStatistics = xiScene.Value.FrameStatistics;
+      SceneName = xiScene.Key;
+      SceneLength = xiScene.Value.FrameStatistics.SceneLength;
+      
+      var lSceneType = xiScene.Value.SceneType;
+      IsEvent = lSceneType == eSceneType.Event;
+      IsSynchronised = lSceneType == eSceneType.Sync || lSceneType == eSceneType.Event;
     }
 
-    [DataMemberAttribute]
-    public string Name
-    {
-      get
-      {
-        return mSceneName;
-      }
-      private set
-      {
-      }
-    }
+    [XmlElement]
+    public string SceneName;
 
-    [DataMemberAttribute]
-    public bool IsEvent
-    {
-      get
-      {
-        return mSceneType == eSceneType.Event;
-      }
-      private set
-      {
-      }
-    }
+    [XmlElement]
+    public bool IsEvent;
 
-    [DataMemberAttribute]
-    public bool IsSynchronised
-    {
-      get
-      {
-        return mSceneType == eSceneType.Sync ||
-               mSceneType == eSceneType.Event;
-      }
-      private set
-      {
-      }
-    }
+    [XmlElement]
+    public bool IsSynchronised;
 
-    [DataMemberAttribute]
-    public int SceneLength
-    {
-      get
-      {
-        return mFrameStatistics.SceneLength;
-      }
-      private set
-      {
-      }
-    }
-
-    private readonly string mSceneName;
-    private readonly eSceneType mSceneType;
-    private readonly FrameStatistics mFrameStatistics;
+    [XmlElement]
+    public int SceneLength;
   }
 }
