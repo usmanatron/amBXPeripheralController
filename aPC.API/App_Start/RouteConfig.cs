@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace aPC.API
+namespace aPC.Web
 {
   public class RouteConfig
   {

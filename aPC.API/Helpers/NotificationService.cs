@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using aPC.Common.Client.Communication;
 
-namespace aPC.Web.Areas.API.Helpers
+namespace aPC.Web.Helpers
 {
   public class NotificationClient : NotificationClientBase
   {

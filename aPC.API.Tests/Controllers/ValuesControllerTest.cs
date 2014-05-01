@@ -6,8 +6,8 @@ using System.Text;
 using System.Web.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using aPC.Web;
-using aPC.Web.Areas.API.Controllers;
-using aPC.Web.Areas.API.Models;
+using aPC.Web.Controllers;
+using aPC.Web.Models;
 using aPC.Common.Entities;
 
 namespace aPC.Web.Tests.Controllers

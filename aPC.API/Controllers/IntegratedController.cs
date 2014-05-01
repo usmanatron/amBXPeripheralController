@@ -4,13 +4,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using aPC.Web.Areas.API.Helpers;
+using aPC.Web.Helpers;
 using aPC.Common;
 using aPC.Common.Entities;
-using aPC.Web.Areas.API.Models;
+using aPC.Web.Models;
 
 
-namespace aPC.Web.Areas.API.Controllers
+namespace aPC.Web.Controllers
 {
   public class IntegratedController : ApiController
   {

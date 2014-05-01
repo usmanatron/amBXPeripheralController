@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace aPC.API
+namespace aPC.Web
 {
   public class BundleConfig
   {
