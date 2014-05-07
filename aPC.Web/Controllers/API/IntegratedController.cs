@@ -4,16 +4,21 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using aPC.Common.Communication;
 using aPC.Web.Helpers;
 using aPC.Common;
 using aPC.Common.Entities;
 using aPC.Web.Models;
 
-
-namespace aPC.Web.Controllers
+namespace aPC.Web.Controllers.API
 {
   public class IntegratedController : ApiController
   {
+    public IntegratedController(INotificationClient xiNotificationClient)
+    {
+      mNotificationClient = xiNotificationClient;
+    }
+
     // GET api/integrated
     public IEnumerable<amBXSceneSummary> Get()
     {
@@ -40,13 +45,14 @@ namespace aPC.Web.Controllers
     {
       try
       {
-        var lNotificationClient = new NotificationClient();
-        lNotificationClient.PushIntegratedScene(name);
+        mNotificationClient.PushIntegratedScene(name);
       }
       catch (Exception)
       {
         throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.InternalServerError));
       }
     }
+
+    private readonly INotificationClient mNotificationClient;
   }
 }

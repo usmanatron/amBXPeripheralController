@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using aPC.Client.Morse.Communication;
-using aPC.Common.Client.Test.Communication;
-using aPC.Common.Communication;
+using aPC.Common.Client.Tests.Communication;
 using aPC.Common.Defaults;
 
 namespace aPC.Client.Morse.Tests.Communication
@@ -17,12 +12,8 @@ namespace aPC.Client.Morse.Tests.Communication
     [TestFixtureSetUp]
     public void SetupTests()
     {
-      var lUrl = CommunicationSettings.ServiceUrlTemplate
-        .Replace(CommunicationSettings.HostnameHolder, "localhost")
-        .Replace("amBXPeripheralController", "aPCTest");
-
-      mHost = new TestNotificationService(lUrl);
-      mClient = new NotificationClient(lUrl);
+      mHost = new TestNotificationService();
+      mClient = new NotificationClient(mHost.Url);
     }
 
     [TestFixtureTearDown]

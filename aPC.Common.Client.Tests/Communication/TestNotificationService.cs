@@ -4,18 +4,22 @@ using aPC.Common.Communication;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 
-namespace aPC.Common.Client.Test.Communication
+namespace aPC.Common.Client.Tests.Communication
 {
   [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
   public class TestNotificationService : INotificationService, IDisposable
   {
-    public TestNotificationService(string xiUrl)
+    public TestNotificationService()
     {
+      Url = CommunicationSettings.ServiceUrlTemplate
+        .Replace(CommunicationSettings.HostnameHolder, "localhost")
+        .Replace("amBXPeripheralController", "aPCTest");
+
       ClearScenes();
       mHost = new ServiceHost(this);
       mHost.AddServiceEndpoint(typeof(INotificationService),
-                                 new BasicHttpBinding(),
-                                 xiUrl);
+                               new BasicHttpBinding(),
+                               Url);
       IncludeExceptionsInTestFaults(mHost);
       mHost.Open();
     }
@@ -73,6 +77,7 @@ namespace aPC.Common.Client.Test.Communication
     // Item1 is a boolean specifying if the item pushed was an integrated scene
     // Item2 is the information sent
     public List<Tuple<bool, string>> Scenes { get; private set; }
+    public string Url;
     private readonly ServiceHost mHost;
   }
 }
