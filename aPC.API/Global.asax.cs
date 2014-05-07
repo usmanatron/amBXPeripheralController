@@ -15,8 +15,6 @@ namespace aPC.Web
     {
       AreaRegistration.RegisterAllAreas();
       GlobalConfiguration.Configure(WebApiConfig.Register);
-      GlobalConfiguration.Configuration.Formatters.XmlFormatter.UseXmlSerializer = true;
-      GlobalConfiguration.Configuration.Formatters.JsonFormatter.UseDataContractJsonSerializer = true; //qqUMI do I need this?
       FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
       RouteConfig.RegisterRoutes(RouteTable.Routes);
       BundleConfig.RegisterBundles(BundleTable.Bundles);
