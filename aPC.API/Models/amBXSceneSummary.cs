@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 using aPC.Common.Entities;
 using aPC.Common;
-using System.Xml.Serialization;
 
 namespace aPC.Web.Models
 {
   /// <summary>
   /// Represents summary information from a given amBXScene
   /// </summary>
-  [XmlRoot]
-  [Serializable]
+  [DataContract]
   public class amBXSceneSummary
   {
     public amBXSceneSummary(KeyValuePair<string, amBXScene> xiScene)
@@ -24,16 +21,16 @@ namespace aPC.Web.Models
       IsSynchronised = lSceneType == eSceneType.Sync || lSceneType == eSceneType.Event;
     }
 
-    [XmlElement]
+    [DataMember]
     public string SceneName;
 
-    [XmlElement]
+    [DataMember]
     public bool IsEvent;
 
-    [XmlElement]
+    [DataMember]
     public bool IsSynchronised;
 
-    [XmlElement]
+    [DataMember]
     public int SceneLength;
   }
 }

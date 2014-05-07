@@ -1,24 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
 namespace aPC.Common.Entities
 {
   [XmlRoot]
   [Serializable]
+  [DataContract]
   public class amBXScene
   {
     // A complicated one.  The idea is that we want to mess with fans without touching the light (for example).
     // Saying you're exclusive means that we kill off everything and just use this.  Otherwise we'll merge in the 
     // changes specified by this.
     // TODO: not yet implemented
+    [DataMember]
     [XmlAttribute]
     public bool IsExclusive;
 
+    [DataMember]
     [XmlAttribute]
     public eSceneType SceneType;
-    
+
+    [DataMember]
     [XmlArray("Frames")]
     [XmlArrayItem("Frame")]
     public List<Frame> Frames
