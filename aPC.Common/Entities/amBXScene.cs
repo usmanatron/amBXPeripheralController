@@ -19,9 +19,28 @@ namespace aPC.Common.Entities
     [XmlAttribute]
     public bool IsExclusive;
 
-    [DataMember]
     [XmlAttribute]
     public eSceneType SceneType;
+
+    /// <summary>
+    /// Used for JSON serialisation - a limitation means that enums 
+    /// are shown by their numerical representation.  This ensures we see the
+    /// name instead.
+    /// </summary>
+    [XmlIgnore]
+    [DataMember(Name = "SceneType")]
+    public string PropertyOneString
+    {
+      get
+      {
+        return Enum.GetName(typeof(eSceneType), this.SceneType);
+      }
+      set
+      {
+        this.SceneType = (eSceneType)Enum.Parse(typeof(eSceneType), value);
+      }
+    }  
+
 
     [DataMember]
     [XmlArray("Frames")]
