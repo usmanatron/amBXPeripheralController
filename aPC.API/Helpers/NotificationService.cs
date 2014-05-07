@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using aPC.Common.Client.Communication;
+﻿using aPC.Common.Client.Communication;
 
 namespace aPC.Web.Helpers
 {
