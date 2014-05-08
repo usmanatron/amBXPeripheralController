@@ -23,9 +23,20 @@ Used to work collectively with all integrated scenes.
     + Body
     
             {
-                "scenes": [
+                [
+                
+                
                     {
-                        "SceneType" : Scene Type
+                        "SceneName": "ccnet_red",
+                        "IsEvent": false,
+                        "IsSynchronised": false,
+                        "SceneLength": 1000
+                    },
+                    {
+                        "SceneName": "ccnet_green",
+                        "IsEvent": false,
+                        "IsSynchronised": false,
+                        "SceneLength": 1000
                     }
                 ]
             }
@@ -50,10 +61,71 @@ Used to manipulate specific integrated scenes.
     + Body
 
             {
-                "SceneType" : "The type of scene"
+                "IsExclusive": false,
+                "SceneType": "Desync",
+                "Frames": [
+                    {
+                        "Length": 1000,
+                        "IsRepeated": false,
+                        "Lights": {
+                            "North": {
+                                "Intensity": 1,
+                                "Red": 1,
+                                "Green": 0,
+                                "Blue": 0
+                            },
+                            "NorthEast": {
+                                "Intensity": 1,
+                                "Red": 1,
+                                "Green": 0,
+                                "Blue": 0
+                            },
+                            "East": {
+                                "Intensity": 1,
+                                "Red": 1,
+                                "Green": 0,
+                                "Blue": 0
+                            },
+                            "SouthEast": {
+                                "Intensity": 1,
+                                "Red": 1,
+                                "Green": 0,
+                                "Blue": 0
+                            },
+                            "South": {
+                                "Intensity": 1,
+                                "Red": 1,
+                                "Green": 0,
+                                "Blue": 0
+                            },
+                            "SouthWest": {
+                                "Intensity": 1,
+                                "Red": 1,
+                                "Green": 0,
+                                "Blue": 0
+                            },
+                            "West": {
+                            "Intensity": 1,
+                            "Red": 1,
+                            "Green": 0,
+                            "Blue": 0
+                        },
+                        "NorthWest": {
+                            "Intensity": 1,
+                            "Red": 1,
+                            "Green": 0,
+                            "Blue": 0
+                        },
+                        "FadeTime": 500
+                    },
+                    "Fans": null,
+                    "Rumbles": null
+                    }
+                ]
             }
 
 ## Get the definition of the scene [GET]
+
 + Response 200
 
     [Integrated Scene][]
