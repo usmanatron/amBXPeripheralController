@@ -1,9 +1,9 @@
-﻿using aPC.Common.Client.Tests.Communication;
+﻿using System.Net;
+using System.Web.Http;
+using aPC.Common.Client.Tests.Communication;
 using aPC.Common;
 using aPC.Web.Controllers.API;
-using aPC.Web.Models;
 using NUnit.Framework;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace aPC.Web.Tests.Controllers.API
@@ -11,11 +11,6 @@ namespace aPC.Web.Tests.Controllers.API
   [TestFixture]
   public class IntegratedControllerTests
   {
-    [TestFixtureSetUp]
-    public void FixtureSetup()
-    {
-    }
-
     [SetUp]
     public void Setup()
     {
@@ -24,11 +19,11 @@ namespace aPC.Web.Tests.Controllers.API
     }
 
     [Test]
-    public void TestGet_ReturnsAllIntegratedScenes()
+    public void GetWithoutName_ReturnsAllIntegratedScenes()
     {
       var lIntegratedScenes = new SceneAccessor().GetAllScenes();
 
-      IEnumerable<amBXSceneSummary> lResults = mController.Get();
+      var lResults = mController.Get();
 
       Assert.AreEqual(lIntegratedScenes.Count, lResults.Count());
       CollectionAssert.AreEquivalent(lIntegratedScenes.Select(scene => scene.Key), lResults.Select(scene => scene.SceneName));
@@ -36,9 +31,10 @@ namespace aPC.Web.Tests.Controllers.API
 
 
     [Test]
-    public void GetById_ReturnsExpectedScene()
+    public void GetByName_ReturnsExpectedScene()
     {
       var lScene = new SceneAccessor().GetScene("poolq2_event");
+
       var lResult = mController.Get("poolq2_event");
 
       Assert.AreEqual(lScene.SceneType, lResult.SceneType);
@@ -47,13 +43,20 @@ namespace aPC.Web.Tests.Controllers.API
     }
 
     [Test]
+    public void GetByName_WhereNameDoesntExist_Returns404()
+    {
+      var lException = Assert.Throws<HttpResponseException>(() => mController.Get("TotallyNonExistantScene"));
+      Assert.AreEqual(HttpStatusCode.NotFound, lException.Response.StatusCode);
+    }
+
+    [Test]
     public void Post_SendsExpectedScene()
     {
       mController.Post("poolq2_event");
 
-       Assert.AreEqual(1, mClient.NumberOfIntegratedScenesPushed);
-       Assert.AreEqual(0, mClient.NumberOfCustomScenesPushed);
-       Assert.AreEqual("poolq2_event", mClient.IntegratedScenesPushed.First());
+      Assert.AreEqual(1, mClient.NumberOfIntegratedScenesPushed);
+      Assert.AreEqual(0, mClient.NumberOfCustomScenesPushed);
+      Assert.AreEqual("poolq2_event", mClient.IntegratedScenesPushed.First());
     }
 
     private IntegratedController mController;

@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using aPC.Common.Communication;
-using aPC.Web.Helpers;
 using aPC.Common;
 using aPC.Common.Entities;
 using aPC.Web.Models;
@@ -49,7 +47,7 @@ namespace aPC.Web.Controllers.API
       }
       catch (Exception)
       {
-        throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.InternalServerError));
+        throw new HttpResponseException(HttpStatusCode.InternalServerError);
       }
     }
 
