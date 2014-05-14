@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using aPC.Common.Client.Tests.Communication;
-using aPC.Common.Entities;
+﻿using aPC.Common.Client.Tests.Communication;
 using aPC.Common;
 using aPC.Web.Controllers.API;
-using aPC.Web.Helpers;
 using aPC.Web.Models;
 using NUnit.Framework;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace aPC.Web.Tests.Controllers.API
 {
@@ -16,7 +14,13 @@ namespace aPC.Web.Tests.Controllers.API
     [TestFixtureSetUp]
     public void FixtureSetup()
     {
-      mHost = new TestNotificationService();
+    }
+
+    [SetUp]
+    public void Setup()
+    {
+      mClient = new TestNotificationClient();
+      mController = new IntegratedController(mClient);
     }
 
     [Test]
@@ -24,7 +28,7 @@ namespace aPC.Web.Tests.Controllers.API
     {
       var lIntegratedScenes = new SceneAccessor().GetAllScenes();
 
-      IEnumerable<amBXSceneSummary> lResults = new IntegratedController().Get();
+      IEnumerable<amBXSceneSummary> lResults = mController.Get();
 
       Assert.AreEqual(lIntegratedScenes.Count, lResults.Count());
       CollectionAssert.AreEquivalent(lIntegratedScenes.Select(scene => scene.Key), lResults.Select(scene => scene.SceneName));
@@ -32,10 +36,10 @@ namespace aPC.Web.Tests.Controllers.API
 
 
     [Test]
-    public void GetById()
+    public void GetById_ReturnsExpectedScene()
     {
       var lScene = new SceneAccessor().GetScene("poolq2_event");
-      var lResult = new IntegratedController().Get("poolq2_event");
+      var lResult = mController.Get("poolq2_event");
 
       Assert.AreEqual(lScene.SceneType, lResult.SceneType);
       Assert.AreEqual(lScene.FrameStatistics.SceneLength, lResult.FrameStatistics.SceneLength);
@@ -43,21 +47,16 @@ namespace aPC.Web.Tests.Controllers.API
     }
 
     [Test]
-    public void Post()
+    public void Post_SendsExpectedScene()
     {
-      var lClient = new NotificationClient(mHost.Url);
+      mController.Post("poolq2_event");
 
-
-
-      // Arrange
-      IntegratedController controller = new IntegratedController();
-
-      // Act
-      controller.Post("value");
-
-      // Assert
+       Assert.AreEqual(1, mClient.NumberOfIntegratedScenesPushed);
+       Assert.AreEqual(0, mClient.NumberOfCustomScenesPushed);
+       Assert.AreEqual("poolq2_event", mClient.IntegratedScenesPushed.First());
     }
 
-    private TestNotificationService mHost;
+    private IntegratedController mController;
+    private TestNotificationClient mClient;
   }
 }
