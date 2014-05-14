@@ -2,11 +2,21 @@
 <!--
 A test event scene
 -->
-<amBXScene IsExclusive="true" SceneType="Event">
+<amBXScene>
+  <IsExclusive>true</IsExclusive>
+  <SceneType>Event</SceneType>
   <Frames>
-    <Frame Length="200" IsRepeated="false">
-      <Lights FadeTime="100">
-        <West      Intensity="0.5" Red="0.5" Green="0" Blue="1" />
+    <Frame>
+      <Length>200</Length>
+      <IsRepeated>false</IsRepeated>
+      <Lights>
+        <FadeTime>100</FadeTime>
+        <West>
+        <Intensity>0.5</Intensity>
+        <Red>0.5</Red>
+        <Green>0</Green>
+        <Blue>1</Blue>
+        </West>
         <NorthWest Intensity="0.5" Red="0.5" Green="0" Blue="1" />
         <North     Intensity="0.5" Red="0.5" Green="0" Blue="1" />
         <NorthEast Intensity="0.5" Red="0.5" Green="0" Blue="1" />
