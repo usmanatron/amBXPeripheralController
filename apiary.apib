@@ -1,16 +1,17 @@
 FORMAT: 1A
-HOST: http://www.google.com
+HOST: localhost\apc
 
 # amBX Peripheral Controller
 A web-aware means to control a local instance of amBX Peripheral Controller (aPC) Server.
 
 # Summary
-the main usage of this API is to get the following:
+The main usage of this API is to get the following:
+
 * Information about the currently running scene(s)
 * An indication of the supported integrated scenes
-* the ability to push scenes
+* The ability to push scenes
 
-
+Both XML and JSON are supported - examples below target JSON.
 
 
 # Group Integrated Scenes
@@ -125,6 +126,10 @@ Used to manipulate specific integrated scenes.
             }
 
 ## Get the definition of the scene [GET]
++ Request
+
+        Accept: application/json
+
 
 + Response 200
 
@@ -141,13 +146,73 @@ Used to manipulate specific integrated scenes.
 Handling custom-built scenes
 
 ## Parse custom Scene [/custom/parse]
-Confirm if a given custom scene is correctly formed
+Confirm if a given custom scene is correctly formed.
 
 ## Parse given scene [POST]
-+ Request (text/plain)
++ Request (application/json)
 
         {
-            "Xml representation of scene"
+            "IsExclusive": false,
+            "SceneType": "Desync",
+            "Frames": [
+                {
+                    "Length": 1000,
+                    "IsRepeated": false,
+                    "Lights": {
+                        "North": {
+                            "Intensity": 1,
+                            "Red": 1,
+                            "Green": 0,
+                            "Blue": 0
+                        },
+                        "NorthEast": {
+                            "Intensity": 1,
+                            "Red": 1,
+                            "Green": 0,
+                            "Blue": 0
+                        },
+                        "East": {
+                            "Intensity": 1,
+                            "Red": 1,
+                            "Green": 0,
+                            "Blue": 0
+                        },
+                        "SouthEast": {
+                            "Intensity": 1,
+                            "Red": 1,
+                            "Green": 0,
+                            "Blue": 0
+                        },
+                        "South": {
+                            "Intensity": 1,
+                            "Red": 1,
+                            "Green": 0,
+                            "Blue": 0
+                       },
+                       "SouthWest": {
+                           "Intensity": 1,
+                           "Red": 1,
+                           "Green": 0,
+                           "Blue": 0
+                       },
+                       "West": {
+                       "Intensity": 1,
+                       "Red": 1,
+                       "Green": 0,
+                       "Blue": 0
+                   },
+                   "NorthWest": {
+                       "Intensity": 1,
+                       "Red": 1,
+                       "Green": 0,
+                       "Blue": 0
+                   },
+                   "FadeTime": 500
+                },
+                "Fans": null,
+                "Rumbles": null
+                }
+            ]
         }
 
 + Response 200
@@ -159,10 +224,70 @@ Confirm if a given custom scene is correctly formed
 Confirm if a given custom scene is correctly formed
 
 ## Run given scene [POST]
-+ Request (text/plain)
++ Request (application/json)
 
         {
-            "Xml representation of scene"
+            "IsExclusive": false,
+            "SceneType": "Desync",
+            "Frames": [
+                {
+                    "Length": 1000,
+                    "IsRepeated": false,
+                    "Lights": {
+                        "North": {
+                            "Intensity": 1,
+                            "Red": 1,
+                            "Green": 0,
+                            "Blue": 0
+                        },
+                        "NorthEast": {
+                            "Intensity": 1,
+                            "Red": 1,
+                            "Green": 0,
+                            "Blue": 0
+                        },
+                        "East": {
+                            "Intensity": 1,
+                            "Red": 1,
+                            "Green": 0,
+                            "Blue": 0
+                        },
+                        "SouthEast": {
+                            "Intensity": 1,
+                            "Red": 1,
+                            "Green": 0,
+                            "Blue": 0
+                        },
+                        "South": {
+                            "Intensity": 1,
+                            "Red": 1,
+                            "Green": 0,
+                            "Blue": 0
+                       },
+                       "SouthWest": {
+                           "Intensity": 1,
+                           "Red": 1,
+                           "Green": 0,
+                           "Blue": 0
+                       },
+                       "West": {
+                       "Intensity": 1,
+                       "Red": 1,
+                       "Green": 0,
+                       "Blue": 0
+                   },
+                   "NorthWest": {
+                       "Intensity": 1,
+                       "Red": 1,
+                       "Green": 0,
+                       "Blue": 0
+                   },
+                   "FadeTime": 500
+                },
+                "Fans": null,
+                "Rumbles": null
+                }
+            ]
         }
 
 + Response 200
