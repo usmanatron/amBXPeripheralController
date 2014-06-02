@@ -1,7 +1,6 @@
 ﻿using aPC.Common;
 using aPC.Common.Communication;
 using aPC.Common.Entities;
-using aPC.Server.Communication;
 using System;
 using System.IO;
 using System.Xml.Serialization;
