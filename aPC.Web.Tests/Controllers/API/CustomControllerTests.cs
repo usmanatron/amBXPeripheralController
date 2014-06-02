@@ -22,7 +22,7 @@ namespace aPC.Web.Tests.Controllers.API
     {
       amBXScene lScene;
       
-      Assert.DoesNotThrow(() => lScene = mController.Parse(xiScene););
+      Assert.DoesNotThrow(() => lScene = mController.Parse(xiScene));
       
     }
 
@@ -32,7 +32,7 @@ namespace aPC.Web.Tests.Controllers.API
     {
       amBXScene lScene;
       
-      Assert.DoesNotThrow(() => lScene = mController.Parse(xiScene););
+      Assert.DoesNotThrow(() => lScene = mController.Parse(xiScene));
       
     }
     
