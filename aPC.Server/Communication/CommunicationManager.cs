@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ServiceModel;
+using System.ServiceModel.Description;
 using aPC.Common.Communication;
 
 namespace aPC.Server.Communication
@@ -14,17 +15,23 @@ namespace aPC.Server.Communication
 
     private void SetupHost(INotificationService xiNotificationService)
     {
-      mHost = new ServiceHost(xiNotificationService.GetType());
+      string lBaseAddress = CommunicationSettings.ServiceUrlTemplate
+        .Replace(CommunicationSettings.HostnameHolder, System.Net.Dns.GetHostName());
 
-      AddEndpoint(CommunicationSettings.ServiceUrlTemplate.
-        Replace(CommunicationSettings.HostnameHolder, System.Net.Dns.GetHostName()));
+      mHost = new ServiceHost(xiNotificationService.GetType(), new Uri(lBaseAddress));
+      
+      AddHostBehaviors();
+      AddEndpoint();
     }
 
-    private void AddEndpoint(string xiUrl)
+    private void AddHostBehaviors()
     {
-      mHost.AddServiceEndpoint(typeof(INotificationService),
-                               new BasicHttpBinding(),
-                               xiUrl);
+      mHost.Description.Behaviors.Add(new ServiceMetadataBehavior { HttpGetEnabled = true });
+    }
+
+    private void AddEndpoint()
+    {
+      mHost.AddServiceEndpoint(typeof (INotificationService), new BasicHttpBinding(), "");
     }
 
     public void Close()

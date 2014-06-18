@@ -13,6 +13,11 @@ namespace aPC.Common.Defaults
       Name = name;
     }
 
+    public static string GetName(PropertyInfo xiPropertyInfo)
+    {
+      return xiPropertyInfo.GetCustomAttribute<SceneNameAttribute>().Name;
+    }
+
     public static bool MatchesName(PropertyInfo xiPropertyInfo, string xiName)
     {
       var lAttribute = xiPropertyInfo.GetCustomAttribute<SceneNameAttribute>();

@@ -1,8 +1,6 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using aPC.Client.Communication;
-using aPC.Common.Communication;
-using aPC.Common.Client.Test.Communication;
+using aPC.Common.Client.Tests.Communication;
 
 namespace aPC.Client.Tests.Communication
 {
@@ -12,12 +10,8 @@ namespace aPC.Client.Tests.Communication
     [TestFixtureSetUp]
     public void SetupTests()
     {
-      var lUrl = CommunicationSettings.ServiceUrlTemplate
-        .Replace(CommunicationSettings.HostnameHolder, "localhost")
-        .Replace("amBXPeripheralController", "aPCTest");
-
-      mHost = new TestNotificationService(lUrl);
-      mClient = new NotificationClient(lUrl);
+      mHost = new TestNotificationService();
+      mClient = new NotificationClient(mHost.Url);
     }
 
     [SetUp]

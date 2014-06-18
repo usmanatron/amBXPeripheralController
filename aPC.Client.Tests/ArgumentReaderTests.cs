@@ -20,8 +20,8 @@ namespace aPC.Client.Tests
     [Test]
     [TestCase(@"blah")]
     // Incorrect slash
-    [TestCase(@"/i")]
-    [TestCase(@"/f")]
+    [TestCase(@"\i")]
+    [TestCase(@"\f")]
     public void UnexpectedFirstArgument_Throws(string xiFirstArgument)
     {
       var lArguments = new[] { xiFirstArgument, "OtherArg" };
@@ -31,7 +31,7 @@ namespace aPC.Client.Tests
     [Test]
     public void IntegratedScene_ParsedCorrectly()
     {
-      var lArguments = new[] { @"\I", "SceneName" };
+      var lArguments = new[] { @"/I", "SceneName" };
       var lSettings = GetSettingsFromArguments(lArguments);
 
       Assert.AreEqual(true, lSettings.IsIntegratedScene);
@@ -41,7 +41,7 @@ namespace aPC.Client.Tests
     [Test]
     public void CustomScene_ParsedCorrectly()
     {
-      var lArguments = new[] { @"\F", "ExampleScene.xml" };
+      var lArguments = new[] { @"/F", "ExampleScene.xml" };
       var lSettings = GetSettingsFromArguments(lArguments);
 
       Assert.AreEqual(false, lSettings.IsIntegratedScene);

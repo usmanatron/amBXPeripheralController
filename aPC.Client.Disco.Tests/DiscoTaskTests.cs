@@ -47,7 +47,7 @@ namespace aPC.Client.Disco.Tests
     [Test]
     public void PushingAScene_SendsTheExpectedConfiguration()
     {
-      int lInterval = (int)(2.5 * mSettings.PushInterval);
+      int lInterval = (int)(1.5 * mSettings.PushInterval);
       var lTask = new Task(mDiscoTask.Run);
       
       lTask.Start();

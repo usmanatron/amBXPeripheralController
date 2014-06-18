@@ -2,6 +2,8 @@
 using System.Linq;
 using aPC.Common.Defaults;
 using aPC.Common.Entities;
+using System.Reflection;
+using System.Collections.Generic;
 
 namespace aPC.Common
 {
@@ -9,9 +11,7 @@ namespace aPC.Common
   {
     public amBXScene GetScene(string xiDescription)
     {
-      var lSceneProperty = mDefaultScenes
-        .GetType()
-        .GetProperties()
+      var lSceneProperty = GetAllIntegratedScenes()
         .SingleOrDefault(property => SceneNameAttribute.MatchesName(property, xiDescription));
 
       if (lSceneProperty == null)
@@ -21,6 +21,19 @@ namespace aPC.Common
       }
 
       return lSceneProperty.GetValue(mDefaultScenes) as amBXScene;
+    }
+
+    public Dictionary<string, amBXScene> GetAllScenes()
+    {
+      return GetAllIntegratedScenes()
+        .ToDictionary(scene => SceneNameAttribute.GetName(scene), scene => (amBXScene)scene.GetValue(mDefaultScenes));
+    }
+
+    private PropertyInfo[] GetAllIntegratedScenes()
+    {
+      return mDefaultScenes
+        .GetType()
+        .GetProperties();
     }
 
     private static readonly DefaultScenes mDefaultScenes = new DefaultScenes();

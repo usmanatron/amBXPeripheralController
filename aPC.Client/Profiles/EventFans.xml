@@ -2,42 +2,136 @@
 <!--
 A test event scene
 -->
-<amBXScene IsExclusive="true" SceneType="Event">
-  <Frames>
-    <Frame Length="200" IsRepeated="false">
-      <Lights FadeTime="100">
-        <West      Intensity="0.5" Red="0.5" Green="0" Blue="1" />
-        <NorthWest Intensity="0.5" Red="0.5" Green="0" Blue="1" />
-        <North     Intensity="0.5" Red="0.5" Green="0" Blue="1" />
-        <NorthEast Intensity="0.5" Red="0.5" Green="0" Blue="1" />
-        <East      Intensity="0.5" Red="0.5" Green="0" Blue="1" />
-      </Lights>
-    </Frame>
-    <Frame Length="1000" IsRepeated="false">
-      <Lights FadeTime="200">
-        <West      Intensity="1" Red="1" Green="0.5" Blue="0.5" />
-        <NorthWest Intensity="1" Red="1" Green="0.5" Blue="0.5" />
-        <North     Intensity="1" Red="1" Green="0.5" Blue="0.5" />
-        <NorthEast Intensity="1" Red="1" Green="0.5" Blue="0.5" />
-        <East      Intensity="1" Red="1" Green="0.5" Blue="0.5" />
-      </Lights>
-      <Fans>
-        <East Intensity="1" />
-        <West Intensity="1" />
-      </Fans>
-    </Frame>
-    <Frame Length="500" IsRepeated="false">
-      <Lights FadeTime="100">
-        <West      Intensity="0.5" Red="0.5" Green="0" Blue="1" />
-        <NorthWest Intensity="0.5" Red="0.5" Green="0" Blue="1" />
-        <North     Intensity="0.5" Red="0.5" Green="0" Blue="1" />
-        <NorthEast Intensity="0.5" Red="0.5" Green="0" Blue="1" />
-        <East      Intensity="0.5" Red="0.5" Green="0" Blue="1" />
-      </Lights>
-      <Fans>
-        <East Intensity="0" />
-        <West Intensity="0" />
-      </Fans>
-    </Frame>
-  </Frames>
+<amBXScene>
+    <IsExclusive>true</IsExclusive>
+    <SceneType>Event</SceneType>
+    <Frames>
+        <Frame>
+            <Length>200</Length>
+            <IsRepeated>false</IsRepeated>
+            <Lights>
+                <FadeTime>100</FadeTime>
+                <West>
+                    <Intensity>0.5</Intensity>
+                    <Red>0.5</Red>
+                    <Green>0</Green>
+                    <Blue>1</Blue>
+                </West>
+                <NorthWest>
+                    <Intensity>0.5</Intensity>
+                    <Red>0.5</Red>
+                    <Green>0</Green>
+                    <Blue>1</Blue>
+                </NorthWest>
+                <North>
+                    <Intensity>0.5</Intensity>
+                    <Red>0.5</Red>
+                    <Green>0</Green>
+                    <Blue>1</Blue>
+                </North>
+                <NorthEast>
+                    <Intensity>0.5</Intensity>
+                    <Red>0.5</Red>
+                    <Green>0</Green>
+                    <Blue>1</Blue>
+                </NorthEast>
+                <East>
+                    <Intensity>0.5</Intensity>
+                    <Red>0.5</Red>
+                    <Green>0</Green>
+                    <Blue>1</Blue>
+                </East>
+            </Lights>
+        </Frame>
+        <Frame>
+            <Length>1000</Length>
+            <IsRepeated>false</IsRepeated>
+            <Lights>
+                <FadeTime>200</FadeTime>
+                <West>
+                    <Intensity>1</Intensity>
+                    <Red>1</Red>
+                    <Green>0.5</Green>
+                    <Blue>0.5</Blue>
+                </West>
+                <NorthWest>
+                    <Intensity>1</Intensity>
+                    <Red>1</Red>
+                    <Green>0.5</Green>
+                    <Blue>0.5</Blue>
+                </NorthWest>
+                <North>
+                    <Intensity>1</Intensity>
+                    <Red>1</Red>
+                    <Green>0.5</Green>
+                    <Blue>0.5</Blue>
+                </North>
+                <NorthEast>
+                    <Intensity>1</Intensity>
+                    <Red>1</Red>
+                    <Green>0.5</Green>
+                    <Blue>0.5</Blue>
+                </NorthEast>
+                <East>
+                    <Intensity>1</Intensity>
+                    <Red>1</Red>
+                    <Green>0.5</Green>
+                    <Blue>0.5</Blue>
+                </East>
+            </Lights>
+            <Fans>
+                <East>
+                    <Intensity>1</Intensity>
+                </East>
+                <West>
+                    <Intensity>1</Intensity>
+                </West>
+            </Fans>
+        </Frame>
+        <Frame>
+            <Length>500</Length>
+            <IsRepeated>false</IsRepeated>
+            <Lights>
+                <FadeTime>100</FadeTime>
+                <West>
+                    <Intensity>0.5</Intensity>
+                    <Red>0.5</Red>
+                    <Green>0</Green>
+                    <Blue>1</Blue>
+                </West>
+                <NorthWest>
+                    <Intensity>0.5</Intensity>
+                    <Red>0.5</Red>
+                    <Green>0</Green>
+                    <Blue>1</Blue>
+                </NorthWest>
+                <North>
+                    <Intensity>0.5</Intensity>
+                    <Red>0.5</Red>
+                    <Green>0</Green>
+                    <Blue>1</Blue>
+                </North>
+                <NorthEast>
+                    <Intensity>0.5</Intensity>
+                    <Red>0.5</Red>
+                    <Green>0</Green>
+                    <Blue>1</Blue>
+                </NorthEast>
+                <East>
+                    <Intensity>0.5</Intensity>
+                    <Red>0.5</Red>
+                    <Green>0</Green>
+                    <Blue>1</Blue>
+                </East>
+            </Lights>
+            <Fans>
+                <East>
+                    <Intensity>0</Intensity>
+                </East>
+                <West>
+                    <Intensity>0</Intensity>
+                </West>
+            </Fans>
+        </Frame>
+    </Frames>
 </amBXScene>

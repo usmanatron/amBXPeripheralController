@@ -15,6 +15,7 @@ namespace aPC.Common.Entities
     public FrameStatistics(List<Frame> xiFrames)
     {
       EnabledDirectionalComponents = new List<Tuple<eComponentType, eDirection>>();
+      SceneLength = 0;
 
       foreach (var lFrame in xiFrames)
       {
@@ -24,6 +25,7 @@ namespace aPC.Common.Entities
 
     private void ProcessFrame(Frame xiFrame)
     {
+      SceneLength += xiFrame.Length;
       ProcessComponent<Light>(xiFrame.Lights);
       ProcessComponent<Fan>(xiFrame.Fans);
       ProcessComponent<Rumble>(xiFrame.Rumbles);
@@ -83,5 +85,6 @@ namespace aPC.Common.Entities
       (item, direction) => item.Item2 == direction;
 
     public readonly List<Tuple<eComponentType, eDirection>> EnabledDirectionalComponents;
+    public int SceneLength;
   }
 }
