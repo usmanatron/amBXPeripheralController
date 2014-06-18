@@ -22,27 +22,28 @@ namespace aPC.Client.Overlay
   {
     public MainWindow()
     {
+
       InitializeComponent();
     }
 
     private void CustomSceneSelected(object sender, RoutedEventArgs e)
     {
-      MessageBox.Show("CS");
+      CustomSceneList.IsEnabled = true;
     }
 
     private void CustomSceneDeselected(object sender, RoutedEventArgs e)
     {
-      MessageBox.Show("CD");
+      CustomSceneList.IsEnabled = false;
     }
 
     private void IntegratedSceneSelected(object sender, RoutedEventArgs e)
     {
-      MessageBox.Show("IS");
+      IntegratedSceneList.IsEnabled = true;
     }
 
     private void IntegratedSceneDeselected(object sender, RoutedEventArgs e)
     {
-      MessageBox.Show("ID");
+      IntegratedSceneList.IsEnabled = false;
     }
 
   }

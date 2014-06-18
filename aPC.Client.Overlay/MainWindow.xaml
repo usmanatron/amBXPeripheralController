@@ -6,7 +6,10 @@
     <Label Content="Server: " Margin="45, 30" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" />
 
     <RadioButton Content="Integrated " Margin="30, 80" Checked="IntegratedSceneSelected" Unchecked="IntegratedSceneDeselected" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" GroupName="SceneType" />
+    <ComboBox Margin="45, 120" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" IsEnabled="False" x:Name="IntegratedSceneList" Height="25"/>
+    
     <RadioButton Content="Custom " Margin="30,180,0,0" Checked="CustomSceneSelected" Unchecked="CustomSceneDeselected" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" GroupName="SceneType" />
+    <ComboBox Margin="45,220,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" IsEnabled="False" x:Name="CustomSceneList" Height="25"/>
 
   </Grid>
 </Window>
