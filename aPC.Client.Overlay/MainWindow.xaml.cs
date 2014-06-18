@@ -28,7 +28,8 @@ namespace aPC.Client.Overlay
     {
       var lScenes = new SceneAccessor()
         .GetAllScenes()
-        .Select(scene => scene.Key);
+        .Select(scene => scene.Key)
+        .OrderBy(scene => scene);
 
       IntegratedSceneList.ItemsSource = lScenes;
     }
