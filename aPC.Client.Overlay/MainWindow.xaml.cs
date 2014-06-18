@@ -24,5 +24,26 @@ namespace aPC.Client.Overlay
     {
       InitializeComponent();
     }
+
+    private void CustomSceneSelected(object sender, RoutedEventArgs e)
+    {
+      MessageBox.Show("CS");
+    }
+
+    private void CustomSceneDeselected(object sender, RoutedEventArgs e)
+    {
+      MessageBox.Show("CD");
+    }
+
+    private void IntegratedSceneSelected(object sender, RoutedEventArgs e)
+    {
+      MessageBox.Show("IS");
+    }
+
+    private void IntegratedSceneDeselected(object sender, RoutedEventArgs e)
+    {
+      MessageBox.Show("ID");
+    }
+
   }
 }
