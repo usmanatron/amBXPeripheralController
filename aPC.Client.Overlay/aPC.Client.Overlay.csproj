@@ -105,6 +105,10 @@
       <Project>{315aae4d-8524-4993-9d40-2c2e2ec1b50d}</Project>
       <Name>aPC.Client</Name>
     </ProjectReference>
+    <ProjectReference Include="..\aPC.Common\aPC.Common.csproj">
+      <Project>{b6543e75-59af-4059-acf8-560e82bc72ce}</Project>
+      <Name>aPC.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Settings\" />

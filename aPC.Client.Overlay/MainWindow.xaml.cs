@@ -2,16 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using aPC.Common;
 
 namespace aPC.Client.Overlay
 {
@@ -22,8 +14,39 @@ namespace aPC.Client.Overlay
   {
     public MainWindow()
     {
-
       InitializeComponent();
+      PopulateSceneLists();
+    }
+
+    private void PopulateSceneLists()
+    {
+      PopulateIntegratedList();
+      PopulateCustomList();
+    }
+
+    private void PopulateIntegratedList()
+    {
+      var lScenes = new SceneAccessor()
+        .GetAllScenes()
+        .Select(scene => scene.Key);
+
+      IntegratedSceneList.ItemsSource = lScenes;
+    }
+
+    private void PopulateCustomList()
+    {
+      var lScenes = new List<string> { mBrowse };
+      CustomSceneList.ItemsSource = lScenes;
+    }
+
+    private void IntegratedSceneSelected(object sender, RoutedEventArgs e)
+    {
+      IntegratedSceneList.IsEnabled = true;
+    }
+
+    private void IntegratedSceneDeselected(object sender, RoutedEventArgs e)
+    {
+      IntegratedSceneList.IsEnabled = false;
     }
 
     private void CustomSceneSelected(object sender, RoutedEventArgs e)
@@ -36,14 +59,31 @@ namespace aPC.Client.Overlay
       CustomSceneList.IsEnabled = false;
     }
 
-    private void IntegratedSceneSelected(object sender, RoutedEventArgs e)
+    private void CustomSceneSelectionChanged(object sender, RoutedEventArgs e)
     {
-      IntegratedSceneList.IsEnabled = true;
+      if ((string)CustomSceneList.SelectedValue == mBrowse)
+      {
+        MessageBox.Show("Not yet implemented!");
+      }
     }
 
-    private void IntegratedSceneDeselected(object sender, RoutedEventArgs e)
+    private const string mBrowse = "<Browse...>";
+
+    private void CloseClick(object sender, RoutedEventArgs e)
     {
-      IntegratedSceneList.IsEnabled = false;
+      Application.Current.Shutdown();
+    }
+
+    private void RunClick(object sender, RoutedEventArgs e)
+    {
+      if (!IntegratedSceneList.IsEnabled)
+      {
+        throw new NotImplementedException();
+      }
+
+      var lArguments = new string[] { @"/I", (string)IntegratedSceneList.SelectedValue };
+
+      aPC.Client.Client.Main(lArguments);
     }
 
   }

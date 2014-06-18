@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace aPC.Client
 {
-  internal class Client
+  public class Client
   {
-    private static void Main(string[] xiArgs)
+    public static void Main(string[] xiArgs)
     {
       var lSettings = GetSettings(xiArgs.ToList());
       var lKernel = new NinjectKernelHandler(lSettings);
