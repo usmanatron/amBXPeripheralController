@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using aPC.Client;
 
-namespace aPC.Client.Tests
+namespace aPC.Client.Tests.Console
 {
   [TestFixture]
   public class ArgumentReaderTests

@@ -55,7 +55,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="ArgumentReaderTests.cs" />
+    <Compile Include="Console\ArgumentReaderTests.cs" />
     <Compile Include="ClientTaskTests.cs" />
     <Compile Include="Communication\NotificationServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
