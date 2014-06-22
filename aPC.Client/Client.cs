@@ -9,7 +9,12 @@ namespace aPC.Client
     public static void ConsoleMain(string[] xiArgs)
     {
       var lSettings = GetSettings(xiArgs.ToList());
-      var lKernel = new NinjectKernelHandler(lSettings);
+      ConsoleMain(lSettings);
+    }
+
+    public static void ConsoleMain(Settings mSettings)
+    {
+      var lKernel = new NinjectKernelHandler(mSettings);
       var lTask = lKernel.Get<ClientTask>();
       lTask.Push();
     }

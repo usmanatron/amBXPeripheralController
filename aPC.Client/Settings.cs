@@ -2,13 +2,15 @@
 {
   public class Settings
   {
-    public Settings(bool xiIsIntegratedScene, string xiSceneData)
+    public bool IsValid
     {
-      IsIntegratedScene = xiIsIntegratedScene;
-      SceneData = xiSceneData;
+      get
+      {
+        return string.IsNullOrEmpty(SceneData);
+      }
     }
 
-    public readonly bool IsIntegratedScene;
-    public readonly string SceneData;
+    public bool IsIntegratedScene;
+    public string SceneData;
   }
 }

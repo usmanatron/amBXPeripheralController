@@ -14,6 +14,7 @@ namespace aPC.Client
   {
     public MainWindow()
     {
+      mSettings = new Settings();
       InitializeComponent();
       PopulateSceneLists();
     }
@@ -43,6 +44,7 @@ namespace aPC.Client
     private void IntegratedSceneSelected(object sender, RoutedEventArgs e)
     {
       IntegratedSceneList.IsEnabled = true;
+      mSettings.IsIntegratedScene = true;
     }
 
     private void IntegratedSceneDeselected(object sender, RoutedEventArgs e)
@@ -50,9 +52,15 @@ namespace aPC.Client
       IntegratedSceneList.IsEnabled = false;
     }
 
+    private void IntegratedSceneSelectionChanged(object sender, RoutedEventArgs e)
+    {
+      mSettings.SceneData = (string)IntegratedSceneList.SelectedValue;
+    }
+
     private void CustomSceneSelected(object sender, RoutedEventArgs e)
     {
       CustomSceneList.IsEnabled = true;
+      mSettings.IsIntegratedScene = false;
     }
 
     private void CustomSceneDeselected(object sender, RoutedEventArgs e)
@@ -77,15 +85,19 @@ namespace aPC.Client
 
     private void RunClick(object sender, RoutedEventArgs e)
     {
-      if (!IntegratedSceneList.IsEnabled)
-      {
+      if (!mSettings.IsIntegratedScene)
+      { 
         throw new NotImplementedException();
       }
 
-      var lArguments = new string[] { @"/I", (string)IntegratedSceneList.SelectedValue };
+      if (!mSettings.IsValid)
+      {
+        throw new ArgumentException("The information given is invalid");
+      }
 
-      Client.ConsoleMain(lArguments);
+      Client.ConsoleMain(mSettings);
     }
 
+    private Settings mSettings;
   }
 }

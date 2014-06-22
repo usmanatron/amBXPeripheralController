@@ -17,15 +17,17 @@ namespace aPC.Client
         throw new UsageException("Unexpected number of arguments");
       }
 
-      Settings lSettings;
+      var lSettings = new Settings();
 
       switch (mArgs[0].ToLower())
       {
         case @"/i":
-          lSettings = new Settings(true, mArgs[1]);
+          lSettings.IsIntegratedScene = true;
+          lSettings.SceneData = mArgs[1];
           break;
         case @"/f":
-          lSettings = new Settings(false, RetrieveFile(mArgs[1]));
+          lSettings.IsIntegratedScene = false;
+          lSettings.SceneData = RetrieveFile(mArgs[1]);
           break;
         default:
           throw new UsageException("Unexpected first argument");

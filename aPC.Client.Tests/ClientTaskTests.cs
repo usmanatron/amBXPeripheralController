@@ -16,7 +16,7 @@ namespace aPC.Client.Tests
     [Test]
     public void IntegratedScene_PushedAppropriately()
     {
-      var lSettings = new Settings(true, "Scene_Name");
+      var lSettings = new Settings { IsIntegratedScene = true, SceneData = "Scene_Name" };
       var lTask = new ClientTask(lSettings, mTestNotificationClient);
 
       lTask.Push();
@@ -29,7 +29,7 @@ namespace aPC.Client.Tests
     [Test]
     public void CustomScene_PushedAppropriately()
     {
-      var lSettings = new Settings(false, "CustomScene");
+      var lSettings = new Settings { IsIntegratedScene = false, SceneData = "CustomScene" };
       var lTask = new ClientTask(lSettings, mTestNotificationClient);
 
       lTask.Push();
