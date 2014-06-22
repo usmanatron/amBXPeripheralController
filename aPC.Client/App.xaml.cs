@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 using aPC.Common;
+using aPC.Client.Console;
 using System.Threading;
 
 namespace aPC.Client
@@ -19,6 +20,7 @@ namespace aPC.Client
   {
     public App()
     {
+
     }
 
     /// <summary>

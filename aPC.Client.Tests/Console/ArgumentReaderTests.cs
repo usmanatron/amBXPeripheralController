@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.IO;
-using aPC.Client;
+using aPC.Client.Console;
 
 namespace aPC.Client.Tests.Console
 {

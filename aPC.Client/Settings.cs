@@ -1,6 +1,8 @@
-﻿namespace aPC.Client
+﻿using aPC.Common.Client;
+
+namespace aPC.Client
 {
-  public class Settings
+  public class Settings : ISettings
   {
     public bool IsValid
     {

@@ -1,6 +1,8 @@
-﻿namespace aPC.Client.Disco
+﻿using aPC.Common.Client;
+
+namespace aPC.Client.Disco
 {
-  public class Settings
+  public class Settings : ISettings
   {
     public Settings()
     {

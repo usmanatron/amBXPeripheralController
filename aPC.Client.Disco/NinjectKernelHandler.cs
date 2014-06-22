@@ -9,7 +9,7 @@ namespace aPC.Client.Disco
 {
   class NinjectKernelHandler : NinjectKernelHandlerBase
   {
-    public NinjectKernelHandler(Settings xiSettings)
+    public NinjectKernelHandler(Settings xiSettings) : base (xiSettings)
     {
       SetupSettingsBinding(xiSettings);
     }
