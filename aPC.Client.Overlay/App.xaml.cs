@@ -17,26 +17,41 @@ namespace aPC.Client.Overlay
   /// </summary>
   public partial class App : Application
   {
+    /// <summary>
+    ///   Checks if arguments have been passed in - if this is the case,
+    ///   fallback to running in Console mode (i.e. suppress the UI).
+    /// </summary>
     protected override void OnStartup(StartupEventArgs e)
     {
       var lArguments = GetArguments();
 
       if (lArguments.Count > 0)
       {
-        var parentId = ParentProcessUtilities.GetParentProcess(Process.GetCurrentProcess().Id).Id;
-        AttachConsole(parentId);
-        
-        Console.WriteLine("test");
-        Client.Main(lArguments.ToArray());
-        Thread.Sleep(1000);
-        Shutdown(0);
+        RunInConsole(lArguments);
       }
-
-      int i = 1;
     }
 
-    // When retrieving command line arguments in this way, the first
-    // argument is always the name of the executable.
+    private void RunInConsole(List<string> xiArguments)
+    {
+      var parentId = ParentProcessUtilities.GetParentProcess(Process.GetCurrentProcess().Id).Id;
+
+      AllocConsole();
+
+      try
+      {
+        Client.Main(xiArguments.ToArray());
+      }
+      catch
+      {
+        Console.ReadLine();
+      }
+      Shutdown(0);
+    }
+
+    /// <remarks>
+    /// When retrieving command line arguments in this way, the first
+    /// argument is always the name of the executable.
+    /// </remarks>
     private List<string> GetArguments()
     {
       var lArgs = Environment.GetCommandLineArgs();
@@ -48,6 +63,6 @@ namespace aPC.Client.Overlay
     }
 
     [DllImport("Kernel32.dll")]
-    public static extern bool AttachConsole(int processId);
+    private static extern bool AllocConsole();
   }
 }

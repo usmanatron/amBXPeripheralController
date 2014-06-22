@@ -23,7 +23,6 @@ namespace aPC.Client
       catch (UsageException e)
       {
         e.DisplayUsage();
-        Environment.Exit(1);
         throw;
       }
     }
