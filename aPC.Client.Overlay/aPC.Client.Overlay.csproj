@@ -42,6 +42,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -59,6 +60,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Settings.cs" />
+    <Compile Include="UsageException.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -67,12 +70,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ArgumentReader.cs" />
+    <Compile Include="Client.cs" />
+    <Compile Include="ClientTask.cs" />
+    <Compile Include="Communication\NotificationClient.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NinjectKernelHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -101,9 +109,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\aPC.Client\aPC.Client.csproj">
-      <Project>{315aae4d-8524-4993-9d40-2c2e2ec1b50d}</Project>
-      <Name>aPC.Client</Name>
+    <ProjectReference Include="..\aPC.Common.Client\aPC.Common.Client.csproj">
+      <Project>{20941c53-9669-4bf2-b354-aff8023c1a1e}</Project>
+      <Name>aPC.Common.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\aPC.Common.Communication\aPC.Common.Communication.csproj">
+      <Project>{38537b40-b1fd-433b-b958-8a1b3c7b83d7}</Project>
+      <Name>aPC.Common.Communication</Name>
     </ProjectReference>
     <ProjectReference Include="..\aPC.Common\aPC.Common.csproj">
       <Project>{b6543e75-59af-4059-acf8-560e82bc72ce}</Project>
@@ -112,6 +124,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Settings\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Profiles\DesyncTest-Multiple.xml" />
+    <Resource Include="Profiles\DesyncTest.xml" />
+    <Resource Include="Profiles\Event.xml" />
+    <Resource Include="Profiles\EventFans.xml" />
+    <Resource Include="Profiles\RedVsBlue.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

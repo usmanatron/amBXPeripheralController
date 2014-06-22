@@ -39,7 +39,7 @@ namespace aPC.Client.Overlay
 
       try
       {
-        Client.Main(xiArguments.ToArray());
+        Client.ConsoleMain(xiArguments.ToArray());
       }
       catch
       {

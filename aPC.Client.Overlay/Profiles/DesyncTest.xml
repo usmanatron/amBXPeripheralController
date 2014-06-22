@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+A test event scene
+-->
+<amBXScene> 
+    <IsExclusive>true</IsExclusive>
+    <SceneType>Desync</SceneType>
+    <Frames>
+        <Frame>
+            <Length>500</Length>
+            <IsRepeated>true</IsRepeated>
+            <Lights>
+                <FadeTime>200</FadeTime>
+                <North>
+                    <Intensity>1</Intensity>
+                    <Red>1</Red>
+                    <Green>0</Green>
+                    <Blue>1</Blue>
+                </North>  
+            </Lights>
+        </Frame>
+        <Frame>
+            <Length>500</Length>
+            <IsRepeated>true</IsRepeated>
+            <Lights>
+                <FadeTime>200</FadeTime>
+                <North>
+                    <Intensity>1</Intensity>
+                    <Red>0</Red>
+                    <Green>1</Green>
+                    <Blue>0</Blue>
+                </North> 
+            </Lights>
+        </Frame>
+    </Frames>
+</amBXScene>

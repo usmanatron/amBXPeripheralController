@@ -84,7 +84,7 @@ namespace aPC.Client.Overlay
 
       var lArguments = new string[] { @"/I", (string)IntegratedSceneList.SelectedValue };
 
-      aPC.Client.Client.Main(lArguments);
+      Client.ConsoleMain(lArguments);
     }
 
   }
