@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2013 for Windows Desktop
 VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.Client", "aPC.Client\aPC.Client.csproj", "{315AAE4D-8524-4993-9D40-2C2E2EC1B50D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.Common", "aPC.Common\aPC.Common.csproj", "{B6543E75-59AF-4059-ACF8-560E82BC72CE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.Common.Communication", "aPC.Common.Communication\aPC.Common.Communication.csproj", "{38537B40-B1FD-433B-B958-8A1B3C7B83D7}"
@@ -52,16 +50,6 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{315AAE4D-8524-4993-9D40-2C2E2EC1B50D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{315AAE4D-8524-4993-9D40-2C2E2EC1B50D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{315AAE4D-8524-4993-9D40-2C2E2EC1B50D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{315AAE4D-8524-4993-9D40-2C2E2EC1B50D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{315AAE4D-8524-4993-9D40-2C2E2EC1B50D}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{315AAE4D-8524-4993-9D40-2C2E2EC1B50D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{315AAE4D-8524-4993-9D40-2C2E2EC1B50D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{315AAE4D-8524-4993-9D40-2C2E2EC1B50D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{315AAE4D-8524-4993-9D40-2C2E2EC1B50D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{315AAE4D-8524-4993-9D40-2C2E2EC1B50D}.Release|Win32.ActiveCfg = Release|Any CPU
 		{B6543E75-59AF-4059-ACF8-560E82BC72CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B6543E75-59AF-4059-ACF8-560E82BC72CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6543E75-59AF-4059-ACF8-560E82BC72CE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
