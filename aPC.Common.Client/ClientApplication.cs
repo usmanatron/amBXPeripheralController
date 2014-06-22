@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace aPC.Common.Client
 {
-  class ClientApplication
+  public class ClientApplication
   {
     public ISettings Settings;
     public NinjectKernelHandlerBase Kernel;
