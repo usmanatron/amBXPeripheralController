@@ -60,6 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Console\ConsoleRunner.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="UsageException.cs" />
     <Page Include="MainWindow.xaml">
@@ -70,7 +71,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ArgumentReader.cs" />
+    <Compile Include="Console\ArgumentReader.cs" />
     <Compile Include="ClientTask.cs" />
     <Compile Include="Communication\NotificationClient.cs" />
     <Compile Include="MainWindow.xaml.cs">

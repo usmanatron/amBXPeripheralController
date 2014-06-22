@@ -17,6 +17,10 @@ namespace aPC.Client
   /// </summary>
   public partial class App : Application
   {
+    public App()
+    {
+    }
+
     /// <summary>
     ///   Checks if arguments have been passed in - if this is the case,
     ///   fallback to running in Console mode (i.e. suppress the UI).
@@ -27,7 +31,9 @@ namespace aPC.Client
 
       if (lArguments.Count > 0)
       {
-        RunInConsole(lArguments);
+        var lRunner = new ConsoleRunner(lArguments);
+        lRunner.Run();
+        Shutdown(0);
       }
     }
 
@@ -44,35 +50,5 @@ namespace aPC.Client
         .Take(lArgs.Count() - 1)
         .ToList();
     }
-
-    private void RunInConsole(List<string> xiArguments)
-    {
-      AllocateConsole();
-      
-      try
-      {
-        //qqUMI This is duplicated in the MainWindow class - commonise?
-        // Also need to sort out DI properly...
-        var lSettings = new ArgumentReader(xiArguments).ParseArguments();
-        var lKernel = new NinjectKernelHandler(lSettings);
-        var lTask = lKernel.Get<ClientTask>();
-        lTask.Push();
-      }
-      catch (UsageException lException)
-      {
-        lException.DisplayUsage();
-        Console.ReadLine();
-      }
-      Shutdown(0);
-    }
-
-    private void AllocateConsole()
-    {
-      var parentId = ParentProcessUtilities.GetParentProcess(Process.GetCurrentProcess().Id).Id;
-      AllocConsole();
-    }
-
-    [DllImport("Kernel32.dll")]
-    private static extern bool AllocConsole();
   }
 }
