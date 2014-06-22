@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace aPC.Client.Overlay
+namespace aPC.Client
 {
   public class ArgumentReader
   {

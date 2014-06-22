@@ -64,6 +64,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\aPC.Client\aPC.Client.csproj">
+      <Project>{a4d3b184-053b-41ce-badb-d751d95abca2}</Project>
+      <Name>aPC.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\aPC.Common.Client.Tests\aPC.Common.Client.Tests.csproj">
       <Project>{c43479ea-8919-4ad4-8a85-c26145168afc}</Project>
       <Name>aPC.Common.Client.Tests</Name>

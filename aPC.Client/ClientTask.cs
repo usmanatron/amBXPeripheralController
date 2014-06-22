@@ -1,7 +1,7 @@
-﻿using aPC.Client.Overlay.Communication;
+﻿using aPC.Client.Communication;
 using aPC.Common.Communication;
 
-namespace aPC.Client.Overlay
+namespace aPC.Client
 {
   public class ClientTask
   {

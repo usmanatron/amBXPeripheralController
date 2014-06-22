@@ -10,7 +10,7 @@ using System.Windows;
 using aPC.Common;
 using System.Threading;
 
-namespace aPC.Client.Overlay
+namespace aPC.Client
 {
   /// <summary>
   /// Interaction logic for App.xaml

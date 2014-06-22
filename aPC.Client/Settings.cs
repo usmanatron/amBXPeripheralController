@@ -1,4 +1,4 @@
-﻿namespace aPC.Client.Overlay
+﻿namespace aPC.Client
 {
   public class Settings
   {

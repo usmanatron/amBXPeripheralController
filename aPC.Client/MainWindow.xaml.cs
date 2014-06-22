@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows;
 using aPC.Common;
 
-namespace aPC.Client.Overlay
+namespace aPC.Client
 {
   /// <summary>
   /// Interaction logic for MainWindow.xaml

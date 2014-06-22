@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace aPC.Client.Overlay
+namespace aPC.Client
 {
   public class Client
   {

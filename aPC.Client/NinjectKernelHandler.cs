@@ -1,8 +1,8 @@
-﻿using aPC.Client.Overlay.Communication;
+﻿using aPC.Client.Communication;
 using aPC.Common.Communication;
 using aPC.Common.Client;
 
-namespace aPC.Client.Overlay
+namespace aPC.Client
 {
   class NinjectKernelHandler : NinjectKernelHandlerBase
   {

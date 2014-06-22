@@ -1,7 +1,7 @@
 ﻿using aPC.Common.Client.Communication;
 using System.ServiceModel;
 
-namespace aPC.Client.Overlay.Communication
+namespace aPC.Client.Communication
 {
   public class NotificationClient : NotificationClientBase
   {
