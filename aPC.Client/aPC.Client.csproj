@@ -71,7 +71,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ArgumentReader.cs" />
-    <Compile Include="Client.cs" />
     <Compile Include="ClientTask.cs" />
     <Compile Include="Communication\NotificationClient.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -122,9 +121,7 @@
       <Name>aPC.Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Settings\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Profiles\DesyncTest-Multiple.xml" />
     <Resource Include="Profiles\DesyncTest.xml" />

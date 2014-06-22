@@ -6,7 +6,7 @@
     {
       get
       {
-        return string.IsNullOrEmpty(SceneData);
+        return !string.IsNullOrEmpty(SceneData);
       }
     }
 

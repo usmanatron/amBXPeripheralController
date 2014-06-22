@@ -15,6 +15,7 @@ namespace aPC.Client
     public MainWindow()
     {
       mSettings = new Settings();
+      mKernel = new NinjectKernelHandler(mSettings);
       InitializeComponent();
       PopulateSceneLists();
     }
@@ -95,9 +96,11 @@ namespace aPC.Client
         throw new ArgumentException("The information given is invalid");
       }
 
-      Client.ConsoleMain(mSettings);
+      var lTask = mKernel.Get<ClientTask>();
+      lTask.Push();
     }
 
-    private Settings mSettings;
+    private readonly Settings mSettings;
+    private NinjectKernelHandler mKernel;
   }
 }

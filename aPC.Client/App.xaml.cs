@@ -31,23 +31,6 @@ namespace aPC.Client
       }
     }
 
-    private void RunInConsole(List<string> xiArguments)
-    {
-      var parentId = ParentProcessUtilities.GetParentProcess(Process.GetCurrentProcess().Id).Id;
-
-      AllocConsole();
-
-      try
-      {
-        Client.ConsoleMain(xiArguments.ToArray());
-      }
-      catch
-      {
-        Console.ReadLine();
-      }
-      Shutdown(0);
-    }
-
     /// <remarks>
     /// When retrieving command line arguments in this way, the first
     /// argument is always the name of the executable.
@@ -55,11 +38,38 @@ namespace aPC.Client
     private List<string> GetArguments()
     {
       var lArgs = Environment.GetCommandLineArgs();
-      
+
       return lArgs
         .Skip(1)
         .Take(lArgs.Count() - 1)
         .ToList();
+    }
+
+    private void RunInConsole(List<string> xiArguments)
+    {
+      AllocateConsole();
+      
+      try
+      {
+        //qqUMI This is duplicated in the MainWindow class - commonise?
+        // Also need to sort out DI properly...
+        var lSettings = new ArgumentReader(xiArguments).ParseArguments();
+        var lKernel = new NinjectKernelHandler(lSettings);
+        var lTask = lKernel.Get<ClientTask>();
+        lTask.Push();
+      }
+      catch (UsageException lException)
+      {
+        lException.DisplayUsage();
+        Console.ReadLine();
+      }
+      Shutdown(0);
+    }
+
+    private void AllocateConsole()
+    {
+      var parentId = ParentProcessUtilities.GetParentProcess(Process.GetCurrentProcess().Id).Id;
+      AllocConsole();
     }
 
     [DllImport("Kernel32.dll")]
