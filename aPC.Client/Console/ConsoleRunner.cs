@@ -1,12 +1,7 @@
 ﻿using aPC.Common;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using aPC.Common.Client;
 using Ninject;
 
 namespace aPC.Client.Console
@@ -25,8 +20,8 @@ namespace aPC.Client.Console
 
       try
       {
-        var lTask = NinjectKernelHandler.Instance.Kernel.Get<ClientTask>();
-        lTask.Push();
+        var lTask = NinjectKernelHandler.Instance.Kernel.Get<SceneRunner>();
+        lTask.RunScene();
       }
       catch (UsageException lException)
       {
@@ -40,8 +35,6 @@ namespace aPC.Client.Console
       var parentId = ParentProcessUtilities.GetParentProcess(Process.GetCurrentProcess().Id).Id;
       AllocConsole();
     }
-
-    List<string> mArguments;
 
     [DllImport("Kernel32.dll")]
     private static extern bool AllocConsole();

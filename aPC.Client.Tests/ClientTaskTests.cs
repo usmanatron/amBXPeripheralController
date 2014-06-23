@@ -17,9 +17,9 @@ namespace aPC.Client.Tests
     public void IntegratedScene_PushedAppropriately()
     {
       var lSettings = GetSettings(true, "Scene_Name");
-      var lTask = new ClientTask(lSettings, mTestNotificationClient);
+      var lTask = new SceneRunner(lSettings, mTestNotificationClient);
 
-      lTask.Push();
+      lTask.RunScene();
 
       Assert.AreEqual(1, mTestNotificationClient.NumberOfIntegratedScenesPushed);
       Assert.AreEqual(0, mTestNotificationClient.NumberOfCustomScenesPushed);
@@ -30,9 +30,9 @@ namespace aPC.Client.Tests
     public void CustomScene_PushedAppropriately()
     {
       var lSettings = GetSettings(false, "CustomScene");
-      var lTask = new ClientTask(lSettings, mTestNotificationClient);
+      var lTask = new SceneRunner(lSettings, mTestNotificationClient);
 
-      lTask.Push();
+      lTask.RunScene();
 
       Assert.AreEqual(0, mTestNotificationClient.NumberOfIntegratedScenesPushed);
       Assert.AreEqual(1, mTestNotificationClient.NumberOfCustomScenesPushed);

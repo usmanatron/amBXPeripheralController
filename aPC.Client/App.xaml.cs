@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Diagnostics;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 using System.Windows;
 using aPC.Common;
 using aPC.Client.Console;
-using System.Threading;
 using aPC.Common.Client;
 
 namespace aPC.Client

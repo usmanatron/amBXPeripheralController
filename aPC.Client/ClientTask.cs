@@ -3,15 +3,15 @@ using aPC.Common.Communication;
 
 namespace aPC.Client
 {
-  public class ClientTask
+  public class SceneRunner
   {
-    public ClientTask(Settings xiSettings, INotificationClient xiNotificationClient)
+    public SceneRunner(Settings xiSettings, INotificationClient xiNotificationClient)
     {
       mNotificationClient = xiNotificationClient;
       mSettings = xiSettings;
     }
 
-    public void Push()
+    public void RunScene()
     {
       if (mSettings.IsIntegratedScene)
       {

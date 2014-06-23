@@ -18,7 +18,6 @@ namespace aPC.Client
     {
       Kernel.Bind<Settings>().ToConstant(Settings.Instance);
       Kernel.Bind<INotificationClient>().To<NotificationClient>();
-      Kernel.Bind<ConsoleRunner>().ToSelf();
     }
 
     public static NinjectKernelHandler Instance

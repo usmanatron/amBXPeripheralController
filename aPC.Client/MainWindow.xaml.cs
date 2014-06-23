@@ -98,8 +98,8 @@ namespace aPC.Client
         throw new ArgumentException("The information given is invalid");
       }
 
-      var lTask = mKernel.Kernel.Get<ClientTask>();
-      lTask.Push();
+      var lTask = mKernel.Kernel.Get<SceneRunner>();
+      lTask.RunScene();
     }
 
     private readonly Settings mSettings;
