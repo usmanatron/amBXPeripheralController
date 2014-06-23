@@ -62,7 +62,7 @@
     </ApplicationDefinition>
     <Compile Include="Console\ConsoleRunner.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="UsageException.cs" />
+    <Compile Include="Console\UsageException.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

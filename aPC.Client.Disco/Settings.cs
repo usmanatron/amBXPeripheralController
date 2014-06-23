@@ -2,7 +2,7 @@
 
 namespace aPC.Client.Disco
 {
-  public class Settings : ISettings
+  public class Settings
   {
     public Settings()
     {

@@ -6,6 +6,8 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using aPC.Common.Client;
+using Ninject;
 
 namespace aPC.Client.Console
 {
@@ -13,7 +15,8 @@ namespace aPC.Client.Console
   {
     public ConsoleRunner(List<string> xiArguments)
     {
-      mArguments = xiArguments;
+      var lReader = new ArgumentReader(xiArguments);
+      lReader.AddArgumentsToSettings();
     }
 
     public void Run()
@@ -22,11 +25,7 @@ namespace aPC.Client.Console
 
       try
       {
-        //qqUMI This is duplicated in the MainWindow class - commonise?
-        // Also need to sort out DI properly...
-        var lSettings = new ArgumentReader(mArguments).ParseArguments();
-        var lKernel = new NinjectKernelHandler(lSettings);
-        var lTask = lKernel.Get<ClientTask>();
+        var lTask = NinjectKernelHandler.Instance.Kernel.Get<ClientTask>();
         lTask.Push();
       }
       catch (UsageException lException)

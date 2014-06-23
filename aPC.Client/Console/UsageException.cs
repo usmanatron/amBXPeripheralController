@@ -1,7 +1,7 @@
 ﻿using aPC.Common.Client;
 using System;
 
-namespace aPC.Client
+namespace aPC.Client.Console
 {
   [Serializable]
   public class UsageException : UsageExceptionBase

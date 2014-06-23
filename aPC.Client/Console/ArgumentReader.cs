@@ -7,33 +7,30 @@ namespace aPC.Client.Console
   {
     public ArgumentReader(List<string> xiArguments)
     {
-      mArgs = xiArguments;
+      mLocalSettings = Settings.NewInstance;
+      ReadArguments(xiArguments);
     }
 
-    public Settings ParseArguments()
+    private void ReadArguments(List<string> xiArguments)
     {
-      if (mArgs.Count != 2)
+      if (xiArguments.Count != 2)
       {
         throw new UsageException("Unexpected number of arguments");
       }
 
-      var lSettings = new Settings();
-
-      switch (mArgs[0].ToLower())
+      switch (xiArguments[0].ToLower())
       {
         case @"/i":
-          lSettings.IsIntegratedScene = true;
-          lSettings.SceneData = mArgs[1];
+          mLocalSettings.IsIntegratedScene = true;
+          mLocalSettings.SceneData = xiArguments[1];
           break;
         case @"/f":
-          lSettings.IsIntegratedScene = false;
-          lSettings.SceneData = RetrieveFile(mArgs[1]);
+          mLocalSettings.IsIntegratedScene = false;
+          mLocalSettings.SceneData = RetrieveFile(xiArguments[1]);
           break;
         default:
           throw new UsageException("Unexpected first argument");
       }
-
-      return lSettings;
     }
 
     private string RetrieveFile(string xifilePath)
@@ -47,7 +44,7 @@ namespace aPC.Client.Console
       catch
       {
         // File not there / error
-        throw new UsageException("Input was not a valid path (a full path is required)");
+        throw new UsageException("Input was not a valid path");
       }
 
       using (var lReader = new StreamReader(lInputFilePath))
@@ -56,6 +53,12 @@ namespace aPC.Client.Console
       }
     }
 
-    private readonly List<string> mArgs;
+    public void AddArgumentsToSettings()
+    {
+      Settings.Instance.IsIntegratedScene = mLocalSettings.IsIntegratedScene;
+      Settings.Instance.SceneData = mLocalSettings.SceneData;
+    }
+
+    private Settings mLocalSettings;
   }
 }

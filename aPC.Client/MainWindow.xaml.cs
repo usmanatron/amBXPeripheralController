@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using aPC.Common;
+using aPC.Common.Client;
+using Ninject;
 
 namespace aPC.Client
 {
@@ -14,8 +16,8 @@ namespace aPC.Client
   {
     public MainWindow()
     {
-      mSettings = new Settings();
-      mKernel = new NinjectKernelHandler(mSettings);
+      mSettings = Settings.Instance;
+      mKernel = NinjectKernelHandler.Instance;
       InitializeComponent();
       PopulateSceneLists();
     }
@@ -96,7 +98,7 @@ namespace aPC.Client
         throw new ArgumentException("The information given is invalid");
       }
 
-      var lTask = mKernel.Get<ClientTask>();
+      var lTask = mKernel.Kernel.Get<ClientTask>();
       lTask.Push();
     }
 

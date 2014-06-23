@@ -1,18 +1,36 @@
 ﻿using aPC.Client.Communication;
 using aPC.Common.Communication;
 using aPC.Common.Client;
+using aPC.Client.Console;
+using Ninject;
 
 namespace aPC.Client
 {
-  class NinjectKernelHandler : NinjectKernelHandlerBase
+  public sealed class NinjectKernelHandler
   {
-    public NinjectKernelHandler(Settings xiSettings) : base (xiSettings)
+    private NinjectKernelHandler()
     {
+      Kernel = new StandardKernel();
+      AddBindings();
     }
 
-    protected override void SetupBindings()
+    private void AddBindings()
     {
-      mKernel.Bind<INotificationClient>().To<NotificationClient>();
+      Kernel.Bind<Settings>().ToConstant(Settings.Instance);
+      Kernel.Bind<INotificationClient>().To<NotificationClient>();
+      Kernel.Bind<ConsoleRunner>().ToSelf();
     }
+
+    public static NinjectKernelHandler Instance
+    {
+      get
+      {
+        return mInstance;
+      }
+    }
+
+    private static NinjectKernelHandler mInstance = new NinjectKernelHandler();
+
+    public StandardKernel Kernel;
   }
 }

@@ -45,9 +45,7 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientApplication.cs" />
     <Compile Include="Communication\NotificationClientBase.cs" />
-    <Compile Include="ISettings.cs" />
     <Compile Include="NinjectKernelHandlerBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UsageExceptionBase.cs" />

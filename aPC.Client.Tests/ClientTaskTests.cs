@@ -16,7 +16,7 @@ namespace aPC.Client.Tests
     [Test]
     public void IntegratedScene_PushedAppropriately()
     {
-      var lSettings = new Settings { IsIntegratedScene = true, SceneData = "Scene_Name" };
+      var lSettings = GetSettings(true, "Scene_Name");
       var lTask = new ClientTask(lSettings, mTestNotificationClient);
 
       lTask.Push();
@@ -29,7 +29,7 @@ namespace aPC.Client.Tests
     [Test]
     public void CustomScene_PushedAppropriately()
     {
-      var lSettings = new Settings { IsIntegratedScene = false, SceneData = "CustomScene" };
+      var lSettings = GetSettings(false, "CustomScene");
       var lTask = new ClientTask(lSettings, mTestNotificationClient);
 
       lTask.Push();
@@ -38,6 +38,17 @@ namespace aPC.Client.Tests
       Assert.AreEqual(1, mTestNotificationClient.NumberOfCustomScenesPushed);
       Assert.AreEqual("CustomScene", mTestNotificationClient.CustomScenesPushed[0]);
     }
+
+
+    private Settings GetSettings(bool xiIsIntegratedScene, string xiSceneData)
+    {
+      var lSettings = Settings.NewInstance;
+      lSettings.IsIntegratedScene = xiIsIntegratedScene;
+      lSettings.SceneData = xiSceneData;
+
+      return lSettings;
+    }
+
 
     private TestNotificationClient mTestNotificationClient;
   }

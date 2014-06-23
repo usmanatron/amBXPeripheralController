@@ -10,6 +10,7 @@ using System.Windows;
 using aPC.Common;
 using aPC.Client.Console;
 using System.Threading;
+using aPC.Common.Client;
 
 namespace aPC.Client
 {
@@ -18,11 +19,6 @@ namespace aPC.Client
   /// </summary>
   public partial class App : Application
   {
-    public App()
-    {
-
-    }
-
     /// <summary>
     ///   Checks if arguments have been passed in - if this is the case,
     ///   fallback to running in Console mode (i.e. suppress the UI).
