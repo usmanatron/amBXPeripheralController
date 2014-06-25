@@ -5,6 +5,8 @@ using aPC.Common;
 using Microsoft.Win32;
 using Ninject;
 using aPC.Client.Scene;
+using System.IO;
+using System.Windows.Controls;
 
 namespace aPC.Client
 {
@@ -39,13 +41,12 @@ namespace aPC.Client
       CustomSceneList.ItemsSource = mCustomScenes.Scenes.Keys;
     }
 
+    #region Integrated Scenes
+
     private void IntegratedSceneSelected(object sender, RoutedEventArgs e)
     {
       IntegratedSceneList.IsEnabled = true;
-      if (IntegratedSceneList.SelectedIndex > -1)
-      {
-        mSettings.Apply(true, (string)IntegratedSceneList.SelectedValue);
-      }
+      SceneSelectionChanged(IntegratedSceneList, mIntegratedScenes, true);
     }
 
     private void IntegratedSceneDeselected(object sender, RoutedEventArgs e)
@@ -55,16 +56,17 @@ namespace aPC.Client
 
     private void IntegratedSceneSelectionChanged(object sender, RoutedEventArgs e)
     {
-      mSettings.Apply(true, (string)IntegratedSceneList.SelectedValue);
+      SceneSelectionChanged(IntegratedSceneList, mIntegratedScenes, true);
     }
+
+    #endregion
+
+    #region Custom Scenes
 
     private void CustomSceneSelected(object sender, RoutedEventArgs e)
     {
       CustomSceneList.IsEnabled = true;
-      if (CustomSceneList.SelectedIndex > -1)
-      {
-        mSettings.Apply(false, mCustomScenes.Scenes[(string)CustomSceneList.SelectedValue]);
-      }
+      SceneSelectionChanged(CustomSceneList, mCustomScenes, false);
     }
 
     private void CustomSceneDeselected(object sender, RoutedEventArgs e)
@@ -79,12 +81,18 @@ namespace aPC.Client
         //var lFilename = GetFileFromDialog();
         MessageBox.Show("Not yet implemented!");
       }
-      mSettings.Apply(false, mCustomScenes.Scenes[(string)CustomSceneList.SelectedValue]);
+      SceneSelectionChanged(CustomSceneList, mCustomScenes, false);
     }
     
-    private void CloseClick(object sender, RoutedEventArgs e)
+
+    #endregion
+
+    private void SceneSelectionChanged(ComboBox xiSceneList, ISceneListing xiSceneListing, bool xiIsIntegratedScene)
     {
-      Application.Current.Shutdown();
+      if (xiSceneList.SelectedIndex > -1)
+      {
+        mSettings.Apply(xiIsIntegratedScene, xiSceneListing.Scenes[(string)xiSceneList.SelectedValue]);
+      }
     }
 
     private void RunClick(object sender, RoutedEventArgs e)
@@ -98,9 +106,9 @@ namespace aPC.Client
       lTask.RunScene();
     }
 
+    private readonly NinjectKernelHandler mKernel;
     private readonly Settings mSettings;
     private IntegratedListing mIntegratedScenes;
     private CustomListing mCustomScenes;
-    private readonly NinjectKernelHandler mKernel;
   }
 }
