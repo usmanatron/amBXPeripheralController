@@ -61,9 +61,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Console\ConsoleRunner.cs" />
-    <Compile Include="Scene\CustomSceneFileHandler.cs" />
+    <Compile Include="Scene\CustomFileHandler.cs" />
     <Compile Include="Scene\CustomListing.cs" />
-    <Compile Include="Scene\ICustomSceneFileHandler.cs" />
     <Compile Include="Scene\ISceneListing.cs" />
     <Compile Include="Scene\IntegratedListing.cs" />
     <Compile Include="Settings.cs" />

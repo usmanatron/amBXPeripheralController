@@ -6,11 +6,14 @@ namespace aPC.Client.Scene
 {
   class CustomListing : ISceneListing
   {
-    public CustomListing(ICustomSceneFileHandler xiFileHandler)
+    public CustomListing()
     {
       mBaseDirectory = Path.Combine(Environment.CurrentDirectory, "Profiles");
-      mFileHandler = xiFileHandler;
+      LoadSavedScenes();
+    }
 
+    public void Reload()
+    {
       LoadSavedScenes();
     }
 
@@ -37,7 +40,6 @@ namespace aPC.Client.Scene
     }
 
     private readonly string mBaseDirectory;
-    private readonly ICustomSceneFileHandler mFileHandler;
 
     public string BrowseItemName
     {

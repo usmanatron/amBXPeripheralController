@@ -19,7 +19,6 @@ namespace aPC.Client
     {
       Kernel.Bind<Settings>().ToSelf().InSingletonScope();
       Kernel.Bind<INotificationClient>().To<NotificationClient>();
-      Kernel.Bind<ICustomSceneFileHandler>().To<CustomSceneFileHandler>();
     }
 
     public static NinjectKernelHandler Instance

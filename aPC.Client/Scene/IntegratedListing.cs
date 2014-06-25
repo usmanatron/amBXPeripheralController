@@ -1,8 +1,6 @@
 ﻿using aPC.Common;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace aPC.Client.Scene
 {
@@ -13,12 +11,16 @@ namespace aPC.Client.Scene
       LoadScenes();
     }
 
+    public void Reload()
+    {
+      LoadScenes();
+    }
+
     private void LoadScenes()
     {
       Scenes = new Dictionary<string, string>();
     
-      var lScenes = new SceneAccessor()
-        .GetAllScenes()
+      var lScenes = new SceneAccessor().GetAllScenes()
         .Select(scene => scene.Key)
         .OrderBy(scene => scene);
 
