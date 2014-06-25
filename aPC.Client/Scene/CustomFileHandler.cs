@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Win32;
 
 namespace aPC.Client.Scene
 {
-  class CustomSceneFileHandler : ICustomSceneFileHandler
+  class CustomFileHandler
   {
     public string GetFilenameFromDialog()
     {
@@ -17,7 +17,12 @@ namespace aPC.Client.Scene
       return lDialog.FileName;
     }
 
-    public void Import()
+    public string LoadFile(string xiFilename)
+    {
+      throw new NotImplementedException();
+    }
+
+    public string ImportAndReturnNewPath(string xiFilename)
     {
       throw new NotImplementedException();
     }
