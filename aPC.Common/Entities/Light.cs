@@ -4,16 +4,16 @@ namespace aPC.Common.Entities
 {
   public class Light : IComponent
   {
-    [XmlAttribute]
+    [XmlElement]
     public float Intensity;
 
-    [XmlAttribute] 
+    [XmlElement] 
     public float Red;
 
-    [XmlAttribute] 
+    [XmlElement] 
     public float Green;
 
-    [XmlAttribute] 
+    [XmlElement] 
     public float Blue;
 
     public eComponentType ComponentType()

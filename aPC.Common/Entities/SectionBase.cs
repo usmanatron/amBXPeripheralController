@@ -4,7 +4,7 @@ namespace aPC.Common.Entities
 {
   public class SectionBase<T> where T : IComponent
   {
-    [XmlAttribute]
+    [XmlElement]
     public int FadeTime;
   }
 }

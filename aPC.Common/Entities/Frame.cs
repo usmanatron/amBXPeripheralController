@@ -4,12 +4,12 @@ namespace aPC.Common.Entities
 {
   public class Frame
   {
-    [XmlAttribute] 
+    [XmlElement] 
     public int Length;
 
     // Each frame can be set seperately.  the idea is that you can have a certain animation as a one off and
     // then certain parts don't show again.
-    [XmlAttribute]
+    [XmlElement]
     public bool IsRepeated;
 
     [XmlElement] 

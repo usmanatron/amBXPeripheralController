@@ -16,10 +16,10 @@ namespace aPC.Common.Entities
     // changes specified by this.
     // TODO: not yet implemented
     [DataMember]
-    [XmlAttribute]
+    [XmlElement]
     public bool IsExclusive;
 
-    [XmlAttribute]
+    [XmlElement]
     public eSceneType SceneType;
 
     /// <summary>
