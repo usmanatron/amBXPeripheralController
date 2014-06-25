@@ -3,6 +3,7 @@ using aPC.Common.Communication;
 using aPC.Common.Client;
 using aPC.Client.Console;
 using Ninject;
+using aPC.Client.Scene;
 
 namespace aPC.Client
 {
@@ -16,8 +17,9 @@ namespace aPC.Client
 
     private void AddBindings()
     {
-      Kernel.Bind<Settings>().ToConstant(Settings.Instance);
+      Kernel.Bind<Settings>().ToSelf().InSingletonScope();
       Kernel.Bind<INotificationClient>().To<NotificationClient>();
+      Kernel.Bind<ICustomSceneFileHandler>().To<CustomSceneFileHandler>();
     }
 
     public static NinjectKernelHandler Instance

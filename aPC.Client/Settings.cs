@@ -3,30 +3,22 @@
   /// <remarks>
   ///   Designed as a singleton, as there should only ever be one set of settings.
   /// </remarks>
-  public sealed class Settings
+  public class Settings
   {
-    private Settings()
-    {
+    public Settings() : this(default(bool), string.Empty)
+    { 
     }
 
-    public static Settings Instance
+    public Settings(bool xiIsIntegratedScene, string xiSceneData)
     {
-      get
-      {
-        return mInstance;
-      }
+      IsIntegratedScene = xiIsIntegratedScene;
+      SceneData = xiSceneData;
     }
 
-    /// <summary>
-    /// Used specifically when a new (separate) instance is required. For example,
-    /// when mimicking the structure of the Settings (e.g. when reading arguments).
-    /// </summary>
-    public static Settings NewInstance
+    public void Apply(bool xiIsIntegratedScene, string xiSceneData)
     {
-      get
-      {
-        return new Settings();
-      }
+      IsIntegratedScene = xiIsIntegratedScene;
+      SceneData = xiSceneData;
     }
 
     public bool IsValid
@@ -37,9 +29,7 @@
       }
     }
 
-    public bool IsIntegratedScene;
-    public string SceneData;
-
-    private static readonly Settings mInstance = new Settings();
+    public bool IsIntegratedScene { get; private set; }
+    public string SceneData { get; private set; }
   }
 }

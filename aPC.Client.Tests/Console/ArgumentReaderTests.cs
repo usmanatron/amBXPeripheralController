@@ -56,8 +56,9 @@ namespace aPC.Client.Tests.Console
 
     private Settings GetSettingsFromArguments(string[] xiArguments)
     {
-      new ArgumentReader(xiArguments.ToList()).AddArgumentsToSettings();
-      return Settings.Instance;
+      var lSettings = new Settings();
+      new ArgumentReader(xiArguments.ToList()).AddArgumentsToSettings(lSettings);
+      return lSettings;
     }
   }
 }

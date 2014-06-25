@@ -7,7 +7,7 @@ namespace aPC.Client.Console
   {
     public ArgumentReader(List<string> xiArguments)
     {
-      mLocalSettings = Settings.NewInstance;
+      mLocalSettings = new Settings();
       ReadArguments(xiArguments);
     }
 
@@ -21,12 +21,10 @@ namespace aPC.Client.Console
       switch (xiArguments[0].ToLower())
       {
         case @"/i":
-          mLocalSettings.IsIntegratedScene = true;
-          mLocalSettings.SceneData = xiArguments[1];
+          mLocalSettings.Apply(true, xiArguments[1]);
           break;
         case @"/f":
-          mLocalSettings.IsIntegratedScene = false;
-          mLocalSettings.SceneData = RetrieveFile(xiArguments[1]);
+          mLocalSettings.Apply(false, RetrieveFile(xiArguments[1]));
           break;
         default:
           throw new UsageException("Unexpected first argument");
@@ -53,10 +51,9 @@ namespace aPC.Client.Console
       }
     }
 
-    public void AddArgumentsToSettings()
+    public void AddArgumentsToSettings(Settings xiSettings)
     {
-      Settings.Instance.IsIntegratedScene = mLocalSettings.IsIntegratedScene;
-      Settings.Instance.SceneData = mLocalSettings.SceneData;
+      xiSettings.Apply(mLocalSettings.IsIntegratedScene, mLocalSettings.SceneData);
     }
 
     private Settings mLocalSettings;

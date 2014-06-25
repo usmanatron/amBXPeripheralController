@@ -10,8 +10,9 @@ namespace aPC.Client.Console
   {
     public ConsoleRunner(List<string> xiArguments)
     {
+      mKernel = NinjectKernelHandler.Instance.Kernel;
       var lReader = new ArgumentReader(xiArguments);
-      lReader.AddArgumentsToSettings();
+      lReader.AddArgumentsToSettings(mKernel.Get<Settings>());
     }
 
     public void Run()
@@ -20,7 +21,7 @@ namespace aPC.Client.Console
 
       try
       {
-        var lTask = NinjectKernelHandler.Instance.Kernel.Get<SceneRunner>();
+        var lTask = mKernel.Get<SceneRunner>();
         lTask.RunScene();
       }
       catch (UsageException lException)
@@ -38,5 +39,7 @@ namespace aPC.Client.Console
 
     [DllImport("Kernel32.dll")]
     private static extern bool AllocConsole();
+
+    private StandardKernel mKernel;
   }
 }

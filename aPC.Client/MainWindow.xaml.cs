@@ -15,8 +15,8 @@ namespace aPC.Client
   {
     public MainWindow()
     {
-      mSettings = Settings.Instance;
       mKernel = NinjectKernelHandler.Instance;
+      mSettings = mKernel.Kernel.Get<Settings>();
       InitializeComponent();
       PopulateSceneLists();
     }
@@ -44,7 +44,7 @@ namespace aPC.Client
       IntegratedSceneList.IsEnabled = true;
       if (IntegratedSceneList.SelectedIndex > -1)
       {
-        UpdateSettings(true, (string) IntegratedSceneList.SelectedValue);
+        mSettings.Apply(true, (string)IntegratedSceneList.SelectedValue);
       }
     }
 
@@ -55,7 +55,7 @@ namespace aPC.Client
 
     private void IntegratedSceneSelectionChanged(object sender, RoutedEventArgs e)
     {
-      UpdateSettings(true, (string) IntegratedSceneList.SelectedValue);
+      mSettings.Apply(true, (string)IntegratedSceneList.SelectedValue);
     }
 
     private void CustomSceneSelected(object sender, RoutedEventArgs e)
@@ -63,7 +63,7 @@ namespace aPC.Client
       CustomSceneList.IsEnabled = true;
       if (CustomSceneList.SelectedIndex > -1)
       {
-        UpdateSettings(false, mCustomScenes.Scenes[(string) CustomSceneList.SelectedValue]);
+        mSettings.Apply(false, mCustomScenes.Scenes[(string)CustomSceneList.SelectedValue]);
       }
     }
 
@@ -79,15 +79,7 @@ namespace aPC.Client
         //var lFilename = GetFileFromDialog();
         MessageBox.Show("Not yet implemented!");
       }
-      UpdateSettings(false, mCustomScenes.Scenes[(string)CustomSceneList.SelectedValue]);
-    }
-
-    
-
-    private void UpdateSettings(bool xiIsintegratedScene, string xiSceneData)
-    {
-      mSettings.IsIntegratedScene = xiIsintegratedScene;
-      mSettings.SceneData = xiSceneData;
+      mSettings.Apply(false, mCustomScenes.Scenes[(string)CustomSceneList.SelectedValue]);
     }
     
     private void CloseClick(object sender, RoutedEventArgs e)
