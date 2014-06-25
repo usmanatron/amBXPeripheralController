@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using aPC.Common;
-using aPC.Common.Client;
+using Microsoft.Win32;
 using Ninject;
 
 namespace aPC.Client
@@ -40,14 +38,17 @@ namespace aPC.Client
 
     private void PopulateCustomList()
     {
-      var lScenes = new List<string> { mBrowse };
-      CustomSceneList.ItemsSource = lScenes;
+      mCustomScenes = new CustomSceneListing();
+      CustomSceneList.ItemsSource = mCustomScenes.Scenes.Keys;
     }
 
     private void IntegratedSceneSelected(object sender, RoutedEventArgs e)
     {
       IntegratedSceneList.IsEnabled = true;
-      mSettings.IsIntegratedScene = true;
+      if (IntegratedSceneList.SelectedIndex > -1)
+      {
+        UpdateSettings(true, (string) IntegratedSceneList.SelectedValue);
+      }
     }
 
     private void IntegratedSceneDeselected(object sender, RoutedEventArgs e)
@@ -57,13 +58,16 @@ namespace aPC.Client
 
     private void IntegratedSceneSelectionChanged(object sender, RoutedEventArgs e)
     {
-      mSettings.SceneData = (string)IntegratedSceneList.SelectedValue;
+      UpdateSettings(true, (string) IntegratedSceneList.SelectedValue);
     }
 
     private void CustomSceneSelected(object sender, RoutedEventArgs e)
     {
       CustomSceneList.IsEnabled = true;
-      mSettings.IsIntegratedScene = false;
+      if (CustomSceneList.SelectedIndex > -1)
+      {
+        UpdateSettings(false, mCustomScenes.Scenes[(string) CustomSceneList.SelectedValue]);
+      }
     }
 
     private void CustomSceneDeselected(object sender, RoutedEventArgs e)
@@ -73,14 +77,22 @@ namespace aPC.Client
 
     private void CustomSceneSelectionChanged(object sender, RoutedEventArgs e)
     {
-      if ((string)CustomSceneList.SelectedValue == mBrowse)
+      if ((string)CustomSceneList.SelectedValue == mCustomScenes.BrowseItemName)
       {
+        //var lFilename = GetFileFromDialog();
         MessageBox.Show("Not yet implemented!");
       }
+      UpdateSettings(false, mCustomScenes.Scenes[(string)CustomSceneList.SelectedValue]);
     }
 
-    private const string mBrowse = "<Browse...>";
+    
 
+    private void UpdateSettings(bool xiIsintegratedScene, string xiSceneData)
+    {
+      mSettings.IsIntegratedScene = xiIsintegratedScene;
+      mSettings.SceneData = xiSceneData;
+    }
+    
     private void CloseClick(object sender, RoutedEventArgs e)
     {
       Application.Current.Shutdown();
@@ -88,11 +100,6 @@ namespace aPC.Client
 
     private void RunClick(object sender, RoutedEventArgs e)
     {
-      if (!mSettings.IsIntegratedScene)
-      { 
-        throw new NotImplementedException();
-      }
-
       if (!mSettings.IsValid)
       {
         throw new ArgumentException("The information given is invalid");
@@ -103,6 +110,7 @@ namespace aPC.Client
     }
 
     private readonly Settings mSettings;
-    private NinjectKernelHandler mKernel;
+    private CustomSceneListing mCustomScenes;
+    private readonly NinjectKernelHandler mKernel;
   }
 }
