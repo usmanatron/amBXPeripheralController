@@ -78,12 +78,29 @@ namespace aPC.Client
     {
       if ((string)CustomSceneList.SelectedValue == mCustomScenes.BrowseItemName)
       {
-        //var lFilename = GetFileFromDialog();
-        MessageBox.Show("Not yet implemented!");
+        GetCustomSceneNotKnown();
       }
       SceneSelectionChanged(CustomSceneList, mCustomScenes, false);
     }
-    
+
+    //qqUMI rename
+    private void GetCustomSceneNotKnown()
+    {
+      var lHandler = new CustomFileHandler();
+      var lFilename = lHandler.GetFilenameFromDialog();
+      var lKeepScene = MessageBox.Show("Do you want to store this scene for future use?", "Store for later?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+      if (lKeepScene == MessageBoxResult.Yes)
+      {
+        lHandler.ImportAndReturnNewPath(lFilename);
+        //qqUMI need to reload the dropdown on the UI, and then select it!
+        mCustomScenes.Reload();
+        
+      }
+      
+      var lFileContents = File.ReadAllText(lFilename);
+      CustomSceneList.SelectedValue = lFileContents;
+    }
 
     #endregion
 
