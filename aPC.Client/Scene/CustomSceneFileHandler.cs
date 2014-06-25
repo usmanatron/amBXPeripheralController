@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 
-namespace aPC.Client
+namespace aPC.Client.Scene
 {
-  class CustomSceneFileHandler
+  class CustomSceneFileHandler : ICustomSceneFileHandler
   {
     public string GetFilenameFromDialog()
     {

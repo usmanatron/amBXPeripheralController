@@ -61,8 +61,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Console\ConsoleRunner.cs" />
-    <Compile Include="CustomSceneFileHandler.cs" />
-    <Compile Include="CustomSceneListing.cs" />
+    <Compile Include="Scene\CustomSceneFileHandler.cs" />
+    <Compile Include="Scene\CustomListing.cs" />
+    <Compile Include="Scene\ICustomSceneFileHandler.cs" />
+    <Compile Include="Scene\ISceneListing.cs" />
+    <Compile Include="Scene\IntegratedListing.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Console\UsageException.cs" />
     <Page Include="MainWindow.xaml">

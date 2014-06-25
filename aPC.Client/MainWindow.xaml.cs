@@ -4,6 +4,7 @@ using System.Windows;
 using aPC.Common;
 using Microsoft.Win32;
 using Ninject;
+using aPC.Client.Scene;
 
 namespace aPC.Client
 {
@@ -28,17 +29,13 @@ namespace aPC.Client
 
     private void PopulateIntegratedList()
     {
-      var lScenes = new SceneAccessor()
-        .GetAllScenes()
-        .Select(scene => scene.Key)
-        .OrderBy(scene => scene);
-
-      IntegratedSceneList.ItemsSource = lScenes;
+      mIntegratedScenes = mKernel.Kernel.Get<IntegratedListing>();
+      IntegratedSceneList.ItemsSource = mIntegratedScenes.Scenes.Keys;
     }
 
     private void PopulateCustomList()
     {
-      mCustomScenes = new CustomSceneListing();
+      mCustomScenes = mKernel.Kernel.Get<CustomListing>();
       CustomSceneList.ItemsSource = mCustomScenes.Scenes.Keys;
     }
 
@@ -110,7 +107,8 @@ namespace aPC.Client
     }
 
     private readonly Settings mSettings;
-    private CustomSceneListing mCustomScenes;
+    private IntegratedListing mIntegratedScenes;
+    private CustomListing mCustomScenes;
     private readonly NinjectKernelHandler mKernel;
   }
 }

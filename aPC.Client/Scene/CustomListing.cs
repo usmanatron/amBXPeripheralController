@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace aPC.Client
+namespace aPC.Client.Scene
 {
-  class CustomSceneListing
+  class CustomListing : ISceneListing
   {
-    public CustomSceneListing()
+    public CustomListing(ICustomSceneFileHandler xiFileHandler)
     {
       mBaseDirectory = Path.Combine(Environment.CurrentDirectory, "Profiles");
-      mFileHandler = new CustomSceneFileHandler();
+      mFileHandler = xiFileHandler;
 
       LoadSavedScenes();
     }
@@ -36,12 +36,17 @@ namespace aPC.Client
       return xiFullFilename.Substring(lFistCharAfterLastSlash, lFilenameLength);
     }
 
-
-
     private readonly string mBaseDirectory;
-    private readonly CustomSceneFileHandler mFileHandler;
+    private readonly ICustomSceneFileHandler mFileHandler;
 
-    public string BrowseItemName = "<Browse...>";
+    public string BrowseItemName
+    {
+      get
+      {
+        return "<Browse...>";
+      }
+    }
+
     public Dictionary<string, string> Scenes { get; private set; }
   }
 }
