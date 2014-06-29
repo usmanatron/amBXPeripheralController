@@ -11,11 +11,6 @@ namespace aPC.Client.Scene
       LoadSavedScenes();
     }
 
-    public void Reload()
-    {
-      LoadSavedScenes();
-    }
-
     private void LoadSavedScenes()
     {
       Scenes = new Dictionary<string, string>();
