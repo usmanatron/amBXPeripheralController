@@ -5,6 +5,7 @@ using System.Windows;
 using aPC.Common;
 using aPC.Client.Console;
 using aPC.Common.Client;
+using System.IO;
 
 namespace aPC.Client
 {
@@ -19,6 +20,8 @@ namespace aPC.Client
     /// </summary>
     protected override void OnStartup(StartupEventArgs e)
     {
+      AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+
       var lArguments = GetArguments();
 
       if (lArguments.Count > 0)
@@ -27,6 +30,12 @@ namespace aPC.Client
         lRunner.Run();
         Shutdown(0);
       }
+    }
+
+    private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+    {
+      var lFilePath = Path.Combine(Environment.CurrentDirectory, "Exception.log");
+      System.IO.File.WriteAllText(lFilePath, e.ExceptionObject.ToString());
     }
 
     /// <remarks>
