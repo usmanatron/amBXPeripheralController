@@ -26,6 +26,19 @@ namespace aPC.Client.Scene
       }
     }
 
+    public IEnumerable<string> DropdownListing
+    {
+      get
+      {
+        return Scenes.Keys;
+      }
+    }
+
+    public string GetValue(string xiKey)
+    {
+      return Scenes[xiKey];
+    }
+
     public string BrowseItemName 
     {
       get
@@ -36,5 +49,6 @@ namespace aPC.Client.Scene
 
     public Dictionary<string, string> Scenes { get; private set; }
     private SceneAccessor mAccessor;
+
   }
 }

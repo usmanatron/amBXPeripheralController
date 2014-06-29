@@ -33,13 +33,13 @@ namespace aPC.Client
     private void PopulateIntegratedList()
     {
       mIntegratedScenes = mKernel.Kernel.Get<IntegratedListing>();
-      IntegratedSceneList.ItemsSource = mIntegratedScenes.Scenes.Keys;
+      IntegratedSceneList.ItemsSource = mIntegratedScenes.DropdownListing;
     }
 
     private void PopulateCustomList()
     {
       mCustomScenes = mKernel.Kernel.Get<CustomListing>();
-      CustomSceneList.ItemsSource = mCustomScenes.Scenes.Keys;
+      CustomSceneList.ItemsSource = mCustomScenes.DropdownListing;
     }
 
     #region Integrated Scenes
@@ -89,7 +89,7 @@ namespace aPC.Client
 
     private void ReloadCustomDropdown(string xiNewFile)
     {
-      CustomSceneList.ItemsSource = mCustomScenes.Scenes.Keys;
+      CustomSceneList.ItemsSource = mCustomScenes.DropdownListing;
       CustomSceneList.Text = xiNewFile;
     }
 
@@ -99,7 +99,7 @@ namespace aPC.Client
     {
       if (xiSceneList.SelectedIndex > -1)
       {
-        mSettings.Apply(xiIsIntegratedScene, xiSceneListing.Scenes[(string)xiSceneList.SelectedValue]);
+        mSettings.Apply(xiIsIntegratedScene, xiSceneListing.GetValue((string)xiSceneList.SelectedValue));
       }
     }
 
@@ -116,7 +116,7 @@ namespace aPC.Client
 
     private readonly NinjectKernelHandler mKernel;
     private readonly Settings mSettings;
-    private IntegratedListing mIntegratedScenes;
-    private CustomListing mCustomScenes;
+    private ISceneListing mIntegratedScenes;
+    private ISceneListing mCustomScenes;
   }
 }

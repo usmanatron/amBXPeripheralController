@@ -25,6 +25,18 @@ namespace aPC.Client.Scene
       Scenes.Add(BrowseItemName, "");
     }
 
+    public IEnumerable<string> DropdownListing
+    {
+      get
+      {
+        return Scenes.Keys;
+      }
+    }
+
+    public string GetValue(string xiKey)
+    {
+      return Scenes[xiKey];
+    }
     public void AddScene(string xiKey, string xiValue)
     {
       Scenes.Add(xiKey, xiValue);

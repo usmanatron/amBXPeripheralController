@@ -6,6 +6,8 @@ namespace aPC.Client.Scene
   {
     string BrowseItemName { get; }
 
-    Dictionary<string, string> Scenes { get; }
+    IEnumerable<string> DropdownListing { get; }
+
+    string GetValue(string xiKey);
   }
 }
