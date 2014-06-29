@@ -41,21 +41,14 @@ namespace aPC.Client.Scene
       return lDialog.FileName;
     }
 
-    public string LoadFile(string xiFilename)
-    {
-      throw new NotImplementedException();
-    }
-
     /// <summary>
-    /// 
+    ///   Import the given file, after doing a couple of checks.
     /// </summary>
-    /// <param name="xiFilename"></param>
     /// <returns>True if the file was successfully imported.</returns>
     public bool ImportFile(string xiFilename)
     {
       if (mCustomListing.Scenes.Keys.Any(scene => scene == xiFilename))
       {
-        // Check if you want to rename it
         var lOverwrite = MessageBox.Show("A scene with this filename already exists and will be overwritten.  Do you want to continue?",
                                          "Overwrite file?", 
                                          MessageBoxButton.YesNo, 
@@ -63,7 +56,7 @@ namespace aPC.Client.Scene
 
         if (lOverwrite != MessageBoxResult.Yes)
         {
-          //qqUMI This isn't currently honoured!
+          // Bail out
           return false;
         }
       }

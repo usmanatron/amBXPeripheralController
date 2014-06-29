@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Windows;
 using aPC.Common;
-using Microsoft.Win32;
 using Ninject;
 using aPC.Client.Scene;
 using System.IO;
