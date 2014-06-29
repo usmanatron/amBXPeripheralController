@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace aPC.Client.Tests
 {
   [TestFixture]
-  class ClientTaskTests
+  class SceneRunnerTests
   {
     [SetUp]
     public void Setup()

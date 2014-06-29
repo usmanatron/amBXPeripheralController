@@ -77,7 +77,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Console\ArgumentReader.cs" />
-    <Compile Include="ClientTask.cs" />
+    <Compile Include="SceneRunner.cs" />
     <Compile Include="Communication\NotificationClient.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
