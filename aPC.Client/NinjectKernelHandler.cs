@@ -19,6 +19,9 @@ namespace aPC.Client
     {
       Kernel.Bind<Settings>().ToSelf().InSingletonScope();
       Kernel.Bind<INotificationClient>().To<NotificationClient>();
+
+      Kernel.Bind<IntegratedListing>().ToSelf().InSingletonScope();
+      Kernel.Bind<CustomListing>().ToSelf().InSingletonScope();
     }
 
     public static NinjectKernelHandler Instance

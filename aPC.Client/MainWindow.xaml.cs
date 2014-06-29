@@ -7,6 +7,7 @@ using Ninject;
 using aPC.Client.Scene;
 using System.IO;
 using System.Windows.Controls;
+using System.Collections.Generic;
 
 namespace aPC.Client
 {
@@ -78,28 +79,18 @@ namespace aPC.Client
     {
       if ((string)CustomSceneList.SelectedValue == mCustomScenes.BrowseItemName)
       {
-        GetCustomSceneNotKnown();
+        var lFileHandler = mKernel.Kernel.Get<CustomFileHandler>();
+        var lNewFile = lFileHandler.AddNewFileAndUpdateListing();
+        ReloadCustomDropdown(lNewFile);
+          
       }
       SceneSelectionChanged(CustomSceneList, mCustomScenes, false);
     }
 
-    //qqUMI rename
-    private void GetCustomSceneNotKnown()
+    private void ReloadCustomDropdown(string xiNewFile)
     {
-      var lHandler = new CustomFileHandler();
-      var lFilename = lHandler.GetFilenameFromDialog();
-      var lKeepScene = MessageBox.Show("Do you want to store this scene for future use?", "Store for later?", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-      if (lKeepScene == MessageBoxResult.Yes)
-      {
-        lHandler.ImportAndReturnNewPath(lFilename);
-        //qqUMI need to reload the dropdown on the UI, and then select it!
-        mCustomScenes.Reload();
-        
-      }
-      
-      var lFileContents = File.ReadAllText(lFilename);
-      CustomSceneList.SelectedValue = lFileContents;
+      CustomSceneList.ItemsSource = mCustomScenes.Scenes.Keys;
+      CustomSceneList.Text = xiNewFile;
     }
 
     #endregion
