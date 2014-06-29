@@ -6,8 +6,9 @@ namespace aPC.Client.Scene
 {
   class IntegratedListing : ISceneListing
   {
-    public IntegratedListing()
+    public IntegratedListing(SceneAccessor xiSceneAccessor)
     {
+      mAccessor = xiSceneAccessor;
       LoadScenes();
     }
 
@@ -20,7 +21,7 @@ namespace aPC.Client.Scene
     {
       Scenes = new Dictionary<string, string>();
     
-      var lScenes = new SceneAccessor().GetAllScenes()
+      var lScenes = mAccessor.GetAllScenes()
         .Select(scene => scene.Key)
         .OrderBy(scene => scene);
 
@@ -39,5 +40,6 @@ namespace aPC.Client.Scene
     }
 
     public Dictionary<string, string> Scenes { get; private set; }
+    private SceneAccessor mAccessor;
   }
 }
