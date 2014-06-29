@@ -19,6 +19,10 @@ namespace aPC.Client.Scene
     public string AddNewFileAndUpdateListing()
     {
       var lFullFilePath = GetFilenameFromDialog();
+      if (lFullFilePath == string.Empty)
+      {
+        return string.Empty;
+      }
       
       var lKeepScene = MessageBox.Show("Do you want to store this scene for future use?", "Store for later?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -37,6 +41,7 @@ namespace aPC.Client.Scene
     {
       var lDialog = new OpenFileDialog();
       lDialog.Multiselect = false;
+      lDialog.Filter = "Xml Files (*.xml)|*.xml";
       lDialog.ShowDialog();
       return lDialog.FileName;
     }
@@ -61,9 +66,9 @@ namespace aPC.Client.Scene
         }
       }
 
-      System.IO.File.Copy(xiFilename, Profiles.Directory);
-
-      throw new NotImplementedException();
+      var lTargetFullFilePath = Path.Combine(Profiles.Directory, Profiles.GetFilenameWithoutExtension(xiFilename) + ".xml");
+      File.Copy(xiFilename, lTargetFullFilePath);
+      return true;
     }
 
     /// <summary>
