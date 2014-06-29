@@ -66,9 +66,22 @@ namespace aPC.Client.Scene
       throw new NotImplementedException();
     }
 
-    public void Delete(string xiFilename)
+    /// <summary>
+    /// Delete the file with the given name
+    /// </summary>
+    /// <param name="xiFilename"></param>
+    public void Delete(string xiKey)
     {
-      throw new NotImplementedException();
+      var lConfirmDeletion = MessageBox.Show("Are you sure you want to delete this file?",
+                                             "Delete file?",
+                                             MessageBoxButton.YesNo,
+                                             MessageBoxImage.Question);
+      if (lConfirmDeletion != MessageBoxResult.Yes)
+      {
+        return;
+      }
+
+      File.Delete(Path.Combine(Profiles.Directory, Profiles.GetFilenameWithoutExtension(xiKey) + ".xml"));
     }
 
     private CustomListing mCustomListing;
