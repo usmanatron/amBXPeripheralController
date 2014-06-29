@@ -8,7 +8,6 @@ namespace aPC.Client.Scene
   {
     public CustomListing()
     {
-      mBaseDirectory = Path.Combine(Environment.CurrentDirectory, "Profiles");
       LoadSavedScenes();
     }
 
@@ -20,26 +19,21 @@ namespace aPC.Client.Scene
     private void LoadSavedScenes()
     {
       Scenes = new Dictionary<string, string>();
-      var lFiles = Directory.EnumerateFiles(mBaseDirectory);
+      var lFiles = Directory.EnumerateFiles(Profiles.Directory);
 
       foreach (var lFile in lFiles)
       {
-        Scenes.Add(StripPathAndExtension(lFile), File.ReadAllText(lFile));
+        AddScene(Profiles.GetFilenameWithoutExtension(lFile), File.ReadAllText(lFile));
       }
 
       // Finally add a "browse" choice to select you're own scene
       Scenes.Add(BrowseItemName, "");
     }
 
-    private string StripPathAndExtension(string xiFullFilename)
+    public void AddScene(string xiKey, string xiValue)
     {
-      var lFistCharAfterLastSlash = xiFullFilename.LastIndexOf(@"\", StringComparison.Ordinal) + 1;
-      const int lXmlExtensionLength = 4;
-      var lFilenameLength = xiFullFilename.Length - lFistCharAfterLastSlash - lXmlExtensionLength;
-      return xiFullFilename.Substring(lFistCharAfterLastSlash, lFilenameLength);
+      Scenes.Add(xiKey, xiValue);
     }
-
-    private readonly string mBaseDirectory;
 
     public string BrowseItemName
     {
