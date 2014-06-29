@@ -15,7 +15,7 @@
       SceneData = xiSceneData;
     }
 
-    public void Apply(bool xiIsIntegratedScene, string xiSceneData)
+    public void Update(bool xiIsIntegratedScene, string xiSceneData)
     {
       IsIntegratedScene = xiIsIntegratedScene;
       SceneData = xiSceneData;

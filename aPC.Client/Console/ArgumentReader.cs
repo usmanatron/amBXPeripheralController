@@ -21,10 +21,10 @@ namespace aPC.Client.Console
       switch (xiArguments[0].ToLower())
       {
         case @"/i":
-          mLocalSettings.Apply(true, xiArguments[1]);
+          mLocalSettings.Update(true, xiArguments[1]);
           break;
         case @"/f":
-          mLocalSettings.Apply(false, RetrieveFile(xiArguments[1]));
+          mLocalSettings.Update(false, RetrieveFile(xiArguments[1]));
           break;
         default:
           throw new UsageException("Unexpected first argument");
@@ -53,7 +53,7 @@ namespace aPC.Client.Console
 
     public void AddArgumentsToSettings(Settings xiSettings)
     {
-      xiSettings.Apply(mLocalSettings.IsIntegratedScene, mLocalSettings.SceneData);
+      xiSettings.Update(mLocalSettings.IsIntegratedScene, mLocalSettings.SceneData);
     }
 
     private Settings mLocalSettings;

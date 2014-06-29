@@ -98,7 +98,7 @@ namespace aPC.Client
     {
       if (xiSceneList.SelectedIndex > -1)
       {
-        mSettings.Apply(xiIsIntegratedScene, xiSceneListing.GetValue((string)xiSceneList.SelectedValue));
+        mSettings.Update(xiIsIntegratedScene, xiSceneListing.GetValue((string)xiSceneList.SelectedValue));
       }
     }
 
