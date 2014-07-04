@@ -62,6 +62,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Console\ConsoleRunner.cs" />
+    <Compile Include="HostnameInput.xaml.cs">
+      <DependentUpon>HostnameInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HostnameUpdater.cs" />
     <Compile Include="Scene\CustomFileHandler.cs" />
     <Compile Include="Scene\CustomListing.cs" />
     <Compile Include="Scene\ISceneListing.cs" />
@@ -69,6 +73,10 @@
     <Compile Include="Scene\ProfilesStore.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Console\UsageException.cs" />
+    <Page Include="HostnameInput.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

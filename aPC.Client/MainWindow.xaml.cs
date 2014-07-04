@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Windows;
 using Ninject;
 using aPC.Client.Scene;
@@ -17,6 +18,7 @@ namespace aPC.Client
       mSettings = mKernel.Kernel.Get<Settings>();
       InitializeComponent();
       PopulateSceneLists();
+      PopulateHostname();
     }
 
     private void PopulateSceneLists()
@@ -36,6 +38,27 @@ namespace aPC.Client
       mCustomScenes = mKernel.Kernel.Get<CustomListing>();
       CustomSceneList.ItemsSource = mCustomScenes.DropdownListing;
     }
+
+    private void PopulateHostname()
+    {
+      mHostnameUpdater = mKernel.Kernel.Get<HostnameUpdater>();
+      UpdateHostnameContent();
+    }
+
+    #region Hostname selection \ update
+
+    private void UpdateHostnameContent()
+    {
+      Hostname.Content = mHostnameUpdater.Get();
+    }
+
+    public void ChangeHostnameClick(object sender, RoutedEventArgs e)
+    {
+      mHostnameUpdater.Update();
+      UpdateHostnameContent();
+    }
+
+    #endregion
 
     #region Integrated Scenes
 
@@ -115,5 +138,6 @@ namespace aPC.Client
     private readonly Settings mSettings;
     private ISceneListing mIntegratedScenes;
     private ISceneListing mCustomScenes;
+    private HostnameUpdater mHostnameUpdater;
   }
 }
