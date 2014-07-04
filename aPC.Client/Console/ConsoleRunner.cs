@@ -40,6 +40,6 @@ namespace aPC.Client.Console
     [DllImport("Kernel32.dll")]
     private static extern bool AllocConsole();
 
-    private StandardKernel mKernel;
+    private readonly StandardKernel mKernel;
   }
 }

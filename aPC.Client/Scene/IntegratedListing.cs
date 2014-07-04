@@ -48,7 +48,7 @@ namespace aPC.Client.Scene
     }
 
     public Dictionary<string, string> Scenes { get; private set; }
-    private SceneAccessor mAccessor;
+    private readonly SceneAccessor mAccessor;
 
   }
 }

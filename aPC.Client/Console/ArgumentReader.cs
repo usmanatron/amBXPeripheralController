@@ -56,6 +56,6 @@ namespace aPC.Client.Console
       xiSettings.Update(mLocalSettings.IsIntegratedScene, mLocalSettings.SceneData);
     }
 
-    private Settings mLocalSettings;
+    private readonly Settings mLocalSettings;
   }
 }

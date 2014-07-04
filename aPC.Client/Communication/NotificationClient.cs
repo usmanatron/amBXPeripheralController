@@ -7,7 +7,7 @@ namespace aPC.Client.Communication
   public class NotificationClient : NotificationClientBase
   {
     public NotificationClient()
-      : base(ConfigurationManager.AppSettings["hostname"])
+      : base(ConfigurationManager.AppSettings["hostname"]) //qqUMI Need to get rid of this!
     {
     }
 

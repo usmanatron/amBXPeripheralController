@@ -30,8 +30,7 @@ namespace aPC.Client
       }
     }
 
-    private static NinjectKernelHandler mInstance = new NinjectKernelHandler();
-
+    private static readonly NinjectKernelHandler mInstance = new NinjectKernelHandler();
     public StandardKernel Kernel;
   }
 }

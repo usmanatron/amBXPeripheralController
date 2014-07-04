@@ -1,8 +1,5 @@
 ﻿namespace aPC.Client
 {
-  /// <remarks>
-  ///   Designed as a singleton, as there should only ever be one set of settings.
-  /// </remarks>
   public class Settings
   {
     public Settings() : this(default(bool), string.Empty)

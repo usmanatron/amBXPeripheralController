@@ -35,9 +35,7 @@ namespace aPC.Client.Scene
 
     private string GetFilenameFromDialog()
     {
-      var lDialog = new OpenFileDialog();
-      lDialog.Multiselect = false;
-      lDialog.Filter = "Xml Files (*.xml)|*.xml";
+      var lDialog = new OpenFileDialog { Multiselect = false, Filter = "Xml Files (*.xml)|*.xml" };
       lDialog.ShowDialog();
       return lDialog.FileName;
     }
@@ -70,7 +68,6 @@ namespace aPC.Client.Scene
     /// <summary>
     /// Delete the file with the given name
     /// </summary>
-    /// <param name="xiFilename"></param>
     public void Delete(string xiKey)
     {
       var lConfirmDeletion = MessageBox.Show("Are you sure you want to delete this file?",
@@ -85,6 +82,6 @@ namespace aPC.Client.Scene
       File.Delete(Path.Combine(ProfilesStore.Directory, ProfilesStore.GetFilenameWithoutExtension(xiKey) + ".xml"));
     }
 
-    private CustomListing mCustomListing;
+    private readonly CustomListing mCustomListing;
   }
 }
