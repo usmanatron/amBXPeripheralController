@@ -27,7 +27,7 @@ namespace aPC.Client.Scene
         ImportFile(lFullFilePath);
       }
 
-      var lFilename = Profiles.GetFilenameWithoutExtension(lFullFilePath);
+      var lFilename = ProfilesStore.GetFilenameWithoutExtension(lFullFilePath);
       mCustomListing.AddScene(lFilename, File.ReadAllText(lFullFilePath));
       return lFilename;
     }
@@ -62,7 +62,7 @@ namespace aPC.Client.Scene
         }
       }
 
-      var lTargetFullFilePath = Path.Combine(Profiles.Directory, Profiles.GetFilenameWithoutExtension(xiFilename) + ".xml");
+      var lTargetFullFilePath = Path.Combine(ProfilesStore.Directory, ProfilesStore.GetFilenameWithoutExtension(xiFilename) + ".xml");
       File.Copy(xiFilename, lTargetFullFilePath);
       return true;
     }
@@ -82,7 +82,7 @@ namespace aPC.Client.Scene
         return;
       }
 
-      File.Delete(Path.Combine(Profiles.Directory, Profiles.GetFilenameWithoutExtension(xiKey) + ".xml"));
+      File.Delete(Path.Combine(ProfilesStore.Directory, ProfilesStore.GetFilenameWithoutExtension(xiKey) + ".xml"));
     }
 
     private CustomListing mCustomListing;

@@ -13,11 +13,11 @@ namespace aPC.Client.Scene
     private void LoadSavedScenes()
     {
       Scenes = new Dictionary<string, string>();
-      var lFiles = Directory.EnumerateFiles(Profiles.Directory);
+      var lFiles = Directory.EnumerateFiles(ProfilesStore.Directory);
 
       foreach (var lFile in lFiles)
       {
-        AddScene(Profiles.GetFilenameWithoutExtension(lFile), File.ReadAllText(lFile));
+        AddScene(ProfilesStore.GetFilenameWithoutExtension(lFile), File.ReadAllText(lFile));
       }
 
       // Finally add a "browse" choice to select you're own scene
