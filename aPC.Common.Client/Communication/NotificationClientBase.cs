@@ -9,17 +9,22 @@ namespace aPC.Common.Client.Communication
 {
   public abstract class NotificationClientBase : INotificationClient
   {
-    public NotificationClientBase() 
-      : this(CommunicationSettings.ServiceUrlTemplate.Replace(CommunicationSettings.HostnameHolder, "localhost"))
+    //qqUMI TODO: Remove this constructor and always ask for the host
+    protected NotificationClientBase() : this("localhost")
+    {
+    }
+
+    protected NotificationClientBase(string xiHost)
+      : this(new EndpointAddress(CommunicationSettings.ServiceUrlTemplate.Replace(CommunicationSettings.HostnameHolder, xiHost)))
     {
     }
 
     // Overriding of the Url is used by tests
-    public NotificationClientBase(string xiUrl)
+    protected NotificationClientBase(EndpointAddress xiAddress)
     {
       mClient = new ChannelFactory<INotificationService>(
         new BasicHttpBinding(),
-        xiUrl);
+        xiAddress);
     }
 
     public void PushCustomScene(amBXScene xiScene)

@@ -1,15 +1,18 @@
-﻿using aPC.Common.Client.Communication;
+﻿using System.Configuration;
+using System.ServiceModel;
+using aPC.Common.Client.Communication;
 
 namespace aPC.Client.Communication
 {
   public class NotificationClient : NotificationClientBase
   {
-    public NotificationClient() : base()
+    public NotificationClient()
+      : base(ConfigurationManager.AppSettings["hostname"])
     {
     }
 
     // Overriding of the Url is used by tests
-    public NotificationClient(string xiUrl) : base(xiUrl)
+    public NotificationClient(EndpointAddress xiAddress) : base(xiAddress)
     {
     }
 
