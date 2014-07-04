@@ -96,6 +96,8 @@ namespace aPC.Client
       {
         mSettings.Update(xiIsIntegratedScene, xiSceneListing.GetValue((string)xiSceneList.SelectedValue));
       }
+
+      StartButton.IsEnabled = mSettings.IsValid;
     }
 
     private void RunClick(object sender, RoutedEventArgs e)

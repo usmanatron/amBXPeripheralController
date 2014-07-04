@@ -10,7 +10,7 @@
     
     <RadioButton Content="Custom " Margin="20,180,0,0" Checked="CustomSceneSelected" Unchecked="CustomSceneDeselected" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" GroupName="SceneType" />
     <ComboBox Margin="30,220,45,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="200" IsEnabled="False" x:Name="CustomSceneList" SelectionChanged="CustomSceneSelectionChanged" Height="25" />
-    
-    <Button Margin="0,0,30,30" Content="Go!" Click="RunClick" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="16" Height="35" Width="70" />
+
+    <Button Margin="0,0,30,30" Content="Go!" Click="RunClick" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="16" Height="35" Width="70" x:Name="StartButton" IsEnabled="False" />
   </Grid>
 </Window>
