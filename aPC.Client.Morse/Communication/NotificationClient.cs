@@ -6,7 +6,7 @@ namespace aPC.Client.Morse.Communication
 {
   public class NotificationClient : NotificationClientBase
   {
-    public NotificationClient() : base()
+    public NotificationClient() : base("localhost")
     {
     }
 

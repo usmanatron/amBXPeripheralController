@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.ServiceModel;
+using NUnit.Framework;
 using aPC.Client.Communication;
 using aPC.Common.Client.Tests.Communication;
 
@@ -11,7 +12,7 @@ namespace aPC.Client.Tests.Communication
     public void SetupTests()
     {
       mHost = new TestNotificationService();
-      mClient = new NotificationClient(mHost.Url);
+      mClient = new NotificationClient(new EndpointAddress(mHost.Url));
     }
 
     [SetUp]

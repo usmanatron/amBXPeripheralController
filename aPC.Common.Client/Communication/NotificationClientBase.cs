@@ -9,11 +9,6 @@ namespace aPC.Common.Client.Communication
 {
   public abstract class NotificationClientBase : INotificationClient
   {
-    //qqUMI TODO: Remove this constructor and always ask for the host
-    protected NotificationClientBase() : this("localhost")
-    {
-    }
-
     protected NotificationClientBase(string xiHost)
       : this(new EndpointAddress(CommunicationSettings.ServiceUrlTemplate.Replace(CommunicationSettings.HostnameHolder, xiHost)))
     {

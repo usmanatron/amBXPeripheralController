@@ -1,12 +1,11 @@
 ﻿using System;
 using aPC.Common.Client.Communication;
-using System.ServiceModel;
 
 namespace aPC.Client.Disco.Communication
 {
   public class NotificationClient : NotificationClientBase
   {
-    public NotificationClient() : base ()
+    public NotificationClient() : base ("localhost")
     {
     }
 
