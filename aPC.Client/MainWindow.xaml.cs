@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Windows;
-using aPC.Common;
 using Ninject;
 using aPC.Client.Scene;
-using System.IO;
 using System.Windows.Controls;
-using System.Collections.Generic;
 
 namespace aPC.Client
 {

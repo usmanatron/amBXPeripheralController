@@ -1,7 +1,5 @@
 ﻿using aPC.Client.Communication;
 using aPC.Common.Communication;
-using aPC.Common.Client;
-using aPC.Client.Console;
 using Ninject;
 using aPC.Client.Scene;
 

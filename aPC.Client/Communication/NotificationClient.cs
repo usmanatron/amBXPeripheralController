@@ -1,5 +1,4 @@
 ﻿using aPC.Common.Client.Communication;
-using System.ServiceModel;
 
 namespace aPC.Client.Communication
 {
