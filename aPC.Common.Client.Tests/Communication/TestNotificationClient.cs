@@ -11,6 +11,17 @@ namespace aPC.Common.Client.Tests.Communication
       CustomScenesPushed = new List<string>();
     }
 
+
+    protected override bool SupportsCustomScenes
+    {
+      get { return true; }
+    }
+
+    protected override bool SupportsIntegratedScenes
+    {
+      get { return true; }
+    }
+
     public override void PushCustomScene(string xiScene)
     {
       CustomScenesPushed.Add(xiScene);
@@ -19,6 +30,11 @@ namespace aPC.Common.Client.Tests.Communication
     public override void PushIntegratedScene(string xiScene)
     {
       IntegratedScenesPushed.Add(xiScene);
+    }
+
+    public override string[] GetSupportedIntegratedScenes()
+    {
+      throw new NotImplementedException();
     }
 
     public int NumberOfCustomScenesPushed

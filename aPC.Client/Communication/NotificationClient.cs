@@ -16,14 +16,14 @@ namespace aPC.Client.Communication
     {
     }
 
-    public override void PushCustomScene(string xiScene)
+    protected override bool SupportsCustomScenes
     {
-      mClient.CreateChannel().RunCustomScene(xiScene);
+      get { return true; }
     }
 
-    public override void PushIntegratedScene(string xiScene)
+    protected override bool SupportsIntegratedScenes
     {
-      mClient.CreateChannel().RunIntegratedScene(xiScene);
+      get { return true; }
     }
   }
 }

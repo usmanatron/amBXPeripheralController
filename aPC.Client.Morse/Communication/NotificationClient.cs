@@ -15,14 +15,14 @@ namespace aPC.Client.Morse.Communication
     {
     }
 
-    public override void PushCustomScene(string xiScene)
+    protected override bool SupportsCustomScenes
     {
-      mClient.CreateChannel().RunCustomScene(xiScene);
+      get { return true; }
     }
 
-    public override void PushIntegratedScene(string xiScene)
+    protected override bool SupportsIntegratedScenes
     {
-      throw new InvalidOperationException("The Morse Client does not support pushing integrated scenes.");
+      get { return false; }
     }
   }
 }

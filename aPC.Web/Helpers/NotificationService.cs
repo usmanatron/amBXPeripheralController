@@ -4,7 +4,7 @@ namespace aPC.Web.Helpers
 {
   public class NotificationClient : NotificationClientBase
   {
-    public NotificationClient() : base()
+    public NotificationClient() : base("localhost")
     {
     }
 
@@ -13,14 +13,14 @@ namespace aPC.Web.Helpers
     {
     }
 
-    public override void PushCustomScene(string xiScene)
+    protected override bool SupportsCustomScenes
     {
-      mClient.CreateChannel().RunCustomScene(xiScene);
+      get { return true; }
     }
 
-    public override void PushIntegratedScene(string xiScene)
+    protected override bool SupportsIntegratedScenes
     {
-      mClient.CreateChannel().RunIntegratedScene(xiScene);
+      get { return true; }
     }
   }
 }

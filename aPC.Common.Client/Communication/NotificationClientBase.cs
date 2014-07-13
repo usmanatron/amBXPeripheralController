@@ -14,13 +14,35 @@ namespace aPC.Common.Client.Communication
     {
     }
 
-    // Overriding of the Url is used by tests
+    // Overriding of the Url structure is used by tests
     protected NotificationClientBase(EndpointAddress xiAddress)
     {
       mClient = new ChannelFactory<INotificationService>(
         new BasicHttpBinding(),
         xiAddress);
     }
+
+    #region Interface methods
+
+    public virtual void PushCustomScene(string xiScene)
+    {
+      if (!SupportsCustomScenes)
+      {
+        throw new InvalidOperationException("Attempted to use custom scenes, however these are unsupported!");
+      }
+      mClient.CreateChannel().RunCustomScene(xiScene);
+    }
+
+    public virtual void PushIntegratedScene(string xiScene)
+    {
+      if (!SupportsIntegratedScenes)
+      {
+        throw new InvalidOperationException("Attempted to use integrated scenes, however these are unsupported!");
+      }
+      mClient.CreateChannel().RunIntegratedScene(xiScene);
+    }
+
+    #endregion
 
     public void PushCustomScene(amBXScene xiScene)
     {
@@ -37,10 +59,9 @@ namespace aPC.Common.Client.Communication
       }
     }
 
-    public abstract void PushCustomScene(string xiScene);
+    private readonly ChannelFactory<INotificationService> mClient;
 
-    public abstract void PushIntegratedScene(string xiScene);
-
-    protected readonly ChannelFactory<INotificationService> mClient;
+    protected abstract bool SupportsCustomScenes { get; }
+    protected abstract bool SupportsIntegratedScenes { get; }
   }
 }

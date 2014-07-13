@@ -14,21 +14,14 @@ namespace aPC.Client.Disco.Communication
     {
     }
 
-    public override void PushCustomScene(string xiScene)
+    protected override bool SupportsCustomScenes
     {
-      try
-      {
-        mClient.CreateChannel().RunCustomScene(xiScene);
-      }
-      catch (Exception e)
-      {
-        Console.WriteLine(e.ToString());
-      }
+      get { return true; }
     }
 
-    public override void PushIntegratedScene(string xiScene)
+    protected override bool SupportsIntegratedScenes
     {
-      throw new NotImplementedException("The disco task does not use integrated scenes");
+      get { return false; }
     }
   }
 }
