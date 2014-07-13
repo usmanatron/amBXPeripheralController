@@ -9,8 +9,8 @@ namespace aPC.Common.Client.Communication
 {
   public abstract class NotificationClientBase : INotificationClient
   {
-    protected NotificationClientBase(string xiHost)
-      : this(new EndpointAddress(CommunicationSettings.ServiceUrlTemplate.Replace(CommunicationSettings.HostnameHolder, xiHost)))
+    protected NotificationClientBase(string xiHost) : this(
+      new EndpointAddress(CommunicationSettings.GetServiceUrl(xiHost, eApplicationType.amBXPeripheralController)))
     {
     }
 

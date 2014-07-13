@@ -1,10 +1,16 @@
 ﻿namespace aPC.Common.Communication
 {
-    public static class CommunicationSettings
+  public static class CommunicationSettings
+  {
+    public static string GetServiceUrl(string xiHostname, eApplicationType xiApplicationType)
     {
-      // Template to use for the Url - [HOSTNAME] needs to be replaced with
-      // the actual hostname to use.
-      public const string HostnameHolder = @"[HOSTNAME]";
-      public const string ServiceUrlTemplate = @"http://" + HostnameHolder + "/amBXPeripheralController";
+      return @"http://" + xiHostname + @"/" + xiApplicationType.ToString();
     }
+  }
+
+  public enum eApplicationType
+  {
+    amBXPeripheralController,
+    aPCTest
+  }
 }

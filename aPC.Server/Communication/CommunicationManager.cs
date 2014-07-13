@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 using aPC.Common.Communication;
@@ -15,8 +16,7 @@ namespace aPC.Server.Communication
 
     private void SetupHost(INotificationService xiNotificationService)
     {
-      string lBaseAddress = CommunicationSettings.ServiceUrlTemplate
-        .Replace(CommunicationSettings.HostnameHolder, System.Net.Dns.GetHostName());
+      string lBaseAddress = CommunicationSettings.GetServiceUrl(Dns.GetHostName(), eApplicationType.amBXPeripheralController);
 
       mHost = new ServiceHost(xiNotificationService.GetType(), new Uri(lBaseAddress));
       

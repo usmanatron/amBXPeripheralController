@@ -11,11 +11,9 @@ namespace aPC.Common.Client.Tests.Communication
   {
     public TestNotificationService()
     {
-      Url = CommunicationSettings.ServiceUrlTemplate
-        .Replace(CommunicationSettings.HostnameHolder, "localhost")
-        .Replace("amBXPeripheralController", "aPCTest");
-
+      Url = CommunicationSettings.GetServiceUrl("localhost", eApplicationType.aPCTest);
       ClearScenes();
+
       mHost = new ServiceHost(this);
       mHost.AddServiceEndpoint(typeof(INotificationService),
                                new BasicHttpBinding(),
