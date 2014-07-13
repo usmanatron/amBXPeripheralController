@@ -6,5 +6,7 @@
     void PushCustomScene(string xiScene);
 
     void PushIntegratedScene(string xiScene);
+
+    string[] GetSupportedIntegratedScenes();
   }
 }

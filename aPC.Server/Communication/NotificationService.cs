@@ -3,6 +3,7 @@ using aPC.Common.Communication;
 using aPC.Common.Entities;
 using System;
 using System.IO;
+using System.Linq;
 using System.Xml.Serialization;
 
 namespace aPC.Server.Communication
@@ -32,6 +33,15 @@ namespace aPC.Server.Communication
                    lAccessor.GetScene("Error_Flash");
 
       UpdateScene(lScene);
+    }
+
+    public string[] GetSupportedIntegratedScenes()
+    {
+      var lAccessor = new SceneAccessor();
+
+      return lAccessor.GetAllScenes()
+        .Select(scene => scene.Key)
+        .ToArray();
     }
 
     private amBXScene DeserialiseScene(string xiSceneXml)

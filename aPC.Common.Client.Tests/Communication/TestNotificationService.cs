@@ -59,6 +59,11 @@ namespace aPC.Common.Client.Tests.Communication
       Scenes.Add(new Tuple<bool, string>(true, xiSceneName));
     }
 
+    public string[] GetSupportedIntegratedScenes()
+    {
+      throw new NotImplementedException();
+    }
+
     private void ThrowExceptionIfSpecified(string xiContent)
     {
       if (xiContent == "ThrowException")

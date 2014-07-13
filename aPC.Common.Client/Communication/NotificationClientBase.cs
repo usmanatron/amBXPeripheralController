@@ -42,6 +42,15 @@ namespace aPC.Common.Client.Communication
       mClient.CreateChannel().RunIntegratedScene(xiScene);
     }
 
+    public virtual string[] GetSupportedIntegratedScenes()
+    {
+      if (!SupportsIntegratedScenes)
+      {
+        throw new InvalidOperationException("Attempted to use integrated scenes, however these are unsupported!");
+      }
+      return mClient.CreateChannel().GetSupportedIntegratedScenes();
+    }
+
     #endregion
 
     public void PushCustomScene(amBXScene xiScene)

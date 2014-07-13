@@ -10,5 +10,8 @@ namespace aPC.Common.Communication
 
     [OperationContract]
     void RunIntegratedScene(string xiSceneName);
+
+    [OperationContract]
+    string[] GetSupportedIntegratedScenes();
   }
 }
