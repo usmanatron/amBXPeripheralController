@@ -41,7 +41,7 @@ namespace aPC.Client
 
     private void PopulateHostname()
     {
-      mHostnameUpdater = mKernel.Kernel.Get<HostnameUpdater>();
+      mHostnameAccessor = mKernel.Kernel.Get<HostnameAccessor>();
       UpdateHostnameContent();
     }
 
@@ -49,12 +49,12 @@ namespace aPC.Client
 
     private void UpdateHostnameContent()
     {
-      Hostname.Content = mHostnameUpdater.Get();
+      Hostname.Content = mHostnameAccessor.Get();
     }
 
     public void ChangeHostnameClick(object sender, RoutedEventArgs e)
     {
-      mHostnameUpdater.Update();
+      mHostnameAccessor.Update();
       UpdateHostnameContent();
     }
 
@@ -138,6 +138,6 @@ namespace aPC.Client
     private readonly Settings mSettings;
     private ISceneListing mIntegratedScenes;
     private ISceneListing mCustomScenes;
-    private HostnameUpdater mHostnameUpdater;
+    private HostnameAccessor mHostnameAccessor;
   }
 }

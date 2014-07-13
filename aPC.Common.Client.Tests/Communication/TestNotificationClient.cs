@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using aPC.Common.Client.Communication;
+using System;
 
 namespace aPC.Common.Client.Tests.Communication
 {

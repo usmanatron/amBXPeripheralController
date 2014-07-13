@@ -6,8 +6,7 @@ namespace aPC.Client.Communication
 {
   public class NotificationClient : NotificationClientBase
   {
-    public NotificationClient()
-      : base(ConfigurationManager.AppSettings["hostname"]) //qqUMI Need to get rid of this!
+    public NotificationClient(HostnameAccessor xiHostnameAccessor) : base(xiHostnameAccessor.Get())
     {
     }
 

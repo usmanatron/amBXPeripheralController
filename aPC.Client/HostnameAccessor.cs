@@ -2,8 +2,13 @@
 
 namespace aPC.Client
 {
-  class HostnameUpdater
+  public class HostnameAccessor
   {
+    public HostnameAccessor(HostnameInput xiHostnameInput)
+    {
+      mHostnameInput = xiHostnameInput;
+    }
+
     public string Get()
     {
       return ConfigurationManager.AppSettings[HostnameKey];
@@ -17,11 +22,11 @@ namespace aPC.Client
 
     public string GetNewHostname()
     {
-      var lWindow = new HostnameInput();
-      lWindow.ShowDialog();
-      return lWindow.NewHostname;
+      mHostnameInput.ShowDialog();
+      return mHostnameInput.NewHostname;
     }
 
     private const string HostnameKey = "hostname";
+    private readonly HostnameInput mHostnameInput;
   }
 }
