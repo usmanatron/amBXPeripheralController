@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using aPC.Common;
+using aPC.Client.Communication;
 using aPC.Client.Console;
-using aPC.Common.Client;
 using System.IO;
+using aPC.Client.Scene;
+using aPC.Common.Communication;
+using Ninject;
 
 namespace aPC.Client
 {
@@ -20,22 +22,34 @@ namespace aPC.Client
     /// </summary>
     protected override void OnStartup(StartupEventArgs e)
     {
-      AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
-
+      AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+      var lKernel = SetupKernel();
       var lArguments = GetArguments();
 
       if (lArguments.Count > 0)
       {
-        var lRunner = new ConsoleRunner(lArguments);
+        lKernel.Bind<ConsoleRunner>().ToSelf().WithConstructorArgument("xiArguments", lArguments);
+        var lRunner = lKernel. Get<ConsoleRunner>();
         lRunner.Run();
-        Shutdown(0);
       }
+      else
+      {
+        var lMainWindow = lKernel.Get<MainWindow>();
+        lMainWindow.ShowDialog();
+      }
+      Shutdown(0);
     }
 
-    private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+    private StandardKernel SetupKernel()
     {
-      var lFilePath = Path.Combine(Environment.CurrentDirectory, "Exception.log");
-      System.IO.File.WriteAllText(lFilePath, e.ExceptionObject.ToString());
+      var lKernel = new StandardKernel();
+      
+      lKernel.Bind<Settings>().ToSelf().InSingletonScope();
+      lKernel.Bind<INotificationClient>().To<NotificationClient>();
+      lKernel.Bind<IntegratedListing>().ToSelf().InSingletonScope();
+      lKernel.Bind<CustomListing>().ToSelf().InSingletonScope();
+
+      return lKernel;
     }
 
     /// <remarks>
@@ -50,6 +64,12 @@ namespace aPC.Client
         .Skip(1)
         .Take(lArgs.Count() - 1)
         .ToList();
+    }
+
+    private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+    {
+      var lFilePath = Path.Combine(Environment.CurrentDirectory, "Exception.log");
+      System.IO.File.WriteAllText(lFilePath, e.ExceptionObject.ToString());
     }
   }
 }

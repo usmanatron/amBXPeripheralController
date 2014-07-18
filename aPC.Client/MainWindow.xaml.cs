@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Configuration;
+using System.Collections.ObjectModel;
 using System.Windows;
-using Ninject;
 using aPC.Client.Scene;
 using System.Windows.Controls;
 
@@ -12,10 +11,16 @@ namespace aPC.Client
   /// </summary>
   public partial class MainWindow : Window
   {
-    public MainWindow()
+    public MainWindow(Settings xiSettings, IntegratedListing xiIntegratedListing, CustomListing xiCustomListing, 
+                      HostnameAccessor xiHostnameAccessor, CustomFileHandler xiCustomFileHandler, SceneRunner xiSceneRunner)
     {
-      mKernel = NinjectKernelHandler.Instance;
-      mSettings = mKernel.Kernel.Get<Settings>();
+      mSettings = xiSettings;
+      mIntegratedSceneListing = xiIntegratedListing;
+      mCustomSceneListing = xiCustomListing;
+      mHostnameAccessor = xiHostnameAccessor; //qqUMI This will break if you update twice+
+      mCustomFileHandler = xiCustomFileHandler;
+      mSceneRunner = xiSceneRunner;
+
       InitializeComponent();
       PopulateSceneLists();
       PopulateHostname();
@@ -97,8 +102,7 @@ namespace aPC.Client
     {
       if ((string)CustomSceneList.SelectedValue == mCustomScenes.BrowseItemName)
       {
-        var lFileHandler = mKernel.Kernel.Get<CustomFileHandler>();
-        var lNewFile = lFileHandler.AddNewFileAndUpdateListing();
+        var lNewFile = mCustomFileHandler.AddNewFileAndUpdateListing();
         ReloadCustomDropdown(lNewFile);
           
       }
@@ -130,14 +134,14 @@ namespace aPC.Client
         throw new ArgumentException("The information given is invalid");
       }
 
-      var lTask = mKernel.Kernel.Get<SceneRunner>();
-      lTask.RunScene();
+      mSceneRunner.RunScene();
     }
 
-    private readonly NinjectKernelHandler mKernel;
     private readonly Settings mSettings;
     private ISceneListing mIntegratedScenes;
     private ISceneListing mCustomScenes;
-    private HostnameAccessor mHostnameAccessor;
+    private readonly SceneRunner mSceneRunner;
+    private readonly HostnameAccessor mHostnameAccessor;
+    private readonly CustomFileHandler mCustomFileHandler;
   }
 }

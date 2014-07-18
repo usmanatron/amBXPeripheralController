@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace aPC.Client.Scene
 {
-  class IntegratedListing : ISceneListing
+  public class IntegratedListing : ISceneListing
   {
     public IntegratedListing(SceneAccessor xiSceneAccessor)
     {

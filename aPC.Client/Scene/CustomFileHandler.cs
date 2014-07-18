@@ -5,7 +5,7 @@ using System.IO;
 
 namespace aPC.Client.Scene
 {
-  class CustomFileHandler
+  public class CustomFileHandler
   {
     public CustomFileHandler(CustomListing xiCustomListing)
     {

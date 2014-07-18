@@ -3,7 +3,7 @@ using System.IO;
 
 namespace aPC.Client.Scene
 {
-  class CustomListing : ISceneListing
+  public class CustomListing : ISceneListing
   {
     public CustomListing()
     {
