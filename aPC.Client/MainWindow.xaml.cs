@@ -34,19 +34,18 @@ namespace aPC.Client
 
     private void PopulateIntegratedList()
     {
-      mIntegratedScenes = mKernel.Kernel.Get<IntegratedListing>();
-      IntegratedSceneList.ItemsSource = mIntegratedScenes.DropdownListing;
+      mIntegratedScenes = new ObservableCollection<string>(mIntegratedSceneListing.DropdownListing);
+      IntegratedSceneList.ItemsSource = mIntegratedScenes;
     }
 
     private void PopulateCustomList()
     {
-      mCustomScenes = mKernel.Kernel.Get<CustomListing>();
-      CustomSceneList.ItemsSource = mCustomScenes.DropdownListing;
+      mCustomScenes = new ObservableCollection<string>(mCustomSceneListing.DropdownListing);
+      CustomSceneList.ItemsSource = mCustomScenes;
     }
 
     private void PopulateHostname()
     {
-      mHostnameAccessor = mKernel.Kernel.Get<HostnameAccessor>();
       UpdateHostnameContent();
     }
 
@@ -70,7 +69,7 @@ namespace aPC.Client
     private void IntegratedSceneSelected(object sender, RoutedEventArgs e)
     {
       IntegratedSceneList.IsEnabled = true;
-      SceneSelectionChanged(IntegratedSceneList, mIntegratedScenes, true);
+      SceneSelectionChanged(IntegratedSceneList, mIntegratedSceneListing, true);
     }
 
     private void IntegratedSceneDeselected(object sender, RoutedEventArgs e)
@@ -80,7 +79,7 @@ namespace aPC.Client
 
     private void IntegratedSceneSelectionChanged(object sender, RoutedEventArgs e)
     {
-      SceneSelectionChanged(IntegratedSceneList, mIntegratedScenes, true);
+      SceneSelectionChanged(IntegratedSceneList, mIntegratedSceneListing, true);
     }
 
     #endregion
@@ -90,7 +89,7 @@ namespace aPC.Client
     private void CustomSceneSelected(object sender, RoutedEventArgs e)
     {
       CustomSceneList.IsEnabled = true;
-      SceneSelectionChanged(CustomSceneList, mCustomScenes, false);
+      SceneSelectionChanged(CustomSceneList, mCustomSceneListing, false);
     }
 
     private void CustomSceneDeselected(object sender, RoutedEventArgs e)
@@ -100,18 +99,30 @@ namespace aPC.Client
 
     private void CustomSceneSelectionChanged(object sender, RoutedEventArgs e)
     {
-      if ((string)CustomSceneList.SelectedValue == mCustomScenes.BrowseItemName)
+      if ((string)CustomSceneList.SelectedValue == mCustomSceneListing.BrowseItemName)
       {
         var lNewFile = mCustomFileHandler.AddNewFileAndUpdateListing();
-        ReloadCustomDropdown(lNewFile);
+        AddNewFileToCustomDropdown(lNewFile);
           
       }
-      SceneSelectionChanged(CustomSceneList, mCustomScenes, false);
+      SceneSelectionChanged(CustomSceneList, mCustomSceneListing, false);
     }
 
-    private void ReloadCustomDropdown(string xiNewFile)
+    /// <summary>
+    /// Adds the newly added file to the dropdown
+    /// </summary>
+    /// <remarks>
+    /// The new file is added in the correct place (according to alphabetical order)
+    /// </remarks>
+    private void AddNewFileToCustomDropdown(string xiNewFile)
     {
-      CustomSceneList.ItemsSource = mCustomScenes.DropdownListing;
+      var lIndex = 0;
+      while (lIndex < mCustomScenes.Count && String.CompareOrdinal(mCustomScenes[lIndex], xiNewFile) < 0)
+      {
+        lIndex++;
+      }
+
+      mCustomScenes.Insert(lIndex, xiNewFile);
       CustomSceneList.Text = xiNewFile;
     }
 
@@ -133,13 +144,14 @@ namespace aPC.Client
       {
         throw new ArgumentException("The information given is invalid");
       }
-
       mSceneRunner.RunScene();
     }
 
     private readonly Settings mSettings;
-    private ISceneListing mIntegratedScenes;
-    private ISceneListing mCustomScenes;
+    private readonly ISceneListing mIntegratedSceneListing;
+    private readonly ISceneListing mCustomSceneListing;
+    private ObservableCollection<string> mIntegratedScenes;
+    private ObservableCollection<string> mCustomScenes;
     private readonly SceneRunner mSceneRunner;
     private readonly HostnameAccessor mHostnameAccessor;
     private readonly CustomFileHandler mCustomFileHandler;
