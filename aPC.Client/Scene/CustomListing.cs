@@ -7,10 +7,15 @@ namespace aPC.Client.Scene
   {
     public CustomListing()
     {
-      LoadSavedScenes();
+      LoadScenes();
     }
 
-    private void LoadSavedScenes()
+    public void Reload()
+    {
+      LoadScenes();
+    }
+
+    private void LoadScenes()
     {
       Scenes = new Dictionary<string, string>();
       var lFiles = Directory.EnumerateFiles(ProfilesStore.Directory);
@@ -46,7 +51,7 @@ namespace aPC.Client.Scene
     {
       get
       {
-        return "<Browse...>";
+        return "<Add...>";
       }
     }
 

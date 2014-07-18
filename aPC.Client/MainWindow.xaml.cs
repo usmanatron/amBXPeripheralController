@@ -60,6 +60,7 @@ namespace aPC.Client
     {
       mHostnameAccessor.Update();
       UpdateHostnameContent();
+      ReloadDropdown(mIntegratedSceneListing, mIntegratedScenes);
     }
 
     #endregion
@@ -101,32 +102,30 @@ namespace aPC.Client
     {
       if ((string)CustomSceneList.SelectedValue == mCustomSceneListing.BrowseItemName)
       {
-        var lNewFile = mCustomFileHandler.AddNewFileAndUpdateListing();
-        AddNewFileToCustomDropdown(lNewFile);
-          
+        var lNewFile = mCustomFileHandler.AddNewFile();
+
+        if (string.IsNullOrEmpty(lNewFile))
+        {
+          return;
+        }
+
+        ReloadDropdown(mCustomSceneListing, mCustomScenes);
+        CustomSceneList.Text = lNewFile;
       }
       SceneSelectionChanged(CustomSceneList, mCustomSceneListing, false);
     }
 
-    /// <summary>
-    /// Adds the newly added file to the dropdown
-    /// </summary>
-    /// <remarks>
-    /// The new file is added in the correct place (according to alphabetical order)
-    /// </remarks>
-    private void AddNewFileToCustomDropdown(string xiNewFile)
-    {
-      var lIndex = 0;
-      while (lIndex < mCustomScenes.Count && String.CompareOrdinal(mCustomScenes[lIndex], xiNewFile) < 0)
-      {
-        lIndex++;
-      }
-
-      mCustomScenes.Insert(lIndex, xiNewFile);
-      CustomSceneList.Text = xiNewFile;
-    }
-
     #endregion
+
+    private void ReloadDropdown(ISceneListing xiSceneListing, ObservableCollection<string> xiScenes)
+    {
+      xiScenes.Clear();
+      xiSceneListing.Reload();
+      foreach (var lScene in xiSceneListing.DropdownListing)
+      {
+        xiScenes.Add(lScene);
+      }
+    }
 
     private void SceneSelectionChanged(ComboBox xiSceneList, ISceneListing xiSceneListing, bool xiIsIntegratedScene)
     {

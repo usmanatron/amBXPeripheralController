@@ -12,24 +12,17 @@ namespace aPC.Client.Scene
       mCustomListing = xiCustomListing;
     }
 
-    public string AddNewFileAndUpdateListing()
+    public string AddNewFile()
     {
       var lFullFilePath = GetFilenameFromDialog();
       if (lFullFilePath == string.Empty)
       {
         return string.Empty;
       }
-      
-      var lKeepScene = MessageBox.Show("Do you want to store this scene for future use?", "Store for later?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-      if (lKeepScene == MessageBoxResult.Yes)
-      {
-        ImportFile(lFullFilePath);
-      }
-
-      var lFilename = ProfilesStore.GetFilenameWithoutExtension(lFullFilePath);
-      mCustomListing.AddScene(lFilename, File.ReadAllText(lFullFilePath));
-      return lFilename;
+      return ImportFile(lFullFilePath)
+        ? ProfilesStore.GetFilenameWithoutExtension(lFullFilePath)
+        : string.Empty;
     }
 
 

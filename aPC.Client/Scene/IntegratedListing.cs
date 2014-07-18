@@ -1,4 +1,5 @@
-﻿using aPC.Common;
+﻿using aPC.Client.Communication;
+using aPC.Common;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,20 +7,25 @@ namespace aPC.Client.Scene
 {
   public class IntegratedListing : ISceneListing
   {
-    public IntegratedListing(SceneAccessor xiSceneAccessor)
+    public IntegratedListing(SceneAccessor xiSceneAccessor, NotificationClient xiNotificationClient)
     {
       mAccessor = xiSceneAccessor;
+      mNotificationClient = xiNotificationClient;
+      LoadScenes();
+    }
+
+    public void Reload()
+    {
       LoadScenes();
     }
 
     private void LoadScenes()
     {
       Scenes = new Dictionary<string, string>();
-    
-      var lScenes = mAccessor.GetAllScenes()
-        .Select(scene => scene.Key)
-        .OrderBy(scene => scene);
 
+      var lScenes = mNotificationClient.GetSupportedIntegratedScenes()
+        .OrderBy(scene => scene);
+      
       foreach (var lScene in lScenes)
       {
         Scenes.Add(lScene, lScene);
@@ -49,6 +55,7 @@ namespace aPC.Client.Scene
 
     public Dictionary<string, string> Scenes { get; private set; }
     private readonly SceneAccessor mAccessor;
+    private readonly NotificationClient mNotificationClient;
 
   }
 }

@@ -4,6 +4,9 @@ namespace aPC.Client.Scene
 {
   interface ISceneListing
   {
+
+    void Reload();
+
     string BrowseItemName { get; }
 
     IEnumerable<string> DropdownListing { get; }
