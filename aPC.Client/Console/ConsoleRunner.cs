@@ -29,7 +29,6 @@ namespace aPC.Client.Console
 
     private void AllocateConsole()
     {
-      var parentId = ParentProcessUtilities.GetParentProcess(Process.GetCurrentProcess().Id).Id;
       AllocConsole();
     }
 
