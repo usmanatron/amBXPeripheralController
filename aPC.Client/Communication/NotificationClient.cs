@@ -1,11 +1,13 @@
 ﻿using System.Configuration;
 using System.ServiceModel;
 using aPC.Common.Client.Communication;
+using Ninject;
 
 namespace aPC.Client.Communication
 {
   public class NotificationClient : NotificationClientBase
   {
+    [Inject]
     public NotificationClient(HostnameAccessor xiHostnameAccessor) : base(xiHostnameAccessor.Get())
     {
     }
