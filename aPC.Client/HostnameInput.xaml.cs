@@ -14,17 +14,6 @@ namespace aPC.Client
 
     public void OkButtonClick(object sender, RoutedEventArgs e)
     {
-      var lNewHostnameContent = NewHostnameTextBox.Text;
-
-      if (string.IsNullOrEmpty(lNewHostnameContent))
-      {
-        MessageBox.Show("No hostname given!  Please check and try again.", 
-                        "Error", 
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Error);
-        return;
-      }
-
       NewHostname = NewHostnameTextBox.Text;
       Close();
     }
