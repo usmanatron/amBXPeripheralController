@@ -1,5 +1,4 @@
 ﻿using aPC.Common.Client;
-using aPC.Common.Communication;
 using aPC.Client.Disco.Communication;
 using aPC.Client.Disco.Generators;
 using aPC.Common.Entities;

@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace aPC.Client.Console
 {
   public class ArgumentReader
   {
-    public ArgumentReader(List<string> xiArguments)
+    public ArgumentReader(IEnumerable<string> xiArguments)
     {
       mLocalSettings = new Settings();
-      ReadArguments(xiArguments);
+      ReadArguments(xiArguments.ToList());
     }
 
     private void ReadArguments(List<string> xiArguments)
