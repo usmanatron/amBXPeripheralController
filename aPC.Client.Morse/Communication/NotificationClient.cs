@@ -6,12 +6,12 @@ namespace aPC.Client.Morse.Communication
 {
   public class NotificationClient : NotificationClientBase
   {
-    public NotificationClient() : base("localhost")
+    public NotificationClient() : base(new HostnameAccessor())
     {
     }
 
     // Overriding of the Url is used by tests
-    public NotificationClient(string xiUrl) : base(xiUrl)
+    public NotificationClient(EndpointAddress xiAddress) : base(xiAddress)
     {
     }
 

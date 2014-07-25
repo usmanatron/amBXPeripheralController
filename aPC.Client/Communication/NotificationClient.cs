@@ -8,7 +8,7 @@ namespace aPC.Client.Communication
   public class NotificationClient : NotificationClientBase
   {
     [Inject]
-    public NotificationClient(HostnameAccessor xiHostnameAccessor) : base(xiHostnameAccessor.Get())
+    public NotificationClient(HostnameAccessor xiHostnameAccessor) : base(xiHostnameAccessor)
     {
     }
 

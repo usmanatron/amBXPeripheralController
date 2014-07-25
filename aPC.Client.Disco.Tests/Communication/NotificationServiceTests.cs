@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ServiceModel;
 using NUnit.Framework;
 using aPC.Client.Disco.Communication;
 using aPC.Common.Client.Tests.Communication;
@@ -12,7 +13,7 @@ namespace aPC.Client.Disco.Tests.Communication
     public void SetupTests()
     {
       mHost = new TestNotificationService();
-      mClient = new NotificationClient(mHost.Url);
+      mClient = new NotificationClient(new EndpointAddress(mHost.Url));
     }
 
     [TestFixtureTearDown]
@@ -24,7 +25,7 @@ namespace aPC.Client.Disco.Tests.Communication
     [Test]
     public void PushingAnIntegratedScene_ThrowsException()
     {
-      Assert.Throws<NotImplementedException>(() => mClient.PushIntegratedScene("ccnet_green"));
+      Assert.Throws<NotSupportedException>(() => mClient.PushIntegratedScene("ccnet_green"));
     }
 
     [Test]

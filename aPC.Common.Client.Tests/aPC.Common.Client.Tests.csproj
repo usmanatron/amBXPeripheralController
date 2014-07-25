@@ -53,6 +53,7 @@
     <Compile Include="Communication\TestNotificationClient.cs" />
     <Compile Include="Communication\TestNotificationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestHostnameAccessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\aPC.Common.Client\aPC.Common.Client.csproj">

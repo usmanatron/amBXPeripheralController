@@ -1,29 +1,30 @@
 ﻿using System.Configuration;
+using aPC.Common.Client;
 
 namespace aPC.Client
 {
-  public class HostnameAccessor
+  public class HostnameAccessor : HostnameAccessorBase
   {
     public HostnameAccessor(HostnameInput xiHostnameInput)
     {
       mHostnameInput = xiHostnameInput;
     }
 
-    public string Get()
+    public override string Get()
     {
       return ConfigurationManager.AppSettings[HostnameKey];
     }
 
-    public void Update()
+    public override void Update()
     {
       var lNewHostname = GetNewHostname();
       ConfigurationManager.AppSettings[HostnameKey] = lNewHostname;
     }
 
-    public string GetNewHostname()
+    private string GetNewHostname()
     {
       //TODO: Get rid of this - right now it's necessary to stop an exception happening when hitting this
-      // twice in the application lifetime.
+      // twice in the applications lifetime.
       mHostnameInput = new HostnameInput();
       mHostnameInput.ShowDialog();
       var lNewHostname = mHostnameInput.NewHostname;

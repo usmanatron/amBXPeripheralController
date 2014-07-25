@@ -6,12 +6,11 @@ namespace aPC.Common.Client.Tests.Communication
 {
   public class TestNotificationClient : NotificationClientBase
   {
-    public TestNotificationClient() : base("localhost")
+    public TestNotificationClient() : base(new TestHostnameAccessor())
     {
       IntegratedScenesPushed = new List<string>();
       CustomScenesPushed = new List<string>();
     }
-
 
     protected override bool SupportsCustomScenes
     {

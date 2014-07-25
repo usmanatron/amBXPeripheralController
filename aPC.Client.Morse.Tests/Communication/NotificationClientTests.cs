@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ServiceModel;
 using NUnit.Framework;
 using aPC.Client.Morse.Communication;
 using aPC.Common.Client.Tests.Communication;
@@ -13,7 +14,7 @@ namespace aPC.Client.Morse.Tests.Communication
     public void SetupTests()
     {
       mHost = new TestNotificationService();
-      mClient = new NotificationClient(mHost.Url);
+      mClient = new NotificationClient(new EndpointAddress(mHost.Url));
     }
 
     [TestFixtureTearDown]
@@ -31,7 +32,7 @@ namespace aPC.Client.Morse.Tests.Communication
     [Test]
     public void PushingAnIntegratedScene_ThrowsException()
     {
-      Assert.Throws<InvalidOperationException>(() => mClient.PushIntegratedScene("blah"));
+      Assert.Throws<NotSupportedException>(() => mClient.PushIntegratedScene("blah"));
     }
 
     [Test]
