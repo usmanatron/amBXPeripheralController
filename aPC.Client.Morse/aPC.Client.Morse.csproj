@@ -46,7 +46,6 @@
     <Compile Include="ArgumentReader.cs" />
     <Compile Include="Codes\MessageEndMarker.cs" />
     <Compile Include="Communication\NotificationClient.cs" />
-    <Compile Include="HostnameAccessor.cs" />
     <Compile Include="MorseFrameBuilder.cs" />
     <Compile Include="SceneGenerator.cs" />
     <Compile Include="Translators\CharacterTranslator.cs" />

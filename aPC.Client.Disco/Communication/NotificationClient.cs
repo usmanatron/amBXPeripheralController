@@ -1,4 +1,5 @@
 ﻿using System.ServiceModel;
+using aPC.Common.Client;
 using aPC.Common.Client.Communication;
 
 namespace aPC.Client.Disco.Communication

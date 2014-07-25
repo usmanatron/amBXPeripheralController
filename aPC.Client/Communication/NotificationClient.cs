@@ -1,5 +1,5 @@
-﻿using System.Configuration;
-using System.ServiceModel;
+﻿using System.ServiceModel;
+using aPC.Common.Client;
 using aPC.Common.Client.Communication;
 using Ninject;
 

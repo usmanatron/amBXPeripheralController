@@ -6,7 +6,7 @@ namespace aPC.Common.Client.Tests.Communication
 {
   public class TestNotificationClient : NotificationClientBase
   {
-    public TestNotificationClient() : base(new TestHostnameAccessor())
+    public TestNotificationClient() : base(new HostnameAccessor())
     {
       IntegratedScenesPushed = new List<string>();
       CustomScenesPushed = new List<string>();

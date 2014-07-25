@@ -3,9 +3,9 @@ using aPC.Common.Client;
 
 namespace aPC.Client
 {
-  public class HostnameAccessor : HostnameAccessorBase
+  public class UpdatableHostnameAccessor : HostnameAccessor
   {
-    public HostnameAccessor(HostnameInput xiHostnameInput)
+    public UpdatableHostnameAccessor(HostnameInput xiHostnameInput)
     {
       mHostnameInput = xiHostnameInput;
     }

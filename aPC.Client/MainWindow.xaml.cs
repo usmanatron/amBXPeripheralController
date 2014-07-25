@@ -12,7 +12,7 @@ namespace aPC.Client
   public partial class MainWindow : Window
   {
     public MainWindow(Settings xiSettings, IntegratedListing xiIntegratedListing, CustomListing xiCustomListing, 
-                      HostnameAccessor xiHostnameAccessor, CustomFileHandler xiCustomFileHandler, SceneRunner xiSceneRunner)
+                      UpdatableHostnameAccessor xiHostnameAccessor, CustomFileHandler xiCustomFileHandler, SceneRunner xiSceneRunner)
     {
       mSettings = xiSettings;
       mIntegratedSceneListing = xiIntegratedListing;
@@ -152,7 +152,7 @@ namespace aPC.Client
     private ObservableCollection<string> mIntegratedScenes;
     private ObservableCollection<string> mCustomScenes;
     private readonly SceneRunner mSceneRunner;
-    private readonly HostnameAccessor mHostnameAccessor;
+    private readonly UpdatableHostnameAccessor mHostnameAccessor;
     private readonly CustomFileHandler mCustomFileHandler;
   }
 }

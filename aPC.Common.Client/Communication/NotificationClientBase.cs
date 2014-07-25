@@ -9,7 +9,7 @@ namespace aPC.Common.Client.Communication
 {
   public abstract class NotificationClientBase : INotificationClient
   {
-    protected NotificationClientBase(HostnameAccessorBase xiHostnameAccessorBase) : this(
+    protected NotificationClientBase(HostnameAccessor xiHostnameAccessorBase) : this(
       new EndpointAddress(CommunicationSettings.GetServiceUrl(xiHostnameAccessorBase.Get(), eApplicationType.amBXPeripheralController)))
     {
       mHostnameAccessor = xiHostnameAccessorBase;
@@ -100,7 +100,7 @@ namespace aPC.Common.Client.Communication
       }
     }
 
-    private readonly HostnameAccessorBase mHostnameAccessor;
+    private readonly HostnameAccessor mHostnameAccessor;
     private ChannelFactory<INotificationService> mClient;
 
     protected abstract bool SupportsCustomScenes { get; }

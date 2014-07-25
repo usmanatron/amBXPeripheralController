@@ -1,16 +1,18 @@
 ﻿namespace aPC.Common.Client
 {
-  public abstract class HostnameAccessorBase
+  /// <summary>
+  /// The default HostnameAccessor points to 
+  /// localhost and does not support updating
+  /// </summary>
+  public class HostnameAccessor
   {
-    public abstract string Get();
+    public virtual string Get()
+    {
+      return "localhost";
+    }
 
-    /// <remarks>
-    /// By default, do nothing.
-    /// </remarks>
     public virtual void Update()
     {
     }
-
-    //public event OnHostnameChanged();
   }
 }

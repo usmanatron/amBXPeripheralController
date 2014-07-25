@@ -1,5 +1,5 @@
-﻿using aPC.Common.Client.Communication;
-using System;
+﻿using aPC.Common.Client;
+using aPC.Common.Client.Communication;
 using System.ServiceModel;
 
 namespace aPC.Client.Morse.Communication
