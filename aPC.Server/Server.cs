@@ -6,7 +6,7 @@ using log4net;
 
 namespace aPC.Server
 {
-  class Server
+  public class Server
   {
     private static void Main(string[] args)
     {
@@ -28,6 +28,6 @@ namespace aPC.Server
     }
 
     private static ILog Log = LogManager.GetLogger("Server");
-    internal static ServerTask ServerTask;
+    public static ServerTask ServerTask;
   }
 }

@@ -11,7 +11,7 @@ using aPC.Common.Communication;
 
 namespace aPC.Server
 {
-  class ServerTask
+  public class ServerTask
   {
     public ServerTask(
       amBXScene xiInitialScene,
@@ -27,7 +27,7 @@ namespace aPC.Server
       mEngine = xiEngine;
     }
 
-    internal void Run()
+    public void Run()
     {
       using (new CommunicationManager(mNotificationService))
       using (mEngine)
@@ -42,7 +42,7 @@ namespace aPC.Server
       }
     }
 
-    internal void Update(amBXScene xiScene)
+    public void Update(amBXScene xiScene)
     {
       mSceneUpdateHandler.UpdateScene(xiScene);
     }
