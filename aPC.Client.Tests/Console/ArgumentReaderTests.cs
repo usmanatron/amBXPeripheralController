@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using NUnit.Framework;
-using System.Collections.Generic;
+﻿using NUnit.Framework;
 using System.IO;
 using aPC.Client.Console;
 
@@ -49,6 +47,15 @@ namespace aPC.Client.Tests.Console
       Assert.AreEqual(lSettings.SceneData, GetExampleScene(lArguments[1]));
     }
 
+    [Test]
+    public void CustomScene_WithIvalidPath_Throws()
+    {
+      var lArguments = new[] { @"/F", "DoesntExist.xml" };
+      Assert.Throws<UsageException>(() => new ArgumentReader(lArguments));
+    }
+
+    #region Helpers
+
     private string GetExampleScene(string xiFilename)
     {
       return File.ReadAllText(Path.GetFullPath(xiFilename));
@@ -57,8 +64,10 @@ namespace aPC.Client.Tests.Console
     private Settings GetSettingsFromArguments(string[] xiArguments)
     {
       var lSettings = new Settings();
-      new ArgumentReader(xiArguments.ToList()).AddArgumentsToSettings(lSettings);
+      new ArgumentReader(xiArguments).AddArgumentsToSettings(lSettings);
       return lSettings;
     }
+
+    #endregion
   }
 }

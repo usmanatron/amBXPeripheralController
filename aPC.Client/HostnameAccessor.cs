@@ -23,7 +23,7 @@ namespace aPC.Client
 
     private string GetNewHostname()
     {
-      //TODO: Get rid of this - right now it's necessary to stop an exception happening when hitting this
+      //TODO: Use ninject somehow here - right now it's necessary to stop an exception happening when hitting this
       // twice in the applications lifetime.
       mHostnameInput = new HostnameInput();
       mHostnameInput.ShowDialog();

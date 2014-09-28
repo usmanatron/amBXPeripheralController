@@ -1,5 +1,4 @@
-﻿using aPC.Client;
-using aPC.Common.Client.Tests.Communication;
+﻿using aPC.Common.Client.Tests.Communication;
 using NUnit.Framework;
 
 namespace aPC.Client.Tests
@@ -13,6 +12,15 @@ namespace aPC.Client.Tests
       mTestNotificationClient = new TestNotificationClient();
     }
 
+    //TODO: Move this to a better place
+    [Test]
+    public void MissingSceneData_GivesInvalidSettings()
+    {
+      var lSettings = new Settings(true, string.Empty);
+
+      Assert.IsFalse(lSettings.IsValid);
+    }
+
     [Test]
     public void IntegratedScene_PushedAppropriately()
     {
@@ -21,6 +29,7 @@ namespace aPC.Client.Tests
 
       lTask.RunScene();
 
+      Assert.IsTrue(lSettings.IsValid);
       Assert.AreEqual(1, mTestNotificationClient.NumberOfIntegratedScenesPushed);
       Assert.AreEqual(0, mTestNotificationClient.NumberOfCustomScenesPushed);
       Assert.AreEqual("Scene_Name", mTestNotificationClient.IntegratedScenesPushed[0]);
@@ -34,6 +43,7 @@ namespace aPC.Client.Tests
 
       lTask.RunScene();
 
+      Assert.IsTrue(lSettings.IsValid);
       Assert.AreEqual(0, mTestNotificationClient.NumberOfIntegratedScenesPushed);
       Assert.AreEqual(1, mTestNotificationClient.NumberOfCustomScenesPushed);
       Assert.AreEqual("CustomScene", mTestNotificationClient.CustomScenesPushed[0]);

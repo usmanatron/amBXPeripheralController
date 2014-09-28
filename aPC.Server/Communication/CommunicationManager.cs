@@ -5,7 +5,7 @@ using System.ServiceModel.Description;
 using aPC.Common.Communication;
 
 namespace aPC.Server.Communication
-{
+{ 
   public class CommunicationManager : IDisposable
   {
     public CommunicationManager(INotificationService xiNotificationService)
