@@ -38,6 +38,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.Chromesthesia", "aPC.Ch
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.Chromesthesia.Tests", "aPC.Chromesthesia.Tests\aPC.Chromesthesia.Tests.csproj", "{3656A115-D461-42C8-A96B-7752BCD4EE18}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.Common.Server", "aPC.Common.Server\aPC.Common.Server.csproj", "{D92D8FB4-7414-4DFE-83B6-2EE8852676BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.Common.Server.Tests", "aPC.Common.Server.Tests\aPC.Common.Server.Tests.csproj", "{39D46142-A4C2-4159-A2AD-EFA800D87FC2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -158,6 +162,26 @@ Global
 		{3656A115-D461-42C8-A96B-7752BCD4EE18}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{3656A115-D461-42C8-A96B-7752BCD4EE18}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{3656A115-D461-42C8-A96B-7752BCD4EE18}.Release|Win32.ActiveCfg = Release|Any CPU
+		{D92D8FB4-7414-4DFE-83B6-2EE8852676BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D92D8FB4-7414-4DFE-83B6-2EE8852676BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D92D8FB4-7414-4DFE-83B6-2EE8852676BC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D92D8FB4-7414-4DFE-83B6-2EE8852676BC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D92D8FB4-7414-4DFE-83B6-2EE8852676BC}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{D92D8FB4-7414-4DFE-83B6-2EE8852676BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D92D8FB4-7414-4DFE-83B6-2EE8852676BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D92D8FB4-7414-4DFE-83B6-2EE8852676BC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D92D8FB4-7414-4DFE-83B6-2EE8852676BC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D92D8FB4-7414-4DFE-83B6-2EE8852676BC}.Release|Win32.ActiveCfg = Release|Any CPU
+		{39D46142-A4C2-4159-A2AD-EFA800D87FC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39D46142-A4C2-4159-A2AD-EFA800D87FC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39D46142-A4C2-4159-A2AD-EFA800D87FC2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{39D46142-A4C2-4159-A2AD-EFA800D87FC2}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{39D46142-A4C2-4159-A2AD-EFA800D87FC2}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{39D46142-A4C2-4159-A2AD-EFA800D87FC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39D46142-A4C2-4159-A2AD-EFA800D87FC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39D46142-A4C2-4159-A2AD-EFA800D87FC2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{39D46142-A4C2-4159-A2AD-EFA800D87FC2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{39D46142-A4C2-4159-A2AD-EFA800D87FC2}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

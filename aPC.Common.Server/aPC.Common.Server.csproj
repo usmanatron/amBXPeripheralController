@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5B9C9DAD-4539-4F54-A13E-30C603F767FF}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{D92D8FB4-7414-4DFE-83B6-2EE8852676BC}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>aPC.Server</RootNamespace>
-    <AssemblyName>aPC.Server</AssemblyName>
+    <RootNamespace>aPC.Common.Server</RootNamespace>
+    <AssemblyName>aPC.Common.Server</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -16,7 +16,6 @@
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,9 +23,9 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -34,52 +33,62 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="amBXLib, Version=1.0.5075.24159, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\Release\amBXLib.dll</HintPath>
+    <Reference Include="amBXLib">
+      <HintPath>..\Lib\Debug\amBXLib.dll</HintPath>
     </Reference>
-    <Reference Include="Ninject">
-      <HintPath>..\packages\Ninject.3.0.1.10\lib\net45-full\Ninject.dll</HintPath>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.XML" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Communication\CommunicationManager.cs" />
-    <Compile Include="ConductorManager.cs" />
-    <Compile Include="Communication\NotificationService.cs" />
-    <Compile Include="SceneStatus.cs" />
-    <Compile Include="SceneUpdateHandler.cs" />
-    <Compile Include="Server.cs" />
+    <Compile Include="Actors\ActorBase.cs" />
+    <Compile Include="Actors\ComponentActor.cs" />
+    <Compile Include="Actors\FanActor.cs" />
+    <Compile Include="Actors\FrameActor.cs" />
+    <Compile Include="Actors\IActor.cs" />
+    <Compile Include="Actors\LightActor.cs" />
+    <Compile Include="Actors\RumbleActor.cs" />
+    <Compile Include="AtypicalFirstRunInfiniteTicker.cs" />
+    <Compile Include="Conductors\ComponentConductor.cs" />
+    <Compile Include="Conductors\ConductorBase.cs" />
+    <Compile Include="Conductors\FanConductor.cs" />
+    <Compile Include="Conductors\FrameConductor.cs" />
+    <Compile Include="Conductors\IConductor.cs" />
+    <Compile Include="Conductors\LightConductor.cs" />
+    <Compile Include="Conductors\RumbleConductor.cs" />
+    <Compile Include="Engine\ConversionHelpers.cs" />
+    <Compile Include="Engine\EngineManager.cs" />
+    <Compile Include="Engine\IEngine.cs" />
+    <Compile Include="LockedBool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServerTask.cs" />
+    <Compile Include="SceneHandlers\ComponentHandler.cs" />
+    <Compile Include="SceneHandlers\FanHandler.cs" />
+    <Compile Include="SceneHandlers\FrameHandler.cs" />
+    <Compile Include="SceneHandlers\ISceneHandler.cs" />
+    <Compile Include="SceneHandlers\LightHandler.cs" />
+    <Compile Include="SceneHandlers\RumbleHandler.cs" />
+    <Compile Include="SceneHandlers\SceneHandlerBase.cs" />
+    <Compile Include="Snapshots\ComponentSnapshot.cs" />
+    <Compile Include="Snapshots\FrameSnapshot.cs" />
+    <Compile Include="Snapshots\SnapshotBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\aPC.Common.Communication\aPC.Common.Communication.csproj">
-      <Project>{38537B40-B1FD-433B-B958-8A1B3C7B83D7}</Project>
-      <Name>aPC.Common.Communication</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\aPC.Common.Server\aPC.Common.Server.csproj">
-      <Project>{d92d8fb4-7414-4dfe-83b6-2ee8852676bc}</Project>
-      <Name>aPC.Common.Server</Name>
-    </ProjectReference>
     <ProjectReference Include="..\aPC.Common\aPC.Common.csproj">
       <Project>{b6543e75-59af-4059-acf8-560e82bc72ce}</Project>
       <Name>aPC.Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
