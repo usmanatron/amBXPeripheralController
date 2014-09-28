@@ -58,29 +58,12 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Actors\FanActorTests.cs" />
-    <Compile Include="Actors\LightActorTests.cs" />
-    <Compile Include="Actors\RumbleActorTests.cs" />
-    <Compile Include="AtypicalFirstRunInfiniteTickerTests.cs" />
     <Compile Include="Communication\NotificationServiceTests.cs" />
     <Compile Include="ConductorManagerTests.cs" />
-    <Compile Include="Conductors\ConductorBaseTests.cs" />
-    <Compile Include="Conductors\TestConductor.cs" />
-    <Compile Include="ConversionHelperTests.cs" />
-    <Compile Include="Actors\FrameActorTests.cs" />
-    <Compile Include="Actors\TestEngineActor.cs" />
     <Compile Include="EngineManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SceneHandlers\FanHandlerTests.cs" />
-    <Compile Include="SceneHandlers\FrameHandlerTests.cs" />
-    <Compile Include="SceneHandlers\LightHandlerTests.cs" />
-    <Compile Include="SceneHandlers\RumbleHandlerTests.cs" />
-    <Compile Include="SceneHandlers\SceneHandlerBaseTests.cs" />
-    <Compile Include="SceneHandlers\TestSceneHandler.cs" />
     <Compile Include="SceneStatusTests.cs" />
-    <Compile Include="Snapshots\TestSnapshot.cs" />
     <Compile Include="TestConductorManager.cs" />
-    <Compile Include="TestEngineManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\aPC.Common.Communication\aPC.Common.Communication.csproj">
@@ -95,9 +78,6 @@
       <Project>{5b9c9dad-4539-4f54-a13e-30c603f767ff}</Project>
       <Name>aPC.Server</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
