@@ -34,21 +34,19 @@ namespace aPC.Client.Console
 
     private string RetrieveFile(string xifilePath)
     {
-      string lInputFilePath;
-
       try
       {
-        lInputFilePath = Path.GetFullPath(xifilePath);
+        var lInputFilePath = Path.GetFullPath(xifilePath);
+
+        using (var lReader = new StreamReader(lInputFilePath))
+        {
+          return lReader.ReadToEnd();
+        }
       }
       catch
       {
         // File not there / error
         throw new UsageException("Input was not a valid path");
-      }
-
-      using (var lReader = new StreamReader(lInputFilePath))
-      {
-        return lReader.ReadToEnd();
       }
     }
 

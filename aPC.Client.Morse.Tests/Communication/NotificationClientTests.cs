@@ -61,90 +61,393 @@ namespace aPC.Client.Morse.Tests.Communication
     private TestNotificationService mHost;
 
     private const string mSerialisedRainbow = @"<?xml version=""1.0"" encoding=""utf-16""?>
-<amBXScene xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" IsExclusive=""true"" SceneType=""Desync"">
+<amBXScene xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <IsExclusive>true</IsExclusive>
+  <SceneType>Desync</SceneType>
   <Frames>
-    <Frame Length=""1000"" IsRepeated=""true"">
-      <Lights FadeTime=""500"">
-        <North Intensity=""1"" Red=""1"" Green=""0"" Blue=""0"" />
-        <NorthEast Intensity=""1"" Red=""1"" Green=""0"" Blue=""0"" />
-        <East Intensity=""1"" Red=""1"" Green=""0"" Blue=""0"" />
-        <SouthEast Intensity=""1"" Red=""1"" Green=""0"" Blue=""0"" />
-        <South Intensity=""1"" Red=""1"" Green=""0"" Blue=""0"" />
-        <SouthWest Intensity=""1"" Red=""1"" Green=""0"" Blue=""0"" />
-        <West Intensity=""1"" Red=""1"" Green=""0"" Blue=""0"" />
-        <NorthWest Intensity=""1"" Red=""1"" Green=""0"" Blue=""0"" />
+    <Frame>
+      <Length>1000</Length>
+      <IsRepeated>true</IsRepeated>
+      <Lights>
+        <FadeTime>500</FadeTime>
+        <North>
+          <Intensity>1</Intensity>
+          <Red>1</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </North>
+        <NorthEast>
+          <Intensity>1</Intensity>
+          <Red>1</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </NorthEast>
+        <East>
+          <Intensity>1</Intensity>
+          <Red>1</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </East>
+        <SouthEast>
+          <Intensity>1</Intensity>
+          <Red>1</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </SouthEast>
+        <South>
+          <Intensity>1</Intensity>
+          <Red>1</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </South>
+        <SouthWest>
+          <Intensity>1</Intensity>
+          <Red>1</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </SouthWest>
+        <West>
+          <Intensity>1</Intensity>
+          <Red>1</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </West>
+        <NorthWest>
+          <Intensity>1</Intensity>
+          <Red>1</Red>
+          <Green>0</Green>
+          <Blue>0</Blue>
+        </NorthWest>
       </Lights>
     </Frame>
-    <Frame Length=""1000"" IsRepeated=""true"">
-      <Lights FadeTime=""500"">
-        <North Intensity=""1"" Red=""1"" Green=""0.5"" Blue=""0"" />
-        <NorthEast Intensity=""1"" Red=""1"" Green=""0.5"" Blue=""0"" />
-        <East Intensity=""1"" Red=""1"" Green=""0.5"" Blue=""0"" />
-        <SouthEast Intensity=""1"" Red=""1"" Green=""0.5"" Blue=""0"" />
-        <South Intensity=""1"" Red=""1"" Green=""0.5"" Blue=""0"" />
-        <SouthWest Intensity=""1"" Red=""1"" Green=""0.5"" Blue=""0"" />
-        <West Intensity=""1"" Red=""1"" Green=""0.5"" Blue=""0"" />
-        <NorthWest Intensity=""1"" Red=""1"" Green=""0.5"" Blue=""0"" />
+    <Frame>
+      <Length>1000</Length>
+      <IsRepeated>true</IsRepeated>
+      <Lights>
+        <FadeTime>500</FadeTime>
+        <North>
+          <Intensity>1</Intensity>
+          <Red>1</Red>
+          <Green>0.5</Green>
+          <Blue>0</Blue>
+        </North>
+        <NorthEast>
+          <Intensity>1</Intensity>
+          <Red>1</Red>
+          <Green>0.5</Green>
+          <Blue>0</Blue>
+        </NorthEast>
+        <East>
+          <Intensity>1</Intensity>
+          <Red>1</Red>
+          <Green>0.5</Green>
+          <Blue>0</Blue>
+        </East>
+        <SouthEast>
+          <Intensity>1</Intensity>
+          <Red>1</Red>
+          <Green>0.5</Green>
+          <Blue>0</Blue>
+        </SouthEast>
+        <South>
+          <Intensity>1</Intensity>
+          <Red>1</Red>
+          <Green>0.5</Green>
+          <Blue>0</Blue>
+        </South>
+        <SouthWest>
+          <Intensity>1</Intensity>
+          <Red>1</Red>
+          <Green>0.5</Green>
+          <Blue>0</Blue>
+        </SouthWest>
+        <West>
+          <Intensity>1</Intensity>
+          <Red>1</Red>
+          <Green>0.5</Green>
+          <Blue>0</Blue>
+        </West>
+        <NorthWest>
+          <Intensity>1</Intensity>
+          <Red>1</Red>
+          <Green>0.5</Green>
+          <Blue>0</Blue>
+        </NorthWest>
       </Lights>
     </Frame>
-    <Frame Length=""1000"" IsRepeated=""true"">
-      <Lights FadeTime=""500"">
-        <North Intensity=""1"" Red=""1"" Green=""1"" Blue=""0"" />
-        <NorthEast Intensity=""1"" Red=""1"" Green=""1"" Blue=""0"" />
-        <East Intensity=""1"" Red=""1"" Green=""1"" Blue=""0"" />
-        <SouthEast Intensity=""1"" Red=""1"" Green=""1"" Blue=""0"" />
-        <South Intensity=""1"" Red=""1"" Green=""1"" Blue=""0"" />
-        <SouthWest Intensity=""1"" Red=""1"" Green=""1"" Blue=""0"" />
-        <West Intensity=""1"" Red=""1"" Green=""1"" Blue=""0"" />
-        <NorthWest Intensity=""1"" Red=""1"" Green=""1"" Blue=""0"" />
+    <Frame>
+      <Length>1000</Length>
+      <IsRepeated>true</IsRepeated>
+      <Lights>
+        <FadeTime>500</FadeTime>
+        <North>
+          <Intensity>1</Intensity>
+          <Red>1</Red>
+          <Green>1</Green>
+          <Blue>0</Blue>
+        </North>
+        <NorthEast>
+          <Intensity>1</Intensity>
+          <Red>1</Red>
+          <Green>1</Green>
+          <Blue>0</Blue>
+        </NorthEast>
+        <East>
+          <Intensity>1</Intensity>
+          <Red>1</Red>
+          <Green>1</Green>
+          <Blue>0</Blue>
+        </East>
+        <SouthEast>
+          <Intensity>1</Intensity>
+          <Red>1</Red>
+          <Green>1</Green>
+          <Blue>0</Blue>
+        </SouthEast>
+        <South>
+          <Intensity>1</Intensity>
+          <Red>1</Red>
+          <Green>1</Green>
+          <Blue>0</Blue>
+        </South>
+        <SouthWest>
+          <Intensity>1</Intensity>
+          <Red>1</Red>
+          <Green>1</Green>
+          <Blue>0</Blue>
+        </SouthWest>
+        <West>
+          <Intensity>1</Intensity>
+          <Red>1</Red>
+          <Green>1</Green>
+          <Blue>0</Blue>
+        </West>
+        <NorthWest>
+          <Intensity>1</Intensity>
+          <Red>1</Red>
+          <Green>1</Green>
+          <Blue>0</Blue>
+        </NorthWest>
       </Lights>
     </Frame>
-    <Frame Length=""1000"" IsRepeated=""true"">
-      <Lights FadeTime=""500"">
-        <North Intensity=""1"" Red=""0"" Green=""1"" Blue=""0"" />
-        <NorthEast Intensity=""1"" Red=""0"" Green=""1"" Blue=""0"" />
-        <East Intensity=""1"" Red=""0"" Green=""1"" Blue=""0"" />
-        <SouthEast Intensity=""1"" Red=""0"" Green=""1"" Blue=""0"" />
-        <South Intensity=""1"" Red=""0"" Green=""1"" Blue=""0"" />
-        <SouthWest Intensity=""1"" Red=""0"" Green=""1"" Blue=""0"" />
-        <West Intensity=""1"" Red=""0"" Green=""1"" Blue=""0"" />
-        <NorthWest Intensity=""1"" Red=""0"" Green=""1"" Blue=""0"" />
+    <Frame>
+      <Length>1000</Length>
+      <IsRepeated>true</IsRepeated>
+      <Lights>
+        <FadeTime>500</FadeTime>
+        <North>
+          <Intensity>1</Intensity>
+          <Red>0</Red>
+          <Green>1</Green>
+          <Blue>0</Blue>
+        </North>
+        <NorthEast>
+          <Intensity>1</Intensity>
+          <Red>0</Red>
+          <Green>1</Green>
+          <Blue>0</Blue>
+        </NorthEast>
+        <East>
+          <Intensity>1</Intensity>
+          <Red>0</Red>
+          <Green>1</Green>
+          <Blue>0</Blue>
+        </East>
+        <SouthEast>
+          <Intensity>1</Intensity>
+          <Red>0</Red>
+          <Green>1</Green>
+          <Blue>0</Blue>
+        </SouthEast>
+        <South>
+          <Intensity>1</Intensity>
+          <Red>0</Red>
+          <Green>1</Green>
+          <Blue>0</Blue>
+        </South>
+        <SouthWest>
+          <Intensity>1</Intensity>
+          <Red>0</Red>
+          <Green>1</Green>
+          <Blue>0</Blue>
+        </SouthWest>
+        <West>
+          <Intensity>1</Intensity>
+          <Red>0</Red>
+          <Green>1</Green>
+          <Blue>0</Blue>
+        </West>
+        <NorthWest>
+          <Intensity>1</Intensity>
+          <Red>0</Red>
+          <Green>1</Green>
+          <Blue>0</Blue>
+        </NorthWest>
       </Lights>
     </Frame>
-    <Frame Length=""1000"" IsRepeated=""true"">
-      <Lights FadeTime=""500"">
-        <North Intensity=""1"" Red=""0"" Green=""0"" Blue=""1"" />
-        <NorthEast Intensity=""1"" Red=""0"" Green=""0"" Blue=""1"" />
-        <East Intensity=""1"" Red=""0"" Green=""0"" Blue=""1"" />
-        <SouthEast Intensity=""1"" Red=""0"" Green=""0"" Blue=""1"" />
-        <South Intensity=""1"" Red=""0"" Green=""0"" Blue=""1"" />
-        <SouthWest Intensity=""1"" Red=""0"" Green=""0"" Blue=""1"" />
-        <West Intensity=""1"" Red=""0"" Green=""0"" Blue=""1"" />
-        <NorthWest Intensity=""1"" Red=""0"" Green=""0"" Blue=""1"" />
+    <Frame>
+      <Length>1000</Length>
+      <IsRepeated>true</IsRepeated>
+      <Lights>
+        <FadeTime>500</FadeTime>
+        <North>
+          <Intensity>1</Intensity>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>1</Blue>
+        </North>
+        <NorthEast>
+          <Intensity>1</Intensity>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>1</Blue>
+        </NorthEast>
+        <East>
+          <Intensity>1</Intensity>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>1</Blue>
+        </East>
+        <SouthEast>
+          <Intensity>1</Intensity>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>1</Blue>
+        </SouthEast>
+        <South>
+          <Intensity>1</Intensity>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>1</Blue>
+        </South>
+        <SouthWest>
+          <Intensity>1</Intensity>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>1</Blue>
+        </SouthWest>
+        <West>
+          <Intensity>1</Intensity>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>1</Blue>
+        </West>
+        <NorthWest>
+          <Intensity>1</Intensity>
+          <Red>0</Red>
+          <Green>0</Green>
+          <Blue>1</Blue>
+        </NorthWest>
       </Lights>
     </Frame>
-    <Frame Length=""1000"" IsRepeated=""true"">
-      <Lights FadeTime=""500"">
-        <North Intensity=""1"" Red=""0.3"" Green=""0"" Blue=""0.5"" />
-        <NorthEast Intensity=""1"" Red=""0.3"" Green=""0"" Blue=""0.5"" />
-        <East Intensity=""1"" Red=""0.3"" Green=""0"" Blue=""0.5"" />
-        <SouthEast Intensity=""1"" Red=""0.3"" Green=""0"" Blue=""0.5"" />
-        <South Intensity=""1"" Red=""0.3"" Green=""0"" Blue=""0.5"" />
-        <SouthWest Intensity=""1"" Red=""0.3"" Green=""0"" Blue=""0.5"" />
-        <West Intensity=""1"" Red=""0.3"" Green=""0"" Blue=""0.5"" />
-        <NorthWest Intensity=""1"" Red=""0.3"" Green=""0"" Blue=""0.5"" />
+    <Frame>
+      <Length>1000</Length>
+      <IsRepeated>true</IsRepeated>
+      <Lights>
+        <FadeTime>500</FadeTime>
+        <North>
+          <Intensity>1</Intensity>
+          <Red>0.3</Red>
+          <Green>0</Green>
+          <Blue>0.5</Blue>
+        </North>
+        <NorthEast>
+          <Intensity>1</Intensity>
+          <Red>0.3</Red>
+          <Green>0</Green>
+          <Blue>0.5</Blue>
+        </NorthEast>
+        <East>
+          <Intensity>1</Intensity>
+          <Red>0.3</Red>
+          <Green>0</Green>
+          <Blue>0.5</Blue>
+        </East>
+        <SouthEast>
+          <Intensity>1</Intensity>
+          <Red>0.3</Red>
+          <Green>0</Green>
+          <Blue>0.5</Blue>
+        </SouthEast>
+        <South>
+          <Intensity>1</Intensity>
+          <Red>0.3</Red>
+          <Green>0</Green>
+          <Blue>0.5</Blue>
+        </South>
+        <SouthWest>
+          <Intensity>1</Intensity>
+          <Red>0.3</Red>
+          <Green>0</Green>
+          <Blue>0.5</Blue>
+        </SouthWest>
+        <West>
+          <Intensity>1</Intensity>
+          <Red>0.3</Red>
+          <Green>0</Green>
+          <Blue>0.5</Blue>
+        </West>
+        <NorthWest>
+          <Intensity>1</Intensity>
+          <Red>0.3</Red>
+          <Green>0</Green>
+          <Blue>0.5</Blue>
+        </NorthWest>
       </Lights>
     </Frame>
-    <Frame Length=""1000"" IsRepeated=""true"">
-      <Lights FadeTime=""500"">
-        <North Intensity=""1"" Red=""0.56"" Green=""0"" Blue=""1"" />
-        <NorthEast Intensity=""1"" Red=""0.56"" Green=""0"" Blue=""1"" />
-        <East Intensity=""1"" Red=""0.56"" Green=""0"" Blue=""1"" />
-        <SouthEast Intensity=""1"" Red=""0.56"" Green=""0"" Blue=""1"" />
-        <South Intensity=""1"" Red=""0.56"" Green=""0"" Blue=""1"" />
-        <SouthWest Intensity=""1"" Red=""0.56"" Green=""0"" Blue=""1"" />
-        <West Intensity=""1"" Red=""0.56"" Green=""0"" Blue=""1"" />
-        <NorthWest Intensity=""1"" Red=""0.56"" Green=""0"" Blue=""1"" />
+    <Frame>
+      <Length>1000</Length>
+      <IsRepeated>true</IsRepeated>
+      <Lights>
+        <FadeTime>500</FadeTime>
+        <North>
+          <Intensity>1</Intensity>
+          <Red>0.56</Red>
+          <Green>0</Green>
+          <Blue>1</Blue>
+        </North>
+        <NorthEast>
+          <Intensity>1</Intensity>
+          <Red>0.56</Red>
+          <Green>0</Green>
+          <Blue>1</Blue>
+        </NorthEast>
+        <East>
+          <Intensity>1</Intensity>
+          <Red>0.56</Red>
+          <Green>0</Green>
+          <Blue>1</Blue>
+        </East>
+        <SouthEast>
+          <Intensity>1</Intensity>
+          <Red>0.56</Red>
+          <Green>0</Green>
+          <Blue>1</Blue>
+        </SouthEast>
+        <South>
+          <Intensity>1</Intensity>
+          <Red>0.56</Red>
+          <Green>0</Green>
+          <Blue>1</Blue>
+        </South>
+        <SouthWest>
+          <Intensity>1</Intensity>
+          <Red>0.56</Red>
+          <Green>0</Green>
+          <Blue>1</Blue>
+        </SouthWest>
+        <West>
+          <Intensity>1</Intensity>
+          <Red>0.56</Red>
+          <Green>0</Green>
+          <Blue>1</Blue>
+        </West>
+        <NorthWest>
+          <Intensity>1</Intensity>
+          <Red>0.56</Red>
+          <Green>0</Green>
+          <Blue>1</Blue>
+        </NorthWest>
       </Lights>
     </Frame>
   </Frames>
