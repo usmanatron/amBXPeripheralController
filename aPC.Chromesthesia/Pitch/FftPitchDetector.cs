@@ -1,9 +1,15 @@
-﻿using System;
+﻿using NAudio.Dsp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace aPC.Chromesthesia.Pitch
 {
+  /* qqUMI TODO:
+   * Increase buffer to 8192 if possible (decrease bin size)
+   * Use NAudio to calculate FFT (instead of some random library)
+   */
+
   // FFT based pitch detector. seems to work best with block sizes of 4096
   public class FftPitchDetector : IPitchDetector
   {
@@ -14,21 +20,17 @@ namespace aPC.Chromesthesia.Pitch
       this.sampleRate = sampleRate;
     }
 
-    // http://en.wikipedia.org/wiki/Window_function
-    private float HammingWindow(int n, int N)
-    {
-      return 0.54f - 0.46f * (float)Math.Cos((2 * Math.PI * n) / (N - 1));
-    }
-
     private float[] fftBuffer;
+    private Complex[] fftBufferComplex;
     private float[] prevBuffer;
+    private Complex[] prevBufferComplex;
 
     public float DetectPitch(float[] buffer, int inFrames)
     {
-      Func<int, int, float> window = HammingWindow;
       if (prevBuffer == null)
       {
         prevBuffer = new float[inFrames];
+        prevBufferComplex = new Complex[inFrames];// / 2];
       }
 
       // double frames since we are combining present and previous buffers
@@ -36,42 +38,66 @@ namespace aPC.Chromesthesia.Pitch
       if (fftBuffer == null)
       {
         fftBuffer = new float[frames * 2]; // times 2 because it is complex input
+        fftBufferComplex = new Complex[frames];
       }
 
       for (int n = 0; n < frames; n++)
       {
         if (n < inFrames)
         {
-          fftBuffer[n * 2] = prevBuffer[n] * window(n, frames);
+
+          fftBuffer[n * 2] = prevBuffer[n] * (float) FastFourierTransform.HammingWindow(n, frames);
+          fftBufferComplex[n].X = prevBufferComplex[n].X * (float)FastFourierTransform.HammingWindow(n, frames);
+          
           fftBuffer[n * 2 + 1] = 0; // need to clear out as fft modifies buffer
+          fftBufferComplex[n].Y = 0;
         }
         else
         {
-          fftBuffer[n * 2] = buffer[n - inFrames] * window(n, frames);
+          fftBuffer[n * 2] = buffer[n - inFrames] * (float) FastFourierTransform.HammingWindow(n, frames);
+          fftBufferComplex[n].X = buffer[n - inFrames] * (float) FastFourierTransform.HammingWindow(n, frames);
+          
           fftBuffer[n * 2 + 1] = 0; // need to clear out as fft modifies buffer
+          fftBufferComplex[n].Y = 0;
         }
       }
 
-      //NAudio.Dsp.FastFourierTransform.FFT(true, 11 /* 2048 */, fftBuffer);
       // assuming frames is a power of 2
       SmbPitchShift.smbFft(fftBuffer, frames, -1);
+      FastFourierTransform.FFT(true, fftBufferComplex.Length /*11*/, fftBufferComplex);
 
       float binSize = sampleRate / frames;
-      int minBin = (int)(85 / binSize);
-      int maxBin = (int)(300 / binSize);
+      int minBin = (int)(60 / binSize);
+      int maxBin = (int)(600 / binSize);
       float maxIntensity = 0f;
+      float maxIntensityC = 0f;
       int maxBinIndex = 0;
+      int maxBinIndexC = 0;
       for (int bin = minBin; bin <= maxBin; bin++)
       {
         float real = fftBuffer[bin * 2];
+        float realC = fftBufferComplex[bin].X;
+
         float imaginary = fftBuffer[bin * 2 + 1];
+        float imaginaryC = fftBufferComplex[bin].Y;
+
         float intensity = real * real + imaginary * imaginary;
+        float intensityC = realC * realC * imaginaryC * imaginaryC;
+
         if (intensity > maxIntensity)
         {
           maxIntensity = intensity;
           maxBinIndex = bin;
         }
+        if (intensityC > maxIntensityC)
+        {
+          maxIntensityC = intensityC;
+          maxBinIndexC = bin;
+        }
+
       }
+      if (maxBinIndex != maxBinIndexC) maxBinIndexC++;
+
       return binSize * maxBinIndex;
     }
   }
