@@ -11,14 +11,15 @@ namespace aPC.Chromesthesia
   class SceneGeneratorProvider : IWaveProvider
   {
     private IWaveProvider sourceProvider;
-    private PitchDetector pitchDetector;    
+    private PitchDetector leftPitchDetector;
+    private PitchDetector rightPitchDetector;
     private FloatDataStereoSplitter stereoSplitter;
     
     private WaveBuffer intermediaryBuffer;
     private WaveBuffer leftBuffer;
     private WaveBuffer rightBuffer;
 
-    public SceneGeneratorProvider(IWaveProvider sourceProvider, PitchDetector pitchDetector, FloatDataStereoSplitter stereoSplitter)
+    public SceneGeneratorProvider(IWaveProvider sourceProvider, PitchDetector leftPitchDetector, PitchDetector rightPitchDetector, FloatDataStereoSplitter stereoSplitter)
     {
       if (sourceProvider.WaveFormat.SampleRate != 44100)
       {
@@ -32,7 +33,8 @@ namespace aPC.Chromesthesia
       this.sourceProvider = sourceProvider;
       this.stereoSplitter = stereoSplitter;
 
-      this.pitchDetector = pitchDetector;
+      this.leftPitchDetector = leftPitchDetector;
+      this.rightPitchDetector = rightPitchDetector;
     }
 
     public int Read(byte[] buffer, int offset, int count)
@@ -41,8 +43,8 @@ namespace aPC.Chromesthesia
       int bytesRead = FillIntermediateBufferAndReturnBytesRead(count);
       
       var stereoFrames = FillStereoBuffersAndReturnFrames();
-      var leftPitch  = pitchDetector.DetectPitch(leftBuffer.FloatBuffer, stereoFrames);
-      var rightPitch = pitchDetector.DetectPitch(rightBuffer.FloatBuffer, stereoFrames);
+      var leftPitch  = leftPitchDetector.DetectPitch(leftBuffer.FloatBuffer, stereoFrames);
+      var rightPitch = rightPitchDetector.DetectPitch(rightBuffer.FloatBuffer, stereoFrames);
 
       if (leftPitch != 0 || rightPitch != 0)
       {
