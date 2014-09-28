@@ -52,7 +52,6 @@
     <Compile Include="Pitch\FftPitchDetector.cs" />
     <Compile Include="Pitch\IPitchDetector.cs" />
     <Compile Include="Pitch\PitchDetector.cs" />
-    <Compile Include="Pitch\SmbPitchShift.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SceneGeneratorProvider.cs" />
     <Compile Include="Server\ConductorManager.cs" />
