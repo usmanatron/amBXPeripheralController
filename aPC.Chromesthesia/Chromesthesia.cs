@@ -18,7 +18,7 @@ namespace aPC.Chromesthesia
       OutputCaptureSettings(waveIn);
       
       var streamRaw = new WaveInProvider(waveIn);
-      var streamEffect = new SceneGeneratorProvider(streamRaw, new PitchDetector(), new FloatDataStereoSplitter());
+      var streamEffect = new SceneGeneratorProvider(streamRaw, new PitchDetector(), new PitchDetector(), new FloatDataStereoSplitter());
       var task = new ChromesthesiaTask(streamEffect);
 
       task.Run();
