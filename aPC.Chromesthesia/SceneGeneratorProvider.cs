@@ -10,13 +10,14 @@ namespace aPC.Chromesthesia
   class SceneGeneratorProvider : IWaveProvider
   {
     private IWaveProvider sourceProvider;
-    private WaveBuffer waveBuffer;
-    private int release;
-    private int maxHold;
-    private float previousPitch;
-    private PitchDetector pitchDetector;
+    private PitchDetector pitchDetector;    
+    private FloatDataStereoSplitter stereoSplitter;
+    
+    private WaveBuffer intermediaryBuffer;
+    private WaveBuffer leftBuffer;
+    private WaveBuffer rightBuffer;
 
-    public SceneGeneratorProvider(PitchDetector pitchDetector, IWaveProvider sourceProvider)
+    public SceneGeneratorProvider(IWaveProvider sourceProvider, PitchDetector pitchDetector, FloatDataStereoSplitter stereoSplitter)
     {
       if (sourceProvider.WaveFormat.SampleRate != 44100)
       {
@@ -28,42 +29,52 @@ namespace aPC.Chromesthesia
       }
 
       this.sourceProvider = sourceProvider;
-      this.waveBuffer = new WaveBuffer(8192);
+      this.stereoSplitter = stereoSplitter;
+
       this.pitchDetector = pitchDetector;
     }
 
     public int Read(byte[] buffer, int offset, int count)
     {
+      SetupWaveBuffers(count);
 
-      if (waveBuffer == null || waveBuffer.MaxSize < count)
-      {
-        waveBuffer = new WaveBuffer(count);
-      }
-
-      int bytesRead = sourceProvider.Read(waveBuffer, 0, count);
+      int bytesRead = sourceProvider.Read(intermediaryBuffer, 0, count);
 
       // the last bit sometimes needs to be rounded up:
       if (bytesRead > 0) bytesRead = count;
+      
+      //qqUMI
+      var stereoFrames = FillStereoBuffersAndReturnFrames();
+      var leftPitch  = pitchDetector.DetectPitch(leftBuffer.FloatBuffer, stereoFrames);
+      var rightPitch = pitchDetector.DetectPitch(rightBuffer.FloatBuffer, stereoFrames);
 
-      int frames = bytesRead / sizeof(float);
-      float pitch = pitchDetector.DetectPitch(waveBuffer.FloatBuffer, frames);
-
-      // an attempt to make it less "warbly" by holding onto the pitch 
-      // for at least one more buffer
-      if (pitch == 0f && release < maxHold)
+      if (leftPitch != 0 || rightPitch != 0)
       {
-        pitch = previousPitch;
-        release++;
+        Console.WriteLine("{0} | {1}", leftPitch.ToString(), rightPitch.ToString()); //Debugging qqUMI
       }
-      else
-      {
-        this.previousPitch = pitch;
-        release = 0;
-      }
+      return bytesRead;
+    }
 
-      Console.WriteLine(pitch); //Debugging qqUMI
-      WaveBuffer outBuffer = new WaveBuffer(buffer);
-      return frames * 4;
+    private void SetupWaveBuffers(int count)
+    {
+
+      if (intermediaryBuffer == null || intermediaryBuffer.MaxSize < count)
+      {
+        intermediaryBuffer = new WaveBuffer(count);
+
+        var singleChannelCount = count / 2;
+        leftBuffer = new WaveBuffer(singleChannelCount);
+        rightBuffer = new WaveBuffer(singleChannelCount);
+      }
+    }
+
+    private int FillStereoBuffersAndReturnFrames()
+    {
+      var stereoBuffer = stereoSplitter.Split(intermediaryBuffer);
+
+      leftBuffer.BindTo(stereoBuffer.LeftChannel);
+      rightBuffer.BindTo(stereoBuffer.RightChannel);
+      return stereoBuffer.frames;
     }
 
     public WaveFormat WaveFormat

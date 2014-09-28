@@ -9,14 +9,44 @@ namespace aPC.Chromesthesia
   class PitchDetector
   {
     private bool UseAutoCorrelator = true;
+    private int release;
+    private int maxHold;
+    private float previousPitch;
+
 
     public float DetectPitch(float[] buffer, int frames)
     {
+      float pitch;
+
       if (UseAutoCorrelator)
       {
-        return new AutoCorrelator(44100).DetectPitch(buffer, frames);
+        pitch = new AutoCorrelator(44100).DetectPitch(buffer, frames);
       }
-      throw new NotImplementedException();
+      else
+      {
+        throw new NotImplementedException();
+      }
+
+      pitch = StabilisePitch(pitch);
+      return pitch;
+    }
+
+    private float StabilisePitch(float pitch)
+    {
+      // an attempt to make it less "warbly" by holding onto the pitch 
+      // for at least one more buffer
+      if (pitch == 0f && release < maxHold)
+      {
+        pitch = previousPitch;
+        release++;
+      }
+      else
+      {
+        this.previousPitch = pitch;
+        release = 0;
+      }
+
+      return pitch;
     }
   }
 

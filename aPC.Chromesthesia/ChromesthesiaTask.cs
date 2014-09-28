@@ -39,7 +39,7 @@ namespace aPC.Chromesthesia
       var streamRaw = new WaveInProvider(waveIn);
 
       //var stream32 = new Wave16ToFloatProvider(streamRaw);
-      var streamEffect = new SceneGeneratorProvider(new PitchDetector(), streamRaw);
+      var streamEffect = new SceneGeneratorProvider(streamRaw, new PitchDetector(), new FloatDataStereoSplitter());
 
       // buffer length needs to be a power of 2 for FFT to work nicely
       // however, make the buffer too long and pitches aren't detected fast enough
