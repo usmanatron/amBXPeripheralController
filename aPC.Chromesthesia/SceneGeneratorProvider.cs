@@ -21,11 +21,11 @@ namespace aPC.Chromesthesia
     {
       if (sourceProvider.WaveFormat.SampleRate != 44100)
       {
-        throw new ArgumentException("AutoTune only works at 44.1kHz");
+        throw new ArgumentException("This provider only works at 44.1kHz");
       }
       if (sourceProvider.WaveFormat.Encoding != WaveFormatEncoding.IeeeFloat)
       {
-        throw new ArgumentException("AutoTune only works on IEEE floating point audio data");
+        throw new ArgumentException("This provider only works on IEEE floating point audio data");
       }
 
       this.sourceProvider = sourceProvider;
@@ -37,20 +37,15 @@ namespace aPC.Chromesthesia
     public int Read(byte[] buffer, int offset, int count)
     {
       SetupWaveBuffers(count);
-
-      int bytesRead = sourceProvider.Read(intermediaryBuffer, 0, count);
-
-      // the last bit sometimes needs to be rounded up:
-      if (bytesRead > 0) bytesRead = count;
+      int bytesRead = FillIntermediateBufferAndReturnBytesRead(count);
       
-      //qqUMI
       var stereoFrames = FillStereoBuffersAndReturnFrames();
       var leftPitch  = pitchDetector.DetectPitch(leftBuffer.FloatBuffer, stereoFrames);
       var rightPitch = pitchDetector.DetectPitch(rightBuffer.FloatBuffer, stereoFrames);
 
       if (leftPitch != 0 || rightPitch != 0)
       {
-        Console.WriteLine("{0} | {1}", leftPitch.ToString(), rightPitch.ToString()); //Debugging qqUMI
+        Console.WriteLine("{0} | {1}", leftPitch.ToString("000.000"), rightPitch.ToString("000.000")); //Debugging qqUMI
       }
       return bytesRead;
     }
@@ -68,6 +63,16 @@ namespace aPC.Chromesthesia
       }
     }
 
+    private int FillIntermediateBufferAndReturnBytesRead(int count)
+    {
+      int bytesRead = sourceProvider.Read(intermediaryBuffer, 0, count);
+
+      // the last bit sometimes needs to be rounded up:
+      return bytesRead > 0
+        ? count
+        : bytesRead;
+    }
+
     private int FillStereoBuffersAndReturnFrames()
     {
       var stereoBuffer = stereoSplitter.Split(intermediaryBuffer);
@@ -79,7 +84,7 @@ namespace aPC.Chromesthesia
 
     public WaveFormat WaveFormat
     {
-      get { throw new NotImplementedException(); }
+      get { return sourceProvider.WaveFormat; }
     }
   }
 }

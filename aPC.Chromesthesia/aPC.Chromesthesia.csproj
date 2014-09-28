@@ -43,21 +43,15 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChromesthesiaTask.cs" />
-    <Compile Include="Communication\NotificationClient.cs" />
     <Compile Include="Chromesthesia.cs" />
     <Compile Include="PitchDetector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SceneGeneratorProvider.cs" />
+    <Compile Include="Server\ConductorManager.cs" />
     <Compile Include="StereoBuffer.cs" />
     <Compile Include="StereoSplitterProvider.cs" />
   </ItemGroup>
@@ -66,21 +60,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\aPC.Common.Client\aPC.Common.Client.csproj">
-      <Project>{20941c53-9669-4bf2-b354-aff8023c1a1e}</Project>
-      <Name>aPC.Common.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\aPC.Common.Communication\aPC.Common.Communication.csproj">
-      <Project>{38537b40-b1fd-433b-b958-8a1b3c7b83d7}</Project>
-      <Name>aPC.Common.Communication</Name>
+    <ProjectReference Include="..\aPC.Common.Server\aPC.Common.Server.csproj">
+      <Project>{d92d8fb4-7414-4dfe-83b6-2ee8852676bc}</Project>
+      <Name>aPC.Common.Server</Name>
     </ProjectReference>
     <ProjectReference Include="..\aPC.Common\aPC.Common.csproj">
       <Project>{b6543e75-59af-4059-acf8-560e82bc72ce}</Project>
       <Name>aPC.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\aPC.Server\aPC.Server.csproj">
-      <Project>{5b9c9dad-4539-4f54-a13e-30c603f767ff}</Project>
-      <Name>aPC.Server</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
