@@ -1,4 +1,5 @@
-﻿using NAudio.Wave;
+﻿using aPC.Chromesthesia.Pitch;
+using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.Linq;

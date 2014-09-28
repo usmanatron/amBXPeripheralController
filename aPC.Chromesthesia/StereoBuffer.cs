@@ -25,7 +25,7 @@ namespace aPC.Chromesthesia
       RightChannel = new byte[count / 2];
       LeftChannelCount = 0;
       RightChannelCount = 0;
-      frames = count / 8;
+      frames = count / (2 * sizeof(float));
     }
 
     private bool IsDivisibleBy8(int value)
