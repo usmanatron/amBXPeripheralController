@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.Common", "aPC.Common\aPC.Common.csproj", "{B6543E75-59AF-4059-ACF8-560E82BC72CE}"
 EndProject
@@ -37,6 +37,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.Common.Client.Tests", "aPC.Common.Client.Tests\aPC.Common.Client.Tests.csproj", "{C43479EA-8919-4AD4-8A85-C26145168AFC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.Client", "aPC.Client\aPC.Client.csproj", "{A4D3B184-053B-41CE-BADB-D751D95ABCA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.Chromesthesia", "aPC.Chromesthesia\aPC.Chromesthesia.csproj", "{0DDE3008-F7F2-4136-9139-CE1E8C3E57FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -158,6 +160,16 @@ Global
 		{A4D3B184-053B-41CE-BADB-D751D95ABCA2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{A4D3B184-053B-41CE-BADB-D751D95ABCA2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{A4D3B184-053B-41CE-BADB-D751D95ABCA2}.Release|Win32.ActiveCfg = Release|Any CPU
+		{0DDE3008-F7F2-4136-9139-CE1E8C3E57FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DDE3008-F7F2-4136-9139-CE1E8C3E57FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DDE3008-F7F2-4136-9139-CE1E8C3E57FD}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0DDE3008-F7F2-4136-9139-CE1E8C3E57FD}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0DDE3008-F7F2-4136-9139-CE1E8C3E57FD}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{0DDE3008-F7F2-4136-9139-CE1E8C3E57FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DDE3008-F7F2-4136-9139-CE1E8C3E57FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DDE3008-F7F2-4136-9139-CE1E8C3E57FD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0DDE3008-F7F2-4136-9139-CE1E8C3E57FD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0DDE3008-F7F2-4136-9139-CE1E8C3E57FD}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
