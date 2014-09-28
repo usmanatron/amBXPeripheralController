@@ -2,15 +2,16 @@
 using System.Linq;
 using aPC.Common;
 using aPC.Server;
-using aPC.Server.Conductors;
-using aPC.Server.Engine;
+using aPC.Common.Server.Conductors;
+using aPC.Common.Server.Engine;
 using aPC.Common.Entities;
 
 namespace aPC.Server.Tests
 {
   class TestConductorManager : ConductorManager
   {
-    public TestConductorManager(IEngine xiEngine, amBXScene xiScene) : base (xiEngine, xiScene, null)
+    public TestConductorManager(IEngine xiEngine, amBXScene xiScene)
+      : base(xiEngine, xiScene, null)
     {
     }
 

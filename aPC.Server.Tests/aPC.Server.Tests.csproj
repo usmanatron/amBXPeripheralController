@@ -70,6 +70,14 @@
       <Project>{38537b40-b1fd-433b-b958-8a1b3c7b83d7}</Project>
       <Name>aPC.Common.Communication</Name>
     </ProjectReference>
+    <ProjectReference Include="..\aPC.Common.Server.Tests\aPC.Common.Server.Tests.csproj">
+      <Project>{39d46142-a4c2-4159-a2ad-efa800d87fc2}</Project>
+      <Name>aPC.Common.Server.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\aPC.Common.Server\aPC.Common.Server.csproj">
+      <Project>{d92d8fb4-7414-4dfe-83b6-2ee8852676bc}</Project>
+      <Name>aPC.Common.Server</Name>
+    </ProjectReference>
     <ProjectReference Include="..\aPC.Common\aPC.Common.csproj">
       <Project>{b6543e75-59af-4059-acf8-560e82bc72ce}</Project>
       <Name>aPC.Common</Name>

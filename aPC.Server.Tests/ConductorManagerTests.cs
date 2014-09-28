@@ -8,6 +8,7 @@ using aPC.Server;
 using NUnit.Framework;
 using System.Threading;
 using aPC.Common.Entities;
+using aPC.Common.Server.Tests;
 
 namespace aPC.Server.Tests
 {
@@ -30,7 +31,7 @@ namespace aPC.Server.Tests
     public void EnablingSync_SetsFrameConductorRunning()
     {
       mConductorManager.EnableSync();
-      Thread.Sleep(200);
+      Thread.Sleep(400);
 
       Assert.IsTrue(mConductorManager.FrameConductor.IsRunning.Get);
     }
@@ -41,13 +42,11 @@ namespace aPC.Server.Tests
       mConductorManager.UpdateSync(mDifferentScene);
     }
 
-
-
     [Test]
     public void EnablingDesync_SetsDesyncConductorsRunning()
     {
       mConductorManager.EnableDesync();
-      Thread.Sleep(200);
+      Thread.Sleep(400);
 
       mConductorManager.LightConductors.ToList().ForEach(light => Assert.IsTrue(light.IsRunning.Get));
       mConductorManager.FanConductors.ToList().ForEach(fan => Assert.IsTrue(fan.IsRunning.Get));

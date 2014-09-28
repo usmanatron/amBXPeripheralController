@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace aPC.Common.Server.Tests
 {
-  class TestEngineManager : IEngine
+  public class TestEngineManager : IEngine
   {
     public TestEngineManager()
     {
