@@ -4,6 +4,7 @@ using aPC.Client.Disco.Tests.Generators;
 using aPC.Common.Communication;
 using aPC.Common.Client.Tests.Communication;
 using NUnit.Framework;
+using aPC.Common.Client;
 
 namespace aPC.Client.Disco.Tests
 {
@@ -13,7 +14,7 @@ namespace aPC.Client.Disco.Tests
     [SetUp]
     public void Setup()
     {
-      mSettings = new Settings() { BPM = 240 };
+      mSettings = new Settings(new HostnameAccessor()) { BPM = 240 };
       mLightSectionGenerator = new TestLightSectionGenerator();
       var lSceneGenerator = new TestRandomSceneGenerator(mLightSectionGenerator);
       mNotificationClient = new TestNotificationClient();

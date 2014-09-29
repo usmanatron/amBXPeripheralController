@@ -1,19 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using aPC.Common.Client;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace aPC.Client.Disco
 {
   public class ArgumentReader
   {
-    public ArgumentReader(List<string> xiArgs)
+    public ArgumentReader(List<string> xiArgs, Settings xiSettings)
     {
       mArgs = xiArgs;
+      mSettings = xiSettings;
     }
 
     public Settings ParseArguments()
     {
-      var lSettings = new Settings();
-
       foreach (string lArg in mArgs)
       {
         var lDeconstructedArgument = lArg.Split(':');
@@ -21,26 +21,29 @@ namespace aPC.Client.Disco
         switch (lDeconstructedArgument[0].ToLower())
         {
           case "bpm":
-            lSettings.BPM = int.Parse(lDeconstructedArgument[1]);
+            mSettings.BPM = int.Parse(lDeconstructedArgument[1]);
             break;
           case "intensity":
-            lSettings.LightIntensityWidth = GetRange(lDeconstructedArgument[1]);
+            mSettings.LightIntensityWidth = GetRange(lDeconstructedArgument[1]);
             break;
           case "red":
-            lSettings.RedColourWidth = GetRange(lDeconstructedArgument[1]);
+            mSettings.RedColourWidth = GetRange(lDeconstructedArgument[1]);
             break;
           case "blue":
-            lSettings.BlueColourWidth = GetRange(lDeconstructedArgument[1]);
+            mSettings.BlueColourWidth = GetRange(lDeconstructedArgument[1]);
             break;
           case "green":
-            lSettings.GreenColourWidth = GetRange(lDeconstructedArgument[1]);
+            mSettings.GreenColourWidth = GetRange(lDeconstructedArgument[1]);
+            break;
+          case "servers":
+            mSettings.HostnameAccessor.ResetWith(lDeconstructedArgument[1].Split(',').ToList());
             break;
           default:
             throw new UsageException("Unknown argument: " + lDeconstructedArgument);
         }
       }
 
-      return lSettings;
+      return mSettings;
     }
 
     private Range GetRange(string xiRange)
@@ -64,5 +67,6 @@ namespace aPC.Client.Disco
     }
 
     private List<string> mArgs;
+    private Settings mSettings;    
   }
 }

@@ -1,21 +1,21 @@
 ﻿using System.Reflection;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
+using aPC.Common.Client;
 
 namespace aPC.Client.Disco.Tests
 {
   [TestFixture]
   public class ArgumentReaderTests
   {
-    /* Finish Argumentreader - check that specific arguments work by passing one in and making sure it no longer is
-     * equal to the default in Settings.
-     * NotificationService - Mock out the communication part?  Just check it serialises and passes the string I guess>
-     */
+    // TODO: This test fails because of HostnameAccessor.  One potential fix is to override Equals etc...
     [Test]
     public void NoGivenArguments_GivesDefaultSettings()
     {
-      var lArgumentSettings = new ArgumentReader(new List<string>()).ParseArguments();
-      var lDefaultSettings = new Settings();
+      var lReader = new ArgumentReader(new List<string>(), new Settings(new HostnameAccessor()));
+      var lArgumentSettings = lReader.ParseArguments();
+      var lDefaultSettings = GetDefaultSettings();
 
       foreach (FieldInfo lField in typeof (Settings).GetFields(BindingFlags.Public | BindingFlags.Instance))
       {
@@ -23,11 +23,16 @@ namespace aPC.Client.Disco.Tests
       }
     }
 
+    private Settings GetDefaultSettings()
+    {
+      return new Settings(new HostnameAccessor());
+    }
+
     [Test]
     public void UnexpectedArgument_ThrowsException()
     {
       var lArguments = new List<string> { "TotallyNonExistantArgument:0,1" };
-      var lArgumentReader = new ArgumentReader(lArguments);
+      var lArgumentReader = new ArgumentReader(lArguments, GetDefaultSettings());
       Assert.Throws<UsageException>(() => lArgumentReader.ParseArguments());
     }
 
@@ -37,7 +42,7 @@ namespace aPC.Client.Disco.Tests
     {
       var lArgs = new List<string> { xiSettingsTest.Argument };
 
-      var lArgumentSettings = new ArgumentReader(lArgs).ParseArguments();
+      var lArgumentSettings = new ArgumentReader(lArgs, GetDefaultSettings()).ParseArguments();
 
       Assert.AreEqual(xiSettingsTest.ExpectedValue, xiSettingsTest.RangeSelector(lArgumentSettings));
     }
@@ -48,7 +53,9 @@ namespace aPC.Client.Disco.Tests
       new SettingsTester(new Range(0.21f, 0.89f), "green:0.21,0.89", settings => settings.GreenColourWidth),
       new SettingsTester(new Range(0.1f, 0.55f), "blue:0.1,0.55", settings => settings.BlueColourWidth),
       new SettingsTester(new Range(0, 1), "intensity:0,1", settings => settings.LightIntensityWidth),
-      new SettingsTester(200, "bpm:300", settings => settings.PushInterval)
+      new SettingsTester(200, "bpm:300", settings => settings.PushInterval),
+      new SettingsTester("KRAKEN", "servers:KRAKEN", settings => settings.HostnameAccessor.GetAll().Single()),
+      new SettingsTester(new List<string> { "ONE", "TWO" }, "servers:ONE,TWO", settings => settings.HostnameAccessor.GetAll())
     };
 
 
@@ -63,7 +70,7 @@ namespace aPC.Client.Disco.Tests
     public void SpecifyingACustomRange_WithInvalidData_ThrowsException(string xiRange)
     {
       var lArgument = new List<string> { xiRange };
-      var lArgumentReader = new ArgumentReader(lArgument);
+      var lArgumentReader = new ArgumentReader(lArgument, GetDefaultSettings());
       Assert.Throws<UsageException>(() => lArgumentReader.ParseArguments());
     }
   }

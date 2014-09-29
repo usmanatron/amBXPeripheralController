@@ -1,12 +1,13 @@
 ﻿using System.ServiceModel;
 using aPC.Common.Client;
 using aPC.Common.Client.Communication;
+using System.Collections.Generic;
 
 namespace aPC.Client.Disco.Communication
 {
   public class NotificationClient : NotificationClientBase
   {
-    public NotificationClient() : base (new HostnameAccessor())
+    public NotificationClient(HostnameAccessor xiHostnameAccessor) : base (xiHostnameAccessor)
     {
     }
 

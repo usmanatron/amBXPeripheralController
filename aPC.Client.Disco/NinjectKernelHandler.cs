@@ -8,21 +8,13 @@ namespace aPC.Client.Disco
 {
   class NinjectKernelHandler : NinjectKernelHandlerBase
   {
-    public NinjectKernelHandler(Settings xiSettings)
-    {
-      SetupSettingsBinding(xiSettings);
-    }
-
     protected override void SetupBindings()
     {
+      mKernel.Bind<Settings>().ToSelf().InSingletonScope();
+      mKernel.Bind<HostnameAccessor>().ToSelf().InSingletonScope();
       mKernel.Bind<NotificationClientBase>().To<NotificationClient>();
       mKernel.Bind<IGenerator<amBXScene>>().To<RandomSceneGenerator>();
       mKernel.Bind<IGenerator<LightSection>>().To<RandomLightSectionGenerator>();
-    }
-
-    private void SetupSettingsBinding(Settings xiSettings)
-    {
-      mKernel.Bind<Settings>().ToConstant(xiSettings);
     }
   }
 }

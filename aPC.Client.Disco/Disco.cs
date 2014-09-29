@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using aPC.Common.Client;
 
 namespace aPC.Client.Disco
 {
@@ -8,18 +9,18 @@ namespace aPC.Client.Disco
   {
     public static void Main(string[] xiArgs)
     {
-      var lSettings = GetSettings(xiArgs.ToList());
-      var lKernel = new NinjectKernelHandler(lSettings);
+      var lKernel = new NinjectKernelHandler();
+      BuildSettings(xiArgs.ToList(), lKernel.Get<Settings>());
       
       var lTask = lKernel.Get<DiscoTask>();
       lTask.Run();
     }
 
-    private static Settings GetSettings(IEnumerable<string> xiArgs)
+    private static void BuildSettings(IEnumerable<string> xiArgs, Settings xiSettings)
     {
       try
       {
-        return new ArgumentReader(xiArgs.ToList()).ParseArguments();
+        new ArgumentReader(xiArgs.ToList(), xiSettings).ParseArguments();
       }
       catch (UsageException e)
       {

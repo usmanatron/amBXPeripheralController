@@ -4,8 +4,9 @@ namespace aPC.Client.Disco
 {
   public class Settings
   {
-    public Settings()
+    public Settings(HostnameAccessor xiHostnameAccessor)
     {
+      HostnameAccessor = xiHostnameAccessor;
       SetConstantValues();
       SetConfigurableDefaultValues();
     }
@@ -58,5 +59,7 @@ namespace aPC.Client.Disco
 
     public double ChangeThreshold;
     public int FramesPerScene;
+
+    public HostnameAccessor HostnameAccessor;
   }
 }
