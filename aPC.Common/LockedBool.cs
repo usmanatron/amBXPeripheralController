@@ -1,4 +1,4 @@
-﻿namespace aPC.Common.Server
+﻿namespace aPC.Common
 {
   /// <summary>
   /// A bool with locking to ensure it's thread-safe.

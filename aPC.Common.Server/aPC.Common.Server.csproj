@@ -67,7 +67,6 @@
     <Compile Include="Engine\ConversionHelpers.cs" />
     <Compile Include="Engine\EngineManager.cs" />
     <Compile Include="Engine\IEngine.cs" />
-    <Compile Include="LockedBool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SceneHandlers\ComponentHandler.cs" />
     <Compile Include="SceneHandlers\FanHandler.cs" />
