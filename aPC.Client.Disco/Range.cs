@@ -7,21 +7,21 @@ namespace aPC.Client.Disco
   /// </summary>
   public class Range
   {
-    public Range(float xiMinimum, float xiMaximum)
+    public Range(float minimum, float maximum)
     {
-      if (xiMaximum < xiMinimum)
+      if (maximum < minimum)
       {
         var lMessage = string.Format(
           "Range constructor values in the wrong order: " + Environment.NewLine +
           "Minimum: {0} " + Environment.NewLine +
           "Maximum: {1}", 
-          xiMinimum, 
-          xiMaximum);
+          minimum, 
+          maximum);
         throw new ArgumentException(lMessage);
       }
 
-      mMinimum = xiMinimum;
-      mMaximum = xiMaximum;
+      this.minimum = minimum;
+      this.maximum = maximum;
     }
 
     /// <remarks>
@@ -29,54 +29,54 @@ namespace aPC.Client.Disco
     ///   isn't the case, we clip the value appropriately instead of
     ///   throwing any error.
     /// </remarks>
-    public float GetScaledValue(double xiValue)
+    public float GetScaledValue(double value)
     {
-      var lValue = CheckValueAndClipIfNecessary(xiValue);
+      var clippedValue = CheckValueAndClipIfNecessary(value);
 
-      return ((float)lValue * Width) + mMinimum;
+      return ((float)clippedValue * Width) + minimum;
     }
 
-    private double CheckValueAndClipIfNecessary(double xiValue)
+    private double CheckValueAndClipIfNecessary(double value)
     {
-      if (xiValue < 0)
+      if (value < 0)
       {
         return 0;
       }
-      if (1 < xiValue)
+      if (1 < value)
       {
         return 1;
       }
 
-      return xiValue;
+      return value;
     }
 
     public float Width
     {
       get
       {
-        return mMaximum - mMinimum;
+        return maximum - minimum;
       }
     }
 
     public override bool Equals(object obj)
     {
-      var lOther = obj as Range;
+      var other = obj as Range;
 
-      if (lOther == null)
+      if (other == null)
       {
         return false;
       }
 
-      return lOther.mMinimum == mMinimum &&
-             lOther.mMaximum == mMaximum;
+      return other.minimum == minimum &&
+             other.maximum == maximum;
     }
 
     public override int GetHashCode()
     {
-      return mMinimum.GetHashCode() ^ mMaximum.GetHashCode();
+      return minimum.GetHashCode() ^ maximum.GetHashCode();
     }
 
-    private readonly float mMinimum;
-    private readonly float mMaximum;
+    private readonly float minimum;
+    private readonly float maximum;
   }
 }

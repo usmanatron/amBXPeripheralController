@@ -10,42 +10,40 @@ namespace aPC.Client.Disco
 {
   public class DiscoTask
   {
-    public DiscoTask(Settings xiSettings,
-      IGenerator<amBXScene> xiRandomSceneGenerator, 
-      NotificationClientBase xiNotificationService)
+    public DiscoTask(Settings settings, IGenerator<amBXScene> randomSceneGenerator, NotificationClientBase notificationService)
     {
-      mSettings = xiSettings;
-      mRandomSceneGenerator = xiRandomSceneGenerator;
-      mNotificationService = xiNotificationService;
+      this.settings = settings;
+      this.randomSceneGenerator = randomSceneGenerator;
+      this.notificationService = notificationService;
     }
 
     public void Run()
     {
       while (true)
       {
-        var lScene = GenerateScene();
-        PushScene(lScene);
+        var scene = GenerateScene();
+        PushScene(scene);
         WaitForInterval();
       }
     }
 
     private amBXScene GenerateScene()
     {
-      return mRandomSceneGenerator.Generate();
+      return randomSceneGenerator.Generate();
     }
 
     private void PushScene(amBXScene xiScene)
     {
-      mNotificationService.PushCustomScene(xiScene);
+      notificationService.PushCustomScene(xiScene);
     }
 
     private void WaitForInterval()
     {
-      Thread.Sleep(mSettings.PushInterval);
+      Thread.Sleep(settings.PushInterval);
     }
     
-    private readonly Settings mSettings;
-    private readonly IGenerator<amBXScene> mRandomSceneGenerator;
-    private readonly NotificationClientBase mNotificationService;
+    private readonly Settings settings;
+    private readonly IGenerator<amBXScene> randomSceneGenerator;
+    private readonly NotificationClientBase notificationService;
   }
 }

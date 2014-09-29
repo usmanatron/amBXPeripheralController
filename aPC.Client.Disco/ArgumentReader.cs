@@ -6,67 +6,67 @@ namespace aPC.Client.Disco
 {
   public class ArgumentReader
   {
-    public ArgumentReader(List<string> xiArgs, Settings xiSettings)
+    public ArgumentReader(List<string> args, Settings sSettings)
     {
-      mArgs = xiArgs;
-      mSettings = xiSettings;
+      this.args = args;
+      this.settings = sSettings;
     }
 
     public Settings ParseArguments()
     {
-      foreach (string lArg in mArgs)
+      foreach (string arg in args)
       {
-        var lDeconstructedArgument = lArg.Split(':');
+        var deconstructedArgument = arg.Split(':');
 
-        switch (lDeconstructedArgument[0].ToLower())
+        switch (deconstructedArgument[0].ToLower())
         {
           case "bpm":
-            mSettings.BPM = int.Parse(lDeconstructedArgument[1]);
+            settings.BPM = int.Parse(deconstructedArgument[1]);
             break;
           case "intensity":
-            mSettings.LightIntensityWidth = GetRange(lDeconstructedArgument[1]);
+            settings.LightIntensityWidth = GetRange(deconstructedArgument[1]);
             break;
           case "red":
-            mSettings.RedColourWidth = GetRange(lDeconstructedArgument[1]);
+            settings.RedColourWidth = GetRange(deconstructedArgument[1]);
             break;
           case "blue":
-            mSettings.BlueColourWidth = GetRange(lDeconstructedArgument[1]);
+            settings.BlueColourWidth = GetRange(deconstructedArgument[1]);
             break;
           case "green":
-            mSettings.GreenColourWidth = GetRange(lDeconstructedArgument[1]);
+            settings.GreenColourWidth = GetRange(deconstructedArgument[1]);
             break;
           case "servers":
-            mSettings.HostnameAccessor.ResetWith(lDeconstructedArgument[1].Split(',').ToList());
+            settings.HostnameAccessor.ResetWith(deconstructedArgument[1].Split(',').ToList());
             break;
           default:
-            throw new UsageException("Unknown argument: " + lDeconstructedArgument);
+            throw new UsageException("Unknown argument: " + deconstructedArgument);
         }
       }
 
-      return mSettings;
+      return settings;
     }
 
-    private Range GetRange(string xiRange)
+    private Range GetRange(string range)
     {
-      var lDeconstructedWidth = xiRange.Split(',');
-      if (lDeconstructedWidth.Count() != 2)
+      var deconstructedWidth = range.Split(',');
+      if (deconstructedWidth.Count() != 2)
       {
-        throw new UsageException("Invalid number of arguments when calculating a range: " + xiRange);
+        throw new UsageException("Invalid number of arguments when calculating a range: " + range);
       }
 
-      var lMinimum = float.Parse(lDeconstructedWidth[0]);
-      var lMaximum = float.Parse(lDeconstructedWidth[1]);
+      var minimum = float.Parse(deconstructedWidth[0]);
+      var maximum = float.Parse(deconstructedWidth[1]);
 
-      if (lMinimum < 0 || lMaximum > 1)
+      if (minimum < 0 || maximum > 1)
       {
-        var lMessage = string.Format("Invalid input range {0} - must be between 0 and 1", xiRange);
-        throw new UsageException(lMessage);
+        var message = string.Format("Invalid input range {0} - must be between 0 and 1", range);
+        throw new UsageException(message);
       }
 
-      return new Range(lMinimum, lMaximum);
+      return new Range(minimum, maximum);
     }
 
-    private List<string> mArgs;
-    private Settings mSettings;    
+    private List<string> args;
+    private Settings settings;    
   }
 }

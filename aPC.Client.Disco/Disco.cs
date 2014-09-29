@@ -7,20 +7,20 @@ namespace aPC.Client.Disco
 {
   class Disco
   {
-    public static void Main(string[] xiArgs)
+    public static void Main(string[] args)
     {
-      var lKernel = new NinjectKernelHandler();
-      BuildSettings(xiArgs.ToList(), lKernel.Get<Settings>());
+      var kernel = new NinjectKernelHandler();
+      BuildSettings(args.ToList(), kernel.Get<Settings>());
       
-      var lTask = lKernel.Get<DiscoTask>();
+      var lTask = kernel.Get<DiscoTask>();
       lTask.Run();
     }
 
-    private static void BuildSettings(IEnumerable<string> xiArgs, Settings xiSettings)
+    private static void BuildSettings(IEnumerable<string> args, Settings settings)
     {
       try
       {
-        new ArgumentReader(xiArgs.ToList(), xiSettings).ParseArguments();
+        new ArgumentReader(args.ToList(), settings).ParseArguments();
       }
       catch (UsageException e)
       {

@@ -10,11 +10,11 @@ namespace aPC.Client.Disco
   {
     protected override void SetupBindings()
     {
-      mKernel.Bind<Settings>().ToSelf().InSingletonScope();
-      mKernel.Bind<HostnameAccessor>().ToSelf().InSingletonScope();
-      mKernel.Bind<NotificationClientBase>().To<NotificationClient>();
-      mKernel.Bind<IGenerator<amBXScene>>().To<RandomSceneGenerator>();
-      mKernel.Bind<IGenerator<LightSection>>().To<RandomLightSectionGenerator>();
+      kernel.Bind<Settings>().ToSelf().InSingletonScope();
+      kernel.Bind<HostnameAccessor>().ToSelf().InSingletonScope();
+      kernel.Bind<NotificationClientBase>().To<NotificationClient>();
+      kernel.Bind<IGenerator<amBXScene>>().To<RandomSceneGenerator>();
+      kernel.Bind<IGenerator<LightSection>>().To<RandomLightSectionGenerator>();
     }
   }
 }

@@ -3,19 +3,20 @@ using aPC.Common.Client;
 
 namespace aPC.Client
 {
-  public class UpdatableHostnameAccessor : HostnameAccessor
+  //qqUMI This needs to use the HostnameAccessor instead of re-inventing it here!  This also probably won't work...
+  public class UpdatableHostnameAccessor
   {
     public UpdatableHostnameAccessor(HostnameInput xiHostnameInput)
     {
       mHostnameInput = xiHostnameInput;
     }
 
-    public override string Get()
+    public string Get()
     {
       return ConfigurationManager.AppSettings[HostnameKey];
     }
 
-    public override void Update()
+    public void Update()
     {
       var lNewHostname = GetNewHostname();
       ConfigurationManager.AppSettings[HostnameKey] = lNewHostname;

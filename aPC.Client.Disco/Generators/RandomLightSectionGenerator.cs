@@ -8,39 +8,39 @@ namespace aPC.Client.Disco.Generators
 {
   public class RandomLightSectionGenerator : IGenerator<LightSection>
   {
-    public RandomLightSectionGenerator(Settings xiSettings, Random xiRandom)
+    public RandomLightSectionGenerator(Settings settings, Random random)
     {
-      mSettings = xiSettings;
-      mRandom = xiRandom;
+      this.settings = settings;
+      this.random = random;
     }
 
     public LightSection Generate()
     {
-      var lFadeTime = (int) mSettings.FadeTime.GetScaledValue(mRandom.NextDouble());
-      var lSectionBuilder = new LightSectionBuilder().WithFadeTime(lFadeTime);
+      var fadeTime = (int) settings.FadeTime.GetScaledValue(random.NextDouble());
+      var sectionBuilder = new LightSectionBuilder().WithFadeTime(fadeTime);
 
-      foreach (eDirection lDirection in Enum.GetValues(typeof(eDirection)).Cast<eDirection>())
+      foreach (eDirection direction in Enum.GetValues(typeof(eDirection)).Cast<eDirection>())
       {
-        lSectionBuilder.WithLightInDirectionIfPhysical(lDirection, GetRandomLight());
+        sectionBuilder.WithLightInDirectionIfPhysical(direction, GetRandomLight());
       }
 
-      return lSectionBuilder.Build();
+      return sectionBuilder.Build();
     }
 
     private Light GetRandomLight()
     {
-      return mRandom.NextDouble() < mSettings.ChangeThreshold
+      return random.NextDouble() < settings.ChangeThreshold
         ? null
         : new Light
       {
-        Red = mSettings.RedColourWidth.GetScaledValue(mRandom.NextDouble()),
-        Blue = mSettings.BlueColourWidth.GetScaledValue(mRandom.NextDouble()),
-        Green = mSettings.GreenColourWidth.GetScaledValue(mRandom.NextDouble()),
-        Intensity = mSettings.LightIntensityWidth.GetScaledValue(mRandom.NextDouble())
+        Red = settings.RedColourWidth.GetScaledValue(random.NextDouble()),
+        Blue = settings.BlueColourWidth.GetScaledValue(random.NextDouble()),
+        Green = settings.GreenColourWidth.GetScaledValue(random.NextDouble()),
+        Intensity = settings.LightIntensityWidth.GetScaledValue(random.NextDouble())
       };
     }
 
-    private readonly Random mRandom;
-    private readonly Settings mSettings;
+    private readonly Random random;
+    private readonly Settings settings;
   }
 }

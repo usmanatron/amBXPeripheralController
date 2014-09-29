@@ -6,40 +6,40 @@ namespace aPC.Client.Disco.Generators
 {
   public class RandomSceneGenerator : IGenerator<amBXScene>
   {
-    public RandomSceneGenerator(Settings xiSettings, IGenerator<LightSection> xiLightSectionGenerator)
+    public RandomSceneGenerator(Settings settings, IGenerator<LightSection> lightSectionGenerator)
     {
-      mSettings = xiSettings;
-      mRandomLightSectionGenerator = xiLightSectionGenerator;
+      this.settings = settings;
+      randomLightSectionGenerator = lightSectionGenerator;
     }
 
     public amBXScene Generate()
     {
-      var lScene = new amBXScene
+      var scene = new amBXScene
       {
         SceneType = eSceneType.Desync
       };
 
-      var lFrames = new FrameBuilder();
+      var frames = new FrameBuilder();
 
-      for (int i = 0; i < mSettings.FramesPerScene; i++ )
+      for (int i = 0; i < settings.FramesPerScene; i++ )
       {
-        AddNewFrame(lFrames);
+        AddNewFrame(frames);
       }
 
-      lScene.Frames = lFrames.Build();
-      return lScene;
+      scene.Frames = frames.Build();
+      return scene;
     }
 
     private void AddNewFrame(FrameBuilder xiBuilder)
     {
       xiBuilder
         .AddFrame()
-        .WithFrameLength(mSettings.PushInterval)
+        .WithFrameLength(settings.PushInterval)
         .WithRepeated(true)
-        .WithLightSection(mRandomLightSectionGenerator.Generate());
+        .WithLightSection(randomLightSectionGenerator.Generate());
     }
 
-    private readonly Settings mSettings;
-    private readonly IGenerator<LightSection> mRandomLightSectionGenerator;
+    private readonly Settings settings;
+    private readonly IGenerator<LightSection> randomLightSectionGenerator;
   }
 }

@@ -6,8 +6,8 @@ namespace aPC.Client.Disco
   [Serializable]
   public class UsageException : UsageExceptionBase
   {
-    public UsageException(string xiDescription)
-      : base(xiDescription)
+    public UsageException(string description)
+      : base(description)
     {
     }
 

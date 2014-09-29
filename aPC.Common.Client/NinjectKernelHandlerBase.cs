@@ -6,7 +6,7 @@ namespace aPC.Common.Client
   {
     protected NinjectKernelHandlerBase()
     {
-      mKernel = new StandardKernel();
+      kernel = new StandardKernel();
       SetupBindings();
     }
 
@@ -14,9 +14,9 @@ namespace aPC.Common.Client
 
     public T Get<T>()
     {
-      return mKernel.Get<T>();
+      return kernel.Get<T>();
     }
 
-    protected StandardKernel mKernel;
+    protected StandardKernel kernel;
   }
 }
