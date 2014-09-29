@@ -12,7 +12,7 @@ namespace aPC.Client.Tests.Communication
     public void SetupTests()
     {
       mHost = new TestNotificationService();
-      mClient = new NotificationClient(new EndpointAddress(mHost.Url));
+      mClient = new NotificationClient(mHost.Hostname);
     }
 
     [SetUp]

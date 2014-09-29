@@ -11,7 +11,7 @@ namespace aPC.Web.Helpers
     }
 
     // Overriding of the Url is used by tests
-    public NotificationClient(string xiAddress) : base(new EndpointAddress(xiAddress))
+    public NotificationClient(string xiHostname) : base(xiHostname)
     {
     }
 

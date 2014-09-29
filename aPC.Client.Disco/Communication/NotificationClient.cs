@@ -11,7 +11,7 @@ namespace aPC.Client.Disco.Communication
     }
 
     // Overriding of the Url is used by tests
-    public NotificationClient(EndpointAddress xiAddress) : base(xiAddress)
+    public NotificationClient(string xiHostname) : base(xiHostname)
     {
     }
 

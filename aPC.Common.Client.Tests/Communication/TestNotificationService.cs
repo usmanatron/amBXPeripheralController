@@ -11,13 +11,14 @@ namespace aPC.Common.Client.Tests.Communication
   {
     public TestNotificationService()
     {
-      Url = CommunicationSettings.GetServiceUrl("localhost", eApplicationType.aPCTest);
+      Hostname = "localhost";
+      mUrl = CommunicationSettings.GetServiceUrl(Hostname, eApplicationType.aPCTest);
       ClearScenes();
 
       mHost = new ServiceHost(this);
       mHost.AddServiceEndpoint(typeof(INotificationService),
                                new BasicHttpBinding(),
-                               Url);
+                               mUrl);
       IncludeExceptionsInTestFaults(mHost);
       mHost.Open();
     }
@@ -80,7 +81,8 @@ namespace aPC.Common.Client.Tests.Communication
     // Item1 is a boolean specifying if the item pushed was an integrated scene
     // Item2 is the information sent
     public List<Tuple<bool, string>> Scenes { get; private set; }
-    public string Url;
+    private string mUrl;
+    public string Hostname;
     private readonly ServiceHost mHost;
   }
 }

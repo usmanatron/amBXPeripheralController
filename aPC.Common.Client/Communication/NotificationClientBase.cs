@@ -3,45 +3,54 @@ using aPC.Common.Entities;
 using aPC.Common.Communication;
 using System.ServiceModel;
 using System.IO;
+using System.Linq;
 using System.Xml.Serialization;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace aPC.Common.Client.Communication
 {
   public abstract class NotificationClientBase : INotificationClient
   {
-    protected NotificationClientBase(HostnameAccessor xiHostnameAccessorBase) : this(
-      new EndpointAddress(CommunicationSettings.GetServiceUrl(xiHostnameAccessorBase.Get(), eApplicationType.amBXPeripheralController)))
+    protected NotificationClientBase(HostnameAccessor xiHostnameAccessor) 
     {
-      mHostnameAccessor = xiHostnameAccessorBase;
+      mHostnameAccessor = xiHostnameAccessor;
+      UpdateClients();
     }
 
     // Overriding of the Url structure is used by tests
-    protected NotificationClientBase(EndpointAddress xiAddress)
+    protected NotificationClientBase(string xiHostname)
     {
-      UpdateClient(xiAddress);
+      mHostnameAccessor = new HostnameAccessor();
+      mClients = new List<ClientConnection> { CreateConnection(xiHostname, eApplicationType.aPCTest) };
     }
 
-    private void UpdateClient(EndpointAddress xiAddress)
+    private void UpdateClients()
     {
-      mClient = new ChannelFactory<INotificationService>(
-        new BasicHttpBinding(),
-        xiAddress);
-    }
+      mClients = new List<ClientConnection>();
 
-    #region Hostname Handling
-
-    public void UpdateClientIfHostnameChanged()
-    {
-      if (HostnameHasChanged())
+      foreach (var lHostname in mHostnameAccessor.GetAll())
       {
-        UpdateClient(new EndpointAddress(CommunicationSettings.GetServiceUrl(mHostnameAccessor.Get(), eApplicationType.amBXPeripheralController)));
+        mClients.Add(CreateConnection(lHostname, eApplicationType.amBXPeripheralController));
       }
     }
 
-    private bool HostnameHasChanged()
+    private ClientConnection CreateConnection(string xiHostname, eApplicationType xiApplicationType)
     {
-      return mHostnameAccessor!= null &&
-            !mClient.Endpoint.Address.Uri.Host.Contains(mHostnameAccessor.Get());
+      var lAddress = new EndpointAddress(CommunicationSettings.GetServiceUrl(xiHostname, xiApplicationType));
+      var lClient = new ChannelFactory<INotificationService>(new BasicHttpBinding(), lAddress);
+      return new ClientConnection(xiHostname, lClient);
+    }
+
+
+    #region Hostname Handling
+
+    public void UpdateClientsIfHostnameChanged()
+    {
+      if (mHostnameAccessor.HasChangedSinceLastCheck())
+      {
+        UpdateClients();
+      }
     }
 
     #endregion
@@ -50,32 +59,46 @@ namespace aPC.Common.Client.Communication
 
     public virtual void PushCustomScene(string xiScene)
     {
-      UpdateClientIfHostnameChanged();
+      UpdateClientsIfHostnameChanged();
       if (!SupportsCustomScenes)
       {
         ThrowUnsupportedException("custom");
       }
-      mClient.CreateChannel().RunCustomScene(xiScene);
+
+      Parallel.ForEach(mClients, client => PushCustomScene(client.Client, xiScene));
+    }
+
+    private void PushCustomScene(ChannelFactory<INotificationService> xiClient, string xiScene)
+    {
+      xiClient.CreateChannel().RunCustomScene(xiScene);
     }
 
     public virtual void PushIntegratedScene(string xiScene)
     {
-      UpdateClientIfHostnameChanged();
+      UpdateClientsIfHostnameChanged();
       if (!SupportsIntegratedScenes)
       {
         ThrowUnsupportedException("integrated");
       }
-      mClient.CreateChannel().RunIntegratedScene(xiScene);
+
+      Parallel.ForEach(mClients, client => PushIntegratedScene(client.Client, xiScene));
     }
 
+    private void PushIntegratedScene(ChannelFactory<INotificationService> xiClient, string xiScene)
+    {
+      xiClient.CreateChannel().RunIntegratedScene(xiScene);
+    }
+
+    // qqUMI - should ideally ask all and only return a subset!
     public virtual string[] GetSupportedIntegratedScenes()
     {
-      UpdateClientIfHostnameChanged();
+      UpdateClientsIfHostnameChanged();
       if (!SupportsIntegratedScenes)
       {
         ThrowUnsupportedException("integrated");
       }
-      return mClient.CreateChannel().GetSupportedIntegratedScenes();
+      
+      return mClients.First().Client.CreateChannel().GetSupportedIntegratedScenes();
     }
 
     private void ThrowUnsupportedException(string xiSceneType)
@@ -101,7 +124,7 @@ namespace aPC.Common.Client.Communication
     }
 
     private readonly HostnameAccessor mHostnameAccessor;
-    private ChannelFactory<INotificationService> mClient;
+    private List<ClientConnection> mClients;
 
     protected abstract bool SupportsCustomScenes { get; }
     protected abstract bool SupportsIntegratedScenes { get; }
