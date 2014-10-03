@@ -1,7 +1,5 @@
-﻿using System.Threading;
-using aPC.Chromesthesia.Pitch;
+﻿using aPC.Chromesthesia.Pitch;
 using aPC.Chromesthesia.Server;
-using aPC.Common;
 using NAudio.Wave;
 
 namespace aPC.Chromesthesia
@@ -30,17 +28,6 @@ namespace aPC.Chromesthesia
       conductorManager.Update(scene);
       return results.bytesRead;
     }
-
-    //public void TestServer()
-    //{
-    //  var sceneName = isRed ? "ccnet_red" : "ccnet_green";
-    //  isRed = !isRed;
-    //  var scene = new SceneAccessor().GetScene(sceneName);
-    //  conductorManager.Update(scene);
-    //  Thread.Sleep(900);
-    //}
-    //private bool isRed;
-
 
     private StereoPitchResult GetResultsFromPitchGenerator(byte[] buffer, int offset, int count)
     {
