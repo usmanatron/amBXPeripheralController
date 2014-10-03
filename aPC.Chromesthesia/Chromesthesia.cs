@@ -13,11 +13,14 @@ namespace aPC.Chromesthesia
 
     static void Main()
     {
-      var waveIn = new WasapiLoopbackCapture();
+      var kernel = new NinjectKernelHandler();
+      var waveIn = kernel.Get<WasapiLoopbackCapture>();
       waveIn.StartRecording();
 
       OutputCaptureSettings(waveIn);
       
+
+
       var streamRaw = new WaveInProvider(waveIn);
       var streamPitch = new PitchGeneratorProvider(streamRaw, new PitchDetector(), new PitchDetector(), new FloatDataStereoSplitter());
       var streamScene = new SceneGeneratorProvider(streamPitch, new SceneBuilder(), new ConductorManager(new EngineManager(), new SceneAccessor()));

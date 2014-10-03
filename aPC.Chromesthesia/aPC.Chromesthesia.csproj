@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="ChromesthesiaTask.cs" />
     <Compile Include="Chromesthesia.cs" />
+    <Compile Include="NinjectKernelHandler.cs" />
     <Compile Include="Pitch\FftPitchDetector.cs" />
     <Compile Include="Pitch\IPitchDetector.cs" />
     <Compile Include="Pitch\Pitch.cs" />
@@ -67,6 +68,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\aPC.Common.Client\aPC.Common.Client.csproj">
+      <Project>{20941C53-9669-4BF2-B354-AFF8023C1A1E}</Project>
+      <Name>aPC.Common.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\aPC.Common.Server\aPC.Common.Server.csproj">
       <Project>{d92d8fb4-7414-4dfe-83b6-2ee8852676bc}</Project>
       <Name>aPC.Common.Server</Name>
