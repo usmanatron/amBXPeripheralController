@@ -1,31 +1,28 @@
-﻿using aPC.Common;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using aPC.Common;
 using aPC.Common.Entities;
 using aPC.Common.Server.Conductors;
 using aPC.Common.Server.Engine;
 using aPC.Common.Server.Actors;
 using aPC.Common.Server.SceneHandlers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
 
 namespace aPC.Chromesthesia.Server
 {
   /* Manages the Chromesthesia Conductors.
-   * This application only runs lights in Desync mode, so the sync \ event cases are not handled here.  See aPC.Server for a Manager that handles multiple cases
+   * This application only runs lights in Sync mode, so the desync \ event cases are not handled here.
+   * See aPC.Server for a Manager that handles multiple cases
    * TODO: Consider merging these two classes together
    */
   class ConductorManager
   {
-    private List<IConductor> lights;
+    private IConductor conductor;
 
     public ConductorManager(IEngine xiEngine, SceneAccessor sceneAccessor)
     {
-      lights = new List<IConductor>();
       var scene = sceneAccessor.GetScene("rainbow");
-      SetupManagers(xiEngine, scene, new Action(EventComplete));
+      SetupManagers(xiEngine, scene, EventComplete);
     }
 
     /// <summary>
@@ -41,42 +38,19 @@ namespace aPC.Chromesthesia.Server
 
     private void SetupManagers(IEngine xiEngine, amBXScene xiScene, Action xiAction)
     {
-      lights.Add(new LightConductor(eDirection.North, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
-      lights.Add(new LightConductor(eDirection.NorthEast, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
-      lights.Add(new LightConductor(eDirection.East, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
-      lights.Add(new LightConductor(eDirection.SouthEast, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
-      lights.Add(new LightConductor(eDirection.South, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
-      lights.Add(new LightConductor(eDirection.SouthWest, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
-      lights.Add(new LightConductor(eDirection.West, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
-      lights.Add(new LightConductor(eDirection.NorthWest, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
-
-      lights.ForEach(conductor => EnableAndRunIfRequired(conductor));
+      conductor = new FrameConductor(new FrameActor(xiEngine), new FrameHandler(xiScene, xiAction));
+      EnableAndRunConductor();
     }
 
-    private void EnableAndRunIfRequired(IConductor xiConductor)
+    private void EnableAndRunConductor()
     {
-      xiConductor.Enable();
-
-      if (!xiConductor.IsRunning.Get)
-      {
-        ThreadPool.QueueUserWorkItem(_ => xiConductor.Run());
-      }
+      conductor.Enable();
+      ThreadPool.QueueUserWorkItem(_ => conductor.Run());
     }
 
     public void Update(amBXScene xiScene)
     {
-      Parallel.ForEach(lights, conductor => UpdateSceneIfRelevant(conductor, xiScene));
+      conductor.UpdateScene(xiScene);
     }
-
-    private void UpdateSceneIfRelevant(IConductor xiConductor, amBXScene xiScene)
-    {
-      if (IsApplicableForConductor(xiScene.FrameStatistics, xiConductor.ComponentType, xiConductor.Direction))
-      {
-        xiConductor.UpdateScene(xiScene);
-      }
-    }
-
-    private Func<FrameStatistics, eComponentType, eDirection, bool> IsApplicableForConductor =
-      (statistics, componentType, direction) => statistics.AreEnabledForComponentAndDirection(componentType, direction);
   }
 }
