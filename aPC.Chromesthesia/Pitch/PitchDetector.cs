@@ -16,13 +16,13 @@
       maxHold = 2;
     }
 
-    public float DetectPitch(float[] buffer, int frames)
+    public PitchResult DetectPitch(float[] buffer, int frames)
     {
       var pitchResult = fftPitchDetector.DetectPitchDistribution(buffer, frames);
 
       var pitch = pitchResult.PeakPitch.lowerFrequency;
-      pitch = StabilisePitch(pitch);
-      return pitch;
+      //pitch = StabilisePitch(pitch); //qqUMI Move the Pitch Stabilisation into the Pitch class potentially?
+      return pitchResult;
     }
 
     private float StabilisePitch(float pitch)

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace aPC.Chromesthesia.Pitch
+﻿namespace aPC.Chromesthesia.Pitch
 {
   public class Pitch
   {
@@ -17,6 +11,14 @@ namespace aPC.Chromesthesia.Pitch
       this.lowerFrequency = lowerFrequency;
       this.upperFrequency = upperFrequency;
       this.amplitude = amplitude;
+    }
+
+    public float averageFrequency
+    {
+      get
+      {
+        return (lowerFrequency + upperFrequency) / 2;
+      }
     }
   }
 }

@@ -1,14 +1,10 @@
 ﻿using aPC.Chromesthesia.Pitch;
 using NAudio.Wave;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace aPC.Chromesthesia
 {
-  class SceneGeneratorProvider : IWaveProvider
+  class PitchGeneratorProvider : IWaveProvider
   {
     private readonly IWaveProvider sourceProvider;
     private readonly PitchDetector leftPitchDetector;
@@ -19,7 +15,9 @@ namespace aPC.Chromesthesia
     private WaveBuffer leftBuffer;
     private WaveBuffer rightBuffer;
 
-    public SceneGeneratorProvider(IWaveProvider sourceProvider, PitchDetector leftPitchDetector, PitchDetector rightPitchDetector, FloatDataStereoSplitter stereoSplitter)
+    public StereoPitchResult PitchResults { get; private set; }
+
+    public PitchGeneratorProvider(IWaveProvider sourceProvider, PitchDetector leftPitchDetector, PitchDetector rightPitchDetector, FloatDataStereoSplitter stereoSplitter)
     {
       if (sourceProvider.WaveFormat.SampleRate != 44100)
       {
@@ -43,11 +41,19 @@ namespace aPC.Chromesthesia
       int bytesRead = FillIntermediateBufferAndReturnBytesRead(count);
       
       var stereoFrames = FillStereoBuffersAndReturnFrames();
-      var leftPitch  = leftPitchDetector.DetectPitch(leftBuffer.FloatBuffer, stereoFrames);
-      var rightPitch = rightPitchDetector.DetectPitch(rightBuffer.FloatBuffer, stereoFrames);
 
-      WriteToConsole(leftPitch, rightPitch); //Debugging qqUMI
+      AnalysePitch(stereoFrames, bytesRead);
+      
       return bytesRead;
+    }
+
+    private void AnalysePitch(int stereoFrames, int bytesRead)
+    {
+      var leftPitchResult  = leftPitchDetector.DetectPitch(leftBuffer.FloatBuffer, stereoFrames);
+      var rightPitchResult = rightPitchDetector.DetectPitch(rightBuffer.FloatBuffer, stereoFrames);
+
+      WriteToConsole(leftPitchResult.PeakPitch.averageFrequency, rightPitchResult.PeakPitch.averageFrequency); //Debugging qqUMI
+      PitchResults = new StereoPitchResult(leftPitchResult, rightPitchResult, bytesRead);
     }
 
     private void WriteToConsole(float leftPitch, float rightPitch)
