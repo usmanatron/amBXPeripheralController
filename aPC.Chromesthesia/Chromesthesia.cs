@@ -1,16 +1,17 @@
 ﻿using aPC.Chromesthesia.Pitch;
+using aPC.Chromesthesia.Server;
+using aPC.Common;
+using aPC.Common.Server.Engine;
 using NAudio.Wave;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace aPC.Chromesthesia
 {
   class Chromesthesia
   {
-    static void Main(string[] args)
+    private static ChromesthesiaTask task;
+
+    static void Main()
     {
       var waveIn = new WasapiLoopbackCapture();
       waveIn.StartRecording();
@@ -18,8 +19,9 @@ namespace aPC.Chromesthesia
       OutputCaptureSettings(waveIn);
       
       var streamRaw = new WaveInProvider(waveIn);
-      var streamEffect = new SceneGeneratorProvider(streamRaw, new PitchDetector(), new PitchDetector(), new FloatDataStereoSplitter());
-      var task = new ChromesthesiaTask(streamEffect);
+      var streamPitch = new PitchGeneratorProvider(streamRaw, new PitchDetector(), new PitchDetector(), new FloatDataStereoSplitter());
+      var streamScene = new SceneGeneratorProvider(streamPitch, new SceneBuilder(), new ConductorManager(new EngineManager(), new SceneAccessor()));
+      task = new ChromesthesiaTask(streamScene);
 
       task.Run();
     }

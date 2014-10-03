@@ -1,24 +1,21 @@
-﻿// The following link goes through understanding FFT and getting frequencies from it:
-// http://channel9.msdn.com/coding4fun/articles/AutotuneNET
-
-using NAudio.Wave;
-using System;
-using System.Threading;
+﻿using System.Threading;
 
 namespace aPC.Chromesthesia
 {
+  // The following link goes through understanding FFT and getting frequencies from it:
+  // http://channel9.msdn.com/coding4fun/articles/AutotuneNET
   class ChromesthesiaTask
   {
-    private SceneGeneratorProvider stream;
+    private readonly SceneGeneratorProvider sceneGenerator;
 
-    public ChromesthesiaTask(SceneGeneratorProvider stream)
+    public ChromesthesiaTask(SceneGeneratorProvider sceneGenerator)
     {
-      this.stream = stream;
+      this.sceneGenerator = sceneGenerator;
     }
 
     public void Run()
     {
-      ApplyAutoTune();
+      ApplyAutoTune(true);
 
       while (true)
       {
@@ -32,15 +29,17 @@ namespace aPC.Chromesthesia
     /// successful buffer sizes: 8192, 4096, 2048, 1024
     /// (some pitch detection algorithms need at least 2048) 
     /// </remarks>
-    public void ApplyAutoTune()
+    public void ApplyAutoTune(bool runForever)
     {
       byte[] buffer = new byte[8192];
       int bytesRead;
 
       do
       {
-        bytesRead = stream.Read(buffer, 0, buffer.Length);
-      } while (true);//bytesRead != 0);
+        //sceneGenerator.TestServer();
+        bytesRead = sceneGenerator.Read(buffer, 0, buffer.Length);
+        //Thread.Sleep(100);
+      } while (runForever);//bytesRead != 0);
     }
   }
 }

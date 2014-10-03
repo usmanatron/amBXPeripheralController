@@ -56,7 +56,9 @@
     <Compile Include="Pitch\StereoPitchResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PitchGeneratorProvider.cs" />
+    <Compile Include="SceneGeneratorProvider.cs" />
     <Compile Include="Server\ConductorManager.cs" />
+    <Compile Include="Server\SceneBuilder.cs" />
     <Compile Include="StereoBuffer.cs" />
     <Compile Include="StereoSplitterProvider.cs" />
   </ItemGroup>
