@@ -2,6 +2,6 @@
 {
   public interface IPitchDetector
   {
-    float DetectPitch(float[] buffer, int frames);
+    PitchResult DetectPitchDistribution(float[] buffer, int frames);
   }
 }

@@ -10,10 +10,10 @@ namespace aPC.Chromesthesia
 {
   class SceneGeneratorProvider : IWaveProvider
   {
-    private IWaveProvider sourceProvider;
-    private PitchDetector leftPitchDetector;
-    private PitchDetector rightPitchDetector;
-    private FloatDataStereoSplitter stereoSplitter;
+    private readonly IWaveProvider sourceProvider;
+    private readonly PitchDetector leftPitchDetector;
+    private readonly PitchDetector rightPitchDetector;
+    private readonly FloatDataStereoSplitter stereoSplitter;
     
     private WaveBuffer intermediaryBuffer;
     private WaveBuffer leftBuffer;
@@ -46,11 +46,21 @@ namespace aPC.Chromesthesia
       var leftPitch  = leftPitchDetector.DetectPitch(leftBuffer.FloatBuffer, stereoFrames);
       var rightPitch = rightPitchDetector.DetectPitch(rightBuffer.FloatBuffer, stereoFrames);
 
-      if (leftPitch != 0 || rightPitch != 0)
-      {
-        Console.WriteLine("{0} | {1}", leftPitch.ToString("000.000"), rightPitch.ToString("000.000")); //Debugging qqUMI
-      }
+      WriteToConsole(leftPitch, rightPitch); //Debugging qqUMI
       return bytesRead;
+    }
+
+    private void WriteToConsole(float leftPitch, float rightPitch)
+    {
+      var leftPitchNonZero  = leftPitch == 0  ? "       " : leftPitch.ToString("000.000");
+      var rightPitchNonZero = rightPitch == 0 ? "       " : rightPitch.ToString("000.000");
+
+      if (leftPitchNonZero == "       " && rightPitchNonZero == "       ")
+      {
+        return;
+      }
+
+      Console.WriteLine("{0} | {1}", leftPitchNonZero, rightPitchNonZero);
     }
 
     private void SetupWaveBuffers(int count)

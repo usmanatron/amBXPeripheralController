@@ -1,44 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace aPC.Chromesthesia.Pitch
+﻿namespace aPC.Chromesthesia.Pitch
 {
   class PitchDetector
   {
-    private AutoCorrelator autoCorrelator;
     private FftPitchDetector fftPitchDetector;
-    private bool UseAutoCorrelator;
 
-    private int maxHold;
+    private readonly int maxHold;
     private int release;
     private float previousPitch;
 
     public PitchDetector()
     {
       int sampleRate = 44100;
-      autoCorrelator = new AutoCorrelator(sampleRate);
       fftPitchDetector = new FftPitchDetector(sampleRate);
 
-      UseAutoCorrelator = false;
-      maxHold = 1;
+      maxHold = 2;
     }
 
     public float DetectPitch(float[] buffer, int frames)
     {
-      float pitch;
+      var pitchResult = fftPitchDetector.DetectPitchDistribution(buffer, frames);
 
-      if (UseAutoCorrelator)
-      {
-        pitch = autoCorrelator.DetectPitch(buffer, frames);
-      }
-      else
-      {
-        pitch = fftPitchDetector.DetectPitch(buffer, frames);
-      }
-
+      var pitch = pitchResult.PeakPitch.lowerFrequency;
       pitch = StabilisePitch(pitch);
       return pitch;
     }

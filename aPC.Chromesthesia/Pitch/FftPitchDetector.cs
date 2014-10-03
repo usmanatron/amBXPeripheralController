@@ -1,7 +1,6 @@
-﻿using NAudio.Dsp;
+﻿using System.Collections.Generic;
+using NAudio.Dsp;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace aPC.Chromesthesia.Pitch
 {
@@ -12,70 +11,72 @@ namespace aPC.Chromesthesia.Pitch
   // FFT based pitch detector. seems to work best with block sizes of 4096
   public class FftPitchDetector : IPitchDetector
   {
-    private float sampleRate;
-    private Complex[] fftBufferComplex;
-    private Complex[] prevBufferComplex;
+    private readonly float sampleRate;
+    private Complex[] fftBuffer;
+    private Complex[] prevBuffer;
+
+    // Settings
+    private int lowerDetectionFrequence = 60;
+    private int upperDetectionFrequence = 600;
 
     public FftPitchDetector(float sampleRate)
     {
       this.sampleRate = sampleRate;
     }
 
-    public float DetectPitch(float[] buffer, int inFrames)
+    public PitchResult DetectPitchDistribution(float[] buffer, int inFrames)
     {
-      if (prevBufferComplex == null)
+      if (prevBuffer == null)
       {
-        prevBufferComplex = new Complex[inFrames];// / 2];
+        prevBuffer = new Complex[inFrames];// / 2];
       }
 
       // double frames since we are combining present and previous buffers
       int frames = inFrames * 2;
-      if (fftBufferComplex == null)
+      if (fftBuffer == null)
       {
-        fftBufferComplex = new Complex[frames];
+        fftBuffer = new Complex[frames];
       }
 
       for (int n = 0; n < frames; n++)
       {
         if (n < inFrames)
         {
-          fftBufferComplex[n].X = GetIntensity(prevBufferComplex[n]) * (float)FastFourierTransform.HammingWindow(n, frames);
-          fftBufferComplex[n].Y = 0;
+          fftBuffer[n].X = GetIntensity(prevBuffer[n]) * (float)FastFourierTransform.HammingWindow(n, frames);
+          fftBuffer[n].Y = 0;
         }
         else
         {
-          fftBufferComplex[n].X = buffer[n - inFrames] * (float) FastFourierTransform.HammingWindow(n, frames);
-          fftBufferComplex[n].Y = 0;
+          fftBuffer[n].X = buffer[n - inFrames] * (float) FastFourierTransform.HammingWindow(n, frames);
+          fftBuffer[n].Y = 0;
         }
       }
 
       var power = (int) Math.Log(frames, 2);
-      FastFourierTransform.FFT(true, power, fftBufferComplex);
+      FastFourierTransform.FFT(true, power, fftBuffer);
 
+      return BuildResults(fftBuffer, frames);
+    }
+
+    private PitchResult BuildResults(Complex[] fftBuffer, int frames)
+    {
       float binSize = sampleRate / frames;
       int minBin = (int)(60 / binSize);
       int maxBin = (int)(600 / binSize);
-      float maxIntensity = 0f;
-      int maxBinIndex = 0;
+
+      var pitches = new List<Pitch>();
+
       for (int bin = minBin; bin <= maxBin; bin++)
       {
-        float real = fftBufferComplex[bin].X;
-        float imaginary = fftBufferComplex[bin].Y;
-        float intensity = real * real * imaginary * imaginary;
-
-        if (intensity > maxIntensity)
-        {
-          maxIntensity = intensity;
-          maxBinIndex = bin;
-        }
+        pitches.Add(new Pitch(bin * binSize, (bin + 1) * binSize, GetIntensity(fftBuffer[bin])));
       }
 
-      return binSize * maxBinIndex;
+      return new PitchResult(pitches);
     }
 
     private float GetIntensity(Complex value)
     {
-      return (float)Math.Sqrt((double)(value.X * value.X * value.Y * value.Y));
+      return (float)Math.Sqrt((double)((value.X * value.X) + (value.Y * value.Y)));
     }
   }
 }

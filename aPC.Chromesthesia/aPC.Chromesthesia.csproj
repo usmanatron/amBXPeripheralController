@@ -48,10 +48,11 @@
   <ItemGroup>
     <Compile Include="ChromesthesiaTask.cs" />
     <Compile Include="Chromesthesia.cs" />
-    <Compile Include="Pitch\AutoCorrelator.cs" />
     <Compile Include="Pitch\FftPitchDetector.cs" />
     <Compile Include="Pitch\IPitchDetector.cs" />
+    <Compile Include="Pitch\Pitch.cs" />
     <Compile Include="Pitch\PitchDetector.cs" />
+    <Compile Include="Pitch\PitchResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SceneGeneratorProvider.cs" />
     <Compile Include="Server\ConductorManager.cs" />
