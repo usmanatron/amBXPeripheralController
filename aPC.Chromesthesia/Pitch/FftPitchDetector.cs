@@ -68,7 +68,7 @@ namespace aPC.Chromesthesia.Pitch
 
       for (int bin = minBin; bin <= maxBin; bin++)
       {
-        pitches.Add(new Pitch(bin * binSize, (bin + 1) * binSize, GetIntensity(fftBuffer[bin])));
+        pitches.Add(new Pitch(bin, binSize, GetIntensity(fftBuffer[bin])));
       }
 
       return new PitchResult(pitches);
