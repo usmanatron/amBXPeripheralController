@@ -4,16 +4,28 @@ using System;
 
 namespace aPC.Common.Builders
 {
+  /// <summary>
+  ///   Assists with building a list of frames.
+  /// </summary>
+  /// <remarks>
+  ///   An important Gotcha: when creating a new Builder, you must first call AddFrame
+  ///   before calling anything else to complete iitialisation.
+  ///   TODO: Fix this limitation
+  /// </remarks>
   public class FrameBuilder
   {
+    private readonly List<Frame> frames;
+    private Frame currentFrame;
+    private bool isRepeatedSpecified;
+
     public FrameBuilder()
     {
-      mFrames = new List<Frame>();
+      frames = new List<Frame>();
     }
 
     public FrameBuilder AddFrame()
     {
-      if (mCurrentFrame != null)
+      if (currentFrame != null)
       {
         AddCurrentFrame();
       }
@@ -21,58 +33,21 @@ namespace aPC.Common.Builders
       return this;
     }
 
-    public FrameBuilder WithFrameLength(int xiLength)
-    {
-      mCurrentFrame.Length = xiLength;
-      return this;
-    }
-
-    public FrameBuilder WithRepeated(bool xiIsRepeated)
-    {
-      mCurrentFrame.IsRepeated = xiIsRepeated;
-      mIsRepeatedSpecified = true;
-      return this;
-    }
-
-    public FrameBuilder WithLightSection(LightSection xiLightSection)
-    {
-      mCurrentFrame.Lights = xiLightSection;
-      return this;
-    }
-
-    public FrameBuilder WithFanSection(FanSection xiFanSection)
-    {
-      mCurrentFrame.Fans = xiFanSection;
-      return this;
-    }
-
-    public FrameBuilder WithRumbleSection(RumbleSection xiRumbleSection)
-    {
-      mCurrentFrame.Rumbles = xiRumbleSection;
-      return this;
-    }
-
-    public List<Frame> Build()
-    {
-      AddCurrentFrame();
-      return mFrames;
-    }
-
     private void AddCurrentFrame()
     {
-      if (CurrentFrameIsInvalid)
+      if (!CurrentFrameIsValid)
       {
         throw new ArgumentException("The last frame passed into FrameBuilder is invalid - please check and try again.");
       }
-      mFrames.Add(mCurrentFrame);
+      frames.Add(currentFrame);
     }
 
-    private bool CurrentFrameIsInvalid
+    private bool CurrentFrameIsValid
     {
       get
       {
-        return !mIsRepeatedSpecified ||
-               mCurrentFrame.Length == default(int) ||
+        return isRepeatedSpecified &&
+               currentFrame.Length != default(int) &&
                AllSectionsOnCurrentFrameUnSpecified;
       }
     }
@@ -81,20 +56,53 @@ namespace aPC.Common.Builders
     {
       get
       {
-        return mCurrentFrame.Lights == null &&
-               mCurrentFrame.Fans == null &&
-               mCurrentFrame.Rumbles == null;
+        return currentFrame.Lights != null ||
+               currentFrame.Fans != null ||
+               currentFrame.Rumbles != null;
       }
     }
 
     private void SetupCurrentFrame()
     {
-      mCurrentFrame  = new Frame();
-      mIsRepeatedSpecified = false;
+      currentFrame = new Frame();
+      isRepeatedSpecified = false;
     }
 
-    private readonly List<Frame> mFrames;
-    private Frame mCurrentFrame;
-    private bool mIsRepeatedSpecified;
+    public FrameBuilder WithFrameLength(int length)
+    {
+      currentFrame.Length = length;
+      return this;
+    }
+
+    public FrameBuilder WithRepeated(bool isRepeated)
+    {
+      currentFrame.IsRepeated = isRepeated;
+      isRepeatedSpecified = true;
+      return this;
+    }
+
+    public FrameBuilder WithLightSection(LightSection lightSection)
+    {
+      currentFrame.Lights = lightSection;
+      return this;
+    }
+
+    public FrameBuilder WithFanSection(FanSection fanSection)
+    {
+      currentFrame.Fans = fanSection;
+      return this;
+    }
+
+    public FrameBuilder WithRumbleSection(RumbleSection rumbleSection)
+    {
+      currentFrame.Rumbles = rumbleSection;
+      return this;
+    }
+
+    public List<Frame> Build()
+    {
+      AddCurrentFrame();
+      return frames;
+    }
   }
 }

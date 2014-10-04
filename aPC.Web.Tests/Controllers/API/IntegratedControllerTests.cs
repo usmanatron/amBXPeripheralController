@@ -5,6 +5,7 @@ using aPC.Common;
 using aPC.Web.Controllers.API;
 using NUnit.Framework;
 using System.Linq;
+using aPC.Common.Defaults;
 
 namespace aPC.Web.Tests.Controllers.API
 {
@@ -21,7 +22,7 @@ namespace aPC.Web.Tests.Controllers.API
     [Test]
     public void GetWithoutName_ReturnsAllIntegratedScenes()
     {
-      var lIntegratedScenes = new SceneAccessor().GetAllScenes();
+      var lIntegratedScenes = new SceneAccessor(new DefaultScenes()).GetAllScenes();
 
       var lResults = mController.Get();
 
@@ -33,7 +34,7 @@ namespace aPC.Web.Tests.Controllers.API
     [Test]
     public void GetByName_ReturnsExpectedScene()
     {
-      var lScene = new SceneAccessor().GetScene("poolq2_event");
+      var lScene = new SceneAccessor(new DefaultScenes()).GetScene("poolq2_event");
 
       var lResult = mController.Get("poolq2_event");
 

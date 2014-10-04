@@ -5,33 +5,36 @@ namespace aPC.Common.Builders
 {
   public class FanSectionBuilder : SectionBuilderBase<Fan>
   {
+    private readonly FanSection fanSection;
+    private bool fanSpecified;
+
     public FanSectionBuilder()
     {
-      mFanSection = new FanSection();
-      mFanSpecified = false;
+      fanSection = new FanSection();
+      fanSpecified = false;
     }
 
-    public FanSectionBuilder WithFadeTime(int xiFadeTime)
+    public FanSectionBuilder WithFadeTime(int fadeTime)
     {
-      SetFadeTime(mFanSection, xiFadeTime);
+      SetFadeTime(fanSection, fadeTime);
       return this;
     }
 
-    public FanSectionBuilder WithAllFans(Fan xiFan)
+    public FanSectionBuilder WithAllFans(Fan fan)
     {
-      WithFanInDirection(eDirection.East, xiFan);
-      WithFanInDirection(eDirection.West, xiFan);
+      WithFanInDirection(eDirection.East, fan);
+      WithFanInDirection(eDirection.West, fan);
       return this;
     }
 
-    public FanSectionBuilder WithFanInDirection(eDirection xiDirection, Fan xiFan)
+    public FanSectionBuilder WithFanInDirection(eDirection direction, Fan fan)
     {
-      var lFanExists = mFanSection.SetComponentValueInDirection(xiFan, xiDirection);
-      if (!lFanExists)
+      var fanExists = fanSection.SetComponentValueInDirection(fan, direction);
+      if (!fanExists)
       {
         throw new InvalidOperationException("Attempted to update a fan which does not exist");
       }
-      mFanSpecified = true;
+      fanSpecified = true;
       return this;
     }
 
@@ -42,18 +45,15 @@ namespace aPC.Common.Builders
         throw new ArgumentException("Incomplete FanSection built.  At least one fan and the Fade Time must be specified.");
       }
 
-      return mFanSection;
+      return fanSection;
     }
 
     private bool FanSectionIsValid
     {
       get
       {
-        return mFanSection.FadeTime != default(int) && mFanSpecified;
+        return fanSection.FadeTime != default(int) && fanSpecified;
       }
     }
-
-    private readonly FanSection mFanSection;
-    private bool mFanSpecified;
   }
 }

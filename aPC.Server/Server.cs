@@ -3,6 +3,7 @@ using aPC.Common.Entities;
 using aPC.Server.Communication;
 using aPC.Common.Server.Engine;
 using log4net;
+using aPC.Common.Defaults;
 
 namespace aPC.Server
 {
@@ -12,7 +13,7 @@ namespace aPC.Server
     {
       Log.Info("Server Initialising...");
 
-      var lAccessor = new SceneAccessor();
+      var lAccessor = new SceneAccessor(new DefaultScenes());
       var lInitialEvent = lAccessor.GetScene("Server_Startup");
       var lInitialScene = lAccessor.GetScene("Rainbow");
       var lStatus = new SceneStatus(lInitialScene.SceneType);

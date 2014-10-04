@@ -14,7 +14,7 @@ namespace aPC.Common.Server.Conductors
     void Enable();
     void Disable();
 
-    LockedBool IsRunning { get; }
+    Locked<bool> IsRunning { get; }
     eDirection Direction { get; }
     eComponentType ComponentType { get; }
   }

@@ -2,30 +2,33 @@
 
 namespace aPC.Common.Builders
 {
+  /// <summary>
+  /// Aids in building Rumble Sections.
+  /// </summary>
   public class RumbleSectionBuilder : SectionBuilderBase<Rumble>
   {
+    private readonly RumbleSection rumbleSection;
+
     public RumbleSectionBuilder()
     {
-      mRumbleSection = new RumbleSection();
+      rumbleSection = new RumbleSection();
     }
 
-    public RumbleSectionBuilder WithFadeTime(int xiFadeTime)
+    public RumbleSectionBuilder WithFadeTime(int fadeTime)
     {
-      SetFadeTime(mRumbleSection, xiFadeTime);
+      SetFadeTime(rumbleSection, fadeTime);
       return this;
     }
 
-    public RumbleSectionBuilder WithRumble(Rumble xiRumble)
+    public RumbleSectionBuilder WithRumble(Rumble rumble)
     {
-      mRumbleSection.Rumble = xiRumble;
+      rumbleSection.Rumble = rumble;
       return this;
     }
 
     public RumbleSection Build()
     {
-      return mRumbleSection;
+      return rumbleSection;
     }
-
-    private readonly RumbleSection mRumbleSection;
   }
 }

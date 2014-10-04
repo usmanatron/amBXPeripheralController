@@ -12,28 +12,29 @@ namespace aPC.Common.Entities
     ///   For now, just go through all of the frames and process them - forgoe
     ///   any potential performance gains of doing anything smarter
     /// </remarks>
-    public FrameStatistics(List<Frame> xiFrames)
+    public FrameStatistics(List<Frame> frames)
     {
       EnabledDirectionalComponents = new List<Tuple<eComponentType, eDirection>>();
       SceneLength = 0;
 
-      foreach (var lFrame in xiFrames)
+      foreach (var frame in frames)
       {
-        ProcessFrame(lFrame);
+        ProcessFrame(frame);
       }
     }
 
-    private void ProcessFrame(Frame xiFrame)
+    private void ProcessFrame(Frame frame)
     {
-      SceneLength += xiFrame.Length;
-      ProcessComponent<Light>(xiFrame.Lights);
-      ProcessComponent<Fan>(xiFrame.Fans);
-      ProcessComponent<Rumble>(xiFrame.Rumbles);
+      SceneLength += frame.Length;
+      ProcessComponent<Light>(frame.Lights);
+      ProcessComponent<Fan>(frame.Fans);
+      ProcessComponent<Rumble>(frame.Rumbles);
     }
 
     /// <remarks>
     ///   TODO: The following commented out portion is an alternative method which *may*
-    ///         be more efficient (as it'll be looking at less directions).  though it isn't as clean.
+    ///         be more efficient (as it'll be looking at less directions).  Need to ensure
+    ///         this area is fully tested before dropping this in and confirming:
     ///  var lDirections = xiSection
     ///    .GetType()
     ///    .GetFields()
@@ -45,37 +46,37 @@ namespace aPC.Common.Entities
     ///    AddDirectionalComponent(new T(), lDirection);
     ///  }
     /// </remarks>
-    private void ProcessComponent<T>(SectionBase<T> xiSection) where T : IComponent
+    private void ProcessComponent<T>(SectionBase<T> section) where T : IComponent
     {
-      foreach (eDirection lDirection in Enum.GetValues(typeof(eDirection)))
+      foreach (eDirection direction in Enum.GetValues(typeof(eDirection)))
       {
-        var lComponent = xiSection.GetComponentValueInDirection(lDirection);
-        if (lComponent != null)
+        var component = section.GetComponentValueInDirection(direction);
+        if (component != null)
         {
-          AddDirectionalComponent(lComponent.ComponentType(), lDirection);
+          AddDirectionalComponent(component.ComponentType(), direction);
         }
       }
     }
 
-    private void AddDirectionalComponent(eComponentType xiComponentType, eDirection xiDirection)
+    private void AddDirectionalComponent(eComponentType componentType, eDirection direction)
     {
-      if (!AreEnabledForComponentAndDirection(xiComponentType, xiDirection))
+      if (!AreEnabledForComponentAndDirection(componentType, direction))
       {
-        EnabledDirectionalComponents.Add(new Tuple<eComponentType, eDirection>(xiComponentType, xiDirection));
+        EnabledDirectionalComponents.Add(new Tuple<eComponentType, eDirection>(componentType, direction));
       }
     }
 
-    public bool AreEnabledForComponent(eComponentType xiComponentType)
+    public bool AreEnabledForComponent(eComponentType componentType)
     {
       return EnabledDirectionalComponents
-        .Any(c => HasComponentType(c, xiComponentType));
+        .Any(c => HasComponentType(c, componentType));
     }
 
-    public bool AreEnabledForComponentAndDirection(eComponentType xiComponentType, eDirection xiDirection)
+    public bool AreEnabledForComponentAndDirection(eComponentType componentType, eDirection direction)
     {
       return EnabledDirectionalComponents
-        .Any(c => HasComponentType(c, xiComponentType) &&
-                  HasDirection(c, xiDirection));
+        .Any(c => HasComponentType(c, componentType) &&
+                  HasDirection(c, direction));
     }
 
     private Func<Tuple<eComponentType, eDirection>, eComponentType, bool> HasComponentType = 

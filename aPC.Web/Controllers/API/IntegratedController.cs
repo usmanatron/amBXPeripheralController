@@ -7,6 +7,7 @@ using aPC.Common.Communication;
 using aPC.Common;
 using aPC.Common.Entities;
 using aPC.Web.Models;
+using aPC.Common.Defaults;
 
 namespace aPC.Web.Controllers.API
 {
@@ -20,7 +21,7 @@ namespace aPC.Web.Controllers.API
     // GET api/integrated
     public IEnumerable<amBXSceneSummary> Get()
     {
-      return new SceneAccessor()
+      return new SceneAccessor(new DefaultScenes())
         .GetAllScenes()
         .Select(scene => new amBXSceneSummary(scene));
     }
@@ -28,7 +29,7 @@ namespace aPC.Web.Controllers.API
     // GET api/integrated/{name}
     public amBXScene Get(string name)
     {
-      var lScene = new SceneAccessor().GetScene(name);
+      var lScene = new SceneAccessor(new DefaultScenes()).GetScene(name);
 
       if (lScene == null)
       {

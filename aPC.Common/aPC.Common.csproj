@@ -65,7 +65,7 @@
     <Compile Include="Entities\IComponent.cs" />
     <Compile Include="Entities\SectionBase.cs" />
     <Compile Include="Entities\SectionBaseExtensions.cs" />
-    <Compile Include="LockedBool.cs" />
+    <Compile Include="Locked.cs" />
     <Compile Include="PhysicalComponentAttribute.cs" />
     <Compile Include="SceneAccessor.cs" />
     <Compile Include="Entities\amBXScene.cs" />

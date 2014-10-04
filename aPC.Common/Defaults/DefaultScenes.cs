@@ -15,15 +15,15 @@ namespace aPC.Common.Defaults
     {
       get
       {
-        var lScene = new amBXScene();
-        lScene.Frames = new FrameBuilder()
+        var scene = new amBXScene();
+        scene.Frames = new FrameBuilder()
           .AddFrame()
           .WithRepeated(false)
           .WithFrameLength(1000)
           .WithLightSection(DefaultLightSections.Red)
           .Build();
 
-        return lScene;
+        return scene;
       }
     }
 
@@ -32,14 +32,14 @@ namespace aPC.Common.Defaults
     {
       get
       {
-        var lScene = new amBXScene();
-        lScene.Frames = new FrameBuilder()
+        var scene = new amBXScene();
+        scene.Frames = new FrameBuilder()
           .AddFrame()
           .WithRepeated(false)
           .WithFrameLength(1000)
           .WithLightSection(DefaultLightSections.Green)
           .Build();
-        return lScene;
+        return scene;
       }
     }
     
@@ -48,8 +48,8 @@ namespace aPC.Common.Defaults
     {
       get
       {
-        var lScene = new amBXScene();
-        lScene.Frames = new FrameBuilder()
+        var scene = new amBXScene();
+        scene.Frames = new FrameBuilder()
           .AddFrame()
           .WithRepeated(true)
           .WithFrameLength(1000)
@@ -61,7 +61,7 @@ namespace aPC.Common.Defaults
           .WithLightSection(DefaultLightSections.Green)
           .Build();
 
-        return lScene;
+        return scene;
       }
     }
 
@@ -70,8 +70,8 @@ namespace aPC.Common.Defaults
     {
       get
       {
-        var lScene = new amBXScene();
-        lScene.Frames = new FrameBuilder()
+        var scene = new amBXScene();
+        scene.Frames = new FrameBuilder()
           .AddFrame()
           .WithRepeated(true)
           .WithFrameLength(1000)
@@ -83,7 +83,7 @@ namespace aPC.Common.Defaults
           .WithLightSection(DefaultLightSections.Red)
           .Build();
 
-        return lScene;
+        return scene;
       }
     }
 
@@ -92,15 +92,15 @@ namespace aPC.Common.Defaults
     {
       get
       {
-        var lScene = new amBXScene();
-        lScene.Frames = new FrameBuilder()
+        var scene = new amBXScene();
+        scene.Frames = new FrameBuilder()
           .AddFrame()
           .WithRepeated(false)
           .WithFrameLength(1000)
           .WithLightSection(DefaultLightSections.Off)
           .Build();
 
-        return lScene;
+        return scene;
       }
     }
 
@@ -113,13 +113,13 @@ namespace aPC.Common.Defaults
     {
       get
       {
-        var lScene = new amBXScene
+        var scene = new amBXScene
                      {
                        SceneType = eSceneType.Event,
                        IsExclusive = true
                      };
 
-        lScene.Frames = new FrameBuilder()
+        scene.Frames = new FrameBuilder()
           .AddFrame()
           .WithRepeated(false)
           .WithFrameLength(500)
@@ -139,7 +139,7 @@ namespace aPC.Common.Defaults
           .WithRumbleSection(DefaultRumbleSections.Off)
           .Build();
 
-        return lScene;
+        return scene;
       }
     }
 
@@ -148,13 +148,13 @@ namespace aPC.Common.Defaults
     {
       get
       {
-        var lScene = new amBXScene
+        var scene = new amBXScene
                      {
                        SceneType = eSceneType.Desync,
                        IsExclusive = true
                      };
 
-        lScene.Frames = new FrameBuilder()
+        scene.Frames = new FrameBuilder()
           .AddFrame()
           .WithRepeated(true)
           .WithFrameLength(1000)
@@ -185,7 +185,7 @@ namespace aPC.Common.Defaults
           .WithLightSection(DefaultLightSections.Violet)
           .Build();
 
-        return lScene;
+        return scene;
       }
     }
 
@@ -194,12 +194,12 @@ namespace aPC.Common.Defaults
     {
       get
       {
-        var lScene = new amBXScene
+        var scene = new amBXScene
                      {
                        SceneType = eSceneType.Sync
                      };
 
-        lScene.Frames = new FrameBuilder()
+        scene.Frames = new FrameBuilder()
           .AddFrame()
           .WithRepeated(false)
           .WithFrameLength(2000)
@@ -243,7 +243,7 @@ namespace aPC.Common.Defaults
             .Build())
           .Build();
 
-        return lScene;
+        return scene;
       }
     }
 
@@ -252,9 +252,9 @@ namespace aPC.Common.Defaults
     {
       get
       {
-        var lScene = new amBXScene();
-        lScene.Frames = new List<Frame>();
-        return lScene;
+        var scene = new amBXScene();
+        scene.Frames = new List<Frame>();
+        return scene;
       }
     }
 
@@ -263,12 +263,12 @@ namespace aPC.Common.Defaults
     {
       get
       {
-        var lScene = new amBXScene
+        var scene = new amBXScene
                      {
                        SceneType = eSceneType.Event
                      };
 
-        var lOff = new FrameBuilder()
+        var off = new FrameBuilder()
           .AddFrame()
           .WithRepeated(false)
           .WithFrameLength(100)
@@ -279,7 +279,7 @@ namespace aPC.Common.Defaults
           .Build()
           .Single();
         
-        var lError = new FrameBuilder()
+        var error = new FrameBuilder()
           .AddFrame()
           .WithRepeated(false)
           .WithFrameLength(200)
@@ -290,8 +290,8 @@ namespace aPC.Common.Defaults
           .Build()
           .Single();
         
-        lScene.Frames = new List<Frame> { lOff, lError, lOff, lError, lOff };
-        return lScene;
+        scene.Frames = new List<Frame> { off, error, off, error, off };
+        return scene;
       }
     }
 
@@ -300,18 +300,19 @@ namespace aPC.Common.Defaults
     {
       get
       {
-        var lScene = new amBXScene()
+        var scene = new amBXScene()
           {
             SceneType = eSceneType.Desync
           };
-        lScene.Frames = new FrameBuilder()
+
+        scene.Frames = new FrameBuilder()
           .AddFrame()
           .WithRepeated(true)
           .WithFrameLength(2000)
           .WithFanSection(DefaultFanSections.Quarter)
           .Build();
 
-        return lScene;
+        return scene;
       }
     }
 
@@ -324,13 +325,13 @@ namespace aPC.Common.Defaults
     {
       get
       {
-        var lScene = new amBXScene
+        var scene = new amBXScene
                      {
                        SceneType = eSceneType.Event,
                        IsExclusive = true,
                      };
 
-        lScene.Frames = new FrameBuilder()
+        scene.Frames = new FrameBuilder()
           .AddFrame()
           .WithRepeated(false)
           .WithFrameLength(200)
@@ -352,7 +353,7 @@ namespace aPC.Common.Defaults
           .WithRumbleSection(DefaultRumbleSections.Off)
           .Build();
 
-        return lScene;
+        return scene;
       }
     }
 
@@ -365,13 +366,13 @@ namespace aPC.Common.Defaults
     {
       get
       {
-        var lScene = new amBXScene
+        var scene = new amBXScene
                      {
                        SceneType = eSceneType.Event,
                        IsExclusive = true,
                      };
 
-        lScene.Frames = new FrameBuilder()
+        scene.Frames = new FrameBuilder()
           .AddFrame()
           .WithRepeated(false)
           .WithFrameLength(500)
@@ -407,7 +408,7 @@ namespace aPC.Common.Defaults
           .WithRumbleSection(DefaultRumbleSections.Off)
           .Build();
 
-        return lScene;
+        return scene;
       }
     }
 

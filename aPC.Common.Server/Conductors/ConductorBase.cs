@@ -12,7 +12,7 @@ namespace aPC.Common.Server.Conductors
   {
     protected ConductorBase(eDirection xiDirection, ActorBase<T> xiActor, SceneHandlerBase<T> xiHandler)
     {
-      mIsRunning = new LockedBool();
+      mIsRunning = new Locked<bool>(false);
       mDirection = xiDirection;
       mActor = xiActor;
       mHandler = xiHandler;
@@ -21,7 +21,7 @@ namespace aPC.Common.Server.Conductors
     public void Run()
     {
       Log("About to run");
-      IsRunning.SetTrue();
+      IsRunning.Set(true);
 
       while (true)
       {
@@ -32,7 +32,7 @@ namespace aPC.Common.Server.Conductors
         else
         {
           Log("Handler disabled - Disabling conductor.");
-          IsRunning.SetFalse();
+          IsRunning.Set(false);
           break;
         }
       }
@@ -86,7 +86,7 @@ namespace aPC.Common.Server.Conductors
       mHandler.Enable();
     }
 
-    public LockedBool IsRunning
+    public Locked<bool> IsRunning
     {
       get
       {
@@ -106,7 +106,7 @@ namespace aPC.Common.Server.Conductors
 
     protected abstract void Log(string xiNotification);
 
-    private readonly LockedBool mIsRunning;
+    private readonly Locked<bool> mIsRunning;
     private readonly eDirection mDirection;
     private readonly ActorBase<T> mActor;
     private readonly SceneHandlerBase<T> mHandler;

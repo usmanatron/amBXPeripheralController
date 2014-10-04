@@ -13,18 +13,21 @@ namespace aPC.Common.Defaults
       Name = name;
     }
 
-    public static string GetName(PropertyInfo xiPropertyInfo)
+    public static string GetName(PropertyInfo propertyInfo)
     {
-      return xiPropertyInfo.GetCustomAttribute<SceneNameAttribute>().Name;
+      return propertyInfo.GetCustomAttribute<SceneNameAttribute>().Name;
     }
 
-    public static bool MatchesName(PropertyInfo xiPropertyInfo, string xiName)
+    public static bool MatchesName(PropertyInfo propertyInfo, string name)
     {
-      var lAttribute = xiPropertyInfo.GetCustomAttribute<SceneNameAttribute>();
+      var attribute = propertyInfo.GetCustomAttribute<SceneNameAttribute>();
 
-      if (lAttribute == null) return false;
+      if (attribute == null) 
+      {
+        return false;
+      }
 
-      return string.Equals(lAttribute.Name, xiName, StringComparison.InvariantCultureIgnoreCase);
+      return string.Equals(attribute.Name, name, StringComparison.InvariantCultureIgnoreCase);
     }
   }
 }

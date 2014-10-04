@@ -9,33 +9,37 @@ namespace aPC.Common
 {
   public class SceneAccessor
   {
-    public amBXScene GetScene(string xiDescription)
-    {
-      var lSceneProperty = GetAllIntegratedScenes()
-        .SingleOrDefault(property => SceneNameAttribute.MatchesName(property, xiDescription));
+    private readonly DefaultScenes defaultScenes;
 
-      if (lSceneProperty == null)
+    public SceneAccessor(DefaultScenes defaultScenes)
+    {
+      this.defaultScenes = defaultScenes;
+    }
+
+    public amBXScene GetScene(string description)
+    {
+      var sceneProperty = GetAllIntegratedScenes()
+        .SingleOrDefault(property => SceneNameAttribute.MatchesName(property, description));
+
+      if (sceneProperty == null)
       {
-        Console.WriteLine("Integrated scene with description {0} not found.", xiDescription);
+        Console.WriteLine("Integrated scene with description {0} not found.", description);
         return null;
       }
 
-      return lSceneProperty.GetValue(mDefaultScenes) as amBXScene;
+      return sceneProperty.GetValue(defaultScenes) as amBXScene;
     }
 
     public Dictionary<string, amBXScene> GetAllScenes()
     {
       return GetAllIntegratedScenes()
-        .ToDictionary(scene => SceneNameAttribute.GetName(scene), scene => (amBXScene)scene.GetValue(mDefaultScenes));
+        .ToDictionary(scene => SceneNameAttribute.GetName(scene), scene => (amBXScene)scene.GetValue(defaultScenes));
     }
 
     private PropertyInfo[] GetAllIntegratedScenes()
     {
-      return mDefaultScenes
-        .GetType()
+      return defaultScenes.GetType()
         .GetProperties();
     }
-
-    private static readonly DefaultScenes mDefaultScenes = new DefaultScenes();
   }
 }

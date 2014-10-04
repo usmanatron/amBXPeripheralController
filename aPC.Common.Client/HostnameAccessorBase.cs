@@ -12,13 +12,13 @@ namespace aPC.Common.Client
     public HostnameAccessor()
     {
       hostnames = new List<string> { "localhost" };
-      hasChangedSinceLastCheck = new LockedBool();
+      hasChangedSinceLastCheck = new Locked<bool>(false);
     }
 
     public HostnameAccessor(List<string> xiHostnames)
     {
       hostnames = xiHostnames;
-      hasChangedSinceLastCheck = new LockedBool();
+      hasChangedSinceLastCheck = new Locked<bool>(false);
     }
 
     public void Add(string xiHostname)
@@ -45,14 +45,14 @@ namespace aPC.Common.Client
 
     private void MarkUpdated()
     {
-      hasChangedSinceLastCheck.SetTrue();
+      hasChangedSinceLastCheck.Set(true);
     }
 
     public bool HasChangedSinceLastCheck()
     {
       if (hasChangedSinceLastCheck.Get)
       {
-        hasChangedSinceLastCheck.SetFalse();
+        hasChangedSinceLastCheck.Set(false);
         return true;
       }
       return false;
@@ -60,7 +60,7 @@ namespace aPC.Common.Client
 
     #endregion
 
-    private LockedBool hasChangedSinceLastCheck;
+    private Locked<bool> hasChangedSinceLastCheck;
     private List<string> hostnames;
   }
 }

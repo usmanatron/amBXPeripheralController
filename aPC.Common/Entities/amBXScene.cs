@@ -49,13 +49,13 @@ namespace aPC.Common.Entities
     {
       get
       {
-        return mFrames;
+        return frames;
       }
       set
       {
-        mFrames = value;
+        frames = value;
         // Clear the statistics
-        mFrameStatistics = null;
+        frameStatistics = null;
       }
     }
 
@@ -76,20 +76,20 @@ namespace aPC.Common.Entities
     {
       get
       {
-        if (mFrameStatistics == null)
+        if (frameStatistics == null)
         {
-          mFrameStatistics = new FrameStatistics(Frames);
+          frameStatistics = new FrameStatistics(Frames);
         }
-        return mFrameStatistics;
+        return frameStatistics;
       }
     }
 
     #endregion
 
     [XmlIgnore]
-    private List<Frame> mFrames;
+    private List<Frame> frames;
 
     [XmlIgnore]
-    private FrameStatistics mFrameStatistics;
+    private FrameStatistics frameStatistics;
   }
 }

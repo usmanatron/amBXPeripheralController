@@ -1,5 +1,8 @@
 ﻿namespace aPC.Common
 {
+  /// <summary>
+  /// The type of component.
+  /// </summary>
   public enum eComponentType
   {
     Light,

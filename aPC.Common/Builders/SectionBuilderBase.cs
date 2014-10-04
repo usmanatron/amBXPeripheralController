@@ -4,9 +4,9 @@ namespace aPC.Common.Builders
 {
   public class SectionBuilderBase<T> where T : IComponent
   {
-    protected void SetFadeTime(SectionBase<T> xiSection, int xiFadeTime)
+    protected void SetFadeTime(SectionBase<T> section, int fadeTime)
     {
-      xiSection.FadeTime = xiFadeTime;
+      section.FadeTime = fadeTime;
     }
   }
 }

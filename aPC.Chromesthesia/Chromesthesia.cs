@@ -2,6 +2,7 @@
 using aPC.Chromesthesia.Server;
 using aPC.Common;
 using aPC.Common.Builders;
+using aPC.Common.Defaults;
 using aPC.Common.Server.Actors;
 using aPC.Common.Server.Conductors;
 using aPC.Common.Server.Engine;
@@ -26,9 +27,9 @@ namespace aPC.Chromesthesia
       var streamRaw = new WaveInProvider(waveIn);
       var streamPitch = new PitchGeneratorProvider(streamRaw, new FftPitchDetector(), new FftPitchDetector(), new FloatDataStereoSplitter());
       var compositeLightSectionBuilder = new SceneBuilder(new CompositeLightSectionBuilder(new LightSectionBuilder(), new CompositeLightBuilder()), new LightBuilder());
-
-      var frameConductor = new FrameConductor(new FrameActor(new EngineManager()), new FrameHandler(new SceneAccessor().GetScene("rainbow"), EventComplete));
+      var frameConductor = new FrameConductor(new FrameActor(new EngineManager()), new FrameHandler(new SceneAccessor(new DefaultScenes()).GetScene("rainbow"), EventComplete));
       var streamScene = new SceneGenerator(streamPitch, compositeLightSectionBuilder, new ConductorManager(frameConductor));
+      
       task = new ChromesthesiaTask(streamScene);
 
       task.Run();

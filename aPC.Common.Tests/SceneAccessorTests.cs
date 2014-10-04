@@ -1,4 +1,5 @@
-﻿using aPC.Common.Entities;
+﻿using aPC.Common.Defaults;
+using aPC.Common.Entities;
 using NUnit.Framework;
 
 namespace aPC.Common.Tests
@@ -9,7 +10,7 @@ namespace aPC.Common.Tests
     [TestFixtureSetUp]
     public void Setup()
     {
-      mSeceneAccessor = new SceneAccessor();
+      mSeceneAccessor = new SceneAccessor(new DefaultScenes());
     }
 
     [Test]

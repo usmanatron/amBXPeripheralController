@@ -7,22 +7,22 @@ namespace aPC.Common
   [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
   public class DirectionAttribute : Attribute
   {
-    public DirectionAttribute(eDirection xiDirection)
+    public DirectionAttribute(eDirection direction)
     {
-      mDirection = xiDirection;
+      Direction = direction;
     }
 
     public eDirection Direction
     {
-      get { return mDirection; }
+      get; private set;
     }
 
-    public static bool MatchesDirection(FieldInfo xiFieldInfo, eDirection xiDirection)
+    public static bool MatchesDirection(FieldInfo fieldInfo, eDirection direction)
     {
-      var lAttributes = xiFieldInfo.GetCustomAttributes<DirectionAttribute>();
-      return lAttributes != null && lAttributes.Any(attr => attr.Direction == xiDirection);
+      var attributes = fieldInfo.GetCustomAttributes<DirectionAttribute>();
+      
+      return attributes != null && 
+             attributes.Any(attr => attr.Direction == direction);
     }
-
-    private readonly eDirection mDirection;
   }
 }
