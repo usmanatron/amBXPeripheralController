@@ -1,6 +1,7 @@
 ﻿using aPC.Chromesthesia.Pitch;
 using aPC.Chromesthesia.Server;
 using aPC.Common;
+using aPC.Common.Builders;
 using aPC.Common.Server.Engine;
 using NAudio.Wave;
 using System;
@@ -18,12 +19,13 @@ namespace aPC.Chromesthesia
       waveIn.StartRecording();
 
       OutputCaptureSettings(waveIn);
-      
 
+      int sampleRate = 44100;
 
       var streamRaw = new WaveInProvider(waveIn);
-      var streamPitch = new PitchGeneratorProvider(streamRaw, new PitchDetector(), new PitchDetector(), new FloatDataStereoSplitter());
-      var streamScene = new SceneGeneratorProvider(streamPitch, new SceneBuilder(), new ConductorManager(new EngineManager(), new SceneAccessor()));
+      var streamPitch = new PitchGeneratorProvider(streamRaw, new FftPitchDetector(sampleRate), new FftPitchDetector(sampleRate), new FloatDataStereoSplitter());
+      var compositeLightSectionBuilder = new SceneBuilder(new CompositeLightSectionBuilder(new LightSectionBuilder(), new CompositeLightBuilder()), new LightBuilder());
+      var streamScene = new SceneGeneratorProvider(streamPitch, compositeLightSectionBuilder, new ConductorManager(new EngineManager(), new SceneAccessor()));
       task = new ChromesthesiaTask(streamScene);
 
       task.Run();

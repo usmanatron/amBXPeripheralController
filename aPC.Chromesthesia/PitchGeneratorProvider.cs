@@ -7,8 +7,8 @@ namespace aPC.Chromesthesia
   class PitchGeneratorProvider : IWaveProvider
   {
     private readonly IWaveProvider sourceProvider;
-    private readonly PitchDetector leftPitchDetector;
-    private readonly PitchDetector rightPitchDetector;
+    private readonly IPitchDetector leftPitchDetector;
+    private readonly IPitchDetector rightPitchDetector;
     private readonly FloatDataStereoSplitter stereoSplitter;
     
     private WaveBuffer intermediaryBuffer;
@@ -17,7 +17,7 @@ namespace aPC.Chromesthesia
 
     public StereoPitchResult PitchResults { get; private set; }
 
-    public PitchGeneratorProvider(IWaveProvider sourceProvider, PitchDetector leftPitchDetector, PitchDetector rightPitchDetector, FloatDataStereoSplitter stereoSplitter)
+    public PitchGeneratorProvider(IWaveProvider sourceProvider, IPitchDetector leftPitchDetector, IPitchDetector rightPitchDetector, FloatDataStereoSplitter stereoSplitter)
     {
       if (sourceProvider.WaveFormat.SampleRate != 44100)
       {
@@ -49,8 +49,8 @@ namespace aPC.Chromesthesia
 
     private void AnalysePitch(int stereoFrames, int bytesRead)
     {
-      var leftPitchResult  = leftPitchDetector.DetectPitch(leftBuffer.FloatBuffer, stereoFrames);
-      var rightPitchResult = rightPitchDetector.DetectPitch(rightBuffer.FloatBuffer, stereoFrames);
+      var leftPitchResult  = leftPitchDetector.DetectPitchDistribution(leftBuffer.FloatBuffer, stereoFrames);
+      var rightPitchResult = rightPitchDetector.DetectPitchDistribution(rightBuffer.FloatBuffer, stereoFrames);
 
       WriteToConsole(leftPitchResult.PeakPitch.averageFrequency, rightPitchResult.PeakPitch.averageFrequency); //Debugging qqUMI
       PitchResults = new StereoPitchResult(leftPitchResult, rightPitchResult, bytesRead);

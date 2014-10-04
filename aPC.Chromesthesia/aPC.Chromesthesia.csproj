@@ -52,16 +52,18 @@
     <Compile Include="Pitch\FftPitchDetector.cs" />
     <Compile Include="Pitch\IPitchDetector.cs" />
     <Compile Include="Pitch\Pitch.cs" />
-    <Compile Include="Pitch\PitchDetector.cs" />
     <Compile Include="Pitch\PitchResult.cs" />
     <Compile Include="Pitch\StereoPitchResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PitchGeneratorProvider.cs" />
     <Compile Include="SceneGeneratorProvider.cs" />
+    <Compile Include="Server\CompositeLightBuilder.cs" />
+    <Compile Include="Server\CompositeLightSectionBuilder.cs" />
     <Compile Include="Server\ConductorManager.cs" />
+    <Compile Include="Server\LightBuilder.cs" />
     <Compile Include="Server\SceneBuilder.cs" />
     <Compile Include="StereoBuffer.cs" />
-    <Compile Include="StereoSplitterProvider.cs" />
+    <Compile Include="FloatDataStereoSplitter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

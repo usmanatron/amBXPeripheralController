@@ -16,8 +16,8 @@ namespace aPC.Chromesthesia.Pitch
     private Complex[] prevBuffer;
 
     // Settings
-    private int lowerDetectionFrequence = 60;
-    private int upperDetectionFrequence = 600;
+    private const int lowerDetectionFrequency = 60;
+    private const int upperDetectionFrequency = 600;
 
     public FftPitchDetector(float sampleRate)
     {
@@ -61,8 +61,8 @@ namespace aPC.Chromesthesia.Pitch
     private PitchResult BuildResults(Complex[] fftBuffer, int frames)
     {
       float binSize = sampleRate / frames;
-      int minBin = (int)(60 / binSize);
-      int maxBin = (int)(600 / binSize);
+      int minBin = (int)(lowerDetectionFrequency / binSize);
+      int maxBin = (int)(upperDetectionFrequency / binSize);
 
       var pitches = new List<Pitch>();
 

@@ -2,18 +2,29 @@
 using aPC.Common;
 using aPC.Common.Builders;
 using aPC.Common.Entities;
+using System;
 
 namespace aPC.Chromesthesia.Server
 {
   class SceneBuilder
   {
+    private CompositeLightSectionBuilder compositeLightSectionBuilder;
+    private LightBuilder lightBuilder;
+
+    public SceneBuilder(CompositeLightSectionBuilder compositeLightBuilder, LightBuilder lightBuilder)
+    {
+      this.compositeLightSectionBuilder = compositeLightBuilder;
+      this.lightBuilder = lightBuilder;
+    }
+
     public amBXScene BuildSceneFromPitchResults(StereoPitchResult pitchResults)
     {
-      var leftMaxPitch = pitchResults.left.PeakPitch.averageFrequency;
+      var leftLight = lightBuilder.BuildLightFrom(pitchResults.Left);
+      var rightLight = lightBuilder.BuildLightFrom(pitchResults.Right);
 
-      var lightSection = new LightSectionBuilder()
-        .WithAllLights(new Light {Blue = leftMaxPitch / 600})
-        .WithFadeTime(2)
+      var lightSection = compositeLightSectionBuilder
+        .WithLights(leftLight, rightLight)
+        .WithSidePercentageOnDiagonal(70)
         .Build();
 
       var frames = new FrameBuilder()

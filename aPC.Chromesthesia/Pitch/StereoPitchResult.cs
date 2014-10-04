@@ -2,14 +2,14 @@
 {
   class StereoPitchResult
   {
-    public PitchResult left { get; private set; }
-    public PitchResult right { get; private set; }
+    public PitchResult Left { get; private set; }
+    public PitchResult Right { get; private set; }
     public int bytesRead { get; private set; }
 
     public StereoPitchResult(PitchResult leftResult, PitchResult rightResult, int bytesRead)
     {
-      left = leftResult;
-      right = rightResult;
+      Left = leftResult;
+      Right = rightResult;
       this.bytesRead = bytesRead;
     }
   }
