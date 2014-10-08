@@ -52,21 +52,32 @@ namespace aPC.Chromesthesia
       var leftPitchResult  = leftPitchDetector.DetectPitchDistribution(leftBuffer.FloatBuffer, stereoFrames);
       var rightPitchResult = rightPitchDetector.DetectPitchDistribution(rightBuffer.FloatBuffer, stereoFrames);
 
-      WriteToConsole(leftPitchResult.PeakPitch.averageFrequency, rightPitchResult.PeakPitch.averageFrequency); //Debugging qqUMI
+      WriteToConsole(leftPitchResult, rightPitchResult); //Debugging qqUMI
       PitchResults = new StereoPitchResult(leftPitchResult, rightPitchResult, bytesRead);
     }
 
-    private void WriteToConsole(float leftPitch, float rightPitch)
+    private void WriteToConsole(PitchResult leftResult, PitchResult rightResult)
     {
-      var leftPitchNonZero  = leftPitch == 0  ? "       " : leftPitch.ToString("000.000");
-      var rightPitchNonZero = rightPitch == 0 ? "       " : rightPitch.ToString("000.000");
+      var leftPeakPitchNonZero  = ToNonZeroString(leftResult.PeakPitch.averageFrequency);
+      var rightPeakPitchNonZero = ToNonZeroString(rightResult.PeakPitch.averageFrequency);
+      var leftMaxPitchAmp  = ToNonZeroString(leftResult.PeakPitch.amplitude);
+      var rightMaxPitchAmp = ToNonZeroString(rightResult.PeakPitch.amplitude);
 
-      if (leftPitchNonZero == "       " && rightPitchNonZero == "       ")
+
+      if (leftPeakPitchNonZero != "       " || rightPeakPitchNonZero != "       ")
       {
-        return;
+        Console.WriteLine("{0} | {1}", leftPeakPitchNonZero, rightPeakPitchNonZero);
       }
 
-      Console.WriteLine("{0} | {1}", leftPitchNonZero, rightPitchNonZero);
+      if (leftMaxPitchAmp != "       " || rightMaxPitchAmp != "       ")
+      {
+        Console.WriteLine("{0} | {1}", leftMaxPitchAmp, rightMaxPitchAmp);
+      }
+    }
+
+    private string ToNonZeroString(float value)
+    {
+      return value == 0 ? "       " : value.ToString("000.000"); 
     }
 
     private void SetupWaveBuffers(int count)
