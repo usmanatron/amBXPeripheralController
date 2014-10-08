@@ -42,6 +42,11 @@ namespace aPC.Chromesthesia.Pitch
     // for at least one more buffer
     private Pitch StabilisePitch(Pitch currentPeakPitch)
     {
+      if (previousPitch == null)
+      {
+        previousPitch = currentPeakPitch;
+      }
+
       if (Math.Abs(currentPeakPitch.fftBinIndex - previousPitch.fftBinIndex) == 1 && release < maxHold)
       {
         currentPeakPitch = previousPitch;
