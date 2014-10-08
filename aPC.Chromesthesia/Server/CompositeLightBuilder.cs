@@ -1,9 +1,5 @@
 ﻿using aPC.Common.Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace aPC.Chromesthesia.Server
 {
@@ -34,7 +30,12 @@ namespace aPC.Chromesthesia.Server
     {
       var secondValuePercentage = 100 - firstValuePercentage;
 
-      return (firstValue * firstValuePercentage) + (secondValue * secondValuePercentage);
+      return (firstValue * GetPercentage(firstValuePercentage)) + (secondValue * GetPercentage(secondValuePercentage));
+    }
+
+    private float GetPercentage(int value)
+    {
+      return value / 100f;
     }
   }
 }

@@ -2,18 +2,21 @@
 using aPC.Common;
 using aPC.Common.Builders;
 using aPC.Common.Entities;
-using System;
 
 namespace aPC.Chromesthesia.Server
 {
   class SceneBuilder
   {
-    private CompositeLightSectionBuilder compositeLightSectionBuilder;
-    private LightBuilder lightBuilder;
+    private readonly CompositeLightSectionBuilder compositeLightSectionBuilder;
+    private readonly LightBuilder lightBuilder;
 
-    public SceneBuilder(CompositeLightSectionBuilder compositeLightBuilder, LightBuilder lightBuilder)
+    // Settings
+    private const int diagonalLightPercentage = 70;
+    private const int frameLength = 10;
+
+    public SceneBuilder(CompositeLightSectionBuilder compositeLightSectionBuilder, LightBuilder lightBuilder)
     {
-      this.compositeLightSectionBuilder = compositeLightBuilder;
+      this.compositeLightSectionBuilder = compositeLightSectionBuilder;
       this.lightBuilder = lightBuilder;
     }
 
@@ -24,14 +27,14 @@ namespace aPC.Chromesthesia.Server
 
       var lightSection = compositeLightSectionBuilder
         .WithLights(leftLight, rightLight)
-        .WithSidePercentageOnDiagonal(70)
+        .WithSidePercentageOnDiagonal(diagonalLightPercentage)
         .Build();
 
       var frames = new FrameBuilder()
         .AddFrame()
         .WithLightSection(lightSection)
         .WithRepeated(true)
-        .WithFrameLength(10)
+        .WithFrameLength(frameLength)
         .Build();
 
       return new amBXScene

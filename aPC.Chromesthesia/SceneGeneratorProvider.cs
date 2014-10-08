@@ -1,5 +1,7 @@
-﻿using aPC.Chromesthesia.Pitch;
+﻿using System;
+using aPC.Chromesthesia.Pitch;
 using aPC.Chromesthesia.Server;
+using aPC.Common.Entities;
 using NAudio.Wave;
 
 namespace aPC.Chromesthesia
@@ -24,6 +26,11 @@ namespace aPC.Chromesthesia
       // BuildScene      
       var scene = sceneBuilder.BuildSceneFromPitchResults(results);
 
+      if (SceneIsEmpty(scene))
+      {
+        return results.bytesRead;
+      }
+
       // Push through conductorManager
       conductorManager.Update(scene);
       return results.bytesRead;
@@ -34,6 +41,19 @@ namespace aPC.Chromesthesia
       pitchGenerator.Read(buffer, offset, count);
       return pitchGenerator.PitchResults;
     }
+
+    private bool SceneIsEmpty(amBXScene scene)
+    {
+      return LightIsEmpty(scene.Frames[0].Lights.East) &&
+             LightIsEmpty(scene.Frames[0].Lights.West);
+    }
+
+    private bool LightIsEmpty(Light light)
+    {
+      return Math.Abs(light.Red) < TOLERANCE && Math.Abs(light.Green) < TOLERANCE && Math.Abs(light.Blue) < TOLERANCE;
+    }
+
+    private const float TOLERANCE = 0.01f;
 
     public WaveFormat WaveFormat { get; private set; }
   }
