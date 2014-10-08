@@ -89,7 +89,7 @@ namespace aPC.Common.Client.Communication
       xiClient.CreateChannel().RunIntegratedScene(xiScene);
     }
 
-    // qqUMI - should ideally ask all and only return a subset!
+    // TODO: Should ideally ask all Servers and only return a subset!
     public virtual string[] GetSupportedIntegratedScenes()
     {
       UpdateClientsIfHostnameChanged();

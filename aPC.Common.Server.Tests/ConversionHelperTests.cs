@@ -1,13 +1,13 @@
-﻿using aPC.Common;
-using aPC.Common.Server.Engine;
+﻿using aPC.Common.Server.Engine;
 using System;
 using NUnit.Framework;
 
 namespace aPC.Common.Server.Tests
 {
-  //qqUMI These tests are dependent on amBXLib => they require ambxrt.
+  // TODO: These tests are dependent on amBXLib => they require ambxrt.
   // It's not possible to include this in source control and they will fail
   // until this file is copied to the appropriate places.
+  // Need to work out what I can do about this
   [TestFixture]
   class ConversionHelperTests
   {

@@ -24,8 +24,6 @@
 
   #region amBXLib-equivalent enums
 
-  //qqUMI Write a unit test that forces equivalence
-  // between these and the amBXLib equivalents
   public enum eDirection
   {
     Everywhere = 0,

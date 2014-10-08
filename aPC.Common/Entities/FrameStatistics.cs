@@ -32,7 +32,7 @@ namespace aPC.Common.Entities
     }
 
     /// <remarks>
-    ///   qqUMI The following commented out portion is an alternative method which *may*
+    ///   TODO: The following commented out portion is an alternative method which *may*
     ///         be more efficient (as it'll be looking at less directions).  though it isn't as clean.
     ///  var lDirections = xiSection
     ///    .GetType()

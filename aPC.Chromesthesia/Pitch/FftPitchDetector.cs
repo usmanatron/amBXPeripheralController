@@ -4,9 +4,7 @@ using System;
 
 namespace aPC.Chromesthesia.Pitch
 {
-  /* qqUMI TODO:
-   * Increase buffer to 8192 if possible (decrease bin size)
-   */
+  /* TODO: Increase buffer to 8192 if possible (decrease bin size) */
 
   // FFT based pitch detector. seems to work best with block sizes of 4096
   public class FftPitchDetector : IPitchDetector

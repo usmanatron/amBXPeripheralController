@@ -1,8 +1,5 @@
 ﻿using System.IO;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using aPC.Common.Entities;
 using aPC.Server.Communication;
