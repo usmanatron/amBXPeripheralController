@@ -80,14 +80,14 @@ namespace aPC.Chromesthesia.Pitch
 
       for (int n = 0; n < frames; n++)
       {
-        if (n < previousBufferCount) //qqUMI
+        if (n < previousBufferCount)
         {
-          fftBuffer[n].X = prevBuffers[n] * (float)FastFourierTransform.HammingWindow(n, frames);
+          fftBuffer[n].X = prevBuffers[n];//qqUMI Test removal * (float)FastFourierTransform.HammingWindow(n, frames);
           fftBuffer[n].Y = 0;
         }
         else
         {
-          fftBuffer[n].X = buffer[n - previousBufferCount] * (float)FastFourierTransform.HammingWindow(n, frames);
+          fftBuffer[n].X = buffer[n - previousBufferCount];//qqUMI Test removal * (float)FastFourierTransform.HammingWindow(n, frames);
           fftBuffer[n].Y = 0;
         }
       }

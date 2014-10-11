@@ -42,9 +42,9 @@ namespace aPC.Chromesthesia.Pitch
       // The buffer we get is loads bigger, but the rest of it is empty and it's safe to truncate to the size we expect
       var floatBuffer = waveBuffers.SelectMany(chunk => chunk.FloatBuffer.Take(bufferSize));
 
-      if (floatBuffer.Count() < bufferSize * numberOfChunks)
+      if (waveBuffers.Count < numberOfChunks)
       {
-        var sampleCountToAdd = (bufferSize * numberOfChunks) - floatBuffer.Count();
+        var sampleCountToAdd = (numberOfChunks - waveBuffers.Count) * bufferSize;
         floatBuffer = Enumerable.Repeat(0f, sampleCountToAdd).Concat(floatBuffer);
       }
 

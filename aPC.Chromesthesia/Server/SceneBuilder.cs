@@ -12,7 +12,7 @@ namespace aPC.Chromesthesia.Server
 
     // Settings
     private const int diagonalLightPercentage = 70;
-    private const int frameLength = 10;
+    private const int frameLength = 5;
 
     public SceneBuilder(CompositeLightSectionBuilder compositeLightSectionBuilder, LightBuilder lightBuilder)
     {
