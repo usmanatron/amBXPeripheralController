@@ -16,7 +16,7 @@ namespace aPC.Chromesthesia.Server
     {
       if ((startIndex + endIndex) % 2 != 0)
       {
-        throw new ArgumentException("Both indexes must have the same parity!");
+        //throw new ArgumentException("Both indexes must have the same parity!");
       }
 
       if (startIndex >= endIndex)

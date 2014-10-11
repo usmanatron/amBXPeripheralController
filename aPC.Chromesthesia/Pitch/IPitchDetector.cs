@@ -1,7 +1,10 @@
-﻿namespace aPC.Chromesthesia.Pitch
+﻿using NAudio.Wave;
+namespace aPC.Chromesthesia.Pitch
 {
   public interface IPitchDetector
   {
-    PitchResult DetectPitchDistribution(float[] buffer, int frames);
+    PitchResult Result { get; }
+
+    void DetectPitchDistribution(WaveBuffer buffer, int frames);
   }
 }

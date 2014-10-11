@@ -3,6 +3,7 @@ using aPC.Chromesthesia.Pitch;
 using aPC.Chromesthesia.Server;
 using aPC.Common.Entities;
 using NAudio.Wave;
+using System.Threading;
 
 namespace aPC.Chromesthesia
 {
@@ -33,6 +34,7 @@ namespace aPC.Chromesthesia
 
       // Push through conductorManager
       conductorManager.Update(scene);
+      
       return results.bytesRead;
     }
 

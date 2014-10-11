@@ -16,19 +16,25 @@ namespace aPC.Chromesthesia
     {
       var kernel = new NinjectKernelHandler();
       var waveIn = kernel.Get<WasapiLoopbackCapture>();
+      waveIn.RecordingStopped += RecordingStopped;
       waveIn.StartRecording();
 
       OutputCaptureSettings(waveIn);
 
       int sampleRate = 44100;
 
-      var streamRaw = new WaveInProvider(waveIn);
+      var streamRaw = new CircularWaveInProvider(waveIn);
       var streamPitch = new PitchGeneratorProvider(streamRaw, new FftPitchDetector(sampleRate), new FftPitchDetector(sampleRate), new FloatDataStereoSplitter());
       var compositeLightSectionBuilder = new SceneBuilder(new CompositeLightSectionBuilder(new LightSectionBuilder(), new CompositeLightBuilder()), new LightBuilder());
       var streamScene = new SceneGeneratorProvider(streamPitch, compositeLightSectionBuilder, new ConductorManager(new EngineManager(), new SceneAccessor()));
       task = new ChromesthesiaTask(streamScene);
 
       task.Run();
+    }
+
+    private static void RecordingStopped(object sender, StoppedEventArgs e)
+    {
+      Console.WriteLine(e.Exception);
     }
 
     private static void OutputCaptureSettings(IWaveIn waveIn)

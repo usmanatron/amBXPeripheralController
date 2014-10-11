@@ -1,6 +1,7 @@
 ﻿using aPC.Chromesthesia.Pitch;
 using NAudio.Wave;
 using System;
+using System.Threading;
 
 namespace aPC.Chromesthesia
 {
@@ -49,10 +50,19 @@ namespace aPC.Chromesthesia
 
     private void AnalysePitch(int stereoFrames, int bytesRead)
     {
-      var leftPitchResult  = leftPitchDetector.DetectPitchDistribution(leftBuffer.FloatBuffer, stereoFrames);
-      var rightPitchResult = rightPitchDetector.DetectPitchDistribution(rightBuffer.FloatBuffer, stereoFrames);
+      var leftDetectPitch  = new Thread(() => leftPitchDetector.DetectPitchDistribution(leftBuffer, stereoFrames));
+      var rightDetectPitch = new Thread(() => rightPitchDetector.DetectPitchDistribution(rightBuffer, stereoFrames));
 
-      WriteToConsole(leftPitchResult, rightPitchResult); //Debugging qqUMI
+      leftDetectPitch.Start();
+      rightDetectPitch.Start();
+
+      leftDetectPitch.Join();
+      rightDetectPitch.Join();
+
+      PitchResult leftPitchResult = leftPitchDetector.Result;
+      PitchResult rightPitchResult = rightPitchDetector.Result;
+
+      ThreadPool.QueueUserWorkItem(_ => WriteToConsole(leftPitchResult, rightPitchResult)); //Debugging qqUMI
       PitchResults = new StereoPitchResult(leftPitchResult, rightPitchResult, bytesRead);
     }
 
