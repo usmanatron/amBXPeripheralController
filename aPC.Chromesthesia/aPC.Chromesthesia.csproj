@@ -37,7 +37,7 @@
   <ItemGroup>
     <Reference Include="amBXLib, Version=1.0.5056.34406, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\Debug\amBXLib.dll</HintPath>
+      <HintPath>..\Lib\Release\amBXLib.dll</HintPath>
     </Reference>
     <Reference Include="NAudio">
       <HintPath>..\packages\NAudio.1.7.1\lib\net35\NAudio.dll</HintPath>
