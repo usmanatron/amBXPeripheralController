@@ -15,8 +15,8 @@ namespace aPC.Chromesthesia.Pitch
     private float[] prevBuffer;
 
     // Settings
-    private const int lowerDetectionFrequency = 60;
-    private const int upperDetectionFrequency = 600;
+    private const int lowerDetectionFrequency = 100;
+    private const int upperDetectionFrequency = 1000;
 
     public FftPitchDetector(float sampleRate)
     {

@@ -3,66 +3,40 @@
 namespace aPC.Chromesthesia.Server
 {
   /// <summary>
-  /// Handles the curve of a colour.
+  /// Handles the value of a colour.
   /// For a given start and end index, values between 0 and 1 are calculated so that,
-  /// if graphed, you get a bell curve.
+  /// if graphed, you get a triangle, (with midPoint being the highest point.
   /// </summary>
-  class ColourCurve
+  class ColourTriangle
   {
-    private readonly int startIndex;
-    private readonly int endIndex;
+    private readonly int midPoint;
+    private readonly int radius;
 
-    public ColourCurve(int startIndex, int endIndex)
+    public ColourTriangle(int midPoint, int radius)
     {
-      if ((startIndex + endIndex) % 2 != 0)
-      {
-        throw new ArgumentException("Both indexes must have the same parity!");
-      }
-
-      if (startIndex >= endIndex)
-      {
-        throw new ArgumentException("Start index must be less than the ending index.");
-      }
-
-      this.startIndex = startIndex;
-      this.endIndex = endIndex;
+      this.midPoint = midPoint;
+      this.radius = radius;
     }
 
     public float GetValue(int index)
     {
-      if (!IsInRange(index))
+      var value = Math.Abs(index - midPoint) / radius;
+
+      if (IsNotInRange2(value))
       {
         return 0f;
       }
 
-      if (index > midpoint)
-      {
-        return (endIndex - index) / midpointToEndDistance;
-      }
-      else
-      {
-        return (index - startIndex) / midpointToEndDistance;
-      }
+      return value;
     }
 
-    private bool IsInRange(int index)
+    /// <remarks>
+    /// This parity is used to allow for short-circuiting in most (if not all!) scenarios
+    /// </remarks>
+    private bool IsNotInRange2(float value)
     {
-      return startIndex <= index &&
-             index <= endIndex;
+      return value > 1f ||
+             value < 0f;
     }
-
-    private int midpoint
-    {
-      get
-      {
-        return (startIndex + endIndex) / 2;
-      }
-    }
-
-    private float midpointToEndDistance
-    {
-      get { return endIndex - midpoint; }
-    }
-
   }
 }

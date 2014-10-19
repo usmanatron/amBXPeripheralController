@@ -6,7 +6,7 @@ namespace aPC.Chromesthesia.Server
 {
   class LightBuilder
   {
-    private const int lightMultiplicationFactor = 30;//00;
+    private const int lightMultiplicationFactor = 60;//00;
     private const int amplitudeMultiplicationFactor = 10;
 
 
@@ -16,18 +16,17 @@ namespace aPC.Chromesthesia.Server
       var spectrumWidth = pitchResult.Pitches.Count;
 
       // These are magic numbers and may need tweaking to get the colour scheme absolutely right
-      var red = new ColourCurve(-1 * (spectrumWidth / 2),(spectrumWidth / 2));
-      var green = new ColourCurve(6, spectrumWidth);
-      var blue = new ColourCurve((spectrumWidth / 2), (3 * spectrumWidth / 2));
+      var red = new ColourTriangle(0, spectrumWidth / 4);
+      var green = new ColourTriangle(spectrumWidth / 2, spectrumWidth / 3);
+      var blue = new ColourTriangle((3 * spectrumWidth / 4), spectrumWidth / 2);
 
       foreach (var pitch in pitchResult.Pitches.OrderBy(p => p.fftBinIndex))
       {
         var amplitudePercentage = pitch.amplitude / pitchResult.TotalAmplitude;
 
-
         light.Red += red.GetValue(pitch.fftBinIndex) * amplitudePercentage * lightMultiplicationFactor / spectrumWidth;
-        light.Blue += blue.GetValue(pitch.fftBinIndex) * amplitudePercentage * lightMultiplicationFactor / spectrumWidth;
         light.Green += green.GetValue(pitch.fftBinIndex) * amplitudePercentage * lightMultiplicationFactor / spectrumWidth;
+        light.Blue += blue.GetValue(pitch.fftBinIndex) * amplitudePercentage * lightMultiplicationFactor / spectrumWidth;
       }
       light.Intensity = pitchResult.TotalAmplitude * amplitudeMultiplicationFactor;
       
