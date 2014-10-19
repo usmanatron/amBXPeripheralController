@@ -7,100 +7,102 @@ namespace aPC.Common.Tests
   [TestFixture]
   class SectionBaseTests
   {
+    private TestSection testSection;
+
+    [SetUp]
+    public void Setup()
+    {
+      this.testSection = new TestSection();
+    }
+
+
     [Test]
     public void GettingComponentByDirection_GivesCorrectMember()
     {
-      var lSection = new TestSection();
-      var lComponent = lSection.GetComponentValueInDirection(eDirection.North);
-      Assert.AreEqual(lSection.Up, lComponent);
+      var component = testSection.GetComponentValueInDirection(eDirection.North);
+      
+      Assert.AreEqual(testSection.Up, component);
     }
 
     [Test]
     public void GettingComponentByDirection_WhereFieldHasMultipleDifferentDirections_GivesCorrectMember()
     {
-      var lSection = new TestSection();
-      var lNorthEast = lSection.GetComponentValueInDirection(eDirection.NorthEast);
-      var lEast = lSection.GetComponentValueInDirection(eDirection.East);
-      var lSouthEast = lSection.GetComponentValueInDirection(eDirection.SouthEast);
+      var northEast = testSection.GetComponentValueInDirection(eDirection.NorthEast);
+      var east = testSection.GetComponentValueInDirection(eDirection.East);
+      var southEast = testSection.GetComponentValueInDirection(eDirection.SouthEast);
 
-      Assert.AreEqual(lSection.Right, lNorthEast);
-      Assert.AreEqual(lSection.Right, lEast);
-      Assert.AreEqual(lSection.Right, lSouthEast);
+      Assert.AreEqual(testSection.Right, northEast);
+      Assert.AreEqual(testSection.Right, east);
+      Assert.AreEqual(testSection.Right, southEast);
     }
 
     [Test]
     public void MultipleFieldsSharingTheSameDirection_ThrowsException()
     {
-      var lSection = new TestSection();
-      Assert.Throws<InvalidOperationException>(() => lSection.GetComponentValueInDirection(eDirection.South));
+      Assert.Throws<InvalidOperationException>(() => testSection.GetComponentValueInDirection(eDirection.South));
     }
 
     [Test]
     public void SettingComponentByDirection_IsCorrectlySaved()
     {
-      var lSection = new TestSection();
-      var lComponent = new TestComponent { Value = "Test1" };
-      var lSuccess = lSection.SetComponentValueInDirection(lComponent, eDirection.North);
+      var component = new TestComponent { Value = "Test1" };
+      var success = testSection.SetComponentValueInDirection(component, eDirection.North);
 
-      Assert.AreEqual(true, lSuccess);
-      Assert.AreEqual(lComponent.Value, lSection.Up.Value);
+      Assert.AreEqual(true, success);
+      Assert.AreEqual(component.Value, testSection.Up.Value);
     }
 
     [Test]
     public void SettingComponentByDirection_WhereDirectionDoesntExist_Fails()
     {
-      var lSection = new TestSection();
-      var lComponent = new TestComponent { Value = "Test2" };
-      var lSuccess = lSection.SetComponentValueInDirection(lComponent, eDirection.West);
+      var component = new TestComponent { Value = "Test2" };
+      var success = testSection.SetComponentValueInDirection(component, eDirection.West);
 
-      Assert.AreEqual(false, lSuccess);
-      Assert.IsNull(lSection.Down);
+      Assert.AreEqual(false, success);
+      Assert.IsNull(testSection.Down);
     }
 
     [Test]
     public void GettingPhysicalComponentByDirection_GivesExpectedMember()
     {
-      var lSection = new TestSection();
-      var lComponent = lSection.GetPhysicalComponentValueInDirection(eDirection.North);
-      Assert.AreEqual(lSection.Down, lComponent);
+      var component = testSection.GetPhysicalComponentValueInDirection(eDirection.North);
+      
+      Assert.AreEqual(testSection.Down, component);
     }
 
     [Test]
     public void GettingPhysicalComponentByDirection_WhereTheMemberIsNotMarkedPhysical_GivesNull()
     {
-      var lSection = new TestSection();
-      var lComponent = lSection.GetPhysicalComponentValueInDirection(eDirection.East);
-      Assert.IsNull(lComponent);
+      var component = testSection.GetPhysicalComponentValueInDirection(eDirection.East);
+      
+      Assert.IsNull(component);
     }
 
     [Test]
     public void SettingPhysicalComponentByDirection_IsCorrectlySaved()
     {
-      var lSection = new TestSection();
-      var lComponent = new TestComponent { Value = "Test3" };
-      var lSuccess = lSection.SetPhysicalComponentValueInDirection(lComponent, eDirection.North);
+      var component = new TestComponent { Value = "Test3" };
+      var success = testSection.SetPhysicalComponentValueInDirection(component, eDirection.North);
 
-      Assert.AreEqual(true, lSuccess);
-      Assert.AreEqual(lComponent.Value, lSection.Up.Value);
+      Assert.AreEqual(true, success);
+      Assert.AreEqual(component.Value, testSection.Up.Value);
     }
 
     [Test]
     public void SettingPhysicalComponentByDirection_WhereDirectionIsNotMarkedPhysical_Fails()
     {
-      var lSection = new TestSection();
       var lComponent = new TestComponent { Value = "Test4" };
-      var lSuccess = lSection.SetPhysicalComponentValueInDirection(lComponent, eDirection.East);
+      var lSuccess = testSection.SetPhysicalComponentValueInDirection(lComponent, eDirection.East);
 
       Assert.AreEqual(false, lSuccess);
-      Assert.IsNull(lSection.Right);
+      Assert.IsNull(testSection.Right);
     }
 
     [Test]
     public void SettingPhysicalComponentByDirection_WhereDirectionDoesntExistAtAll_Fails()
     {
-      var lSection = new TestSection();
       var lComponent = new TestComponent { Value = "Test5" };
-      var lSuccess = lSection.SetPhysicalComponentValueInDirection(lComponent, eDirection.West);
+      var lSuccess = testSection.SetPhysicalComponentValueInDirection(lComponent, eDirection.West);
 
       Assert.AreEqual(false, lSuccess);
     }
