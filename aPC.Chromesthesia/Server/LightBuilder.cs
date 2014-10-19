@@ -24,12 +24,14 @@ namespace aPC.Chromesthesia.Server
 
       foreach (var pitch in pitchResult.Pitches.OrderBy(p => p.fftBinIndex))
       {
-        light.Red += red.GetValue(pitch.fftBinIndex) *pitch.amplitude * 1000 / spectrumWidth;
-        light.Blue += blue.GetValue(pitch.fftBinIndex) * pitch.amplitude * 1000 / spectrumWidth;
-        light.Green += green.GetValue(pitch.fftBinIndex) * pitch.amplitude * 1000 / spectrumWidth;
+        light.Red += red.GetValue(pitch.fftBinIndex) * pitch.amplitude * MultFactor / spectrumWidth;
+        light.Blue += blue.GetValue(pitch.fftBinIndex) * pitch.amplitude * MultFactor / spectrumWidth;
+        light.Green += green.GetValue(pitch.fftBinIndex) * pitch.amplitude * MultFactor / spectrumWidth;
       }
       
       return light;
     }
+
+    private const int MultFactor = 100;
   }
 }
