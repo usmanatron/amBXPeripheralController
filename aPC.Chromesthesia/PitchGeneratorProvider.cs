@@ -58,26 +58,21 @@ namespace aPC.Chromesthesia
 
     private void WriteToConsole(PitchResult leftResult, PitchResult rightResult)
     {
-      var leftPeakPitchNonZero  = ToNonZeroString(leftResult.PeakPitch.averageFrequency);
-      var rightPeakPitchNonZero = ToNonZeroString(rightResult.PeakPitch.averageFrequency);
-      var leftMaxPitchAmp  = ToNonZeroString(leftResult.PeakPitch.amplitude);
-      var rightMaxPitchAmp = ToNonZeroString(rightResult.PeakPitch.amplitude);
+      var leftPeakPitchNonZero  = ToNonZeroString(leftResult.PeakPitch.averageFrequency, "0000.000");
+      var rightPeakPitchNonZero = ToNonZeroString(rightResult.PeakPitch.averageFrequency, "0000.000");
+      var leftTotalAmp  = ToNonZeroString(leftResult.TotalAmplitude, "0.00000");
+      var rightTotalAmp = ToNonZeroString(rightResult.TotalAmplitude, "0.00000");
 
 
-      if (leftPeakPitchNonZero != "       " || rightPeakPitchNonZero != "       ")
+      if (leftPeakPitchNonZero != "       " || rightPeakPitchNonZero != "       " || leftTotalAmp != "       " || rightTotalAmp != "       ")
       {
-        Console.WriteLine("{0} | {1}", leftPeakPitchNonZero, rightPeakPitchNonZero);
-      }
-
-      if (leftMaxPitchAmp != "       " || rightMaxPitchAmp != "       ")
-      {
-        Console.WriteLine("{0} | {1}", leftMaxPitchAmp, rightMaxPitchAmp);
+        Console.WriteLine("{0} : {1} <- PP | MA -> {2} : {3}", leftPeakPitchNonZero, rightPeakPitchNonZero, leftTotalAmp, rightTotalAmp);
       }
     }
 
-    private string ToNonZeroString(float value)
+    private string ToNonZeroString(float value, string format)
     {
-      return value == 0 ? "       " : value.ToString("000.000"); 
+      return value == 0 ? "       " : value.ToString(format); 
     }
 
     private void SetupWaveBuffers(int count)
