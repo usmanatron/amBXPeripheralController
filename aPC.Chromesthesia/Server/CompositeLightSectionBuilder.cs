@@ -63,7 +63,7 @@ namespace aPC.Chromesthesia.Server
     {
       var westDiagonalLight = compositeLightBuilder.BuildCompositeLight(westLight, eastLight, sidePercentageOnDiagonal);
       var centralLight = compositeLightBuilder.BuildCompositeLight(westLight, eastLight, centrePercentage);
-      var eastDiagonalLight = compositeLightBuilder.BuildCompositeLight(westLight, eastLight, sidePercentageOnDiagonal);
+      var eastDiagonalLight = compositeLightBuilder.BuildCompositeLight(eastLight, westLight, sidePercentageOnDiagonal);
 
       return lightSectionBuilder
         .WithLightInDirection(eDirection.North, centralLight)
