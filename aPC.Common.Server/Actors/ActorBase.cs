@@ -5,13 +5,13 @@ namespace aPC.Common.Server.Actors
 {
   public abstract class ActorBase<T> : IActor<T> where T : SnapshotBase
   {
-    protected ActorBase(IEngine xiEngine)
+    protected IEngine Engine;
+
+    protected ActorBase(IEngine engine)
     {
-      Engine = xiEngine;
+      Engine = engine;
     }
 
-    public abstract void ActNextFrame(eDirection xiDirection, T xiSnapshot);
-
-    protected IEngine Engine;
+    public abstract void ActNextFrame(eDirection direction, T snapshot);
   }
 }

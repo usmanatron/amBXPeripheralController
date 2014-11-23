@@ -2,10 +2,10 @@
 {
   public abstract class SnapshotBase
   {
-    protected SnapshotBase(int xiFadeTime, int xiLength)
+    protected SnapshotBase(int fadeTime, int length)
     {
-      FadeTime = xiFadeTime;
-      Length = xiLength;
+      FadeTime = fadeTime;
+      Length = length;
     }
 
     public int FadeTime;

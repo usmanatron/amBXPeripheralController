@@ -5,9 +5,9 @@ namespace aPC.Common.Server.SceneHandlers
 {
   internal interface ISceneHandler<T> where T : SnapshotBase
   {
-    void UpdateScene(amBXScene xiNewScene);
+    void UpdateScene(amBXScene newScene);
 
-    T GetNextSnapshot(eDirection xiDirection);
+    T GetNextSnapshot(eDirection direction);
 
     void AdvanceScene();
 

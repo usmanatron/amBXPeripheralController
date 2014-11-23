@@ -7,8 +7,8 @@ namespace aPC.Common.Server.Tests.Conductors
 {
   internal class TestConductor : ConductorBase<TestSnapshot>
   {
-    public TestConductor(eDirection xiDirection, TestActor xiActor, TestSceneHandler xiHandler)
-      : base(xiDirection, xiActor, xiHandler)
+    public TestConductor(eDirection direction, TestActor actor, TestSceneHandler handler)
+      : base(direction, actor, handler)
     {
     }
 
@@ -18,7 +18,7 @@ namespace aPC.Common.Server.Tests.Conductors
     }
 
     // Don't need to log anything here.
-    protected override void Log(string xiNotification)
+    protected override void Log(string message)
     {
     }
   }

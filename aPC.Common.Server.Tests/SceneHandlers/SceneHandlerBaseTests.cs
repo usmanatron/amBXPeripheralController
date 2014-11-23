@@ -10,10 +10,16 @@ namespace aPC.Common.Server.Tests.SceneHandlers
   [TestFixture]
   internal class SceneHandlerBaseTests
   {
+    private amBXScene initialScene;
+    private amBXScene blueEvent;
+    private amBXScene purpleEvent;
+    private amBXScene unrepeatedScene;
+    private Action action;
+
     [TestFixtureSetUp]
     public void FixtureSetup()
     {
-      var lInitialSceneFrames = new FrameBuilder()
+      var initialSceneFrames = new FrameBuilder()
         .AddFrame()
         .WithRepeated(false)
         .WithFrameLength(1000)
@@ -24,206 +30,200 @@ namespace aPC.Common.Server.Tests.SceneHandlers
         .WithLightSection(DefaultLightSections.Orange)
         .Build();
 
-      var lBlueEventFrames = new FrameBuilder()
+      var blueEventFrames = new FrameBuilder()
         .AddFrame()
         .WithRepeated(true)
         .WithFrameLength(500)
         .WithLightSection(DefaultLightSections.JiraBlue)
         .Build();
 
-      var lPurpleEventFrames = new FrameBuilder()
+      var purpleEventFrames = new FrameBuilder()
         .AddFrame()
         .WithRepeated(true)
         .WithFrameLength(250)
         .WithLightSection(DefaultLightSections.StrongPurple)
         .Build();
 
-      var lUnrepeatedFrames = new FrameBuilder()
-      .AddFrame()
+      var unrepeatedFrames = new FrameBuilder()
+        .AddFrame()
         .WithRepeated(false)
         .WithFrameLength(125)
         .WithLightSection(DefaultLightSections.Red)
         .Build();
 
-      mInitialScene = new amBXScene
+      initialScene = new amBXScene
       {
         SceneType = eSceneType.Desync,
         IsExclusive = false,
-        Frames = lInitialSceneFrames
+        Frames = initialSceneFrames
       };
 
-      mBlueEvent = new amBXScene
+      blueEvent = new amBXScene
       {
         SceneType = eSceneType.Event,
         IsExclusive = false,
-        Frames = lBlueEventFrames
+        Frames = blueEventFrames
       };
 
-      mPurpleEvent = new amBXScene
+      purpleEvent = new amBXScene
       {
         SceneType = eSceneType.Event,
         IsExclusive = false,
-        Frames = lPurpleEventFrames
+        Frames = purpleEventFrames
       };
 
-      mUnrepeatedScene = new amBXScene
+      unrepeatedScene = new amBXScene
       {
         SceneType = eSceneType.Desync,
         IsExclusive = false,
-        Frames = lUnrepeatedFrames
+        Frames = unrepeatedFrames
       };
 
-      mAction = new Action(() => { });
+      action = new Action(() => { });
     }
 
     [Test]
     public void NewSceneHandler_IsDisabledByDefault()
     {
-      var lHandler = new TestSceneHandler(mInitialScene, mAction);
-      Assert.IsFalse(lHandler.IsEnabled);
+      var handler = new TestSceneHandler(initialScene, action);
+      Assert.IsFalse(handler.IsEnabled);
     }
 
     [Test]
     public void NewSceneHandler_IsEnabledWhenDoneExplicitly()
     {
-      var lHandler = new TestSceneHandler(mInitialScene, mAction);
-      lHandler.Enable();
-      Assert.IsTrue(lHandler.IsEnabled);
+      var handler = new TestSceneHandler(initialScene, action);
+      handler.Enable();
+      Assert.IsTrue(handler.IsEnabled);
     }
 
     [Test]
     public void GetNextFrame_GetsExpectedData()
     {
-      var lHandler = new TestSceneHandler(mInitialScene, mAction);
+      var handler = new TestSceneHandler(initialScene, action);
 
-      var lFrame = lHandler.NextFrame;
-      var lExpectedFrame = mInitialScene.Frames[0];
+      var frame = handler.NextFrame;
+      var expectedFrame = initialScene.Frames[0];
 
-      Assert.AreEqual(lExpectedFrame.Length, lFrame.Length);
-      Assert.AreEqual(lExpectedFrame.IsRepeated, lFrame.IsRepeated);
-      Assert.AreEqual(lExpectedFrame.Lights, lFrame.Lights);
+      Assert.AreEqual(expectedFrame.Length, frame.Length);
+      Assert.AreEqual(expectedFrame.IsRepeated, frame.IsRepeated);
+      Assert.AreEqual(expectedFrame.Lights, frame.Lights);
     }
 
     [Test]
     public void AdvancingHandlerOnFirstRun_GivesSecondFrame()
     {
-      var lHandler = new TestSceneHandler(mInitialScene, mAction);
+      var handler = new TestSceneHandler(initialScene, action);
 
-      lHandler.AdvanceScene();
-      var lFrame = lHandler.NextFrame;
-      var lExpectedFrame = mInitialScene.Frames[1];
+      handler.AdvanceScene();
+      var frame = handler.NextFrame;
+      var expectedFrame = initialScene.Frames[1];
 
-      Assert.AreEqual(lExpectedFrame.Length, lFrame.Length);
-      Assert.AreEqual(lExpectedFrame.IsRepeated, lFrame.IsRepeated);
-      Assert.AreEqual(lExpectedFrame.Lights, lFrame.Lights);
+      Assert.AreEqual(expectedFrame.Length, frame.Length);
+      Assert.AreEqual(expectedFrame.IsRepeated, frame.IsRepeated);
+      Assert.AreEqual(expectedFrame.Lights, frame.Lights);
     }
 
     [Test]
     public void AdvancingHandlerThreeTimes_ReturnsToFirstRepeatableFrame()
     {
-      var lHandler = new TestSceneHandler(mInitialScene, mAction);
+      var handler = new TestSceneHandler(initialScene, action);
 
-      lHandler.AdvanceScene();
-      lHandler.AdvanceScene();
+      handler.AdvanceScene();
+      handler.AdvanceScene();
 
-      var lFrame = lHandler.NextFrame;
+      var frame = handler.NextFrame;
       // The first repeatable frame is the second one in the scene
-      var lExpectedFrame = mInitialScene.Frames[1];
+      var expectedFrame = initialScene.Frames[1];
 
-      Assert.AreEqual(lExpectedFrame.Length, lFrame.Length);
-      Assert.AreEqual(lExpectedFrame.IsRepeated, lFrame.IsRepeated);
-      Assert.AreEqual(lExpectedFrame.Lights, lFrame.Lights);
+      Assert.AreEqual(expectedFrame.Length, frame.Length);
+      Assert.AreEqual(expectedFrame.IsRepeated, frame.IsRepeated);
+      Assert.AreEqual(expectedFrame.Lights, frame.Lights);
     }
 
     [Test]
     public void AfterRunningThroughAnEvent_RevertsToPreviousScene()
     {
-      var lHandler = new TestSceneHandler(mInitialScene, mAction);
-      lHandler.UpdateScene(mBlueEvent);
+      var handler = new TestSceneHandler(initialScene, action);
+      handler.UpdateScene(blueEvent);
 
-      lHandler.AdvanceScene();
-      var lFrame = lHandler.NextFrame;
-      var lExpectedFrame = mInitialScene.Frames[0];
+      handler.AdvanceScene();
+      var frame = handler.NextFrame;
+      var expectedFrame = initialScene.Frames[0];
 
-      Assert.AreEqual(lExpectedFrame.Length, lFrame.Length);
-      Assert.AreEqual(lExpectedFrame.IsRepeated, lFrame.IsRepeated);
-      Assert.AreEqual(lExpectedFrame.Lights, lFrame.Lights);
+      Assert.AreEqual(expectedFrame.Length, frame.Length);
+      Assert.AreEqual(expectedFrame.IsRepeated, frame.IsRepeated);
+      Assert.AreEqual(expectedFrame.Lights, frame.Lights);
     }
 
     [Test]
     public void AfterRunningThroughAnEvent_WithASpecifiedAction_GivenActionIsRun()
     {
-      var lActionRun = false;
-      var lHandler = new TestSceneHandler(mInitialScene, () => lActionRun = true);
+      var actionRun = false;
+      var handler = new TestSceneHandler(initialScene, () => actionRun = true);
 
-      lHandler.UpdateScene(mBlueEvent);
-      lHandler.AdvanceScene();
+      handler.UpdateScene(blueEvent);
+      handler.AdvanceScene();
 
-      Assert.IsTrue(lActionRun);
+      Assert.IsTrue(actionRun);
     }
 
     [Test]
     public void NoMoreApplicableScenes_MarksHandlerAsDormant()
     {
-      var lHandler = new TestSceneHandler(mUnrepeatedScene, mAction);
-      lHandler.AdvanceScene();
+      var handler = new TestSceneHandler(unrepeatedScene, action);
+      handler.AdvanceScene();
 
-      var lFrame = lHandler.NextFrame;
+      var frame = handler.NextFrame;
 
-      Assert.IsFalse(lHandler.IsEnabled);
-      Assert.AreEqual(default(int), lFrame.Length);
-      Assert.AreEqual(default(bool), lFrame.IsRepeated);
-      Assert.IsNull(lFrame.Lights);
+      Assert.IsFalse(handler.IsEnabled);
+      Assert.AreEqual(default(int), frame.Length);
+      Assert.AreEqual(default(bool), frame.IsRepeated);
+      Assert.IsNull(frame.Lights);
     }
 
     [Test]
     public void HandlerWithEvent_PushingAnotherEvent_DoesNotUpdatePreviousScene()
     {
-      var lHandler = new TestSceneHandler(mInitialScene, mAction);
-      lHandler.UpdateScene(mBlueEvent);
-      lHandler.UpdateScene(mPurpleEvent);
+      var handler = new TestSceneHandler(initialScene, action);
+      handler.UpdateScene(blueEvent);
+      handler.UpdateScene(purpleEvent);
 
       // Confirm it's actually updated the Scene Handler
-      var lEventFrame = lHandler.NextFrame;
-      Assert.AreEqual(lEventFrame.Lights, mPurpleEvent.Frames.Single().Lights);
+      var eventFrame = handler.NextFrame;
+      Assert.AreEqual(eventFrame.Lights, purpleEvent.Frames.Single().Lights);
 
-      lHandler.AdvanceScene();
+      handler.AdvanceScene();
 
       // Confirm the previous scene is mInitialScene
-      var lPreviousFrame = lHandler.NextFrame;
-      var lExpectedFrame = mInitialScene.Frames[0];
+      var previousFrame = handler.NextFrame;
+      var expectedFrame = initialScene.Frames[0];
 
-      Assert.AreEqual(lExpectedFrame.Length, lPreviousFrame.Length);
-      Assert.AreEqual(lExpectedFrame.IsRepeated, lPreviousFrame.IsRepeated);
-      Assert.AreEqual(lExpectedFrame.Lights, lPreviousFrame.Lights);
+      Assert.AreEqual(expectedFrame.Length, previousFrame.Length);
+      Assert.AreEqual(expectedFrame.IsRepeated, previousFrame.IsRepeated);
+      Assert.AreEqual(expectedFrame.Lights, previousFrame.Lights);
     }
 
     [Test]
     public void HandlerWithEvent_PushingNonEvent_QuietlyUpdatesPreviousScene()
     {
-      var lHandler = new TestSceneHandler(mInitialScene, mAction);
-      lHandler.UpdateScene(mBlueEvent);
-      lHandler.UpdateScene(mUnrepeatedScene);
+      var handler = new TestSceneHandler(initialScene, action);
+      handler.UpdateScene(blueEvent);
+      handler.UpdateScene(unrepeatedScene);
 
       // Confirm the current Scene is still the event
-      var lFirstFrame = lHandler.NextFrame;
-      Assert.AreEqual(lFirstFrame.Lights, mBlueEvent.Frames.Single().Lights);
+      var firstFrame = handler.NextFrame;
+      Assert.AreEqual(firstFrame.Lights, blueEvent.Frames.Single().Lights);
 
-      lHandler.AdvanceScene();
+      handler.AdvanceScene();
 
       // Confirm the previous scene has changed
-      var lPreviousFrame = lHandler.NextFrame;
-      var lExpectedFrame = mUnrepeatedScene.Frames[0];
+      var previousFrame = handler.NextFrame;
+      var expectedFrame = unrepeatedScene.Frames[0];
 
-      Assert.AreEqual(lExpectedFrame.Length, lPreviousFrame.Length);
-      Assert.AreEqual(lExpectedFrame.IsRepeated, lPreviousFrame.IsRepeated);
-      Assert.AreEqual(lExpectedFrame.Lights, lPreviousFrame.Lights);
+      Assert.AreEqual(expectedFrame.Length, previousFrame.Length);
+      Assert.AreEqual(expectedFrame.IsRepeated, previousFrame.IsRepeated);
+      Assert.AreEqual(expectedFrame.Lights, previousFrame.Lights);
     }
-
-    private amBXScene mInitialScene;
-    private amBXScene mBlueEvent;
-    private amBXScene mPurpleEvent;
-    private amBXScene mUnrepeatedScene;
-    private Action mAction;
   }
 }

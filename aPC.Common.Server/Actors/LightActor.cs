@@ -6,16 +6,16 @@ namespace aPC.Common.Server.Actors
 {
   public class LightActor : ComponentActor<Light>
   {
-    public LightActor(IEngine xiEngine)
-      : base(xiEngine)
+    public LightActor(IEngine engine)
+      : base(engine)
     {
     }
 
-    public override void ActNextFrame(eDirection xiDirection, ComponentSnapshot<Light> xiSnapshot)
+    public override void ActNextFrame(eDirection direction, ComponentSnapshot<Light> snapshot)
     {
-      if (!xiSnapshot.IsComponentNull)
+      if (!snapshot.IsComponentNull)
       {
-        Engine.UpdateLight(xiDirection, xiSnapshot.Item, xiSnapshot.FadeTime);
+        Engine.UpdateLight(direction, snapshot.Item, snapshot.FadeTime);
       }
     }
   }

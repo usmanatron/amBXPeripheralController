@@ -9,42 +9,42 @@ namespace aPC.Common.Server.Tests.SceneHandlers
   [TestFixture]
   internal class FrameHandlerTests
   {
+    private readonly eDirection[] directions = (eDirection[])Enum.GetValues(typeof(eDirection));
+    private amBXScene scene;
+    private Action action;
+
     [TestFixtureSetUp]
     public void FixtureSetup()
     {
-      mScene = new DefaultScenes().Building;
-      mAction = new Action(() => { });
+      scene = new DefaultScenes().Building;
+      action = new Action(() => { });
     }
 
     [Test]
     public void NextFrame_IsAsExpected()
     {
-      var lHandler = new FrameHandler(mScene, mAction);
+      var handler = new FrameHandler(scene, action);
 
-      var lSnapshot = lHandler.GetNextSnapshot(eDirection.North);
-      var lExpectedFrame = mScene.Frames[0];
+      var snapshot = handler.GetNextSnapshot(eDirection.North);
+      var expectedFrame = scene.Frames[0];
 
-      Assert.AreEqual(lExpectedFrame.Length, lSnapshot.Frame.Length);
-      Assert.AreEqual(lExpectedFrame.IsRepeated, lSnapshot.Frame.IsRepeated);
-      Assert.AreEqual(lExpectedFrame.Lights, lSnapshot.Frame.Lights);
+      Assert.AreEqual(expectedFrame.Length, snapshot.Frame.Length);
+      Assert.AreEqual(expectedFrame.IsRepeated, snapshot.Frame.IsRepeated);
+      Assert.AreEqual(expectedFrame.Lights, snapshot.Frame.Lights);
     }
 
     [Test]
     [TestCaseSource("Directions")]
     public void GetNextSnapshot_ReturnsExpectedFrame_RegardlessOfDirection(eDirection xiDirection)
     {
-      var lHandler = new FrameHandler(mScene, mAction);
+      var handler = new FrameHandler(scene, action);
 
-      var lSnapshot = lHandler.GetNextSnapshot(xiDirection);
-      var lExpectedFrame = mScene.Frames[0];
+      var snapshot = handler.GetNextSnapshot(xiDirection);
+      var expectedFrame = scene.Frames[0];
 
-      Assert.AreEqual(lExpectedFrame.Length, lSnapshot.Frame.Length);
-      Assert.AreEqual(lExpectedFrame.IsRepeated, lSnapshot.Frame.IsRepeated);
-      Assert.AreEqual(lExpectedFrame.Lights, lSnapshot.Frame.Lights);
+      Assert.AreEqual(expectedFrame.Length, snapshot.Frame.Length);
+      Assert.AreEqual(expectedFrame.IsRepeated, snapshot.Frame.IsRepeated);
+      Assert.AreEqual(expectedFrame.Lights, snapshot.Frame.Lights);
     }
-
-    private readonly eDirection[] Directions = (eDirection[])Enum.GetValues(typeof(eDirection));
-    private amBXScene mScene;
-    private Action mAction;
   }
 }

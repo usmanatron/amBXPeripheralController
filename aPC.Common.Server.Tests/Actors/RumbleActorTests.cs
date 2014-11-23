@@ -9,36 +9,36 @@ namespace aPC.Common.Server.Tests.Actors
   [TestFixture]
   internal class RumbleActorTests
   {
+    private TestEngineManager engine;
+    private RumbleActor actor;
+
     [SetUp]
     public void Setup()
     {
-      mEngine = new TestEngineManager();
-      mActor = new RumbleActor(mEngine);
+      engine = new TestEngineManager();
+      actor = new RumbleActor(engine);
     }
 
     [Test]
     public void ActingNextSnapshot_WithNullComponent_DoesNothing()
     {
-      var lSnapshot = new ComponentSnapshot<Rumble>(1000);
+      var snapshot = new ComponentSnapshot<Rumble>(1000);
 
-      mActor.ActNextFrame(eDirection.Center, lSnapshot);
+      actor.ActNextFrame(eDirection.Center, snapshot);
 
-      Assert.IsNull(mEngine.Status.Rumbles.Rumble);
+      Assert.IsNull(engine.Status.Rumbles.Rumble);
     }
 
     [Test]
     public void ActingNextSnapshot_UpdatesComponent()
     {
-      var lSnapshot = new ComponentSnapshot<Rumble>(DefaultRumbleSections.Boing.Rumble, 100, 1000);
+      var snapshot = new ComponentSnapshot<Rumble>(DefaultRumbleSections.Boing.Rumble, 100, 1000);
 
-      mActor.ActNextFrame(eDirection.Center, lSnapshot);
+      actor.ActNextFrame(eDirection.Center, snapshot);
 
       // Unlike other component tests, direction is not relevant as
       // only one rumble is currently supported.
-      Assert.AreEqual(DefaultRumbleSections.Boing.Rumble, mEngine.Status.Rumbles.Rumble);
+      Assert.AreEqual(DefaultRumbleSections.Boing.Rumble, engine.Status.Rumbles.Rumble);
     }
-
-    private TestEngineManager mEngine;
-    private RumbleActor mActor;
   }
 }

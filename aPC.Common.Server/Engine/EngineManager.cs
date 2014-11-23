@@ -6,15 +6,22 @@ using System.Threading;
 
 namespace aPC.Common.Server.Engine
 {
-  // Manages the amBXEngine interface - deals with adding and setting stuff etc.
+  /// <summary>
+  ///  Manages the amBXEngine interface - deals with adding and setting stuff etc.
+  /// </summary>
   public class EngineManager : IEngine
   {
+    private readonly amBX engine;
+    private readonly Dictionary<CompassDirection, amBXLight> lights;
+    private readonly Dictionary<CompassDirection, amBXFan> fans;
+    private readonly Dictionary<CompassDirection, amBXRumble> rumbles;
+
     public EngineManager()
     {
-      mEngine = new amBX(1, 0, "amBXPeripheralController", "1.0");
-      mLights = new Dictionary<CompassDirection, amBXLight>();
-      mFans = new Dictionary<CompassDirection, amBXFan>();
-      mRumbles = new Dictionary<CompassDirection, amBXRumble>();
+      engine = new amBX(1, 0, "amBXPeripheralController", "1.0");
+      lights = new Dictionary<CompassDirection, amBXLight>();
+      fans = new Dictionary<CompassDirection, amBXFan>();
+      rumbles = new Dictionary<CompassDirection, amBXRumble>();
       InitialiseEngine();
     }
 
@@ -37,89 +44,89 @@ namespace aPC.Common.Server.Engine
       CreateRumble(CompassDirection.Center);
     }
 
-    private void CreateLight(CompassDirection xiDirection)
+    private void CreateLight(CompassDirection direction)
     {
-      var lLight = mEngine.CreateLight(xiDirection, RelativeHeight.AnyHeight);
-      mLights.Add(xiDirection, lLight);
+      var light = engine.CreateLight(direction, RelativeHeight.AnyHeight);
+      lights.Add(direction, light);
     }
 
-    private void CreateFan(CompassDirection xiDirection)
+    private void CreateFan(CompassDirection direction)
     {
-      var lFan = mEngine.CreateFan(xiDirection, RelativeHeight.AnyHeight);
-      mFans.Add(xiDirection, lFan);
+      var fan = engine.CreateFan(direction, RelativeHeight.AnyHeight);
+      fans.Add(direction, fan);
     }
 
-    private void CreateRumble(CompassDirection xiDirection)
+    private void CreateRumble(CompassDirection direction)
     {
-      var lRumble = mEngine.CreateRumble(xiDirection, RelativeHeight.AnyHeight);
-      mRumbles.Add(xiDirection, lRumble);
+      var rumble = engine.CreateRumble(direction, RelativeHeight.AnyHeight);
+      rumbles.Add(direction, rumble);
     }
 
     #endregion Engine Setup
 
     #region Updating
 
-    public void UpdateLight(eDirection xiDirection, Light xiLight, int xiFadeTime)
+    public void UpdateLight(eDirection direction, Light light, int fadeTime)
     {
-      var lDirection = ConversionHelpers.GetDirection(xiDirection);
-      ThreadPool.QueueUserWorkItem(_ => UpdateLightInternal(mLights[lDirection], xiLight, xiFadeTime));
+      var convertedDirection = ConversionHelpers.GetDirection(direction);
+      ThreadPool.QueueUserWorkItem(_ => UpdateLightInternal(lights[convertedDirection], light, fadeTime));
     }
 
-    private void UpdateLightInternal(amBXLight xiLight, Light xiInputLight, int xiFadeTime)
+    private void UpdateLightInternal(amBXLight light, Light inputLight, int fadeTime)
     {
-      if (xiInputLight == null)
+      if (inputLight == null)
       {
         // No change - don't touch!
         return;
       }
-      xiLight.Color = new amBXColor { Red = xiInputLight.Red, Green = xiInputLight.Green, Blue = xiInputLight.Blue };
-      xiLight.FadeTime = xiFadeTime;
+      light.Color = new amBXColor { Red = inputLight.Red, Green = inputLight.Green, Blue = inputLight.Blue };
+      light.FadeTime = fadeTime;
     }
 
-    public void UpdateFan(eDirection xiDirection, Fan xiFan)
+    public void UpdateFan(eDirection direction, Fan fan)
     {
-      var lDirection = ConversionHelpers.GetDirection(xiDirection);
-      UpdateFanInternal(mFans[lDirection], xiFan);
+      var convertedDirection = ConversionHelpers.GetDirection(direction);
+      UpdateFanInternal(fans[convertedDirection], fan);
     }
 
-    private void UpdateFanInternal(amBXFan xiFan, Fan xiInputFan)
+    private void UpdateFanInternal(amBXFan fan, Fan inputFan)
     {
-      if (xiInputFan == null)
+      if (inputFan == null)
       {
         return;
       }
-      xiFan.Intensity = xiInputFan.Intensity;
+      fan.Intensity = inputFan.Intensity;
     }
 
-    public void UpdateRumble(eDirection xiDirection, Rumble xiRumble)
+    public void UpdateRumble(eDirection direction, Rumble rumble)
     {
-      var lDirection = ConversionHelpers.GetDirection(xiDirection);
-      UpdateRumbleInternal(mRumbles[lDirection], xiRumble);
+      var convertedDirection = ConversionHelpers.GetDirection(direction);
+      UpdateRumbleInternal(rumbles[convertedDirection], rumble);
     }
 
-    private void UpdateRumbleInternal(amBXRumble xiRumble, Rumble xiInputRumble)
+    private void UpdateRumbleInternal(amBXRumble rumble, Rumble inputRumble)
     {
-      if (xiInputRumble == null)
+      if (inputRumble == null)
       {
         return;
       }
 
-      RumbleType lRumbleType;
+      RumbleType rumbleType;
 
       try
       {
-        lRumbleType = ConversionHelpers.GetRumbleType(xiInputRumble.RumbleType);
+        rumbleType = ConversionHelpers.GetRumbleType(inputRumble.RumbleType);
       }
       catch (InvalidOperationException)
       {
         return;
       }
 
-      xiRumble.RumbleSetting = new amBXRumbleSetting
+      rumble.RumbleSetting = new amBXRumbleSetting
       {
-        Intensity = xiInputRumble.Intensity,
-        Speed = xiInputRumble.Speed,
-        Type = lRumbleType
+        Intensity = inputRumble.Intensity,
+        Speed = inputRumble.Speed,
+        Type = rumbleType
       };
     }
 
@@ -127,13 +134,7 @@ namespace aPC.Common.Server.Engine
 
     public void Dispose()
     {
-      mEngine.Dispose();
+      engine.Dispose();
     }
-
-    private readonly amBX mEngine;
-
-    private readonly Dictionary<CompassDirection, amBXLight> mLights;
-    private readonly Dictionary<CompassDirection, amBXFan> mFans;
-    private readonly Dictionary<CompassDirection, amBXRumble> mRumbles;
   }
 }

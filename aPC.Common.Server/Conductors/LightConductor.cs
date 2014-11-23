@@ -6,8 +6,8 @@ namespace aPC.Common.Server.Conductors
 {
   public class LightConductor : ComponentConductor<Light>
   {
-    public LightConductor(eDirection xiDirection, LightActor xiActor, LightHandler xiHandler)
-      : base(xiDirection, xiActor, xiHandler)
+    public LightConductor(eDirection direction, LightActor actor, LightHandler handler)
+      : base(direction, actor, handler)
     {
     }
 

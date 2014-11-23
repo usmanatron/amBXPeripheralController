@@ -12,20 +12,28 @@ namespace aPC.Common.Server.SceneHandlers
   /// <typeparam name="T">A snapshot</typeparam>
   public abstract class SceneHandlerBase<T> : ISceneHandler<T> where T : SnapshotBase
   {
-    protected SceneHandlerBase(amBXScene xiScene, Action xiEventCallback)
-    {
-      mEventCallback = xiEventCallback;
+    protected amBXScene CurrentScene;
 
-      mPreviousScene = xiScene;
-      CurrentScene = xiScene;
+    public bool IsEnabled { get; set; }
+
+    private readonly Action eventCallback;
+    private AtypicalFirstRunInfiniteTicker ticker;
+    private amBXScene previousScene;
+
+    protected SceneHandlerBase(amBXScene scene, Action eventCallback)
+    {
+      this.eventCallback = eventCallback;
+
+      previousScene = scene;
+      CurrentScene = scene;
       SetupNewScene(CurrentScene);
     }
 
-    public void UpdateScene(amBXScene xiNewScene)
+    public void UpdateScene(amBXScene newScene)
     {
       if (CurrentScene.SceneType == eSceneType.Event)
       {
-        if (xiNewScene.SceneType == eSceneType.Event)
+        if (newScene.SceneType == eSceneType.Event)
         {
           // Skip updating the previous scene, to ensure that we don't get
           // stuck in an infinite loop of events.
@@ -34,35 +42,35 @@ namespace aPC.Common.Server.SceneHandlers
         {
           // Don't interrupt the currently playing scene - instead quietly update
           // the previous scene so that we fall back to this when the event is done.
-          mPreviousScene = xiNewScene;
+          previousScene = newScene;
           return;
         }
       }
       else
       {
-        mPreviousScene = CurrentScene;
+        previousScene = CurrentScene;
       }
 
-      SetupNewScene(xiNewScene);
+      SetupNewScene(newScene);
     }
 
-    protected void SetupNewScene(amBXScene xiNewScene)
+    protected void SetupNewScene(amBXScene newScene)
     {
-      CurrentScene = xiNewScene;
-      mTicker = new AtypicalFirstRunInfiniteTicker(CurrentScene.Frames.Count, CurrentScene.RepeatableFrames.Count);
+      CurrentScene = newScene;
+      ticker = new AtypicalFirstRunInfiniteTicker(CurrentScene.Frames.Count, CurrentScene.RepeatableFrames.Count);
     }
 
-    public abstract T GetNextSnapshot(eDirection xiDirection);
+    public abstract T GetNextSnapshot(eDirection direction);
 
     protected Frame GetNextFrame()
     {
-      List<Frame> lFrames;
+      List<Frame> frames;
 
-      lFrames = mTicker.IsFirstRun
+      frames = ticker.IsFirstRun
         ? CurrentScene.Frames
         : CurrentScene.RepeatableFrames;
 
-      if (!lFrames.Any())
+      if (!frames.Any())
       {
         // This can happen if there are no repeatable frames.  Mark as disabled and
         // pass through an empty frame.
@@ -70,15 +78,15 @@ namespace aPC.Common.Server.SceneHandlers
         return new Frame();
       }
 
-      return lFrames[mTicker.Index];
+      return frames[ticker.Index];
     }
 
     public void AdvanceScene()
     {
-      mTicker.Advance();
+      ticker.Advance();
 
       // If we've run the scene once through, we need to check for a few special circumstances
-      if (mTicker.Index == 0 && CurrentScene.SceneType == eSceneType.Event)
+      if (ticker.Index == 0 && CurrentScene.SceneType == eSceneType.Event)
       {
         EventComplete();
       }
@@ -92,23 +100,14 @@ namespace aPC.Common.Server.SceneHandlers
     public void Enable()
     {
       IsEnabled = true;
-      mTicker.Refresh();
+      ticker.Refresh();
     }
 
     private void EventComplete()
     {
-      SetupNewScene(mPreviousScene);
+      SetupNewScene(previousScene);
       Disable();
-      mEventCallback();
+      eventCallback();
     }
-
-    protected amBXScene CurrentScene;
-
-    public bool IsEnabled { get; set; }
-
-    private readonly Action mEventCallback;
-
-    private AtypicalFirstRunInfiniteTicker mTicker;
-    private amBXScene mPreviousScene;
   }
 }

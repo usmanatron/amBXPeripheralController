@@ -12,15 +12,19 @@ namespace aPC.Common.Server.Tests.Conductors
   [TestFixture]
   internal class ConductorBaseTests
   {
+    private amBXScene initialScene;
+    private TestSceneHandler handler;
+    private TestActor actor;
+
     [SetUp]
     public void FixtureSetup()
     {
-      mInitialScene = new amBXScene()
+      initialScene = new amBXScene()
       {
         SceneType = eSceneType.Desync,
         IsExclusive = false
       };
-      mInitialScene.Frames = new FrameBuilder()
+      initialScene.Frames = new FrameBuilder()
         .AddFrame()
         .WithRepeated(true)
         .WithFrameLength(50)
@@ -31,70 +35,66 @@ namespace aPC.Common.Server.Tests.Conductors
         .WithLightSection(DefaultLightSections.Blue)
         .Build();
 
-      mHandler = new TestSceneHandler(mInitialScene, new Action(() => { }));
-      mActor = new TestActor(new TestEngineManager());
+      handler = new TestSceneHandler(initialScene, new Action(() => { }));
+      actor = new TestActor(new TestEngineManager());
     }
 
     [Test]
     public void RunningOnce_ActsFrame()
     {
-      var lConductor = new TestConductor(eDirection.Everywhere, mActor, mHandler);
-      lConductor.RunOnce();
+      var conductor = new TestConductor(eDirection.Everywhere, actor, handler);
+      conductor.RunOnce();
 
-      Assert.AreEqual(1, mActor.TimesInvoked);
+      Assert.AreEqual(1, actor.TimesInvoked);
     }
 
     [Test]
     public void RunningOnce_AdvancesScene()
     {
-      var lConductor = new TestConductor(eDirection.Everywhere, mActor, mHandler);
-      lConductor.RunOnce();
+      var conductor = new TestConductor(eDirection.Everywhere, actor, handler);
+      conductor.RunOnce();
 
-      Assert.AreEqual(mInitialScene.Frames[1], mHandler.NextFrame);
+      Assert.AreEqual(initialScene.Frames[1], handler.NextFrame);
     }
 
     [Test]
     public void RunningOnce_WaitsForSceneLength()
     {
-      var lConductor = new TestConductor(eDirection.Everywhere, mActor, mHandler);
-      var lStopwatch = new Stopwatch();
-      var lFirstFrameLength = mInitialScene.Frames[0].Length;
+      var conductor = new TestConductor(eDirection.Everywhere, actor, handler);
+      var stopwatch = new Stopwatch();
+      var firstFrameLength = initialScene.Frames[0].Length;
 
-      lStopwatch.Start();
-      lConductor.RunOnce();
-      lStopwatch.Stop();
+      stopwatch.Start();
+      conductor.RunOnce();
+      stopwatch.Stop();
 
-      Assert.GreaterOrEqual(lStopwatch.ElapsedMilliseconds, lFirstFrameLength - 5);
-      Assert.LessOrEqual(lStopwatch.ElapsedMilliseconds, lFirstFrameLength + 5);
+      Assert.GreaterOrEqual(stopwatch.ElapsedMilliseconds, firstFrameLength - 5);
+      Assert.LessOrEqual(stopwatch.ElapsedMilliseconds, firstFrameLength + 5);
     }
 
     [Test]
     public void Running_WithDormantHandler_ReturnsImmediately()
     {
-      mHandler.IsEnabled = false;
-      var lConductor = new TestConductor(eDirection.Everywhere, mActor, mHandler);
-      var lStopwatch = new Stopwatch();
+      handler.IsEnabled = false;
+      var conductor = new TestConductor(eDirection.Everywhere, actor, handler);
+      var stopwatch = new Stopwatch();
 
-      lStopwatch.Start();
-      lConductor.Run();
-      lStopwatch.Stop();
+      stopwatch.Start();
+      conductor.Run();
+      stopwatch.Stop();
 
-      Assert.LessOrEqual(lStopwatch.ElapsedMilliseconds, 50);
+      Assert.LessOrEqual(stopwatch.ElapsedMilliseconds, 50);
     }
 
     [Test]
     public void UpdateScene_UpdatesHandler()
     {
-      var lConductor = new TestConductor(eDirection.Everywhere, mActor, mHandler);
-      var lNewScene = new DefaultScenes().BuildBroken;
+      var conductor = new TestConductor(eDirection.Everywhere, actor, handler);
+      var newScene = new DefaultScenes().BuildBroken;
 
-      lConductor.UpdateScene(lNewScene);
+      conductor.UpdateScene(newScene);
 
-      Assert.AreEqual(lNewScene, mHandler.Scene);
+      Assert.AreEqual(newScene, handler.Scene);
     }
-
-    private amBXScene mInitialScene;
-    private TestSceneHandler mHandler;
-    private TestActor mActor;
   }
 }

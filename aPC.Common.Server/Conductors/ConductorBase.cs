@@ -9,12 +9,22 @@ namespace aPC.Common.Server.Conductors
 {
   public abstract class ConductorBase<T> : IConductor where T : SnapshotBase
   {
-    protected ConductorBase(eDirection xiDirection, ActorBase<T> xiActor, SceneHandlerBase<T> xiHandler)
+    public abstract eComponentType ComponentType { get; }
+
+    protected abstract void Log(string xiNotification);
+
+    private readonly Locked<bool> isRunning;
+    private readonly eDirection direction;
+    private readonly ActorBase<T> actor;
+    private readonly SceneHandlerBase<T> handler;
+    private readonly object sceneLock = new object();
+
+    protected ConductorBase(eDirection direction, ActorBase<T> actor, SceneHandlerBase<T> handler)
     {
-      mIsRunning = new Locked<bool>(false);
-      mDirection = xiDirection;
-      mActor = xiActor;
-      mHandler = xiHandler;
+      isRunning = new Locked<bool>(false);
+      this.direction = direction;
+      this.actor = actor;
+      this.handler = handler;
     }
 
     public void Run()
@@ -24,7 +34,7 @@ namespace aPC.Common.Server.Conductors
 
       while (true)
       {
-        if (mHandler.IsEnabled)
+        if (handler.IsEnabled)
         {
           RunOnce();
         }
@@ -48,48 +58,48 @@ namespace aPC.Common.Server.Conductors
 
     public void RunOnce()
     {
-      lock (mSceneLock)
+      lock (sceneLock)
       {
-        var lSnapshot = mHandler.GetNextSnapshot(Direction);
-        if (lSnapshot == null)
+        var snapshot = handler.GetNextSnapshot(Direction);
+        if (snapshot == null)
         {
           throw new InvalidOperationException("An error occured when retrieving the next snapshot");
         }
 
-        mActor.ActNextFrame(Direction, lSnapshot);
-        WaitforInterval(lSnapshot.Length);
-        mHandler.AdvanceScene();
+        actor.ActNextFrame(Direction, snapshot);
+        WaitforInterval(snapshot.Length);
+        handler.AdvanceScene();
       }
     }
 
-    public void UpdateScene(amBXScene xiScene)
+    public void UpdateScene(amBXScene scene)
     {
-      lock (mSceneLock)
+      lock (sceneLock)
       {
-        mHandler.UpdateScene(xiScene);
+        handler.UpdateScene(scene);
       }
     }
 
-    private void WaitforInterval(int xiLength)
+    private void WaitforInterval(int length)
     {
-      Thread.Sleep(xiLength);
+      Thread.Sleep(length);
     }
 
     public void Disable()
     {
-      mHandler.Disable();
+      handler.Disable();
     }
 
     public void Enable()
     {
-      mHandler.Enable();
+      handler.Enable();
     }
 
     public Locked<bool> IsRunning
     {
       get
       {
-        return mIsRunning;
+        return isRunning;
       }
     }
 
@@ -97,18 +107,8 @@ namespace aPC.Common.Server.Conductors
     {
       get
       {
-        return mDirection;
+        return direction;
       }
     }
-
-    public abstract eComponentType ComponentType { get; }
-
-    protected abstract void Log(string xiNotification);
-
-    private readonly Locked<bool> mIsRunning;
-    private readonly eDirection mDirection;
-    private readonly ActorBase<T> mActor;
-    private readonly SceneHandlerBase<T> mHandler;
-    private readonly object mSceneLock = new object();
   }
 }

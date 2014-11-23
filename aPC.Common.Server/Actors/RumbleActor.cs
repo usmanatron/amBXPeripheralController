@@ -6,16 +6,16 @@ namespace aPC.Common.Server.Actors
 {
   public class RumbleActor : ComponentActor<Rumble>
   {
-    public RumbleActor(IEngine xiEngine)
-      : base(xiEngine)
+    public RumbleActor(IEngine engine)
+      : base(engine)
     {
     }
 
-    public override void ActNextFrame(eDirection xiDirection, ComponentSnapshot<Rumble> xiSnapshot)
+    public override void ActNextFrame(eDirection direction, ComponentSnapshot<Rumble> snapshot)
     {
-      if (!xiSnapshot.IsComponentNull)
+      if (!snapshot.IsComponentNull)
       {
-        Engine.UpdateRumble(xiDirection, xiSnapshot.Item);
+        Engine.UpdateRumble(direction, snapshot.Item);
       }
     }
   }

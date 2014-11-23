@@ -6,13 +6,13 @@ namespace aPC.Common.Server.Tests.Actors
 {
   internal class TestActor : ActorBase<TestSnapshot>
   {
-    public TestActor(IEngine xiEngine)
-      : base(xiEngine)
+    public TestActor(IEngine engine)
+      : base(engine)
     {
       TimesInvoked = 0;
     }
 
-    public override void ActNextFrame(eDirection xiDirection, TestSnapshot xiSnapshot)
+    public override void ActNextFrame(eDirection direction, TestSnapshot snapshot)
     {
       TimesInvoked++;
     }

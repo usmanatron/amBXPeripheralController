@@ -6,24 +6,24 @@ namespace aPC.Common.Server.SceneHandlers
 {
   public class LightHandler : ComponentHandler<Light>
   {
-    public LightHandler(amBXScene xiScene, Action xiEventcomplete)
-      : base(xiScene, xiEventcomplete)
+    public LightHandler(amBXScene scene, Action eventComplete)
+      : base(scene, eventComplete)
     {
     }
 
-    public override ComponentSnapshot<Light> GetNextSnapshot(eDirection xiDirection)
+    public override ComponentSnapshot<Light> GetNextSnapshot(eDirection direction)
     {
-      var lFrame = GetNextFrame();
-      var lLight = GetLight(xiDirection, lFrame.Lights);
+      var frame = GetNextFrame();
+      var light = GetLight(direction, frame.Lights);
 
-      return lLight == null
-        ? new ComponentSnapshot<Light>(lFrame.Length)
-        : new ComponentSnapshot<Light>(lLight, lFrame.Lights.FadeTime, lFrame.Length);
+      return light == null
+        ? new ComponentSnapshot<Light>(frame.Length)
+        : new ComponentSnapshot<Light>(light, frame.Lights.FadeTime, frame.Length);
     }
 
-    private Light GetLight(eDirection xiDirection, LightSection xiLights)
+    private Light GetLight(eDirection direction, LightSection lights)
     {
-      return xiLights.GetComponentValueInDirection(xiDirection);
+      return lights.GetComponentValueInDirection(direction);
     }
   }
 }

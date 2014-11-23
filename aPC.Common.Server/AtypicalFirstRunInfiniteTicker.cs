@@ -6,19 +6,19 @@ namespace aPC.Common.Server
   // which are dropped in subsequent runs)
   public class AtypicalFirstRunInfiniteTicker
   {
-    public AtypicalFirstRunInfiniteTicker(int xiInitialCount, int xiSubsequentCount)
+    public AtypicalFirstRunInfiniteTicker(int initialCount, int subsequentCount)
     {
       // It's fine to have a scene with no repeatble frames
-      if (xiInitialCount <= 0 || xiSubsequentCount < 0)
+      if (initialCount <= 0 || subsequentCount < 0)
       {
-        var lError = string.Format("Attempted to create a ticker with non-positive inputs: {0}, {1}",
-          xiInitialCount,
-          xiSubsequentCount);
-        throw new InvalidOperationException(lError);
+        var error = string.Format("Attempted to create a ticker with non-positive inputs: {0}, {1}",
+          initialCount,
+          subsequentCount);
+        throw new InvalidOperationException(error);
       }
 
-      mInitialCount = xiInitialCount;
-      mSubsequentCount = xiSubsequentCount;
+      this.initialCount = initialCount;
+      this.subsequentCount = subsequentCount;
 
       Index = 0;
       IsFirstRun = true;
@@ -27,7 +27,7 @@ namespace aPC.Common.Server
     public void Advance()
     {
       Index++;
-      var lCount = IsFirstRun ? mInitialCount : mSubsequentCount;
+      var lCount = IsFirstRun ? initialCount : subsequentCount;
 
       if (Index == lCount)
       {
@@ -46,7 +46,7 @@ namespace aPC.Common.Server
 
     public bool IsFirstRun { get; private set; }
 
-    private readonly int mInitialCount;
-    private readonly int mSubsequentCount;
+    private readonly int initialCount;
+    private readonly int subsequentCount;
   }
 }

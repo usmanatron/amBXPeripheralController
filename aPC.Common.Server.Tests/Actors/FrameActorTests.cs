@@ -11,92 +11,95 @@ namespace aPC.Common.Server.Tests.Actors
   [TestFixture]
   internal class FrameActorTests
   {
+    private TestEngineManager engine;
+    private FrameActor actor;
+
     [SetUp]
     public void Setup()
     {
-      mEngine = new TestEngineManager();
-      mActor = new FrameActor(mEngine);
+      engine = new TestEngineManager();
+      actor = new FrameActor(engine);
     }
 
     [Test]
     public void UpdatingOneLight_SuccessfullyUpdated()
     {
-      var lLightSection = new LightSectionBuilder()
+      var lightSection = new LightSectionBuilder()
         .WithFadeTime(100)
         .WithLightInDirection(eDirection.North, DefaultLights.Green)
         .Build();
 
-      var lFrame = GetFrameBuilderWithDefaultFrame()
-        .WithLightSection(lLightSection)
+      var frame = GetFrameBuilderWithDefaultFrame()
+        .WithLightSection(lightSection)
         .Build()
         .Single();
 
-      mActor.ActNextFrame(eDirection.East, new FrameSnapshot(lFrame, 100));
+      actor.ActNextFrame(eDirection.East, new FrameSnapshot(frame, 100));
 
-      Assert.IsTrue(mEngine.Updated[eComponentType.Light]);
-      Assert.IsFalse(mEngine.Updated[eComponentType.Fan]);
-      Assert.IsFalse(mEngine.Updated[eComponentType.Rumble]);
-      Assert.AreEqual(DefaultLights.Green, mEngine.Status.Lights.North);
+      Assert.IsTrue(engine.Updated[eComponentType.Light]);
+      Assert.IsFalse(engine.Updated[eComponentType.Fan]);
+      Assert.IsFalse(engine.Updated[eComponentType.Rumble]);
+      Assert.AreEqual(DefaultLights.Green, engine.Status.Lights.North);
     }
 
     [Test]
     public void UpdatingOneFan_SuccessfullyUpdated()
     {
-      var lFanSection = new FanSectionBuilder()
+      var fanSection = new FanSectionBuilder()
         .WithFadeTime(100)
         .WithFanInDirection(eDirection.West, DefaultFans.QuarterPower)
         .Build();
 
-      var lFrame = GetFrameBuilderWithDefaultFrame()
-        .WithFanSection(lFanSection)
+      var frame = GetFrameBuilderWithDefaultFrame()
+        .WithFanSection(fanSection)
         .Build()
         .Single();
 
-      mActor.ActNextFrame(eDirection.East, new FrameSnapshot(lFrame, 100));
+      actor.ActNextFrame(eDirection.East, new FrameSnapshot(frame, 100));
 
-      Assert.IsFalse(mEngine.Updated[eComponentType.Light]);
-      Assert.IsTrue(mEngine.Updated[eComponentType.Fan]);
-      Assert.IsFalse(mEngine.Updated[eComponentType.Rumble]);
-      Assert.AreEqual(DefaultFans.QuarterPower, mEngine.Status.Fans.West);
+      Assert.IsFalse(engine.Updated[eComponentType.Light]);
+      Assert.IsTrue(engine.Updated[eComponentType.Fan]);
+      Assert.IsFalse(engine.Updated[eComponentType.Rumble]);
+      Assert.AreEqual(DefaultFans.QuarterPower, engine.Status.Fans.West);
     }
 
     [Test]
     public void UpdatingRumble_SuccessfullyUpdated()
     {
-      var lFrame = GetFrameBuilderWithDefaultFrame()
+      var frame = GetFrameBuilderWithDefaultFrame()
         .WithRumbleSection(DefaultRumbleSections.SoftThunder)
         .Build()
         .Single();
 
-      mActor.ActNextFrame(eDirection.Center, new FrameSnapshot(lFrame, 100));
+      actor.ActNextFrame(eDirection.Center, new FrameSnapshot(frame, 100));
 
-      Assert.IsFalse(mEngine.Updated[eComponentType.Light]);
-      Assert.IsFalse(mEngine.Updated[eComponentType.Fan]);
-      Assert.IsTrue(mEngine.Updated[eComponentType.Rumble]);
-      Assert.AreEqual(DefaultRumbleSections.SoftThunder.Rumble, mEngine.Status.Rumbles.Rumble);
+      Assert.IsFalse(engine.Updated[eComponentType.Light]);
+      Assert.IsFalse(engine.Updated[eComponentType.Fan]);
+      Assert.IsTrue(engine.Updated[eComponentType.Rumble]);
+      Assert.AreEqual(DefaultRumbleSections.SoftThunder.Rumble, engine.Status.Rumbles.Rumble);
     }
 
     [Test]
     public void WhenActingNextFrame_DirectionIsIgnored()
     {
-      var lLightSection = new LightSectionBuilder()
+      var lightSection = new LightSectionBuilder()
         .WithFadeTime(100)
         .WithLightInDirection(eDirection.North, DefaultLights.Green)
         .Build();
 
-      var lFrame = GetFrameBuilderWithDefaultFrame()
-        .WithLightSection(lLightSection)
+      var frame = GetFrameBuilderWithDefaultFrame()
+        .WithLightSection(lightSection)
         .Build()
         .Single();
 
-      foreach (eDirection lDirection in Enum.GetValues(typeof(eDirection)))
+      foreach (eDirection direction in Enum.GetValues(typeof(eDirection)))
       {
-        mActor.ActNextFrame(lDirection, new FrameSnapshot(lFrame, 100));
+        actor.ActNextFrame(direction, new FrameSnapshot(frame, 100));
 
-        Assert.IsTrue(mEngine.Updated[eComponentType.Light]);
-        Assert.IsFalse(mEngine.Updated[eComponentType.Fan]);
-        Assert.IsFalse(mEngine.Updated[eComponentType.Rumble]);
-        Assert.AreEqual(DefaultLights.Green, mEngine.Status.Lights.North);
+        Assert.IsTrue(engine.Updated[eComponentType.Light]);
+        Assert.IsFalse(engine.Updated[eComponentType.Fan]);
+        Assert.IsFalse(engine.Updated[eComponentType.Rumble]);
+        Assert.AreEqual(DefaultLights.Green, engine.Status.Lights.North);
       }
     }
 
@@ -107,8 +110,5 @@ namespace aPC.Common.Server.Tests.Actors
         .WithFrameLength(1000)
         .WithRepeated(true);
     }
-
-    private TestEngineManager mEngine;
-    private FrameActor mActor;
   }
 }

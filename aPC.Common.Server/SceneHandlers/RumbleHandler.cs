@@ -6,22 +6,22 @@ namespace aPC.Common.Server.SceneHandlers
 {
   public class RumbleHandler : ComponentHandler<Rumble>
   {
-    public RumbleHandler(amBXScene xiScene, Action xiEventcomplete)
-      : base(xiScene, xiEventcomplete)
+    public RumbleHandler(amBXScene scene, Action eventComplete)
+      : base(scene, eventComplete)
     {
     }
 
-    public override ComponentSnapshot<Rumble> GetNextSnapshot(eDirection xiDirection)
+    public override ComponentSnapshot<Rumble> GetNextSnapshot(eDirection direction)
     {
-      var lFrame = GetNextFrame();
+      var frame = GetNextFrame();
 
-      Rumble lRumble = lFrame.Rumbles == null
+      Rumble rumble = frame.Rumbles == null
         ? null
-        : lFrame.Rumbles.Rumble;
+        : frame.Rumbles.Rumble;
 
-      return lRumble == null
-        ? new ComponentSnapshot<Rumble>(lFrame.Length)
-        : new ComponentSnapshot<Rumble>(lRumble, lFrame.Rumbles.FadeTime, lFrame.Length);
+      return rumble == null
+        ? new ComponentSnapshot<Rumble>(frame.Length)
+        : new ComponentSnapshot<Rumble>(rumble, frame.Rumbles.FadeTime, frame.Length);
     }
   }
 }

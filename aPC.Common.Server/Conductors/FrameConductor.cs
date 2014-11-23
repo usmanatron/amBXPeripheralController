@@ -7,21 +7,21 @@ namespace aPC.Common.Server.Conductors
 {
   public class FrameConductor : ConductorBase<FrameSnapshot>
   {
-    public FrameConductor(FrameActor xiActor, FrameHandler xiHandler)
-      : base(eDirection.Everywhere, xiActor, xiHandler)
+    private static ILog log = LogManager.GetLogger(typeof(FrameConductor));
+
+    public FrameConductor(FrameActor actor, FrameHandler handler)
+      : base(eDirection.Everywhere, actor, handler)
     {
     }
 
     protected override void Log(string xiNotification)
     {
-      mLog.Info(xiNotification);
+      log.Info(xiNotification);
     }
 
     public override eComponentType ComponentType
     {
       get { throw new System.InvalidOperationException("The FrameConductor doesn't have a component!"); }
     }
-
-    private static ILog mLog = LogManager.GetLogger(typeof(FrameConductor));
   }
 }

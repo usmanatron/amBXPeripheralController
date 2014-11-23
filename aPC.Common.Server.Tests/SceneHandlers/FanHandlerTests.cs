@@ -10,73 +10,73 @@ namespace aPC.Common.Server.Tests.SceneHandlers
   [TestFixture]
   internal class FanHandlerTests
   {
+    private readonly eDirection[] directions = (eDirection[])Enum.GetValues(typeof(eDirection));
+    private amBXScene standardScene;
+    private amBXScene nonFanScene;
+    private Action action;
+
     [TestFixtureSetUp]
     public void FixtureSetup()
     {
-      var lNonFanFrame = new FrameBuilder()
+      var nonFanFrame = new FrameBuilder()
         .AddFrame()
         .WithRepeated(true)
         .WithFrameLength(10000)
         .WithLightSection(DefaultLightSections.JiraBlue)
         .Build();
 
-      mNonFanScene = new amBXScene()
+      nonFanScene = new amBXScene()
       {
         SceneType = eSceneType.Desync,
         IsExclusive = true,
-        Frames = lNonFanFrame
+        Frames = nonFanFrame
       };
 
-      mStandardScene = new DefaultScenes().QuarterFans;
-      mAction = new Action(() => { });
+      standardScene = new DefaultScenes().QuarterFans;
+      action = new Action(() => { });
     }
 
     [Test]
     public void NextFanSnapshot_IsAsExpected()
     {
-      var lHandler = new FanHandler(mStandardScene, mAction);
+      var handler = new FanHandler(standardScene, action);
 
-      var lSnapshot = lHandler.GetNextSnapshot(eDirection.East);
-      var lExpectedFrame = mStandardScene.Frames[0];
+      var snapshot = handler.GetNextSnapshot(eDirection.East);
+      var expectedFrame = standardScene.Frames[0];
 
-      Assert.IsFalse(lSnapshot.IsComponentNull);
-      Assert.AreEqual(lExpectedFrame.Fans.East, lSnapshot.Item);
-      Assert.AreEqual(lExpectedFrame.Length, lSnapshot.Length);
+      Assert.IsFalse(snapshot.IsComponentNull);
+      Assert.AreEqual(expectedFrame.Fans.East, snapshot.Item);
+      Assert.AreEqual(expectedFrame.Length, snapshot.Length);
     }
 
     [Test]
     public void NextFanSnapshot_FromSceneWithoutFans_IsNull()
     {
-      var lHandler = new FanHandler(mNonFanScene, mAction);
+      var handler = new FanHandler(nonFanScene, action);
 
-      var lSnapshot = lHandler.GetNextSnapshot(eDirection.West);
-      var lExpectedFrame = mNonFanScene.Frames[0];
+      var snapshot = handler.GetNextSnapshot(eDirection.West);
+      var expectedFrame = nonFanScene.Frames[0];
 
-      Assert.IsTrue(lSnapshot.IsComponentNull);
-      Assert.IsNull(lSnapshot.Item);
-      Assert.AreEqual(lExpectedFrame.Length, lSnapshot.Length);
+      Assert.IsTrue(snapshot.IsComponentNull);
+      Assert.IsNull(snapshot.Item);
+      Assert.AreEqual(expectedFrame.Length, snapshot.Length);
     }
 
     [Test]
     [TestCaseSource("Directions")]
-    public void NextFanSnapshot_ReturnsExpectedFan_DependantOnDirection(eDirection xiDirection)
+    public void NextFanSnapshot_ReturnsExpectedFan_DependantOnDirection(eDirection direction)
     {
-      var lHandler = new FanHandler(mStandardScene, mAction);
+      var handler = new FanHandler(standardScene, action);
 
-      var lSnapshot = lHandler.GetNextSnapshot(xiDirection);
-      var lExpectedFrame = mStandardScene.Frames[0];
+      var snapshot = handler.GetNextSnapshot(direction);
+      var expectedFrame = standardScene.Frames[0];
 
-      Assert.AreEqual(lExpectedFrame.Length, lSnapshot.Length);
-      if (!lSnapshot.IsComponentNull)
+      Assert.AreEqual(expectedFrame.Length, snapshot.Length);
+      if (!snapshot.IsComponentNull)
       {
-        Assert.AreEqual(lExpectedFrame.Fans.FadeTime, lSnapshot.FadeTime);
-        Assert.AreEqual(lExpectedFrame.Fans.GetComponentValueInDirection(xiDirection), lSnapshot.Item);
+        Assert.AreEqual(expectedFrame.Fans.FadeTime, snapshot.FadeTime);
+        Assert.AreEqual(expectedFrame.Fans.GetComponentValueInDirection(direction), snapshot.Item);
       }
     }
-
-    private readonly eDirection[] Directions = (eDirection[])Enum.GetValues(typeof(eDirection));
-    private amBXScene mStandardScene;
-    private amBXScene mNonFanScene;
-    private Action mAction;
   }
 }

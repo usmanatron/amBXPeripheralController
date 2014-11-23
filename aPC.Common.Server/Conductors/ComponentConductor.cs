@@ -8,16 +8,16 @@ namespace aPC.Common.Server.Conductors
 {
   public abstract class ComponentConductor<T> : ConductorBase<ComponentSnapshot<T>> where T : IComponent
   {
-    protected ComponentConductor(eDirection xiDirection, ComponentActor<T> xiActor, ComponentHandler<T> xiHandler)
-      : base(xiDirection, xiActor, xiHandler)
+    private static ILog log = LogManager.GetLogger("ComponentConductor");
+
+    protected ComponentConductor(eDirection direction, ComponentActor<T> actor, ComponentHandler<T> handler)
+      : base(direction, actor, handler)
     {
     }
 
-    protected override void Log(string xiNotification)
+    protected override void Log(string message)
     {
-      mLog.InfoFormat("Component:{0}, Direction:{1}, Message:{2}", ComponentType, Direction, xiNotification);
+      log.InfoFormat("Component:{0}, Direction:{1}, Message:{2}", ComponentType, Direction, message);
     }
-
-    private static ILog mLog = LogManager.GetLogger("ComponentConductor");
   }
 }

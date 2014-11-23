@@ -6,6 +6,9 @@ namespace aPC.Common.Server.Tests
 {
   public class TestEngineManager : IEngine
   {
+    public Frame Status;
+    public Dictionary<eComponentType, bool> Updated;
+
     public TestEngineManager()
     {
       Status = new Frame()
@@ -20,31 +23,28 @@ namespace aPC.Common.Server.Tests
         };
     }
 
-    public void UpdateLight(eDirection xiDirection, Light xiLight, int xiFadeTime)
+    public void UpdateLight(eDirection direction, Light light, int fadeTime)
     {
       Updated[eComponentType.Light] = true;
-      Status.Lights.SetComponentValueInDirection(xiLight, xiDirection);
-      Status.Lights.FadeTime = xiFadeTime;
+      Status.Lights.SetComponentValueInDirection(light, direction);
+      Status.Lights.FadeTime = fadeTime;
     }
 
-    public void UpdateFan(eDirection xiDirection, Fan xiFan)
+    public void UpdateFan(eDirection direction, Fan fan)
     {
       Updated[eComponentType.Fan] = true;
-      Status.Fans.SetComponentValueInDirection(xiFan, xiDirection);
+      Status.Fans.SetComponentValueInDirection(fan, direction);
     }
 
-    public void UpdateRumble(eDirection xiDirection, Rumble xiRumble)
+    public void UpdateRumble(eDirection direction, Rumble rumble)
     {
       Updated[eComponentType.Rumble] = true;
-      Status.Rumbles.SetComponentValueInDirection(xiRumble, xiDirection);
+      Status.Rumbles.SetComponentValueInDirection(rumble, direction);
     }
 
     // Nothing to dispose.
     public void Dispose()
     {
     }
-
-    public Frame Status;
-    public Dictionary<eComponentType, bool> Updated;
   }
 }

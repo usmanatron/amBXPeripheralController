@@ -6,15 +6,15 @@ namespace aPC.Common.Server.SceneHandlers
 {
   public class FrameHandler : SceneHandlerBase<FrameSnapshot>
   {
-    public FrameHandler(amBXScene xiScene, Action xiEventComplete)
-      : base(xiScene, xiEventComplete)
+    public FrameHandler(amBXScene scene, Action eventComplete)
+      : base(scene, eventComplete)
     {
     }
 
-    public override FrameSnapshot GetNextSnapshot(eDirection xiDirection)
+    public override FrameSnapshot GetNextSnapshot(eDirection direction)
     {
-      var lFrame = GetNextFrame();
-      return new FrameSnapshot(lFrame, 0);
+      var frame = GetNextFrame();
+      return new FrameSnapshot(frame, 0);
     }
   }
 }

@@ -9,17 +9,17 @@ namespace aPC.Common.Server.Tests
     [Test]
     [TestCase(-5, 3)]
     [TestCase(0, 3)]
-    public void NonPositiveInitialCount_ThrowsException(int xiInitial, int xiSubsequent)
+    public void NonPositiveInitialCount_ThrowsException(int initial, int subsequent)
     {
-      Assert.Throws<InvalidOperationException>(() => CreateTicker(xiInitial, xiSubsequent));
+      Assert.Throws<InvalidOperationException>(() => CreateTicker(initial, subsequent));
     }
 
     [Test]
     [TestCase(7, -5)]
     [TestCase(7, -1)]
-    public void NegativeSubsequentCount_ThrowsException(int xiInitial, int xiSubsequent)
+    public void NegativeSubsequentCount_ThrowsException(int initial, int subsequent)
     {
-      Assert.Throws<InvalidOperationException>(() => CreateTicker(xiInitial, xiSubsequent));
+      Assert.Throws<InvalidOperationException>(() => CreateTicker(initial, subsequent));
     }
 
     [Test]
@@ -31,93 +31,93 @@ namespace aPC.Common.Server.Tests
     [Test]
     public void NewTicker_StartsAtZero()
     {
-      var lTicker = CreateDefaultTicker();
-      Assert.AreEqual(0, lTicker.Index);
+      var ticker = CreateDefaultTicker();
+      Assert.AreEqual(0, ticker.Index);
     }
 
     [Test]
     public void NewTicker_HasFirstRunTrue()
     {
-      var lTicker = CreateDefaultTicker();
-      Assert.AreEqual(true, lTicker.IsFirstRun);
+      var ticker = CreateDefaultTicker();
+      Assert.AreEqual(true, ticker.IsFirstRun);
     }
 
     [Test]
     public void NewTicker_TickedOnce_IncreasesByOne()
     {
-      var lTicker = CreateDefaultTicker();
-      lTicker.Advance();
-      Assert.AreEqual(1, lTicker.Index);
+      var ticker = CreateDefaultTicker();
+      ticker.Advance();
+      Assert.AreEqual(1, ticker.Index);
     }
 
     [Test]
     public void NewTicker_AdvancingThroughFirstRun_ReturnsToZero()
     {
-      var lTicker = CreateTicker(ExampleFirstRunTickerSize);
+      var ticker = CreateTicker(ExampleFirstRunTickerSize);
 
-      for (int lTicks = 0; lTicks < ExampleFirstRunTickerSize; lTicks++)
+      for (int ticks = 0; ticks < ExampleFirstRunTickerSize; ticks++)
       {
-        lTicker.Advance();
+        ticker.Advance();
       }
 
-      Assert.AreEqual(0, lTicker.Index);
+      Assert.AreEqual(0, ticker.Index);
     }
 
     [Test]
     public void NewTicker_AdvancingThroughFirstRun_ChangesFirstRunFalse()
     {
-      var lTicker = CreateTicker(ExampleFirstRunTickerSize);
+      var ticker = CreateTicker(ExampleFirstRunTickerSize);
 
-      for (int lTicks = 0; lTicks < ExampleFirstRunTickerSize; lTicks++)
+      for (int ticks = 0; ticks < ExampleFirstRunTickerSize; ticks++)
       {
-        lTicker.Advance();
+        ticker.Advance();
       }
 
-      Assert.AreEqual(false, lTicker.IsFirstRun);
+      Assert.AreEqual(false, ticker.IsFirstRun);
     }
 
     [Test]
     public void NewTickerWithDifferentSubsequentSize_AdvancingThroughTwoFullRuns_ReturnsToZero()
     {
-      var lTicker = CreateTicker(ExampleFirstRunTickerSize, ExampleSubsequentTickerSize);
+      var ticker = CreateTicker(ExampleFirstRunTickerSize, ExampleSubsequentTickerSize);
 
       // The following should complete two full runs: One at the smaller initial size and one at the larger subsequent one.
-      for (int lTicks = 0; lTicks < ExampleFirstRunTickerSize + ExampleSubsequentTickerSize; lTicks++)
+      for (int ticks = 0; ticks < ExampleFirstRunTickerSize + ExampleSubsequentTickerSize; ticks++)
       {
-        lTicker.Advance();
+        ticker.Advance();
       }
 
-      Assert.AreEqual(0, lTicker.Index);
+      Assert.AreEqual(0, ticker.Index);
     }
 
     [Test]
     public void RefreshTicker_ResetsIndex()
     {
-      var lTicker = CreateTicker(2, 1);
-      lTicker.Advance();
+      var ticker = CreateTicker(2, 1);
+      ticker.Advance();
 
-      lTicker.Refresh();
+      ticker.Refresh();
 
-      Assert.AreEqual(0, lTicker.Index);
+      Assert.AreEqual(0, ticker.Index);
     }
 
     [Test]
     public void RefreshTicker_SetsBackToFirstRun()
     {
-      var lTicker = CreateTicker(2, 1);
-      lTicker.Advance();
-      lTicker.Advance();
+      var ticker = CreateTicker(2, 1);
+      ticker.Advance();
+      ticker.Advance();
 
-      Assert.IsFalse(lTicker.IsFirstRun);
+      Assert.IsFalse(ticker.IsFirstRun);
 
-      lTicker.Refresh();
+      ticker.Refresh();
 
-      Assert.IsTrue(lTicker.IsFirstRun);
+      Assert.IsTrue(ticker.IsFirstRun);
     }
 
-    private AtypicalFirstRunInfiniteTicker CreateTicker(int xiFirstRun, int xiSubsequentRun = 42)
+    private AtypicalFirstRunInfiniteTicker CreateTicker(int xiFirstRun, int subsequentRun = 42)
     {
-      return new AtypicalFirstRunInfiniteTicker(xiFirstRun, xiSubsequentRun);
+      return new AtypicalFirstRunInfiniteTicker(xiFirstRun, subsequentRun);
     }
 
     private AtypicalFirstRunInfiniteTicker CreateDefaultTicker()

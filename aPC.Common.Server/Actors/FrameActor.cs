@@ -6,50 +6,50 @@ namespace aPC.Common.Server.Actors
 {
   public class FrameActor : ActorBase<FrameSnapshot>
   {
-    public FrameActor(IEngine xiEngine)
-      : base(xiEngine)
+    public FrameActor(IEngine engine)
+      : base(engine)
     {
     }
 
-    public override void ActNextFrame(eDirection xiDirection, FrameSnapshot xiFrame)
+    public override void ActNextFrame(eDirection direction, FrameSnapshot snapshot)
     {
-      if (xiFrame.Frame.Lights != null)
+      if (snapshot.Frame.Lights != null)
       {
-        UpdateLights(xiFrame.Frame.Lights);
+        UpdateLights(snapshot.Frame.Lights);
       }
 
-      if (xiFrame.Frame.Fans != null)
+      if (snapshot.Frame.Fans != null)
       {
-        UpdateFans(xiFrame.Frame.Fans);
+        UpdateFans(snapshot.Frame.Fans);
       }
 
-      if (xiFrame.Frame.Rumbles != null)
+      if (snapshot.Frame.Rumbles != null)
       {
-        UpdateRumbles(xiFrame.Frame.Rumbles);
+        UpdateRumbles(snapshot.Frame.Rumbles);
       }
     }
 
-    private void UpdateLights(LightSection xiLights)
+    private void UpdateLights(LightSection lights)
     {
-      Engine.UpdateLight(eDirection.North, xiLights.North, xiLights.FadeTime);
-      Engine.UpdateLight(eDirection.NorthEast, xiLights.NorthEast, xiLights.FadeTime);
-      Engine.UpdateLight(eDirection.East, xiLights.East, xiLights.FadeTime);
-      Engine.UpdateLight(eDirection.SouthEast, xiLights.SouthEast, xiLights.FadeTime);
-      Engine.UpdateLight(eDirection.South, xiLights.South, xiLights.FadeTime);
-      Engine.UpdateLight(eDirection.SouthWest, xiLights.SouthWest, xiLights.FadeTime);
-      Engine.UpdateLight(eDirection.West, xiLights.West, xiLights.FadeTime);
-      Engine.UpdateLight(eDirection.NorthWest, xiLights.NorthWest, xiLights.FadeTime);
+      Engine.UpdateLight(eDirection.North, lights.North, lights.FadeTime);
+      Engine.UpdateLight(eDirection.NorthEast, lights.NorthEast, lights.FadeTime);
+      Engine.UpdateLight(eDirection.East, lights.East, lights.FadeTime);
+      Engine.UpdateLight(eDirection.SouthEast, lights.SouthEast, lights.FadeTime);
+      Engine.UpdateLight(eDirection.South, lights.South, lights.FadeTime);
+      Engine.UpdateLight(eDirection.SouthWest, lights.SouthWest, lights.FadeTime);
+      Engine.UpdateLight(eDirection.West, lights.West, lights.FadeTime);
+      Engine.UpdateLight(eDirection.NorthWest, lights.NorthWest, lights.FadeTime);
     }
 
-    private void UpdateFans(FanSection xiFans)
+    private void UpdateFans(FanSection fans)
     {
-      Engine.UpdateFan(eDirection.East, xiFans.East);
-      Engine.UpdateFan(eDirection.West, xiFans.West);
+      Engine.UpdateFan(eDirection.East, fans.East);
+      Engine.UpdateFan(eDirection.West, fans.West);
     }
 
-    private void UpdateRumbles(RumbleSection xiInputRumble)
+    private void UpdateRumbles(RumbleSection rumble)
     {
-      Engine.UpdateRumble(eDirection.Center, xiInputRumble.Rumble);
+      Engine.UpdateRumble(eDirection.Center, rumble.Rumble);
     }
   }
 }

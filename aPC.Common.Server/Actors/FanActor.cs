@@ -6,16 +6,16 @@ namespace aPC.Common.Server.Actors
 {
   public class FanActor : ComponentActor<Fan>
   {
-    public FanActor(IEngine xiEngine)
-      : base(xiEngine)
+    public FanActor(IEngine engine)
+      : base(engine)
     {
     }
 
-    public override void ActNextFrame(eDirection xiDirection, ComponentSnapshot<Fan> xiSnapshot)
+    public override void ActNextFrame(eDirection direction, ComponentSnapshot<Fan> snapshot)
     {
-      if (!xiSnapshot.IsComponentNull)
+      if (!snapshot.IsComponentNull)
       {
-        Engine.UpdateFan(xiDirection, xiSnapshot.Item);
+        Engine.UpdateFan(direction, snapshot.Item);
       }
     }
   }

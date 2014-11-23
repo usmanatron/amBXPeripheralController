@@ -10,44 +10,44 @@ namespace aPC.Common.Server.Tests.Actors
   [TestFixture]
   internal class LightActorTests
   {
+    private TestEngineManager engine;
+    private LightActor actor;
+
     [SetUp]
     public void Setup()
     {
-      mEngine = new TestEngineManager();
-      mActor = new LightActor(mEngine);
+      engine = new TestEngineManager();
+      actor = new LightActor(engine);
     }
 
     [Test]
     public void ActingNextSnapshot_WithNullComponent_DoesNothing()
     {
-      var lSnapshot = new ComponentSnapshot<Light>(1000);
+      var snapshot = new ComponentSnapshot<Light>(1000);
 
-      mActor.ActNextFrame(eDirection.North, lSnapshot);
+      actor.ActNextFrame(eDirection.North, snapshot);
 
-      Assert.IsNull(mEngine.Status.Lights.North);
+      Assert.IsNull(engine.Status.Lights.North);
     }
 
     [Test]
     public void ActingNextSnapshot_UpdatesComponentInCorrectDirection()
     {
-      var lSnapshot = new ComponentSnapshot<Light>(DefaultLights.Blue, 100, 1000);
+      var snapshot = new ComponentSnapshot<Light>(DefaultLights.Blue, 100, 1000);
 
-      mActor.ActNextFrame(eDirection.East, lSnapshot);
+      actor.ActNextFrame(eDirection.East, snapshot);
 
-      foreach (eDirection lDirection in Enum.GetValues(typeof(eDirection)))
+      foreach (eDirection direction in Enum.GetValues(typeof(eDirection)))
       {
-        if (lDirection == eDirection.East)
+        if (direction == eDirection.East)
         {
-          Assert.AreEqual(DefaultLights.Blue, mEngine.Status.Lights.GetComponentValueInDirection(lDirection));
+          Assert.AreEqual(DefaultLights.Blue, engine.Status.Lights.GetComponentValueInDirection(direction));
         }
         else
         {
-          Assert.IsNull(mEngine.Status.Lights.GetComponentValueInDirection(lDirection));
+          Assert.IsNull(engine.Status.Lights.GetComponentValueInDirection(direction));
         }
       }
     }
-
-    private TestEngineManager mEngine;
-    private LightActor mActor;
   }
 }

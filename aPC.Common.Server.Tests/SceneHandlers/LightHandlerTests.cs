@@ -10,73 +10,73 @@ namespace aPC.Common.Server.Tests.SceneHandlers
   [TestFixture]
   internal class LightHandlerTests
   {
+    private readonly eDirection[] directions = (eDirection[])Enum.GetValues(typeof(eDirection));
+    private amBXScene standardScene;
+    private amBXScene nonLightScene;
+    private Action action;
+
     [TestFixtureSetUp]
     public void FixtureSetup()
     {
-      var lNonLightframe = new FrameBuilder()
+      var nonLightframe = new FrameBuilder()
         .AddFrame()
         .WithRepeated(true)
         .WithFrameLength(10000)
         .WithFanSection(DefaultFanSections.Full)
         .Build();
 
-      mNonLightScene = new amBXScene()
+      nonLightScene = new amBXScene()
         {
           SceneType = eSceneType.Desync,
           IsExclusive = true,
-          Frames = lNonLightframe
+          Frames = nonLightframe
         };
 
-      mStandardScene = new DefaultScenes().Building;
-      mAction = new Action(() => { });
+      standardScene = new DefaultScenes().Building;
+      action = new Action(() => { });
     }
 
     [Test]
     public void NextLightSnapshot_IsAsExpected()
     {
-      var lHandler = new LightHandler(mStandardScene, mAction);
+      var handler = new LightHandler(standardScene, action);
 
-      var lSnapshot = lHandler.GetNextSnapshot(eDirection.North);
-      var lExpectedFrame = mStandardScene.Frames[0];
+      var snapshot = handler.GetNextSnapshot(eDirection.North);
+      var expectedFrame = standardScene.Frames[0];
 
-      Assert.IsFalse(lSnapshot.IsComponentNull);
-      Assert.AreEqual(lExpectedFrame.Lights.North, lSnapshot.Item);
-      Assert.AreEqual(lExpectedFrame.Length, lSnapshot.Length);
+      Assert.IsFalse(snapshot.IsComponentNull);
+      Assert.AreEqual(expectedFrame.Lights.North, snapshot.Item);
+      Assert.AreEqual(expectedFrame.Length, snapshot.Length);
     }
 
     [Test]
     public void NextLightSnapshot_FromSceneWithoutLights_IsNull()
     {
-      var lHandler = new LightHandler(mNonLightScene, mAction);
+      var handler = new LightHandler(nonLightScene, action);
 
-      var lSnapshot = lHandler.GetNextSnapshot(eDirection.North);
-      var lExpectedFrame = mNonLightScene.Frames[0];
+      var snapshot = handler.GetNextSnapshot(eDirection.North);
+      var expectedFrame = nonLightScene.Frames[0];
 
-      Assert.IsTrue(lSnapshot.IsComponentNull);
-      Assert.IsNull(lSnapshot.Item);
-      Assert.AreEqual(lExpectedFrame.Length, lSnapshot.Length);
+      Assert.IsTrue(snapshot.IsComponentNull);
+      Assert.IsNull(snapshot.Item);
+      Assert.AreEqual(expectedFrame.Length, snapshot.Length);
     }
 
     [Test]
     [TestCaseSource("Directions")]
     public void NextLightSnapshot_ReturnsExpectedLight_DependantOnDirection(eDirection xiDirection)
     {
-      var lHandler = new LightHandler(mStandardScene, mAction);
+      var handler = new LightHandler(standardScene, action);
 
-      var lSnapshot = lHandler.GetNextSnapshot(xiDirection);
-      var lExpectedFrame = mStandardScene.Frames[0];
+      var snapshot = handler.GetNextSnapshot(xiDirection);
+      var expectedFrame = standardScene.Frames[0];
 
-      Assert.AreEqual(lExpectedFrame.Length, lSnapshot.Length);
-      if (!lSnapshot.IsComponentNull)
+      Assert.AreEqual(expectedFrame.Length, snapshot.Length);
+      if (!snapshot.IsComponentNull)
       {
-        Assert.AreEqual(lExpectedFrame.Lights.FadeTime, lSnapshot.FadeTime);
-        Assert.AreEqual(lExpectedFrame.Lights.GetComponentValueInDirection(xiDirection), lSnapshot.Item);
+        Assert.AreEqual(expectedFrame.Lights.FadeTime, snapshot.FadeTime);
+        Assert.AreEqual(expectedFrame.Lights.GetComponentValueInDirection(xiDirection), snapshot.Item);
       }
     }
-
-    private readonly eDirection[] Directions = (eDirection[])Enum.GetValues(typeof(eDirection));
-    private amBXScene mStandardScene;
-    private amBXScene mNonLightScene;
-    private Action mAction;
   }
 }

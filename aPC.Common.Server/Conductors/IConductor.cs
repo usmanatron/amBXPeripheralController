@@ -8,7 +8,7 @@ namespace aPC.Common.Server.Conductors
 
     void RunOnce();
 
-    void UpdateScene(amBXScene xiScene);
+    void UpdateScene(amBXScene scene);
 
     void Enable();
 

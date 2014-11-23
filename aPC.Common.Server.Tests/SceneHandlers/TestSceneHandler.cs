@@ -7,15 +7,15 @@ namespace aPC.Common.Server.Tests.SceneHandlers
 {
   internal class TestSceneHandler : SceneHandlerBase<TestSnapshot>
   {
-    public TestSceneHandler(amBXScene xiScene, Action xiAction)
-      : base(xiScene, xiAction)
+    public TestSceneHandler(amBXScene scene, Action action)
+      : base(scene, action)
     {
     }
 
-    public override TestSnapshot GetNextSnapshot(eDirection xiDirection)
+    public override TestSnapshot GetNextSnapshot(eDirection direction)
     {
-      var lFrame = GetNextFrame();
-      return new TestSnapshot(lFrame.Length);
+      var frame = GetNextFrame();
+      return new TestSnapshot(frame.Length);
     }
 
     public Frame NextFrame

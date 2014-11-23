@@ -10,10 +10,15 @@ namespace aPC.Common.Server.Tests.SceneHandlers
   [TestFixture]
   internal class RumbleHandlerTests
   {
+    private readonly eDirection[] directions = (eDirection[])Enum.GetValues(typeof(eDirection));
+    private amBXScene standardScene;
+    private amBXScene nonRumbleScene;
+    private Action action;
+
     [TestFixtureSetUp]
     public void FixtureSetup()
     {
-      var lRumbleFrame = new FrameBuilder()
+      var rumbleFrame = new FrameBuilder()
         .AddFrame()
         .WithRepeated(true)
         .WithFrameLength(10000)
@@ -21,59 +26,54 @@ namespace aPC.Common.Server.Tests.SceneHandlers
         .WithLightSection(DefaultLightSections.JiraBlue)
         .Build();
 
-      mStandardScene = new amBXScene()
+      standardScene = new amBXScene()
       {
         SceneType = eSceneType.Desync,
         IsExclusive = true,
-        Frames = lRumbleFrame
+        Frames = rumbleFrame
       };
 
-      mNonRumbleScene = new DefaultScenes().Building;
-      mAction = new Action(() => { });
+      nonRumbleScene = new DefaultScenes().Building;
+      action = new Action(() => { });
     }
 
     [Test]
     public void NextRumbleSnapshot_IsAsExpected()
     {
-      var lHandler = new RumbleHandler(mStandardScene, mAction);
+      var handler = new RumbleHandler(standardScene, action);
 
-      var lSnapshot = lHandler.GetNextSnapshot(eDirection.Center);
-      var lExpectedFrame = mStandardScene.Frames[0];
+      var snapshot = handler.GetNextSnapshot(eDirection.Center);
+      var expectedFrame = standardScene.Frames[0];
 
-      Assert.IsFalse(lSnapshot.IsComponentNull);
-      Assert.AreEqual(lExpectedFrame.Rumbles.Rumble, lSnapshot.Item);
-      Assert.AreEqual(lExpectedFrame.Length, lSnapshot.Length);
+      Assert.IsFalse(snapshot.IsComponentNull);
+      Assert.AreEqual(expectedFrame.Rumbles.Rumble, snapshot.Item);
+      Assert.AreEqual(expectedFrame.Length, snapshot.Length);
     }
 
     [Test]
     public void NextRumbleSnapshot_FromSceneWithoutRumbles_IsNull()
     {
-      var lHandler = new RumbleHandler(mNonRumbleScene, mAction);
+      var handler = new RumbleHandler(nonRumbleScene, action);
 
-      var lSnapshot = lHandler.GetNextSnapshot(eDirection.West);
-      var lExpectedFrame = mNonRumbleScene.Frames[0];
+      var snapshot = handler.GetNextSnapshot(eDirection.West);
+      var expectedFrame = nonRumbleScene.Frames[0];
 
-      Assert.IsTrue(lSnapshot.IsComponentNull);
-      Assert.IsNull(lSnapshot.Item);
-      Assert.AreEqual(lExpectedFrame.Length, lSnapshot.Length);
+      Assert.IsTrue(snapshot.IsComponentNull);
+      Assert.IsNull(snapshot.Item);
+      Assert.AreEqual(expectedFrame.Length, snapshot.Length);
     }
 
     [Test]
     [TestCaseSource("Directions")]
     public void NextRumbleSnapshot_ReturnsARumble_IrrespectiveOfDirection(eDirection xiDirection)
     {
-      var lHandler = new RumbleHandler(mStandardScene, mAction);
+      var handler = new RumbleHandler(standardScene, action);
 
-      var lSnapshot = lHandler.GetNextSnapshot(xiDirection);
-      var lExpectedFrame = mStandardScene.Frames[0];
+      var snapshot = handler.GetNextSnapshot(xiDirection);
+      var expectedFrame = standardScene.Frames[0];
 
-      Assert.AreEqual(lExpectedFrame.Length, lSnapshot.Length);
-      Assert.IsFalse(lSnapshot.IsComponentNull);
+      Assert.AreEqual(expectedFrame.Length, snapshot.Length);
+      Assert.IsFalse(snapshot.IsComponentNull);
     }
-
-    private readonly eDirection[] Directions = (eDirection[])Enum.GetValues(typeof(eDirection));
-    private amBXScene mStandardScene;
-    private amBXScene mNonRumbleScene;
-    private Action mAction;
   }
 }

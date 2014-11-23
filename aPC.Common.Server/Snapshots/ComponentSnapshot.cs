@@ -7,15 +7,15 @@ namespace aPC.Common.Server.Snapshots
     /// <summary>
     /// Used when a component is not available
     /// </summary>
-    public ComponentSnapshot(int xiLength)
-      : this(default(T), 10, xiLength)
+    public ComponentSnapshot(int length)
+      : this(default(T), 10, length)
     {
     }
 
-    public ComponentSnapshot(T xiComponent, int xiFadeTime, int xiLength)
-      : base(xiFadeTime, xiLength)
+    public ComponentSnapshot(T component, int fadeTime, int length)
+      : base(fadeTime, length)
     {
-      Item = xiComponent;
+      Item = component;
     }
 
     public bool IsComponentNull

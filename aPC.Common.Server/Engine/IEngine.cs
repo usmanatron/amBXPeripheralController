@@ -5,10 +5,10 @@ namespace aPC.Common.Server.Engine
 {
   public interface IEngine : IDisposable
   {
-    void UpdateLight(eDirection xiDirection, Light xiLight, int xiFadeTime);
+    void UpdateLight(eDirection direction, Light light, int fadeTime);
 
-    void UpdateFan(eDirection xiDirection, Fan xiFan);
+    void UpdateFan(eDirection direction, Fan fan);
 
-    void UpdateRumble(eDirection xiDirection, Rumble xiRumble);
+    void UpdateRumble(eDirection direction, Rumble rumble);
   }
 }

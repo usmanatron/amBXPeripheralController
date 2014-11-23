@@ -13,23 +13,23 @@ namespace aPC.Common.Server.Tests
   {
     [Test]
     [TestCaseSource("Directions")]
-    public void eDirectionEnum_AgreesExactlyWithCompassDirectionEnum(eDirection xiDirection)
+    public void eDirectionEnum_AgreesExactlyWithCompassDirectionEnum(eDirection direction)
     {
-      var lCompassDirection = ConversionHelpers.GetDirection(xiDirection);
-      Assert.AreEqual((int)xiDirection, (int)lCompassDirection);
-      Assert.AreEqual(xiDirection.ToString(), lCompassDirection.ToString());
+      var compassDirection = ConversionHelpers.GetDirection(direction);
+      Assert.AreEqual((int)direction, (int)compassDirection);
+      Assert.AreEqual(direction.ToString(), compassDirection.ToString());
     }
 
     [Test]
     [TestCaseSource("RumbleTypes")]
-    public void eRumbletypeEnum_AgreesExactlyWithRumbleTypeEnum(eRumbleType xiRumbleType)
+    public void eRumbletypeEnum_AgreesExactlyWithRumbleTypeEnum(eRumbleType rumbleType)
     {
-      var lRumbleType = ConversionHelpers.GetRumbleType(xiRumbleType);
-      Assert.AreEqual((int)xiRumbleType, (int)lRumbleType);
-      Assert.AreEqual(xiRumbleType.ToString(), lRumbleType.ToString());
+      var convertedRumbleType = ConversionHelpers.GetRumbleType(rumbleType);
+      Assert.AreEqual((int)convertedRumbleType, (int)convertedRumbleType);
+      Assert.AreEqual(convertedRumbleType.ToString(), convertedRumbleType.ToString());
     }
 
-    private readonly eDirection[] Directions = (eDirection[])Enum.GetValues(typeof(eDirection));
-    private readonly eRumbleType[] RumbleTypes = (eRumbleType[])Enum.GetValues(typeof(eRumbleType));
+    private readonly eDirection[] directions = (eDirection[])Enum.GetValues(typeof(eDirection));
+    private readonly eRumbleType[] rumbleTypes = (eRumbleType[])Enum.GetValues(typeof(eRumbleType));
   }
 }

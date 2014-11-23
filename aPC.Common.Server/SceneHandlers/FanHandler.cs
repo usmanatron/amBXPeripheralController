@@ -6,24 +6,24 @@ namespace aPC.Common.Server.SceneHandlers
 {
   public class FanHandler : ComponentHandler<Fan>
   {
-    public FanHandler(amBXScene xiScene, Action xiEventcomplete)
-      : base(xiScene, xiEventcomplete)
+    public FanHandler(amBXScene scene, Action eventComplete)
+      : base(scene, eventComplete)
     {
     }
 
-    public override ComponentSnapshot<Fan> GetNextSnapshot(eDirection xiDirection)
+    public override ComponentSnapshot<Fan> GetNextSnapshot(eDirection direction)
     {
-      var lFrame = GetNextFrame();
-      var lFan = GetFan(xiDirection, lFrame.Fans);
+      var frame = GetNextFrame();
+      var fan = GetFan(direction, frame.Fans);
 
-      return lFan == null
-        ? new ComponentSnapshot<Fan>(lFrame.Length)
-        : new ComponentSnapshot<Fan>(lFan, lFrame.Fans.FadeTime, lFrame.Length);
+      return fan == null
+        ? new ComponentSnapshot<Fan>(frame.Length)
+        : new ComponentSnapshot<Fan>(fan, frame.Fans.FadeTime, frame.Length);
     }
 
-    private Fan GetFan(eDirection xiDirection, FanSection xiFans)
+    private Fan GetFan(eDirection direction, FanSection fans)
     {
-      return xiFans.GetComponentValueInDirection(xiDirection);
+      return fans.GetComponentValueInDirection(direction);
     }
   }
 }
