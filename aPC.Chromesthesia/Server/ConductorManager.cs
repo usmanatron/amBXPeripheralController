@@ -25,9 +25,9 @@ namespace aPC.Chromesthesia.Server
       ThreadPool.QueueUserWorkItem(_ => conductor.Run());
     }
 
-    public void Update(amBXScene xiScene)
+    public void Update(amBXScene scene)
     {
-      conductor.UpdateScene(xiScene);
+      conductor.UpdateScene(scene);
     }
   }
 }
