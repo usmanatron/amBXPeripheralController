@@ -9,86 +9,86 @@ namespace aPC.Common.Tests.Builders
   [TestFixture]
   internal class FanSectionBuilderTests
   {
+    private readonly Fan fullPower = DefaultFans.FullPower;
+    private readonly Fan halfPower = DefaultFans.HalfPower;
+
     [Test]
     public void NewFanSection_WithNoFadeTime_ThrowsException()
     {
-      var lSectionBuilder = new FanSectionBuilder()
-        .WithAllFans(mFull);
+      var sectionBuilder = new FanSectionBuilder()
+        .WithAllFans(fullPower);
 
-      Assert.Throws<ArgumentException>(() => lSectionBuilder.Build());
+      Assert.Throws<ArgumentException>(() => sectionBuilder.Build());
     }
 
     [Test]
     public void NewFanSection_WithNoFans_ThrowsException()
     {
-      var lSectionBuilder = new FanSectionBuilder()
+      var sectionBuilder = new FanSectionBuilder()
         .WithFadeTime(100);
 
-      Assert.Throws<ArgumentException>(() => lSectionBuilder.Build());
+      Assert.Throws<ArgumentException>(() => sectionBuilder.Build());
     }
 
     [Test]
     public void TryingtoSpecifyAFanInAnUnsupportedDirection_ThrowsException()
     {
-      var lSectionBuilder = new FanSectionBuilder();
-      Assert.Throws<InvalidOperationException>(() => lSectionBuilder.WithFanInDirection(eDirection.South, mFull));
+      var sectionBuilder = new FanSectionBuilder();
+      Assert.Throws<InvalidOperationException>(() => sectionBuilder.WithFanInDirection(eDirection.South, fullPower));
     }
 
     [Test]
     public void NewFanSection_CanUpdateAllFansAtSametime()
     {
-      var lSection = new FanSectionBuilder()
+      var section = new FanSectionBuilder()
         .WithFadeTime(100)
-        .WithAllFans(mHalf)
+        .WithAllFans(halfPower)
         .Build();
 
-      Assert.AreEqual(mHalf, lSection.East);
-      Assert.AreEqual(mHalf, lSection.West);
+      Assert.AreEqual(halfPower, section.East);
+      Assert.AreEqual(halfPower, section.West);
     }
 
     [Test]
     public void FanSection_WithDifferentFanTypesOnEachFan_CorrectlySpecified()
     {
-      var lSection = new FanSectionBuilder()
+      var section = new FanSectionBuilder()
         .WithFadeTime(100)
-        .WithFanInDirection(eDirection.East, mFull)
-        .WithFanInDirection(eDirection.West, mHalf)
+        .WithFanInDirection(eDirection.East, fullPower)
+        .WithFanInDirection(eDirection.West, halfPower)
         .Build();
 
-      Assert.AreEqual(mFull, lSection.East);
-      Assert.AreEqual(mHalf, lSection.West);
+      Assert.AreEqual(fullPower, section.East);
+      Assert.AreEqual(halfPower, section.West);
     }
 
     [Test]
     [TestCase(eDirection.East, eDirection.NorthEast)]
     [TestCase(eDirection.West, eDirection.NorthWest)]
-    public void SpecifyingFanRepeatedly_InComplimentaryDirections_UsesTheLastAssignment(eDirection xiFirst, eDirection xiSecond)
+    public void SpecifyingFanRepeatedly_InComplimentaryDirections_UsesTheLastAssignment(eDirection first, eDirection second)
     {
-      var lSection = new FanSectionBuilder()
+      var section = new FanSectionBuilder()
         .WithFadeTime(100)
-        .WithFanInDirection(xiFirst, mFull)
-        .WithFanInDirection(xiSecond, mHalf)
+        .WithFanInDirection(first, fullPower)
+        .WithFanInDirection(second, halfPower)
         .Build();
 
-      Assert.AreEqual(mHalf, GetFanInDirection(lSection, xiSecond));
+      Assert.AreEqual(halfPower, GetFanInDirection(section, second));
     }
 
-    private Fan GetFanInDirection(FanSection xiFanSection, eDirection xiDirection)
+    private Fan GetFanInDirection(FanSection fanSection, eDirection direction)
     {
-      switch (xiDirection)
+      switch (direction)
       {
         case eDirection.East:
         case eDirection.NorthEast:
-          return xiFanSection.East;
+          return fanSection.East;
         case eDirection.West:
         case eDirection.NorthWest:
-          return xiFanSection.West;
+          return fanSection.West;
         default:
           throw new InvalidOperationException("Unexpected Direction");
       }
     }
-
-    private readonly Fan mFull = DefaultFans.FullPower;
-    private readonly Fan mHalf = DefaultFans.HalfPower;
   }
 }

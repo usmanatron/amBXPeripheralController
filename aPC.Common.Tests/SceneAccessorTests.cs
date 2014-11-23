@@ -7,29 +7,29 @@ namespace aPC.Common.Tests
   [TestFixture]
   internal class SceneAccessorTests
   {
+    private SceneAccessor sceneAccessor;
+
     [TestFixtureSetUp]
     public void Setup()
     {
-      mSeceneAccessor = new SceneAccessor(new DefaultScenes());
+      sceneAccessor = new SceneAccessor(new DefaultScenes());
     }
 
     [Test]
     [TestCase("error_flash")]
     [TestCase("Error_Flash")]
     [TestCase("eRrOr_FLaSh")]
-    public void ValidSceneName_ReturnsScene_RegardlessOfCase(string xiSceneName)
+    public void ValidSceneName_ReturnsScene_RegardlessOfCase(string sceneName)
     {
-      var lScene = mSeceneAccessor.GetScene(xiSceneName);
-      Assert.IsNotNull(lScene);
-      Assert.IsTrue(lScene is amBXScene);
+      var scene = sceneAccessor.GetScene(sceneName);
+      Assert.IsNotNull(scene);
+      Assert.IsTrue(scene is amBXScene);
     }
 
     [Test]
     public void InvalidSceneName_ReturnsNull()
     {
-      Assert.IsNull(mSeceneAccessor.GetScene("TotallyInvalidScene"));
+      Assert.IsNull(sceneAccessor.GetScene("TotallyInvalidScene"));
     }
-
-    private SceneAccessor mSeceneAccessor;
   }
 }

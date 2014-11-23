@@ -10,119 +10,119 @@ namespace aPC.Common.Tests.Builders
   [TestFixture]
   internal class FrameBuilderTests
   {
+    private static readonly LightSection lightSection = DefaultLightSections.JiraBlue;
+    private static readonly FanSection fanSection = DefaultFanSections.Half;
+    private static readonly RumbleSection rumbleSection = DefaultRumbleSections.Boing;
+
     [Test]
     public void SpecifyingFrameDataBeforeAddingAFrame_ThrowsException()
     {
-      var lBuilder = new FrameBuilder();
-      Assert.Throws<NullReferenceException>(() => lBuilder.WithFrameLength(100));
+      var builder = new FrameBuilder();
+      Assert.Throws<NullReferenceException>(() => builder.WithFrameLength(100));
     }
 
     [Test]
     public void FrameLengthUnspecified_ThrowsException()
     {
-      var lBuilder = new FrameBuilder()
+      var builder = new FrameBuilder()
         .AddFrame()
         .WithRepeated(true)
-        .WithLightSection(mLightSection)
-        .WithFanSection(mFanSection)
-        .WithRumbleSection(mRumbleSection);
+        .WithLightSection(lightSection)
+        .WithFanSection(fanSection)
+        .WithRumbleSection(rumbleSection);
 
-      Assert.Throws<ArgumentException>(() => lBuilder.Build());
+      Assert.Throws<ArgumentException>(() => builder.Build());
     }
 
     [Test]
     public void IsRepeatedUnspecified_ThrowsException()
     {
-      var lBuilder = new FrameBuilder()
+      var builder = new FrameBuilder()
         .AddFrame()
         .WithFrameLength(100)
-        .WithLightSection(mLightSection)
-        .WithFanSection(mFanSection)
-        .WithRumbleSection(mRumbleSection);
+        .WithLightSection(lightSection)
+        .WithFanSection(fanSection)
+        .WithRumbleSection(rumbleSection);
 
-      Assert.Throws<ArgumentException>(() => lBuilder.Build());
+      Assert.Throws<ArgumentException>(() => builder.Build());
     }
 
     [Test]
     public void AllSectionsUnspecified_ThrowsException()
     {
-      var lBuilder = new FrameBuilder()
+      var builder = new FrameBuilder()
         .AddFrame()
         .WithFrameLength(100)
         .WithRepeated(true);
 
-      Assert.Throws<ArgumentException>(() => lBuilder.Build());
+      Assert.Throws<ArgumentException>(() => builder.Build());
     }
 
     [Test]
     [TestCaseSource("AddSectionCases")]
-    public void RepeatedAndFrameLengthAndOneSectionSpecified_Builds(AddSection xiAddSection)
+    public void RepeatedAndFrameLengthAndOneSectionSpecified_Builds(AddSection addSection)
     {
-      var lBuilder = new FrameBuilder()
+      var builder = new FrameBuilder()
         .AddFrame()
         .WithFrameLength(100)
         .WithRepeated(true);
 
-      xiAddSection(lBuilder);
+      addSection(builder);
 
-      Assert.DoesNotThrow(() => lBuilder.Build());
+      Assert.DoesNotThrow(() => builder.Build());
     }
 
     private readonly object[] AddSectionCases =
     {
-      new AddSection(builder => builder.WithLightSection(mLightSection)),
-      new AddSection(builder => builder.WithFanSection(mFanSection)),
-      new AddSection(builder => builder.WithRumbleSection(mRumbleSection))
+      new AddSection(builder => builder.WithLightSection(lightSection)),
+      new AddSection(builder => builder.WithFanSection(fanSection)),
+      new AddSection(builder => builder.WithRumbleSection(rumbleSection))
     };
 
-    public delegate FrameBuilder AddSection(FrameBuilder xiBuilder);
+    public delegate FrameBuilder AddSection(FrameBuilder builder);
 
     [Test]
     public void NewlyBuiltFrame_HasExpectedData()
     {
-      var lFrame = new FrameBuilder()
+      var frame = new FrameBuilder()
       .AddFrameWithDefaults()
       .Build()
       .Single();
 
-      Assert.AreEqual(mLightSection, lFrame.Lights);
-      Assert.AreEqual(mFanSection, lFrame.Fans);
-      Assert.AreEqual(mRumbleSection, lFrame.Rumbles);
+      Assert.AreEqual(lightSection, frame.Lights);
+      Assert.AreEqual(fanSection, frame.Fans);
+      Assert.AreEqual(rumbleSection, frame.Rumbles);
     }
 
     [Test]
     public void MultipleFrames_AddedCorrectly()
     {
-      var lFrames = new FrameBuilder()
+      var frames = new FrameBuilder()
         .AddFrameWithDefaults(200)
         .AddFrameWithDefaults(400)
         .Build();
 
-      Assert.AreEqual(2, lFrames.Count);
-      Assert.AreEqual(200, lFrames[0].Length);
-      Assert.AreEqual(400, lFrames[1].Length);
+      Assert.AreEqual(2, frames.Count);
+      Assert.AreEqual(200, frames[0].Length);
+      Assert.AreEqual(400, frames[1].Length);
     }
-
-    private static readonly LightSection mLightSection = DefaultLightSections.JiraBlue;
-    private static readonly FanSection mFanSection = DefaultFanSections.Half;
-    private static readonly RumbleSection mRumbleSection = DefaultRumbleSections.Boing;
   }
 
   internal static class FrameBuilderExtensions
   {
-    public static FrameBuilder AddFrameWithDefaults(this FrameBuilder xiBuilder, int xiFrameLength = 1000)
-    {
-      return xiBuilder
-        .AddFrame()
-        .WithFrameLength(xiFrameLength)
-        .WithRepeated(true)
-        .WithLightSection(mLightSection)
-        .WithFanSection(mFanSection)
-        .WithRumbleSection(mRumbleSection);
-    }
+    private static readonly LightSection lightSection = DefaultLightSections.JiraBlue;
+    private static readonly FanSection fanSection = DefaultFanSections.Half;
+    private static readonly RumbleSection rumbleSection = DefaultRumbleSections.Boing;
 
-    private static readonly LightSection mLightSection = DefaultLightSections.JiraBlue;
-    private static readonly FanSection mFanSection = DefaultFanSections.Half;
-    private static readonly RumbleSection mRumbleSection = DefaultRumbleSections.Boing;
+    public static FrameBuilder AddFrameWithDefaults(this FrameBuilder builder, int frameLength = 1000)
+    {
+      return builder
+        .AddFrame()
+        .WithFrameLength(frameLength)
+        .WithRepeated(true)
+        .WithLightSection(lightSection)
+        .WithFanSection(fanSection)
+        .WithRumbleSection(rumbleSection);
+    }
   }
 }

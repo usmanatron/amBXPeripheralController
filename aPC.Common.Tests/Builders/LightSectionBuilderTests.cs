@@ -9,43 +9,49 @@ namespace aPC.Common.Tests.Builders
   [TestFixture]
   internal class LightSectionBuilderTests
   {
+    private readonly Light aribitraryColour = DefaultLights.Green;
+    private readonly Light orange = DefaultLights.Orange;
+    private readonly Light green = DefaultLights.Green;
+    private readonly Light blue = DefaultLights.Blue;
+    private readonly Light red = DefaultLights.Red;
+
     [Test]
     public void NewLightSection_WithNoFadeTime_ThrowsException()
     {
-      var lSectionBuilder = new LightSectionBuilder()
-        .WithAllLights(mAribitraryColour);
+      var sectionBuilder = new LightSectionBuilder()
+        .WithAllLights(aribitraryColour);
 
-      Assert.Throws<ArgumentException>(() => lSectionBuilder.Build());
+      Assert.Throws<ArgumentException>(() => sectionBuilder.Build());
     }
 
     [Test]
     public void NewLightSection_WithNoLights_ThrowsException()
     {
-      var lSectionBuilder = new LightSectionBuilder()
+      var sectionBuilder = new LightSectionBuilder()
         .WithFadeTime(100);
 
-      Assert.Throws<ArgumentException>(() => lSectionBuilder.Build());
+      Assert.Throws<ArgumentException>(() => sectionBuilder.Build());
     }
 
     [Test]
     public void NewLightSection_WithFadeTimeAndAtLeastOneLightSpecified_DoesNotThrowException()
     {
-      var lSectionBuilder = new LightSectionBuilder()
+      var sectionBuilder = new LightSectionBuilder()
         .WithFadeTime(100)
-        .WithLightInDirection(eDirection.East, mAribitraryColour);
+        .WithLightInDirection(eDirection.East, aribitraryColour);
 
-      Assert.DoesNotThrow(() => lSectionBuilder.Build());
+      Assert.DoesNotThrow(() => sectionBuilder.Build());
     }
 
     [Test]
     public void NewLightSection_HasValidFadeTime()
     {
-      var lSection = new LightSectionBuilder()
+      var section = new LightSectionBuilder()
         .WithFadeTime(100)
-        .WithLightInDirection(eDirection.East, mAribitraryColour)
+        .WithLightInDirection(eDirection.East, aribitraryColour)
         .Build();
 
-      Assert.AreEqual(100, lSection.FadeTime);
+      Assert.AreEqual(100, section.FadeTime);
     }
 
     [Test]
@@ -57,62 +63,62 @@ namespace aPC.Common.Tests.Builders
     [TestCase(eDirection.SouthWest)]
     [TestCase(eDirection.West)]
     [TestCase(eDirection.NorthWest)]
-    public void NewLightSection_HasValidLightInRightDirection(eDirection xiDirection)
+    public void NewLightSection_HasValidLightInRightDirection(eDirection direction)
     {
-      var lSection = new LightSectionBuilder()
+      var section = new LightSectionBuilder()
         .WithFadeTime(100)
-        .WithLightInDirection(xiDirection, mAribitraryColour)
+        .WithLightInDirection(direction, aribitraryColour)
         .Build();
 
-      Assert.AreEqual(mAribitraryColour, lSection.GetComponentValueInDirection(xiDirection));
+      Assert.AreEqual(aribitraryColour, section.GetComponentValueInDirection(direction));
     }
 
     [Test]
     public void NewLightSection_AllLightsSpecifiedInOneGo_AllLightsSpecified()
     {
-      var lSection = new LightSectionBuilder()
+      var section = new LightSectionBuilder()
         .WithFadeTime(100)
-        .WithAllLights(mAribitraryColour)
+        .WithAllLights(aribitraryColour)
         .Build();
 
-      Assert.AreEqual(mAribitraryColour, lSection.North);
-      Assert.AreEqual(mAribitraryColour, lSection.NorthEast);
-      Assert.AreEqual(mAribitraryColour, lSection.East);
-      Assert.AreEqual(mAribitraryColour, lSection.SouthEast);
-      Assert.AreEqual(mAribitraryColour, lSection.South);
-      Assert.AreEqual(mAribitraryColour, lSection.SouthWest);
-      Assert.AreEqual(mAribitraryColour, lSection.West);
-      Assert.AreEqual(mAribitraryColour, lSection.NorthWest);
+      Assert.AreEqual(aribitraryColour, section.North);
+      Assert.AreEqual(aribitraryColour, section.NorthEast);
+      Assert.AreEqual(aribitraryColour, section.East);
+      Assert.AreEqual(aribitraryColour, section.SouthEast);
+      Assert.AreEqual(aribitraryColour, section.South);
+      Assert.AreEqual(aribitraryColour, section.SouthWest);
+      Assert.AreEqual(aribitraryColour, section.West);
+      Assert.AreEqual(aribitraryColour, section.NorthWest);
     }
 
     [Test]
     public void NewLightSection_DifferentLightsInDifferentPlaces_OnTheRightPlaces()
     {
-      var lSection = new LightSectionBuilder()
+      var section = new LightSectionBuilder()
         .WithFadeTime(100)
-        .WithLightInDirection(eDirection.North, mGreen)
-        .WithLightInDirection(eDirection.East, mBlue)
-        .WithLightInDirection(eDirection.SouthWest, mRed)
-        .WithLightInDirection(eDirection.NorthWest, mOrange)
+        .WithLightInDirection(eDirection.North, green)
+        .WithLightInDirection(eDirection.East, blue)
+        .WithLightInDirection(eDirection.SouthWest, red)
+        .WithLightInDirection(eDirection.NorthWest, orange)
         .Build();
 
-      Assert.AreEqual(mGreen, lSection.North);
-      Assert.AreEqual(null, lSection.NorthEast);
-      Assert.AreEqual(mBlue, lSection.East);
-      Assert.AreEqual(null, lSection.SouthEast);
-      Assert.AreEqual(null, lSection.South);
-      Assert.AreEqual(mRed, lSection.SouthWest);
-      Assert.AreEqual(null, lSection.West);
-      Assert.AreEqual(mOrange, lSection.NorthWest);
+      Assert.AreEqual(green, section.North);
+      Assert.AreEqual(null, section.NorthEast);
+      Assert.AreEqual(blue, section.East);
+      Assert.AreEqual(null, section.SouthEast);
+      Assert.AreEqual(null, section.South);
+      Assert.AreEqual(red, section.SouthWest);
+      Assert.AreEqual(null, section.West);
+      Assert.AreEqual(orange, section.NorthWest);
     }
 
     [Test]
     public void NewLightSection_SpecifyingALightInAnInvalidDirection_ThrowsException()
     {
-      var lSection = new LightSectionBuilder()
+      var section = new LightSectionBuilder()
         .WithFadeTime(100);
 
-      Assert.Throws<InvalidOperationException>(() => lSection.WithLightInDirection(eDirection.Center, mBlue));
+      Assert.Throws<InvalidOperationException>(() => section.WithLightInDirection(eDirection.Center, blue));
     }
 
     /// <remarks>
@@ -122,41 +128,35 @@ namespace aPC.Common.Tests.Builders
     [Test]
     public void SpecifyingAPhysicalLightInANonPhysicalLocation_DoesNotUpdateLight()
     {
-      var lSectionBuilder = new LightSectionBuilder()
+      var sectionBuilder = new LightSectionBuilder()
         .WithFadeTime(100)
-        .WithLightInDirectionIfPhysical(eDirection.South, mBlue);
+        .WithLightInDirectionIfPhysical(eDirection.South, blue);
 
-      Assert.Throws<ArgumentException>(() => lSectionBuilder.Build());
+      Assert.Throws<ArgumentException>(() => sectionBuilder.Build());
     }
 
     [Test]
     public void SpecifyingAPhysicalLightInaNonPhysicalDirection_DoesNotOverwritePreviousData()
     {
-      var lSection = new LightSectionBuilder()
+      var section = new LightSectionBuilder()
         .WithFadeTime(100)
-        .WithLightInDirection(eDirection.South, mAribitraryColour)
-        .WithLightInDirectionIfPhysical(eDirection.South, mBlue)
+        .WithLightInDirection(eDirection.South, aribitraryColour)
+        .WithLightInDirectionIfPhysical(eDirection.South, blue)
         .Build();
 
-      Assert.AreEqual(mAribitraryColour, lSection.South);
+      Assert.AreEqual(aribitraryColour, section.South);
     }
 
     [Test]
     public void SpecifyingAPhysicalLightInAPhysicalDirection_UpdatesLight()
     {
-      var lSectionBuilder = new LightSectionBuilder()
+      var sectionBuilder = new LightSectionBuilder()
         .WithFadeTime(100)
-        .WithLightInDirectionIfPhysical(eDirection.North, mAribitraryColour);
+        .WithLightInDirectionIfPhysical(eDirection.North, aribitraryColour);
 
-      var lSection = lSectionBuilder.Build();
+      var section = sectionBuilder.Build();
 
-      Assert.AreEqual(mAribitraryColour, lSection.North);
+      Assert.AreEqual(aribitraryColour, section.North);
     }
-
-    private readonly Light mAribitraryColour = DefaultLights.Green;
-    private readonly Light mOrange = DefaultLights.Orange;
-    private readonly Light mGreen = DefaultLights.Green;
-    private readonly Light mBlue = DefaultLights.Blue;
-    private readonly Light mRed = DefaultLights.Red;
   }
 }

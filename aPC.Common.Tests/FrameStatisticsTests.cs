@@ -9,79 +9,79 @@ namespace aPC.Common.Tests
   [TestFixture]
   internal class FrameStatisticsTests
   {
+    private Light arbitraryLight;
+
     [TestFixtureSetUp]
     public void Setup()
     {
-      mArbitraryLight = DefaultLights.Red;
+      arbitraryLight = DefaultLights.Red;
     }
 
     [Test]
     public void FrameStatistics_ContainsExpectedComponentType()
     {
-      var lLightSection = new LightSectionBuilder()
+      var lightSection = new LightSectionBuilder()
         .WithFadeTime(100)
-        .WithLightInDirection(eDirection.North, mArbitraryLight)
+        .WithLightInDirection(eDirection.North, arbitraryLight)
         .Build();
-      var lFrames = new FrameBuilder()
+      var frames = new FrameBuilder()
         .AddFrame()
         .WithFrameLength(1000)
         .WithRepeated(false)
-        .WithLightSection(lLightSection)
+        .WithLightSection(lightSection)
         .Build();
-      var lStats = new FrameStatistics(lFrames);
+      var stats = new FrameStatistics(frames);
 
-      Assert.IsTrue(lStats.AreEnabledForComponent(eComponentType.Light));
-      Assert.IsFalse(lStats.AreEnabledForComponent(eComponentType.Fan));
-      Assert.IsFalse(lStats.AreEnabledForComponent(eComponentType.Rumble));
+      Assert.IsTrue(stats.AreEnabledForComponent(eComponentType.Light));
+      Assert.IsFalse(stats.AreEnabledForComponent(eComponentType.Fan));
+      Assert.IsFalse(stats.AreEnabledForComponent(eComponentType.Rumble));
 
-      Assert.IsTrue(lStats.AreEnabledForComponentAndDirection(eComponentType.Light, eDirection.North));
-      Assert.AreEqual(1, lStats.EnabledDirectionalComponents.Count());
+      Assert.IsTrue(stats.AreEnabledForComponentAndDirection(eComponentType.Light, eDirection.North));
+      Assert.AreEqual(1, stats.EnabledDirectionalComponents.Count());
     }
 
     [Test]
     public void FrameStatistics_ContainsNoDuplicates()
     {
-      var lLightSection = new LightSectionBuilder()
+      var lightSection = new LightSectionBuilder()
         .WithFadeTime(100)
-        .WithAllLights(mArbitraryLight)
+        .WithAllLights(arbitraryLight)
         .Build();
-      var lFrames = new FrameBuilder()
+      var frames = new FrameBuilder()
         .AddFrame()
         .WithFrameLength(1000)
         .WithRepeated(false)
-        .WithLightSection(lLightSection)
+        .WithLightSection(lightSection)
         .AddFrame()
         .WithFrameLength(1000)
         .WithRepeated(false)
-        .WithLightSection(lLightSection)
+        .WithLightSection(lightSection)
         .Build();
-      var lStats = new FrameStatistics(lFrames);
+      var stats = new FrameStatistics(frames);
 
-      Assert.AreEqual(8, lStats.EnabledDirectionalComponents.Count);
+      Assert.AreEqual(8, stats.EnabledDirectionalComponents.Count);
     }
 
     [Test]
     public void FrameStatistics_RecordsSceneLength()
     {
-      var lLightSection = new LightSectionBuilder()
+      var lightSection = new LightSectionBuilder()
         .WithFadeTime(100)
-        .WithAllLights(mArbitraryLight)
+        .WithAllLights(arbitraryLight)
         .Build();
-      var lFrames = new FrameBuilder()
+      var frames = new FrameBuilder()
         .AddFrame()
         .WithFrameLength(1000)
         .WithRepeated(false)
-        .WithLightSection(lLightSection)
+        .WithLightSection(lightSection)
         .AddFrame()
         .WithFrameLength(500)
         .WithRepeated(false)
-        .WithLightSection(lLightSection)
+        .WithLightSection(lightSection)
         .Build();
-      var lStats = new FrameStatistics(lFrames);
+      var stats = new FrameStatistics(frames);
 
-      Assert.AreEqual(lFrames.Sum(frame => frame.Length), lStats.SceneLength);
+      Assert.AreEqual(frames.Sum(frame => frame.Length), stats.SceneLength);
     }
-
-    private Light mArbitraryLight;
   }
 }

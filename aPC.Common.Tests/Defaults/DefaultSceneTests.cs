@@ -12,14 +12,14 @@ namespace aPC.Common.Tests.Defaults
     [Test]
     public void DefaultScenesAreValid()
     {
-      var lScenes = new DefaultScenes()
+      var scenes = new DefaultScenes()
         .GetType()
         .GetProperties()
         .Where(property => property.GetCustomAttribute<SceneNameAttribute>() != null)
         .Select(property => property.GetValue(new DefaultScenes()) as amBXScene)
         .ToList();
 
-      Assert.IsNotEmpty(lScenes);
+      Assert.IsNotEmpty(scenes);
     }
   }
 }
