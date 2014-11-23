@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using aPC.Common.Communication;
+﻿using aPC.Common.Communication;
 using aPC.Common.Entities;
+using System.Web.Http;
 
 namespace aPC.Web.Controllers.API
 {
@@ -21,8 +16,6 @@ namespace aPC.Web.Controllers.API
     {
       return new amBXScene();
     }
-
-
 
     private INotificationClient mNotificationClient;
   }

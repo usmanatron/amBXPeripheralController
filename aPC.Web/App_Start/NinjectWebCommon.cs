@@ -1,21 +1,17 @@
-using System.Web.Http;
 using aPC.Common.Communication;
 using aPC.Web.Helpers;
-using Ninject.Web.Mvc;
+using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+using Ninject;
+using Ninject.Web.Common;
+using System;
+using System.Web;
+using System.Web.Http;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(aPC.Web.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(aPC.Web.App_Start.NinjectWebCommon), "Stop")]
 
 namespace aPC.Web.App_Start
 {
-  using System;
-  using System.Web;
-
-  using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-
-  using Ninject;
-  using Ninject.Web.Common;
-
   public static class NinjectWebCommon
   {
     private static readonly Bootstrapper bootstrapper = new Bootstrapper();
@@ -25,8 +21,8 @@ namespace aPC.Web.App_Start
     /// </summary>
     public static void Start()
     {
-      DynamicModuleUtility.RegisterModule(typeof (OnePerRequestHttpModule));
-      DynamicModuleUtility.RegisterModule(typeof (NinjectHttpModule));
+      DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
+      DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
       bootstrapper.Initialize(CreateKernel);
     }
 

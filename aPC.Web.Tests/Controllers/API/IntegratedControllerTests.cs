@@ -1,11 +1,11 @@
-﻿using System.Net;
-using System.Web.Http;
+﻿using aPC.Common;
 using aPC.Common.Client.Tests.Communication;
-using aPC.Common;
+using aPC.Common.Defaults;
 using aPC.Web.Controllers.API;
 using NUnit.Framework;
 using System.Linq;
-using aPC.Common.Defaults;
+using System.Net;
+using System.Web.Http;
 
 namespace aPC.Web.Tests.Controllers.API
 {
@@ -29,7 +29,6 @@ namespace aPC.Web.Tests.Controllers.API
       Assert.AreEqual(lIntegratedScenes.Count, lResults.Count());
       CollectionAssert.AreEquivalent(lIntegratedScenes.Select(scene => scene.Key), lResults.Select(scene => scene.SceneName));
     }
-
 
     [Test]
     public void GetByName_ReturnsExpectedScene()

@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Ninject;
+using Ninject.Syntax;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Web.Http.Dependencies;
-using Ninject;
-using Ninject.Syntax;
 
 namespace aPC.Web.App_Start
 {

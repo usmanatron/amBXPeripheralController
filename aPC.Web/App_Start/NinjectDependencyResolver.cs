@@ -1,5 +1,5 @@
-﻿using System.Web.Http.Dependencies;
-using Ninject;
+﻿using Ninject;
+using System.Web.Http.Dependencies;
 
 namespace aPC.Web.App_Start
 {

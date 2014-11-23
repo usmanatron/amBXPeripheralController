@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using aPC.Common;
 using aPC.Common.Entities;
-using aPC.Common;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace aPC.Web.Models
 {
@@ -15,7 +15,7 @@ namespace aPC.Web.Models
     {
       SceneName = xiScene.Key;
       SceneLength = xiScene.Value.FrameStatistics.SceneLength;
-      
+
       var lSceneType = xiScene.Value.SceneType;
       IsEvent = lSceneType == eSceneType.Event;
       IsSynchronised = lSceneType == eSceneType.Sync || lSceneType == eSceneType.Event;

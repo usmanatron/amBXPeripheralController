@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace aPC.Web.Tests.Controllers.API
 {
   [TestFixture]
-  class CustomControllerTests
+  internal class CustomControllerTests
   {
     [SetUp]
     public void Setup()
@@ -21,9 +21,8 @@ namespace aPC.Web.Tests.Controllers.API
     public void Parse_WithValidInput_ReturnsOK(string xiScene)
     {
       amBXScene lScene;
-      
+
       Assert.DoesNotThrow(() => lScene = mController.Parse(xiScene));
-      
     }
 
     [Test]
@@ -31,14 +30,13 @@ namespace aPC.Web.Tests.Controllers.API
     public void Parse_WithInvalidInput_ReturnsOK(string xiScene)
     {
       amBXScene lScene;
-      
+
       Assert.DoesNotThrow(() => lScene = mController.Parse(xiScene));
-      
     }
-    
+
     private string[] ValidInput()
     {
-      return new[] {mValidXmlInput, mValidJsonInput};
+      return new[] { mValidXmlInput, mValidJsonInput };
     }
 
     private string[] InvalidInput()
@@ -86,6 +84,7 @@ namespace aPC.Web.Tests.Controllers.API
 
     // These are invalidated by having Scene Types which don't exist
     private const string mInvalidXmlInput = "";
+
     private const string mInvalidJsonInput = "";
   }
 }
