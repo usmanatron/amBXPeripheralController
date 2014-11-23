@@ -11,13 +11,13 @@ namespace aPC.Common.Server.Tests.Actors
   internal class LightActorTests
   {
     private TestEngineManager engine;
-    private LightActor actor;
+    private ComponentActor<Light> actor;
 
     [SetUp]
     public void Setup()
     {
       engine = new TestEngineManager();
-      actor = new LightActor(engine);
+      actor = new ComponentActor<Light>(engine);
     }
 
     [Test]

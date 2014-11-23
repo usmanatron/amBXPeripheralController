@@ -11,13 +11,13 @@ namespace aPC.Common.Server.Tests.Actors
   internal class FanActorTests
   {
     private TestEngineManager engine;
-    private FanActor actor;
+    private ComponentActor<Fan> actor;
 
     [SetUp]
     public void Setup()
     {
       engine = new TestEngineManager();
-      actor = new FanActor(engine);
+      actor = new ComponentActor<Fan>(engine);
     }
 
     [Test]

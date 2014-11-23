@@ -23,20 +23,36 @@ namespace aPC.Common.Server.Tests
         };
     }
 
-    public void UpdateLight(eDirection direction, Light light, int fadeTime)
+    public void UpdateComponent(eDirection direction, IComponent component, int fadeTime)
+    {
+      switch (component.ComponentType())
+      {
+        case eComponentType.Light:
+          UpdateLight(direction, (Light)component, fadeTime);
+          break;
+        case eComponentType.Fan:
+          UpdateFan(direction, (Fan)component);
+          break;
+        case eComponentType.Rumble:
+          UpdateRumble(direction, (Rumble)component);
+          break;
+      }
+    }
+
+    private void UpdateLight(eDirection direction, Light light, int fadeTime)
     {
       Updated[eComponentType.Light] = true;
       Status.Lights.SetComponentValueInDirection(light, direction);
       Status.Lights.FadeTime = fadeTime;
     }
 
-    public void UpdateFan(eDirection direction, Fan fan)
+    private void UpdateFan(eDirection direction, Fan fan)
     {
       Updated[eComponentType.Fan] = true;
       Status.Fans.SetComponentValueInDirection(fan, direction);
     }
 
-    public void UpdateRumble(eDirection direction, Rumble rumble)
+    private void UpdateRumble(eDirection direction, Rumble rumble)
     {
       Updated[eComponentType.Rumble] = true;
       Status.Rumbles.SetComponentValueInDirection(rumble, direction);

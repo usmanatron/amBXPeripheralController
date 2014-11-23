@@ -10,13 +10,13 @@ namespace aPC.Common.Server.Tests.Actors
   internal class RumbleActorTests
   {
     private TestEngineManager engine;
-    private RumbleActor actor;
+    private ComponentActor<Rumble> actor;
 
     [SetUp]
     public void Setup()
     {
       engine = new TestEngineManager();
-      actor = new RumbleActor(engine);
+      actor = new ComponentActor<Rumble>(engine);
     }
 
     [Test]
