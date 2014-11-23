@@ -11,8 +11,8 @@ namespace aPC.Chromesthesia
     public byte[] RightChannel;
     public int frames;
 
-    private int LeftChannelCount;
-    private int RightChannelCount;
+    private int leftChannelCount;
+    private int rightChannelCount;
 
     public StereoBuffer(int count)
     {
@@ -23,8 +23,8 @@ namespace aPC.Chromesthesia
 
       LeftChannel = new byte[count / 2];
       RightChannel = new byte[count / 2];
-      LeftChannelCount = 0;
-      RightChannelCount = 0;
+      leftChannelCount = 0;
+      rightChannelCount = 0;
       frames = count / (2 * sizeof(float));
     }
 
@@ -35,14 +35,14 @@ namespace aPC.Chromesthesia
 
     public void AddToLeftChannel(byte value)
     {
-      LeftChannel[LeftChannelCount] = value;
-      LeftChannelCount++;
+      LeftChannel[leftChannelCount] = value;
+      leftChannelCount++;
     }
 
     public void AddToRightChannel(byte value)
     {
-      RightChannel[RightChannelCount] = value;
-      RightChannelCount++;
+      RightChannel[rightChannelCount] = value;
+      rightChannelCount++;
     }
   }
 }

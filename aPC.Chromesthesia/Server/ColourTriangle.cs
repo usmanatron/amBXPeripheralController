@@ -5,7 +5,7 @@ namespace aPC.Chromesthesia.Server
   /// <summary>
   /// Handles the value of a colour.
   /// For a given start and end index, values between 0 and 1 are calculated so that,
-  /// if graphed, you get a triangle, (with midPoint being the highest point.
+  /// if graphed, you get a triangle, (with midPoint being the highest point).
   /// </summary>
   class ColourTriangle
   {

@@ -36,10 +36,8 @@ namespace aPC.Chromesthesia
 
       do
       {
-        //sceneGenerator.TestServer();
         bytesRead = sceneGenerator.Read(buffer, 0, buffer.Length);
-        //Thread.Sleep(100);
-      } while (runForever);//bytesRead != 0);
+      } while (runForever);
     }
   }
 }

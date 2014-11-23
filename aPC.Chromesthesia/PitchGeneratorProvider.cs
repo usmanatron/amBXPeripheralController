@@ -47,34 +47,6 @@ namespace aPC.Chromesthesia
       return bytesRead;
     }
 
-    private void AnalysePitch(int stereoFrames, int bytesRead)
-    {
-      var leftPitchResult  = leftPitchDetector.DetectPitchDistribution(leftBuffer.FloatBuffer, stereoFrames);
-      var rightPitchResult = rightPitchDetector.DetectPitchDistribution(rightBuffer.FloatBuffer, stereoFrames);
-
-      WriteToConsole(leftPitchResult, rightPitchResult); //Debugging qqUMI
-      PitchResults = new StereoPitchResult(leftPitchResult, rightPitchResult, bytesRead);
-    }
-
-    private void WriteToConsole(PitchResult leftResult, PitchResult rightResult)
-    {
-      var leftPeakPitchNonZero  = ToNonZeroString(leftResult.PeakPitch.averageFrequency, "0000.000");
-      var rightPeakPitchNonZero = ToNonZeroString(rightResult.PeakPitch.averageFrequency, "0000.000");
-      var leftTotalAmp  = ToNonZeroString(leftResult.TotalAmplitude, "0.00000");
-      var rightTotalAmp = ToNonZeroString(rightResult.TotalAmplitude, "0.00000");
-
-
-      if (leftPeakPitchNonZero != "       " || rightPeakPitchNonZero != "       " || leftTotalAmp != "       " || rightTotalAmp != "       ")
-      {
-        Console.WriteLine("{0} : {1} <- PP | MA -> {2} : {3}", leftPeakPitchNonZero, rightPeakPitchNonZero, leftTotalAmp, rightTotalAmp);
-      }
-    }
-
-    private string ToNonZeroString(float value, string format)
-    {
-      return value == 0 ? "       " : value.ToString(format); 
-    }
-
     private void SetupWaveBuffers(int count)
     {
 
@@ -105,6 +77,34 @@ namespace aPC.Chromesthesia
       leftBuffer.BindTo(stereoBuffer.LeftChannel);
       rightBuffer.BindTo(stereoBuffer.RightChannel);
       return stereoBuffer.frames;
+    }
+
+    private void AnalysePitch(int stereoFrames, int bytesRead)
+    {
+      var leftPitchResult  = leftPitchDetector.DetectPitchDistribution(leftBuffer.FloatBuffer, stereoFrames);
+      var rightPitchResult = rightPitchDetector.DetectPitchDistribution(rightBuffer.FloatBuffer, stereoFrames);
+
+      WriteSummaryToConsole(leftPitchResult, rightPitchResult);
+      PitchResults = new StereoPitchResult(leftPitchResult, rightPitchResult, bytesRead);
+    }
+
+    private void WriteSummaryToConsole(PitchResult leftResult, PitchResult rightResult)
+    {
+      var leftPeakPitchNonZero  = ToNonZeroString(leftResult.PeakPitch.averageFrequency, "0000.000");
+      var rightPeakPitchNonZero = ToNonZeroString(rightResult.PeakPitch.averageFrequency, "0000.000");
+      var leftTotalAmp  = ToNonZeroString(leftResult.TotalAmplitude, "0.00000");
+      var rightTotalAmp = ToNonZeroString(rightResult.TotalAmplitude, "0.00000");
+
+
+      if (leftPeakPitchNonZero != "       " || rightPeakPitchNonZero != "       " || leftTotalAmp != "       " || rightTotalAmp != "       ")
+      {
+        Console.WriteLine("{0} : {1} <- PP | MA -> {2} : {3}", leftPeakPitchNonZero, rightPeakPitchNonZero, leftTotalAmp, rightTotalAmp);
+      }
+    }
+
+    private string ToNonZeroString(float value, string format)
+    {
+      return value == 0 ? "       " : value.ToString(format); 
     }
 
     public WaveFormat WaveFormat

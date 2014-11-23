@@ -5,8 +5,8 @@ using System.Linq;
 
 namespace aPC.Chromesthesia.Pitch
 {
-  /* TODO: Increase buffer to 8192 if possible (decrease bin size) */
-  // 1024 frames are input
+  // TODO: Increase buffer to 8192 if possible (decrease bin size)
+  // We input 1024 float frames
   // FFT based pitch detector. seems to work best with block sizes of 4096
   public class FftPitchDetector : IPitchDetector
   {
