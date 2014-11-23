@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace aPC.Chromesthesia
+﻿namespace aPC.Chromesthesia
 {
   /// <summary>
   /// Contains settings vales which are used in a variety of places
@@ -12,7 +6,7 @@ namespace aPC.Chromesthesia
   public static class Settings
   {
     /// <summary>
-    /// We assume the input sample rate is 44.1KHz.  This is required 
+    /// We assume the input sample rate is 44.1KHz.  This is required
     /// in the PitchGenerator.
     /// </summary>
     public static int InputAudioSampleRate
@@ -23,7 +17,6 @@ namespace aPC.Chromesthesia
       }
     }
 
-
     #region FFT
 
     public static int FftLowerDetectionFrequency
@@ -33,7 +26,7 @@ namespace aPC.Chromesthesia
         return 100;
       }
     }
-    
+
     public static int FftUpperDetectionFrequency
     {
       get
@@ -41,8 +34,8 @@ namespace aPC.Chromesthesia
         return 1000;
       }
     }
-    
-    #endregion
+
+    #endregion FFT
 
     #region Lights
 
@@ -58,7 +51,7 @@ namespace aPC.Chromesthesia
         return 70;
       }
     }
-    
+
     public static int SceneFrameLength
     {
       get
@@ -82,7 +75,7 @@ namespace aPC.Chromesthesia
         return 60;
       }
     }
-    
+
     public static int LightIntensityMultiplicationFactor
     {
       get
@@ -90,7 +83,7 @@ namespace aPC.Chromesthesia
         return 10;
       }
     }
-    
-    #endregion
+
+    #endregion Lights
   }
 }

@@ -17,7 +17,7 @@
 
     public float averageFrequency
     {
-      get { return (lowerFrequency + upperFrequency)/2; }
+      get { return (lowerFrequency + upperFrequency) / 2; }
     }
   }
 }

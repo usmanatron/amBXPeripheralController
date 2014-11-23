@@ -12,11 +12,11 @@ using System;
 
 namespace aPC.Chromesthesia
 {
-  class Chromesthesia
+  internal class Chromesthesia
   {
     private static ChromesthesiaTask task;
 
-    static void Main()
+    private static void Main()
     {
       var kernel = new NinjectKernelHandler();
       var waveIn = kernel.Get<WasapiLoopbackCapture>();
@@ -29,7 +29,7 @@ namespace aPC.Chromesthesia
       var compositeLightSectionBuilder = new SceneBuilder(new CompositeLightSectionBuilder(new LightSectionBuilder(), new CompositeLightBuilder()), new LightBuilder());
       var frameConductor = new FrameConductor(new FrameActor(new EngineManager()), new FrameHandler(new SceneAccessor(new DefaultScenes()).GetScene("rainbow"), EventComplete));
       var streamScene = new SceneGenerator(streamPitch, compositeLightSectionBuilder, new ConductorManager(frameConductor));
-      
+
       task = new ChromesthesiaTask(streamScene);
 
       task.Run();

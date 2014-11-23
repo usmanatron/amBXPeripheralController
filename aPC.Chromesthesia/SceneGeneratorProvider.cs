@@ -1,12 +1,12 @@
-﻿using System;
-using aPC.Chromesthesia.Pitch;
+﻿using aPC.Chromesthesia.Pitch;
 using aPC.Chromesthesia.Server;
 using aPC.Common.Entities;
 using NAudio.Wave;
+using System;
 
 namespace aPC.Chromesthesia
 {
-  class SceneGenerator
+  internal class SceneGenerator
   {
     private readonly PitchGeneratorProvider pitchGenerator;
     private readonly SceneBuilder sceneBuilder;
@@ -23,7 +23,7 @@ namespace aPC.Chromesthesia
     {
       var results = GetResultsFromPitchGenerator(new byte[readLength], 0, readLength);
 
-      // BuildScene      
+      // BuildScene
       var scene = sceneBuilder.BuildSceneFromPitchResults(results);
 
       if (!SceneIsEmpty(scene))

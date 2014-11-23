@@ -3,7 +3,7 @@ using System;
 
 namespace aPC.Chromesthesia.Server
 {
-  class CompositeLightBuilder
+  internal class CompositeLightBuilder
   {
     public Light BuildCompositeLight(Light firstLight, Light secondLight, int firstLightPercentage)
     {

@@ -5,7 +5,7 @@ using aPC.Common.Entities;
 
 namespace aPC.Chromesthesia.Server
 {
-  class SceneBuilder
+  internal class SceneBuilder
   {
     private readonly CompositeLightSectionBuilder compositeLightSectionBuilder;
     private readonly LightBuilder lightBuilder;

@@ -1,11 +1,11 @@
 ﻿using aPC.Common;
-using aPC.Common.Entities;
 using aPC.Common.Builders;
+using aPC.Common.Entities;
 using System;
 
 namespace aPC.Chromesthesia.Server
 {
-  class CompositeLightSectionBuilder
+  internal class CompositeLightSectionBuilder
   {
     private LightSectionBuilder lightSectionBuilder;
     private CompositeLightBuilder compositeLightBuilder;
@@ -33,14 +33,14 @@ namespace aPC.Chromesthesia.Server
 
     /// <summary>
     ///   Set the value of sidePercentageOnDiagonal.
-    ///   
-    /// The diagonal lights are composed from a percentage of the left light 
+    ///
+    /// The diagonal lights are composed from a percentage of the left light
     ///   and a percentage of the right.  This value determines the percentage of the side light
-    ///   to use for a diagonal on that side.  For example, the NW light takes a percentage of the 
+    ///   to use for a diagonal on that side.  For example, the NW light takes a percentage of the
     ///   West light equal to sidePercentageOnDiagonal.
     /// </summary>
     /// <remarks>
-    ///   This value is expected to be between 50 and 100  (since the centre lights are hardcoded 
+    ///   This value is expected to be between 50 and 100  (since the centre lights are hardcoded
     ///   as 50% of each side light).
     /// </remarks>
     public CompositeLightSectionBuilder WithSidePercentageOnDiagonal(int percentage)

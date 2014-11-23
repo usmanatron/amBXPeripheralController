@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 
 namespace aPC.Chromesthesia
 {
-  class FloatDataStereoSplitter
+  internal class FloatDataStereoSplitter
   {
     /// <summary>
     /// Splits a given buffer into stereo.
@@ -17,7 +15,6 @@ namespace aPC.Chromesthesia
 
       for (int i = 0; i < buffer.Count(); i = i + 4)
       {
-
         if (isLeftChannel)
         {
           stereoBuffer.AddToLeftChannel(buffer[i]);
@@ -32,7 +29,7 @@ namespace aPC.Chromesthesia
           stereoBuffer.AddToRightChannel(buffer[i + 2]);
           stereoBuffer.AddToRightChannel(buffer[i + 3]);
         }
-        
+
         isLeftChannel = !isLeftChannel;
       }
 

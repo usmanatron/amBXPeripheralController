@@ -7,7 +7,7 @@ namespace aPC.Chromesthesia.Server
   /// For a given start and end index, values between 0 and 1 are calculated so that,
   /// if graphed, you get a triangle, (with midPoint being the highest point).
   /// </summary>
-  class ColourTriangle
+  internal class ColourTriangle
   {
     private readonly int midPoint;
     private readonly int radius;

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace aPC.Chromesthesia.Server
 {
-  class LightBuilder
+  internal class LightBuilder
   {
     private readonly int componentMultiplicationFactor;
     private readonly int amplitudeMultiplicationFactor;
@@ -34,7 +34,7 @@ namespace aPC.Chromesthesia.Server
         light.Blue += blue.GetValue(pitch.fftBinIndex) * amplitudePercentage * componentMultiplicationFactor / spectrumWidth;
       }
       light.Intensity = pitchResult.TotalAmplitude * amplitudeMultiplicationFactor;
-      
+
       return light;
     }
 

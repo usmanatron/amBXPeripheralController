@@ -4,13 +4,13 @@ using System;
 
 namespace aPC.Chromesthesia
 {
-  class PitchGeneratorProvider : IWaveProvider
+  internal class PitchGeneratorProvider : IWaveProvider
   {
     private readonly IWaveProvider sourceProvider;
     private readonly IPitchDetector leftPitchDetector;
     private readonly IPitchDetector rightPitchDetector;
     private readonly FloatDataStereoSplitter stereoSplitter;
-    
+
     private WaveBuffer intermediaryBuffer;
     private WaveBuffer leftBuffer;
     private WaveBuffer rightBuffer;
@@ -39,17 +39,16 @@ namespace aPC.Chromesthesia
     {
       SetupWaveBuffers(count);
       int bytesRead = FillIntermediateBufferAndReturnBytesRead(count);
-      
+
       var stereoFrames = FillStereoBuffersAndReturnFrames();
 
       AnalysePitch(stereoFrames, bytesRead);
-      
+
       return bytesRead;
     }
 
     private void SetupWaveBuffers(int count)
     {
-
       if (intermediaryBuffer == null || intermediaryBuffer.MaxSize < count)
       {
         intermediaryBuffer = new WaveBuffer(count);
@@ -81,7 +80,7 @@ namespace aPC.Chromesthesia
 
     private void AnalysePitch(int stereoFrames, int bytesRead)
     {
-      var leftPitchResult  = leftPitchDetector.DetectPitchDistribution(leftBuffer.FloatBuffer, stereoFrames);
+      var leftPitchResult = leftPitchDetector.DetectPitchDistribution(leftBuffer.FloatBuffer, stereoFrames);
       var rightPitchResult = rightPitchDetector.DetectPitchDistribution(rightBuffer.FloatBuffer, stereoFrames);
 
       WriteSummaryToConsole(leftPitchResult, rightPitchResult);
@@ -90,11 +89,10 @@ namespace aPC.Chromesthesia
 
     private void WriteSummaryToConsole(PitchResult leftResult, PitchResult rightResult)
     {
-      var leftPeakPitchNonZero  = ToNonZeroString(leftResult.PeakPitch.averageFrequency, "0000.000");
+      var leftPeakPitchNonZero = ToNonZeroString(leftResult.PeakPitch.averageFrequency, "0000.000");
       var rightPeakPitchNonZero = ToNonZeroString(rightResult.PeakPitch.averageFrequency, "0000.000");
-      var leftTotalAmp  = ToNonZeroString(leftResult.TotalAmplitude, "0.00000");
+      var leftTotalAmp = ToNonZeroString(leftResult.TotalAmplitude, "0.00000");
       var rightTotalAmp = ToNonZeroString(rightResult.TotalAmplitude, "0.00000");
-
 
       if (leftPeakPitchNonZero != "       " || rightPeakPitchNonZero != "       " || leftTotalAmp != "       " || rightTotalAmp != "       ")
       {
@@ -104,7 +102,7 @@ namespace aPC.Chromesthesia
 
     private string ToNonZeroString(float value, string format)
     {
-      return value == 0 ? "       " : value.ToString(format); 
+      return value == 0 ? "       " : value.ToString(format);
     }
 
     public WaveFormat WaveFormat

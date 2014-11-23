@@ -1,8 +1,6 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using aPC.Common.Entities;
+﻿using aPC.Common.Entities;
 using aPC.Common.Server.Conductors;
-using System;
+using System.Threading;
 
 namespace aPC.Chromesthesia.Server
 {
@@ -11,7 +9,7 @@ namespace aPC.Chromesthesia.Server
   /// This application only runs lights in Sync mode, so the desync \ event cases are not handled here.
   /// See aPC.Server for a Manager that handles multiple cases
   /// </summary>
-  class ConductorManager
+  internal class ConductorManager
   {
     private IConductor conductor;
 

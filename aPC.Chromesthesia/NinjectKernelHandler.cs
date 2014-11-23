@@ -4,7 +4,7 @@ using NAudio.Wave;
 
 namespace aPC.Chromesthesia
 {
-  class NinjectKernelHandler : NinjectKernelHandlerBase
+  internal class NinjectKernelHandler : NinjectKernelHandlerBase
   {
     protected override void SetupBindings()
     {

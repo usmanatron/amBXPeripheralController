@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using NAudio.Dsp;
+﻿using NAudio.Dsp;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace aPC.Chromesthesia.Pitch
@@ -47,12 +47,12 @@ namespace aPC.Chromesthesia.Pitch
         }
         else
         {
-          fftBuffer[n].X = buffer[n - inFrames] * (float) FastFourierTransform.HammingWindow(n, frames);
+          fftBuffer[n].X = buffer[n - inFrames] * (float)FastFourierTransform.HammingWindow(n, frames);
           fftBuffer[n].Y = 0;
         }
       }
 
-      var power = (int) Math.Log(frames, 2);
+      var power = (int)Math.Log(frames, 2);
       FastFourierTransform.FFT(true, power, fftBuffer);
 
       var result = BuildResults(fftBuffer, frames);

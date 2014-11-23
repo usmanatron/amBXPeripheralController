@@ -4,7 +4,7 @@ namespace aPC.Chromesthesia
 {
   // The following link goes through understanding FFT and getting frequencies from it:
   // http://channel9.msdn.com/coding4fun/articles/AutotuneNET
-  class ChromesthesiaTask
+  internal class ChromesthesiaTask
   {
     private readonly SceneGenerator sceneGenerator;
 
@@ -27,12 +27,12 @@ namespace aPC.Chromesthesia
     /// buffer length needs to be a power of 2 for FFT to work nicely
     /// however, make the buffer too long and pitches aren't detected fast enough
     /// successful buffer sizes: 8192, 4096, 2048, 1024
-    /// (some pitch detection algorithms need at least 2048) 
+    /// (some pitch detection algorithms need at least 2048)
     /// </remarks>
     public void ApplyAutoTune(bool runForever)
     {
       int readLength = 8192;
-      
+
       do
       {
         sceneGenerator.Execute(readLength);

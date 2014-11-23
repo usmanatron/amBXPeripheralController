@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace aPC.Chromesthesia.Pitch
@@ -7,7 +6,9 @@ namespace aPC.Chromesthesia.Pitch
   public class PitchResult
   {
     public List<Pitch> Pitches { get; private set; }
+
     public float TotalAmplitude { get; private set; }
+
     public Pitch PeakPitch { get; private set; }
 
     public PitchResult(List<Pitch> pitches)
@@ -29,7 +30,6 @@ namespace aPC.Chromesthesia.Pitch
         (pitch1, pitch2) => pitch1.amplitude > pitch2.amplitude
           ? pitch1
           : pitch2);
-
 
       return currentPeakPitch;
     }
