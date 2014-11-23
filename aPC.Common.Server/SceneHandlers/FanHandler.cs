@@ -1,17 +1,14 @@
-﻿using aPC.Common;
-using aPC.Common.Entities;
-using aPC.Common.Server.SceneHandlers;
+﻿using aPC.Common.Entities;
 using aPC.Common.Server.Snapshots;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace aPC.Common.Server.SceneHandlers
 {
   public class FanHandler : ComponentHandler<Fan>
   {
-    public FanHandler(amBXScene xiScene, Action xiEventcomplete) : base(xiScene, xiEventcomplete)
-    { 
+    public FanHandler(amBXScene xiScene, Action xiEventcomplete)
+      : base(xiScene, xiEventcomplete)
+    {
     }
 
     public override ComponentSnapshot<Fan> GetNextSnapshot(eDirection xiDirection)

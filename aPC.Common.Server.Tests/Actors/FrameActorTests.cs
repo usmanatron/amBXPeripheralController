@@ -1,16 +1,15 @@
-﻿using aPC.Common;
-using System;
-using System.Linq;
-using NUnit.Framework;
+﻿using aPC.Common.Builders;
+using aPC.Common.Defaults;
 using aPC.Common.Server.Actors;
 using aPC.Common.Server.Snapshots;
-using aPC.Common.Builders;
-using aPC.Common.Defaults;
+using NUnit.Framework;
+using System;
+using System.Linq;
 
 namespace aPC.Common.Server.Tests.Actors
 {
   [TestFixture]
-  class FrameActorTests
+  internal class FrameActorTests
   {
     [SetUp]
     public void Setup()
@@ -89,11 +88,11 @@ namespace aPC.Common.Server.Tests.Actors
         .WithLightSection(lLightSection)
         .Build()
         .Single();
-      
+
       foreach (eDirection lDirection in Enum.GetValues(typeof(eDirection)))
       {
         mActor.ActNextFrame(lDirection, new FrameSnapshot(lFrame, 100));
-      
+
         Assert.IsTrue(mEngine.Updated[eComponentType.Light]);
         Assert.IsFalse(mEngine.Updated[eComponentType.Fan]);
         Assert.IsFalse(mEngine.Updated[eComponentType.Rumble]);

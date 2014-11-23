@@ -1,18 +1,16 @@
-﻿using aPC.Common;
-using System;
-using System.Diagnostics;
-using NUnit.Framework;
+﻿using aPC.Common.Builders;
 using aPC.Common.Defaults;
-using aPC.Common.Server.Tests;
+using aPC.Common.Entities;
 using aPC.Common.Server.Tests.Actors;
 using aPC.Common.Server.Tests.SceneHandlers;
-using aPC.Common.Entities;
-using aPC.Common.Builders;
+using NUnit.Framework;
+using System;
+using System.Diagnostics;
 
 namespace aPC.Common.Server.Tests.Conductors
 {
   [TestFixture]
-  class ConductorBaseTests
+  internal class ConductorBaseTests
   {
     [SetUp]
     public void FixtureSetup()

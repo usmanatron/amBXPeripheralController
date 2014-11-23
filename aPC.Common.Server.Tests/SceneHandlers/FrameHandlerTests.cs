@@ -1,14 +1,13 @@
-﻿using aPC.Common;
-using aPC.Common.Server.SceneHandlers;
+﻿using aPC.Common.Defaults;
 using aPC.Common.Entities;
-using aPC.Common.Defaults;
+using aPC.Common.Server.SceneHandlers;
 using NUnit.Framework;
 using System;
 
 namespace aPC.Common.Server.Tests.SceneHandlers
 {
   [TestFixture]
-  class FrameHandlerTests
+  internal class FrameHandlerTests
   {
     [TestFixtureSetUp]
     public void FixtureSetup()
@@ -21,7 +20,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
     public void NextFrame_IsAsExpected()
     {
       var lHandler = new FrameHandler(mScene, mAction);
-      
+
       var lSnapshot = lHandler.GetNextSnapshot(eDirection.North);
       var lExpectedFrame = mScene.Frames[0];
 
@@ -43,7 +42,6 @@ namespace aPC.Common.Server.Tests.SceneHandlers
       Assert.AreEqual(lExpectedFrame.IsRepeated, lSnapshot.Frame.IsRepeated);
       Assert.AreEqual(lExpectedFrame.Lights, lSnapshot.Frame.Lights);
     }
-
 
     private readonly eDirection[] Directions = (eDirection[])Enum.GetValues(typeof(eDirection));
     private amBXScene mScene;

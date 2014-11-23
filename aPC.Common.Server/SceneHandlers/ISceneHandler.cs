@@ -1,9 +1,9 @@
-﻿using aPC.Common;
-using aPC.Common.Entities;
+﻿using aPC.Common.Entities;
 using aPC.Common.Server.Snapshots;
+
 namespace aPC.Common.Server.SceneHandlers
 {
-  interface ISceneHandler<T> where T : SnapshotBase
+  internal interface ISceneHandler<T> where T : SnapshotBase
   {
     void UpdateScene(amBXScene xiNewScene);
 

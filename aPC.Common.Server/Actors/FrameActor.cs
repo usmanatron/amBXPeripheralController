@@ -1,5 +1,4 @@
-﻿using aPC.Common;
-using aPC.Common.Entities;
+﻿using aPC.Common.Entities;
 using aPC.Common.Server.Engine;
 using aPC.Common.Server.Snapshots;
 
@@ -7,7 +6,8 @@ namespace aPC.Common.Server.Actors
 {
   public class FrameActor : ActorBase<FrameSnapshot>
   {
-    public FrameActor(IEngine xiEngine) : base (xiEngine)
+    public FrameActor(IEngine xiEngine)
+      : base(xiEngine)
     {
     }
 

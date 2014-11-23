@@ -1,15 +1,14 @@
-﻿using System;
-using NUnit.Framework;
-using aPC.Common.Server.SceneHandlers;
-using aPC.Common;
+﻿using aPC.Common.Builders;
 using aPC.Common.Defaults;
-using aPC.Common.Builders;
 using aPC.Common.Entities;
+using aPC.Common.Server.SceneHandlers;
+using NUnit.Framework;
+using System;
 
 namespace aPC.Common.Server.Tests.SceneHandlers
 {
   [TestFixture]
-  class RumbleHandlerTests
+  internal class RumbleHandlerTests
   {
     [TestFixtureSetUp]
     public void FixtureSetup()

@@ -7,7 +7,7 @@ namespace aPC.Common.Server.Actors
   public abstract class ComponentActor<T> : ActorBase<ComponentSnapshot<T>> where T : IComponent
   {
     protected ComponentActor(IEngine xiEngine)
-      : base (xiEngine)
+      : base(xiEngine)
     {
     }
   }

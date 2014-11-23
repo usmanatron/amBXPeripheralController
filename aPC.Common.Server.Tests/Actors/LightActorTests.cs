@@ -1,15 +1,14 @@
-﻿using System;
-using aPC.Common;
-using aPC.Common.Defaults;
+﻿using aPC.Common.Defaults;
 using aPC.Common.Entities;
 using aPC.Common.Server.Actors;
 using aPC.Common.Server.Snapshots;
 using NUnit.Framework;
+using System;
 
 namespace aPC.Common.Server.Tests.Actors
 {
   [TestFixture]
-  class LightActorTests
+  internal class LightActorTests
   {
     [SetUp]
     public void Setup()

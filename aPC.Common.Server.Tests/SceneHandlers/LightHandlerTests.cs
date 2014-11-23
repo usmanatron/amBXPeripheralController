@@ -1,20 +1,19 @@
-﻿using System;
-using NUnit.Framework;
-using aPC.Common.Server.SceneHandlers;
-using aPC.Common;
+﻿using aPC.Common.Builders;
 using aPC.Common.Defaults;
-using aPC.Common.Builders;
 using aPC.Common.Entities;
+using aPC.Common.Server.SceneHandlers;
+using NUnit.Framework;
+using System;
 
 namespace aPC.Common.Server.Tests.SceneHandlers
 {
   [TestFixture]
-  class LightHandlerTests
+  internal class LightHandlerTests
   {
     [TestFixtureSetUp]
     public void FixtureSetup()
     {
-      var lNonLightframe  = new FrameBuilder()
+      var lNonLightframe = new FrameBuilder()
         .AddFrame()
         .WithRepeated(true)
         .WithFrameLength(10000)

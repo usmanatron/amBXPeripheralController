@@ -1,6 +1,4 @@
-﻿using System;
-using aPC.Common;
-using aPC.Common.Defaults;
+﻿using aPC.Common.Defaults;
 using aPC.Common.Entities;
 using aPC.Common.Server.Actors;
 using aPC.Common.Server.Snapshots;
@@ -9,7 +7,7 @@ using NUnit.Framework;
 namespace aPC.Common.Server.Tests.Actors
 {
   [TestFixture]
-  class RumbleActorTests
+  internal class RumbleActorTests
   {
     [SetUp]
     public void Setup()

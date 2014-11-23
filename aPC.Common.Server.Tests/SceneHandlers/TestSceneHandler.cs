@@ -1,14 +1,14 @@
-﻿using aPC.Common;
-using aPC.Common.Entities;
+﻿using aPC.Common.Entities;
 using aPC.Common.Server.SceneHandlers;
 using aPC.Common.Server.Tests.Snapshots;
 using System;
 
 namespace aPC.Common.Server.Tests.SceneHandlers
 {
-  class TestSceneHandler : SceneHandlerBase<TestSnapshot>
+  internal class TestSceneHandler : SceneHandlerBase<TestSnapshot>
   {
-    public TestSceneHandler(amBXScene xiScene, Action xiAction) : base (xiScene, xiAction)
+    public TestSceneHandler(amBXScene xiScene, Action xiAction)
+      : base(xiScene, xiAction)
     {
     }
 

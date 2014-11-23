@@ -1,5 +1,4 @@
-﻿using aPC.Common;
-using aPC.Common.Entities;
+﻿using aPC.Common.Entities;
 using aPC.Common.Server.Engine;
 using System.Collections.Generic;
 
@@ -32,7 +31,6 @@ namespace aPC.Common.Server.Tests
     {
       Updated[eComponentType.Fan] = true;
       Status.Fans.SetComponentValueInDirection(xiFan, xiDirection);
-
     }
 
     public void UpdateRumble(eDirection xiDirection, Rumble xiRumble)

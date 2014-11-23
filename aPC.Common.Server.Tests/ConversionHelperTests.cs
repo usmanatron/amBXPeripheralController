@@ -1,6 +1,6 @@
 ﻿using aPC.Common.Server.Engine;
-using System;
 using NUnit.Framework;
+using System;
 
 namespace aPC.Common.Server.Tests
 {
@@ -9,7 +9,7 @@ namespace aPC.Common.Server.Tests
   // until this file is copied to the appropriate places.
   // Need to work out what I can do about this
   [TestFixture]
-  class ConversionHelperTests
+  internal class ConversionHelperTests
   {
     [Test]
     [TestCaseSource("Directions")]

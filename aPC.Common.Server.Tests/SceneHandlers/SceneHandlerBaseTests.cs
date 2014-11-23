@@ -1,18 +1,14 @@
-﻿using aPC.Common;
-using aPC.Common.Builders;
+﻿using aPC.Common.Builders;
 using aPC.Common.Defaults;
 using aPC.Common.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
+using System;
+using System.Linq;
 
 namespace aPC.Common.Server.Tests.SceneHandlers
 {
   [TestFixture]
-  class SceneHandlerBaseTests
+  internal class SceneHandlerBaseTests
   {
     [TestFixtureSetUp]
     public void FixtureSetup()
@@ -99,7 +95,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
     public void GetNextFrame_GetsExpectedData()
     {
       var lHandler = new TestSceneHandler(mInitialScene, mAction);
-      
+
       var lFrame = lHandler.NextFrame;
       var lExpectedFrame = mInitialScene.Frames[0];
 
@@ -112,7 +108,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
     public void AdvancingHandlerOnFirstRun_GivesSecondFrame()
     {
       var lHandler = new TestSceneHandler(mInitialScene, mAction);
-      
+
       lHandler.AdvanceScene();
       var lFrame = lHandler.NextFrame;
       var lExpectedFrame = mInitialScene.Frames[1];
@@ -159,7 +155,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
     {
       var lActionRun = false;
       var lHandler = new TestSceneHandler(mInitialScene, () => lActionRun = true);
-      
+
       lHandler.UpdateScene(mBlueEvent);
       lHandler.AdvanceScene();
 

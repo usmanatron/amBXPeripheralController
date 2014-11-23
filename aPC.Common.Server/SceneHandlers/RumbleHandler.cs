@@ -1,17 +1,14 @@
-﻿using aPC.Common;
-using aPC.Common.Entities;
-using aPC.Common.Server.SceneHandlers;
+﻿using aPC.Common.Entities;
 using aPC.Common.Server.Snapshots;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace aPC.Common.Server.SceneHandlers
 {
   public class RumbleHandler : ComponentHandler<Rumble>
   {
-    public RumbleHandler(amBXScene xiScene, Action xiEventcomplete) : base(xiScene, xiEventcomplete)
-    { 
+    public RumbleHandler(amBXScene xiScene, Action xiEventcomplete)
+      : base(xiScene, xiEventcomplete)
+    {
     }
 
     public override ComponentSnapshot<Rumble> GetNextSnapshot(eDirection xiDirection)

@@ -1,5 +1,4 @@
 ﻿using amBXLib;
-using aPC.Common;
 using aPC.Common.Entities;
 using System;
 using System.Collections.Generic;
@@ -56,7 +55,7 @@ namespace aPC.Common.Server.Engine
       mRumbles.Add(xiDirection, lRumble);
     }
 
-    #endregion
+    #endregion Engine Setup
 
     #region Updating
 
@@ -124,7 +123,7 @@ namespace aPC.Common.Server.Engine
       };
     }
 
-    #endregion
+    #endregion Updating
 
     public void Dispose()
     {

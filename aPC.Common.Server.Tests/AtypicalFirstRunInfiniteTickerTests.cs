@@ -127,6 +127,7 @@ namespace aPC.Common.Server.Tests
 
     // Note: the tests above assume these to be non equal
     private const int ExampleFirstRunTickerSize = 3;
+
     private const int ExampleSubsequentTickerSize = 7;
   }
 }

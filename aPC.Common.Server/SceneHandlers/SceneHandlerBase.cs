@@ -1,5 +1,4 @@
-﻿using aPC.Common;
-using aPC.Common.Entities;
+﻿using aPC.Common.Entities;
 using aPC.Common.Server.Snapshots;
 using System;
 using System.Collections.Generic;
@@ -28,12 +27,12 @@ namespace aPC.Common.Server.SceneHandlers
       {
         if (xiNewScene.SceneType == eSceneType.Event)
         {
-          // Skip updating the previous scene, to ensure that we don't get 
+          // Skip updating the previous scene, to ensure that we don't get
           // stuck in an infinite loop of events.
         }
         else
         {
-          // Don't interrupt the currently playing scene - instead quietly update 
+          // Don't interrupt the currently playing scene - instead quietly update
           // the previous scene so that we fall back to this when the event is done.
           mPreviousScene = xiNewScene;
           return;
@@ -104,7 +103,9 @@ namespace aPC.Common.Server.SceneHandlers
     }
 
     protected amBXScene CurrentScene;
+
     public bool IsEnabled { get; set; }
+
     private readonly Action mEventCallback;
 
     private AtypicalFirstRunInfiniteTicker mTicker;
