@@ -10,17 +10,18 @@ namespace aPC.Chromesthesia.Pitch
   // FFT based pitch detector. seems to work best with block sizes of 4096
   public class FftPitchDetector : IPitchDetector
   {
-    private readonly float sampleRate;
     private Complex[] fftBuffer;
     private float[] prevBuffer;
 
-    // Settings
-    private const int lowerDetectionFrequency = 100;
-    private const int upperDetectionFrequency = 1000;
+    private readonly int sampleRate;
+    private readonly int lowerDetectionFrequency;
+    private readonly int upperDetectionFrequency;
 
-    public FftPitchDetector(float sampleRate)
+    public FftPitchDetector()
     {
-      this.sampleRate = sampleRate;
+      this.sampleRate = Settings.InputAudioSampleRate;
+      this.lowerDetectionFrequency = Settings.FftLowerDetectionFrequency;
+      this.upperDetectionFrequency = Settings.FftUpperDetectionFrequency;
     }
 
     public PitchResult DetectPitchDistribution(float[] buffer, int inFrames)

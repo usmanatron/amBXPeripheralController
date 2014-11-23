@@ -12,16 +12,16 @@ namespace aPC.Chromesthesia.Server
     private Light westLight;
     private Light eastLight;
     private int sidePercentageOnDiagonal;
+    private readonly int fadeTime;
 
-    // Settings
     private const int centrePercentage = 50;
-    private const int fadeTime = 2;
 
     public CompositeLightSectionBuilder(LightSectionBuilder lightSectionBuilder, CompositeLightBuilder compositeLightBuilder)
     {
       this.lightSectionBuilder = lightSectionBuilder;
       this.sidePercentageOnDiagonal = -1;
       this.compositeLightBuilder = compositeLightBuilder;
+      this.fadeTime = Settings.LightSectionFadeTime;
     }
 
     public CompositeLightSectionBuilder WithLights(Light westLight, Light eastLight)
@@ -36,7 +36,7 @@ namespace aPC.Chromesthesia.Server
     ///   
     /// The diagonal lights are composed from a percentage of the left light 
     ///   and a percentage of the right.  This value determines the percentage of the side light
-    ///   to use for a dagonal on that side.  For example, the NW light takes a percentage of the 
+    ///   to use for a diagonal on that side.  For example, the NW light takes a percentage of the 
     ///   West light equal to sidePercentageOnDiagonal.
     /// </summary>
     /// <remarks>

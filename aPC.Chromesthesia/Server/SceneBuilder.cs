@@ -9,15 +9,15 @@ namespace aPC.Chromesthesia.Server
   {
     private readonly CompositeLightSectionBuilder compositeLightSectionBuilder;
     private readonly LightBuilder lightBuilder;
-
-    // Settings
-    private const int diagonalLightPercentage = 70;
-    private const int frameLength = 10;
+    private readonly int diagonalLightPercentage;
+    private readonly int frameLength;
 
     public SceneBuilder(CompositeLightSectionBuilder compositeLightSectionBuilder, LightBuilder lightBuilder)
     {
       this.compositeLightSectionBuilder = compositeLightSectionBuilder;
       this.lightBuilder = lightBuilder;
+      this.diagonalLightPercentage = Settings.DiagonalLightPercentageOfSide;
+      this.frameLength = Settings.SceneFrameLength;
     }
 
     public amBXScene BuildSceneFromPitchResults(StereoPitchResult pitchResults)

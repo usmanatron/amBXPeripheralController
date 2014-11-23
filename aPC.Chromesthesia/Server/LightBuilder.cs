@@ -6,9 +6,14 @@ namespace aPC.Chromesthesia.Server
 {
   class LightBuilder
   {
-    private const int lightMultiplicationFactor = 60;//00;
-    private const int amplitudeMultiplicationFactor = 10;
+    private readonly int componentMultiplicationFactor;
+    private readonly int amplitudeMultiplicationFactor;
 
+    public LightBuilder()
+    {
+      this.componentMultiplicationFactor = Settings.LightComponentMultiplicationFactor;
+      this.amplitudeMultiplicationFactor = Settings.LightIntensityMultiplicationFactor;
+    }
 
     public Light BuildLightFrom(PitchResult pitchResult)
     {
@@ -24,9 +29,9 @@ namespace aPC.Chromesthesia.Server
       {
         var amplitudePercentage = pitch.amplitude / pitchResult.TotalAmplitude;
 
-        light.Red += red.GetValue(pitch.fftBinIndex) * amplitudePercentage * lightMultiplicationFactor / spectrumWidth;
-        light.Green += green.GetValue(pitch.fftBinIndex) * amplitudePercentage * lightMultiplicationFactor / spectrumWidth;
-        light.Blue += blue.GetValue(pitch.fftBinIndex) * amplitudePercentage * lightMultiplicationFactor / spectrumWidth;
+        light.Red += red.GetValue(pitch.fftBinIndex) * amplitudePercentage * componentMultiplicationFactor / spectrumWidth;
+        light.Green += green.GetValue(pitch.fftBinIndex) * amplitudePercentage * componentMultiplicationFactor / spectrumWidth;
+        light.Blue += blue.GetValue(pitch.fftBinIndex) * amplitudePercentage * componentMultiplicationFactor / spectrumWidth;
       }
       light.Intensity = pitchResult.TotalAmplitude * amplitudeMultiplicationFactor;
       

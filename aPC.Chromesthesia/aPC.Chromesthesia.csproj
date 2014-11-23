@@ -67,6 +67,7 @@
     <Compile Include="Server\ConductorManager.cs" />
     <Compile Include="Server\LightBuilder.cs" />
     <Compile Include="Server\SceneBuilder.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="StereoBuffer.cs" />
     <Compile Include="FloatDataStereoSplitter.cs" />
   </ItemGroup>

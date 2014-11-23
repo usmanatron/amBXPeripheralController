@@ -21,28 +21,34 @@ namespace aPC.Chromesthesia
       var waveIn = kernel.Get<WasapiLoopbackCapture>();
       waveIn.StartRecording();
 
-      OutputCaptureSettings(waveIn);
-
-      int sampleRate = 44100;
+      WriteCaptureSettings(waveIn);
 
       var streamRaw = new WaveInProvider(waveIn);
-      var streamPitch = new PitchGeneratorProvider(streamRaw, new FftPitchDetector(sampleRate), new FftPitchDetector(sampleRate), new FloatDataStereoSplitter());
+      var streamPitch = new PitchGeneratorProvider(streamRaw, new FftPitchDetector(), new FftPitchDetector(), new FloatDataStereoSplitter());
       var compositeLightSectionBuilder = new SceneBuilder(new CompositeLightSectionBuilder(new LightSectionBuilder(), new CompositeLightBuilder()), new LightBuilder());
 
       var frameConductor = new FrameConductor(new FrameActor(new EngineManager()), new FrameHandler(new SceneAccessor().GetScene("rainbow"), EventComplete));
-      var streamScene = new SceneGeneratorProvider(streamPitch, compositeLightSectionBuilder, new ConductorManager(frameConductor));
+      var streamScene = new SceneGenerator(streamPitch, compositeLightSectionBuilder, new ConductorManager(frameConductor));
       task = new ChromesthesiaTask(streamScene);
 
       task.Run();
     }
 
-    private static void OutputCaptureSettings(IWaveIn waveIn)
+    /// <remarks>
+    ///   Expected values are as follows.  It's not necessarily a problem if these differ:
+    ///     Bits per sample: 32
+    ///     Average bytes per second: 352800
+    ///     Channels: 2
+    ///     Sample rate: 44100
+    ///     Encoding: IeeeFloat
+    /// </remarks>
+    private static void WriteCaptureSettings(IWaveIn waveIn)
     {
-      Console.WriteLine(waveIn.WaveFormat.BitsPerSample); //32
-      Console.WriteLine(waveIn.WaveFormat.AverageBytesPerSecond); //352800
-      Console.WriteLine(waveIn.WaveFormat.Channels); // 2
-      Console.WriteLine(waveIn.WaveFormat.SampleRate); // 44100
-      Console.WriteLine(waveIn.WaveFormat.Encoding); // IeeeFloat
+      Console.WriteLine("Bits per sample: " + waveIn.WaveFormat.BitsPerSample);
+      Console.WriteLine("Average bytes per second: " + waveIn.WaveFormat.AverageBytesPerSecond);
+      Console.WriteLine("Channels: " + waveIn.WaveFormat.Channels);
+      Console.WriteLine("Sample rate: " + waveIn.WaveFormat.SampleRate);
+      Console.WriteLine("Encoding: " + waveIn.WaveFormat.Encoding);
     }
 
     /// <summary>
