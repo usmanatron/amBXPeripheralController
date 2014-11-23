@@ -9,28 +9,36 @@ namespace aPC.Common.Client.Tests.Communication
   [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
   public class TestNotificationService : INotificationService, IDisposable
   {
+    // Item1 is a boolean specifying if the item pushed was an integrated scene
+    // Item2 is the information sent
+    public List<Tuple<bool, string>> Scenes { get; private set; }
+
+    private string url;
+    public string Hostname;
+    private readonly ServiceHost host;
+
     public TestNotificationService()
     {
       Hostname = "localhost";
-      mUrl = CommunicationSettings.GetServiceUrl(Hostname, eApplicationType.aPCTest);
+      url = CommunicationSettings.GetServiceUrl(Hostname, eApplicationType.aPCTest);
       ClearScenes();
 
-      mHost = new ServiceHost(this);
-      mHost.AddServiceEndpoint(typeof(INotificationService),
+      host = new ServiceHost(this);
+      host.AddServiceEndpoint(typeof(INotificationService),
                                new BasicHttpBinding(),
-                               mUrl);
-      IncludeExceptionsInTestFaults(mHost);
-      mHost.Open();
+                               url);
+      IncludeExceptionsInTestFaults();
+      host.Open();
     }
 
-    private void IncludeExceptionsInTestFaults(ServiceHost xiHost)
+    private void IncludeExceptionsInTestFaults()
     {
-      ServiceDebugBehavior debug = xiHost.Description.Behaviors.Find<ServiceDebugBehavior>();
+      ServiceDebugBehavior debug = host.Description.Behaviors.Find<ServiceDebugBehavior>();
 
       // if not found - add behavior with setting turned on
       if (debug == null)
       {
-        xiHost.Description.Behaviors.Add(
+        host.Description.Behaviors.Add(
              new ServiceDebugBehavior { IncludeExceptionDetailInFaults = true });
       }
       else
@@ -48,16 +56,16 @@ namespace aPC.Common.Client.Tests.Communication
       Scenes = new List<Tuple<bool, string>>();
     }
 
-    public void RunCustomScene(string xiSceneXml)
+    public void RunCustomScene(string sceneXml)
     {
-      ThrowExceptionIfSpecified(xiSceneXml);
-      Scenes.Add(new Tuple<bool, string>(false, xiSceneXml));
+      ThrowExceptionIfSpecified(sceneXml);
+      Scenes.Add(new Tuple<bool, string>(false, sceneXml));
     }
 
-    public void RunIntegratedScene(string xiSceneName)
+    public void RunIntegratedScene(string sceneName)
     {
-      ThrowExceptionIfSpecified(xiSceneName);
-      Scenes.Add(new Tuple<bool, string>(true, xiSceneName));
+      ThrowExceptionIfSpecified(sceneName);
+      Scenes.Add(new Tuple<bool, string>(true, sceneName));
     }
 
     public string[] GetSupportedIntegratedScenes()
@@ -65,9 +73,9 @@ namespace aPC.Common.Client.Tests.Communication
       throw new NotImplementedException();
     }
 
-    private void ThrowExceptionIfSpecified(string xiContent)
+    private void ThrowExceptionIfSpecified(string content)
     {
-      if (xiContent == "ThrowException")
+      if (content == "ThrowException")
       {
         throw new InvalidOperationException("Test exception");
       }
@@ -75,15 +83,7 @@ namespace aPC.Common.Client.Tests.Communication
 
     public void Dispose()
     {
-      mHost.Close();
+      host.Close();
     }
-
-    // Item1 is a boolean specifying if the item pushed was an integrated scene
-    // Item2 is the information sent
-    public List<Tuple<bool, string>> Scenes { get; private set; }
-
-    private string mUrl;
-    public string Hostname;
-    private readonly ServiceHost mHost;
   }
 }

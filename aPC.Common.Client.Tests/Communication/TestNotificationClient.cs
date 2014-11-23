@@ -6,6 +6,9 @@ namespace aPC.Common.Client.Tests.Communication
 {
   public class TestNotificationClient : NotificationClientBase
   {
+    public readonly List<string> IntegratedScenesPushed;
+    public readonly List<string> CustomScenesPushed;
+
     public TestNotificationClient()
       : base(new HostnameAccessor())
     {
@@ -23,14 +26,14 @@ namespace aPC.Common.Client.Tests.Communication
       get { return true; }
     }
 
-    public override void PushCustomScene(string xiScene)
+    public override void PushCustomScene(string scene)
     {
-      CustomScenesPushed.Add(xiScene);
+      CustomScenesPushed.Add(scene);
     }
 
-    public override void PushIntegratedScene(string xiScene)
+    public override void PushIntegratedScene(string scene)
     {
-      IntegratedScenesPushed.Add(xiScene);
+      IntegratedScenesPushed.Add(scene);
     }
 
     public override string[] GetSupportedIntegratedScenes()
@@ -47,8 +50,5 @@ namespace aPC.Common.Client.Tests.Communication
     {
       get { return IntegratedScenesPushed.Count; }
     }
-
-    public readonly List<string> IntegratedScenesPushed;
-    public readonly List<string> CustomScenesPushed;
   }
 }

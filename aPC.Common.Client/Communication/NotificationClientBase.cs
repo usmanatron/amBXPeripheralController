@@ -12,41 +12,48 @@ namespace aPC.Common.Client.Communication
 {
   public abstract class NotificationClientBase : INotificationClient
   {
-    protected NotificationClientBase(HostnameAccessor xiHostnameAccessor)
+    private readonly HostnameAccessor hostnameAccessor;
+    private List<ClientConnection> clients;
+
+    protected abstract bool SupportsCustomScenes { get; }
+
+    protected abstract bool SupportsIntegratedScenes { get; }
+
+    protected NotificationClientBase(HostnameAccessor hostnameAccessor)
     {
-      mHostnameAccessor = xiHostnameAccessor;
+      this.hostnameAccessor = hostnameAccessor;
       UpdateClients();
     }
 
     // Overriding of the Url structure is used by tests
-    protected NotificationClientBase(string xiHostname)
+    protected NotificationClientBase(string hostname)
     {
-      mHostnameAccessor = new HostnameAccessor();
-      mClients = new List<ClientConnection> { CreateConnection(xiHostname, eApplicationType.aPCTest) };
+      hostnameAccessor = new HostnameAccessor();
+      clients = new List<ClientConnection> { CreateConnection(hostname, eApplicationType.aPCTest) };
     }
 
     private void UpdateClients()
     {
-      mClients = new List<ClientConnection>();
+      clients = new List<ClientConnection>();
 
-      foreach (var lHostname in mHostnameAccessor.GetAll())
+      foreach (var hostname in hostnameAccessor.GetAll())
       {
-        mClients.Add(CreateConnection(lHostname, eApplicationType.amBXPeripheralController));
+        clients.Add(CreateConnection(hostname, eApplicationType.amBXPeripheralController));
       }
     }
 
-    private ClientConnection CreateConnection(string xiHostname, eApplicationType xiApplicationType)
+    private ClientConnection CreateConnection(string hostname, eApplicationType applicationType)
     {
-      var lAddress = new EndpointAddress(CommunicationSettings.GetServiceUrl(xiHostname, xiApplicationType));
-      var lClient = new ChannelFactory<INotificationService>(new BasicHttpBinding(), lAddress);
-      return new ClientConnection(xiHostname, lClient);
+      var address = new EndpointAddress(CommunicationSettings.GetServiceUrl(hostname, applicationType));
+      var client = new ChannelFactory<INotificationService>(new BasicHttpBinding(), address);
+      return new ClientConnection(hostname, client);
     }
 
     #region Hostname Handling
 
     public void UpdateClientsIfHostnameChanged()
     {
-      if (mHostnameAccessor.HasChangedSinceLastCheck())
+      if (hostnameAccessor.HasChangedSinceLastCheck())
       {
         UpdateClients();
       }
@@ -56,7 +63,7 @@ namespace aPC.Common.Client.Communication
 
     #region Interface methods
 
-    public virtual void PushCustomScene(string xiScene)
+    public virtual void PushCustomScene(string scene)
     {
       UpdateClientsIfHostnameChanged();
       if (!SupportsCustomScenes)
@@ -64,15 +71,15 @@ namespace aPC.Common.Client.Communication
         ThrowUnsupportedException("custom");
       }
 
-      Parallel.ForEach(mClients, client => PushCustomScene(client.Client, xiScene));
+      Parallel.ForEach(clients, client => PushCustomScene(client.Client, scene));
     }
 
-    private void PushCustomScene(ChannelFactory<INotificationService> xiClient, string xiScene)
+    private void PushCustomScene(ChannelFactory<INotificationService> client, string scene)
     {
-      xiClient.CreateChannel().RunCustomScene(xiScene);
+      client.CreateChannel().RunCustomScene(scene);
     }
 
-    public virtual void PushIntegratedScene(string xiScene)
+    public virtual void PushIntegratedScene(string scene)
     {
       UpdateClientsIfHostnameChanged();
       if (!SupportsIntegratedScenes)
@@ -80,12 +87,12 @@ namespace aPC.Common.Client.Communication
         ThrowUnsupportedException("integrated");
       }
 
-      Parallel.ForEach(mClients, client => PushIntegratedScene(client.Client, xiScene));
+      Parallel.ForEach(clients, client => PushIntegratedScene(client.Client, scene));
     }
 
-    private void PushIntegratedScene(ChannelFactory<INotificationService> xiClient, string xiScene)
+    private void PushIntegratedScene(ChannelFactory<INotificationService> client, string scene)
     {
-      xiClient.CreateChannel().RunIntegratedScene(xiScene);
+      client.CreateChannel().RunIntegratedScene(scene);
     }
 
     // TODO: Should ideally ask all Servers and only return a subset!
@@ -97,36 +104,29 @@ namespace aPC.Common.Client.Communication
         ThrowUnsupportedException("integrated");
       }
 
-      return mClients.First().Client.CreateChannel().GetSupportedIntegratedScenes();
+      return clients.First().Client.CreateChannel().GetSupportedIntegratedScenes();
     }
 
-    private void ThrowUnsupportedException(string xiSceneType)
+    private void ThrowUnsupportedException(string sceneType)
     {
-      throw new NotSupportedException("Attempted to use " + xiSceneType + " scenes, however these are unsupported!");
+      throw new NotSupportedException("Attempted to use " + sceneType + " scenes, however these are unsupported!");
     }
 
     #endregion Interface methods
 
-    public void PushCustomScene(amBXScene xiScene)
+    public void PushCustomScene(amBXScene scene)
     {
-      PushCustomScene(SerialiseScene(xiScene));
+      PushCustomScene(SerialiseScene(scene));
     }
 
-    private string SerialiseScene(amBXScene xiScene)
+    private string SerialiseScene(amBXScene scene)
     {
       using (var lWriter = new StringWriter())
       {
         var lSerializer = new XmlSerializer(typeof(amBXScene));
-        lSerializer.Serialize(lWriter, xiScene);
+        lSerializer.Serialize(lWriter, scene);
         return lWriter.ToString();
       }
     }
-
-    private readonly HostnameAccessor mHostnameAccessor;
-    private List<ClientConnection> mClients;
-
-    protected abstract bool SupportsCustomScenes { get; }
-
-    protected abstract bool SupportsIntegratedScenes { get; }
   }
 }

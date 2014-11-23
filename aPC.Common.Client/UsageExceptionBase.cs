@@ -5,20 +5,20 @@ namespace aPC.Common.Client
   [Serializable]
   public abstract class UsageExceptionBase : Exception
   {
-    protected UsageExceptionBase(string xiDescription)
+    protected UsageExceptionBase(string description)
     {
-      mUserDescription = xiDescription;
+      userDescription = description;
     }
 
     public void DisplayUsage()
     {
-      Console.WriteLine("Error: " + mUserDescription);
+      Console.WriteLine("Error: " + userDescription);
       Console.WriteLine(Environment.NewLine + Environment.NewLine);
       Console.WriteLine(Usage());
     }
 
     protected abstract string Usage();
 
-    private readonly string mUserDescription;
+    private readonly string userDescription;
   }
 }

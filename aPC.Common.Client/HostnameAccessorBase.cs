@@ -8,35 +8,38 @@ namespace aPC.Common.Client
   /// </summary>
   public class HostnameAccessor
   {
+    private Locked<bool> hasChangedSinceLastCheck;
+    private List<string> hostnames;
+
     public HostnameAccessor()
     {
       hostnames = new List<string> { "localhost" };
       hasChangedSinceLastCheck = new Locked<bool>(false);
     }
 
-    public HostnameAccessor(List<string> xiHostnames)
+    public HostnameAccessor(List<string> hostnames)
     {
-      hostnames = xiHostnames;
+      hostnames = hostnames;
       hasChangedSinceLastCheck = new Locked<bool>(false);
     }
 
-    public void Add(string xiHostname)
+    public void Add(string hostname)
     {
-      hostnames.Add(xiHostname);
+      hostnames.Add(hostname);
       MarkUpdated();
     }
 
-    public void ResetWith(List<string> xiHostnames)
+    public void ResetWith(List<string> hostnames)
     {
-      hostnames = xiHostnames;
+      hostnames = hostnames;
       MarkUpdated();
     }
 
     public IEnumerable<string> GetAll()
     {
-      foreach (var lHostname in hostnames)
+      foreach (var hostname in hostnames)
       {
-        yield return lHostname;
+        yield return hostname;
       }
     }
 
@@ -58,8 +61,5 @@ namespace aPC.Common.Client
     }
 
     #endregion Watching for updates
-
-    private Locked<bool> hasChangedSinceLastCheck;
-    private List<string> hostnames;
   }
 }
