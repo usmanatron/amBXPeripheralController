@@ -56,5 +56,5 @@
     Thunder = 10,
   }
 
-  #endregion
+  #endregion amBXLib-equivalent enums
 }

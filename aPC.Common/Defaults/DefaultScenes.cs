@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using aPC.Common.Builders;
+﻿using aPC.Common.Builders;
 using aPC.Common.Entities;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace aPC.Common.Defaults
 {
   public class DefaultScenes
   {
-
     #region CruiseControl.NET Defaults
 
     [SceneName("ccnet_red")]
@@ -42,7 +41,7 @@ namespace aPC.Common.Defaults
         return scene;
       }
     }
-    
+
     [SceneName("ccnet_flashingyellow")]
     public amBXScene Building
     {
@@ -104,7 +103,7 @@ namespace aPC.Common.Defaults
       }
     }
 
-    #endregion
+    #endregion CruiseControl.NET Defaults
 
     #region Misc
 
@@ -278,7 +277,7 @@ namespace aPC.Common.Defaults
             .Build())
           .Build()
           .Single();
-        
+
         var error = new FrameBuilder()
           .AddFrame()
           .WithRepeated(false)
@@ -289,7 +288,7 @@ namespace aPC.Common.Defaults
             .Build())
           .Build()
           .Single();
-        
+
         scene.Frames = new List<Frame> { off, error, off, error, off };
         return scene;
       }
@@ -316,7 +315,7 @@ namespace aPC.Common.Defaults
       }
     }
 
-    #endregion
+    #endregion Misc
 
     #region PoolQ2
 
@@ -337,14 +336,14 @@ namespace aPC.Common.Defaults
           .WithFrameLength(200)
           .WithLightSection(DefaultLightSections.SoftPink)
           .WithRumbleSection(DefaultRumbleSections.Off)
-          
+
           .AddFrame()
           .WithRepeated(false)
           .WithFrameLength(1000)
           .WithLightSection(DefaultLightSections.StrongPurple)
           .WithFanSection(DefaultFanSections.Full)
           .WithRumbleSection(DefaultRumbleSections.Thunder)
-          
+
           .AddFrame()
           .WithRepeated(false)
           .WithFrameLength(500)
@@ -357,7 +356,7 @@ namespace aPC.Common.Defaults
       }
     }
 
-    #endregion
+    #endregion PoolQ2
 
     #region Shiprec
 
@@ -412,7 +411,6 @@ namespace aPC.Common.Defaults
       }
     }
 
-    #endregion
-
+    #endregion Shiprec
   }
 }

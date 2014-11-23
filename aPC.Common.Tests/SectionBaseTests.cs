@@ -1,11 +1,11 @@
-﻿using System;
-using aPC.Common.Entities;
+﻿using aPC.Common.Entities;
 using NUnit.Framework;
+using System;
 
 namespace aPC.Common.Tests
 {
   [TestFixture]
-  class SectionBaseTests
+  internal class SectionBaseTests
   {
     private TestSection testSection;
 
@@ -15,12 +15,11 @@ namespace aPC.Common.Tests
       this.testSection = new TestSection();
     }
 
-
     [Test]
     public void GettingComponentByDirection_GivesCorrectMember()
     {
       var component = testSection.GetComponentValueInDirection(eDirection.North);
-      
+
       Assert.AreEqual(testSection.Up, component);
     }
 
@@ -66,7 +65,7 @@ namespace aPC.Common.Tests
     public void GettingPhysicalComponentByDirection_GivesExpectedMember()
     {
       var component = testSection.GetPhysicalComponentValueInDirection(eDirection.North);
-      
+
       Assert.AreEqual(testSection.Down, component);
     }
 
@@ -74,7 +73,7 @@ namespace aPC.Common.Tests
     public void GettingPhysicalComponentByDirection_WhereTheMemberIsNotMarkedPhysical_GivesNull()
     {
       var component = testSection.GetPhysicalComponentValueInDirection(eDirection.East);
-      
+
       Assert.IsNull(component);
     }
 
@@ -108,9 +107,10 @@ namespace aPC.Common.Tests
     }
   }
 
-  class TestSection : SectionBase<TestComponent>
+  internal class TestSection : SectionBase<TestComponent>
   {
 #pragma warning disable 169 // Fields are used exclusively by reflection
+
     [PhysicalComponent]
     [Direction(eDirection.North)]
     public TestComponent Up;
@@ -125,10 +125,11 @@ namespace aPC.Common.Tests
 
     [Direction(eDirection.South)]
     public TestComponent DownClone;
+
 #pragma warning restore 169
   }
 
-  class TestComponent : IComponent
+  internal class TestComponent : IComponent
   {
     public string Value;
 

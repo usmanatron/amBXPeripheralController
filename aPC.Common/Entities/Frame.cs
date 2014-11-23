@@ -4,7 +4,7 @@ namespace aPC.Common.Entities
 {
   public class Frame
   {
-    [XmlElement] 
+    [XmlElement]
     public int Length;
 
     // Each frame can be set seperately.  the idea is that you can have a certain animation as a one off and
@@ -12,7 +12,7 @@ namespace aPC.Common.Entities
     [XmlElement]
     public bool IsRepeated;
 
-    [XmlElement] 
+    [XmlElement]
     public LightSection Lights;
 
     [XmlElement]

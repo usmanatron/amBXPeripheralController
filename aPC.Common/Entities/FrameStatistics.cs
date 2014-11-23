@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace aPC.Common.Entities
 {
@@ -79,7 +78,7 @@ namespace aPC.Common.Entities
                   HasDirection(c, direction));
     }
 
-    private Func<Tuple<eComponentType, eDirection>, eComponentType, bool> HasComponentType = 
+    private Func<Tuple<eComponentType, eDirection>, eComponentType, bool> HasComponentType =
       (item, componentType) => item.Item1 == componentType;
 
     private Func<Tuple<eComponentType, eDirection>, eDirection, bool> HasDirection =

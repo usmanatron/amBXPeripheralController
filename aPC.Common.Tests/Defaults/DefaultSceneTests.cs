@@ -1,13 +1,13 @@
-﻿using System.Linq;
-using System.Reflection;
-using aPC.Common.Defaults;
+﻿using aPC.Common.Defaults;
 using aPC.Common.Entities;
 using NUnit.Framework;
+using System.Linq;
+using System.Reflection;
 
 namespace aPC.Common.Tests.Defaults
 {
   [TestFixture]
-  class DefaultSceneTests
+  internal class DefaultSceneTests
   {
     [Test]
     public void DefaultScenesAreValid()

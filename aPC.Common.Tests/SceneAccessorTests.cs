@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace aPC.Common.Tests
 {
   [TestFixture]
-  class SceneAccessorTests
+  internal class SceneAccessorTests
   {
     [TestFixtureSetUp]
     public void Setup()

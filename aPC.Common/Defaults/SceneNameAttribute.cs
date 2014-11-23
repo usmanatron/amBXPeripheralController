@@ -22,7 +22,7 @@ namespace aPC.Common.Defaults
     {
       var attribute = propertyInfo.GetCustomAttribute<SceneNameAttribute>();
 
-      if (attribute == null) 
+      if (attribute == null)
       {
         return false;
       }

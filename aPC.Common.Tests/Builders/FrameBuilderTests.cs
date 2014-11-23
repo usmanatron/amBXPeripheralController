@@ -1,14 +1,14 @@
-﻿using System;
-using System.Linq;
-using NUnit.Framework;
-using aPC.Common.Builders;
+﻿using aPC.Common.Builders;
 using aPC.Common.Defaults;
 using aPC.Common.Entities;
+using NUnit.Framework;
+using System;
+using System.Linq;
 
 namespace aPC.Common.Tests.Builders
 {
   [TestFixture]
-  class FrameBuilderTests
+  internal class FrameBuilderTests
   {
     [Test]
     public void SpecifyingFrameDataBeforeAddingAFrame_ThrowsException()
@@ -18,7 +18,7 @@ namespace aPC.Common.Tests.Builders
     }
 
     [Test]
-    public void FrameLengthUnspecified_ThrowsException() 
+    public void FrameLengthUnspecified_ThrowsException()
     {
       var lBuilder = new FrameBuilder()
         .AddFrame()
@@ -68,7 +68,7 @@ namespace aPC.Common.Tests.Builders
       Assert.DoesNotThrow(() => lBuilder.Build());
     }
 
-    private readonly object[] AddSectionCases = 
+    private readonly object[] AddSectionCases =
     {
       new AddSection(builder => builder.WithLightSection(mLightSection)),
       new AddSection(builder => builder.WithFanSection(mFanSection)),
@@ -76,7 +76,7 @@ namespace aPC.Common.Tests.Builders
     };
 
     public delegate FrameBuilder AddSection(FrameBuilder xiBuilder);
-    
+
     [Test]
     public void NewlyBuiltFrame_HasExpectedData()
     {
@@ -102,13 +102,13 @@ namespace aPC.Common.Tests.Builders
       Assert.AreEqual(200, lFrames[0].Length);
       Assert.AreEqual(400, lFrames[1].Length);
     }
-    
+
     private static readonly LightSection mLightSection = DefaultLightSections.JiraBlue;
     private static readonly FanSection mFanSection = DefaultFanSections.Half;
     private static readonly RumbleSection mRumbleSection = DefaultRumbleSections.Boing;
   }
 
-  static class FrameBuilderExtensions
+  internal static class FrameBuilderExtensions
   {
     public static FrameBuilder AddFrameWithDefaults(this FrameBuilder xiBuilder, int xiFrameLength = 1000)
     {

@@ -14,14 +14,15 @@ namespace aPC.Common
 
     public eDirection Direction
     {
-      get; private set;
+      get;
+      private set;
     }
 
     public static bool MatchesDirection(FieldInfo fieldInfo, eDirection direction)
     {
       var attributes = fieldInfo.GetCustomAttributes<DirectionAttribute>();
-      
-      return attributes != null && 
+
+      return attributes != null &&
              attributes.Any(attr => attr.Direction == direction);
     }
   }

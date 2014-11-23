@@ -12,7 +12,7 @@ namespace aPC.Common.Entities
   public class amBXScene
   {
     // A complicated one.  The idea is that we want to mess with fans without touching the light (for example).
-    // Saying you're exclusive means that we kill off everything and just use this.  Otherwise we'll merge in the 
+    // Saying you're exclusive means that we kill off everything and just use this.  Otherwise we'll merge in the
     // changes specified by this.
     // TODO: not yet implemented
     [DataMember]
@@ -23,7 +23,7 @@ namespace aPC.Common.Entities
     public eSceneType SceneType;
 
     /// <summary>
-    /// Used for JSON serialisation - a limitation means that enums 
+    /// Used for JSON serialisation - a limitation means that enums
     /// are shown by their numerical representation.  This ensures we see the
     /// name instead.
     /// </summary>
@@ -39,8 +39,7 @@ namespace aPC.Common.Entities
       {
         this.SceneType = (eSceneType)Enum.Parse(typeof(eSceneType), value);
       }
-    }  
-
+    }
 
     [DataMember]
     [XmlArray("Frames")]
@@ -84,7 +83,7 @@ namespace aPC.Common.Entities
       }
     }
 
-    #endregion
+    #endregion Helper Properties
 
     [XmlIgnore]
     private List<Frame> frames;

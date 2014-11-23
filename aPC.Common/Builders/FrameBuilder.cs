@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using aPC.Common.Entities;
+﻿using aPC.Common.Entities;
 using System;
+using System.Collections.Generic;
 
 namespace aPC.Common.Builders
 {

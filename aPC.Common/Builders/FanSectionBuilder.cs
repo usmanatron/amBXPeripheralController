@@ -1,5 +1,5 @@
-﻿using System;
-using aPC.Common.Entities;
+﻿using aPC.Common.Entities;
+using System;
 
 namespace aPC.Common.Builders
 {

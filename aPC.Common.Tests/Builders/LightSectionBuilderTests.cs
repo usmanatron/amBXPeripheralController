@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
-using aPC.Common.Builders;
+﻿using aPC.Common.Builders;
 using aPC.Common.Defaults;
 using aPC.Common.Entities;
+using NUnit.Framework;
 using System;
 
 namespace aPC.Common.Tests.Builders

@@ -6,14 +6,14 @@ namespace aPC.Common.Entities
 {
   public static class SectionBaseExtensions
   {
-    public static T GetComponentValueInDirection<T>(this SectionBase<T> section, eDirection direction) 
+    public static T GetComponentValueInDirection<T>(this SectionBase<T> section, eDirection direction)
       where T : IComponent
     {
       var field = section.GetComponentInfoInDirection(direction);
       return section.GetComponent(field);
     }
 
-    public static bool SetComponentValueInDirection<T>(this SectionBase<T> section, T component, eDirection direction) 
+    public static bool SetComponentValueInDirection<T>(this SectionBase<T> section, T component, eDirection direction)
       where T : IComponent
     {
       var field = section.GetComponentInfoInDirection(direction);
@@ -48,7 +48,7 @@ namespace aPC.Common.Entities
         .SingleOrDefault(field => DirectionAttribute.MatchesDirection(field, direction));
     }
 
-    private static FieldInfo GetPhysicalComponentInfoInDirection<T>(this SectionBase<T> section, eDirection direction) 
+    private static FieldInfo GetPhysicalComponentInfoInDirection<T>(this SectionBase<T> section, eDirection direction)
       where T : IComponent
     {
       var fieldInDirection = GetComponentInfoInDirection(section, direction);
@@ -99,6 +99,6 @@ namespace aPC.Common.Entities
         .GetFields();
     }
 
-    #endregion
+    #endregion Private Helper methods
   }
 }

@@ -7,13 +7,13 @@ namespace aPC.Common.Entities
     [XmlElement]
     public float Intensity;
 
-    [XmlElement] 
+    [XmlElement]
     public float Red;
 
-    [XmlElement] 
+    [XmlElement]
     public float Green;
 
-    [XmlElement] 
+    [XmlElement]
     public float Blue;
 
     public eComponentType ComponentType()

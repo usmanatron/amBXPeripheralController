@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using NUnit.Framework;
-using aPC.Common.Entities;
-using aPC.Common.Builders;
+﻿using aPC.Common.Builders;
 using aPC.Common.Defaults;
+using aPC.Common.Entities;
+using NUnit.Framework;
+using System.Linq;
 
 namespace aPC.Common.Tests
 {
   [TestFixture]
-  class FrameStatisticsTests
+  internal class FrameStatisticsTests
   {
     [TestFixtureSetUp]
     public void Setup()

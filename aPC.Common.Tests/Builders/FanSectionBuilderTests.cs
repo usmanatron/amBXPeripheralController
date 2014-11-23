@@ -1,13 +1,13 @@
-﻿using System;
-using aPC.Common.Builders;
+﻿using aPC.Common.Builders;
 using aPC.Common.Defaults;
 using aPC.Common.Entities;
 using NUnit.Framework;
+using System;
 
 namespace aPC.Common.Tests.Builders
 {
   [TestFixture]
-  class FanSectionBuilderTests
+  internal class FanSectionBuilderTests
   {
     [Test]
     public void NewFanSection_WithNoFadeTime_ThrowsException()
