@@ -21,11 +21,11 @@ namespace aPC.Client.Morse.Translators
     private char mCharacter;
 
     /// <summary>
-    ///   Gives the Morse Code equivalent of every available character 
+    ///   Gives the Morse Code equivalent of every available character
     ///   * WITHOUT THE SEPARATORS* between dots and dashes.
     /// </summary>
     /// <remarks>
-    ///   Would it be better to just have one actual instance of Dot 
+    ///   Would it be better to just have one actual instance of Dot
     ///   and Dash and just reuse it?  Something worth considering,
     ///   especially once the client runs end-to-end.
     /// </remarks>

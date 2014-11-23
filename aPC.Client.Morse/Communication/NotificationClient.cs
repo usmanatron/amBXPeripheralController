@@ -1,17 +1,18 @@
 ﻿using aPC.Common.Client;
 using aPC.Common.Client.Communication;
-using System.ServiceModel;
 
 namespace aPC.Client.Morse.Communication
 {
   public class NotificationClient : NotificationClientBase
   {
-    public NotificationClient() : base(new HostnameAccessor())
+    public NotificationClient()
+      : base(new HostnameAccessor())
     {
     }
 
     // Overriding of the Url is used by tests
-    public NotificationClient(string xiHostname) : base(xiHostname)
+    public NotificationClient(string xiHostname)
+      : base(xiHostname)
     {
     }
 

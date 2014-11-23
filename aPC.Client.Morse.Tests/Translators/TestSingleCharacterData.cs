@@ -3,9 +3,10 @@ using System.Collections.Generic;
 
 namespace aPC.Client.Morse.Tests.Translators
 {
-  class TestSingleCharacterData : TestCharacterBase
+  internal class TestSingleCharacterData : TestCharacterBase
   {
-    public TestSingleCharacterData(char xiCharacter, List<IMorseBlock> xiExpectedCode) : base(xiExpectedCode)
+    public TestSingleCharacterData(char xiCharacter, List<IMorseBlock> xiExpectedCode)
+      : base(xiExpectedCode)
     {
       Character = xiCharacter;
     }

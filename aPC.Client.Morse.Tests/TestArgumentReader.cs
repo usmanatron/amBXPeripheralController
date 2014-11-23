@@ -2,9 +2,10 @@
 
 namespace aPC.Client.Morse.Tests
 {
-  class TestArgumentReader : ArgumentReader
+  internal class TestArgumentReader : ArgumentReader
   {
-    public TestArgumentReader(string xiArguments) : base (xiArguments)
+    public TestArgumentReader(string xiArguments)
+      : base(xiArguments)
     {
     }
 

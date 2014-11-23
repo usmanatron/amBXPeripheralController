@@ -1,19 +1,16 @@
-﻿using System;
+﻿using aPC.Client.Morse.Codes;
+using aPC.Common;
+using aPC.Common.Defaults;
+using aPC.Common.Entities;
+using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
-using aPC.Client.Morse;
-using aPC.Common;
-using aPC.Common.Entities;
-using aPC.Common.Defaults;
-using aPC.Client.Morse.Codes;
 
 namespace aPC.Client.Morse.Tests
 {
   [TestFixture]
-  class SceneGeneratorTests
+  internal class SceneGeneratorTests
   {
     [Test]
     public void Generator_ReturnsScene()
@@ -36,7 +33,7 @@ namespace aPC.Client.Morse.Tests
     public void GeneratedScene_WithDefaultSettings_HasLightsEnabledOnAllFrames()
     {
       var lGeneratedScene = new SceneGenerator(new Settings("Test")).Generate();
-      
+
       foreach (var lLight in lGeneratedScene.Frames.Select(frame => frame.Lights))
       {
         foreach (eDirection lDirection in ApplicableLightDirections)
@@ -62,7 +59,7 @@ namespace aPC.Client.Morse.Tests
     {
       var lWhiteLight = DefaultLights.White;
       var lGeneratedScene = new SceneGenerator(new Settings("T")).Generate();
-      
+
       foreach (var lLight in lGeneratedScene.Frames.Select(frame => frame.Lights))
       {
         foreach (eDirection lDirection in ApplicableLightDirections)
@@ -83,7 +80,7 @@ namespace aPC.Client.Morse.Tests
       }
     }
 
-    #endregion
+    #endregion Default Settings
 
     #region Switch changes
 
@@ -94,7 +91,7 @@ namespace aPC.Client.Morse.Tests
       var lSettings = new Settings("Test");
       lSettings.RepeatMessage = true;
       var lGeneratedScene = new SceneGenerator(lSettings).Generate();
-      
+
       Assert.AreEqual(eSceneType.Sync, lGeneratedScene.SceneType);
 
       foreach (var lFrame in lGeneratedScene.Frames)
@@ -110,7 +107,7 @@ namespace aPC.Client.Morse.Tests
     {
       var lSettings = new Settings("Test");
       lSettings.LightsEnabled = false;
-      
+
       Assert.Throws<ArgumentException>(() => new SceneGenerator(lSettings).Generate());
     }
 
@@ -183,7 +180,7 @@ namespace aPC.Client.Morse.Tests
       Assert.AreNotEqual(lExpectedBlock.Length * lSettings.UnitLength, lScene.Length);
     }
 
-    #endregion
+    #endregion Switch changes
 
     #region Message Tests
 
@@ -222,9 +219,8 @@ namespace aPC.Client.Morse.Tests
       Assert.AreEqual(DefaultLights.Off, lGeneratedScene.Frames[1].Lights.North);
       Assert.AreEqual(lSecondExpectedFrame.Length * lSettings.UnitLength, lGeneratedScene.Frames[1].Length);
     }
-    #endregion
 
-
+    #endregion Message Tests
 
     //qqUMI Consider moving this idea into SectionBaseExtensions and call it RealDirections or similar (non-compound)
     private List<eDirection> ApplicableLightDirections

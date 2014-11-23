@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using aPC.Client.Morse.Codes;
+﻿using aPC.Client.Morse.Codes;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace aPC.Client.Morse.Tests.Translators
 {
   [TestFixture]
-  class TranslatorBaseTests
+  internal class TranslatorBaseTests
   {
     [TestFixtureSetUp]
     public void FixtureSetup()

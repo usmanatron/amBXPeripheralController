@@ -1,7 +1,6 @@
 ﻿using aPC.Client.Morse.Codes;
-using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace aPC.Client.Morse.Translators
 {

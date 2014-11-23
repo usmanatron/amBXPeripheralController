@@ -1,5 +1,4 @@
-﻿using aPC.Common.Defaults;
-using aPC.Common.Entities;
+﻿using aPC.Common.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -78,7 +77,7 @@ namespace aPC.Client.Morse
     ///   * The letters A-Z and numbers 0-9
     ///   * Space
     ///   * The following other symbols:
-    ///     . , ? ' ! / ( ) & : ; = + _ " $ @ 
+    ///     . , ? ' ! / ( ) & : ; = + _ " $ @
     /// </remarks>
     private bool IsMessageValid()
     {
@@ -139,7 +138,7 @@ namespace aPC.Client.Morse
         .Remove(0, 3).Split(',')
         .Select(colour => float.Parse(colour)).ToList();
 
-      if (lLightComponents.Count != 3 || 
+      if (lLightComponents.Count != 3 ||
           lLightComponents.Any(colour => IsOutOfRange(colour)))
       {
         throw new ArgumentOutOfRangeException();

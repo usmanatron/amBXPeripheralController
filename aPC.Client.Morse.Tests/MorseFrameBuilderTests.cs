@@ -1,14 +1,13 @@
-﻿using System;
+﻿using aPC.Client.Morse.Codes;
+using aPC.Common.Defaults;
+using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
-using aPC.Client.Morse.Codes;
-using aPC.Common.Defaults;
 
 namespace aPC.Client.Morse.Tests
 {
   [TestFixture]
-  class MorseFrameBuilderTests
+  internal class MorseFrameBuilderTests
   {
     [SetUp]
     public void TestSetup()
@@ -58,7 +57,7 @@ namespace aPC.Client.Morse.Tests
       var lFrames = new MorseFrameBuilder(mSettings)
         .AddFrames(new List<IMorseBlock>() { xiBlock })
         .Build();
-      
+
       var lColour = xiBlock.Enabled ? mSettings.Colour : DefaultLights.Off;
       var lRumble = xiBlock.Enabled ? mSettings.Rumble : DefaultRumbles.Off;
 

@@ -1,14 +1,14 @@
-﻿using System;
+﻿using aPC.Client.Morse.Codes;
+using aPC.Client.Morse.Translators;
+using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
-using aPC.Client.Morse.Translators;
-using aPC.Client.Morse.Codes;
 
 namespace aPC.Client.Morse.Tests.Translators
 {
   [TestFixture]
-  class WordTranslatorTests
+  internal class WordTranslatorTests
   {
     [Test]
     public void InputWord_CannotContainSpaces()
@@ -38,7 +38,7 @@ namespace aPC.Client.Morse.Tests.Translators
       var lSecondCharacter = '?';
 
       var lTranslatedWord = new WordTranslator(lFirstCharacter.ToString() + lSecondCharacter.ToString()).Translate();
-      
+
       var lFirstTranslatedCharacter = new CharacterTranslator(lFirstCharacter).Translate();
       var lSecondTranslatedCharacter = new CharacterTranslator(lSecondCharacter).Translate();
       var lExpectedWord = lFirstTranslatedCharacter;
@@ -68,21 +68,21 @@ namespace aPC.Client.Morse.Tests.Translators
 
     private TestMultiCharacterData[] TestWords = new TestMultiCharacterData[]
     {
-      new TestMultiCharacterData("CAR6", new List<IMorseBlock> 
+      new TestMultiCharacterData("CAR6", new List<IMorseBlock>
       {
-        new Dash(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dot(), new CharacterSeparator(), 
-        new Dot(), new DotDashSeparator(), new Dash(), new CharacterSeparator(), 
-        new Dot(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dot(), new CharacterSeparator(), 
-        new Dash(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot() 
+        new Dash(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dot(), new CharacterSeparator(),
+        new Dot(), new DotDashSeparator(), new Dash(), new CharacterSeparator(),
+        new Dot(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dot(), new CharacterSeparator(),
+        new Dash(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot()
       }),
-      new TestMultiCharacterData("BLOB", new List<IMorseBlock> 
+      new TestMultiCharacterData("BLOB", new List<IMorseBlock>
       {
         new Dash(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new CharacterSeparator(),
         new Dot(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new CharacterSeparator(),
         new Dash(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dash(), new CharacterSeparator(),
         new Dash(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot()
       }),
-      new TestMultiCharacterData("WHY?", new List<IMorseBlock> 
+      new TestMultiCharacterData("WHY?", new List<IMorseBlock>
       {
         new Dot(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dash(), new CharacterSeparator(),
         new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new CharacterSeparator(),

@@ -1,7 +1,5 @@
 ﻿using aPC.Client.Morse.Codes;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace aPC.Client.Morse.Translators
 {
@@ -23,7 +21,7 @@ namespace aPC.Client.Morse.Translators
 
       return AddSeparatorsToList(lTranslatedMessage, new WordSeparator());
     }
-    
+
     private string mMessage;
   }
 }

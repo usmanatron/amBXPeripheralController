@@ -12,7 +12,8 @@ namespace aPC.Client.Morse
   /// </summary>
   public class MorseFrameBuilder : FrameBuilder
   {
-    public MorseFrameBuilder(Settings xiSettings) : base()
+    public MorseFrameBuilder(Settings xiSettings)
+      : base()
     {
       mSettings = xiSettings;
     }

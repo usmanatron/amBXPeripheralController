@@ -21,7 +21,7 @@ namespace aPC.Client.Morse.Translators
     {
       var lTranslatedWord = new List<List<IMorseBlock>>();
 
-      foreach(var lCharacter in mWord.ToCharArray())
+      foreach (var lCharacter in mWord.ToCharArray())
       {
         lTranslatedWord.Add(new CharacterTranslator(lCharacter).Translate());
       }

@@ -1,8 +1,6 @@
 ﻿using aPC.Client.Morse.Codes;
 using aPC.Client.Morse.Translators;
 using aPC.Common;
-using aPC.Common.Builders;
-using aPC.Common.Defaults;
 using aPC.Common.Entities;
 using System.Collections.Generic;
 
@@ -41,7 +39,7 @@ namespace aPC.Client.Morse
         SceneType = mSettings.RepeatMessage ? eSceneType.Sync : eSceneType.Event
       };
       lScene.Frames = xiFrames;
-      
+
       return lScene;
     }
 

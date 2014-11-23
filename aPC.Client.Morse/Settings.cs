@@ -1,5 +1,5 @@
-﻿using aPC.Common.Entities;
-using aPC.Common.Defaults;
+﻿using aPC.Common.Defaults;
+using aPC.Common.Entities;
 
 namespace aPC.Client.Morse
 {

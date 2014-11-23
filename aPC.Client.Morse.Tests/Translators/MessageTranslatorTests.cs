@@ -1,14 +1,13 @@
-﻿using System;
+﻿using aPC.Client.Morse.Codes;
+using aPC.Client.Morse.Translators;
+using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
-using aPC.Client.Morse.Translators;
-using aPC.Client.Morse.Codes;
 
 namespace aPC.Client.Morse.Tests.Translators
 {
   [TestFixture]
-  class MessageTranslatorTests
+  internal class MessageTranslatorTests
   {
     [Test]
     public void SingleWordMessage_ReturnsTheWord()
@@ -32,7 +31,7 @@ namespace aPC.Client.Morse.Tests.Translators
       var lSecondWord = "Tock";
 
       var lTranslatedMessage = new MessageTranslator(lFirstWord.ToString() + " " + lSecondWord.ToString()).Translate();
-      
+
       var lFirstTranslatedWord = new WordTranslator(lFirstWord).Translate();
       var lSecondTranslatedWord = new WordTranslator(lSecondWord).Translate();
       var lExpectedMessage = lFirstTranslatedWord;
@@ -62,15 +61,15 @@ namespace aPC.Client.Morse.Tests.Translators
 
     private TestMultiCharacterData[] TestMessages = new TestMultiCharacterData[]
     {
-      new TestMultiCharacterData("1 2 3", new List<IMorseBlock> 
+      new TestMultiCharacterData("1 2 3", new List<IMorseBlock>
       {
         new Dot(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dash(),  new DotDashSeparator(),new Dash(), new DotDashSeparator(), new Dash(),
-        new WordSeparator(), 
+        new WordSeparator(),
         new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dash(),
-        new WordSeparator(), 
+        new WordSeparator(),
         new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dash()
       }),
-      new TestMultiCharacterData("Its A-B", new List<IMorseBlock> 
+      new TestMultiCharacterData("Its A-B", new List<IMorseBlock>
       {
         new Dot(), new DotDashSeparator(), new Dot(), new CharacterSeparator(),
         new Dash(), new CharacterSeparator(),

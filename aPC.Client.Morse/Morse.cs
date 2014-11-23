@@ -1,13 +1,10 @@
-﻿using aPC.Common.Entities;
-using aPC.Client.Morse.Communication;
-using System;
-using System.Collections.Generic;
+﻿using aPC.Client.Morse.Communication;
 
 namespace aPC.Client.Morse
 {
-  class Morse
+  internal class Morse
   {
-    static void Main(string[] xiArgs)
+    private static void Main(string[] xiArgs)
     {
       var lSettings = GetSettings(xiArgs);
       var lGeneratedScene = new SceneGenerator(lSettings).Generate();

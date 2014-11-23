@@ -1,14 +1,13 @@
-﻿using System;
-using System.ServiceModel;
-using NUnit.Framework;
-using aPC.Client.Morse.Communication;
+﻿using aPC.Client.Morse.Communication;
 using aPC.Common.Client.Tests.Communication;
 using aPC.Common.Defaults;
+using NUnit.Framework;
+using System;
 
 namespace aPC.Client.Morse.Tests.Communication
 {
   [TestFixture]
-  class NotificationClientTests
+  internal class NotificationClientTests
   {
     [TestFixtureSetUp]
     public void SetupTests()

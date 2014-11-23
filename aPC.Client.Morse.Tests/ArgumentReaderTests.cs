@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using aPC.Client.Morse;
+﻿using aPC.Common.Defaults;
 using NUnit.Framework;
-using aPC.Common.Defaults;
+using System.Linq;
 
 namespace aPC.Client.Morse.Tests
 {
   [TestFixture]
-  class ArgumentReaderTests
+  internal class ArgumentReaderTests
   {
     [Test]
     [TestCase(null)]
