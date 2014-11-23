@@ -1,10 +1,9 @@
-﻿using aPC.Common;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace aPC.Common.Client
 {
   /// <summary>
-  /// The default HostnameAccessor points to 
+  /// The default HostnameAccessor points to
   /// localhost and does not support updating
   /// </summary>
   public class HostnameAccessor
@@ -58,7 +57,7 @@ namespace aPC.Common.Client
       return false;
     }
 
-    #endregion
+    #endregion Watching for updates
 
     private Locked<bool> hasChangedSinceLastCheck;
     private List<string> hostnames;

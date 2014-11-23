@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
-using aPC.Common.Client.Communication;
+﻿using aPC.Common.Client.Communication;
 using System;
+using System.Collections.Generic;
 
 namespace aPC.Common.Client.Tests.Communication
 {
   public class TestNotificationClient : NotificationClientBase
   {
-    public TestNotificationClient() : base(new HostnameAccessor())
+    public TestNotificationClient()
+      : base(new HostnameAccessor())
     {
       IntegratedScenesPushed = new List<string>();
       CustomScenesPushed = new List<string>();

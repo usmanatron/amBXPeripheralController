@@ -1,6 +1,6 @@
-﻿using System;
+﻿using aPC.Common.Communication;
+using System;
 using System.Collections.Generic;
-using aPC.Common.Communication;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 
@@ -27,7 +27,7 @@ namespace aPC.Common.Client.Tests.Communication
     {
       ServiceDebugBehavior debug = xiHost.Description.Behaviors.Find<ServiceDebugBehavior>();
 
-      // if not found - add behavior with setting turned on 
+      // if not found - add behavior with setting turned on
       if (debug == null)
       {
         xiHost.Description.Behaviors.Add(
@@ -81,6 +81,7 @@ namespace aPC.Common.Client.Tests.Communication
     // Item1 is a boolean specifying if the item pushed was an integrated scene
     // Item2 is the information sent
     public List<Tuple<bool, string>> Scenes { get; private set; }
+
     private string mUrl;
     public string Hostname;
     private readonly ServiceHost mHost;

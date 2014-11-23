@@ -1,18 +1,18 @@
-﻿using System;
+﻿using aPC.Common.Communication;
 using aPC.Common.Entities;
-using aPC.Common.Communication;
-using System.ServiceModel;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Xml.Serialization;
-using System.Collections.Generic;
+using System.ServiceModel;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace aPC.Common.Client.Communication
 {
   public abstract class NotificationClientBase : INotificationClient
   {
-    protected NotificationClientBase(HostnameAccessor xiHostnameAccessor) 
+    protected NotificationClientBase(HostnameAccessor xiHostnameAccessor)
     {
       mHostnameAccessor = xiHostnameAccessor;
       UpdateClients();
@@ -42,7 +42,6 @@ namespace aPC.Common.Client.Communication
       return new ClientConnection(xiHostname, lClient);
     }
 
-
     #region Hostname Handling
 
     public void UpdateClientsIfHostnameChanged()
@@ -53,7 +52,7 @@ namespace aPC.Common.Client.Communication
       }
     }
 
-    #endregion
+    #endregion Hostname Handling
 
     #region Interface methods
 
@@ -97,7 +96,7 @@ namespace aPC.Common.Client.Communication
       {
         ThrowUnsupportedException("integrated");
       }
-      
+
       return mClients.First().Client.CreateChannel().GetSupportedIntegratedScenes();
     }
 
@@ -106,7 +105,7 @@ namespace aPC.Common.Client.Communication
       throw new NotSupportedException("Attempted to use " + xiSceneType + " scenes, however these are unsupported!");
     }
 
-    #endregion
+    #endregion Interface methods
 
     public void PushCustomScene(amBXScene xiScene)
     {
@@ -127,6 +126,7 @@ namespace aPC.Common.Client.Communication
     private List<ClientConnection> mClients;
 
     protected abstract bool SupportsCustomScenes { get; }
+
     protected abstract bool SupportsIntegratedScenes { get; }
   }
 }
