@@ -25,7 +25,7 @@ namespace aPC.Client.Scene
 
       var lScenes = mNotificationClient.GetSupportedIntegratedScenes()
         .OrderBy(scene => scene);
-      
+
       foreach (var lScene in lScenes)
       {
         Scenes.Add(lScene, lScene);
@@ -45,7 +45,7 @@ namespace aPC.Client.Scene
       return Scenes[xiKey];
     }
 
-    public string BrowseItemName 
+    public string BrowseItemName
     {
       get
       {
@@ -54,8 +54,8 @@ namespace aPC.Client.Scene
     }
 
     public Dictionary<string, string> Scenes { get; private set; }
+
     private readonly SceneAccessor mAccessor;
     private readonly NotificationClient mNotificationClient;
-
   }
 }

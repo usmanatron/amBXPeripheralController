@@ -1,6 +1,6 @@
-﻿using NUnit.Framework;
+﻿using aPC.Client.Console;
+using NUnit.Framework;
 using System.IO;
-using aPC.Client.Console;
 
 namespace aPC.Client.Tests.Console
 {
@@ -68,6 +68,6 @@ namespace aPC.Client.Tests.Console
       return lSettings;
     }
 
-    #endregion
+    #endregion Helpers
   }
 }

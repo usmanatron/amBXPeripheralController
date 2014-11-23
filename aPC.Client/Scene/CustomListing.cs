@@ -28,7 +28,7 @@ namespace aPC.Client.Scene
       // Finally add a "browse" choice to select you're own scene
       Scenes.Add(BrowseItemName, "");
     }
- 
+
     public void AddScene(string xiKey, string xiValue)
     {
       Scenes.Add(xiKey, xiValue);

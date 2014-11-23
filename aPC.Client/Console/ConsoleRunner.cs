@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace aPC.Client.Console
 {
-  class ConsoleRunner
+  internal class ConsoleRunner
   {
     public ConsoleRunner(Settings xiSettings, SceneRunner xiSceneRunner, List<string> xiArguments)
     {

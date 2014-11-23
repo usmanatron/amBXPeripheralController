@@ -1,5 +1,4 @@
-﻿using System.ServiceModel;
-using aPC.Common.Client;
+﻿using aPC.Common.Client;
 using aPC.Common.Client.Communication;
 using Ninject;
 
@@ -8,12 +7,14 @@ namespace aPC.Client.Communication
   public class NotificationClient : NotificationClientBase
   {
     [Inject]
-    public NotificationClient(HostnameAccessor xiHostnameAccessor) : base(xiHostnameAccessor)
+    public NotificationClient(HostnameAccessor xiHostnameAccessor)
+      : base(xiHostnameAccessor)
     {
     }
 
     // Overriding of the Url is used by tests
-    public NotificationClient(string xiHostname) : base(xiHostname)
+    public NotificationClient(string xiHostname)
+      : base(xiHostname)
     {
     }
 

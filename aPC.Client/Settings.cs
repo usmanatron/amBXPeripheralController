@@ -2,8 +2,9 @@
 {
   public class Settings
   {
-    public Settings() : this(default(bool), string.Empty)
-    { 
+    public Settings()
+      : this(default(bool), string.Empty)
+    {
     }
 
     public Settings(bool xiIsIntegratedScene, string xiSceneData)
@@ -27,6 +28,7 @@
     }
 
     public bool IsIntegratedScene { get; private set; }
+
     public string SceneData { get; private set; }
   }
 }

@@ -3,7 +3,7 @@ using System.IO;
 
 namespace aPC.Client.Scene
 {
-  static class ProfilesStore
+  internal static class ProfilesStore
   {
     public static string Directory = Path.Combine(Environment.CurrentDirectory, "Profiles");
 

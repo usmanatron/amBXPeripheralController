@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
-using aPC.Client.Communication;
+﻿using aPC.Client.Communication;
 using aPC.Client.Console;
-using System.IO;
 using aPC.Client.Scene;
 using aPC.Common.Communication;
 using Ninject;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Windows;
 
 namespace aPC.Client
 {
@@ -29,7 +29,7 @@ namespace aPC.Client
       if (lArguments.Count > 0)
       {
         lKernel.Bind<ConsoleRunner>().ToSelf().WithConstructorArgument("xiArguments", lArguments);
-        var lRunner = lKernel. Get<ConsoleRunner>();
+        var lRunner = lKernel.Get<ConsoleRunner>();
         lRunner.Run();
       }
       else
@@ -43,7 +43,7 @@ namespace aPC.Client
     private StandardKernel SetupKernel()
     {
       var lKernel = new StandardKernel();
-      
+
       lKernel.Bind<Settings>().ToSelf().InSingletonScope();
       lKernel.Bind<INotificationClient>().To<NotificationClient>();
       lKernel.Bind<IntegratedListing>().ToSelf().InSingletonScope();

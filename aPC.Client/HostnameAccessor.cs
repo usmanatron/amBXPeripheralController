@@ -1,5 +1,4 @@
 ﻿using System.Configuration;
-using aPC.Common.Client;
 
 namespace aPC.Client
 {

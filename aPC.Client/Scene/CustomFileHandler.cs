@@ -1,7 +1,7 @@
 ﻿using Microsoft.Win32;
+using System.IO;
 using System.Linq;
 using System.Windows;
-using System.IO;
 
 namespace aPC.Client.Scene
 {
@@ -25,7 +25,6 @@ namespace aPC.Client.Scene
         : string.Empty;
     }
 
-
     private string GetFilenameFromDialog()
     {
       var lDialog = new OpenFileDialog { Multiselect = false, Filter = "Xml Files (*.xml)|*.xml" };
@@ -42,8 +41,8 @@ namespace aPC.Client.Scene
       if (mCustomListing.Scenes.Keys.Any(scene => scene == xiFilename))
       {
         var lOverwrite = MessageBox.Show("A scene with this filename already exists and will be overwritten.  Do you want to continue?",
-                                         "Overwrite file?", 
-                                         MessageBoxButton.YesNo, 
+                                         "Overwrite file?",
+                                         MessageBoxButton.YesNo,
                                          MessageBoxImage.Question);
 
         if (lOverwrite != MessageBoxResult.Yes)

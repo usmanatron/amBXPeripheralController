@@ -2,7 +2,7 @@
 <!--
 A test event scene
 -->
-<amBXScene> 
+<amBXScene>
     <IsExclusive>true</IsExclusive>
     <SceneType>Desync</SceneType>
     <Frames>
@@ -16,7 +16,7 @@ A test event scene
                     <Red>1</Red>
                     <Green>0</Green>
                     <Blue>1</Blue>
-                </North>  
+                </North>
             </Lights>
         </Frame>
         <Frame>
@@ -29,7 +29,7 @@ A test event scene
                     <Red>0</Red>
                     <Green>1</Green>
                     <Blue>0</Blue>
-                </North> 
+                </North>
             </Lights>
         </Frame>
     </Frames>

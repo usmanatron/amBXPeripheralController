@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace aPC.Client.Tests
 {
   [TestFixture]
-  class SceneRunnerTests
+  internal class SceneRunnerTests
   {
     [SetUp]
     public void Setup()

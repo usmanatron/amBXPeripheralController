@@ -1,12 +1,11 @@
-﻿using System.ServiceModel;
-using NUnit.Framework;
-using aPC.Client.Communication;
+﻿using aPC.Client.Communication;
 using aPC.Common.Client.Tests.Communication;
+using NUnit.Framework;
 
 namespace aPC.Client.Tests.Communication
 {
   [TestFixture]
-  class NotificationServiceTests
+  internal class NotificationServiceTests
   {
     [TestFixtureSetUp]
     public void SetupTests()

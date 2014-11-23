@@ -1,7 +1,7 @@
-﻿using System;
+﻿using aPC.Client.Scene;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows;
-using aPC.Client.Scene;
 using System.Windows.Controls;
 
 namespace aPC.Client
@@ -11,7 +11,7 @@ namespace aPC.Client
   /// </summary>
   public partial class MainWindow : Window
   {
-    public MainWindow(Settings xiSettings, IntegratedListing xiIntegratedListing, CustomListing xiCustomListing, 
+    public MainWindow(Settings xiSettings, IntegratedListing xiIntegratedListing, CustomListing xiCustomListing,
                       UpdatableHostnameAccessor xiHostnameAccessor, CustomFileHandler xiCustomFileHandler, SceneRunner xiSceneRunner)
     {
       mSettings = xiSettings;
@@ -63,7 +63,7 @@ namespace aPC.Client
       ReloadDropdown(mIntegratedSceneListing, mIntegratedScenes);
     }
 
-    #endregion
+    #endregion Hostname selection \ update
 
     #region Integrated Scenes
 
@@ -83,7 +83,7 @@ namespace aPC.Client
       SceneSelectionChanged(IntegratedSceneList, mIntegratedSceneListing, true);
     }
 
-    #endregion
+    #endregion Integrated Scenes
 
     #region Custom Scenes
 
@@ -115,7 +115,7 @@ namespace aPC.Client
       SceneSelectionChanged(CustomSceneList, mCustomSceneListing, false);
     }
 
-    #endregion
+    #endregion Custom Scenes
 
     private void ReloadDropdown(ISceneListing xiSceneListing, ObservableCollection<string> xiScenes)
     {

@@ -19,13 +19,13 @@ namespace aPC.Client.Console
 One of either /I or /F MUST be given first.
 
 /I : Use an integrated amBXScene built into the application.  The exact
-     name of the scene will need to be confirmed before running this 
+     name of the scene will need to be confirmed before running this
      command and can currenly be found by running this app without
      arguments and looking under the ""Integrated"" dropdown.
-     Here, the argument is the name of the integrated amBXScene you 
+     Here, the argument is the name of the integrated amBXScene you
      would like to run.
 
-/F : Run a custom xml amBXScene.  In this case, the argument is the 
+/F : Run a custom xml amBXScene.  In this case, the argument is the
      path to the xml file.
 
 Examples:

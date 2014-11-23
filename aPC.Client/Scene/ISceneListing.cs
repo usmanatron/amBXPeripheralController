@@ -2,7 +2,7 @@
 
 namespace aPC.Client.Scene
 {
-  interface ISceneListing
+  internal interface ISceneListing
   {
     void Reload();
 
