@@ -1,15 +1,13 @@
-﻿using aPC.Server;
+﻿using aPC.Common;
 using aPC.Common.Entities;
-using aPC.Common;
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Threading;
+using aPC.Common.Server.Actors;
 using aPC.Common.Server.Conductors;
 using aPC.Common.Server.Engine;
-using aPC.Common.Server.Actors;
 using aPC.Common.Server.SceneHandlers;
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace aPC.Server
 {
@@ -23,7 +21,7 @@ namespace aPC.Server
 
     private void SetupManagers(IEngine xiEngine, amBXScene xiScene, Action xiAction)
     {
-      mFrameConductor = new FrameConductor(new FrameActor(xiEngine), new FrameHandler(xiScene, xiAction));      
+      mFrameConductor = new FrameConductor(new FrameActor(xiEngine), new FrameHandler(xiScene, xiAction));
 
       mDesyncConductors.Add(new LightConductor(eDirection.North, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
       mDesyncConductors.Add(new LightConductor(eDirection.NorthEast, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
@@ -46,7 +44,7 @@ namespace aPC.Server
     {
       mFrameConductor.UpdateScene(xiScene);
     }
-    
+
     public void UpdateDeSync(amBXScene xiScene)
     {
       Parallel.ForEach(mDesyncConductors, conductor => UpdateSceneIfRelevant(conductor, xiScene));
@@ -63,7 +61,7 @@ namespace aPC.Server
     private Func<FrameStatistics, eComponentType, eDirection, bool> IsApplicableForConductor =
       (statistics, componentType, direction) => statistics.AreEnabledForComponentAndDirection(componentType, direction);
 
-    #endregion
+    #endregion Update Scene
 
     public void EnableSync()
     {

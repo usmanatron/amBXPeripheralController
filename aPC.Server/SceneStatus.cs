@@ -5,6 +5,7 @@ namespace aPC.Server
   public interface ISceneStatus
   {
     eSceneType CurrentSceneType { get; set; }
+
     eSceneType PreviousSceneType { get; }
   }
 

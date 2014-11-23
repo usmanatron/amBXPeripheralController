@@ -1,13 +1,12 @@
 ﻿using aPC.Common;
-using aPC.Common.Entities;
-using aPC.Server.Communication;
-using aPC.Common.Server.Engine;
-using log4net;
 using aPC.Common.Defaults;
+using aPC.Common.Server.Engine;
+using aPC.Server.Communication;
+using log4net;
 
 namespace aPC.Server
 {
-  class Server
+  internal class Server
   {
     private static void Main(string[] args)
     {
@@ -18,9 +17,9 @@ namespace aPC.Server
       var lInitialScene = lAccessor.GetScene("Rainbow");
       var lStatus = new SceneStatus(lInitialScene.SceneType);
 
-      ServerTask = new ServerTask(lInitialScene, 
-                                  lInitialEvent, 
-                                  lStatus, 
+      ServerTask = new ServerTask(lInitialScene,
+                                  lInitialEvent,
+                                  lStatus,
                                   new NotificationService(),
                                   new EngineManager());
 

@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using aPC.Common.Defaults;
-using aPC.Server;
-using NUnit.Framework;
-using System.Threading;
+﻿using aPC.Common.Defaults;
 using aPC.Common.Entities;
 using aPC.Common.Server.Tests;
+using NUnit.Framework;
+using System.Linq;
+using System.Threading;
 
 namespace aPC.Server.Tests
 {
   [TestFixture]
-  class ConductorManagerTests
+  internal class ConductorManagerTests
   {
     [SetUp]
     public void Setup()
@@ -24,7 +19,6 @@ namespace aPC.Server.Tests
       var lScene = lDefaultScenes.Building;
       mDifferentScene = lDefaultScenes.BuildBrokenAndBuilding;
       mConductorManager = new TestConductorManager(mEngine, lScene);
-
     }
 
     [Test]

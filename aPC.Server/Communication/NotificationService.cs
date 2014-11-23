@@ -11,7 +11,8 @@ namespace aPC.Server.Communication
 {
   public class NotificationService : INotificationService
   {
-    public NotificationService() : this(scene => Server.ServerTask.Update(scene))
+    public NotificationService()
+      : this(scene => Server.ServerTask.Update(scene))
     {
     }
 

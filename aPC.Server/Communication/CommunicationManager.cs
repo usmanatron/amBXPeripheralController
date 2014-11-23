@@ -1,11 +1,11 @@
-﻿using System;
+﻿using aPC.Common.Communication;
+using System;
 using System.Net;
 using System.ServiceModel;
 using System.ServiceModel.Description;
-using aPC.Common.Communication;
 
 namespace aPC.Server.Communication
-{ 
+{
   public class CommunicationManager : IDisposable
   {
     public CommunicationManager(INotificationService xiNotificationService)
@@ -19,7 +19,7 @@ namespace aPC.Server.Communication
       string lBaseAddress = CommunicationSettings.GetServiceUrl(Dns.GetHostName(), eApplicationType.amBXPeripheralController);
 
       mHost = new ServiceHost(xiNotificationService.GetType(), new Uri(lBaseAddress));
-      
+
       AddHostBehaviors();
       AddEndpoint();
     }
@@ -31,7 +31,7 @@ namespace aPC.Server.Communication
 
     private void AddEndpoint()
     {
-      mHost.AddServiceEndpoint(typeof (INotificationService), new BasicHttpBinding(), "");
+      mHost.AddServiceEndpoint(typeof(INotificationService), new BasicHttpBinding(), "");
     }
 
     public void Close()

@@ -1,13 +1,13 @@
-﻿using System.IO;
-using System.Collections.Generic;
-using NUnit.Framework;
-using aPC.Common.Entities;
+﻿using aPC.Common.Entities;
 using aPC.Server.Communication;
+using NUnit.Framework;
+using System.Collections.Generic;
+using System.IO;
 
 namespace aPC.Server.Tests.Communication
 {
   [TestFixture]
-  class NotificationServiceTests
+  internal class NotificationServiceTests
   {
     [TestFixtureSetUp]
     public void TestFixtureSetup()

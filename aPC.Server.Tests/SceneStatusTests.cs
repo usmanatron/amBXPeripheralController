@@ -1,10 +1,9 @@
 ﻿using aPC.Common;
-using aPC.Server;
 using NUnit.Framework;
 
 namespace aPC.Server.Tests
 {
-  class SceneStatusTests
+  internal class SceneStatusTests
   {
     [Test]
     public void NewSceneStatus_BothTypesequal()

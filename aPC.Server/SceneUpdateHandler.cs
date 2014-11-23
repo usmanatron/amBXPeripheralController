@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using aPC.Common;
 using aPC.Common.Entities;
-using aPC.Common;
+using System;
 
 namespace aPC.Server
 {
-  class SceneUpdateHandler
+  internal class SceneUpdateHandler
   {
-    public SceneUpdateHandler(amBXScene xiInitialScene, amBXScene xiInitialEvent, 
+    public SceneUpdateHandler(amBXScene xiInitialScene, amBXScene xiInitialEvent,
       ConductorManager xiConductorManager, ISceneStatus xiStatus)
     {
       mConductorManager = xiConductorManager;
@@ -140,7 +136,7 @@ namespace aPC.Server
       mConductorManager.DisableSync();
     }
 
-    #endregion
+    #endregion Sync \ Events
 
     #region Desync
 
@@ -159,7 +155,7 @@ namespace aPC.Server
       mConductorManager.DisableDesync();
     }
 
-    #endregion
+    #endregion Desync
 
     private ConductorManager mConductorManager;
     private ISceneStatus mStatus;

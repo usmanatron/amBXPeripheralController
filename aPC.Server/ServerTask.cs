@@ -1,13 +1,8 @@
-﻿using aPC.Common;
+﻿using aPC.Common.Communication;
 using aPC.Common.Entities;
-using aPC.Server;
-using aPC.Server.Communication;
-using aPC.Common.Server.Conductors;
 using aPC.Common.Server.Engine;
-using aPC.Common.Server.Actors;
-using aPC.Common.Server.SceneHandlers;
+using aPC.Server.Communication;
 using System.Threading;
-using aPC.Common.Communication;
 
 namespace aPC.Server
 {
@@ -15,8 +10,8 @@ namespace aPC.Server
   {
     public ServerTask(
       amBXScene xiInitialScene,
-      amBXScene xiInitialEvent, 
-      ISceneStatus xiStatus, 
+      amBXScene xiInitialEvent,
+      ISceneStatus xiStatus,
       INotificationService xiNotificationService,
       IEngine xiEngine)
     {
@@ -48,7 +43,7 @@ namespace aPC.Server
     }
 
     /// <remarks>
-    ///   This is called when an event has been completed and reinstates the previous behaviour before the event 
+    ///   This is called when an event has been completed and reinstates the previous behaviour before the event
     ///   was run.
     /// </remarks>
     internal void EventComplete()
