@@ -63,7 +63,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
     }
 
     [Test]
-    [TestCaseSource("Directions")]
+    [TestCaseSource("directions")]
     public void NextLightSnapshot_ReturnsExpectedLight_DependantOnDirection(eDirection xiDirection)
     {
       var handler = new LightHandler(standardScene, action);

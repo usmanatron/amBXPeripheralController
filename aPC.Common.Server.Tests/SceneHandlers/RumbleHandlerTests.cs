@@ -64,7 +64,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
     }
 
     [Test]
-    [TestCaseSource("Directions")]
+    [TestCaseSource("directions")]
     public void NextRumbleSnapshot_ReturnsARumble_IrrespectiveOfDirection(eDirection xiDirection)
     {
       var handler = new RumbleHandler(standardScene, action);

@@ -12,7 +12,7 @@ namespace aPC.Common.Server.Tests
   internal class ConversionHelperTests
   {
     [Test]
-    [TestCaseSource("Directions")]
+    [TestCaseSource("directions")]
     public void eDirectionEnum_AgreesExactlyWithCompassDirectionEnum(eDirection direction)
     {
       var compassDirection = ConversionHelpers.GetDirection(direction);
@@ -21,7 +21,7 @@ namespace aPC.Common.Server.Tests
     }
 
     [Test]
-    [TestCaseSource("RumbleTypes")]
+    [TestCaseSource("rumbleTypes")]
     public void eRumbletypeEnum_AgreesExactlyWithRumbleTypeEnum(eRumbleType rumbleType)
     {
       var convertedRumbleType = ConversionHelpers.GetRumbleType(rumbleType);

@@ -34,7 +34,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
     }
 
     [Test]
-    [TestCaseSource("Directions")]
+    [TestCaseSource("directions")]
     public void GetNextSnapshot_ReturnsExpectedFrame_RegardlessOfDirection(eDirection xiDirection)
     {
       var handler = new FrameHandler(scene, action);

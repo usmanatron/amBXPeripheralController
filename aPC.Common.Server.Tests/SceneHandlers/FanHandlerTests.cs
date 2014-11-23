@@ -63,7 +63,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
     }
 
     [Test]
-    [TestCaseSource("Directions")]
+    [TestCaseSource("directions")]
     public void NextFanSnapshot_ReturnsExpectedFan_DependantOnDirection(eDirection direction)
     {
       var handler = new FanHandler(standardScene, action);
