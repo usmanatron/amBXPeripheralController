@@ -23,33 +23,33 @@ namespace aPC.Client
     protected override void OnStartup(StartupEventArgs e)
     {
       AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-      var lKernel = SetupKernel();
-      var lArguments = GetArguments();
+      var kernel = SetupKernel();
+      var arguments = GetArguments();
 
-      if (lArguments.Count > 0)
+      if (arguments.Count > 0)
       {
-        lKernel.Bind<ConsoleRunner>().ToSelf().WithConstructorArgument("xiArguments", lArguments);
-        var lRunner = lKernel.Get<ConsoleRunner>();
-        lRunner.Run();
+        kernel.Bind<ConsoleRunner>().ToSelf().WithConstructorArgument("xiArguments", arguments);
+        var runner = kernel.Get<ConsoleRunner>();
+        runner.Run();
       }
       else
       {
-        var lMainWindow = lKernel.Get<MainWindow>();
-        lMainWindow.ShowDialog();
+        var mainWindow = kernel.Get<MainWindow>();
+        mainWindow.ShowDialog();
       }
       Shutdown(0);
     }
 
     private StandardKernel SetupKernel()
     {
-      var lKernel = new StandardKernel();
+      var kernel = new StandardKernel();
 
-      lKernel.Bind<Settings>().ToSelf().InSingletonScope();
-      lKernel.Bind<INotificationClient>().To<NotificationClient>();
-      lKernel.Bind<IntegratedListing>().ToSelf().InSingletonScope();
-      lKernel.Bind<CustomListing>().ToSelf().InSingletonScope();
+      kernel.Bind<Settings>().ToSelf().InSingletonScope();
+      kernel.Bind<INotificationClient>().To<NotificationClient>();
+      kernel.Bind<IntegratedListing>().ToSelf().InSingletonScope();
+      kernel.Bind<CustomListing>().ToSelf().InSingletonScope();
 
-      return lKernel;
+      return kernel;
     }
 
     /// <remarks>
@@ -58,18 +58,18 @@ namespace aPC.Client
     /// </remarks>
     private List<string> GetArguments()
     {
-      var lArgs = Environment.GetCommandLineArgs();
+      var args = Environment.GetCommandLineArgs();
 
-      return lArgs
+      return args
         .Skip(1)
-        .Take(lArgs.Count() - 1)
+        .Take(args.Count() - 1)
         .ToList();
     }
 
     private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
     {
-      var lFilePath = Path.Combine(Environment.CurrentDirectory, "Exception.log");
-      System.IO.File.WriteAllText(lFilePath, e.ExceptionObject.ToString());
+      var filePath = Path.Combine(Environment.CurrentDirectory, "Exception.log");
+      System.IO.File.WriteAllText(filePath, e.ExceptionObject.ToString());
     }
   }
 }

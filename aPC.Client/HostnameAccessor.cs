@@ -2,12 +2,15 @@
 
 namespace aPC.Client
 {
-  //qqUMI This needs to use the HostnameAccessor instead of re-inventing it here!  This also probably won't work...
+  //TODO: This should use the common HostnameAccessor instead of re-inventing it here!
   public class UpdatableHostnameAccessor
   {
-    public UpdatableHostnameAccessor(HostnameInput xiHostnameInput)
+    private const string HostnameKey = "hostname";
+    private HostnameInput hostnameInput;
+
+    public UpdatableHostnameAccessor(HostnameInput hostnameInput)
     {
-      mHostnameInput = xiHostnameInput;
+      this.hostnameInput = hostnameInput;
     }
 
     public string Get()
@@ -17,24 +20,21 @@ namespace aPC.Client
 
     public void Update()
     {
-      var lNewHostname = GetNewHostname();
-      ConfigurationManager.AppSettings[HostnameKey] = lNewHostname;
+      var newHostname = GetNewHostname();
+      ConfigurationManager.AppSettings[HostnameKey] = newHostname;
     }
 
     private string GetNewHostname()
     {
       //TODO: Use ninject somehow here - right now it's necessary to stop an exception happening when hitting this
       // twice in the applications lifetime.
-      mHostnameInput = new HostnameInput();
-      mHostnameInput.ShowDialog();
-      var lNewHostname = mHostnameInput.NewHostname;
+      hostnameInput = new HostnameInput();
+      hostnameInput.ShowDialog();
+      var newHostname = hostnameInput.NewHostname;
 
-      return string.IsNullOrEmpty(lNewHostname)
+      return string.IsNullOrEmpty(newHostname)
         ? Get()
-        : lNewHostname;
+        : newHostname;
     }
-
-    private const string HostnameKey = "hostname";
-    private HostnameInput mHostnameInput;
   }
 }

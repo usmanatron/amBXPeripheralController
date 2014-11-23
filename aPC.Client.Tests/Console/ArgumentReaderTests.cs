@@ -10,10 +10,10 @@ namespace aPC.Client.Tests.Console
     [Test]
     [TestCase("One")]
     [TestCase("One|Two|Three")]
-    public void NotHavingTwoArguments_ThrowsException(string xiArguments)
+    public void NotHavingTwoArguments_ThrowsException(string arguments)
     {
-      var lArguments = xiArguments.Split('|');
-      Assert.Throws<UsageException>(() => GetSettingsFromArguments(lArguments));
+      var splitArguments = arguments.Split('|');
+      Assert.Throws<UsageException>(() => GetSettingsFromArguments(splitArguments));
     }
 
     [Test]
@@ -21,51 +21,51 @@ namespace aPC.Client.Tests.Console
     // Incorrect slash
     [TestCase(@"\i")]
     [TestCase(@"\f")]
-    public void UnexpectedFirstArgument_Throws(string xiFirstArgument)
+    public void UnexpectedFirstArgument_Throws(string firstArgument)
     {
-      var lArguments = new[] { xiFirstArgument, "OtherArg" };
-      Assert.Throws<UsageException>(() => GetSettingsFromArguments(lArguments));
+      var arguments = new[] { firstArgument, "OtherArg" };
+      Assert.Throws<UsageException>(() => GetSettingsFromArguments(arguments));
     }
 
     [Test]
     public void IntegratedScene_ParsedCorrectly()
     {
-      var lArguments = new[] { @"/I", "SceneName" };
-      var lSettings = GetSettingsFromArguments(lArguments);
+      var arguments = new[] { @"/I", "SceneName" };
+      var settings = GetSettingsFromArguments(arguments);
 
-      Assert.AreEqual(true, lSettings.IsIntegratedScene);
-      Assert.AreEqual(lSettings.SceneData, lArguments[1]);
+      Assert.AreEqual(true, settings.IsIntegratedScene);
+      Assert.AreEqual(settings.SceneData, arguments[1]);
     }
 
     [Test]
     public void CustomScene_ParsedCorrectly()
     {
-      var lArguments = new[] { @"/F", "ExampleScene.xml" };
-      var lSettings = GetSettingsFromArguments(lArguments);
+      var arguments = new[] { @"/F", "ExampleScene.xml" };
+      var settings = GetSettingsFromArguments(arguments);
 
-      Assert.AreEqual(false, lSettings.IsIntegratedScene);
-      Assert.AreEqual(lSettings.SceneData, GetExampleScene(lArguments[1]));
+      Assert.AreEqual(false, settings.IsIntegratedScene);
+      Assert.AreEqual(settings.SceneData, GetExampleScene(arguments[1]));
     }
 
     [Test]
     public void CustomScene_WithIvalidPath_Throws()
     {
-      var lArguments = new[] { @"/F", "DoesntExist.xml" };
-      Assert.Throws<UsageException>(() => new ArgumentReader(lArguments));
+      var arguments = new[] { @"/F", "DoesntExist.xml" };
+      Assert.Throws<UsageException>(() => new ArgumentReader(arguments));
     }
 
     #region Helpers
 
-    private string GetExampleScene(string xiFilename)
+    private string GetExampleScene(string filename)
     {
-      return File.ReadAllText(Path.GetFullPath(xiFilename));
+      return File.ReadAllText(Path.GetFullPath(filename));
     }
 
-    private Settings GetSettingsFromArguments(string[] xiArguments)
+    private Settings GetSettingsFromArguments(string[] arguments)
     {
-      var lSettings = new Settings();
-      new ArgumentReader(xiArguments).AddArgumentsToSettings(lSettings);
-      return lSettings;
+      var settings = new Settings();
+      new ArgumentReader(arguments).AddArgumentsToSettings(settings);
+      return settings;
     }
 
     #endregion Helpers

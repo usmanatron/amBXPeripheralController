@@ -7,14 +7,14 @@ namespace aPC.Client.Communication
   public class NotificationClient : NotificationClientBase
   {
     [Inject]
-    public NotificationClient(HostnameAccessor xiHostnameAccessor)
-      : base(xiHostnameAccessor)
+    public NotificationClient(HostnameAccessor hostnameAccessor)
+      : base(hostnameAccessor)
     {
     }
 
     // Overriding of the Url is used by tests
-    public NotificationClient(string xiHostname)
-      : base(xiHostname)
+    public NotificationClient(string hostname)
+      : base(hostname)
     {
     }
 

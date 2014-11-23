@@ -6,41 +6,43 @@ namespace aPC.Client.Console
 {
   public class ArgumentReader
   {
-    public ArgumentReader(IEnumerable<string> xiArguments)
+    private readonly Settings localSettings;
+
+    public ArgumentReader(IEnumerable<string> arguments)
     {
-      mLocalSettings = new Settings();
-      ReadArguments(xiArguments.ToList());
+      localSettings = new Settings();
+      ReadArguments(arguments.ToList());
     }
 
-    private void ReadArguments(List<string> xiArguments)
+    private void ReadArguments(List<string> arguments)
     {
-      if (xiArguments.Count != 2)
+      if (arguments.Count != 2)
       {
         throw new UsageException("Unexpected number of arguments");
       }
 
-      switch (xiArguments[0].ToLower())
+      switch (arguments[0].ToLower())
       {
         case @"/i":
-          mLocalSettings.Update(true, xiArguments[1]);
+          localSettings.Update(true, arguments[1]);
           break;
         case @"/f":
-          mLocalSettings.Update(false, RetrieveFile(xiArguments[1]));
+          localSettings.Update(false, RetrieveFile(arguments[1]));
           break;
         default:
           throw new UsageException("Unexpected first argument");
       }
     }
 
-    private string RetrieveFile(string xifilePath)
+    private string RetrieveFile(string filePath)
     {
       try
       {
-        var lInputFilePath = Path.GetFullPath(xifilePath);
+        var inputFilePath = Path.GetFullPath(filePath);
 
-        using (var lReader = new StreamReader(lInputFilePath))
+        using (var reader = new StreamReader(inputFilePath))
         {
-          return lReader.ReadToEnd();
+          return reader.ReadToEnd();
         }
       }
       catch
@@ -50,11 +52,9 @@ namespace aPC.Client.Console
       }
     }
 
-    public void AddArgumentsToSettings(Settings xiSettings)
+    public void AddArgumentsToSettings(Settings settings)
     {
-      xiSettings.Update(mLocalSettings.IsIntegratedScene, mLocalSettings.SceneData);
+      settings.Update(localSettings.IsIntegratedScene, localSettings.SceneData);
     }
-
-    private readonly Settings mLocalSettings;
   }
 }

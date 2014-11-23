@@ -4,25 +4,25 @@ namespace aPC.Client
 {
   public class SceneRunner
   {
-    public SceneRunner(Settings xiSettings, INotificationClient xiNotificationClient)
+    private readonly Settings settings;
+    private readonly INotificationClient notificationClient;
+
+    public SceneRunner(Settings settings, INotificationClient notificationClient)
     {
-      mNotificationClient = xiNotificationClient;
-      mSettings = xiSettings;
+      this.notificationClient = notificationClient;
+      this.settings = settings;
     }
 
     public void RunScene()
     {
-      if (mSettings.IsIntegratedScene)
+      if (settings.IsIntegratedScene)
       {
-        mNotificationClient.PushIntegratedScene(mSettings.SceneData);
+        notificationClient.PushIntegratedScene(settings.SceneData);
       }
       else
       {
-        mNotificationClient.PushCustomScene(mSettings.SceneData);
+        notificationClient.PushCustomScene(settings.SceneData);
       }
     }
-
-    private readonly Settings mSettings;
-    private readonly INotificationClient mNotificationClient;
   }
 }

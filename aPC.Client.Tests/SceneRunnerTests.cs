@@ -6,49 +6,49 @@ namespace aPC.Client.Tests
   [TestFixture]
   internal class SceneRunnerTests
   {
+    private TestNotificationClient testNotificationClient;
+
     [SetUp]
     public void Setup()
     {
-      mTestNotificationClient = new TestNotificationClient();
+      testNotificationClient = new TestNotificationClient();
     }
 
     //TODO: Move this to a better place
     [Test]
     public void MissingSceneData_GivesInvalidSettings()
     {
-      var lSettings = new Settings(true, string.Empty);
+      var settings = new Settings(true, string.Empty);
 
-      Assert.IsFalse(lSettings.IsValid);
+      Assert.IsFalse(settings.IsValid);
     }
 
     [Test]
     public void IntegratedScene_PushedAppropriately()
     {
-      var lSettings = new Settings(true, "Scene_Name");
-      var lTask = new SceneRunner(lSettings, mTestNotificationClient);
+      var settings = new Settings(true, "Scene_Name");
+      var task = new SceneRunner(settings, testNotificationClient);
 
-      lTask.RunScene();
+      task.RunScene();
 
-      Assert.IsTrue(lSettings.IsValid);
-      Assert.AreEqual(1, mTestNotificationClient.NumberOfIntegratedScenesPushed);
-      Assert.AreEqual(0, mTestNotificationClient.NumberOfCustomScenesPushed);
-      Assert.AreEqual("Scene_Name", mTestNotificationClient.IntegratedScenesPushed[0]);
+      Assert.IsTrue(settings.IsValid);
+      Assert.AreEqual(1, testNotificationClient.NumberOfIntegratedScenesPushed);
+      Assert.AreEqual(0, testNotificationClient.NumberOfCustomScenesPushed);
+      Assert.AreEqual("Scene_Name", testNotificationClient.IntegratedScenesPushed[0]);
     }
 
     [Test]
     public void CustomScene_PushedAppropriately()
     {
-      var lSettings = new Settings(false, "CustomScene");
-      var lTask = new SceneRunner(lSettings, mTestNotificationClient);
+      var settings = new Settings(false, "CustomScene");
+      var task = new SceneRunner(settings, testNotificationClient);
 
-      lTask.RunScene();
+      task.RunScene();
 
-      Assert.IsTrue(lSettings.IsValid);
-      Assert.AreEqual(0, mTestNotificationClient.NumberOfIntegratedScenesPushed);
-      Assert.AreEqual(1, mTestNotificationClient.NumberOfCustomScenesPushed);
-      Assert.AreEqual("CustomScene", mTestNotificationClient.CustomScenesPushed[0]);
+      Assert.IsTrue(settings.IsValid);
+      Assert.AreEqual(0, testNotificationClient.NumberOfIntegratedScenesPushed);
+      Assert.AreEqual(1, testNotificationClient.NumberOfCustomScenesPushed);
+      Assert.AreEqual("CustomScene", testNotificationClient.CustomScenesPushed[0]);
     }
-
-    private TestNotificationClient mTestNotificationClient;
   }
 }

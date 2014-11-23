@@ -7,73 +7,73 @@ namespace aPC.Client.Scene
 {
   public class CustomFileHandler
   {
-    public CustomFileHandler(CustomListing xiCustomListing)
+    private readonly CustomListing customListing;
+
+    public CustomFileHandler(CustomListing customListing)
     {
-      mCustomListing = xiCustomListing;
+      this.customListing = customListing;
     }
 
     public string AddNewFile()
     {
-      var lFullFilePath = GetFilenameFromDialog();
-      if (lFullFilePath == string.Empty)
+      var fullFilePath = GetFilenameFromDialog();
+      if (fullFilePath == string.Empty)
       {
         return string.Empty;
       }
 
-      return ImportFile(lFullFilePath)
-        ? ProfilesStore.GetFilenameWithoutExtension(lFullFilePath)
+      return ImportFile(fullFilePath)
+        ? ProfilesStore.GetFilenameWithoutExtension(fullFilePath)
         : string.Empty;
     }
 
     private string GetFilenameFromDialog()
     {
-      var lDialog = new OpenFileDialog { Multiselect = false, Filter = "Xml Files (*.xml)|*.xml" };
-      lDialog.ShowDialog();
-      return lDialog.FileName;
+      var dialog = new OpenFileDialog { Multiselect = false, Filter = "Xml Files (*.xml)|*.xml" };
+      dialog.ShowDialog();
+      return dialog.FileName;
     }
 
     /// <summary>
     ///   Import the given file, after doing a couple of checks.
     /// </summary>
     /// <returns>True if the file was successfully imported.</returns>
-    public bool ImportFile(string xiFilename)
+    public bool ImportFile(string filename)
     {
-      if (mCustomListing.Scenes.Keys.Any(scene => scene == xiFilename))
+      if (customListing.Scenes.Keys.Any(scene => scene == filename))
       {
-        var lOverwrite = MessageBox.Show("A scene with this filename already exists and will be overwritten.  Do you want to continue?",
+        var overwriteFile = MessageBox.Show("A scene with this filename already exists and will be overwritten.  Do you want to continue?",
                                          "Overwrite file?",
                                          MessageBoxButton.YesNo,
                                          MessageBoxImage.Question);
 
-        if (lOverwrite != MessageBoxResult.Yes)
+        if (overwriteFile != MessageBoxResult.Yes)
         {
           // Bail out
           return false;
         }
       }
 
-      var lTargetFullFilePath = Path.Combine(ProfilesStore.Directory, ProfilesStore.GetFilenameWithoutExtension(xiFilename) + ".xml");
-      File.Copy(xiFilename, lTargetFullFilePath);
+      var targetFullFilePath = Path.Combine(ProfilesStore.Directory, ProfilesStore.GetFilenameWithoutExtension(filename) + ".xml");
+      File.Copy(filename, targetFullFilePath);
       return true;
     }
 
     /// <summary>
     /// Delete the file with the given name
     /// </summary>
-    public void Delete(string xiKey)
+    public void Delete(string key)
     {
-      var lConfirmDeletion = MessageBox.Show("Are you sure you want to delete this file?",
+      var confirmDeletion = MessageBox.Show("Are you sure you want to delete this file?",
                                              "Delete file?",
                                              MessageBoxButton.YesNo,
                                              MessageBoxImage.Question);
-      if (lConfirmDeletion != MessageBoxResult.Yes)
+      if (confirmDeletion != MessageBoxResult.Yes)
       {
         return;
       }
 
-      File.Delete(Path.Combine(ProfilesStore.Directory, ProfilesStore.GetFilenameWithoutExtension(xiKey) + ".xml"));
+      File.Delete(Path.Combine(ProfilesStore.Directory, ProfilesStore.GetFilenameWithoutExtension(key) + ".xml"));
     }
-
-    private readonly CustomListing mCustomListing;
   }
 }

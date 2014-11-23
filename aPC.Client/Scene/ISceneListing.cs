@@ -10,6 +10,6 @@ namespace aPC.Client.Scene
 
     IEnumerable<string> DropdownListing { get; }
 
-    string GetValue(string xiKey);
+    string GetValue(string key);
   }
 }

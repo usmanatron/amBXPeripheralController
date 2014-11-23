@@ -7,15 +7,15 @@ namespace aPC.Client.Scene
   {
     public static string Directory = Path.Combine(Environment.CurrentDirectory, "Profiles");
 
-    public static string GetFilenameWithoutExtension(string xiFullFilename)
+    public static string GetFilenameWithoutExtension(string fullFilename)
     {
-      var lFistCharAfterLastSlash = xiFullFilename.LastIndexOf(@"\", StringComparison.Ordinal) + 1;
+      var firstCharAfterLastSlash = fullFilename.LastIndexOf(@"\", StringComparison.Ordinal) + 1;
 
-      var lIndexOfLastPeriod = xiFullFilename.LastIndexOf(@".", StringComparison.Ordinal);
-      var lXmlExtensionLength = xiFullFilename.Substring(lIndexOfLastPeriod).Length;
+      var indexOfLastPeriod = fullFilename.LastIndexOf(@".", StringComparison.Ordinal);
+      var xmlExtensionLength = fullFilename.Substring(indexOfLastPeriod).Length;
 
-      var lFilenameLength = xiFullFilename.Length - lFistCharAfterLastSlash - lXmlExtensionLength;
-      return xiFullFilename.Substring(lFistCharAfterLastSlash, lFilenameLength);
+      var filenameLength = fullFilename.Length - firstCharAfterLastSlash - xmlExtensionLength;
+      return fullFilename.Substring(firstCharAfterLastSlash, filenameLength);
     }
   }
 }

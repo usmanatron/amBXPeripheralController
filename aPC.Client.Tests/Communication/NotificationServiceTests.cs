@@ -7,46 +7,46 @@ namespace aPC.Client.Tests.Communication
   [TestFixture]
   internal class NotificationServiceTests
   {
+    private TestNotificationService host;
+    private NotificationClient client;
+
     [TestFixtureSetUp]
     public void SetupTests()
     {
-      mHost = new TestNotificationService();
-      mClient = new NotificationClient(mHost.Hostname);
+      this.host = new TestNotificationService();
+      this.client = new NotificationClient(host.Hostname);
     }
 
     [SetUp]
     public void ClearHost()
     {
-      mHost.ClearScenes();
+      host.ClearScenes();
     }
 
     [TestFixtureTearDown]
     public void TearDownTests()
     {
-      mHost.Dispose();
+      host.Dispose();
     }
 
     [Test]
     public void PushingACustomScene_SendsTheExpectedScene()
     {
-      mClient.PushCustomScene("ArbitraryScene");
+      client.PushCustomScene("ArbitraryScene");
 
-      Assert.AreEqual(1, mHost.Scenes.Count);
-      Assert.AreEqual(false, mHost.Scenes[0].Item1);
-      Assert.AreEqual("ArbitraryScene", mHost.Scenes[0].Item2);
+      Assert.AreEqual(1, host.Scenes.Count);
+      Assert.AreEqual(false, host.Scenes[0].Item1);
+      Assert.AreEqual("ArbitraryScene", host.Scenes[0].Item2);
     }
 
     [Test]
     public void PushingAnIntegratedScene_SendsTheExpectedScene()
     {
-      mClient.PushIntegratedScene("IntegratedScene");
+      client.PushIntegratedScene("IntegratedScene");
 
-      Assert.AreEqual(1, mHost.Scenes.Count);
-      Assert.AreEqual(true, mHost.Scenes[0].Item1);
-      Assert.AreEqual("IntegratedScene", mHost.Scenes[0].Item2);
+      Assert.AreEqual(1, host.Scenes.Count);
+      Assert.AreEqual(true, host.Scenes[0].Item1);
+      Assert.AreEqual("IntegratedScene", host.Scenes[0].Item2);
     }
-
-    private NotificationClient mClient;
-    private TestNotificationService mHost;
   }
 }

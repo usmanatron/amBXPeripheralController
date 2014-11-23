@@ -5,6 +5,8 @@ namespace aPC.Client.Scene
 {
   public class CustomListing : ISceneListing
   {
+    public Dictionary<string, string> Scenes { get; private set; }
+
     public CustomListing()
     {
       LoadScenes();
@@ -18,20 +20,20 @@ namespace aPC.Client.Scene
     private void LoadScenes()
     {
       Scenes = new Dictionary<string, string>();
-      var lFiles = Directory.EnumerateFiles(ProfilesStore.Directory);
+      var files = Directory.EnumerateFiles(ProfilesStore.Directory);
 
-      foreach (var lFile in lFiles)
+      foreach (var file in files)
       {
-        AddScene(ProfilesStore.GetFilenameWithoutExtension(lFile), File.ReadAllText(lFile));
+        AddScene(ProfilesStore.GetFilenameWithoutExtension(file), File.ReadAllText(file));
       }
 
       // Finally add a "browse" choice to select you're own scene
       Scenes.Add(BrowseItemName, "");
     }
 
-    public void AddScene(string xiKey, string xiValue)
+    public void AddScene(string key, string value)
     {
-      Scenes.Add(xiKey, xiValue);
+      Scenes.Add(key, value);
     }
 
     public IEnumerable<string> DropdownListing
@@ -42,9 +44,9 @@ namespace aPC.Client.Scene
       }
     }
 
-    public string GetValue(string xiKey)
+    public string GetValue(string key)
     {
-      return Scenes[xiKey];
+      return Scenes[key];
     }
 
     public string BrowseItemName
@@ -54,7 +56,5 @@ namespace aPC.Client.Scene
         return "<Add...>";
       }
     }
-
-    public Dictionary<string, string> Scenes { get; private set; }
   }
 }

@@ -5,11 +5,16 @@ namespace aPC.Client.Console
 {
   internal class ConsoleRunner
   {
-    public ConsoleRunner(Settings xiSettings, SceneRunner xiSceneRunner, List<string> xiArguments)
+    [DllImport("Kernel32.dll")]
+    private static extern bool AllocConsole();
+
+    private readonly SceneRunner sceneRunner;
+
+    public ConsoleRunner(Settings settings, SceneRunner sceneRunner, List<string> arguments)
     {
-      mSceneRunner = xiSceneRunner;
-      var lReader = new ArgumentReader(xiArguments);
-      lReader.AddArgumentsToSettings(xiSettings);
+      this.sceneRunner = sceneRunner;
+      var reader = new ArgumentReader(arguments);
+      reader.AddArgumentsToSettings(settings);
     }
 
     public void Run()
@@ -18,11 +23,11 @@ namespace aPC.Client.Console
 
       try
       {
-        mSceneRunner.RunScene();
+        sceneRunner.RunScene();
       }
-      catch (UsageException lException)
+      catch (UsageException exception)
       {
-        lException.DisplayUsage();
+        exception.DisplayUsage();
         System.Console.ReadLine();
       }
     }
@@ -31,10 +36,5 @@ namespace aPC.Client.Console
     {
       AllocConsole();
     }
-
-    [DllImport("Kernel32.dll")]
-    private static extern bool AllocConsole();
-
-    private readonly SceneRunner mSceneRunner;
   }
 }

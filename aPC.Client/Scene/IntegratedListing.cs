@@ -7,10 +7,15 @@ namespace aPC.Client.Scene
 {
   public class IntegratedListing : ISceneListing
   {
-    public IntegratedListing(SceneAccessor xiSceneAccessor, NotificationClient xiNotificationClient)
+    public Dictionary<string, string> Scenes { get; private set; }
+
+    private readonly SceneAccessor sceneAccessor;
+    private readonly NotificationClient notificationClient;
+
+    public IntegratedListing(SceneAccessor sceneAccessor, NotificationClient notificationClient)
     {
-      mAccessor = xiSceneAccessor;
-      mNotificationClient = xiNotificationClient;
+      this.sceneAccessor = sceneAccessor;
+      this.notificationClient = notificationClient;
       LoadScenes();
     }
 
@@ -23,12 +28,12 @@ namespace aPC.Client.Scene
     {
       Scenes = new Dictionary<string, string>();
 
-      var lScenes = mNotificationClient.GetSupportedIntegratedScenes()
+      var scenes = notificationClient.GetSupportedIntegratedScenes()
         .OrderBy(scene => scene);
 
-      foreach (var lScene in lScenes)
+      foreach (var scene in scenes)
       {
-        Scenes.Add(lScene, lScene);
+        Scenes.Add(scene, scene);
       }
     }
 
@@ -40,9 +45,9 @@ namespace aPC.Client.Scene
       }
     }
 
-    public string GetValue(string xiKey)
+    public string GetValue(string key)
     {
-      return Scenes[xiKey];
+      return Scenes[key];
     }
 
     public string BrowseItemName
@@ -52,10 +57,5 @@ namespace aPC.Client.Scene
         return string.Empty;
       }
     }
-
-    public Dictionary<string, string> Scenes { get; private set; }
-
-    private readonly SceneAccessor mAccessor;
-    private readonly NotificationClient mNotificationClient;
   }
 }
