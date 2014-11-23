@@ -8,17 +8,17 @@ namespace aPC.Web.App_Start
   /// </summary>
   public class NinjectDependencyResolver : NinjectDependencyScope, IDependencyResolver
   {
-    private IKernel mKernel;
+    private IKernel kernel;
 
     public NinjectDependencyResolver(IKernel kernel)
       : base(kernel)
     {
-      this.mKernel = kernel;
+      this.kernel = kernel;
     }
 
     public IDependencyScope BeginScope()
     {
-      return new NinjectDependencyScope(mKernel.BeginBlock());
+      return new NinjectDependencyScope(kernel.BeginBlock());
     }
   }
 }

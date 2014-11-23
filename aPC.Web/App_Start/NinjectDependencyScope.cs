@@ -12,38 +12,38 @@ namespace aPC.Web.App_Start
   /// </summary>
   public class NinjectDependencyScope : IDependencyScope
   {
-    private IResolutionRoot mResolver;
+    private IResolutionRoot resolver;
 
     internal NinjectDependencyScope(IResolutionRoot resolver)
     {
       Contract.Assert(resolver != null);
 
-      this.mResolver = resolver;
+      this.resolver = resolver;
     }
 
     public void Dispose()
     {
-      IDisposable disposable = mResolver as IDisposable;
+      IDisposable disposable = resolver as IDisposable;
       if (disposable != null)
         disposable.Dispose();
 
-      mResolver = null;
+      resolver = null;
     }
 
     public object GetService(Type serviceType)
     {
-      if (mResolver == null)
+      if (resolver == null)
         throw new ObjectDisposedException("this", "This scope has already been disposed");
 
-      return mResolver.TryGet(serviceType);
+      return resolver.TryGet(serviceType);
     }
 
     public IEnumerable<object> GetServices(Type serviceType)
     {
-      if (mResolver == null)
+      if (resolver == null)
         throw new ObjectDisposedException("this", "This scope has already been disposed");
 
-      return mResolver.GetAll(serviceType);
+      return resolver.GetAll(serviceType);
     }
   }
 }

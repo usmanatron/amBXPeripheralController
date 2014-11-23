@@ -9,45 +9,52 @@ namespace aPC.Web.Tests.Controllers.API
   [TestFixture]
   internal class CustomControllerTests
   {
+    private INotificationClient client;
+    private CustomController controller;
+
+    private const string validJsonInput = "";
+
+    // These are invalidated by having Scene Types which don't exist
+    private const string invalidXmlInput = "";
+
+    private const string invalidJsonInput = "";
+
     [SetUp]
     public void Setup()
     {
-      mClient = new TestNotificationClient();
-      mController = new CustomController(mClient);
+      client = new TestNotificationClient();
+      controller = new CustomController(client);
     }
 
     [Test]
     [TestCaseSource("ValidInput")]
-    public void Parse_WithValidInput_ReturnsOK(string xiScene)
+    public void Parse_WithValidInput_ReturnsOK(string scene)
     {
-      amBXScene lScene;
+      amBXScene sceneOut;
 
-      Assert.DoesNotThrow(() => lScene = mController.Parse(xiScene));
+      Assert.DoesNotThrow(() => sceneOut = controller.Parse(scene));
     }
 
     [Test]
     [TestCaseSource("InvalidInput")]
-    public void Parse_WithInvalidInput_ReturnsOK(string xiScene)
+    public void Parse_WithInvalidInput_ReturnsOK(string scene)
     {
-      amBXScene lScene;
+      amBXScene sceneOut;
 
-      Assert.DoesNotThrow(() => lScene = mController.Parse(xiScene));
+      Assert.DoesNotThrow(() => sceneOut = controller.Parse(scene));
     }
 
     private string[] ValidInput()
     {
-      return new[] { mValidXmlInput, mValidJsonInput };
+      return new[] { validXmlInput, validJsonInput };
     }
 
     private string[] InvalidInput()
     {
-      return new[] { mInvalidXmlInput, mInvalidJsonInput };
+      return new[] { invalidXmlInput, invalidJsonInput };
     }
 
-    private INotificationClient mClient;
-    private CustomController mController;
-
-    private const string mValidXmlInput = @"<amBXScene>
+    private const string validXmlInput = @"<amBXScene>
   <IsExclusive>true</IsExclusive>
   <SceneType>Desync</SceneType>
   <Frames>
@@ -79,12 +86,5 @@ namespace aPC.Web.Tests.Controllers.API
     </Frame>
   </Frames>
 </amBXScene>";
-
-    private const string mValidJsonInput = "";
-
-    // These are invalidated by having Scene Types which don't exist
-    private const string mInvalidXmlInput = "";
-
-    private const string mInvalidJsonInput = "";
   }
 }

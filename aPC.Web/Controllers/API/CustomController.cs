@@ -6,9 +6,11 @@ namespace aPC.Web.Controllers.API
 {
   public class CustomController : ApiController
   {
-    public CustomController(INotificationClient xiNotificationClient)
+    private INotificationClient notificationClient;
+
+    public CustomController(INotificationClient notificationClient)
     {
-      mNotificationClient = xiNotificationClient;
+      this.notificationClient = notificationClient;
     }
 
     // POST custom/parse
@@ -16,7 +18,5 @@ namespace aPC.Web.Controllers.API
     {
       return new amBXScene();
     }
-
-    private INotificationClient mNotificationClient;
   }
 }

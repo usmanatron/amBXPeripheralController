@@ -13,9 +13,11 @@ namespace aPC.Web.Controllers.API
 {
   public class IntegratedController : ApiController
   {
-    public IntegratedController(INotificationClient xiNotificationClient)
+    private readonly INotificationClient notificationClient;
+
+    public IntegratedController(INotificationClient notificationClient)
     {
-      mNotificationClient = xiNotificationClient;
+      this.notificationClient = notificationClient;
     }
 
     // GET api/integrated
@@ -44,14 +46,12 @@ namespace aPC.Web.Controllers.API
     {
       try
       {
-        mNotificationClient.PushIntegratedScene(name);
+        notificationClient.PushIntegratedScene(name);
       }
       catch (Exception)
       {
         throw new HttpResponseException(HttpStatusCode.InternalServerError);
       }
     }
-
-    private readonly INotificationClient mNotificationClient;
   }
 }

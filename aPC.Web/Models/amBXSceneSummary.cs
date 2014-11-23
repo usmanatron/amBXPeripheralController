@@ -11,14 +11,14 @@ namespace aPC.Web.Models
   [DataContract]
   public class amBXSceneSummary
   {
-    public amBXSceneSummary(KeyValuePair<string, amBXScene> xiScene)
+    public amBXSceneSummary(KeyValuePair<string, amBXScene> scene)
     {
-      SceneName = xiScene.Key;
-      SceneLength = xiScene.Value.FrameStatistics.SceneLength;
+      SceneName = scene.Key;
+      SceneLength = scene.Value.FrameStatistics.SceneLength;
 
-      var lSceneType = xiScene.Value.SceneType;
-      IsEvent = lSceneType == eSceneType.Event;
-      IsSynchronised = lSceneType == eSceneType.Sync || lSceneType == eSceneType.Event;
+      var sceneType = scene.Value.SceneType;
+      IsEvent = sceneType == eSceneType.Event;
+      IsSynchronised = sceneType == eSceneType.Sync || sceneType == eSceneType.Event;
     }
 
     [DataMember]

@@ -12,54 +12,54 @@ namespace aPC.Web.Tests.Controllers.API
   [TestFixture]
   public class IntegratedControllerTests
   {
+    private TestNotificationClient client;
+    private IntegratedController controller;
+
     [SetUp]
     public void Setup()
     {
-      mClient = new TestNotificationClient();
-      mController = new IntegratedController(mClient);
+      client = new TestNotificationClient();
+      controller = new IntegratedController(client);
     }
 
     [Test]
     public void GetWithoutName_ReturnsAllIntegratedScenes()
     {
-      var lIntegratedScenes = new SceneAccessor(new DefaultScenes()).GetAllScenes();
+      var integratedScenes = new SceneAccessor(new DefaultScenes()).GetAllScenes();
 
-      var lResults = mController.Get();
+      var results = controller.Get();
 
-      Assert.AreEqual(lIntegratedScenes.Count, lResults.Count());
-      CollectionAssert.AreEquivalent(lIntegratedScenes.Select(scene => scene.Key), lResults.Select(scene => scene.SceneName));
+      Assert.AreEqual(integratedScenes.Count, results.Count());
+      CollectionAssert.AreEquivalent(integratedScenes.Select(scene => scene.Key), results.Select(scene => scene.SceneName));
     }
 
     [Test]
     public void GetByName_ReturnsExpectedScene()
     {
-      var lScene = new SceneAccessor(new DefaultScenes()).GetScene("poolq2_event");
+      var scene = new SceneAccessor(new DefaultScenes()).GetScene("poolq2_event");
 
-      var lResult = mController.Get("poolq2_event");
+      var result = controller.Get("poolq2_event");
 
-      Assert.AreEqual(lScene.SceneType, lResult.SceneType);
-      Assert.AreEqual(lScene.FrameStatistics.SceneLength, lResult.FrameStatistics.SceneLength);
-      Assert.AreEqual(lScene.FrameStatistics.EnabledDirectionalComponents, lResult.FrameStatistics.EnabledDirectionalComponents);
+      Assert.AreEqual(scene.SceneType, result.SceneType);
+      Assert.AreEqual(scene.FrameStatistics.SceneLength, result.FrameStatistics.SceneLength);
+      Assert.AreEqual(scene.FrameStatistics.EnabledDirectionalComponents, result.FrameStatistics.EnabledDirectionalComponents);
     }
 
     [Test]
     public void GetByName_WhereNameDoesntExist_Returns404()
     {
-      var lException = Assert.Throws<HttpResponseException>(() => mController.Get("TotallyNonExistantScene"));
-      Assert.AreEqual(HttpStatusCode.NotFound, lException.Response.StatusCode);
+      var exception = Assert.Throws<HttpResponseException>(() => controller.Get("TotallyNonExistantScene"));
+      Assert.AreEqual(HttpStatusCode.NotFound, exception.Response.StatusCode);
     }
 
     [Test]
     public void Post_SendsExpectedScene()
     {
-      mController.Post("poolq2_event");
+      controller.Post("poolq2_event");
 
-      Assert.AreEqual(1, mClient.NumberOfIntegratedScenesPushed);
-      Assert.AreEqual(0, mClient.NumberOfCustomScenesPushed);
-      Assert.AreEqual("poolq2_event", mClient.IntegratedScenesPushed.First());
+      Assert.AreEqual(1, client.NumberOfIntegratedScenesPushed);
+      Assert.AreEqual(0, client.NumberOfCustomScenesPushed);
+      Assert.AreEqual("poolq2_event", client.IntegratedScenesPushed.First());
     }
-
-    private IntegratedController mController;
-    private TestNotificationClient mClient;
   }
 }
