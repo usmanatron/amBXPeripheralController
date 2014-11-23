@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace aPC.Client.Disco.Tests.Generators
 {
   [TestFixture]
-  class RandomLightSectionGeneratorTests
+  internal class RandomLightSectionGeneratorTests
   {
     [TestFixtureSetUp]
     public void SetupGenerator()

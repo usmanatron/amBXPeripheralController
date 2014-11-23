@@ -1,15 +1,14 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using aPC.Client.Disco.Tests.Generators;
-using aPC.Common.Communication;
+﻿using aPC.Client.Disco.Tests.Generators;
+using aPC.Common.Client;
 using aPC.Common.Client.Tests.Communication;
 using NUnit.Framework;
-using aPC.Common.Client;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace aPC.Client.Disco.Tests
 {
   [TestFixture]
-  class DiscoTaskTests
+  internal class DiscoTaskTests
   {
     [SetUp]
     public void Setup()
@@ -28,7 +27,7 @@ namespace aPC.Client.Disco.Tests
       var lTask = new Task(mDiscoTask.Run);
       lTask.Start();
       Thread.Sleep(4 * mSettings.PushInterval);
-      
+
       // Randomly generating the scenes each time takes a bit of time, which means that it may
       // not be exact (hence checking the value is around what we expect.
       Assert.LessOrEqual(3, mNotificationClient.NumberOfCustomScenesPushed);
@@ -41,7 +40,7 @@ namespace aPC.Client.Disco.Tests
     {
       int lInterval = (int)(1.5 * mSettings.PushInterval);
       var lTask = new Task(mDiscoTask.Run);
-      
+
       lTask.Start();
       Thread.Sleep(lInterval);
 

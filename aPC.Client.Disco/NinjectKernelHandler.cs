@@ -1,12 +1,12 @@
-﻿using aPC.Common.Client;
-using aPC.Client.Disco.Communication;
+﻿using aPC.Client.Disco.Communication;
 using aPC.Client.Disco.Generators;
-using aPC.Common.Entities;
+using aPC.Common.Client;
 using aPC.Common.Client.Communication;
+using aPC.Common.Entities;
 
 namespace aPC.Client.Disco
 {
-  class NinjectKernelHandler : NinjectKernelHandlerBase
+  internal class NinjectKernelHandler : NinjectKernelHandlerBase
   {
     protected override void SetupBindings()
     {

@@ -1,5 +1,4 @@
-﻿using aPC.Common.Client;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace aPC.Client.Disco
@@ -67,6 +66,6 @@ namespace aPC.Client.Disco
     }
 
     private List<string> args;
-    private Settings settings;    
+    private Settings settings;
   }
 }

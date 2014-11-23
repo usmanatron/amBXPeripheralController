@@ -14,8 +14,8 @@ namespace aPC.Client.Disco
         var lMessage = string.Format(
           "Range constructor values in the wrong order: " + Environment.NewLine +
           "Minimum: {0} " + Environment.NewLine +
-          "Maximum: {1}", 
-          minimum, 
+          "Maximum: {1}",
+          minimum,
           maximum);
         throw new ArgumentException(lMessage);
       }
@@ -25,7 +25,7 @@ namespace aPC.Client.Disco
     }
 
     /// <remarks>
-    ///   xiValue is expected to be between 0 and 1.  If this 
+    ///   xiValue is expected to be between 0 and 1.  If this
     ///   isn't the case, we clip the value appropriately instead of
     ///   throwing any error.
     /// </remarks>

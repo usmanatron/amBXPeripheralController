@@ -1,11 +1,11 @@
 ﻿using aPC.Client.Disco.Generators;
+using aPC.Common;
 using aPC.Common.Builders;
 using aPC.Common.Entities;
-using aPC.Common;
 
 namespace aPC.Client.Disco.Tests.Generators
 {
-  class TestRandomSceneGenerator : IGenerator<amBXScene>
+  internal class TestRandomSceneGenerator : IGenerator<amBXScene>
   {
     public TestRandomSceneGenerator(TestLightSectionGenerator xiLights)
     {

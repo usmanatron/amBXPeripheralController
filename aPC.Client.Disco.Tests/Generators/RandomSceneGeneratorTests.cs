@@ -1,12 +1,11 @@
 ﻿using aPC.Client.Disco.Generators;
 using aPC.Common.Client;
-using aPC.Common.Defaults;
 using NUnit.Framework;
 
 namespace aPC.Client.Disco.Tests.Generators
 {
   [TestFixture]
-  class RandomSceneGeneratorTests
+  internal class RandomSceneGeneratorTests
   {
     [TestFixtureSetUp]
     public void SetupGenerator()

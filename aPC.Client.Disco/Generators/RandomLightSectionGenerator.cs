@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
-using aPC.Common;
+﻿using aPC.Common;
 using aPC.Common.Builders;
 using aPC.Common.Entities;
+using System;
+using System.Linq;
 
 namespace aPC.Client.Disco.Generators
 {
@@ -16,7 +16,7 @@ namespace aPC.Client.Disco.Generators
 
     public LightSection Generate()
     {
-      var fadeTime = (int) settings.FadeTime.GetScaledValue(random.NextDouble());
+      var fadeTime = (int)settings.FadeTime.GetScaledValue(random.NextDouble());
       var sectionBuilder = new LightSectionBuilder().WithFadeTime(fadeTime);
 
       foreach (eDirection direction in Enum.GetValues(typeof(eDirection)).Cast<eDirection>())

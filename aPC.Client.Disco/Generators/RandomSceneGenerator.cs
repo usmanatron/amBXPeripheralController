@@ -1,6 +1,6 @@
-﻿using aPC.Common.Entities;
+﻿using aPC.Common;
 using aPC.Common.Builders;
-using aPC.Common;
+using aPC.Common.Entities;
 
 namespace aPC.Client.Disco.Generators
 {
@@ -21,7 +21,7 @@ namespace aPC.Client.Disco.Generators
 
       var frames = new FrameBuilder();
 
-      for (int i = 0; i < settings.FramesPerScene; i++ )
+      for (int i = 0; i < settings.FramesPerScene; i++)
       {
         AddNewFrame(frames);
       }

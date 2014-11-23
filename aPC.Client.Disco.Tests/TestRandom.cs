@@ -2,7 +2,7 @@
 
 namespace aPC.Client.Disco.Tests
 {
-  class TestRandom : Random
+  internal class TestRandom : Random
   {
     public TestRandom(double xiRandomNumber)
     {

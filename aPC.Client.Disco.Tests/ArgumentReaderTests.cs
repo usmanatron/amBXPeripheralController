@@ -1,8 +1,8 @@
-﻿using System.Reflection;
+﻿using aPC.Common.Client;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
-using aPC.Common.Client;
+using System.Reflection;
 
 namespace aPC.Client.Disco.Tests
 {
@@ -17,7 +17,7 @@ namespace aPC.Client.Disco.Tests
       var lArgumentSettings = lReader.ParseArguments();
       var lDefaultSettings = GetDefaultSettings();
 
-      foreach (FieldInfo lField in typeof (Settings).GetFields(BindingFlags.Public | BindingFlags.Instance))
+      foreach (FieldInfo lField in typeof(Settings).GetFields(BindingFlags.Public | BindingFlags.Instance))
       {
         Assert.AreEqual(lField.GetValue(lDefaultSettings), lField.GetValue(lArgumentSettings));
       }
@@ -47,7 +47,7 @@ namespace aPC.Client.Disco.Tests
       Assert.AreEqual(xiSettingsTest.ExpectedValue, xiSettingsTest.RangeSelector(lArgumentSettings));
     }
 
-    private readonly object[] GetArgumentCases = 
+    private readonly object[] GetArgumentCases =
     {
       new SettingsTester(new Range(0.3f, 0.7f), "red:0.3,0.7", settings => settings.RedColourWidth),
       new SettingsTester(new Range(0.21f, 0.89f), "green:0.21,0.89", settings => settings.GreenColourWidth),
@@ -57,7 +57,6 @@ namespace aPC.Client.Disco.Tests
       new SettingsTester("KRAKEN", "servers:KRAKEN", settings => settings.HostnameAccessor.GetAll().Single()),
       new SettingsTester(new List<string> { "ONE", "TWO" }, "servers:ONE,TWO", settings => settings.HostnameAccessor.GetAll())
     };
-
 
     [Test]
     // Invalid number of arguments

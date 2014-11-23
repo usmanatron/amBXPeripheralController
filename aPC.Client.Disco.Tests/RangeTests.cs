@@ -1,10 +1,10 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using System;
 
 namespace aPC.Client.Disco.Tests
 {
   [TestFixture]
-  class RangeTests
+  internal class RangeTests
   {
     [Test]
     [TestCase(0, 1f, 1f)]
@@ -50,7 +50,7 @@ namespace aPC.Client.Disco.Tests
       var lRange = GetStandardRange();
       Assert.AreEqual(false, lRange.Equals(null));
     }
-    
+
     [Test]
     [TestCase(2, 4, 3, 5)]
     [TestCase(2, 4, 1, 4)]

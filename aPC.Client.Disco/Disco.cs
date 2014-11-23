@@ -1,17 +1,16 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
-using aPC.Common.Client;
+using System.Linq;
 
 namespace aPC.Client.Disco
 {
-  class Disco
+  internal class Disco
   {
     public static void Main(string[] args)
     {
       var kernel = new NinjectKernelHandler();
       BuildSettings(args.ToList(), kernel.Get<Settings>());
-      
+
       var lTask = kernel.Get<DiscoTask>();
       lTask.Run();
     }
