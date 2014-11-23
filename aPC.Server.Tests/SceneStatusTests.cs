@@ -8,31 +8,31 @@ namespace aPC.Server.Tests
     [Test]
     public void NewSceneStatus_BothTypesequal()
     {
-      var lStatus = new SceneStatus(eSceneType.Desync);
+      var status = new SceneStatus(eSceneType.Desync);
 
-      Assert.AreEqual(eSceneType.Desync, lStatus.CurrentSceneType);
-      Assert.AreEqual(eSceneType.Desync, lStatus.PreviousSceneType);
+      Assert.AreEqual(eSceneType.Desync, status.CurrentSceneType);
+      Assert.AreEqual(eSceneType.Desync, status.PreviousSceneType);
     }
 
     [Test]
     public void PreviousScene_ReflectsPreviousSetting()
     {
-      var lStatus = new SceneStatus(eSceneType.Desync);
-      lStatus.CurrentSceneType = eSceneType.Sync;
+      var status = new SceneStatus(eSceneType.Desync);
+      status.CurrentSceneType = eSceneType.Sync;
 
-      Assert.AreEqual(eSceneType.Sync, lStatus.CurrentSceneType);
-      Assert.AreEqual(eSceneType.Desync, lStatus.PreviousSceneType);
+      Assert.AreEqual(eSceneType.Sync, status.CurrentSceneType);
+      Assert.AreEqual(eSceneType.Desync, status.PreviousSceneType);
     }
 
     [Test]
     public void SceneStatus_OnlyRecallsImmediatelyPreviousStatus()
     {
-      var lStatus = new SceneStatus(eSceneType.Desync);
-      lStatus.CurrentSceneType = eSceneType.Sync;
-      lStatus.CurrentSceneType = eSceneType.Event;
+      var status = new SceneStatus(eSceneType.Desync);
+      status.CurrentSceneType = eSceneType.Sync;
+      status.CurrentSceneType = eSceneType.Event;
 
-      Assert.AreEqual(eSceneType.Event, lStatus.CurrentSceneType);
-      Assert.AreEqual(eSceneType.Sync, lStatus.PreviousSceneType);
+      Assert.AreEqual(eSceneType.Event, status.CurrentSceneType);
+      Assert.AreEqual(eSceneType.Sync, status.PreviousSceneType);
     }
   }
 }

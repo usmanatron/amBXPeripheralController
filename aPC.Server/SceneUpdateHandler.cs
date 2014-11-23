@@ -6,12 +6,15 @@ namespace aPC.Server
 {
   internal class SceneUpdateHandler
   {
-    public SceneUpdateHandler(amBXScene xiInitialScene, amBXScene xiInitialEvent,
-      ConductorManager xiConductorManager, ISceneStatus xiStatus)
+    private ConductorManager conductorManager;
+    private ISceneStatus status;
+
+    public SceneUpdateHandler(amBXScene initialScene, amBXScene initialEvent,
+      ConductorManager conductorManager, ISceneStatus status)
     {
-      mConductorManager = xiConductorManager;
-      mStatus = xiStatus;
-      InitialiseConductors(xiInitialScene, xiInitialEvent);
+      this.conductorManager = conductorManager;
+      this.status = status;
+      InitialiseConductors(initialScene, initialEvent);
     }
 
     /// <summary>
@@ -19,18 +22,18 @@ namespace aPC.Server
     /// * An event to be played on the Sync Conductor, followed by
     /// * A repeated scene to be played on the Desync Conductors
     /// </summary>
-    private void InitialiseConductors(amBXScene xiInitialScene, amBXScene xiInitialEvent)
+    private void InitialiseConductors(amBXScene initialScene, amBXScene initialEvent)
     {
-      UpdateDesynchronisedActors(xiInitialScene);
+      UpdateDesynchronisedActors(initialScene);
       EnableDesynchronisedActors();
 
-      UpdateScene(xiInitialEvent);
+      UpdateScene(initialEvent);
     }
 
-    public void UpdateScene(amBXScene xiScene)
+    public void UpdateScene(amBXScene scene)
     {
-      mStatus.CurrentSceneType = xiScene.SceneType;
-      Update(xiScene);
+      status.CurrentSceneType = scene.SceneType;
+      Update(scene);
     }
 
     /// <summary>
@@ -41,55 +44,55 @@ namespace aPC.Server
     /// current scene types.  The method used for writing this out
     /// is a bit long-winded (hopefully to make it a bit clearer!)
     /// </remarks>
-    private void Update(amBXScene xiScene)
+    private void Update(amBXScene scene)
     {
-      switch (mStatus.PreviousSceneType)
+      switch (status.PreviousSceneType)
       {
         case eSceneType.Desync:
-          switch (mStatus.CurrentSceneType)
+          switch (status.CurrentSceneType)
           {
             case eSceneType.Desync:
-              UpdateDesynchronisedActors(xiScene);
+              UpdateDesynchronisedActors(scene);
               EnableDesynchronisedActors();
               break;
             case eSceneType.Sync:
-              UpdateDesynchronisedActors(xiScene);
-              UpdateSynchronisedActor(xiScene);
+              UpdateDesynchronisedActors(scene);
+              UpdateSynchronisedActor(scene);
               EnableSynchronisedActor();
               DisableDesynchronisedActors();
               break;
             case eSceneType.Event:
-              UpdateSynchronisedActor(xiScene);
+              UpdateSynchronisedActor(scene);
               EnableSynchronisedActor();
               DisableDesynchronisedActors();
               break;
           }
           break;
         case eSceneType.Sync:
-          switch (mStatus.CurrentSceneType)
+          switch (status.CurrentSceneType)
           {
             case eSceneType.Desync:
-              UpdateDesynchronisedActors(xiScene);
+              UpdateDesynchronisedActors(scene);
               EnableDesynchronisedActors();
               DisableSynchronisedActor();
               break;
             case eSceneType.Sync:
-              UpdateSynchronisedActor(xiScene);
-              UpdateDesynchronisedActors(xiScene);
+              UpdateSynchronisedActor(scene);
+              UpdateDesynchronisedActors(scene);
               EnableSynchronisedActor();
               break;
             case eSceneType.Event:
-              UpdateSynchronisedActor(xiScene);
+              UpdateSynchronisedActor(scene);
               EnableSynchronisedActor();
               break;
           }
           break;
         case eSceneType.Event:
-          switch (mStatus.CurrentSceneType)
+          switch (status.CurrentSceneType)
           {
             case eSceneType.Event:
               // Event -> Event is allowed and overwrites the previous event
-              UpdateSynchronisedActor(xiScene);
+              UpdateSynchronisedActor(scene);
               EnableSynchronisedActor();
               break;
             default:
@@ -104,8 +107,8 @@ namespace aPC.Server
     /// </summary>
     public void UpdatePostEvent()
     {
-      mStatus.CurrentSceneType = mStatus.PreviousSceneType;
-      switch (mStatus.CurrentSceneType)
+      status.CurrentSceneType = status.PreviousSceneType;
+      switch (status.CurrentSceneType)
       {
         case eSceneType.Desync:
           EnableDesynchronisedActors();
@@ -121,43 +124,40 @@ namespace aPC.Server
 
     #region Sync \ Events
 
-    private void UpdateSynchronisedActor(amBXScene xiScene)
+    private void UpdateSynchronisedActor(amBXScene scene)
     {
-      mConductorManager.UpdateSync(xiScene);
+      conductorManager.UpdateSync(scene);
     }
 
     private void EnableSynchronisedActor()
     {
-      mConductorManager.EnableSync();
+      conductorManager.EnableSync();
     }
 
     private void DisableSynchronisedActor()
     {
-      mConductorManager.DisableSync();
+      conductorManager.DisableSync();
     }
 
     #endregion Sync \ Events
 
     #region Desync
 
-    private void UpdateDesynchronisedActors(amBXScene xiScene)
+    private void UpdateDesynchronisedActors(amBXScene scene)
     {
-      mConductorManager.UpdateDeSync(xiScene);
+      conductorManager.UpdateDeSync(scene);
     }
 
     private void EnableDesynchronisedActors()
     {
-      mConductorManager.EnableDesync();
+      conductorManager.EnableDesync();
     }
 
     private void DisableDesynchronisedActors()
     {
-      mConductorManager.DisableDesync();
+      conductorManager.DisableDesync();
     }
 
     #endregion Desync
-
-    private ConductorManager mConductorManager;
-    private ISceneStatus mStatus;
   }
 }

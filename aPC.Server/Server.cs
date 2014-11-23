@@ -10,24 +10,24 @@ namespace aPC.Server
   {
     private static void Main(string[] args)
     {
-      Log.Info("Server Initialising...");
+      log.Info("Server Initialising...");
 
-      var lAccessor = new SceneAccessor(new DefaultScenes());
-      var lInitialEvent = lAccessor.GetScene("Server_Startup");
-      var lInitialScene = lAccessor.GetScene("Rainbow");
-      var lStatus = new SceneStatus(lInitialScene.SceneType);
+      var accessor = new SceneAccessor(new DefaultScenes());
+      var initialEvent = accessor.GetScene("Server_Startup");
+      var initialScene = accessor.GetScene("Rainbow");
+      var status = new SceneStatus(initialScene.SceneType);
 
-      ServerTask = new ServerTask(lInitialScene,
-                                  lInitialEvent,
-                                  lStatus,
+      ServerTask = new ServerTask(initialScene,
+                                  initialEvent,
+                                  status,
                                   new NotificationService(),
                                   new EngineManager());
 
-      Log.Info("Server Ready.");
+      log.Info("Server Ready.");
       ServerTask.Run();
     }
 
-    private static ILog Log = LogManager.GetLogger("Server");
+    private static ILog log = LogManager.GetLogger("Server");
     internal static ServerTask ServerTask;
   }
 }

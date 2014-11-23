@@ -11,22 +11,25 @@ namespace aPC.Server
 
   public class SceneStatus : ISceneStatus
   {
-    public SceneStatus(eSceneType xiSceneType)
+    private eSceneType currentSceneType;
+    private eSceneType previousSceneType;
+
+    public SceneStatus(eSceneType sceneType)
     {
-      mCurrentSceneType = xiSceneType;
-      mPreviousSceneType = xiSceneType;
+      currentSceneType = sceneType;
+      previousSceneType = sceneType;
     }
 
     public eSceneType CurrentSceneType
     {
       get
       {
-        return mCurrentSceneType;
+        return currentSceneType;
       }
       set
       {
-        mPreviousSceneType = mCurrentSceneType;
-        mCurrentSceneType = value;
+        previousSceneType = currentSceneType;
+        currentSceneType = value;
       }
     }
 
@@ -34,11 +37,8 @@ namespace aPC.Server
     {
       get
       {
-        return mPreviousSceneType;
+        return previousSceneType;
       }
     }
-
-    private eSceneType mCurrentSceneType;
-    private eSceneType mPreviousSceneType;
   }
 }

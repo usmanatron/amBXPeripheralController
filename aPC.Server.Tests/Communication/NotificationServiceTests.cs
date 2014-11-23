@@ -9,47 +9,46 @@ namespace aPC.Server.Tests.Communication
   [TestFixture]
   internal class NotificationServiceTests
   {
+    private NotificationService notificationService;
+    private List<amBXScene> pushedScenes;
+
     [TestFixtureSetUp]
     public void TestFixtureSetup()
     {
-      mPushedScenes = new List<amBXScene>();
-      mNotificationService = new NotificationService(scene => mPushedScenes.Add(scene));
+      pushedScenes = new List<amBXScene>();
+      notificationService = new NotificationService(scene => pushedScenes.Add(scene));
     }
 
     [TearDown]
     public void TearDown()
     {
-      mPushedScenes.Clear();
+      pushedScenes.Clear();
     }
+
+    // TODO: Potentially add more assertions to the 3 tests below:
 
     [Test]
     public void PushedCustomScene_Updated()
     {
-      mNotificationService.RunCustomScene(File.ReadAllText("ExampleScene.xml"));
+      notificationService.RunCustomScene(File.ReadAllText("ExampleScene.xml"));
 
-      Assert.AreEqual(1, mPushedScenes.Count);
-      //qq
+      Assert.AreEqual(1, pushedScenes.Count);
     }
 
     [Test]
     public void PushedValidIntegratedScene_Updated()
     {
-      mNotificationService.RunIntegratedScene("Default_RedVsBlue");
+      notificationService.RunIntegratedScene("Default_RedVsBlue");
 
-      Assert.AreEqual(1, mPushedScenes.Count);
-      //qq
+      Assert.AreEqual(1, pushedScenes.Count);
     }
 
     [Test]
     public void PushedInvalidIntegratedScene_DefaultstoErrorFlash()
     {
-      mNotificationService.RunIntegratedScene("TotallyInvalidSceneName");
+      notificationService.RunIntegratedScene("TotallyInvalidSceneName");
 
-      Assert.AreEqual(1, mPushedScenes.Count);
-      //qq
+      Assert.AreEqual(1, pushedScenes.Count);
     }
-
-    private NotificationService mNotificationService;
-    private List<amBXScene> mPushedScenes;
   }
 }

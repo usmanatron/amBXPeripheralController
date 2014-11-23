@@ -13,48 +13,51 @@ namespace aPC.Server
 {
   public class ConductorManager
   {
-    public ConductorManager(IEngine xiEngine, amBXScene xiScene, Action xiEventComplete)
+    protected FrameConductor frameConductor;
+    protected List<IConductor> desyncConductors;
+
+    public ConductorManager(IEngine xiEngine, amBXScene scene, Action eventComplete)
     {
-      mDesyncConductors = new List<IConductor>();
-      SetupManagers(xiEngine, xiScene, xiEventComplete);
+      desyncConductors = new List<IConductor>();
+      SetupManagers(xiEngine, scene, eventComplete);
     }
 
-    private void SetupManagers(IEngine xiEngine, amBXScene xiScene, Action xiAction)
+    private void SetupManagers(IEngine engine, amBXScene scene, Action action)
     {
-      mFrameConductor = new FrameConductor(new FrameActor(xiEngine), new FrameHandler(xiScene, xiAction));
+      frameConductor = new FrameConductor(new FrameActor(engine), new FrameHandler(scene, action));
 
-      mDesyncConductors.Add(new LightConductor(eDirection.North, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
-      mDesyncConductors.Add(new LightConductor(eDirection.NorthEast, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
-      mDesyncConductors.Add(new LightConductor(eDirection.East, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
-      mDesyncConductors.Add(new LightConductor(eDirection.SouthEast, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
-      mDesyncConductors.Add(new LightConductor(eDirection.South, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
-      mDesyncConductors.Add(new LightConductor(eDirection.SouthWest, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
-      mDesyncConductors.Add(new LightConductor(eDirection.West, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
-      mDesyncConductors.Add(new LightConductor(eDirection.NorthWest, new LightActor(xiEngine), new LightHandler(xiScene, xiAction)));
+      desyncConductors.Add(new LightConductor(eDirection.North, new LightActor(engine), new LightHandler(scene, action)));
+      desyncConductors.Add(new LightConductor(eDirection.NorthEast, new LightActor(engine), new LightHandler(scene, action)));
+      desyncConductors.Add(new LightConductor(eDirection.East, new LightActor(engine), new LightHandler(scene, action)));
+      desyncConductors.Add(new LightConductor(eDirection.SouthEast, new LightActor(engine), new LightHandler(scene, action)));
+      desyncConductors.Add(new LightConductor(eDirection.South, new LightActor(engine), new LightHandler(scene, action)));
+      desyncConductors.Add(new LightConductor(eDirection.SouthWest, new LightActor(engine), new LightHandler(scene, action)));
+      desyncConductors.Add(new LightConductor(eDirection.West, new LightActor(engine), new LightHandler(scene, action)));
+      desyncConductors.Add(new LightConductor(eDirection.NorthWest, new LightActor(engine), new LightHandler(scene, action)));
 
-      mDesyncConductors.Add(new FanConductor(eDirection.East, new FanActor(xiEngine), new FanHandler(xiScene, xiAction)));
-      mDesyncConductors.Add(new FanConductor(eDirection.West, new FanActor(xiEngine), new FanHandler(xiScene, xiAction)));
+      desyncConductors.Add(new FanConductor(eDirection.East, new FanActor(engine), new FanHandler(scene, action)));
+      desyncConductors.Add(new FanConductor(eDirection.West, new FanActor(engine), new FanHandler(scene, action)));
 
-      mDesyncConductors.Add(new RumbleConductor(eDirection.Center, new RumbleActor(xiEngine), new RumbleHandler(xiScene, xiAction)));
+      desyncConductors.Add(new RumbleConductor(eDirection.Center, new RumbleActor(engine), new RumbleHandler(scene, action)));
     }
 
     #region Update Scene
 
-    public void UpdateSync(amBXScene xiScene)
+    public void UpdateSync(amBXScene scene)
     {
-      mFrameConductor.UpdateScene(xiScene);
+      frameConductor.UpdateScene(scene);
     }
 
-    public void UpdateDeSync(amBXScene xiScene)
+    public void UpdateDeSync(amBXScene scene)
     {
-      Parallel.ForEach(mDesyncConductors, conductor => UpdateSceneIfRelevant(conductor, xiScene));
+      Parallel.ForEach(desyncConductors, conductor => UpdateSceneIfRelevant(conductor, scene));
     }
 
-    private void UpdateSceneIfRelevant(IConductor xiConductor, amBXScene xiScene)
+    private void UpdateSceneIfRelevant(IConductor conductor, amBXScene scene)
     {
-      if (IsApplicableForConductor(xiScene.FrameStatistics, xiConductor.ComponentType, xiConductor.Direction))
+      if (IsApplicableForConductor(scene.FrameStatistics, conductor.ComponentType, conductor.Direction))
       {
-        xiConductor.UpdateScene(xiScene);
+        conductor.UpdateScene(scene);
       }
     }
 
@@ -65,35 +68,32 @@ namespace aPC.Server
 
     public void EnableSync()
     {
-      EnableAndRunIfRequired(mFrameConductor);
+      EnableAndRunIfRequired(frameConductor);
     }
 
     public void EnableDesync()
     {
-      mDesyncConductors.ForEach(conductor => EnableAndRunIfRequired(conductor));
+      desyncConductors.ForEach(conductor => EnableAndRunIfRequired(conductor));
     }
 
-    private void EnableAndRunIfRequired(IConductor xiConductor)
+    private void EnableAndRunIfRequired(IConductor conductor)
     {
-      xiConductor.Enable();
+      conductor.Enable();
 
-      if (!xiConductor.IsRunning.Get)
+      if (!conductor.IsRunning.Get)
       {
-        ThreadPool.QueueUserWorkItem(_ => xiConductor.Run());
+        ThreadPool.QueueUserWorkItem(_ => conductor.Run());
       }
     }
 
     public void DisableSync()
     {
-      mFrameConductor.Disable();
+      frameConductor.Disable();
     }
 
     public void DisableDesync()
     {
-      mDesyncConductors.ForEach(conductor => conductor.Disable());
+      desyncConductors.ForEach(conductor => conductor.Disable());
     }
-
-    protected FrameConductor mFrameConductor;
-    protected List<IConductor> mDesyncConductors;
   }
 }

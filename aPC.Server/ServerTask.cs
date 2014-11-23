@@ -8,27 +8,35 @@ namespace aPC.Server
 {
   internal class ServerTask
   {
+    private ConductorManager conductorManager;
+    private amBXScene initialScene;
+    private amBXScene initialEvent;
+    private SceneUpdateHandler mSceneUpdateHandler;
+    private ISceneStatus status;
+    private INotificationService notificationService;
+    private IEngine engine;
+
     public ServerTask(
-      amBXScene xiInitialScene,
-      amBXScene xiInitialEvent,
-      ISceneStatus xiStatus,
-      INotificationService xiNotificationService,
-      IEngine xiEngine)
+      amBXScene initialScene,
+      amBXScene initialEvent,
+      ISceneStatus status,
+      INotificationService notificationService,
+      IEngine engine)
     {
-      mInitialScene = xiInitialScene;
-      mInitialEvent = xiInitialEvent;
-      mStatus = xiStatus;
-      mNotificationService = xiNotificationService;
-      mEngine = xiEngine;
+      this.initialScene = initialScene;
+      this.initialEvent = initialEvent;
+      this.status = status;
+      this.notificationService = notificationService;
+      this.engine = engine;
     }
 
     internal void Run()
     {
-      using (new CommunicationManager(mNotificationService))
-      using (mEngine)
+      using (new CommunicationManager(notificationService))
+      using (engine)
       {
-        mConductorManager = new ConductorManager(mEngine, mInitialScene, EventComplete);
-        mSceneUpdateHandler = new SceneUpdateHandler(mInitialScene, mInitialEvent, mConductorManager, mStatus);
+        conductorManager = new ConductorManager(engine, initialScene, EventComplete);
+        mSceneUpdateHandler = new SceneUpdateHandler(initialScene, initialEvent, conductorManager, status);
 
         while (true)
         {
@@ -37,9 +45,9 @@ namespace aPC.Server
       }
     }
 
-    internal void Update(amBXScene xiScene)
+    internal void Update(amBXScene scene)
     {
-      mSceneUpdateHandler.UpdateScene(xiScene);
+      mSceneUpdateHandler.UpdateScene(scene);
     }
 
     /// <remarks>
@@ -50,13 +58,5 @@ namespace aPC.Server
     {
       mSceneUpdateHandler.UpdatePostEvent();
     }
-
-    private ConductorManager mConductorManager;
-    private amBXScene mInitialScene;
-    private amBXScene mInitialEvent;
-    private SceneUpdateHandler mSceneUpdateHandler;
-    private ISceneStatus mStatus;
-    private INotificationService mNotificationService;
-    private IEngine mEngine;
   }
 }

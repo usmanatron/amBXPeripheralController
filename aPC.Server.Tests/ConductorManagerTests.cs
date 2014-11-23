@@ -10,45 +10,45 @@ namespace aPC.Server.Tests
   [TestFixture]
   internal class ConductorManagerTests
   {
+    private TestEngineManager engine;
+    private TestConductorManager conductorManager;
+    private amBXScene differentScene;
+
     [SetUp]
     public void Setup()
     {
-      mEngine = new TestEngineManager();
-      var lDefaultScenes = new DefaultScenes();
+      engine = new TestEngineManager();
+      var defaultScenes = new DefaultScenes();
 
-      var lScene = lDefaultScenes.Building;
-      mDifferentScene = lDefaultScenes.BuildBrokenAndBuilding;
-      mConductorManager = new TestConductorManager(mEngine, lScene);
+      var scene = defaultScenes.Building;
+      differentScene = defaultScenes.BuildBrokenAndBuilding;
+      conductorManager = new TestConductorManager(engine, scene);
     }
 
     [Test]
     public void EnablingSync_SetsFrameConductorRunning()
     {
-      mConductorManager.EnableSync();
+      conductorManager.EnableSync();
       Thread.Sleep(400);
 
-      Assert.IsTrue(mConductorManager.FrameConductor.IsRunning.Get);
+      Assert.IsTrue(conductorManager.FrameConductor.IsRunning.Get);
     }
 
     [Test]
     public void UpdateSync_UpdatesSceneInFrameConductor()
     {
-      mConductorManager.UpdateSync(mDifferentScene);
+      conductorManager.UpdateSync(differentScene);
     }
 
     [Test]
     public void EnablingDesync_SetsDesyncConductorsRunning()
     {
-      mConductorManager.EnableDesync();
+      conductorManager.EnableDesync();
       Thread.Sleep(400);
 
-      mConductorManager.LightConductors.ToList().ForEach(light => Assert.IsTrue(light.IsRunning.Get));
-      mConductorManager.FanConductors.ToList().ForEach(fan => Assert.IsTrue(fan.IsRunning.Get));
-      mConductorManager.RumbleConductors.ToList().ForEach(rumble => Assert.IsTrue(rumble.IsRunning.Get));
+      conductorManager.LightConductors.ToList().ForEach(light => Assert.IsTrue(light.IsRunning.Get));
+      conductorManager.FanConductors.ToList().ForEach(fan => Assert.IsTrue(fan.IsRunning.Get));
+      conductorManager.RumbleConductors.ToList().ForEach(rumble => Assert.IsTrue(rumble.IsRunning.Get));
     }
-
-    private TestEngineManager mEngine;
-    private TestConductorManager mConductorManager;
-    private amBXScene mDifferentScene;
   }
 }

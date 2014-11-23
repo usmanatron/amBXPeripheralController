@@ -9,29 +9,29 @@ namespace aPC.Server.Tests
 {
   internal class TestConductorManager : ConductorManager
   {
-    public TestConductorManager(IEngine xiEngine, amBXScene xiScene)
-      : base(xiEngine, xiScene, null)
+    public TestConductorManager(IEngine engine, amBXScene scene)
+      : base(engine, scene, null)
     {
     }
 
     public FrameConductor FrameConductor
     {
-      get { return mFrameConductor; }
+      get { return frameConductor; }
     }
 
     public IEnumerable<LightConductor> LightConductors
     {
-      get { return mDesyncConductors.Where(conductor => conductor.ComponentType == eComponentType.Light).Cast<LightConductor>(); }
+      get { return desyncConductors.Where(conductor => conductor.ComponentType == eComponentType.Light).Cast<LightConductor>(); }
     }
 
     public IEnumerable<FanConductor> FanConductors
     {
-      get { return mDesyncConductors.Where(conductor => conductor.ComponentType == eComponentType.Fan).Cast<FanConductor>(); }
+      get { return desyncConductors.Where(conductor => conductor.ComponentType == eComponentType.Fan).Cast<FanConductor>(); }
     }
 
     public IEnumerable<RumbleConductor> RumbleConductors
     {
-      get { return mDesyncConductors.Where(conductor => conductor.ComponentType == eComponentType.Rumble).Cast<RumbleConductor>(); }
+      get { return desyncConductors.Where(conductor => conductor.ComponentType == eComponentType.Rumble).Cast<RumbleConductor>(); }
     }
   }
 }

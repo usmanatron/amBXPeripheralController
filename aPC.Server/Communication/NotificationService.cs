@@ -11,30 +11,32 @@ namespace aPC.Server.Communication
 {
   public class NotificationService : INotificationService
   {
+    private Action<amBXScene> action;
+
     public NotificationService()
       : this(scene => Server.ServerTask.Update(scene))
     {
     }
 
     // Used for tests
-    public NotificationService(Action<amBXScene> xiUpdateScene)
+    public NotificationService(Action<amBXScene> updateScene)
     {
-      mAction = xiUpdateScene;
+      action = updateScene;
     }
 
-    public void RunCustomScene(string xiSceneXml)
+    public void RunCustomScene(string sceneXml)
     {
-      var lScene = DeserialiseScene(xiSceneXml);
-      UpdateScene(lScene);
+      var scene = DeserialiseScene(sceneXml);
+      UpdateScene(scene);
     }
 
-    public void RunIntegratedScene(string xiSceneName)
+    public void RunIntegratedScene(string sceneName)
     {
-      var lAccessor = new SceneAccessor(new DefaultScenes());
-      var lScene = lAccessor.GetScene(xiSceneName) ??
-                   lAccessor.GetScene("Error_Flash");
+      var accessor = new SceneAccessor(new DefaultScenes());
+      var scene = accessor.GetScene(sceneName) ??
+                   accessor.GetScene("Error_Flash");
 
-      UpdateScene(lScene);
+      UpdateScene(scene);
     }
 
     public string[] GetSupportedIntegratedScenes()
@@ -46,20 +48,18 @@ namespace aPC.Server.Communication
         .ToArray();
     }
 
-    private amBXScene DeserialiseScene(string xiSceneXml)
+    private amBXScene DeserialiseScene(string sceneXml)
     {
-      using (var lReader = new StringReader(xiSceneXml))
+      using (var reader = new StringReader(sceneXml))
       {
-        var lSerialiser = new XmlSerializer(typeof(amBXScene));
-        return (amBXScene)lSerialiser.Deserialize(lReader);
+        var serialiser = new XmlSerializer(typeof(amBXScene));
+        return (amBXScene)serialiser.Deserialize(reader);
       }
     }
 
-    protected void UpdateScene(amBXScene xiScene)
+    protected void UpdateScene(amBXScene scene)
     {
-      mAction(xiScene);
+      action(scene);
     }
-
-    private Action<amBXScene> mAction;
   }
 }

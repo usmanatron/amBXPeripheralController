@@ -8,17 +8,19 @@ namespace aPC.Server.Communication
 {
   public class CommunicationManager : IDisposable
   {
-    public CommunicationManager(INotificationService xiNotificationService)
+    private ServiceHost host;
+
+    public CommunicationManager(INotificationService notificationService)
     {
-      SetupHost(xiNotificationService);
-      mHost.Open();
+      SetupHost(notificationService);
+      host.Open();
     }
 
-    private void SetupHost(INotificationService xiNotificationService)
+    private void SetupHost(INotificationService notificationService)
     {
-      string lBaseAddress = CommunicationSettings.GetServiceUrl(Dns.GetHostName(), eApplicationType.amBXPeripheralController);
+      string baseAddress = CommunicationSettings.GetServiceUrl(Dns.GetHostName(), eApplicationType.amBXPeripheralController);
 
-      mHost = new ServiceHost(xiNotificationService.GetType(), new Uri(lBaseAddress));
+      host = new ServiceHost(notificationService.GetType(), new Uri(baseAddress));
 
       AddHostBehaviors();
       AddEndpoint();
@@ -26,24 +28,22 @@ namespace aPC.Server.Communication
 
     private void AddHostBehaviors()
     {
-      mHost.Description.Behaviors.Add(new ServiceMetadataBehavior { HttpGetEnabled = true });
+      host.Description.Behaviors.Add(new ServiceMetadataBehavior { HttpGetEnabled = true });
     }
 
     private void AddEndpoint()
     {
-      mHost.AddServiceEndpoint(typeof(INotificationService), new BasicHttpBinding(), "");
+      host.AddServiceEndpoint(typeof(INotificationService), new BasicHttpBinding(), "");
     }
 
     public void Close()
     {
-      mHost.Close();
+      host.Close();
     }
 
     public void Dispose()
     {
       Close();
     }
-
-    private ServiceHost mHost;
   }
 }
