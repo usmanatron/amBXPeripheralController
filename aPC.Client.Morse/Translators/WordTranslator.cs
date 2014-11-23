@@ -7,28 +7,28 @@ namespace aPC.Client.Morse.Translators
 {
   public class WordTranslator : TranslatorBase
   {
-    public WordTranslator(string xiWord)
+    private string word;
+
+    public WordTranslator(string word)
     {
-      if (xiWord.Contains(' '))
+      if (word.Contains(' '))
       {
-        throw new InvalidOperationException("A space was found in the following word to be translated, |" + xiWord + "|, which is not supported.");
+        throw new InvalidOperationException("A space was found in the following word to be translated, |" + word + "|, which is not supported.");
       }
 
-      mWord = xiWord;
+      this.word = word;
     }
 
     public override List<IMorseBlock> Translate()
     {
-      var lTranslatedWord = new List<List<IMorseBlock>>();
+      var translatedWord = new List<List<IMorseBlock>>();
 
-      foreach (var lCharacter in mWord.ToCharArray())
+      foreach (var character in word.ToCharArray())
       {
-        lTranslatedWord.Add(new CharacterTranslator(lCharacter).Translate());
+        translatedWord.Add(new CharacterTranslator(character).Translate());
       }
 
-      return AddSeparatorsToList(lTranslatedWord, new CharacterSeparator());
+      return AddSeparatorsToList(translatedWord, new CharacterSeparator());
     }
-
-    private string mWord;
   }
 }

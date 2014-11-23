@@ -19,50 +19,50 @@ namespace aPC.Client.Morse.Tests.Translators
     [Test]
     public void SingleCharacterWord_ReturnsTheCharacter()
     {
-      var lCharacter = 'A';
+      var character = 'A';
 
-      var lTranslatedWord = new WordTranslator(lCharacter.ToString()).Translate();
-      var lTranslatedCharacter = new CharacterTranslator(lCharacter).Translate();
+      var translatedWord = new WordTranslator(character.ToString()).Translate();
+      var translatedCharacter = new CharacterTranslator(character).Translate();
 
-      Assert.AreEqual(lTranslatedCharacter.Count(), lTranslatedWord.Count());
-      for (var i = 0; i < lTranslatedCharacter.Count(); i++)
+      Assert.AreEqual(translatedCharacter.Count(), translatedWord.Count());
+      for (var i = 0; i < translatedCharacter.Count(); i++)
       {
-        Assert.AreEqual(lTranslatedCharacter[i].GetType(), lTranslatedWord[i].GetType());
+        Assert.AreEqual(translatedCharacter[i].GetType(), translatedWord[i].GetType());
       }
     }
 
     [Test]
     public void TwoCharacters_ReturnsCharactersWithOneSeparator()
     {
-      var lFirstCharacter = '-';
-      var lSecondCharacter = '?';
+      var firstCharacter = '-';
+      var secondCharacter = '?';
 
-      var lTranslatedWord = new WordTranslator(lFirstCharacter.ToString() + lSecondCharacter.ToString()).Translate();
+      var translatedWord = new WordTranslator(firstCharacter.ToString() + secondCharacter.ToString()).Translate();
 
-      var lFirstTranslatedCharacter = new CharacterTranslator(lFirstCharacter).Translate();
-      var lSecondTranslatedCharacter = new CharacterTranslator(lSecondCharacter).Translate();
-      var lExpectedWord = lFirstTranslatedCharacter;
-      lExpectedWord.Add(new CharacterSeparator());
-      lExpectedWord.AddRange(lSecondTranslatedCharacter);
+      var firstTranslatedCharacter = new CharacterTranslator(firstCharacter).Translate();
+      var secondTranslatedCharacter = new CharacterTranslator(secondCharacter).Translate();
+      var expectedWord = firstTranslatedCharacter;
+      expectedWord.Add(new CharacterSeparator());
+      expectedWord.AddRange(secondTranslatedCharacter);
 
-      Assert.AreEqual(lExpectedWord.Count(), lTranslatedWord.Count());
-      for (var i = 0; i < lExpectedWord.Count(); i++)
+      Assert.AreEqual(expectedWord.Count(), translatedWord.Count());
+      for (var i = 0; i < expectedWord.Count(); i++)
       {
-        Assert.AreEqual(lExpectedWord[i].GetType(), lTranslatedWord[i].GetType());
+        Assert.AreEqual(expectedWord[i].GetType(), translatedWord[i].GetType());
       }
     }
 
     [Test]
     [TestCaseSource("TestWords")]
-    public void SomeExampleWords_ReturnExpectedMorseCode(TestMultiCharacterData xiData)
+    public void SomeExampleWords_ReturnExpectedMorseCode(TestMultiCharacterData data)
     {
-      var lTranslatedWord = new WordTranslator(xiData.Word).Translate();
+      var translatedWord = new WordTranslator(data.Word).Translate();
 
-      Assert.AreEqual(xiData.ExpectedCodeCount, lTranslatedWord.Count);
+      Assert.AreEqual(data.ExpectedCodeCount, translatedWord.Count);
 
-      for (int i = 0; i < xiData.ExpectedCodeCount; i++)
+      for (int i = 0; i < data.ExpectedCodeCount; i++)
       {
-        Assert.AreEqual(xiData.ExpectedCode[i].GetType(), lTranslatedWord[i].GetType());
+        Assert.AreEqual(data.ExpectedCode[i].GetType(), translatedWord[i].GetType());
       }
     }
 

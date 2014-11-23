@@ -8,41 +8,41 @@ namespace aPC.Client.Morse
 {
   public class SceneGenerator
   {
-    public SceneGenerator(Settings xiSettings)
+    private Settings settings;
+
+    public SceneGenerator(Settings settings)
     {
-      mSettings = xiSettings;
+      this.settings = settings;
     }
 
     public amBXScene Generate()
     {
-      var lFrames = GetFrames();
-      return BuildScene(lFrames);
+      var frames = GetFrames();
+      return BuildScene(frames);
     }
 
     private List<Frame> GetFrames()
     {
-      var lFrameBuilder = new MorseFrameBuilder(mSettings);
+      var frameBuilder = new MorseFrameBuilder(settings);
 
-      var lMorseBlocks = new MessageTranslator(mSettings.Message).Translate();
-      if (mSettings.RepeatMessage)
+      var morseBlocks = new MessageTranslator(settings.Message).Translate();
+      if (settings.RepeatMessage)
       {
-        lMorseBlocks.Add(new MessageEndMarker());
+        morseBlocks.Add(new MessageEndMarker());
       }
 
-      return lFrameBuilder.AddFrames(lMorseBlocks).Build();
+      return frameBuilder.AddFrames(morseBlocks).Build();
     }
 
     private amBXScene BuildScene(List<Frame> xiFrames)
     {
-      var lScene = new amBXScene()
+      var scene = new amBXScene()
       {
-        SceneType = mSettings.RepeatMessage ? eSceneType.Sync : eSceneType.Event
+        SceneType = settings.RepeatMessage ? eSceneType.Sync : eSceneType.Event
       };
-      lScene.Frames = xiFrames;
+      scene.Frames = xiFrames;
 
-      return lScene;
+      return scene;
     }
-
-    private Settings mSettings;
   }
 }

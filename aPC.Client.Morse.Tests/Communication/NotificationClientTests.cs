@@ -9,39 +9,42 @@ namespace aPC.Client.Morse.Tests.Communication
   [TestFixture]
   internal class NotificationClientTests
   {
+    private NotificationClient client;
+    private TestNotificationService host;
+
     [TestFixtureSetUp]
     public void SetupTests()
     {
-      mHost = new TestNotificationService();
-      mClient = new NotificationClient(mHost.Hostname);
+      host = new TestNotificationService();
+      client = new NotificationClient(host.Hostname);
     }
 
     [TestFixtureTearDown]
     public void FixtureTearDown()
     {
-      mHost.Dispose();
+      host.Dispose();
     }
 
     [TearDown]
     public void TearDown()
     {
-      mHost.Scenes.Clear();
+      host.Scenes.Clear();
     }
 
     [Test]
     public void PushingAnIntegratedScene_ThrowsException()
     {
-      Assert.Throws<NotSupportedException>(() => mClient.PushIntegratedScene("blah"));
+      Assert.Throws<NotSupportedException>(() => client.PushIntegratedScene("blah"));
     }
 
     [Test]
     public void PushingACustomScene_SendsTheExpectedScene()
     {
-      mClient.PushCustomScene("scene");
+      client.PushCustomScene("scene");
 
-      Assert.AreEqual(1, mHost.Scenes.Count);
-      Assert.AreEqual(false, mHost.Scenes[0].Item1);
-      Assert.AreEqual("scene", mHost.Scenes[0].Item2);
+      Assert.AreEqual(1, host.Scenes.Count);
+      Assert.AreEqual(false, host.Scenes[0].Item1);
+      Assert.AreEqual("scene", host.Scenes[0].Item2);
     }
 
     [Test]
@@ -49,15 +52,12 @@ namespace aPC.Client.Morse.Tests.Communication
     {
       var lScene = new DefaultScenes().Rainbow;
 
-      mClient.PushCustomScene(lScene);
+      client.PushCustomScene(lScene);
 
-      Assert.AreEqual(1, mHost.Scenes.Count);
-      Assert.AreEqual(false, mHost.Scenes[0].Item1);
-      Assert.AreEqual(mSerialisedRainbow, mHost.Scenes[0].Item2);
+      Assert.AreEqual(1, host.Scenes.Count);
+      Assert.AreEqual(false, host.Scenes[0].Item1);
+      Assert.AreEqual(mSerialisedRainbow, host.Scenes[0].Item2);
     }
-
-    private NotificationClient mClient;
-    private TestNotificationService mHost;
 
     private const string mSerialisedRainbow = @"<?xml version=""1.0"" encoding=""utf-16""?>
 <amBXScene xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">

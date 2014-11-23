@@ -5,9 +5,11 @@ namespace aPC.Client.Morse.Tests.Translators
 {
   internal abstract class TestCharacterBase
   {
-    public TestCharacterBase(List<IMorseBlock> xiExpectedCode)
+    public readonly List<IMorseBlock> ExpectedCode;
+
+    public TestCharacterBase(List<IMorseBlock> expectedCode)
     {
-      ExpectedCode = xiExpectedCode;
+      ExpectedCode = expectedCode;
     }
 
     public int ExpectedCodeCount
@@ -17,7 +19,5 @@ namespace aPC.Client.Morse.Tests.Translators
         return ExpectedCode.Count;
       }
     }
-
-    public readonly List<IMorseBlock> ExpectedCode;
   }
 }

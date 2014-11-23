@@ -12,43 +12,45 @@ namespace aPC.Client.Morse
   /// </summary>
   public class MorseFrameBuilder : FrameBuilder
   {
-    public MorseFrameBuilder(Settings xiSettings)
+    private Settings settings;
+
+    public MorseFrameBuilder(Settings settings)
       : base()
     {
-      mSettings = xiSettings;
+      this.settings = settings;
     }
 
-    public MorseFrameBuilder AddFrames(IEnumerable<IMorseBlock> xiBlocks)
+    public MorseFrameBuilder AddFrames(IEnumerable<IMorseBlock> blocks)
     {
-      foreach (var lBlock in xiBlocks)
+      foreach (var block in blocks)
       {
-        AddFrame(lBlock);
+        AddFrame(block);
       }
 
       return this;
     }
 
-    private MorseFrameBuilder AddFrame(IMorseBlock xiBlock)
+    private MorseFrameBuilder AddFrame(IMorseBlock block)
     {
       this.AddFrame()
-        .WithRepeated(mSettings.RepeatMessage)
-        .WithFrameLength(xiBlock.Length * mSettings.UnitLength);
+        .WithRepeated(settings.RepeatMessage)
+        .WithFrameLength(block.Length * settings.UnitLength);
 
-      if (mSettings.LightsEnabled)
+      if (settings.LightsEnabled)
       {
-        this.WithLightSection(GetLightSection(xiBlock.Enabled));
+        this.WithLightSection(GetLightSection(block.Enabled));
       }
-      if (mSettings.RumblesEnabled)
+      if (settings.RumblesEnabled)
       {
-        this.WithRumbleSection(GetRumbleSection(xiBlock.Enabled));
+        this.WithRumbleSection(GetRumbleSection(block.Enabled));
       }
 
       return this;
     }
 
-    private LightSection GetLightSection(bool xiEnabled)
+    private LightSection GetLightSection(bool fansEnabled)
     {
-      var lLight = xiEnabled ? mSettings.Colour : DefaultLights.Off;
+      var lLight = fansEnabled ? settings.Colour : DefaultLights.Off;
 
       return new LightSectionBuilder()
         .WithFadeTime(10)
@@ -56,16 +58,14 @@ namespace aPC.Client.Morse
         .Build();
     }
 
-    private RumbleSection GetRumbleSection(bool xiEnabled)
+    private RumbleSection GetRumbleSection(bool rumbleEnabled)
     {
-      var lRumble = xiEnabled ? mSettings.Rumble : DefaultRumbles.Off;
+      var lRumble = rumbleEnabled ? settings.Rumble : DefaultRumbles.Off;
 
       return new RumbleSectionBuilder()
         .WithFadeTime(10)
         .WithRumble(lRumble)
         .Build();
     }
-
-    private Settings mSettings;
   }
 }

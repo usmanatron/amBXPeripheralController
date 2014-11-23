@@ -11,21 +11,21 @@ namespace aPC.Client.Morse.Tests.Translators
     [Test]
     public void TranslateMessage_ReturnsListOfIMorseBlocks()
     {
-      var lTranslatedMessage = new CharacterTranslator('A').Translate();
-      Assert.AreEqual(typeof(List<IMorseBlock>), lTranslatedMessage.GetType());
+      var translatedMessage = new CharacterTranslator('A').Translate();
+      Assert.AreEqual(typeof(List<IMorseBlock>), translatedMessage.GetType());
     }
 
     [Test]
     [TestCaseSource("TestCharacters")]
-    public void TranslatingOneCharacter_GivesExpectedMorseCode(TestSingleCharacterData xiData)
+    public void TranslatingOneCharacter_GivesExpectedMorseCode(TestSingleCharacterData data)
     {
-      var lTranslatedCharacter = new CharacterTranslator(xiData.Character).Translate();
+      var translatedCharacter = new CharacterTranslator(data.Character).Translate();
 
-      Assert.AreEqual(xiData.ExpectedCodeCount, lTranslatedCharacter.Count);
+      Assert.AreEqual(data.ExpectedCodeCount, translatedCharacter.Count);
 
-      for (int i = 0; i < xiData.ExpectedCodeCount; i++)
+      for (int i = 0; i < data.ExpectedCodeCount; i++)
       {
-        Assert.AreEqual(xiData.ExpectedCode[i].GetType(), lTranslatedCharacter[i].GetType());
+        Assert.AreEqual(data.ExpectedCode[i].GetType(), translatedCharacter[i].GetType());
       }
     }
 

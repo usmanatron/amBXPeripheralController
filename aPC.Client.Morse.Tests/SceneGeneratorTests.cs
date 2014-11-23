@@ -15,8 +15,8 @@ namespace aPC.Client.Morse.Tests
     [Test]
     public void Generator_ReturnsScene()
     {
-      var lGeneratedScene = new SceneGenerator(new Settings("Test")).Generate();
-      Assert.AreEqual(typeof(amBXScene), lGeneratedScene.GetType());
+      var generatedScene = new SceneGenerator(new Settings("Test")).Generate();
+      Assert.AreEqual(typeof(amBXScene), generatedScene.GetType());
     }
 
     #region Default Settings
@@ -25,20 +25,20 @@ namespace aPC.Client.Morse.Tests
     // "Is not repeated" implies that this is an event
     public void GeneratedScene_WithDefaultSettings_IsNotRepeated()
     {
-      var lGeneratedScene = new SceneGenerator(new Settings("Test")).Generate();
-      Assert.AreEqual(eSceneType.Event, lGeneratedScene.SceneType);
+      var generatedScene = new SceneGenerator(new Settings("Test")).Generate();
+      Assert.AreEqual(eSceneType.Event, generatedScene.SceneType);
     }
 
     [Test]
     public void GeneratedScene_WithDefaultSettings_HasLightsEnabledOnAllFrames()
     {
-      var lGeneratedScene = new SceneGenerator(new Settings("Test")).Generate();
+      var generatedScene = new SceneGenerator(new Settings("Test")).Generate();
 
-      foreach (var lLight in lGeneratedScene.Frames.Select(frame => frame.Lights))
+      foreach (var light in generatedScene.Frames.Select(frame => frame.Lights))
       {
-        foreach (eDirection lDirection in ApplicableLightDirections)
+        foreach (eDirection direction in ApplicableLightDirections)
         {
-          Assert.IsNotNull(lLight.GetComponentValueInDirection(lDirection));
+          Assert.IsNotNull(light.GetComponentValueInDirection(direction));
         }
       }
     }
@@ -46,11 +46,11 @@ namespace aPC.Client.Morse.Tests
     [Test]
     public void GeneratedScene_WithDefaultSettings_HasRumblesDisabledOnAllFrames()
     {
-      var lGeneratedScene = new SceneGenerator(new Settings("Test")).Generate();
+      var generatedScene = new SceneGenerator(new Settings("Test")).Generate();
 
-      foreach (var lRumble in lGeneratedScene.Frames.Select(frame => frame.Rumbles))
+      foreach (var rumble in generatedScene.Frames.Select(frame => frame.Rumbles))
       {
-        Assert.IsNull(lRumble.GetComponentValueInDirection(eDirection.Center));
+        Assert.IsNull(rumble.GetComponentValueInDirection(eDirection.Center));
       }
     }
 
@@ -58,13 +58,13 @@ namespace aPC.Client.Morse.Tests
     public void GeneratedScene_WithDefaultSettings_HasWhiteLights()
     {
       var lWhiteLight = DefaultLights.White;
-      var lGeneratedScene = new SceneGenerator(new Settings("T")).Generate();
+      var generatedScene = new SceneGenerator(new Settings("T")).Generate();
 
-      foreach (var lLight in lGeneratedScene.Frames.Select(frame => frame.Lights))
+      foreach (var light in generatedScene.Frames.Select(frame => frame.Lights))
       {
-        foreach (eDirection lDirection in ApplicableLightDirections)
+        foreach (eDirection direction in ApplicableLightDirections)
         {
-          Assert.AreEqual(lWhiteLight, lLight.GetComponentValueInDirection(lDirection));
+          Assert.AreEqual(lWhiteLight, light.GetComponentValueInDirection(direction));
         }
       }
     }
@@ -72,11 +72,11 @@ namespace aPC.Client.Morse.Tests
     [Test]
     public void GeneratedScene_WithDefaultSettings_HasLengthsInMultiplesOf100()
     {
-      var lGeneratedScene = new SceneGenerator(new Settings("Test")).Generate();
+      var generatedScene = new SceneGenerator(new Settings("Test")).Generate();
 
-      foreach (var lLight in lGeneratedScene.Frames)
+      foreach (var light in generatedScene.Frames)
       {
-        Assert.AreEqual(0, lLight.Length % 100);
+        Assert.AreEqual(0, light.Length % 100);
       }
     }
 
@@ -88,15 +88,15 @@ namespace aPC.Client.Morse.Tests
     // "Is repeated" implies that this is a synched event with all frames repeated
     public void GeneratedScene_WithRepetitionEnabled_IsRepeated()
     {
-      var lSettings = new Settings("Test");
-      lSettings.RepeatMessage = true;
-      var lGeneratedScene = new SceneGenerator(lSettings).Generate();
+      var settings = new Settings("Test");
+      settings.RepeatMessage = true;
+      var generatedScene = new SceneGenerator(settings).Generate();
 
-      Assert.AreEqual(eSceneType.Sync, lGeneratedScene.SceneType);
+      Assert.AreEqual(eSceneType.Sync, generatedScene.SceneType);
 
-      foreach (var lFrame in lGeneratedScene.Frames)
+      foreach (var frame in generatedScene.Frames)
       {
-        Assert.AreEqual(true, lFrame.IsRepeated);
+        Assert.AreEqual(true, frame.IsRepeated);
       }
     }
 
@@ -105,37 +105,37 @@ namespace aPC.Client.Morse.Tests
     // this Exception should not be thrown (as we enforce either lights or rumble enabled.
     public void GeneratedScene_WithLightsAndRumblesDisabled_Throws()
     {
-      var lSettings = new Settings("Test");
-      lSettings.LightsEnabled = false;
+      var settings = new Settings("Test");
+      settings.LightsEnabled = false;
 
-      Assert.Throws<ArgumentException>(() => new SceneGenerator(lSettings).Generate());
+      Assert.Throws<ArgumentException>(() => new SceneGenerator(settings).Generate());
     }
 
     [Test]
     public void GeneratedScene_WithRumbleEnabled_HasRumblesEnabledOnAllFrames()
     {
-      var lSettings = new Settings("Test");
-      lSettings.RumblesEnabled = true;
-      var lGeneratedScene = new SceneGenerator(lSettings).Generate();
+      var settings = new Settings("Test");
+      settings.RumblesEnabled = true;
+      var generatedScene = new SceneGenerator(settings).Generate();
 
-      foreach (var lRumble in lGeneratedScene.Frames.Select(frame => frame.Rumbles))
+      foreach (var rumble in generatedScene.Frames.Select(frame => frame.Rumbles))
       {
-        Assert.IsNotNull(lRumble.GetComponentValueInDirection(eDirection.Center));
+        Assert.IsNotNull(rumble.GetComponentValueInDirection(eDirection.Center));
       }
     }
 
     [Test]
     public void GeneratedScene_WithDifferentColouredLights_IsPropogatedToScene()
     {
-      var lSettings = new Settings("T");
-      lSettings.Colour = DefaultLights.Red;
-      var lGeneratedScene = new SceneGenerator(lSettings).Generate();
+      var settings = new Settings("T");
+      settings.Colour = DefaultLights.Red;
+      var generatedScene = new SceneGenerator(settings).Generate();
 
-      foreach (var lLight in lGeneratedScene.Frames.Select(frame => frame.Lights))
+      foreach (var light in generatedScene.Frames.Select(frame => frame.Lights))
       {
-        foreach (eDirection lDirection in ApplicableLightDirections)
+        foreach (eDirection direction in ApplicableLightDirections)
         {
-          Assert.AreEqual(DefaultLights.Red, lLight.GetComponentValueInDirection(lDirection));
+          Assert.AreEqual(DefaultLights.Red, light.GetComponentValueInDirection(direction));
         }
       }
     }
@@ -143,41 +143,41 @@ namespace aPC.Client.Morse.Tests
     [Test]
     public void GeneratedScene_WithOverriddenUnitLength_HasLengthsInMultiplesOfNewLength()
     {
-      var lSettings = new Settings("Test");
-      lSettings.UnitLength = 17;
-      var lGeneratedScene = new SceneGenerator(lSettings).Generate();
+      var settings = new Settings("Test");
+      settings.UnitLength = 17;
+      var generatedScene = new SceneGenerator(settings).Generate();
 
-      foreach (var lLight in lGeneratedScene.Frames)
+      foreach (var light in generatedScene.Frames)
       {
-        Assert.AreEqual(0, lLight.Length % 17);
+        Assert.AreEqual(0, light.Length % 17);
       }
     }
 
     [Test]
     public void GeneratedScene_WithMessageRepeated_EndsWithMessageEndMarker()
     {
-      var lSettings = new Settings("Test");
-      lSettings.RepeatMessage = true;
-      var lGeneratedScene = new SceneGenerator(lSettings).Generate();
+      var settings = new Settings("Test");
+      settings.RepeatMessage = true;
+      var generatedScene = new SceneGenerator(settings).Generate();
 
-      var lScene = lGeneratedScene.Frames.Last();
-      var lExpectedBlock = new MessageEndMarker();
+      var scene = generatedScene.Frames.Last();
+      var expectedBlock = new MessageEndMarker();
 
-      Assert.AreEqual(lExpectedBlock.Enabled, lScene.Lights.North == lSettings.Colour);
-      Assert.AreEqual(lExpectedBlock.Length * lSettings.UnitLength, lScene.Length);
+      Assert.AreEqual(expectedBlock.Enabled, scene.Lights.North == settings.Colour);
+      Assert.AreEqual(expectedBlock.Length * settings.UnitLength, scene.Length);
     }
 
     [Test]
     public void GeneratedScene_WithMessageNotRepeated_DoesNotEndWithMessageEndMarker()
     {
-      var lSettings = new Settings("Test");
-      var lGeneratedScene = new SceneGenerator(lSettings).Generate();
+      var settings = new Settings("Test");
+      var generatedScene = new SceneGenerator(settings).Generate();
 
-      var lScene = lGeneratedScene.Frames.Last();
-      var lExpectedBlock = new MessageEndMarker();
+      var scene = generatedScene.Frames.Last();
+      var expectedBlock = new MessageEndMarker();
 
-      Assert.AreNotEqual(lExpectedBlock.Enabled, lScene.Lights.North == lSettings.Colour);
-      Assert.AreNotEqual(lExpectedBlock.Length * lSettings.UnitLength, lScene.Length);
+      Assert.AreNotEqual(expectedBlock.Enabled, scene.Lights.North == settings.Colour);
+      Assert.AreNotEqual(expectedBlock.Length * settings.UnitLength, scene.Length);
     }
 
     #endregion Switch changes
@@ -187,42 +187,42 @@ namespace aPC.Client.Morse.Tests
     [Test]
     public void GeneratedScene_WithSingleCharacterMessage_AndMessageIsNotRepeated_ReturnsCharacter()
     {
-      var lSettings = new Settings("T");
-      var lGeneratedScene = new SceneGenerator(lSettings).Generate();
+      var settings = new Settings("T");
+      var generatedScene = new SceneGenerator(settings).Generate();
 
-      Assert.AreEqual(1, lGeneratedScene.Frames.Count);
-      var lFrame = lGeneratedScene.Frames.Single();
+      Assert.AreEqual(1, generatedScene.Frames.Count);
+      var frame = generatedScene.Frames.Single();
 
-      Assert.IsNotNull(lFrame.Lights);
-      Assert.AreEqual(lSettings.Colour, lFrame.Lights.North); // Sufficient to just test North
-      Assert.AreEqual(new Dash().Length * lSettings.UnitLength, lFrame.Length);
+      Assert.IsNotNull(frame.Lights);
+      Assert.AreEqual(settings.Colour, frame.Lights.North); // Sufficient to just test North
+      Assert.AreEqual(new Dash().Length * settings.UnitLength, frame.Length);
     }
 
     [Test]
     public void GeneratedScene_WithSingleCharacterMessage_AndMessageIsRepeated_ReturnsCharacterAndMessageEndMarker()
     {
-      var lSettings = new Settings("T");
-      lSettings.RepeatMessage = true;
-      var lGeneratedScene = new SceneGenerator(lSettings).Generate();
+      var settings = new Settings("T");
+      settings.RepeatMessage = true;
+      var generatedScene = new SceneGenerator(settings).Generate();
 
-      Assert.AreEqual(2, lGeneratedScene.Frames.Count);
+      Assert.AreEqual(2, generatedScene.Frames.Count);
 
       // First frame should be a dash (which is T)
       // Second frame should be the "end of message" marker
-      var lFirstExpectedFrame = new Dash();
-      var lSecondExpectedFrame = new MessageEndMarker();
+      var firstExpectedFrame = new Dash();
+      var secondExpectedFrame = new MessageEndMarker();
 
-      Assert.IsNotNull(lGeneratedScene.Frames[0].Lights);
-      Assert.AreEqual(lSettings.Colour, lGeneratedScene.Frames[0].Lights.North); // Sufficient to just test North
-      Assert.AreEqual(lFirstExpectedFrame.Length * lSettings.UnitLength, lGeneratedScene.Frames[0].Length);
-      Assert.IsNotNull(lGeneratedScene.Frames[1].Lights);
-      Assert.AreEqual(DefaultLights.Off, lGeneratedScene.Frames[1].Lights.North);
-      Assert.AreEqual(lSecondExpectedFrame.Length * lSettings.UnitLength, lGeneratedScene.Frames[1].Length);
+      Assert.IsNotNull(generatedScene.Frames[0].Lights);
+      Assert.AreEqual(settings.Colour, generatedScene.Frames[0].Lights.North); // Sufficient to just test North
+      Assert.AreEqual(firstExpectedFrame.Length * settings.UnitLength, generatedScene.Frames[0].Length);
+      Assert.IsNotNull(generatedScene.Frames[1].Lights);
+      Assert.AreEqual(DefaultLights.Off, generatedScene.Frames[1].Lights.North);
+      Assert.AreEqual(secondExpectedFrame.Length * settings.UnitLength, generatedScene.Frames[1].Length);
     }
 
     #endregion Message Tests
 
-    //qqUMI Consider moving this idea into SectionBaseExtensions and call it RealDirections or similar (non-compound)
+    //TODO: Consider moving this idea into SectionBaseExtensions and call it Readirections or similar (non-compound)
     private List<eDirection> ApplicableLightDirections
     {
       get

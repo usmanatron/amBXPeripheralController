@@ -12,9 +12,9 @@ namespace aPC.Client.Morse.Tests.Translators
       throw new NotImplementedException();
     }
 
-    public List<IMorseBlock> SeparateList(List<IMorseBlock> xiList, IMorseBlock xiSeparator)
+    public List<IMorseBlock> SeparateList(List<IMorseBlock> list, IMorseBlock separator)
     {
-      return AddSeparatorsToList(xiList, xiSeparator);
+      return AddSeparatorsToList(list, separator);
     }
   }
 }

@@ -5,17 +5,17 @@ namespace aPC.Client.Morse.Tests.Translators
 {
   internal class TestSingleCharacterData : TestCharacterBase
   {
-    public TestSingleCharacterData(char xiCharacter, List<IMorseBlock> xiExpectedCode)
-      : base(xiExpectedCode)
+    public readonly char Character;
+
+    public TestSingleCharacterData(char character, List<IMorseBlock> expectedCode)
+      : base(expectedCode)
     {
-      Character = xiCharacter;
+      Character = character;
     }
 
     public override string ToString()
     {
       return Character.ToString();
     }
-
-    public readonly char Character;
   }
 }

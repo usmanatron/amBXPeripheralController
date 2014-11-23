@@ -4,19 +4,19 @@ namespace aPC.Client.Morse
 {
   internal class Morse
   {
-    private static void Main(string[] xiArgs)
+    private static void Main(string[] args)
     {
-      var lSettings = GetSettings(xiArgs);
-      var lGeneratedScene = new SceneGenerator(lSettings).Generate();
-      new NotificationClient().PushCustomScene(lGeneratedScene);
+      var settings = GetSettings(args);
+      var generatedScene = new SceneGenerator(settings).Generate();
+      new NotificationClient().PushCustomScene(generatedScene);
     }
 
-    private static Settings GetSettings(string[] xiArgs)
+    private static Settings GetSettings(string[] args)
     {
       try
       {
-        var lArguments = string.Join(" ", xiArgs);
-        return new ArgumentReader(lArguments).Read();
+        var arguments = string.Join(" ", args);
+        return new ArgumentReader(arguments).Read();
       }
       catch (UsageException e)
       {

@@ -8,63 +8,67 @@ namespace aPC.Client.Morse
 {
   public class ArgumentReader
   {
-    public ArgumentReader(string xiArguments)
+    protected List<string> switches;
+    protected string message;
+    private Regex morsePattern = new Regex(@"[\w\s\.\,\?\'\!\/\(\)\&\:\;\=\+\""\$\@]+", RegexOptions.Compiled);
+
+    public ArgumentReader(string arguments)
     {
-      if (string.IsNullOrEmpty(xiArguments))
+      if (string.IsNullOrEmpty(arguments))
       {
         throw new UsageException("No arguments specified");
       }
 
-      mSwitches = new List<string>();
-      SplitArguments(xiArguments);
+      switches = new List<string>();
+      SplitArguments(arguments);
     }
 
     /// <remarks>
     ///   We expect the argument string to always have the message right at the end.
     /// </remarks>
-    private void SplitArguments(string xiArguments)
+    private void SplitArguments(string arguments)
     {
-      var lReadingMessage = false;
-      var lMessage = "";
+      var readingMessage = false;
+      var message = "";
 
-      foreach (var lArgument in xiArguments.Split(' '))
+      foreach (var argument in arguments.Split(' '))
       {
-        if (lReadingMessage)
+        if (readingMessage)
         {
-          lMessage += " " + lArgument;
+          message += " " + argument;
         }
-        else if (lArgument.ToLower().StartsWith(@"/m"))
+        else if (argument.ToLower().StartsWith(@"/m"))
         {
-          lReadingMessage = true;
-          lMessage = lArgument.Remove(0, 3);
+          readingMessage = true;
+          message = argument.Remove(0, 3);
         }
-        else if (lArgument.StartsWith(@"/"))
+        else if (argument.StartsWith(@"/"))
         {
-          mSwitches.Add(lArgument);
+          switches.Add(argument);
         }
       }
 
-      mMessage = lMessage;
+      this.message = message;
     }
 
     public Settings Read()
     {
-      var lMessage = ReadMessage();
-      var lSettings = new Settings(lMessage);
-      ReadSwitchesIntoSettings(lSettings);
+      var message = ReadMessage();
+      var settings = new Settings(message);
+      ReadSwitchesIntoSettings(settings);
 
-      ThrowIfSettingsAreInvalid(lSettings);
-      return lSettings;
+      ThrowIfSettingsAreInvalid(settings);
+      return settings;
     }
 
     private string ReadMessage()
     {
       if (!IsMessageValid())
       {
-        throw new UsageException("Invalid message specified: " + mMessage);
+        throw new UsageException("Invalid message specified: " + message);
       }
 
-      return mMessage;
+      return message;
     }
 
     /// <summary>
@@ -81,107 +85,102 @@ namespace aPC.Client.Morse
     /// </remarks>
     private bool IsMessageValid()
     {
-      if (string.IsNullOrEmpty(mMessage))
+      if (string.IsNullOrEmpty(message))
       {
         return false;
       }
 
-      var lMatch = mMorsePattern.Match(mMessage);
+      var match = morsePattern.Match(message);
 
-      if (!lMatch.Success || lMatch.Length != mMessage.Length)
+      if (!match.Success || match.Length != message.Length)
       {
         return false;
       }
       return true;
     }
 
-    private void ReadSwitchesIntoSettings(Settings xiSettings)
+    private void ReadSwitchesIntoSettings(Settings settings)
     {
-      foreach (var lSwitch in mSwitches)
+      foreach (var @switch in switches)
       {
         try
         {
-          ReadSwitchIntoSettings(xiSettings, lSwitch);
+          ReadSwitchIntoSettings(settings, @switch);
         }
         catch (Exception e)
         {
-          throw new UsageException("Error when reading Switch " + lSwitch + " : " + e);
+          throw new UsageException("Error when reading Switch " + @switch + " : " + e);
         }
       }
     }
 
-    private void ReadSwitchIntoSettings(Settings xiSettings, string xiSwitch)
+    private void ReadSwitchIntoSettings(Settings settings, string @switch)
     {
-      switch (xiSwitch.Substring(0, 2).ToLower())
+      switch (@switch.Substring(0, 2).ToLower())
       {
         case @"/d":
-          xiSettings.RepeatMessage = true;
+          settings.RepeatMessage = true;
           break;
         case @"/r":
-          xiSettings.RumblesEnabled = true;
+          settings.RumblesEnabled = true;
           break;
         case @"/l":
-          xiSettings.LightsEnabled = false;
+          settings.LightsEnabled = false;
           break;
         case @"/c":
-          xiSettings.Colour = ParseColour(xiSwitch);
+          settings.Colour = ParseColour(@switch);
           break;
         case @"/u":
-          xiSettings.UnitLength = ParseUnitLength(xiSwitch);
+          settings.UnitLength = ParseUnitLength(@switch);
           break;
       }
     }
 
-    private Light ParseColour(string xiArgument)
+    private Light ParseColour(string argument)
     {
-      var lLightComponents = xiArgument
+      var lightComponents = argument
         .Remove(0, 3).Split(',')
         .Select(colour => float.Parse(colour)).ToList();
 
-      if (lLightComponents.Count != 3 ||
-          lLightComponents.Any(colour => IsOutOfRange(colour)))
+      if (lightComponents.Count != 3 ||
+          lightComponents.Any(colour => IsOutOfRange(colour)))
       {
         throw new ArgumentOutOfRangeException();
       }
 
       return new Light()
       {
-        Red = lLightComponents[0],
-        Green = lLightComponents[1],
-        Blue = lLightComponents[2],
+        Red = lightComponents[0],
+        Green = lightComponents[1],
+        Blue = lightComponents[2],
         Intensity = 1
       };
     }
 
-    private bool IsOutOfRange(float xiColour)
+    private bool IsOutOfRange(float colour)
     {
-      return xiColour < 0 || xiColour > 1;
+      return colour < 0 || colour > 1;
     }
 
-    private int ParseUnitLength(string xiArgument)
+    private int ParseUnitLength(string argument)
     {
-      var lLength = xiArgument.Remove(0, 3);
+      var lLength = argument.Remove(0, 3);
       return int.Parse(lLength);
     }
 
-    private void ThrowIfSettingsAreInvalid(Settings xiSettings)
+    private void ThrowIfSettingsAreInvalid(Settings settings)
     {
-      if (!xiSettings.LightsEnabled && !xiSettings.RumblesEnabled)
+      if (!settings.LightsEnabled && !settings.RumblesEnabled)
       {
         throw new UsageException("Both lights and rumbles are disabled - nothing to show");
       }
 
-      if (xiSettings.Colour.Red == 0 &&
-          xiSettings.Colour.Green == 0 &&
-          xiSettings.Colour.Blue == 0)
+      if (settings.Colour.Red == 0 &&
+          settings.Colour.Green == 0 &&
+          settings.Colour.Blue == 0)
       {
         throw new UsageException("Invalid colour specified");
       }
     }
-
-    protected List<string> mSwitches;
-    protected string mMessage;
-
-    private Regex mMorsePattern = new Regex(@"[\w\s\.\,\?\'\!\/\(\)\&\:\;\=\+\""\$\@]+", RegexOptions.Compiled);
   }
 }

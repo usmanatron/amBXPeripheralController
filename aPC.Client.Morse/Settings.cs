@@ -5,6 +5,15 @@ namespace aPC.Client.Morse
 {
   public class Settings
   {
+    public string Message;
+    public Light Colour;
+    public int UnitLength;
+    public bool LightsEnabled;
+    public bool RumblesEnabled;
+    public bool RepeatMessage;
+
+    public Rumble Rumble { get; private set; }
+
     public Settings(string xiMessage)
     {
       Message = xiMessage;
@@ -18,14 +27,5 @@ namespace aPC.Client.Morse
       // The following settings cannot be overridden:
       Rumble = DefaultRumbles.Thunder;
     }
-
-    public string Message;
-    public Light Colour;
-    public int UnitLength;
-    public bool LightsEnabled;
-    public bool RumblesEnabled;
-    public bool RepeatMessage;
-
-    public Rumble Rumble { get; private set; }
   }
 }

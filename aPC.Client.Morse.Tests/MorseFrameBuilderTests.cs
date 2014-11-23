@@ -9,67 +9,69 @@ namespace aPC.Client.Morse.Tests
   [TestFixture]
   internal class MorseFrameBuilderTests
   {
+    private Settings settings;
+
     [SetUp]
     public void TestSetup()
     {
-      mSettings = new Settings("");
-      mSettings.RumblesEnabled = true;
+      settings = new Settings("");
+      settings.RumblesEnabled = true;
     }
 
     [Test]
     public void AddFramesFromMorseBlocks_AddsExpectedNumberOfFrames()
     {
-      var lBlocks = new List<IMorseBlock> { new Dot(), new Dot() };
-      var lFrames = new MorseFrameBuilder(mSettings)
-        .AddFrames(lBlocks)
+      var blocks = new List<IMorseBlock> { new Dot(), new Dot() };
+      var frames = new MorseFrameBuilder(settings)
+        .AddFrames(blocks)
         .Build();
 
-      Assert.AreEqual(2, lFrames.Count);
+      Assert.AreEqual(2, frames.Count);
     }
 
     [Test]
     public void AddFramesFromMorseBlocks_AddsExpectedFrames()
     {
-      var lBlocks = new List<IMorseBlock> { new Dot(), new Dash() };
-      var lFrames = new MorseFrameBuilder(mSettings)
-        .AddFrames(lBlocks)
+      var blocks = new List<IMorseBlock> { new Dot(), new Dash() };
+      var frames = new MorseFrameBuilder(settings)
+        .AddFrames(blocks)
         .Build();
 
       for (int i = 0; i < 2; i++)
       {
-        var lColour = lBlocks[i].Enabled ? mSettings.Colour : DefaultLights.Off;
-        var lRumble = lBlocks[i].Enabled ? mSettings.Rumble : DefaultRumbles.Off;
+        var colour = blocks[i].Enabled ? settings.Colour : DefaultLights.Off;
+        var rumble = blocks[i].Enabled ? settings.Rumble : DefaultRumbles.Off;
 
-        Assert.IsNull(lFrames[i].Fans);
-        Assert.IsNotNull(lFrames[i].Lights);
-        Assert.IsNotNull(lFrames[i].Rumbles);
+        Assert.IsNull(frames[i].Fans);
+        Assert.IsNotNull(frames[i].Lights);
+        Assert.IsNotNull(frames[i].Rumbles);
 
-        Assert.AreEqual(lBlocks[i].Length * mSettings.UnitLength, lFrames[i].Length);
-        Assert.AreEqual(lColour, lFrames[i].Lights.North);
-        Assert.AreEqual(lRumble, lFrames[i].Rumbles.Rumble);
+        Assert.AreEqual(blocks[i].Length * settings.UnitLength, frames[i].Length);
+        Assert.AreEqual(colour, frames[i].Lights.North);
+        Assert.AreEqual(rumble, frames[i].Rumbles.Rumble);
       }
     }
 
     [Test]
     [TestCaseSource("IMorseBlocks")]
-    public void AddFrameFromMorseBlock_AddsExpectedFrame(IMorseBlock xiBlock)
+    public void AddFrameFromMorseBlock_AddsExpectedFrame(IMorseBlock block)
     {
-      var lFrames = new MorseFrameBuilder(mSettings)
-        .AddFrames(new List<IMorseBlock>() { xiBlock })
+      var frames = new MorseFrameBuilder(settings)
+        .AddFrames(new List<IMorseBlock>() { block })
         .Build();
 
-      var lColour = xiBlock.Enabled ? mSettings.Colour : DefaultLights.Off;
-      var lRumble = xiBlock.Enabled ? mSettings.Rumble : DefaultRumbles.Off;
+      var colour = block.Enabled ? settings.Colour : DefaultLights.Off;
+      var rumble = block.Enabled ? settings.Rumble : DefaultRumbles.Off;
 
-      Assert.AreEqual(1, lFrames.Count);
-      var lFrame = lFrames.Single();
-      Assert.IsNull(lFrame.Fans);
-      Assert.IsNotNull(lFrame.Lights);
-      Assert.IsNotNull(lFrame.Rumbles);
+      Assert.AreEqual(1, frames.Count);
+      var frame = frames.Single();
+      Assert.IsNull(frame.Fans);
+      Assert.IsNotNull(frame.Lights);
+      Assert.IsNotNull(frame.Rumbles);
 
-      Assert.AreEqual(xiBlock.Length * mSettings.UnitLength, lFrame.Length);
-      Assert.AreEqual(lColour, lFrame.Lights.North);
-      Assert.AreEqual(lRumble, lFrame.Rumbles.Rumble);
+      Assert.AreEqual(block.Length * settings.UnitLength, frame.Length);
+      Assert.AreEqual(colour, frame.Lights.North);
+      Assert.AreEqual(rumble, frame.Rumbles.Rumble);
     }
 
     private IEnumerable<IMorseBlock> IMorseBlocks
@@ -84,7 +86,5 @@ namespace aPC.Client.Morse.Tests
         yield return new MessageEndMarker();
       }
     }
-
-    private Settings mSettings;
   }
 }

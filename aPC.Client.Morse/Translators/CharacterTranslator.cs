@@ -6,87 +6,84 @@ namespace aPC.Client.Morse.Translators
 {
   public class CharacterTranslator : TranslatorBase
   {
-    public CharacterTranslator(char xiCharacter)
+    private char character;
+    private static Dot dot = new Dot();
+    private static Dash dash = new Dash();
+
+    public CharacterTranslator(char character)
     {
-      mCharacter = xiCharacter;
+      this.character = character;
     }
 
     public override List<IMorseBlock> Translate()
     {
-      var lSeparator = new DotDashSeparator();
-      var lRawCharacter = RawCharacters[Char.ToLower(mCharacter)];
-      return AddSeparatorsToList(lRawCharacter, lSeparator);
+      var separator = new DotDashSeparator();
+      var rawCharacter = RawCharacters[Char.ToLower(character)];
+      return AddSeparatorsToList(rawCharacter, separator);
     }
-
-    private char mCharacter;
 
     /// <summary>
     ///   Gives the Morse Code equivalent of every available character
     ///   * WITHOUT THE SEPARATORS* between dots and dashes.
     /// </summary>
-    /// <remarks>
-    ///   Would it be better to just have one actual instance of Dot
-    ///   and Dash and just reuse it?  Something worth considering,
-    ///   especially once the client runs end-to-end.
-    /// </remarks>
     private static Dictionary<char, List<IMorseBlock>> RawCharacters = new Dictionary<char, List<IMorseBlock>>
     {
-      {'a', new List<IMorseBlock>(){new Dot(), new Dash()}},
-      {'b', new List<IMorseBlock>(){new Dash(), new Dot(), new Dot(), new Dot()}},
-      {'c', new List<IMorseBlock>(){new Dash(), new Dot(), new Dash(), new Dot()}},
-      {'d', new List<IMorseBlock>(){new Dash(), new Dot(), new Dot()}},
-      {'e', new List<IMorseBlock>(){new Dot()}},
-      {'f', new List<IMorseBlock>(){new Dot(), new Dot(), new Dash(), new Dot()}},
-      {'g', new List<IMorseBlock>(){new Dash(), new Dash(), new Dot()}},
-      {'h', new List<IMorseBlock>(){new Dot(), new Dot(), new Dot(), new Dot()}},
-      {'i', new List<IMorseBlock>(){new Dot(), new Dot()}},
-      {'j', new List<IMorseBlock>(){new Dot(), new Dash(), new Dash(), new Dash()}},
-      {'k', new List<IMorseBlock>(){new Dash(), new Dot(), new Dash()}},
-      {'l', new List<IMorseBlock>(){new Dot(), new Dash(), new Dot(), new Dot()}},
-      {'m', new List<IMorseBlock>(){new Dash(), new Dash()}},
-      {'n', new List<IMorseBlock>(){new Dash(), new Dot()}},
-      {'o', new List<IMorseBlock>(){new Dash(), new Dash(), new Dash()}},
-      {'p', new List<IMorseBlock>(){new Dot(), new Dash(), new Dash(), new Dot()}},
-      {'q', new List<IMorseBlock>(){new Dash(), new Dash(), new Dot(), new Dash()}},
-      {'r', new List<IMorseBlock>(){new Dot(), new Dash(), new Dot()}},
-      {'s', new List<IMorseBlock>(){new Dot(), new Dot(), new Dot()}},
-      {'t', new List<IMorseBlock>(){new Dash()}},
-      {'u', new List<IMorseBlock>(){new Dot(), new Dot(), new Dash()}},
-      {'v', new List<IMorseBlock>(){new Dot(), new Dot(), new Dot(), new Dash()}},
-      {'w', new List<IMorseBlock>(){new Dot(), new Dash(), new Dash()}},
-      {'x', new List<IMorseBlock>(){new Dash(), new Dot(), new Dot(), new Dash()}},
-      {'y', new List<IMorseBlock>(){new Dash(), new Dot(), new Dash(), new Dash()}},
-      {'z', new List<IMorseBlock>(){new Dash(), new Dash(), new Dot(), new Dot()}},
+      {'a', new List<IMorseBlock>(){dot, dash}},
+      {'b', new List<IMorseBlock>(){dash, dot, dot, dot}},
+      {'c', new List<IMorseBlock>(){dash, dot, dash, dot}},
+      {'d', new List<IMorseBlock>(){dash, dot, dot}},
+      {'e', new List<IMorseBlock>(){dot}},
+      {'f', new List<IMorseBlock>(){dot, dot, dash, dot}},
+      {'g', new List<IMorseBlock>(){dash, dash, dot}},
+      {'h', new List<IMorseBlock>(){dot, dot, dot, dot}},
+      {'i', new List<IMorseBlock>(){dot, dot}},
+      {'j', new List<IMorseBlock>(){dot, dash, dash, dash}},
+      {'k', new List<IMorseBlock>(){dash, dot, dash}},
+      {'l', new List<IMorseBlock>(){dot, dash, dot, dot}},
+      {'m', new List<IMorseBlock>(){dash, dash}},
+      {'n', new List<IMorseBlock>(){dash, dot}},
+      {'o', new List<IMorseBlock>(){dash, dash, dash}},
+      {'p', new List<IMorseBlock>(){dot, dash, dash, dot}},
+      {'q', new List<IMorseBlock>(){dash, dash, dot, dash}},
+      {'r', new List<IMorseBlock>(){dot, dash, dot}},
+      {'s', new List<IMorseBlock>(){dot, dot, dot}},
+      {'t', new List<IMorseBlock>(){dash}},
+      {'u', new List<IMorseBlock>(){dot, dot, dash}},
+      {'v', new List<IMorseBlock>(){dot, dot, dot, dash}},
+      {'w', new List<IMorseBlock>(){dot, dash, dash}},
+      {'x', new List<IMorseBlock>(){dash, dot, dot, dash}},
+      {'y', new List<IMorseBlock>(){dash, dot, dash, dash}},
+      {'z', new List<IMorseBlock>(){dash, dash, dot, dot}},
 
-      {'0', new List<IMorseBlock>(){new Dash(), new Dash(), new Dash(), new Dash(), new Dash()}},
-      {'1', new List<IMorseBlock>(){new Dot(), new Dash(), new Dash(), new Dash(), new Dash()}},
-      {'2', new List<IMorseBlock>(){new Dot(), new Dot(), new Dash(), new Dash(), new Dash()}},
-      {'3', new List<IMorseBlock>(){new Dot(), new Dot(), new Dot(), new Dash(), new Dash()}},
-      {'4', new List<IMorseBlock>(){new Dot(), new Dot(), new Dot(), new Dot(), new Dash()}},
-      {'5', new List<IMorseBlock>(){new Dot(), new Dot(), new Dot(), new Dot(), new Dot()}},
-      {'6', new List<IMorseBlock>(){new Dash(), new Dot(), new Dot(), new Dot(), new Dot()}},
-      {'7', new List<IMorseBlock>(){new Dash(), new Dash(), new Dot(), new Dot(), new Dot()}},
-      {'8', new List<IMorseBlock>(){new Dash(), new Dash(), new Dash(), new Dot(), new Dot()}},
-      {'9', new List<IMorseBlock>(){new Dash(), new Dash(), new Dash(), new Dash(), new Dot()}},
+      {'0', new List<IMorseBlock>(){dash, dash, dash, dash, dash}},
+      {'1', new List<IMorseBlock>(){dot, dash, dash, dash, dash}},
+      {'2', new List<IMorseBlock>(){dot, dot, dash, dash, dash}},
+      {'3', new List<IMorseBlock>(){dot, dot, dot, dash, dash}},
+      {'4', new List<IMorseBlock>(){dot, dot, dot, dot, dash}},
+      {'5', new List<IMorseBlock>(){dot, dot, dot, dot, dot}},
+      {'6', new List<IMorseBlock>(){dash, dot, dot, dot, dot}},
+      {'7', new List<IMorseBlock>(){dash, dash, dot, dot, dot}},
+      {'8', new List<IMorseBlock>(){dash, dash, dash, dot, dot}},
+      {'9', new List<IMorseBlock>(){dash, dash, dash, dash, dot}},
 
-      {'.', new List<IMorseBlock>(){new Dot(), new Dash(), new Dot(), new Dash(), new Dot(), new Dash()}},
-      {',', new List<IMorseBlock>(){new Dash(), new Dash(), new Dot(), new Dot(), new Dash(), new Dash()}},
-      {'?', new List<IMorseBlock>(){new Dot(), new Dot(), new Dash(), new Dash(), new Dot(), new Dot()}},
-      {'\'', new List<IMorseBlock>(){new Dot(), new Dash(), new Dash(), new Dash(), new Dash(), new Dot()}},
-      {'!', new List<IMorseBlock>(){new Dash(), new Dot(), new Dash(), new Dot(), new Dash(), new Dash()}},
-      {'/', new List<IMorseBlock>(){new Dash(), new Dot(), new Dot(), new Dash(), new Dot()}},
-      {'(', new List<IMorseBlock>(){new Dash(), new Dot(), new Dash(), new Dash(), new Dot()}},
-      {')', new List<IMorseBlock>(){new Dash(), new Dot(), new Dash(), new Dash(), new Dot(), new Dash()}},
-      {'&', new List<IMorseBlock>(){new Dot(), new Dash(), new Dot(), new Dot(), new Dot()}},
-      {':', new List<IMorseBlock>(){new Dash(), new Dash(), new Dash(), new Dot(), new Dot(), new Dot()}},
-      {';', new List<IMorseBlock>(){new Dash(), new Dot(), new Dash(), new Dot(), new Dash(), new Dot()}},
-      {'=', new List<IMorseBlock>(){new Dash(), new Dot(), new Dot(), new Dot(), new Dash()}},
-      {'+', new List<IMorseBlock>(){new Dot(), new Dash(), new Dot(), new Dash(), new Dot()}},
-      {'-', new List<IMorseBlock>(){new Dash(), new Dot(), new Dot(), new Dot(), new Dot(), new Dash()}},
-      {'_', new List<IMorseBlock>(){new Dot(), new Dot(), new Dash(), new Dash(), new Dot(), new Dash()}},
-      {'\"', new List<IMorseBlock>(){new Dot(), new Dash(), new Dot(), new Dot(), new Dash(), new Dot()}},
-      {'$', new List<IMorseBlock>(){new Dot(), new Dot(), new Dot(), new Dash(), new Dot(), new Dot(), new Dash()}},
-      {'@', new List<IMorseBlock>(){new Dot(), new Dash(), new Dash(), new Dot(), new Dash(), new Dot()}},
+      {'.', new List<IMorseBlock>(){dot, dash, dot, dash, dot, dash}},
+      {',', new List<IMorseBlock>(){dash, dash, dot, dot, dash, dash}},
+      {'?', new List<IMorseBlock>(){dot, dot, dash, dash, dot, dot}},
+      {'\'', new List<IMorseBlock>(){dot, dash, dash, dash, dash, dot}},
+      {'!', new List<IMorseBlock>(){dash, dot, dash, dot, dash, dash}},
+      {'/', new List<IMorseBlock>(){dash, dot, dot, dash, dot}},
+      {'(', new List<IMorseBlock>(){dash, dot, dash, dash, dot}},
+      {')', new List<IMorseBlock>(){dash, dot, dash, dash, dot, dash}},
+      {'&', new List<IMorseBlock>(){dot, dash, dot, dot, dot}},
+      {':', new List<IMorseBlock>(){dash, dash, dash, dot, dot, dot}},
+      {';', new List<IMorseBlock>(){dash, dot, dash, dot, dash, dot}},
+      {'=', new List<IMorseBlock>(){dash, dot, dot, dot, dash}},
+      {'+', new List<IMorseBlock>(){dot, dash, dot, dash, dot}},
+      {'-', new List<IMorseBlock>(){dash, dot, dot, dot, dot, dash}},
+      {'_', new List<IMorseBlock>(){dot, dot, dash, dash, dot, dash}},
+      {'\"', new List<IMorseBlock>(){dot, dash, dot, dot, dash, dot}},
+      {'$', new List<IMorseBlock>(){dot, dot, dot, dash, dot, dot, dash}},
+      {'@', new List<IMorseBlock>(){dot, dash, dash, dot, dash, dot}},
     };
   }
 }

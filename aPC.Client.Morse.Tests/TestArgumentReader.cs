@@ -4,8 +4,8 @@ namespace aPC.Client.Morse.Tests
 {
   internal class TestArgumentReader : ArgumentReader
   {
-    public TestArgumentReader(string xiArguments)
-      : base(xiArguments)
+    public TestArgumentReader(string arguments)
+      : base(arguments)
     {
     }
 
@@ -13,7 +13,7 @@ namespace aPC.Client.Morse.Tests
     {
       get
       {
-        return base.mMessage;
+        return base.message;
       }
     }
 
@@ -21,7 +21,7 @@ namespace aPC.Client.Morse.Tests
     {
       get
       {
-        return base.mSwitches;
+        return base.switches;
       }
     }
   }
