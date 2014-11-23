@@ -2,9 +2,9 @@
 {
   public static class CommunicationSettings
   {
-    public static string GetServiceUrl(string xiHostname, eApplicationType xiApplicationType)
+    public static string GetServiceUrl(string hostname, eApplicationType applicationType)
     {
-      return @"http://" + xiHostname + @"/" + xiApplicationType.ToString();
+      return @"http://" + hostname + @"/" + applicationType.ToString();
     }
   }
 

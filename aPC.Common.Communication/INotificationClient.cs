@@ -3,9 +3,9 @@
   // Used to communicate with INotificationService
   public interface INotificationClient
   {
-    void PushCustomScene(string xiScene);
+    void PushCustomScene(string scene);
 
-    void PushIntegratedScene(string xiScene);
+    void PushIntegratedScene(string scene);
 
     string[] GetSupportedIntegratedScenes();
   }
