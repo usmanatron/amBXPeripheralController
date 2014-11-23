@@ -8,31 +8,31 @@ namespace aPC.Client.Disco.Tests.Generators
   [TestFixture]
   internal class RandomLightSectionGeneratorTests
   {
+    private RandomLightSectionGenerator generator;
+
     [TestFixtureSetUp]
     public void SetupGenerator()
     {
-      var lSettings = new Settings(new HostnameAccessor());
-      mGenerator = new RandomLightSectionGenerator(lSettings, new TestRandom(lSettings.ChangeThreshold / 2));
+      var settings = new Settings(new HostnameAccessor());
+      generator = new RandomLightSectionGenerator(settings, new TestRandom(settings.ChangeThreshold / 2));
     }
 
     [Test]
     public void Generating_BuildsALightSection()
     {
-      LightSection lSection = mGenerator.Generate();
+      LightSection section = generator.Generate();
 
-      Assert.AreNotEqual(default(int), lSection.FadeTime);
+      Assert.AreNotEqual(default(int), section.FadeTime);
     }
 
     [Test]
     public void Generating_GivesOnlyLightsInPhysicalDirections()
     {
-      var lSection = mGenerator.Generate();
+      var section = generator.Generate();
 
-      Assert.IsNull(lSection.SouthEast);
-      Assert.IsNull(lSection.South);
-      Assert.IsNull(lSection.SouthWest);
+      Assert.IsNull(section.SouthEast);
+      Assert.IsNull(section.South);
+      Assert.IsNull(section.SouthWest);
     }
-
-    private RandomLightSectionGenerator mGenerator;
   }
 }

@@ -4,16 +4,16 @@ namespace aPC.Client.Disco.Tests
 {
   internal class TestRandom : Random
   {
-    public TestRandom(double xiRandomNumber)
+    private readonly double randomNumber;
+
+    public TestRandom(double randomNumber)
     {
-      mRandomNumber = xiRandomNumber;
+      this.randomNumber = randomNumber;
     }
 
     public override double NextDouble()
     {
-      return mRandomNumber;
+      return randomNumber;
     }
-
-    private readonly double mRandomNumber;
   }
 }

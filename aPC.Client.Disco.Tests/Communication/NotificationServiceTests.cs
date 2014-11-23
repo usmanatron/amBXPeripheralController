@@ -8,36 +8,36 @@ namespace aPC.Client.Disco.Tests.Communication
   [TestFixture]
   internal class NotificationServiceTests
   {
+    private NotificationClient client;
+    private TestNotificationService host;
+
     [TestFixtureSetUp]
     public void SetupTests()
     {
-      mHost = new TestNotificationService();
-      mClient = new NotificationClient(mHost.Hostname);
+      this.host = new TestNotificationService();
+      this.client = new NotificationClient(host.Hostname);
     }
 
     [TestFixtureTearDown]
     public void TearDownTests()
     {
-      mHost.Dispose();
+      host.Dispose();
     }
 
     [Test]
     public void PushingAnIntegratedScene_ThrowsException()
     {
-      Assert.Throws<NotSupportedException>(() => mClient.PushIntegratedScene("ccnet_green"));
+      Assert.Throws<NotSupportedException>(() => client.PushIntegratedScene("ccnet_green"));
     }
 
     [Test]
     public void PushingACustomScene_SendsTheExpectedScene()
     {
-      mClient.PushCustomScene("scene");
+      client.PushCustomScene("scene");
 
-      Assert.AreEqual(1, mHost.Scenes.Count);
-      Assert.AreEqual(false, mHost.Scenes[0].Item1);
-      Assert.AreEqual("scene", mHost.Scenes[0].Item2);
+      Assert.AreEqual(1, host.Scenes.Count);
+      Assert.AreEqual(false, host.Scenes[0].Item1);
+      Assert.AreEqual("scene", host.Scenes[0].Item2);
     }
-
-    private NotificationClient mClient;
-    private TestNotificationService mHost;
   }
 }

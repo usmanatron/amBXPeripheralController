@@ -7,30 +7,30 @@ namespace aPC.Client.Disco.Tests.Generators
   [TestFixture]
   internal class RandomSceneGeneratorTests
   {
+    private Settings settings;
+    private RandomSceneGenerator generator;
+
     [TestFixtureSetUp]
     public void SetupGenerator()
     {
-      mSettings = new Settings(new HostnameAccessor());
-      mGenerator = new RandomSceneGenerator(mSettings, new TestLightSectionGenerator());
+      settings = new Settings(new HostnameAccessor());
+      generator = new RandomSceneGenerator(settings, new TestLightSectionGenerator());
     }
 
     [Test]
     public void NewScene_HasSpecificNumberOfFrames()
     {
-      var lScene = mGenerator.Generate();
-      Assert.AreEqual(mSettings.FramesPerScene, lScene.Frames.Count);
+      var scene = generator.Generate();
+      Assert.AreEqual(settings.FramesPerScene, scene.Frames.Count);
     }
 
     [Test]
     public void NewScene_DoesNotSpecifyFansOrRumbles()
     {
-      var lScene = mGenerator.Generate();
+      var scene = generator.Generate();
 
-      Assert.IsNull(lScene.Frames[0].Fans);
-      Assert.IsNull(lScene.Frames[0].Rumbles);
+      Assert.IsNull(scene.Frames[0].Fans);
+      Assert.IsNull(scene.Frames[0].Rumbles);
     }
-
-    private Settings mSettings;
-    private RandomSceneGenerator mGenerator;
   }
 }

@@ -4,9 +4,22 @@ namespace aPC.Client.Disco
 {
   public class Settings
   {
-    public Settings(HostnameAccessor xiHostnameAccessor)
+    private int mBPM;
+
+    public Range RedColourWidth;
+    public Range BlueColourWidth;
+    public Range GreenColourWidth;
+    public Range LightIntensityWidth;
+    public Range FadeTime;
+
+    public double ChangeThreshold;
+    public int FramesPerScene;
+
+    public HostnameAccessor HostnameAccessor;
+
+    public Settings(HostnameAccessor hostnameAccessor)
     {
-      HostnameAccessor = xiHostnameAccessor;
+      HostnameAccessor = hostnameAccessor;
       SetConstantValues();
       SetConfigurableDefaultValues();
     }
@@ -44,22 +57,9 @@ namespace aPC.Client.Disco
       {
         mBPM = value;
 
-        var lMaximumFadeLength = PushInterval / (FramesPerScene - 1);
-        FadeTime = new Range(10, lMaximumFadeLength);
+        var maximumFadeLength = PushInterval / (FramesPerScene - 1);
+        FadeTime = new Range(10, maximumFadeLength);
       }
     }
-
-    private int mBPM;
-
-    public Range RedColourWidth;
-    public Range BlueColourWidth;
-    public Range GreenColourWidth;
-    public Range LightIntensityWidth;
-    public Range FadeTime;
-
-    public double ChangeThreshold;
-    public int FramesPerScene;
-
-    public HostnameAccessor HostnameAccessor;
   }
 }

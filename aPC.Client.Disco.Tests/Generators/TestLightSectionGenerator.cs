@@ -6,14 +6,16 @@ namespace aPC.Client.Disco.Tests.Generators
 {
   internal class TestLightSectionGenerator : IGenerator<LightSection>
   {
+    private readonly LightSection lightSection;
+
     public TestLightSectionGenerator()
     {
-      mLightSection = DefaultLightSections.Orange;
+      lightSection = DefaultLightSections.Orange;
     }
 
     public LightSection Generate()
     {
-      return mLightSection;
+      return lightSection;
     }
 
     public string GeneratedScene()
@@ -81,7 +83,5 @@ namespace aPC.Client.Disco.Tests.Generators
   </Frames>
 </amBXScene>";
     }
-
-    private readonly LightSection mLightSection;
   }
 }

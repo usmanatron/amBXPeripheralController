@@ -11,8 +11,8 @@ namespace aPC.Client.Disco
       var kernel = new NinjectKernelHandler();
       BuildSettings(args.ToList(), kernel.Get<Settings>());
 
-      var lTask = kernel.Get<DiscoTask>();
-      lTask.Run();
+      var task = kernel.Get<DiscoTask>();
+      task.Run();
     }
 
     private static void BuildSettings(IEnumerable<string> args, Settings settings)

@@ -8,6 +8,9 @@ namespace aPC.Client.Disco.Generators
 {
   public class RandomLightSectionGenerator : IGenerator<LightSection>
   {
+    private readonly Random random;
+    private readonly Settings settings;
+
     public RandomLightSectionGenerator(Settings settings, Random random)
     {
       this.settings = settings;
@@ -39,8 +42,5 @@ namespace aPC.Client.Disco.Generators
         Intensity = settings.LightIntensityWidth.GetScaledValue(random.NextDouble())
       };
     }
-
-    private readonly Random random;
-    private readonly Settings settings;
   }
 }

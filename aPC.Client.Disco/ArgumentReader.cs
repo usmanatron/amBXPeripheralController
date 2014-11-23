@@ -5,6 +5,9 @@ namespace aPC.Client.Disco
 {
   public class ArgumentReader
   {
+    private List<string> args;
+    private Settings settings;
+
     public ArgumentReader(List<string> args, Settings sSettings)
     {
       this.args = args;
@@ -64,8 +67,5 @@ namespace aPC.Client.Disco
 
       return new Range(minimum, maximum);
     }
-
-    private List<string> args;
-    private Settings settings;
   }
 }

@@ -11,10 +11,10 @@ namespace aPC.Client.Disco.Tests
     [TestCase(0.5f, 2f, 1.5f)]
     [TestCase(-0.5f, 0.5f, 1f)]
     [TestCase(-2, -0.5f, 1.5f)]
-    public void GivenSpecificInputs_ReturnsExpectedWidth(float xiMinimum, float xiMaximum, float xiWidth)
+    public void GivenSpecificInputs_ReturnsExpectedWidth(float minimum, float maximum, float width)
     {
-      var lRange = new Range(xiMinimum, xiMaximum);
-      Assert.AreEqual(xiWidth, lRange.Width);
+      var range = new Range(minimum, maximum);
+      Assert.AreEqual(width, range.Width);
     }
 
     [Test]
@@ -29,26 +29,26 @@ namespace aPC.Client.Disco.Tests
     [TestCase(-2f, 2f, 0.5d, 0f)]
     [TestCase(1f, 2f, 0.75d, 1.75f)]
     [TestCase(-5f, -3f, 0.25d, -4.5f)]
-    public void SpecificInputs_GiveExpectedScaledValue(float xiMinimum, float xiMaximum, double xiValue, float xiScaledValue)
+    public void SpecificInputs_GiveExpectedScaledValue(float minimum, float maximum, double value, float scaledValue)
     {
-      var lRange = new Range(xiMinimum, xiMaximum);
-      Assert.AreEqual(xiScaledValue, lRange.GetScaledValue(xiValue));
+      var range = new Range(minimum, maximum);
+      Assert.AreEqual(scaledValue, range.GetScaledValue(value));
     }
 
     [Test]
     [TestCase(-0.5d, 2)]
     [TestCase(3d, 4)]
-    public void OutOfRangeInputToGetScaledValue_ReturnsClippedScaledValue(double xiValue, float xiScaledValue)
+    public void OutOfRangeInputToGetScaledValue_ReturnsClippedScaledValue(double value, float scaledValue)
     {
-      var lRange = GetStandardRange();
-      Assert.AreEqual(xiScaledValue, lRange.GetScaledValue(xiValue));
+      var range = GetStandardRange();
+      Assert.AreEqual(scaledValue, range.GetScaledValue(value));
     }
 
     [Test]
     public void RangeIsNotEqualToNull()
     {
-      var lRange = GetStandardRange();
-      Assert.AreEqual(false, lRange.Equals(null));
+      var range = GetStandardRange();
+      Assert.AreEqual(false, range.Equals(null));
     }
 
     [Test]
@@ -57,10 +57,10 @@ namespace aPC.Client.Disco.Tests
     [TestCase(0, 0, -1, 0)]
     public void GetHashCode_WorksAsExpected(int xiMin1, int xiMax1, int xiMin2, int xiMax2)
     {
-      var lFirstRange = new Range(xiMin1, xiMax1);
-      var lSecondRange = new Range(xiMin2, xiMax2);
+      var firstRange = new Range(xiMin1, xiMax1);
+      var secondRange = new Range(xiMin2, xiMax2);
 
-      Assert.AreNotEqual(lFirstRange.GetHashCode(), lSecondRange.GetHashCode());
+      Assert.AreNotEqual(firstRange.GetHashCode(), secondRange.GetHashCode());
     }
 
     private Range GetStandardRange()

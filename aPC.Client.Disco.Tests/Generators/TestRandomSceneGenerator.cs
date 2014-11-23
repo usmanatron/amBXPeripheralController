@@ -7,28 +7,28 @@ namespace aPC.Client.Disco.Tests.Generators
 {
   internal class TestRandomSceneGenerator : IGenerator<amBXScene>
   {
-    public TestRandomSceneGenerator(TestLightSectionGenerator xiLights)
+    private readonly TestLightSectionGenerator lights;
+
+    public TestRandomSceneGenerator(TestLightSectionGenerator lights)
     {
-      mLights = xiLights;
+      this.lights = lights;
     }
 
     public amBXScene Generate()
     {
-      var lFrames = new FrameBuilder()
+      var frames = new FrameBuilder()
         .AddFrame()
         .WithRepeated(true)
         .WithFrameLength(1000)
-        .WithLightSection(mLights.Generate())
+        .WithLightSection(lights.Generate())
         .Build();
 
       return new amBXScene
       {
-        Frames = lFrames,
+        Frames = frames,
         IsExclusive = false,
         SceneType = eSceneType.Desync
       };
     }
-
-    private readonly TestLightSectionGenerator mLights;
   }
 }

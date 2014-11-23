@@ -9,17 +9,19 @@ namespace aPC.Client.Disco.Tests
   [TestFixture]
   public class ArgumentReaderTests
   {
+    public delegate object GetSetting(Settings xiSettings);
+
     // TODO: This test fails because of HostnameAccessor.  One potential fix is to override Equals etc...
     [Test]
     public void NoGivenArguments_GivesDefaultSettings()
     {
-      var lReader = new ArgumentReader(new List<string>(), new Settings(new HostnameAccessor()));
-      var lArgumentSettings = lReader.ParseArguments();
-      var lDefaultSettings = GetDefaultSettings();
+      var reader = new ArgumentReader(new List<string>(), new Settings(new HostnameAccessor()));
+      var argumentSettings = reader.ParseArguments();
+      var defaultSettings = GetDefaultSettings();
 
-      foreach (FieldInfo lField in typeof(Settings).GetFields(BindingFlags.Public | BindingFlags.Instance))
+      foreach (FieldInfo field in typeof(Settings).GetFields(BindingFlags.Public | BindingFlags.Instance))
       {
-        Assert.AreEqual(lField.GetValue(lDefaultSettings), lField.GetValue(lArgumentSettings));
+        Assert.AreEqual(field.GetValue(defaultSettings), field.GetValue(argumentSettings));
       }
     }
 
@@ -31,20 +33,20 @@ namespace aPC.Client.Disco.Tests
     [Test]
     public void UnexpectedArgument_ThrowsException()
     {
-      var lArguments = new List<string> { "TotallyNonExistantArgument:0,1" };
-      var lArgumentReader = new ArgumentReader(lArguments, GetDefaultSettings());
-      Assert.Throws<UsageException>(() => lArgumentReader.ParseArguments());
+      var arguments = new List<string> { "TotallyNonExistantArgument:0,1" };
+      var argumentReader = new ArgumentReader(arguments, GetDefaultSettings());
+      Assert.Throws<UsageException>(() => argumentReader.ParseArguments());
     }
 
     [Test]
     [TestCaseSource("GetArgumentCases")]
-    public void SpecifyingAnOverridingArgument_CorrectlyAddedToSettings(SettingsTester xiSettingsTest)
+    public void SpecifyingAnOverridingArgument_CorrectlyAddedToSettings(SettingsTester settingsTest)
     {
-      var lArgs = new List<string> { xiSettingsTest.Argument };
+      var args = new List<string> { settingsTest.Argument };
 
-      var lArgumentSettings = new ArgumentReader(lArgs, GetDefaultSettings()).ParseArguments();
+      var argumentSettings = new ArgumentReader(args, GetDefaultSettings()).ParseArguments();
 
-      Assert.AreEqual(xiSettingsTest.ExpectedValue, xiSettingsTest.RangeSelector(lArgumentSettings));
+      Assert.AreEqual(settingsTest.ExpectedValue, settingsTest.RangeSelector(argumentSettings));
     }
 
     private readonly object[] GetArgumentCases =
@@ -68,25 +70,23 @@ namespace aPC.Client.Disco.Tests
     [TestCase("red:2,4")]
     public void SpecifyingACustomRange_WithInvalidData_ThrowsException(string xiRange)
     {
-      var lArgument = new List<string> { xiRange };
-      var lArgumentReader = new ArgumentReader(lArgument, GetDefaultSettings());
-      Assert.Throws<UsageException>(() => lArgumentReader.ParseArguments());
+      var argument = new List<string> { xiRange };
+      var argumentReader = new ArgumentReader(argument, GetDefaultSettings());
+      Assert.Throws<UsageException>(() => argumentReader.ParseArguments());
     }
   }
 
   public class SettingsTester
   {
-    public SettingsTester(object xiExpectedValue, string xiArgument, GetSetting xiRangeSelector)
-    {
-      ExpectedValue = xiExpectedValue;
-      Argument = xiArgument;
-      RangeSelector = xiRangeSelector;
-    }
-
     public object ExpectedValue;
     public string Argument;
     public GetSetting RangeSelector;
-  }
 
-  public delegate object GetSetting(Settings xiSettings);
+    public SettingsTester(object expectedValue, string argument, GetSetting rangeSelector)
+    {
+      ExpectedValue = expectedValue;
+      Argument = argument;
+      RangeSelector = rangeSelector;
+    }
+  }
 }

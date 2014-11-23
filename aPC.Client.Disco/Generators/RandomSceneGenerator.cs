@@ -6,6 +6,9 @@ namespace aPC.Client.Disco.Generators
 {
   public class RandomSceneGenerator : IGenerator<amBXScene>
   {
+    private readonly Settings settings;
+    private readonly IGenerator<LightSection> randomLightSectionGenerator;
+
     public RandomSceneGenerator(Settings settings, IGenerator<LightSection> lightSectionGenerator)
     {
       this.settings = settings;
@@ -30,16 +33,13 @@ namespace aPC.Client.Disco.Generators
       return scene;
     }
 
-    private void AddNewFrame(FrameBuilder xiBuilder)
+    private void AddNewFrame(FrameBuilder builder)
     {
-      xiBuilder
+      builder
         .AddFrame()
         .WithFrameLength(settings.PushInterval)
         .WithRepeated(true)
         .WithLightSection(randomLightSectionGenerator.Generate());
     }
-
-    private readonly Settings settings;
-    private readonly IGenerator<LightSection> randomLightSectionGenerator;
   }
 }

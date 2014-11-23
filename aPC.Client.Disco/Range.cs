@@ -7,17 +7,20 @@ namespace aPC.Client.Disco
   /// </summary>
   public class Range
   {
+    private readonly float minimum;
+    private readonly float maximum;
+
     public Range(float minimum, float maximum)
     {
       if (maximum < minimum)
       {
-        var lMessage = string.Format(
+        var message = string.Format(
           "Range constructor values in the wrong order: " + Environment.NewLine +
           "Minimum: {0} " + Environment.NewLine +
           "Maximum: {1}",
           minimum,
           maximum);
-        throw new ArgumentException(lMessage);
+        throw new ArgumentException(message);
       }
 
       this.minimum = minimum;
@@ -25,7 +28,7 @@ namespace aPC.Client.Disco
     }
 
     /// <remarks>
-    ///   xiValue is expected to be between 0 and 1.  If this
+    ///   value is expected to be between 0 and 1.  If this
     ///   isn't the case, we clip the value appropriately instead of
     ///   throwing any error.
     /// </remarks>
@@ -75,8 +78,5 @@ namespace aPC.Client.Disco
     {
       return minimum.GetHashCode() ^ maximum.GetHashCode();
     }
-
-    private readonly float minimum;
-    private readonly float maximum;
   }
 }
