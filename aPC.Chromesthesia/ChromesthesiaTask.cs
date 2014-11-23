@@ -6,9 +6,9 @@ namespace aPC.Chromesthesia
   // http://channel9.msdn.com/coding4fun/articles/AutotuneNET
   class ChromesthesiaTask
   {
-    private readonly SceneGeneratorProvider sceneGenerator;
+    private readonly SceneGenerator sceneGenerator;
 
-    public ChromesthesiaTask(SceneGeneratorProvider sceneGenerator)
+    public ChromesthesiaTask(SceneGenerator sceneGenerator)
     {
       this.sceneGenerator = sceneGenerator;
     }
@@ -31,12 +31,11 @@ namespace aPC.Chromesthesia
     /// </remarks>
     public void ApplyAutoTune(bool runForever)
     {
-      byte[] buffer = new byte[8192];
-      int bytesRead;
-
+      int readLength = 8192;
+      
       do
       {
-        bytesRead = sceneGenerator.Read(buffer, 0, buffer.Length);
+        sceneGenerator.Execute(readLength);
       } while (runForever);
     }
   }

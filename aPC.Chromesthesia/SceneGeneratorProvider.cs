@@ -6,34 +6,33 @@ using NAudio.Wave;
 
 namespace aPC.Chromesthesia
 {
-  class SceneGeneratorProvider : IWaveProvider
+  class SceneGenerator
   {
     private readonly PitchGeneratorProvider pitchGenerator;
     private readonly SceneBuilder sceneBuilder;
     private readonly ConductorManager conductorManager;
 
-    public SceneGeneratorProvider(PitchGeneratorProvider pitchGenerator, SceneBuilder sceneBuilder, ConductorManager conductorManager)
+    public SceneGenerator(PitchGeneratorProvider pitchGenerator, SceneBuilder sceneBuilder, ConductorManager conductorManager)
     {
       this.pitchGenerator = pitchGenerator;
       this.sceneBuilder = sceneBuilder;
       this.conductorManager = conductorManager;
     }
 
-    public int Read(byte[] buffer, int offset, int count)
+    public void Execute(int readLength)
     {
-      var results = GetResultsFromPitchGenerator(buffer, offset, count);
+      var results = GetResultsFromPitchGenerator(new byte[readLength], 0, readLength);
 
       // BuildScene      
       var scene = sceneBuilder.BuildSceneFromPitchResults(results);
 
-      if (SceneIsEmpty(scene))
+      if (!SceneIsEmpty(scene))
       {
-        return results.bytesRead;
+        // Push through conductorManager
+        conductorManager.Update(scene);
       }
 
-      // Push through conductorManager
-      conductorManager.Update(scene);
-      return results.bytesRead;
+      return;
     }
 
     private StereoPitchResult GetResultsFromPitchGenerator(byte[] buffer, int offset, int count)
