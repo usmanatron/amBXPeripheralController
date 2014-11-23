@@ -15,11 +15,11 @@ namespace aPC.Common.Server.Conductors
 
     private readonly Locked<bool> isRunning;
     private readonly eDirection direction;
-    private readonly ActorBase<T> actor;
+    private readonly IActor<T> actor;
     private readonly SceneHandlerBase<T> handler;
     private readonly object sceneLock = new object();
 
-    protected ConductorBase(eDirection direction, ActorBase<T> actor, SceneHandlerBase<T> handler)
+    protected ConductorBase(eDirection direction, IActor<T> actor, SceneHandlerBase<T> handler)
     {
       isRunning = new Locked<bool>(false);
       this.direction = direction;

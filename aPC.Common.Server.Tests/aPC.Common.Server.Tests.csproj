@@ -62,7 +62,7 @@
     <Compile Include="Actors\FrameActorTests.cs" />
     <Compile Include="Actors\LightActorTests.cs" />
     <Compile Include="Actors\RumbleActorTests.cs" />
-    <Compile Include="Actors\TestEngineActor.cs" />
+    <Compile Include="Actors\TestActor.cs" />
     <Compile Include="AtypicalFirstRunInfiniteTickerTests.cs" />
     <Compile Include="Conductors\ConductorBaseTests.cs" />
     <Compile Include="Conductors\TestConductor.cs" />

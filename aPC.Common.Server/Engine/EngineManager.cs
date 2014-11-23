@@ -66,10 +66,21 @@ namespace aPC.Common.Server.Engine
 
     #region Updating
 
-    public void UpdateLight(eDirection direction, Light light, int fadeTime)
+    public void UpdateComponent(eDirection direction, IComponent component, int fadeTime)
     {
       var convertedDirection = ConversionHelpers.GetDirection(direction);
-      ThreadPool.QueueUserWorkItem(_ => UpdateLightInternal(lights[convertedDirection], light, fadeTime));
+      switch (component.ComponentType())
+      {
+        case eComponentType.Light:
+          ThreadPool.QueueUserWorkItem(_ => UpdateLightInternal(lights[convertedDirection], (Light)component, fadeTime));
+          break;
+        case eComponentType.Fan:
+          UpdateFanInternal(fans[convertedDirection], (Fan)component);
+          break;
+        case eComponentType.Rumble:
+          UpdateRumbleInternal(rumbles[convertedDirection], (Rumble)component);
+          break;
+      }
     }
 
     private void UpdateLightInternal(amBXLight light, Light inputLight, int fadeTime)
@@ -83,12 +94,6 @@ namespace aPC.Common.Server.Engine
       light.FadeTime = fadeTime;
     }
 
-    public void UpdateFan(eDirection direction, Fan fan)
-    {
-      var convertedDirection = ConversionHelpers.GetDirection(direction);
-      UpdateFanInternal(fans[convertedDirection], fan);
-    }
-
     private void UpdateFanInternal(amBXFan fan, Fan inputFan)
     {
       if (inputFan == null)
@@ -96,12 +101,6 @@ namespace aPC.Common.Server.Engine
         return;
       }
       fan.Intensity = inputFan.Intensity;
-    }
-
-    public void UpdateRumble(eDirection direction, Rumble rumble)
-    {
-      var convertedDirection = ConversionHelpers.GetDirection(direction);
-      UpdateRumbleInternal(rumbles[convertedDirection], rumble);
     }
 
     private void UpdateRumbleInternal(amBXRumble rumble, Rumble inputRumble)

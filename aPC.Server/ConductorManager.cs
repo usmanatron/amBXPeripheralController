@@ -26,19 +26,19 @@ namespace aPC.Server
     {
       frameConductor = new FrameConductor(new FrameActor(engine), new FrameHandler(scene, action));
 
-      desyncConductors.Add(new LightConductor(eDirection.North, new LightActor(engine), new LightHandler(scene, action)));
-      desyncConductors.Add(new LightConductor(eDirection.NorthEast, new LightActor(engine), new LightHandler(scene, action)));
-      desyncConductors.Add(new LightConductor(eDirection.East, new LightActor(engine), new LightHandler(scene, action)));
-      desyncConductors.Add(new LightConductor(eDirection.SouthEast, new LightActor(engine), new LightHandler(scene, action)));
-      desyncConductors.Add(new LightConductor(eDirection.South, new LightActor(engine), new LightHandler(scene, action)));
-      desyncConductors.Add(new LightConductor(eDirection.SouthWest, new LightActor(engine), new LightHandler(scene, action)));
-      desyncConductors.Add(new LightConductor(eDirection.West, new LightActor(engine), new LightHandler(scene, action)));
-      desyncConductors.Add(new LightConductor(eDirection.NorthWest, new LightActor(engine), new LightHandler(scene, action)));
+      desyncConductors.Add(new LightConductor(eDirection.North, new ComponentActor<Light>(engine), new LightHandler(scene, action)));
+      desyncConductors.Add(new LightConductor(eDirection.NorthEast, new ComponentActor<Light>(engine), new LightHandler(scene, action)));
+      desyncConductors.Add(new LightConductor(eDirection.East, new ComponentActor<Light>(engine), new LightHandler(scene, action)));
+      desyncConductors.Add(new LightConductor(eDirection.SouthEast, new ComponentActor<Light>(engine), new LightHandler(scene, action)));
+      desyncConductors.Add(new LightConductor(eDirection.South, new ComponentActor<Light>(engine), new LightHandler(scene, action)));
+      desyncConductors.Add(new LightConductor(eDirection.SouthWest, new ComponentActor<Light>(engine), new LightHandler(scene, action)));
+      desyncConductors.Add(new LightConductor(eDirection.West, new ComponentActor<Light>(engine), new LightHandler(scene, action)));
+      desyncConductors.Add(new LightConductor(eDirection.NorthWest, new ComponentActor<Light>(engine), new LightHandler(scene, action)));
 
-      desyncConductors.Add(new FanConductor(eDirection.East, new FanActor(engine), new FanHandler(scene, action)));
-      desyncConductors.Add(new FanConductor(eDirection.West, new FanActor(engine), new FanHandler(scene, action)));
+      desyncConductors.Add(new FanConductor(eDirection.East, new ComponentActor<Fan>(engine), new FanHandler(scene, action)));
+      desyncConductors.Add(new FanConductor(eDirection.West, new ComponentActor<Fan>(engine), new FanHandler(scene, action)));
 
-      desyncConductors.Add(new RumbleConductor(eDirection.Center, new RumbleActor(engine), new RumbleHandler(scene, action)));
+      desyncConductors.Add(new RumbleConductor(eDirection.Center, new ComponentActor<Rumble>(engine), new RumbleHandler(scene, action)));
     }
 
     #region Update Scene

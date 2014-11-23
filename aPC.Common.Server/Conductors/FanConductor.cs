@@ -6,7 +6,7 @@ namespace aPC.Common.Server.Conductors
 {
   public class FanConductor : ComponentConductor<Fan>
   {
-    public FanConductor(eDirection direction, FanActor actor, FanHandler handler)
+    public FanConductor(eDirection direction, ComponentActor<Fan> actor, FanHandler handler)
       : base(direction, actor, handler)
     {
     }

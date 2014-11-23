@@ -4,14 +4,16 @@ using aPC.Common.Server.Snapshots;
 
 namespace aPC.Common.Server.Actors
 {
-  public class FrameActor : ActorBase<FrameSnapshot>
+  public class FrameActor : IActor<FrameSnapshot>
   {
+    private IEngine engine;
+
     public FrameActor(IEngine engine)
-      : base(engine)
     {
+      this.engine = engine;
     }
 
-    public override void ActNextFrame(eDirection direction, FrameSnapshot snapshot)
+    public void ActNextFrame(eDirection direction, FrameSnapshot snapshot)
     {
       if (snapshot.Frame.Lights != null)
       {
@@ -31,25 +33,25 @@ namespace aPC.Common.Server.Actors
 
     private void UpdateLights(LightSection lights)
     {
-      Engine.UpdateLight(eDirection.North, lights.North, lights.FadeTime);
-      Engine.UpdateLight(eDirection.NorthEast, lights.NorthEast, lights.FadeTime);
-      Engine.UpdateLight(eDirection.East, lights.East, lights.FadeTime);
-      Engine.UpdateLight(eDirection.SouthEast, lights.SouthEast, lights.FadeTime);
-      Engine.UpdateLight(eDirection.South, lights.South, lights.FadeTime);
-      Engine.UpdateLight(eDirection.SouthWest, lights.SouthWest, lights.FadeTime);
-      Engine.UpdateLight(eDirection.West, lights.West, lights.FadeTime);
-      Engine.UpdateLight(eDirection.NorthWest, lights.NorthWest, lights.FadeTime);
+      engine.UpdateComponent(eDirection.North, lights.North, lights.FadeTime);
+      engine.UpdateComponent(eDirection.NorthEast, lights.NorthEast, lights.FadeTime);
+      engine.UpdateComponent(eDirection.East, lights.East, lights.FadeTime);
+      engine.UpdateComponent(eDirection.SouthEast, lights.SouthEast, lights.FadeTime);
+      engine.UpdateComponent(eDirection.South, lights.South, lights.FadeTime);
+      engine.UpdateComponent(eDirection.SouthWest, lights.SouthWest, lights.FadeTime);
+      engine.UpdateComponent(eDirection.West, lights.West, lights.FadeTime);
+      engine.UpdateComponent(eDirection.NorthWest, lights.NorthWest, lights.FadeTime);
     }
 
     private void UpdateFans(FanSection fans)
     {
-      Engine.UpdateFan(eDirection.East, fans.East);
-      Engine.UpdateFan(eDirection.West, fans.West);
+      engine.UpdateComponent(eDirection.East, fans.East, fans.FadeTime);
+      engine.UpdateComponent(eDirection.West, fans.West, fans.FadeTime);
     }
 
     private void UpdateRumbles(RumbleSection rumble)
     {
-      Engine.UpdateRumble(eDirection.Center, rumble.Rumble);
+      engine.UpdateComponent(eDirection.Center, rumble.Rumble, rumble.FadeTime);
     }
   }
 }

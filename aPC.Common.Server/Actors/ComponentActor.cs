@@ -4,11 +4,21 @@ using aPC.Common.Server.Snapshots;
 
 namespace aPC.Common.Server.Actors
 {
-  public abstract class ComponentActor<T> : ActorBase<ComponentSnapshot<T>> where T : IComponent
+  public class ComponentActor<T> : IActor<ComponentSnapshot<T>> where T : IComponent
   {
-    protected ComponentActor(IEngine engine)
-      : base(engine)
+    private IEngine engine;
+
+    public ComponentActor(IEngine engine)
     {
+      this.engine = engine;
+    }
+
+    public void ActNextFrame(eDirection direction, ComponentSnapshot<T> snapshot)
+    {
+      if (!snapshot.IsComponentNull)
+      {
+        engine.UpdateComponent(direction, snapshot.Item, snapshot.FadeTime);
+      }
     }
   }
 }

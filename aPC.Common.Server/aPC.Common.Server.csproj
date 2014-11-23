@@ -49,13 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actors\ActorBase.cs" />
     <Compile Include="Actors\ComponentActor.cs" />
-    <Compile Include="Actors\FanActor.cs" />
     <Compile Include="Actors\FrameActor.cs" />
     <Compile Include="Actors\IActor.cs" />
-    <Compile Include="Actors\LightActor.cs" />
-    <Compile Include="Actors\RumbleActor.cs" />
     <Compile Include="AtypicalFirstRunInfiniteTicker.cs" />
     <Compile Include="Conductors\ComponentConductor.cs" />
     <Compile Include="Conductors\ConductorBase.cs" />
