@@ -74,7 +74,6 @@ namespace aPC.Chromesthesia.Server
         .WithLightInDirection(eDirection.SouthWest, westDiagonalLight)
         .WithLightInDirection(eDirection.West, westLight)
         .WithLightInDirection(eDirection.NorthWest, westDiagonalLight)
-        .WithFadeTime(fadeTime)
         .Build();
     }
   }

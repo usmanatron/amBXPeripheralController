@@ -53,7 +53,6 @@ namespace aPC.Client.Morse
       var lLight = fansEnabled ? settings.Colour : DefaultLights.Off;
 
       return new LightSectionBuilder()
-        .WithFadeTime(10)
         .WithAllLights(lLight)
         .Build();
     }

@@ -33,25 +33,25 @@ namespace aPC.Common.Server.Actors
 
     private void UpdateLights(LightSection lights)
     {
-      engine.UpdateComponent(eDirection.North, lights.North, lights.FadeTime);
-      engine.UpdateComponent(eDirection.NorthEast, lights.NorthEast, lights.FadeTime);
-      engine.UpdateComponent(eDirection.East, lights.East, lights.FadeTime);
-      engine.UpdateComponent(eDirection.SouthEast, lights.SouthEast, lights.FadeTime);
-      engine.UpdateComponent(eDirection.South, lights.South, lights.FadeTime);
-      engine.UpdateComponent(eDirection.SouthWest, lights.SouthWest, lights.FadeTime);
-      engine.UpdateComponent(eDirection.West, lights.West, lights.FadeTime);
-      engine.UpdateComponent(eDirection.NorthWest, lights.NorthWest, lights.FadeTime);
+      engine.UpdateComponent(eDirection.North, lights.North);
+      engine.UpdateComponent(eDirection.NorthEast, lights.NorthEast);
+      engine.UpdateComponent(eDirection.East, lights.East);
+      engine.UpdateComponent(eDirection.SouthEast, lights.SouthEast);
+      engine.UpdateComponent(eDirection.South, lights.South);
+      engine.UpdateComponent(eDirection.SouthWest, lights.SouthWest);
+      engine.UpdateComponent(eDirection.West, lights.West);
+      engine.UpdateComponent(eDirection.NorthWest, lights.NorthWest);
     }
 
     private void UpdateFans(FanSection fans)
     {
-      engine.UpdateComponent(eDirection.East, fans.East, 100); //Value Ignored
-      engine.UpdateComponent(eDirection.West, fans.West, 100); //Value Ignored
+      engine.UpdateComponent(eDirection.East, fans.East);
+      engine.UpdateComponent(eDirection.West, fans.West);
     }
 
     private void UpdateRumbles(RumbleSection rumble)
     {
-      engine.UpdateComponent(eDirection.Center, rumble.Rumble, 100); //Value Ignored
+      engine.UpdateComponent(eDirection.Center, rumble.Rumble);
     }
   }
 }

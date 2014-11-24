@@ -21,7 +21,6 @@ namespace aPC.Common.Tests
     public void FrameStatistics_ContainsExpectedComponentType()
     {
       var lightSection = new LightSectionBuilder()
-        .WithFadeTime(100)
         .WithLightInDirection(eDirection.North, arbitraryLight)
         .Build();
       var frames = new FrameBuilder()
@@ -44,7 +43,6 @@ namespace aPC.Common.Tests
     public void FrameStatistics_ContainsNoDuplicates()
     {
       var lightSection = new LightSectionBuilder()
-        .WithFadeTime(100)
         .WithAllLights(arbitraryLight)
         .Build();
       var frames = new FrameBuilder()
@@ -66,7 +64,6 @@ namespace aPC.Common.Tests
     public void FrameStatistics_RecordsSceneLength()
     {
       var lightSection = new LightSectionBuilder()
-        .WithFadeTime(100)
         .WithAllLights(arbitraryLight)
         .Build();
       var frames = new FrameBuilder()

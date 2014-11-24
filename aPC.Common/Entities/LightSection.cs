@@ -40,8 +40,5 @@ namespace aPC.Common.Entities
     [Direction(eDirection.NorthWest)]
     [PhysicalComponent]
     public Light NorthWest;
-
-    [XmlElement]
-    public int FadeTime;
   }
 }

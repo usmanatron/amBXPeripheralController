@@ -27,8 +27,7 @@ namespace aPC.Common.Tests.Builders
     [Test]
     public void NewLightSection_WithNoLights_ThrowsException()
     {
-      var sectionBuilder = new LightSectionBuilder()
-        .WithFadeTime(100);
+      var sectionBuilder = new LightSectionBuilder();
 
       Assert.Throws<ArgumentException>(() => sectionBuilder.Build());
     }
@@ -37,21 +36,9 @@ namespace aPC.Common.Tests.Builders
     public void NewLightSection_WithFadeTimeAndAtLeastOneLightSpecified_DoesNotThrowException()
     {
       var sectionBuilder = new LightSectionBuilder()
-        .WithFadeTime(100)
         .WithLightInDirection(eDirection.East, aribitraryColour);
 
       Assert.DoesNotThrow(() => sectionBuilder.Build());
-    }
-
-    [Test]
-    public void NewLightSection_HasValidFadeTime()
-    {
-      var section = new LightSectionBuilder()
-        .WithFadeTime(100)
-        .WithLightInDirection(eDirection.East, aribitraryColour)
-        .Build();
-
-      Assert.AreEqual(100, section.FadeTime);
     }
 
     [Test]
@@ -66,7 +53,6 @@ namespace aPC.Common.Tests.Builders
     public void NewLightSection_HasValidLightInRightDirection(eDirection direction)
     {
       var section = new LightSectionBuilder()
-        .WithFadeTime(100)
         .WithLightInDirection(direction, aribitraryColour)
         .Build();
 
@@ -77,7 +63,6 @@ namespace aPC.Common.Tests.Builders
     public void NewLightSection_AllLightsSpecifiedInOneGo_AllLightsSpecified()
     {
       var section = new LightSectionBuilder()
-        .WithFadeTime(100)
         .WithAllLights(aribitraryColour)
         .Build();
 
@@ -95,7 +80,6 @@ namespace aPC.Common.Tests.Builders
     public void NewLightSection_DifferentLightsInDifferentPlaces_OnTheRightPlaces()
     {
       var section = new LightSectionBuilder()
-        .WithFadeTime(100)
         .WithLightInDirection(eDirection.North, green)
         .WithLightInDirection(eDirection.East, blue)
         .WithLightInDirection(eDirection.SouthWest, red)
@@ -115,8 +99,7 @@ namespace aPC.Common.Tests.Builders
     [Test]
     public void NewLightSection_SpecifyingALightInAnInvalidDirection_ThrowsException()
     {
-      var section = new LightSectionBuilder()
-        .WithFadeTime(100);
+      var section = new LightSectionBuilder();
 
       Assert.Throws<InvalidOperationException>(() => section.WithLightInDirection(eDirection.Center, blue));
     }
@@ -129,7 +112,6 @@ namespace aPC.Common.Tests.Builders
     public void SpecifyingAPhysicalLightInANonPhysicalLocation_DoesNotUpdateLight()
     {
       var sectionBuilder = new LightSectionBuilder()
-        .WithFadeTime(100)
         .WithLightInDirectionIfPhysical(eDirection.South, blue);
 
       Assert.Throws<ArgumentException>(() => sectionBuilder.Build());
@@ -139,7 +121,6 @@ namespace aPC.Common.Tests.Builders
     public void SpecifyingAPhysicalLightInaNonPhysicalDirection_DoesNotOverwritePreviousData()
     {
       var section = new LightSectionBuilder()
-        .WithFadeTime(100)
         .WithLightInDirection(eDirection.South, aribitraryColour)
         .WithLightInDirectionIfPhysical(eDirection.South, blue)
         .Build();
@@ -151,7 +132,6 @@ namespace aPC.Common.Tests.Builders
     public void SpecifyingAPhysicalLightInAPhysicalDirection_UpdatesLight()
     {
       var sectionBuilder = new LightSectionBuilder()
-        .WithFadeTime(100)
         .WithLightInDirectionIfPhysical(eDirection.North, aribitraryColour);
 
       var section = sectionBuilder.Build();

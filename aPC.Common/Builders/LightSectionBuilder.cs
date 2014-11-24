@@ -14,12 +14,6 @@ namespace aPC.Common.Builders
       lightSpecified = false;
     }
 
-    public LightSectionBuilder WithFadeTime(int fadeTime)
-    {
-      lightSection.FadeTime = fadeTime;
-      return this;
-    }
-
     public LightSectionBuilder WithAllLights(Light light)
     {
       WithLightInDirection(eDirection.North, light);
@@ -36,6 +30,11 @@ namespace aPC.Common.Builders
 
     public LightSectionBuilder WithLightInDirection(eDirection direction, Light light)
     {
+      if (!LightIsValid(light))
+      {
+        throw new ArgumentException("Given light is not valid");
+      }
+
       var lightExists = lightSection.SetComponentValueInDirection(light, direction);
       if (!lightExists)
       {
@@ -43,6 +42,11 @@ namespace aPC.Common.Builders
       }
       lightSpecified = true;
       return this;
+    }
+
+    private bool LightIsValid(Light light)
+    {
+      return light.FadeTime > 0;
     }
 
     public LightSectionBuilder WithLightInDirectionIfPhysical(eDirection direction, Light light)
@@ -69,7 +73,7 @@ namespace aPC.Common.Builders
     {
       get
       {
-        return lightSection.FadeTime != default(int) && lightSpecified;
+        return lightSpecified;
       }
     }
   }

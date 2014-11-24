@@ -23,7 +23,7 @@ namespace aPC.Common.Server.Tests
         };
     }
 
-    public void UpdateComponent(eDirection direction, IComponent component, int fadeTime)
+    public void UpdateComponent(eDirection direction, IComponent component)
     {
       if (component == null)
       {
@@ -33,7 +33,7 @@ namespace aPC.Common.Server.Tests
       switch (component.ComponentType())
       {
         case eComponentType.Light:
-          UpdateLight(direction, (Light)component, fadeTime);
+          UpdateLight(direction, (Light)component);
           break;
         case eComponentType.Fan:
           UpdateFan(direction, (Fan)component);
@@ -44,11 +44,10 @@ namespace aPC.Common.Server.Tests
       }
     }
 
-    private void UpdateLight(eDirection direction, Light light, int fadeTime)
+    private void UpdateLight(eDirection direction, Light light)
     {
       Updated[eComponentType.Light] = true;
       Status.Lights.SetComponentValueInDirection(light, direction);
-      Status.Lights.FadeTime = fadeTime;
     }
 
     private void UpdateFan(eDirection direction, Fan fan)

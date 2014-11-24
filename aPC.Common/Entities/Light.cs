@@ -8,6 +8,9 @@ namespace aPC.Common.Entities
     public float Intensity;
 
     [XmlElement]
+    public int FadeTime;
+
+    [XmlElement]
     public float Red;
 
     [XmlElement]

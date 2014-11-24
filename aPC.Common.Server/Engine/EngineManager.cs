@@ -66,7 +66,7 @@ namespace aPC.Common.Server.Engine
 
     #region Updating
 
-    public void UpdateComponent(eDirection direction, IComponent component, int fadeTime)
+    public void UpdateComponent(eDirection direction, IComponent component)
     {
       if (component == null)
       {
@@ -77,7 +77,7 @@ namespace aPC.Common.Server.Engine
       switch (component.ComponentType())
       {
         case eComponentType.Light:
-          ThreadPool.QueueUserWorkItem(_ => UpdateLightInternal(lights[convertedDirection], (Light)component, fadeTime));
+          ThreadPool.QueueUserWorkItem(_ => UpdateLightInternal(lights[convertedDirection], (Light)component));
           break;
         case eComponentType.Fan:
           UpdateFanInternal(fans[convertedDirection], (Fan)component);
@@ -88,10 +88,10 @@ namespace aPC.Common.Server.Engine
       }
     }
 
-    private void UpdateLightInternal(amBXLight light, Light inputLight, int fadeTime)
+    private void UpdateLightInternal(amBXLight light, Light inputLight)
     {
       light.Color = new amBXColor { Red = inputLight.Red, Green = inputLight.Green, Blue = inputLight.Blue };
-      light.FadeTime = fadeTime;
+      light.FadeTime = inputLight.FadeTime;
     }
 
     private void UpdateFanInternal(amBXFan fan, Fan inputFan)

@@ -18,14 +18,6 @@ namespace aPC.Client.Disco.Tests.Generators
     }
 
     [Test]
-    public void Generating_BuildsALightSection()
-    {
-      LightSection section = generator.Generate();
-
-      Assert.AreNotEqual(default(int), section.FadeTime);
-    }
-
-    [Test]
     public void Generating_GivesOnlyLightsInPhysicalDirections()
     {
       var section = generator.Generate();

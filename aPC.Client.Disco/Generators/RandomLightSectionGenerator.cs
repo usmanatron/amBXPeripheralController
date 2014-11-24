@@ -20,7 +20,7 @@ namespace aPC.Client.Disco.Generators
     public LightSection Generate()
     {
       var fadeTime = (int)settings.FadeTime.GetScaledValue(random.NextDouble());
-      var sectionBuilder = new LightSectionBuilder().WithFadeTime(fadeTime);
+      var sectionBuilder = new LightSectionBuilder();
 
       foreach (eDirection direction in Enum.GetValues(typeof(eDirection)).Cast<eDirection>())
       {

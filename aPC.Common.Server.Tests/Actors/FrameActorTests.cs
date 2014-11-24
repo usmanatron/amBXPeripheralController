@@ -25,7 +25,6 @@ namespace aPC.Common.Server.Tests.Actors
     public void UpdatingOneLight_SuccessfullyUpdated()
     {
       var lightSection = new LightSectionBuilder()
-        .WithFadeTime(100)
         .WithLightInDirection(eDirection.North, DefaultLights.Green)
         .Build();
 
@@ -82,7 +81,6 @@ namespace aPC.Common.Server.Tests.Actors
     public void WhenActingNextFrame_DirectionIsIgnored()
     {
       var lightSection = new LightSectionBuilder()
-        .WithFadeTime(100)
         .WithLightInDirection(eDirection.North, DefaultLights.Green)
         .Build();
 
