@@ -5,7 +5,7 @@ namespace aPC.Common.Server.Snapshots
   public class FrameSnapshot : SnapshotBase
   {
     public FrameSnapshot(Frame frame, int fadeTime)
-      : base(fadeTime, frame.Length)
+      : base(frame.Length)
     {
       Frame = frame;
     }

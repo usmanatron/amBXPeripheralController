@@ -24,8 +24,7 @@ namespace aPC.Common.Tests.Builders
     [Test]
     public void NewFanSection_WithNoFans_ThrowsException()
     {
-      var sectionBuilder = new FanSectionBuilder()
-        .WithFadeTime(100);
+      var sectionBuilder = new FanSectionBuilder();
 
       Assert.Throws<ArgumentException>(() => sectionBuilder.Build());
     }
@@ -41,7 +40,6 @@ namespace aPC.Common.Tests.Builders
     public void NewFanSection_CanUpdateAllFansAtSametime()
     {
       var section = new FanSectionBuilder()
-        .WithFadeTime(100)
         .WithAllFans(halfPower)
         .Build();
 
@@ -53,7 +51,6 @@ namespace aPC.Common.Tests.Builders
     public void FanSection_WithDifferentFanTypesOnEachFan_CorrectlySpecified()
     {
       var section = new FanSectionBuilder()
-        .WithFadeTime(100)
         .WithFanInDirection(eDirection.East, fullPower)
         .WithFanInDirection(eDirection.West, halfPower)
         .Build();
@@ -68,7 +65,6 @@ namespace aPC.Common.Tests.Builders
     public void SpecifyingFanRepeatedly_InComplimentaryDirections_UsesTheLastAssignment(eDirection first, eDirection second)
     {
       var section = new FanSectionBuilder()
-        .WithFadeTime(100)
         .WithFanInDirection(first, fullPower)
         .WithFanInDirection(second, halfPower)
         .Build();

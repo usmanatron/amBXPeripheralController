@@ -74,7 +74,6 @@ namespace aPC.Common.Server.Tests.SceneHandlers
       Assert.AreEqual(expectedFrame.Length, snapshot.Length);
       if (!snapshot.IsComponentNull)
       {
-        Assert.AreEqual(expectedFrame.Fans.FadeTime, snapshot.FadeTime);
         Assert.AreEqual(expectedFrame.Fans.GetComponentValueInDirection(direction), snapshot.Item);
       }
     }

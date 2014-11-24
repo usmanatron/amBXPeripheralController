@@ -3,7 +3,7 @@ using System;
 
 namespace aPC.Common.Builders
 {
-  public class LightSectionBuilder : SectionBuilderBase<Light>
+  public class LightSectionBuilder
   {
     private LightSection lightSection;
     private bool lightSpecified;
@@ -16,7 +16,7 @@ namespace aPC.Common.Builders
 
     public LightSectionBuilder WithFadeTime(int fadeTime)
     {
-      SetFadeTime(lightSection, fadeTime);
+      lightSection.FadeTime = fadeTime;
       return this;
     }
 

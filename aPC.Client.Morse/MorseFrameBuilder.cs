@@ -63,7 +63,6 @@ namespace aPC.Client.Morse
       var lRumble = rumbleEnabled ? settings.Rumble : DefaultRumbles.Off;
 
       return new RumbleSectionBuilder()
-        .WithFadeTime(10)
         .WithRumble(lRumble)
         .Build();
     }

@@ -2,13 +2,11 @@
 {
   public abstract class SnapshotBase
   {
-    protected SnapshotBase(int fadeTime, int length)
+    protected SnapshotBase(int length)
     {
-      FadeTime = fadeTime;
       Length = length;
     }
 
-    public int FadeTime;
     public int Length;
   }
 }

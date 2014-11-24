@@ -46,7 +46,6 @@ namespace aPC.Common.Server.Tests.Actors
     public void UpdatingOneFan_SuccessfullyUpdated()
     {
       var fanSection = new FanSectionBuilder()
-        .WithFadeTime(100)
         .WithFanInDirection(eDirection.West, DefaultFans.QuarterPower)
         .Build();
 

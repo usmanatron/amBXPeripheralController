@@ -32,7 +32,7 @@ namespace aPC.Common.Server.Tests.Actors
     [Test]
     public void ActingNextSnapshot_UpdatesComponent()
     {
-      var snapshot = new ComponentSnapshot(DefaultRumbleSections.Boing.Rumble, 100, 1000);
+      var snapshot = new ComponentSnapshot(DefaultRumbleSections.Boing.Rumble, 1000);
 
       actor.ActNextFrame(eDirection.Center, snapshot);
 

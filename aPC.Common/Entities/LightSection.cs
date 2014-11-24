@@ -2,7 +2,7 @@
 
 namespace aPC.Common.Entities
 {
-  public class LightSection : SectionBase<Light>
+  public class LightSection : IComponentSection
   {
     [XmlElement]
     [Direction(eDirection.North)]
@@ -40,5 +40,8 @@ namespace aPC.Common.Entities
     [Direction(eDirection.NorthWest)]
     [PhysicalComponent]
     public Light NorthWest;
+
+    [XmlElement]
+    public int FadeTime;
   }
 }

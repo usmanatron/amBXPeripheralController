@@ -66,7 +66,7 @@
     <Compile Include="Builders\FrameBuilderTests.cs" />
     <Compile Include="Builders\RumbleSectionBuilderTests.cs" />
     <Compile Include="FrameStatisticsTests.cs" />
-    <Compile Include="SectionBaseTests.cs" />
+    <Compile Include="IComponentSectionExtensionTests.cs" />
     <Compile Include="Builders\LightSectionBuilderTests.cs" />
     <Compile Include="Defaults\DefaultSceneTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -33,7 +33,7 @@ namespace aPC.Common.Server.Tests.Actors
     [Test]
     public void ActingNextSnapshot_UpdatesComponentInCorrectDirection()
     {
-      var snapshot = new ComponentSnapshot(DefaultFans.FullPower, 100, 1000);
+      var snapshot = new ComponentSnapshot(DefaultFans.FullPower, 1000);
 
       actor.ActNextFrame(eDirection.West, snapshot);
 

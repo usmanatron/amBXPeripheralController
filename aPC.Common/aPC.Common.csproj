@@ -50,7 +50,6 @@
     <Compile Include="Builders\FanSectionBuilder.cs" />
     <Compile Include="Builders\LightSectionBuilder.cs" />
     <Compile Include="Builders\RumbleSectionBuilder.cs" />
-    <Compile Include="Builders\SectionBuilderBase.cs" />
     <Compile Include="Defaults\DefaultRumbles.cs" />
     <Compile Include="Defaults\DefaultRumbleSections.cs" />
     <Compile Include="Defaults\DefaultFanSections.cs" />
@@ -63,8 +62,8 @@
     <Compile Include="DirectionAttribute.cs" />
     <Compile Include="Entities\FrameStatistics.cs" />
     <Compile Include="Entities\IComponent.cs" />
-    <Compile Include="Entities\SectionBase.cs" />
-    <Compile Include="Entities\SectionBaseExtensions.cs" />
+    <Compile Include="Entities\IComponentSection.cs" />
+    <Compile Include="Entities\IComponentSectionExtensions.cs" />
     <Compile Include="Locked.cs" />
     <Compile Include="PhysicalComponentAttribute.cs" />
     <Compile Include="SceneAccessor.cs" />

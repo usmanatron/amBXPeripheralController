@@ -4,31 +4,27 @@ using System.Reflection;
 
 namespace aPC.Common.Entities
 {
-  public static class SectionBaseExtensions
+  public static class IComponentSectionExtensions
   {
-    public static T GetComponentValueInDirection<T>(this SectionBase<T> section, eDirection direction)
-      where T : IComponent
+    public static IComponent GetComponentValueInDirection(this IComponentSection section, eDirection direction)
     {
       var field = section.GetComponentInfoInDirection(direction);
       return section.GetComponent(field);
     }
 
-    public static bool SetComponentValueInDirection<T>(this SectionBase<T> section, T component, eDirection direction)
-      where T : IComponent
+    public static bool SetComponentValueInDirection(this IComponentSection section, IComponent component, eDirection direction)
     {
       var field = section.GetComponentInfoInDirection(direction);
       return section.TrySetComponent(field, component);
     }
 
-    public static T GetPhysicalComponentValueInDirection<T>(this SectionBase<T> section, eDirection direction)
-      where T : IComponent
+    public static IComponent GetPhysicalComponentValueInDirection(this IComponentSection section, eDirection direction)
     {
       var field = section.GetPhysicalComponentInfoInDirection(direction);
       return section.GetComponent(field);
     }
 
-    public static bool SetPhysicalComponentValueInDirection<T>(this SectionBase<T> section, T component, eDirection direction)
-      where T : IComponent
+    public static bool SetPhysicalComponentValueInDirection(this IComponentSection section, IComponent component, eDirection direction)
     {
       var field = section.GetPhysicalComponentInfoInDirection(direction);
       return section.TrySetComponent(field, component);
@@ -36,8 +32,7 @@ namespace aPC.Common.Entities
 
     #region Private Helper methods
 
-    private static FieldInfo GetComponentInfoInDirection<T>(this SectionBase<T> section, eDirection direction)
-      where T : IComponent
+    private static FieldInfo GetComponentInfoInDirection(this IComponentSection section, eDirection direction)
     {
       if (section == null)
       {
@@ -48,8 +43,7 @@ namespace aPC.Common.Entities
         .SingleOrDefault(field => DirectionAttribute.MatchesDirection(field, direction));
     }
 
-    private static FieldInfo GetPhysicalComponentInfoInDirection<T>(this SectionBase<T> section, eDirection direction)
-      where T : IComponent
+    private static FieldInfo GetPhysicalComponentInfoInDirection(this IComponentSection section, eDirection direction)
     {
       var fieldInDirection = GetComponentInfoInDirection(section, direction);
       if (fieldInDirection == null)
@@ -62,19 +56,17 @@ namespace aPC.Common.Entities
         : null;
     }
 
-    private static T GetComponent<T>(this SectionBase<T> section, FieldInfo fieldInfo)
-      where T : IComponent
+    private static IComponent GetComponent(this IComponentSection section, FieldInfo fieldInfo)
     {
       if (fieldInfo == null)
       {
-        return default(T);
+        return default(IComponent);
       }
 
-      return (T)fieldInfo.GetValue(section);
+      return (IComponent)fieldInfo.GetValue(section);
     }
 
-    private static bool TrySetComponent<T>(this SectionBase<T> section, FieldInfo fieldInfo, T component)
-      where T : IComponent
+    private static bool TrySetComponent(this IComponentSection section, FieldInfo fieldInfo, IComponent component)
     {
       if (fieldInfo == null)
       {
@@ -92,7 +84,7 @@ namespace aPC.Common.Entities
       return true;
     }
 
-    private static IEnumerable<FieldInfo> GetSectionFields<T>(this SectionBase<T> section) where T : IComponent
+    private static IEnumerable<FieldInfo> GetSectionFields(this IComponentSection section)
     {
       return section
         .GetType()

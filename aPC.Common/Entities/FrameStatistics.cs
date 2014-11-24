@@ -25,9 +25,9 @@ namespace aPC.Common.Entities
     private void ProcessFrame(Frame frame)
     {
       SceneLength += frame.Length;
-      ProcessComponent<Light>(frame.Lights);
-      ProcessComponent<Fan>(frame.Fans);
-      ProcessComponent<Rumble>(frame.Rumbles);
+      ProcessComponent(frame.Lights);
+      ProcessComponent(frame.Fans);
+      ProcessComponent(frame.Rumbles);
     }
 
     /// <remarks>
@@ -45,7 +45,7 @@ namespace aPC.Common.Entities
     ///    AddDirectionalComponent(new T(), lDirection);
     ///  }
     /// </remarks>
-    private void ProcessComponent<T>(SectionBase<T> section) where T : IComponent
+    private void ProcessComponent(IComponentSection section)
     {
       foreach (eDirection direction in Enum.GetValues(typeof(eDirection)))
       {

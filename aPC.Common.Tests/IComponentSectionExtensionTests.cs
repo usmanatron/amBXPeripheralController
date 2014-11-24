@@ -5,7 +5,7 @@ using System;
 namespace aPC.Common.Tests
 {
   [TestFixture]
-  internal class SectionBaseTests
+  internal class IComponentSectionExtensionTests
   {
     private TestSection testSection;
 
@@ -107,7 +107,7 @@ namespace aPC.Common.Tests
     }
   }
 
-  internal class TestSection : SectionBase<TestComponent>
+  internal class TestSection : IComponentSection
   {
 #pragma warning disable 169 // Fields are used exclusively by reflection
 

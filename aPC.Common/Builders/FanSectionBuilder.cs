@@ -3,7 +3,7 @@ using System;
 
 namespace aPC.Common.Builders
 {
-  public class FanSectionBuilder : SectionBuilderBase<Fan>
+  public class FanSectionBuilder
   {
     private readonly FanSection fanSection;
     private bool fanSpecified;
@@ -12,12 +12,6 @@ namespace aPC.Common.Builders
     {
       fanSection = new FanSection();
       fanSpecified = false;
-    }
-
-    public FanSectionBuilder WithFadeTime(int fadeTime)
-    {
-      SetFadeTime(fanSection, fadeTime);
-      return this;
     }
 
     public FanSectionBuilder WithAllFans(Fan fan)
@@ -52,7 +46,7 @@ namespace aPC.Common.Builders
     {
       get
       {
-        return fanSection.FadeTime != default(int) && fanSpecified;
+        return fanSpecified;
       }
     }
   }

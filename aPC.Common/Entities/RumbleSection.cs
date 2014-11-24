@@ -2,7 +2,7 @@
 
 namespace aPC.Common.Entities
 {
-  public class RumbleSection : SectionBase<Rumble>
+  public class RumbleSection : IComponentSection
   {
     [XmlElement]
     [PhysicalComponent]

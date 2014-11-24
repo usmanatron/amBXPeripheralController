@@ -45,13 +45,13 @@ namespace aPC.Common.Server.Actors
 
     private void UpdateFans(FanSection fans)
     {
-      engine.UpdateComponent(eDirection.East, fans.East, fans.FadeTime);
-      engine.UpdateComponent(eDirection.West, fans.West, fans.FadeTime);
+      engine.UpdateComponent(eDirection.East, fans.East, 100); //Value Ignored
+      engine.UpdateComponent(eDirection.West, fans.West, 100); //Value Ignored
     }
 
     private void UpdateRumbles(RumbleSection rumble)
     {
-      engine.UpdateComponent(eDirection.Center, rumble.Rumble, rumble.FadeTime);
+      engine.UpdateComponent(eDirection.Center, rumble.Rumble, 100); //Value Ignored
     }
   }
 }

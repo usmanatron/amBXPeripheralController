@@ -19,7 +19,7 @@ namespace aPC.Common.Server.Actors
     {
       if (!snapshot.IsComponentNull)
       {
-        engine.UpdateComponent(direction, snapshot.Item, snapshot.FadeTime);
+        engine.UpdateComponent(direction, snapshot.Item, 100); // Value ignored
       }
     }
   }

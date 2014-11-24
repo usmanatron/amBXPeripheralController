@@ -8,12 +8,12 @@ namespace aPC.Common.Server.Snapshots
     /// Used when a component is not available
     /// </summary>
     public ComponentSnapshot(int length)
-      : this(default(IComponent), 10, length)
+      : this(default(IComponent), length)
     {
     }
 
-    public ComponentSnapshot(IComponent component, int fadeTime, int length)
-      : base(fadeTime, length)
+    public ComponentSnapshot(IComponent component, int length)
+      : base(length)
     {
       Item = component;
     }
