@@ -28,7 +28,7 @@ namespace aPC.Client
 
       if (arguments.Count > 0)
       {
-        kernel.Bind<ConsoleRunner>().ToSelf().WithConstructorArgument("xiArguments", arguments);
+        kernel.Bind<ConsoleRunner>().ToSelf().WithConstructorArgument("arguments", arguments);
         var runner = kernel.Get<ConsoleRunner>();
         runner.Run();
       }
