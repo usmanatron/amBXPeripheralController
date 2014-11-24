@@ -14,9 +14,9 @@ namespace aPC.Common.Server.Conductors
     {
     }
 
-    protected override void Log(string xiNotification)
+    protected override void Log(string notification)
     {
-      log.Info(xiNotification);
+      log.Info(notification);
     }
   }
 }

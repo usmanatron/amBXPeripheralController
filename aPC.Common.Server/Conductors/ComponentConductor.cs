@@ -19,7 +19,7 @@ namespace aPC.Common.Server.Conductors
 
     protected override void Log(string message)
     {
-      log.InfoFormat("Component:{0}, Direction:{1}, Message:{2}", ComponentType, Direction, message);
+      log.InfoFormat("{0} pointing {1} -- {2}", ComponentType, Direction, message);
     }
   }
 }
