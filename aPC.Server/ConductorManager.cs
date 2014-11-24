@@ -26,19 +26,19 @@ namespace aPC.Server
     {
       frameConductor = new FrameConductor(new FrameActor(engine), new FrameHandler(scene, action));
 
-      desyncConductors.Add(new ComponentConductor(eComponentType.Light, eDirection.North, new ComponentActor(eComponentType.Light, engine), new LightHandler(scene, action)));
-      desyncConductors.Add(new ComponentConductor(eComponentType.Light, eDirection.NorthEast, new ComponentActor(eComponentType.Light, engine), new LightHandler(scene, action)));
-      desyncConductors.Add(new ComponentConductor(eComponentType.Light, eDirection.East, new ComponentActor(eComponentType.Light, engine), new LightHandler(scene, action)));
-      desyncConductors.Add(new ComponentConductor(eComponentType.Light, eDirection.SouthEast, new ComponentActor(eComponentType.Light, engine), new LightHandler(scene, action)));
-      desyncConductors.Add(new ComponentConductor(eComponentType.Light, eDirection.South, new ComponentActor(eComponentType.Light, engine), new LightHandler(scene, action)));
-      desyncConductors.Add(new ComponentConductor(eComponentType.Light, eDirection.SouthWest, new ComponentActor(eComponentType.Light, engine), new LightHandler(scene, action)));
-      desyncConductors.Add(new ComponentConductor(eComponentType.Light, eDirection.West, new ComponentActor(eComponentType.Light, engine), new LightHandler(scene, action)));
-      desyncConductors.Add(new ComponentConductor(eComponentType.Light, eDirection.NorthWest, new ComponentActor(eComponentType.Light, engine), new LightHandler(scene, action)));
+      desyncConductors.Add(new ComponentConductor(eComponentType.Light, eDirection.North, new ComponentActor(eComponentType.Light, engine), new ComponentHandler(eComponentType.Light, scene, action)));
+      desyncConductors.Add(new ComponentConductor(eComponentType.Light, eDirection.NorthEast, new ComponentActor(eComponentType.Light, engine), new ComponentHandler(eComponentType.Light, scene, action)));
+      desyncConductors.Add(new ComponentConductor(eComponentType.Light, eDirection.East, new ComponentActor(eComponentType.Light, engine), new ComponentHandler(eComponentType.Light, scene, action)));
+      desyncConductors.Add(new ComponentConductor(eComponentType.Light, eDirection.SouthEast, new ComponentActor(eComponentType.Light, engine), new ComponentHandler(eComponentType.Light, scene, action)));
+      desyncConductors.Add(new ComponentConductor(eComponentType.Light, eDirection.South, new ComponentActor(eComponentType.Light, engine), new ComponentHandler(eComponentType.Light, scene, action)));
+      desyncConductors.Add(new ComponentConductor(eComponentType.Light, eDirection.SouthWest, new ComponentActor(eComponentType.Light, engine), new ComponentHandler(eComponentType.Light, scene, action)));
+      desyncConductors.Add(new ComponentConductor(eComponentType.Light, eDirection.West, new ComponentActor(eComponentType.Light, engine), new ComponentHandler(eComponentType.Light, scene, action)));
+      desyncConductors.Add(new ComponentConductor(eComponentType.Light, eDirection.NorthWest, new ComponentActor(eComponentType.Light, engine), new ComponentHandler(eComponentType.Light, scene, action)));
 
-      desyncConductors.Add(new ComponentConductor(eComponentType.Fan, eDirection.East, new ComponentActor(eComponentType.Fan, engine), new FanHandler(scene, action)));
-      desyncConductors.Add(new ComponentConductor(eComponentType.Fan, eDirection.West, new ComponentActor(eComponentType.Fan, engine), new FanHandler(scene, action)));
+      desyncConductors.Add(new ComponentConductor(eComponentType.Fan, eDirection.East, new ComponentActor(eComponentType.Fan, engine), new ComponentHandler(eComponentType.Fan, scene, action)));
+      desyncConductors.Add(new ComponentConductor(eComponentType.Fan, eDirection.West, new ComponentActor(eComponentType.Fan, engine), new ComponentHandler(eComponentType.Fan, scene, action)));
 
-      desyncConductors.Add(new ComponentConductor(eComponentType.Rumble, eDirection.Center, new ComponentActor(eComponentType.Rumble, engine), new RumbleHandler(scene, action)));
+      desyncConductors.Add(new ComponentConductor(eComponentType.Rumble, eDirection.Center, new ComponentActor(eComponentType.Rumble, engine), new ComponentHandler(eComponentType.Rumble, scene, action)));
     }
 
     #region Update Scene
