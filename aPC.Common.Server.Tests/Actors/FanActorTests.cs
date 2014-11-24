@@ -11,19 +11,19 @@ namespace aPC.Common.Server.Tests.Actors
   internal class FanActorTests
   {
     private TestEngineManager engine;
-    private ComponentActor<Fan> actor;
+    private ComponentActor actor;
 
     [SetUp]
     public void Setup()
     {
       engine = new TestEngineManager();
-      actor = new ComponentActor<Fan>(engine);
+      actor = new ComponentActor(eComponentType.Fan, engine);
     }
 
     [Test]
     public void ActingNextSnapshot_WithNullComponent_DoesNothing()
     {
-      var snapshot = new ComponentSnapshot<Fan>(1000);
+      var snapshot = new ComponentSnapshot(1000);
 
       actor.ActNextFrame(eDirection.East, snapshot);
 
@@ -33,7 +33,7 @@ namespace aPC.Common.Server.Tests.Actors
     [Test]
     public void ActingNextSnapshot_UpdatesComponentInCorrectDirection()
     {
-      var snapshot = new ComponentSnapshot<Fan>(DefaultFans.FullPower, 100, 1000);
+      var snapshot = new ComponentSnapshot(DefaultFans.FullPower, 100, 1000);
 
       actor.ActNextFrame(eDirection.West, snapshot);
 

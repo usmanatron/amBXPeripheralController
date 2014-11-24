@@ -4,14 +4,14 @@ using System;
 
 namespace aPC.Common.Server.SceneHandlers
 {
-  public class RumbleHandler : ComponentHandler<Rumble>
+  public class RumbleHandler : ComponentHandler
   {
     public RumbleHandler(amBXScene scene, Action eventComplete)
       : base(scene, eventComplete)
     {
     }
 
-    public override ComponentSnapshot<Rumble> GetNextSnapshot(eDirection direction)
+    public override ComponentSnapshot GetNextSnapshot(eDirection direction)
     {
       var frame = GetNextFrame();
 
@@ -20,8 +20,8 @@ namespace aPC.Common.Server.SceneHandlers
         : frame.Rumbles.Rumble;
 
       return rumble == null
-        ? new ComponentSnapshot<Rumble>(frame.Length)
-        : new ComponentSnapshot<Rumble>(rumble, frame.Rumbles.FadeTime, frame.Length);
+        ? new ComponentSnapshot(frame.Length)
+        : new ComponentSnapshot(rumble, frame.Rumbles.FadeTime, frame.Length);
     }
   }
 }

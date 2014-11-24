@@ -4,21 +4,21 @@ using System;
 
 namespace aPC.Common.Server.SceneHandlers
 {
-  public class LightHandler : ComponentHandler<Light>
+  public class LightHandler : ComponentHandler
   {
     public LightHandler(amBXScene scene, Action eventComplete)
       : base(scene, eventComplete)
     {
     }
 
-    public override ComponentSnapshot<Light> GetNextSnapshot(eDirection direction)
+    public override ComponentSnapshot GetNextSnapshot(eDirection direction)
     {
       var frame = GetNextFrame();
       var light = GetLight(direction, frame.Lights);
 
       return light == null
-        ? new ComponentSnapshot<Light>(frame.Length)
-        : new ComponentSnapshot<Light>(light, frame.Lights.FadeTime, frame.Length);
+        ? new ComponentSnapshot(frame.Length)
+        : new ComponentSnapshot(light, frame.Lights.FadeTime, frame.Length);
     }
 
     private Light GetLight(eDirection direction, LightSection lights)

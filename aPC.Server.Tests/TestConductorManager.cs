@@ -19,19 +19,19 @@ namespace aPC.Server.Tests
       get { return frameConductor; }
     }
 
-    public IEnumerable<LightConductor> LightConductors
+    public IEnumerable<ComponentConductor> LightConductors
     {
-      get { return desyncConductors.Where(conductor => conductor.ComponentType == eComponentType.Light).Cast<LightConductor>(); }
+      get { return desyncConductors.Where(conductor => conductor.ComponentType == eComponentType.Light); }
     }
 
-    public IEnumerable<FanConductor> FanConductors
+    public IEnumerable<ComponentConductor> FanConductors
     {
-      get { return desyncConductors.Where(conductor => conductor.ComponentType == eComponentType.Fan).Cast<FanConductor>(); }
+      get { return desyncConductors.Where(conductor => conductor.ComponentType == eComponentType.Fan); }
     }
 
-    public IEnumerable<RumbleConductor> RumbleConductors
+    public IEnumerable<ComponentConductor> RumbleConductors
     {
-      get { return desyncConductors.Where(conductor => conductor.ComponentType == eComponentType.Rumble).Cast<RumbleConductor>(); }
+      get { return desyncConductors.Where(conductor => conductor.ComponentType == eComponentType.Rumble); }
     }
   }
 }

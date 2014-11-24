@@ -9,8 +9,6 @@ namespace aPC.Common.Server.Conductors
 {
   public abstract class ConductorBase<T> : IConductor where T : SnapshotBase
   {
-    public abstract eComponentType ComponentType { get; }
-
     protected abstract void Log(string xiNotification);
 
     private readonly Locked<bool> isRunning;

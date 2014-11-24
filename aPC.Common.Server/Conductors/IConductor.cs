@@ -17,7 +17,5 @@ namespace aPC.Common.Server.Conductors
     Locked<bool> IsRunning { get; }
 
     eDirection Direction { get; }
-
-    eComponentType ComponentType { get; }
   }
 }

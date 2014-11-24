@@ -6,13 +6,15 @@ using log4net;
 
 namespace aPC.Common.Server.Conductors
 {
-  public abstract class ComponentConductor<T> : ConductorBase<ComponentSnapshot<T>> where T : IComponent
+  public class ComponentConductor : ConductorBase<ComponentSnapshot>
   {
     private static ILog log = LogManager.GetLogger("ComponentConductor");
+    public readonly eComponentType ComponentType;
 
-    protected ComponentConductor(eDirection direction, ComponentActor<T> actor, ComponentHandler<T> handler)
+    public ComponentConductor(eComponentType componentType, eDirection direction, ComponentActor actor, ComponentHandler handler)
       : base(direction, actor, handler)
     {
+      this.ComponentType = componentType;
     }
 
     protected override void Log(string message)

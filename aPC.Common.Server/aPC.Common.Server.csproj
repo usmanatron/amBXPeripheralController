@@ -55,11 +55,8 @@
     <Compile Include="AtypicalFirstRunInfiniteTicker.cs" />
     <Compile Include="Conductors\ComponentConductor.cs" />
     <Compile Include="Conductors\ConductorBase.cs" />
-    <Compile Include="Conductors\FanConductor.cs" />
     <Compile Include="Conductors\FrameConductor.cs" />
     <Compile Include="Conductors\IConductor.cs" />
-    <Compile Include="Conductors\LightConductor.cs" />
-    <Compile Include="Conductors\RumbleConductor.cs" />
     <Compile Include="Engine\ConversionHelpers.cs" />
     <Compile Include="Engine\EngineManager.cs" />
     <Compile Include="Engine\IEngine.cs" />

@@ -18,10 +18,5 @@ namespace aPC.Common.Server.Conductors
     {
       log.Info(xiNotification);
     }
-
-    public override eComponentType ComponentType
-    {
-      get { throw new System.InvalidOperationException("The FrameConductor doesn't have a component!"); }
-    }
   }
 }

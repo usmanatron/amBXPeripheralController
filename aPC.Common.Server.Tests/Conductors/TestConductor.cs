@@ -12,11 +12,6 @@ namespace aPC.Common.Server.Tests.Conductors
     {
     }
 
-    public override eComponentType ComponentType
-    {
-      get { throw new System.NotImplementedException(); }
-    }
-
     // Don't need to log anything here.
     protected override void Log(string message)
     {

@@ -10,19 +10,19 @@ namespace aPC.Common.Server.Tests.Actors
   internal class RumbleActorTests
   {
     private TestEngineManager engine;
-    private ComponentActor<Rumble> actor;
+    private ComponentActor actor;
 
     [SetUp]
     public void Setup()
     {
       engine = new TestEngineManager();
-      actor = new ComponentActor<Rumble>(engine);
+      actor = new ComponentActor(eComponentType.Rumble, engine);
     }
 
     [Test]
     public void ActingNextSnapshot_WithNullComponent_DoesNothing()
     {
-      var snapshot = new ComponentSnapshot<Rumble>(1000);
+      var snapshot = new ComponentSnapshot(1000);
 
       actor.ActNextFrame(eDirection.Center, snapshot);
 
@@ -32,7 +32,7 @@ namespace aPC.Common.Server.Tests.Actors
     [Test]
     public void ActingNextSnapshot_UpdatesComponent()
     {
-      var snapshot = new ComponentSnapshot<Rumble>(DefaultRumbleSections.Boing.Rumble, 100, 1000);
+      var snapshot = new ComponentSnapshot(DefaultRumbleSections.Boing.Rumble, 100, 1000);
 
       actor.ActNextFrame(eDirection.Center, snapshot);
 
