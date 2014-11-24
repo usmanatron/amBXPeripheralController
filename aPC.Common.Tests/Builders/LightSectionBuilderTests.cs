@@ -16,15 +16,6 @@ namespace aPC.Common.Tests.Builders
     private readonly Light red = DefaultLights.Red;
 
     [Test]
-    public void NewLightSection_WithNoFadeTime_ThrowsException()
-    {
-      var sectionBuilder = new LightSectionBuilder()
-        .WithAllLights(aribitraryColour);
-
-      Assert.Throws<ArgumentException>(() => sectionBuilder.Build());
-    }
-
-    [Test]
     public void NewLightSection_WithNoLights_ThrowsException()
     {
       var sectionBuilder = new LightSectionBuilder();

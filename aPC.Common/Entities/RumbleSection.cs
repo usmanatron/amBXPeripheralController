@@ -6,6 +6,15 @@ namespace aPC.Common.Entities
   {
     [XmlElement]
     [PhysicalComponent]
+    [Direction(eDirection.Everywhere)]
+    [Direction(eDirection.North)]
+    [Direction(eDirection.NorthEast)]
+    [Direction(eDirection.East)]
+    [Direction(eDirection.SouthEast)]
+    [Direction(eDirection.South)]
+    [Direction(eDirection.SouthWest)]
+    [Direction(eDirection.West)]
+    [Direction(eDirection.NorthWest)]
     [Direction(eDirection.Center)]
     public Rumble Rumble;
   }

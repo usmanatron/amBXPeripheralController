@@ -17,7 +17,8 @@ namespace aPC.Chromesthesia.Server
         Red = BuildCompositeValue(firstLight.Red, secondLight.Red, firstLightPercentage),
         Blue = BuildCompositeValue(firstLight.Blue, secondLight.Blue, firstLightPercentage),
         Green = BuildCompositeValue(firstLight.Green, secondLight.Green, firstLightPercentage),
-        Intensity = BuildCompositeValue(firstLight.Intensity, secondLight.Intensity, firstLightPercentage)
+        Intensity = BuildCompositeValue(firstLight.Intensity, secondLight.Intensity, firstLightPercentage),
+        FadeTime = firstLight.FadeTime
       };
     }
 

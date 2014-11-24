@@ -29,51 +29,58 @@ namespace aPC.Client.Disco.Tests.Generators
       <Length>1000</Length>
       <IsRepeated>true</IsRepeated>
       <Lights>
-        <FadeTime>500</FadeTime>
         <North>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>0.5</Green>
           <Blue>0</Blue>
         </North>
         <NorthEast>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>0.5</Green>
           <Blue>0</Blue>
         </NorthEast>
         <East>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>0.5</Green>
           <Blue>0</Blue>
         </East>
         <SouthEast>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>0.5</Green>
           <Blue>0</Blue>
         </SouthEast>
         <South>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>0.5</Green>
           <Blue>0</Blue>
         </South>
         <SouthWest>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>0.5</Green>
           <Blue>0</Blue>
         </SouthWest>
         <West>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>0.5</Green>
           <Blue>0</Blue>
         </West>
         <NorthWest>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>0.5</Green>
           <Blue>0</Blue>

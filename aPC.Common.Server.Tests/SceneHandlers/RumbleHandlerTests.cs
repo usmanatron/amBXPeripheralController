@@ -65,11 +65,11 @@ namespace aPC.Common.Server.Tests.SceneHandlers
 
     [Test]
     [TestCaseSource("directions")]
-    public void NextRumbleSnapshot_ReturnsARumble_IrrespectiveOfDirection(eDirection xiDirection)
+    public void NextRumbleSnapshot_ReturnsARumble_IrrespectiveOfDirection(eDirection direction)
     {
       var handler = new ComponentHandler(eComponentType.Rumble, standardScene, action);
 
-      var snapshot = handler.GetNextSnapshot(xiDirection);
+      var snapshot = handler.GetNextSnapshot(direction);
       var expectedFrame = standardScene.Frames[0];
 
       Assert.AreEqual(expectedFrame.Length, snapshot.Length);

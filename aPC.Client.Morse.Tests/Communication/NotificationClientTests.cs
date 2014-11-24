@@ -68,51 +68,58 @@ namespace aPC.Client.Morse.Tests.Communication
       <Length>1000</Length>
       <IsRepeated>true</IsRepeated>
       <Lights>
-        <FadeTime>500</FadeTime>
         <North>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>0</Green>
           <Blue>0</Blue>
         </North>
         <NorthEast>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>0</Green>
           <Blue>0</Blue>
         </NorthEast>
         <East>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>0</Green>
           <Blue>0</Blue>
         </East>
         <SouthEast>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>0</Green>
           <Blue>0</Blue>
         </SouthEast>
         <South>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>0</Green>
           <Blue>0</Blue>
         </South>
         <SouthWest>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>0</Green>
           <Blue>0</Blue>
         </SouthWest>
         <West>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>0</Green>
           <Blue>0</Blue>
         </West>
         <NorthWest>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>0</Green>
           <Blue>0</Blue>
@@ -123,51 +130,58 @@ namespace aPC.Client.Morse.Tests.Communication
       <Length>1000</Length>
       <IsRepeated>true</IsRepeated>
       <Lights>
-        <FadeTime>500</FadeTime>
         <North>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>0.5</Green>
           <Blue>0</Blue>
         </North>
         <NorthEast>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>0.5</Green>
           <Blue>0</Blue>
         </NorthEast>
         <East>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>0.5</Green>
           <Blue>0</Blue>
         </East>
         <SouthEast>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>0.5</Green>
           <Blue>0</Blue>
         </SouthEast>
         <South>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>0.5</Green>
           <Blue>0</Blue>
         </South>
         <SouthWest>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>0.5</Green>
           <Blue>0</Blue>
         </SouthWest>
         <West>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>0.5</Green>
           <Blue>0</Blue>
         </West>
         <NorthWest>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>0.5</Green>
           <Blue>0</Blue>
@@ -178,51 +192,58 @@ namespace aPC.Client.Morse.Tests.Communication
       <Length>1000</Length>
       <IsRepeated>true</IsRepeated>
       <Lights>
-        <FadeTime>500</FadeTime>
         <North>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>1</Green>
           <Blue>0</Blue>
         </North>
         <NorthEast>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>1</Green>
           <Blue>0</Blue>
         </NorthEast>
         <East>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>1</Green>
           <Blue>0</Blue>
         </East>
         <SouthEast>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>1</Green>
           <Blue>0</Blue>
         </SouthEast>
         <South>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>1</Green>
           <Blue>0</Blue>
         </South>
         <SouthWest>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>1</Green>
           <Blue>0</Blue>
         </SouthWest>
         <West>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>1</Green>
           <Blue>0</Blue>
         </West>
         <NorthWest>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>1</Red>
           <Green>1</Green>
           <Blue>0</Blue>
@@ -233,51 +254,58 @@ namespace aPC.Client.Morse.Tests.Communication
       <Length>1000</Length>
       <IsRepeated>true</IsRepeated>
       <Lights>
-        <FadeTime>500</FadeTime>
         <North>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0</Red>
           <Green>1</Green>
           <Blue>0</Blue>
         </North>
         <NorthEast>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0</Red>
           <Green>1</Green>
           <Blue>0</Blue>
         </NorthEast>
         <East>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0</Red>
           <Green>1</Green>
           <Blue>0</Blue>
         </East>
         <SouthEast>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0</Red>
           <Green>1</Green>
           <Blue>0</Blue>
         </SouthEast>
         <South>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0</Red>
           <Green>1</Green>
           <Blue>0</Blue>
         </South>
         <SouthWest>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0</Red>
           <Green>1</Green>
           <Blue>0</Blue>
         </SouthWest>
         <West>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0</Red>
           <Green>1</Green>
           <Blue>0</Blue>
         </West>
         <NorthWest>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0</Red>
           <Green>1</Green>
           <Blue>0</Blue>
@@ -288,51 +316,58 @@ namespace aPC.Client.Morse.Tests.Communication
       <Length>1000</Length>
       <IsRepeated>true</IsRepeated>
       <Lights>
-        <FadeTime>500</FadeTime>
         <North>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0</Red>
           <Green>0</Green>
           <Blue>1</Blue>
         </North>
         <NorthEast>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0</Red>
           <Green>0</Green>
           <Blue>1</Blue>
         </NorthEast>
         <East>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0</Red>
           <Green>0</Green>
           <Blue>1</Blue>
         </East>
         <SouthEast>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0</Red>
           <Green>0</Green>
           <Blue>1</Blue>
         </SouthEast>
         <South>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0</Red>
           <Green>0</Green>
           <Blue>1</Blue>
         </South>
         <SouthWest>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0</Red>
           <Green>0</Green>
           <Blue>1</Blue>
         </SouthWest>
         <West>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0</Red>
           <Green>0</Green>
           <Blue>1</Blue>
         </West>
         <NorthWest>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0</Red>
           <Green>0</Green>
           <Blue>1</Blue>
@@ -343,51 +378,58 @@ namespace aPC.Client.Morse.Tests.Communication
       <Length>1000</Length>
       <IsRepeated>true</IsRepeated>
       <Lights>
-        <FadeTime>500</FadeTime>
         <North>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0.3</Red>
           <Green>0</Green>
           <Blue>0.5</Blue>
         </North>
         <NorthEast>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0.3</Red>
           <Green>0</Green>
           <Blue>0.5</Blue>
         </NorthEast>
         <East>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0.3</Red>
           <Green>0</Green>
           <Blue>0.5</Blue>
         </East>
         <SouthEast>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0.3</Red>
           <Green>0</Green>
           <Blue>0.5</Blue>
         </SouthEast>
         <South>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0.3</Red>
           <Green>0</Green>
           <Blue>0.5</Blue>
         </South>
         <SouthWest>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0.3</Red>
           <Green>0</Green>
           <Blue>0.5</Blue>
         </SouthWest>
         <West>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0.3</Red>
           <Green>0</Green>
           <Blue>0.5</Blue>
         </West>
         <NorthWest>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0.3</Red>
           <Green>0</Green>
           <Blue>0.5</Blue>
@@ -398,51 +440,58 @@ namespace aPC.Client.Morse.Tests.Communication
       <Length>1000</Length>
       <IsRepeated>true</IsRepeated>
       <Lights>
-        <FadeTime>500</FadeTime>
         <North>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0.56</Red>
           <Green>0</Green>
           <Blue>1</Blue>
         </North>
         <NorthEast>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0.56</Red>
           <Green>0</Green>
           <Blue>1</Blue>
         </NorthEast>
         <East>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0.56</Red>
           <Green>0</Green>
           <Blue>1</Blue>
         </East>
         <SouthEast>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0.56</Red>
           <Green>0</Green>
           <Blue>1</Blue>
         </SouthEast>
         <South>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0.56</Red>
           <Green>0</Green>
           <Blue>1</Blue>
         </South>
         <SouthWest>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0.56</Red>
           <Green>0</Green>
           <Blue>1</Blue>
         </SouthWest>
         <West>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0.56</Red>
           <Green>0</Green>
           <Blue>1</Blue>
         </West>
         <NorthWest>
           <Intensity>1</Intensity>
+          <FadeTime>100</FadeTime>
           <Red>0.56</Red>
           <Green>0</Green>
           <Blue>1</Blue>

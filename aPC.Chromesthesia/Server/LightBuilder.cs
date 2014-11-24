@@ -45,7 +45,8 @@ namespace aPC.Chromesthesia.Server
         Red = 0f,
         Blue = 0f,
         Green = 0f,
-        Intensity = 0f
+        Intensity = 0f,
+        FadeTime = 10
       };
     }
   }

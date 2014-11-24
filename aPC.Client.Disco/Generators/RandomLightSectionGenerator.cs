@@ -39,7 +39,8 @@ namespace aPC.Client.Disco.Generators
         Red = settings.RedColourWidth.GetScaledValue(random.NextDouble()),
         Blue = settings.BlueColourWidth.GetScaledValue(random.NextDouble()),
         Green = settings.GreenColourWidth.GetScaledValue(random.NextDouble()),
-        Intensity = settings.LightIntensityWidth.GetScaledValue(random.NextDouble())
+        Intensity = settings.LightIntensityWidth.GetScaledValue(random.NextDouble()),
+        FadeTime = 10 // Light updates are nearly instant
       };
     }
   }
