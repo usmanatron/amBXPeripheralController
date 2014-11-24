@@ -8,10 +8,10 @@ namespace aPC.Client.Disco
     private List<string> args;
     private Settings settings;
 
-    public ArgumentReader(List<string> args, Settings sSettings)
+    public ArgumentReader(List<string> args, Settings settings)
     {
       this.args = args;
-      this.settings = sSettings;
+      this.settings = settings;
     }
 
     public Settings ParseArguments()

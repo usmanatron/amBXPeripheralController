@@ -25,6 +25,11 @@ namespace aPC.Common.Server.Tests
 
     public void UpdateComponent(eDirection direction, IComponent component, int fadeTime)
     {
+      if (component == null)
+      {
+        return;
+      }
+
       switch (component.ComponentType())
       {
         case eComponentType.Light:

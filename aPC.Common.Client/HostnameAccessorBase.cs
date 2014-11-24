@@ -19,7 +19,7 @@ namespace aPC.Common.Client
 
     public HostnameAccessor(List<string> hostnames)
     {
-      hostnames = hostnames;
+      this.hostnames = hostnames;
       hasChangedSinceLastCheck = new Locked<bool>(false);
     }
 
@@ -31,7 +31,7 @@ namespace aPC.Common.Client
 
     public void ResetWith(List<string> hostnames)
     {
-      hostnames = hostnames;
+      this.hostnames = hostnames;
       MarkUpdated();
     }
 

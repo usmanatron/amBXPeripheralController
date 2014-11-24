@@ -68,6 +68,11 @@ namespace aPC.Common.Server.Engine
 
     public void UpdateComponent(eDirection direction, IComponent component, int fadeTime)
     {
+      if (component == null)
+      {
+        return;
+      }
+
       var convertedDirection = ConversionHelpers.GetDirection(direction);
       switch (component.ComponentType())
       {
@@ -85,31 +90,17 @@ namespace aPC.Common.Server.Engine
 
     private void UpdateLightInternal(amBXLight light, Light inputLight, int fadeTime)
     {
-      if (inputLight == null)
-      {
-        // No change - don't touch!
-        return;
-      }
       light.Color = new amBXColor { Red = inputLight.Red, Green = inputLight.Green, Blue = inputLight.Blue };
       light.FadeTime = fadeTime;
     }
 
     private void UpdateFanInternal(amBXFan fan, Fan inputFan)
     {
-      if (inputFan == null)
-      {
-        return;
-      }
       fan.Intensity = inputFan.Intensity;
     }
 
     private void UpdateRumbleInternal(amBXRumble rumble, Rumble inputRumble)
     {
-      if (inputRumble == null)
-      {
-        return;
-      }
-
       RumbleType rumbleType;
 
       try

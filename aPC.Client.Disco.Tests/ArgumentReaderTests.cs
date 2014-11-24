@@ -12,7 +12,6 @@ namespace aPC.Client.Disco.Tests
   {
     public delegate object GetSetting(Settings xiSettings);
 
-    // TODO: This test fails because of HostnameAccessor.  One potential fix is to override Equals etc...
     [Test]
     public void NoGivenArguments_GivesDefaultSettings()
     {
@@ -22,7 +21,16 @@ namespace aPC.Client.Disco.Tests
 
       foreach (FieldInfo field in typeof(Settings).GetFields(BindingFlags.Public | BindingFlags.Instance))
       {
-        Assert.AreEqual(field.GetValue(defaultSettings), field.GetValue(argumentSettings));
+        if (field.FieldType == typeof(HostnameAccessor))
+        {
+          var defaultAccessor = (HostnameAccessor)field.GetValue(defaultSettings);
+          var actualAccessor = (HostnameAccessor)field.GetValue(defaultSettings);
+          Assert.AreEqual(defaultAccessor.GetAll().Single(), actualAccessor.GetAll().Single());
+        }
+        else
+        {
+          Assert.AreEqual(field.GetValue(defaultSettings), field.GetValue(argumentSettings));
+        }
       }
     }
 
