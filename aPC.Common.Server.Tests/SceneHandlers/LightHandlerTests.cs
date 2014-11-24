@@ -39,7 +39,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
     [Test]
     public void NextLightSnapshot_IsAsExpected()
     {
-      var handler = new LightHandler(standardScene, action);
+      var handler = new ComponentHandler(eComponentType.Light, standardScene, action);
 
       var snapshot = handler.GetNextSnapshot(eDirection.North);
       var expectedFrame = standardScene.Frames[0];
@@ -52,7 +52,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
     [Test]
     public void NextLightSnapshot_FromSceneWithoutLights_IsNull()
     {
-      var handler = new LightHandler(nonLightScene, action);
+      var handler = new ComponentHandler(eComponentType.Light, nonLightScene, action);
 
       var snapshot = handler.GetNextSnapshot(eDirection.North);
       var expectedFrame = nonLightScene.Frames[0];
@@ -64,18 +64,18 @@ namespace aPC.Common.Server.Tests.SceneHandlers
 
     [Test]
     [TestCaseSource("directions")]
-    public void NextLightSnapshot_ReturnsExpectedLight_DependantOnDirection(eDirection xiDirection)
+    public void NextLightSnapshot_ReturnsExpectedLight_DependantOnDirection(eDirection direction)
     {
-      var handler = new LightHandler(standardScene, action);
+      var handler = new ComponentHandler(eComponentType.Light, standardScene, action);
 
-      var snapshot = handler.GetNextSnapshot(xiDirection);
+      var snapshot = handler.GetNextSnapshot(direction);
       var expectedFrame = standardScene.Frames[0];
 
       Assert.AreEqual(expectedFrame.Length, snapshot.Length);
       if (!snapshot.IsComponentNull)
       {
         Assert.AreEqual(expectedFrame.Lights.FadeTime, snapshot.FadeTime);
-        Assert.AreEqual(expectedFrame.Lights.GetComponentValueInDirection(xiDirection), snapshot.Item);
+        Assert.AreEqual(expectedFrame.Lights.GetComponentValueInDirection(direction), snapshot.Item);
       }
     }
   }

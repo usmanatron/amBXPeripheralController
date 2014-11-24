@@ -39,7 +39,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
     [Test]
     public void NextFanSnapshot_IsAsExpected()
     {
-      var handler = new FanHandler(standardScene, action);
+      var handler = new ComponentHandler(eComponentType.Fan, standardScene, action);
 
       var snapshot = handler.GetNextSnapshot(eDirection.East);
       var expectedFrame = standardScene.Frames[0];
@@ -52,7 +52,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
     [Test]
     public void NextFanSnapshot_FromSceneWithoutFans_IsNull()
     {
-      var handler = new FanHandler(nonFanScene, action);
+      var handler = new ComponentHandler(eComponentType.Fan, nonFanScene, action);
 
       var snapshot = handler.GetNextSnapshot(eDirection.West);
       var expectedFrame = nonFanScene.Frames[0];
@@ -66,7 +66,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
     [TestCaseSource("directions")]
     public void NextFanSnapshot_ReturnsExpectedFan_DependantOnDirection(eDirection direction)
     {
-      var handler = new FanHandler(standardScene, action);
+      var handler = new ComponentHandler(eComponentType.Fan, standardScene, action);
 
       var snapshot = handler.GetNextSnapshot(direction);
       var expectedFrame = standardScene.Frames[0];

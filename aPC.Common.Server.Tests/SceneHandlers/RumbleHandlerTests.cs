@@ -40,7 +40,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
     [Test]
     public void NextRumbleSnapshot_IsAsExpected()
     {
-      var handler = new RumbleHandler(standardScene, action);
+      var handler = new ComponentHandler(eComponentType.Rumble, standardScene, action);
 
       var snapshot = handler.GetNextSnapshot(eDirection.Center);
       var expectedFrame = standardScene.Frames[0];
@@ -53,7 +53,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
     [Test]
     public void NextRumbleSnapshot_FromSceneWithoutRumbles_IsNull()
     {
-      var handler = new RumbleHandler(nonRumbleScene, action);
+      var handler = new ComponentHandler(eComponentType.Rumble, nonRumbleScene, action);
 
       var snapshot = handler.GetNextSnapshot(eDirection.West);
       var expectedFrame = nonRumbleScene.Frames[0];
@@ -67,7 +67,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
     [TestCaseSource("directions")]
     public void NextRumbleSnapshot_ReturnsARumble_IrrespectiveOfDirection(eDirection xiDirection)
     {
-      var handler = new RumbleHandler(standardScene, action);
+      var handler = new ComponentHandler(eComponentType.Rumble, standardScene, action);
 
       var snapshot = handler.GetNextSnapshot(xiDirection);
       var expectedFrame = standardScene.Frames[0];
