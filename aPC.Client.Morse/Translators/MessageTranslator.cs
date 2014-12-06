@@ -5,23 +5,31 @@ namespace aPC.Client.Morse.Translators
 {
   public class MessageTranslator : TranslatorBase
   {
-    private string message;
+    private WordTranslator baseTranslator;
 
-    public MessageTranslator(string message)
+    public MessageTranslator(WordTranslator wordTranslator)
     {
-      this.message = message;
+      this.baseTranslator = wordTranslator;
     }
 
-    public override List<IMorseBlock> Translate()
+    public override List<IMorseBlock> Translate(string content)
     {
       var translatedMessage = new List<List<IMorseBlock>>();
 
-      foreach (var word in message.Split(' '))
+      foreach (var word in content.Split(' '))
       {
-        translatedMessage.Add(new WordTranslator(word).Translate());
+        translatedMessage.Add(baseTranslator.Translate(word));
       }
 
-      return AddSeparatorsToList(translatedMessage, new WordSeparator());
+      return AddSeparatorsToList(translatedMessage, Separator);
+    }
+
+    public override IMorseBlock Separator
+    {
+      get
+      {
+        return new WordSeparator();
+      }
     }
   }
 }

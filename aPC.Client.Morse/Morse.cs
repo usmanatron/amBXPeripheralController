@@ -1,4 +1,6 @@
 ﻿using aPC.Client.Morse.Communication;
+using aPC.Client.Morse.Translators;
+using aPC.Common.Client;
 
 namespace aPC.Client.Morse
 {
@@ -10,9 +12,10 @@ namespace aPC.Client.Morse
       {
         var arguments = string.Join(" ", args);
         var settings = new ArgumentReader(arguments).Read();
-        var generatedScene = new SceneGenerator(settings).Generate();
+        var translator = new MessageTranslator(new WordTranslator(new CharacterTranslator()));
+        var generatedScene = new SceneGenerator(settings, translator).Generate();
 
-        new NotificationClient().PushCustomScene(generatedScene);
+        new NotificationClient(new HostnameAccessor()).PushCustomScene(generatedScene);
       }
       catch (UsageException e)
       {

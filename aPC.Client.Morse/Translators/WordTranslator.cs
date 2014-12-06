@@ -7,28 +7,41 @@ namespace aPC.Client.Morse.Translators
 {
   public class WordTranslator : TranslatorBase
   {
-    private string word;
+    private CharacterTranslator baseTranslator;
 
-    public WordTranslator(string word)
+    public WordTranslator(CharacterTranslator baseTranslator)
+    {
+      this.baseTranslator = baseTranslator;
+    }
+
+    public override List<IMorseBlock> Translate(string content)
+    {
+      ThrowIfInputInvalid(content);
+
+      var translatedWord = new List<List<IMorseBlock>>();
+
+      foreach (var character in content.ToCharArray())
+      {
+        translatedWord.Add(baseTranslator.Translate(character.ToString()));
+      }
+
+      return AddSeparatorsToList(translatedWord, Separator);
+    }
+
+    private void ThrowIfInputInvalid(string word)
     {
       if (word.Contains(' '))
       {
-        throw new InvalidOperationException("A space was found in the following word to be translated, |" + word + "|, which is not supported.");
+        throw new InvalidOperationException("A space was found in the following word to be translated: |" + word + "|.  This should never happen!");
       }
-
-      this.word = word;
     }
 
-    public override List<IMorseBlock> Translate()
+    public override IMorseBlock Separator
     {
-      var translatedWord = new List<List<IMorseBlock>>();
-
-      foreach (var character in word.ToCharArray())
+      get
       {
-        translatedWord.Add(new CharacterTranslator(character).Translate());
+        return new CharacterSeparator();
       }
-
-      return AddSeparatorsToList(translatedWord, new CharacterSeparator());
     }
   }
 }

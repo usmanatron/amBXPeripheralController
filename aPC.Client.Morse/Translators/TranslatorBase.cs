@@ -6,7 +6,9 @@ namespace aPC.Client.Morse.Translators
 {
   public abstract class TranslatorBase : ITranslator
   {
-    public abstract List<IMorseBlock> Translate();
+    public abstract List<IMorseBlock> Translate(string content);
+
+    public abstract IMorseBlock Separator { get; }
 
     /// <summary>
     ///   Adds an instance of the given type between every list of elements

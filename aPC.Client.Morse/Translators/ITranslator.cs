@@ -5,6 +5,8 @@ namespace aPC.Client.Morse.Translators
 {
   public interface ITranslator
   {
-    List<IMorseBlock> Translate();
+    List<IMorseBlock> Translate(string content);
+
+    IMorseBlock Separator { get; }
   }
 }

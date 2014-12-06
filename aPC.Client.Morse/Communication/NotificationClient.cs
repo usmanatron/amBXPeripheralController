@@ -5,8 +5,8 @@ namespace aPC.Client.Morse.Communication
 {
   public class NotificationClient : NotificationClientBase
   {
-    public NotificationClient()
-      : base(new HostnameAccessor())
+    public NotificationClient(HostnameAccessor hostnameAccessor)
+      : base(hostnameAccessor)
     {
     }
 

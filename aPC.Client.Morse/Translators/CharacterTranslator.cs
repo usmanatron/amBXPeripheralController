@@ -1,30 +1,44 @@
 ﻿using aPC.Client.Morse.Codes;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace aPC.Client.Morse.Translators
 {
   public class CharacterTranslator : TranslatorBase
   {
-    private char character;
-    private static Dot dot = new Dot();
-    private static Dash dash = new Dash();
+    private static IMorseBlock dot = new Dot();
+    private static IMorseBlock dash = new Dash();
 
-    public CharacterTranslator(char character)
+    public override List<IMorseBlock> Translate(string content)
     {
-      this.character = character;
+      var character = ConvertToCharacter(content);
+
+      var rawCharacter = RawCharacters[Char.ToLower(character)];
+      return AddSeparatorsToList(rawCharacter, Separator);
     }
 
-    public override List<IMorseBlock> Translate()
+    private char ConvertToCharacter(string content)
     {
-      var separator = new DotDashSeparator();
-      var rawCharacter = RawCharacters[Char.ToLower(character)];
-      return AddSeparatorsToList(rawCharacter, separator);
+      if (content.Length != 1)
+      {
+        throw new InvalidOperationException("The content given to the CharacterTranslator is longer than one character: |" + content + "|.  This should never happen!");
+      }
+
+      return content.ToCharArray().Single();
+    }
+
+    public override IMorseBlock Separator
+    {
+      get
+      {
+        return new DotDashSeparator();
+      }
     }
 
     /// <summary>
     ///   Gives the Morse Code equivalent of every available character
-    ///   * WITHOUT THE SEPARATORS* between dots and dashes.
+    ///   *WITHOUT THE SEPARATORS* between dots and dashes.
     /// </summary>
     private static Dictionary<char, List<IMorseBlock>> RawCharacters = new Dictionary<char, List<IMorseBlock>>
     {

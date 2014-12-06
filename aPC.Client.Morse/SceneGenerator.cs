@@ -9,10 +9,12 @@ namespace aPC.Client.Morse
   public class SceneGenerator
   {
     private Settings settings;
+    private MessageTranslator messageTranslator;
 
-    public SceneGenerator(Settings settings)
+    public SceneGenerator(Settings settings, MessageTranslator messageTranslator)
     {
       this.settings = settings;
+      this.messageTranslator = messageTranslator;
     }
 
     public amBXScene Generate()
@@ -25,7 +27,7 @@ namespace aPC.Client.Morse
     {
       var frameBuilder = new MorseFrameBuilder(settings);
 
-      var morseBlocks = new MessageTranslator(settings.Message).Translate();
+      var morseBlocks = messageTranslator.Translate(settings.Message);
       if (settings.RepeatMessage)
       {
         morseBlocks.Add(new MessageEndMarker());
