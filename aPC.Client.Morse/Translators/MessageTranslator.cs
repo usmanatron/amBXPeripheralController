@@ -12,7 +12,7 @@ namespace aPC.Client.Morse.Translators
       this.baseTranslator = wordTranslator;
     }
 
-    public override List<IMorseBlock> Translate(string content)
+    public override IEnumerable<List<IMorseBlock>> TranslateContent(string content)
     {
       var translatedMessage = new List<List<IMorseBlock>>();
 
@@ -21,7 +21,7 @@ namespace aPC.Client.Morse.Translators
         translatedMessage.Add(baseTranslator.Translate(word));
       }
 
-      return AddSeparatorsToList(translatedMessage, Separator);
+      return translatedMessage;
     }
 
     public override IMorseBlock Separator

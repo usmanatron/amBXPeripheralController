@@ -6,7 +6,21 @@ namespace aPC.Client.Morse.Translators
 {
   public abstract class TranslatorBase : ITranslator
   {
-    public abstract List<IMorseBlock> Translate(string content);
+    public List<IMorseBlock> Translate(string content)
+    {
+      ThrowIfInputInvalid(content);
+
+      var translatedMessage = TranslateContent(content);
+
+      return AddSeparatorsToList(translatedMessage, Separator);
+    }
+
+    // Default implementation assumes it's valid
+    protected virtual void ThrowIfInputInvalid(string content)
+    {
+    }
+
+    public abstract IEnumerable<List<IMorseBlock>> TranslateContent(string content);
 
     public abstract IMorseBlock Separator { get; }
 
@@ -26,15 +40,6 @@ namespace aPC.Client.Morse.Translators
 
       newList.RemoveAt(newList.Count - 1);
       return newList;
-    }
-
-    /// <remarks>
-    ///   Calls the method above, first breaking each item into a separate list
-    ///   (i.e. we add a separator in between each element of xiList).
-    /// </remarks>
-    protected List<IMorseBlock> AddSeparatorsToList(List<IMorseBlock> list, IMorseBlock separator)
-    {
-      return AddSeparatorsToList(list.Select(item => new List<IMorseBlock> { item }), separator);
     }
   }
 }

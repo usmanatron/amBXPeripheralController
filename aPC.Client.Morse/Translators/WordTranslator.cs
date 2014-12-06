@@ -14,10 +14,8 @@ namespace aPC.Client.Morse.Translators
       this.baseTranslator = baseTranslator;
     }
 
-    public override List<IMorseBlock> Translate(string content)
+    public override IEnumerable<List<IMorseBlock>> TranslateContent(string content)
     {
-      ThrowIfInputInvalid(content);
-
       var translatedWord = new List<List<IMorseBlock>>();
 
       foreach (var character in content.ToCharArray())
@@ -25,10 +23,10 @@ namespace aPC.Client.Morse.Translators
         translatedWord.Add(baseTranslator.Translate(character.ToString()));
       }
 
-      return AddSeparatorsToList(translatedWord, Separator);
+      return translatedWord;
     }
 
-    private void ThrowIfInputInvalid(string word)
+    protected override void ThrowIfInputInvalid(string word)
     {
       if (word.Contains(' '))
       {

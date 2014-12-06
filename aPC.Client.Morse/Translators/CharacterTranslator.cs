@@ -10,22 +10,19 @@ namespace aPC.Client.Morse.Translators
     private static IMorseBlock dot = new Dot();
     private static IMorseBlock dash = new Dash();
 
-    public override List<IMorseBlock> Translate(string content)
+    public override IEnumerable<List<IMorseBlock>> TranslateContent(string content)
     {
-      var character = ConvertToCharacter(content);
-
+      var character = content.ToCharArray().Single();
       var rawCharacter = RawCharacters[Char.ToLower(character)];
-      return AddSeparatorsToList(rawCharacter, Separator);
+      return rawCharacter.Select(item => new List<IMorseBlock> { item });
     }
 
-    private char ConvertToCharacter(string content)
+    protected override void ThrowIfInputInvalid(string content)
     {
       if (content.Length != 1)
       {
         throw new InvalidOperationException("The content given to the CharacterTranslator is longer than one character: |" + content + "|.  This should never happen!");
       }
-
-      return content.ToCharArray().Single();
     }
 
     public override IMorseBlock Separator

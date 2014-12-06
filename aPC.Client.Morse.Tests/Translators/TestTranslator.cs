@@ -7,7 +7,7 @@ namespace aPC.Client.Morse.Tests.Translators
 {
   internal class TestTranslator : TranslatorBase
   {
-    public override List<IMorseBlock> Translate(string content)
+    public override IEnumerable<List<IMorseBlock>> TranslateContent(string content)
     {
       throw new NotImplementedException();
     }
@@ -20,9 +20,9 @@ namespace aPC.Client.Morse.Tests.Translators
       }
     }
 
-    public List<IMorseBlock> SeparateList(List<IMorseBlock> list, IMorseBlock separator)
+    public List<IMorseBlock> AddSeparatorsToList(IEnumerable<List<IMorseBlock>> list, IMorseBlock separator)
     {
-      return AddSeparatorsToList(list, separator);
+      return base.AddSeparatorsToList(list, separator);
     }
   }
 }
