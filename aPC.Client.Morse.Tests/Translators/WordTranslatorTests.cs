@@ -1,5 +1,6 @@
 ﻿using aPC.Client.Morse.Codes;
 using aPC.Client.Morse.Translators;
+using FakeItEasy;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -10,53 +11,32 @@ namespace aPC.Client.Morse.Tests.Translators
   [TestFixture]
   internal class WordTranslatorTests
   {
+    private WordTranslator translator;
+    private CharacterTranslator baseTranslator;
+
+    private static IMorseBlock dot = new Dot();
+    private static IMorseBlock dash = new Dash();
+    private static IMorseBlock dotDashSeparator = new DotDashSeparator();
+    private static IMorseBlock characterSeparator = new CharacterSeparator();
+
+    [SetUp]
+    public void Setup()
+    {
+      baseTranslator = new CharacterTranslator();
+      translator = new WordTranslator(baseTranslator);
+    }
+
     [Test]
     public void InputWord_CannotContainSpaces()
     {
-      Assert.Throws<InvalidOperationException>(() => new WordTranslator("Space Space"));
-    }
-
-    [Test]
-    public void SingleCharacterWord_ReturnsTheCharacter()
-    {
-      var character = 'A';
-
-      var translatedWord = new WordTranslator(character.ToString()).Translate();
-      var translatedCharacter = new CharacterTranslator(character).Translate();
-
-      Assert.AreEqual(translatedCharacter.Count(), translatedWord.Count());
-      for (var i = 0; i < translatedCharacter.Count(); i++)
-      {
-        Assert.AreEqual(translatedCharacter[i].GetType(), translatedWord[i].GetType());
-      }
-    }
-
-    [Test]
-    public void TwoCharacters_ReturnsCharactersWithOneSeparator()
-    {
-      var firstCharacter = '-';
-      var secondCharacter = '?';
-
-      var translatedWord = new WordTranslator(firstCharacter.ToString() + secondCharacter.ToString()).Translate();
-
-      var firstTranslatedCharacter = new CharacterTranslator(firstCharacter).Translate();
-      var secondTranslatedCharacter = new CharacterTranslator(secondCharacter).Translate();
-      var expectedWord = firstTranslatedCharacter;
-      expectedWord.Add(new CharacterSeparator());
-      expectedWord.AddRange(secondTranslatedCharacter);
-
-      Assert.AreEqual(expectedWord.Count(), translatedWord.Count());
-      for (var i = 0; i < expectedWord.Count(); i++)
-      {
-        Assert.AreEqual(expectedWord[i].GetType(), translatedWord[i].GetType());
-      }
+      Assert.Throws<InvalidOperationException>(() => translator.Translate("Space Space"));
     }
 
     [Test]
     [TestCaseSource("TestWords")]
     public void SomeExampleWords_ReturnExpectedMorseCode(TestMultiCharacterData data)
     {
-      var translatedWord = new WordTranslator(data.Word).Translate();
+      var translatedWord = translator.Translate(data.Word);
 
       Assert.AreEqual(data.ExpectedCodeCount, translatedWord.Count);
 
@@ -68,26 +48,35 @@ namespace aPC.Client.Morse.Tests.Translators
 
     private TestMultiCharacterData[] TestWords = new TestMultiCharacterData[]
     {
+      new TestMultiCharacterData("A", new List<IMorseBlock>
+      {
+        dot, dotDashSeparator, dash
+      }),
+      new TestMultiCharacterData("AD", new List<IMorseBlock>
+      {
+        dot, dotDashSeparator, dash, characterSeparator,
+        dash, dotDashSeparator, dot, dotDashSeparator, dot
+      }),
       new TestMultiCharacterData("CAR6", new List<IMorseBlock>
       {
-        new Dash(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dot(), new CharacterSeparator(),
-        new Dot(), new DotDashSeparator(), new Dash(), new CharacterSeparator(),
-        new Dot(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dot(), new CharacterSeparator(),
-        new Dash(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot()
+        dash, dotDashSeparator, dot, dotDashSeparator, dash, dotDashSeparator, dot, characterSeparator,
+        dot, dotDashSeparator, dash, characterSeparator,
+        dot, dotDashSeparator, dash, dotDashSeparator, dot, characterSeparator,
+        dash, dotDashSeparator, dot, dotDashSeparator, dot, dotDashSeparator, dot, dotDashSeparator, dot
       }),
       new TestMultiCharacterData("BLOB", new List<IMorseBlock>
       {
-        new Dash(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new CharacterSeparator(),
-        new Dot(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new CharacterSeparator(),
-        new Dash(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dash(), new CharacterSeparator(),
-        new Dash(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot()
+        dash, dotDashSeparator, dot, dotDashSeparator, dot, dotDashSeparator, dot, characterSeparator,
+        dot, dotDashSeparator, dash, dotDashSeparator, dot, dotDashSeparator, dot, characterSeparator,
+        dash, dotDashSeparator, dash, dotDashSeparator, dash, characterSeparator,
+        dash, dotDashSeparator, dot, dotDashSeparator, dot, dotDashSeparator, dot
       }),
       new TestMultiCharacterData("WHY?", new List<IMorseBlock>
       {
-        new Dot(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dash(), new CharacterSeparator(),
-        new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new CharacterSeparator(),
-        new Dash(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dash(), new CharacterSeparator(),
-        new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot()
+        dot, dotDashSeparator, dash, dotDashSeparator, dash, characterSeparator,
+        dot, dotDashSeparator, dot, dotDashSeparator, dot, dotDashSeparator, dot, characterSeparator,
+        dash, dotDashSeparator, dot, dotDashSeparator, dash, dotDashSeparator, dash, characterSeparator,
+        dot, dotDashSeparator, dot, dotDashSeparator, dash, dotDashSeparator, dash, dotDashSeparator, dot, dotDashSeparator, dot
       })
     };
   }

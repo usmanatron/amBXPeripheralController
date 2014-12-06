@@ -48,11 +48,11 @@ namespace aPC.Common.Builders
       {
         return isRepeatedSpecified &&
                currentFrame.Length != default(int) &&
-               AllSectionsOnCurrentFrameUnSpecified;
+               AtLeastOneSectionSpecified;
       }
     }
 
-    private bool AllSectionsOnCurrentFrameUnSpecified
+    private bool AtLeastOneSectionSpecified
     {
       get
       {

@@ -1,5 +1,6 @@
 ﻿using aPC.Client.Morse.Codes;
 using aPC.Client.Morse.Translators;
+using FakeItEasy;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,47 +10,27 @@ namespace aPC.Client.Morse.Tests.Translators
   [TestFixture]
   internal class MessageTranslatorTests
   {
-    [Test]
-    public void SingleWordMessage_ReturnsTheWord()
+    private MessageTranslator translator;
+    private WordTranslator wordTranslator;
+
+    private static IMorseBlock dot = new Dot();
+    private static IMorseBlock dash = new Dash();
+    private static IMorseBlock dotDashSeparator = new DotDashSeparator();
+    private static IMorseBlock characterSeparator = new CharacterSeparator();
+    private static IMorseBlock wordSeparator = new WordSeparator();
+
+    [SetUp]
+    public void Setup()
     {
-      var word = "Boom!";
-
-      var translatedMessage = new MessageTranslator(word).Translate();
-      var translatedWord = new WordTranslator(word).Translate();
-
-      Assert.AreEqual(translatedWord.Count(), translatedMessage.Count());
-      for (var i = 0; i < translatedWord.Count(); i++)
-      {
-        Assert.AreEqual(translatedWord[i].GetType(), translatedMessage[i].GetType());
-      }
-    }
-
-    [Test]
-    public void TwoWords_ReturnsWordsWithOneSeparator()
-    {
-      var firstWord = "Tick";
-      var secondWord = "Tock";
-
-      var translatedMessage = new MessageTranslator(firstWord + " " + secondWord).Translate();
-
-      var firstTranslatedWord = new WordTranslator(firstWord).Translate();
-      var secondTranslatedWord = new WordTranslator(secondWord).Translate();
-      var expectedMessage = firstTranslatedWord;
-      expectedMessage.Add(new WordSeparator());
-      expectedMessage.AddRange(secondTranslatedWord);
-
-      Assert.AreEqual(expectedMessage.Count(), translatedMessage.Count());
-      for (var i = 0; i < expectedMessage.Count(); i++)
-      {
-        Assert.AreEqual(expectedMessage[i].GetType(), translatedMessage[i].GetType());
-      }
+      wordTranslator = new WordTranslator(new CharacterTranslator());
+      translator = new MessageTranslator(wordTranslator);
     }
 
     [Test]
     [TestCaseSource("TestMessages")]
     public void SomeExampleWords_ReturnExpectedMorseCode(TestMultiCharacterData data)
     {
-      var translatedWord = new MessageTranslator(data.Word).Translate();
+      var translatedWord = translator.Translate(data.Word);
 
       Assert.AreEqual(data.ExpectedCodeCount, translatedWord.Count);
 
@@ -61,23 +42,40 @@ namespace aPC.Client.Morse.Tests.Translators
 
     private TestMultiCharacterData[] TestMessages = new TestMultiCharacterData[]
     {
+      new TestMultiCharacterData("Boom", new List<IMorseBlock> {
+        dash, dotDashSeparator, dot, dotDashSeparator, dot, dotDashSeparator, dot, characterSeparator,
+        dash, dotDashSeparator, dash, dotDashSeparator, dash, characterSeparator,
+        dash, dotDashSeparator, dash, dotDashSeparator, dash, characterSeparator,
+        dash, dotDashSeparator, dash
+      }),
+      new TestMultiCharacterData("Tick Tock", new List<IMorseBlock> {
+        dash, characterSeparator,
+        dot, dotDashSeparator, dot, characterSeparator,
+        dash, dotDashSeparator, dot, dotDashSeparator, dash, dotDashSeparator, dot, characterSeparator,
+        dash, dotDashSeparator, dot, dotDashSeparator, dash,
+        wordSeparator,
+        dash, characterSeparator,
+        dash, dotDashSeparator, dash, dotDashSeparator, dash, characterSeparator,
+        dash, dotDashSeparator, dot, dotDashSeparator, dash, dotDashSeparator, dot, characterSeparator,
+        dash, dotDashSeparator, dot, dotDashSeparator, dash
+      }),
       new TestMultiCharacterData("1 2 3", new List<IMorseBlock>
       {
-        new Dot(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dash(),  new DotDashSeparator(),new Dash(), new DotDashSeparator(), new Dash(),
-        new WordSeparator(),
-        new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dash(),
-        new WordSeparator(),
-        new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dash(), new DotDashSeparator(), new Dash()
+        dot, dotDashSeparator, dash, dotDashSeparator, dash,  dotDashSeparator,dash, dotDashSeparator, dash,
+        wordSeparator,
+        dot, dotDashSeparator, dot, dotDashSeparator, dash, dotDashSeparator, dash, dotDashSeparator, dash,
+        wordSeparator,
+        dot, dotDashSeparator, dot, dotDashSeparator, dot, dotDashSeparator, dash, dotDashSeparator, dash
       }),
       new TestMultiCharacterData("Its A-B", new List<IMorseBlock>
       {
-        new Dot(), new DotDashSeparator(), new Dot(), new CharacterSeparator(),
-        new Dash(), new CharacterSeparator(),
-        new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(),
-        new WordSeparator(),
-        new Dot(), new DotDashSeparator(), new Dash(), new CharacterSeparator(),
-        new Dash(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dash(), new CharacterSeparator(),
-        new Dash(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot(), new DotDashSeparator(), new Dot()
+        dot, dotDashSeparator, dot, characterSeparator,
+        dash, characterSeparator,
+        dot, dotDashSeparator, dot, dotDashSeparator, dot,
+        wordSeparator,
+        dot, dotDashSeparator, dash, characterSeparator,
+        dash, dotDashSeparator, dot, dotDashSeparator, dot, dotDashSeparator, dot, dotDashSeparator, dot, dotDashSeparator, dash, characterSeparator,
+        dash, dotDashSeparator, dot, dotDashSeparator, dot, dotDashSeparator, dot
       })
     };
   }

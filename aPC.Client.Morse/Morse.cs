@@ -13,7 +13,7 @@ namespace aPC.Client.Morse
         var arguments = string.Join(" ", args);
         var settings = new ArgumentReader(arguments).Read();
         var translator = new MessageTranslator(new WordTranslator(new CharacterTranslator()));
-        var generatedScene = new SceneGenerator(settings, translator).Generate();
+        var generatedScene = new SceneGenerator(translator).Generate(settings);
 
         new NotificationClient(new HostnameAccessor()).PushCustomScene(generatedScene);
       }

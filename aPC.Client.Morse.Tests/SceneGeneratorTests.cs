@@ -1,7 +1,9 @@
 ﻿using aPC.Client.Morse.Codes;
+using aPC.Client.Morse.Translators;
 using aPC.Common;
 using aPC.Common.Defaults;
 using aPC.Common.Entities;
+using FakeItEasy;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -12,10 +14,20 @@ namespace aPC.Client.Morse.Tests
   [TestFixture]
   internal class SceneGeneratorTests
   {
+    private MessageTranslator messageTranslator;
+    private SceneGenerator sceneGenerator;
+
+    [SetUp]
+    public void Setup()
+    {
+      messageTranslator = new MessageTranslator(new WordTranslator(new CharacterTranslator()));
+      sceneGenerator = new SceneGenerator(messageTranslator);
+    }
+
     [Test]
     public void Generator_ReturnsScene()
     {
-      var generatedScene = new SceneGenerator(new Settings("Test")).Generate();
+      var generatedScene = sceneGenerator.Generate(new Settings("Test"));
       Assert.AreEqual(typeof(amBXScene), generatedScene.GetType());
     }
 
@@ -25,14 +37,14 @@ namespace aPC.Client.Morse.Tests
     // "Is not repeated" implies that this is an event
     public void GeneratedScene_WithDefaultSettings_IsNotRepeated()
     {
-      var generatedScene = new SceneGenerator(new Settings("Test")).Generate();
+      var generatedScene = sceneGenerator.Generate(new Settings("Test"));
       Assert.AreEqual(eSceneType.Event, generatedScene.SceneType);
     }
 
     [Test]
     public void GeneratedScene_WithDefaultSettings_HasLightsEnabledOnAllFrames()
     {
-      var generatedScene = new SceneGenerator(new Settings("Test")).Generate();
+      var generatedScene = sceneGenerator.Generate(new Settings("Test"));
 
       foreach (var light in generatedScene.Frames.Select(frame => frame.Lights))
       {
@@ -46,7 +58,7 @@ namespace aPC.Client.Morse.Tests
     [Test]
     public void GeneratedScene_WithDefaultSettings_HasRumblesDisabledOnAllFrames()
     {
-      var generatedScene = new SceneGenerator(new Settings("Test")).Generate();
+      var generatedScene = sceneGenerator.Generate(new Settings("Test"));
 
       foreach (var rumble in generatedScene.Frames.Select(frame => frame.Rumbles))
       {
@@ -58,7 +70,7 @@ namespace aPC.Client.Morse.Tests
     public void GeneratedScene_WithDefaultSettings_HasWhiteLights()
     {
       var lWhiteLight = DefaultLights.White;
-      var generatedScene = new SceneGenerator(new Settings("T")).Generate();
+      var generatedScene = sceneGenerator.Generate(new Settings("T"));
 
       foreach (var light in generatedScene.Frames.Select(frame => frame.Lights))
       {
@@ -72,7 +84,7 @@ namespace aPC.Client.Morse.Tests
     [Test]
     public void GeneratedScene_WithDefaultSettings_HasLengthsInMultiplesOf100()
     {
-      var generatedScene = new SceneGenerator(new Settings("Test")).Generate();
+      var generatedScene = sceneGenerator.Generate(new Settings("Test"));
 
       foreach (var light in generatedScene.Frames)
       {
@@ -90,7 +102,7 @@ namespace aPC.Client.Morse.Tests
     {
       var settings = new Settings("Test");
       settings.RepeatMessage = true;
-      var generatedScene = new SceneGenerator(settings).Generate();
+      var generatedScene = sceneGenerator.Generate(settings);
 
       Assert.AreEqual(eSceneType.Sync, generatedScene.SceneType);
 
@@ -108,7 +120,7 @@ namespace aPC.Client.Morse.Tests
       var settings = new Settings("Test");
       settings.LightsEnabled = false;
 
-      Assert.Throws<ArgumentException>(() => new SceneGenerator(settings).Generate());
+      Assert.Throws<ArgumentException>(() => sceneGenerator.Generate(settings));
     }
 
     [Test]
@@ -116,7 +128,7 @@ namespace aPC.Client.Morse.Tests
     {
       var settings = new Settings("Test");
       settings.RumblesEnabled = true;
-      var generatedScene = new SceneGenerator(settings).Generate();
+      var generatedScene = sceneGenerator.Generate(settings);
 
       foreach (var rumble in generatedScene.Frames.Select(frame => frame.Rumbles))
       {
@@ -129,7 +141,7 @@ namespace aPC.Client.Morse.Tests
     {
       var settings = new Settings("T");
       settings.Colour = DefaultLights.Red;
-      var generatedScene = new SceneGenerator(settings).Generate();
+      var generatedScene = sceneGenerator.Generate(settings);
 
       foreach (var light in generatedScene.Frames.Select(frame => frame.Lights))
       {
@@ -145,7 +157,7 @@ namespace aPC.Client.Morse.Tests
     {
       var settings = new Settings("Test");
       settings.UnitLength = 17;
-      var generatedScene = new SceneGenerator(settings).Generate();
+      var generatedScene = sceneGenerator.Generate(settings);
 
       foreach (var light in generatedScene.Frames)
       {
@@ -158,7 +170,7 @@ namespace aPC.Client.Morse.Tests
     {
       var settings = new Settings("Test");
       settings.RepeatMessage = true;
-      var generatedScene = new SceneGenerator(settings).Generate();
+      var generatedScene = sceneGenerator.Generate(settings);
 
       var scene = generatedScene.Frames.Last();
       var expectedBlock = new MessageEndMarker();
@@ -171,7 +183,7 @@ namespace aPC.Client.Morse.Tests
     public void GeneratedScene_WithMessageNotRepeated_DoesNotEndWithMessageEndMarker()
     {
       var settings = new Settings("Test");
-      var generatedScene = new SceneGenerator(settings).Generate();
+      var generatedScene = sceneGenerator.Generate(settings);
 
       var scene = generatedScene.Frames.Last();
       var expectedBlock = new MessageEndMarker();
@@ -188,7 +200,7 @@ namespace aPC.Client.Morse.Tests
     public void GeneratedScene_WithSingleCharacterMessage_AndMessageIsNotRepeated_ReturnsCharacter()
     {
       var settings = new Settings("T");
-      var generatedScene = new SceneGenerator(settings).Generate();
+      var generatedScene = sceneGenerator.Generate(settings);
 
       Assert.AreEqual(1, generatedScene.Frames.Count);
       var frame = generatedScene.Frames.Single();
@@ -203,7 +215,7 @@ namespace aPC.Client.Morse.Tests
     {
       var settings = new Settings("T");
       settings.RepeatMessage = true;
-      var generatedScene = new SceneGenerator(settings).Generate();
+      var generatedScene = sceneGenerator.Generate(settings);
 
       Assert.AreEqual(2, generatedScene.Frames.Count);
 
