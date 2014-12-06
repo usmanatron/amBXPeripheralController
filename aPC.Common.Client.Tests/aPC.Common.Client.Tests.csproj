@@ -38,6 +38,9 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FakeItEasy">
+      <HintPath>..\packages\FakeItEasy.1.25.1\lib\net40\FakeItEasy.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
@@ -67,6 +70,9 @@
       <Project>{b6543e75-59af-4059-acf8-560e82bc72ce}</Project>
       <Name>aPC.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

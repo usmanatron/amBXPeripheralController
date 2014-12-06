@@ -43,6 +43,9 @@
     <Reference Include="amBXLib">
       <HintPath>..\Lib\Release\amBXLib.dll</HintPath>
     </Reference>
+    <Reference Include="FakeItEasy">
+      <HintPath>..\packages\FakeItEasy.1.25.1\lib\net40\FakeItEasy.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
@@ -87,7 +90,9 @@
       <Name>aPC.Server</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="ExampleScene.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
