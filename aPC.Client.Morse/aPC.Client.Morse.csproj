@@ -54,7 +54,6 @@
     <Compile Include="Codes\Dot.cs" />
     <Compile Include="Codes\DotDashSeparator.cs" />
     <Compile Include="Codes\IMorseBlock.cs" />
-    <Compile Include="Translators\ITranslator.cs" />
     <Compile Include="Translators\MessageTranslator.cs" />
     <Compile Include="Codes\WordSeparator.cs" />
     <Compile Include="Morse.cs" />

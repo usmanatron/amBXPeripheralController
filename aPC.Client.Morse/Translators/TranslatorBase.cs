@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace aPC.Client.Morse.Translators
 {
-  public abstract class TranslatorBase : ITranslator
+  public abstract class TranslatorBase
   {
     public List<IMorseBlock> Translate(string content)
     {
