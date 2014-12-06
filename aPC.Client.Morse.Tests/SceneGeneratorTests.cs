@@ -1,6 +1,7 @@
 ﻿using aPC.Client.Morse.Codes;
 using aPC.Client.Morse.Translators;
 using aPC.Common;
+using aPC.Common.Builders;
 using aPC.Common.Defaults;
 using aPC.Common.Entities;
 using FakeItEasy;
@@ -21,7 +22,7 @@ namespace aPC.Client.Morse.Tests
     public void Setup()
     {
       messageTranslator = new MessageTranslator(new WordTranslator(new CharacterTranslator()));
-      sceneGenerator = new SceneGenerator(messageTranslator);
+      sceneGenerator = new SceneGenerator(messageTranslator, new MorseFrameBuilder(new LightSectionBuilder(), new RumbleSectionBuilder()));
     }
 
     [Test]

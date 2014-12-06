@@ -1,4 +1,5 @@
 ﻿using aPC.Client.Morse.Codes;
+using aPC.Common.Builders;
 using aPC.Common.Defaults;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -10,20 +11,21 @@ namespace aPC.Client.Morse.Tests
   internal class MorseFrameBuilderTests
   {
     private Settings settings;
+    private MorseFrameBuilder frameBuilder;
 
     [SetUp]
-    public void TestSetup()
+    public void Setup()
     {
       settings = new Settings("");
       settings.RumblesEnabled = true;
+      frameBuilder = new MorseFrameBuilder(new LightSectionBuilder(), new RumbleSectionBuilder());
     }
 
     [Test]
     public void AddFramesFromMorseBlocks_AddsExpectedNumberOfFrames()
     {
       var blocks = new List<IMorseBlock> { new Dot(), new Dot() };
-      var frames = new MorseFrameBuilder(settings)
-        .AddFrames(blocks)
+      var frames = frameBuilder.AddFrames(settings, blocks)
         .Build();
 
       Assert.AreEqual(2, frames.Count);
@@ -33,8 +35,7 @@ namespace aPC.Client.Morse.Tests
     public void AddFramesFromMorseBlocks_AddsExpectedFrames()
     {
       var blocks = new List<IMorseBlock> { new Dot(), new Dash() };
-      var frames = new MorseFrameBuilder(settings)
-        .AddFrames(blocks)
+      var frames = frameBuilder.AddFrames(settings, blocks)
         .Build();
 
       for (int i = 0; i < 2; i++)
@@ -56,8 +57,7 @@ namespace aPC.Client.Morse.Tests
     [TestCaseSource("IMorseBlocks")]
     public void AddFrameFromMorseBlock_AddsExpectedFrame(IMorseBlock block)
     {
-      var frames = new MorseFrameBuilder(settings)
-        .AddFrames(new List<IMorseBlock>() { block })
+      var frames = frameBuilder.AddFrames(settings, new List<IMorseBlock>() { block })
         .Build();
 
       var colour = block.Enabled ? settings.Colour : DefaultLights.Off;

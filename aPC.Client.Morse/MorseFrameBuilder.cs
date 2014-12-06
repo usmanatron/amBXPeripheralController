@@ -12,25 +12,27 @@ namespace aPC.Client.Morse
   /// </summary>
   public class MorseFrameBuilder : FrameBuilder
   {
-    private Settings settings;
+    private LightSectionBuilder lightSectionBuilder;
+    private RumbleSectionBuilder rumbleSectionBuilder;
 
-    public MorseFrameBuilder(Settings settings)
+    public MorseFrameBuilder(LightSectionBuilder lightSectionBuilder, RumbleSectionBuilder rumbleSectionBuilder)
       : base()
     {
-      this.settings = settings;
+      this.lightSectionBuilder = lightSectionBuilder;
+      this.rumbleSectionBuilder = rumbleSectionBuilder;
     }
 
-    public MorseFrameBuilder AddFrames(IEnumerable<IMorseBlock> blocks)
+    public MorseFrameBuilder AddFrames(Settings settings, IEnumerable<IMorseBlock> blocks)
     {
       foreach (var block in blocks)
       {
-        AddFrame(block);
+        AddFrame(settings, block);
       }
 
       return this;
     }
 
-    private MorseFrameBuilder AddFrame(IMorseBlock block)
+    private MorseFrameBuilder AddFrame(Settings settings, IMorseBlock block)
     {
       this.AddFrame()
         .WithRepeated(settings.RepeatMessage)
@@ -38,31 +40,33 @@ namespace aPC.Client.Morse
 
       if (settings.LightsEnabled)
       {
-        this.WithLightSection(GetLightSection(block.Enabled));
+        this.WithLightSection(GetLightSection(block.Enabled, settings.Colour));
       }
       if (settings.RumblesEnabled)
       {
-        this.WithRumbleSection(GetRumbleSection(block.Enabled));
+        this.WithRumbleSection(GetRumbleSection(block.Enabled, settings.Rumble));
       }
 
       return this;
     }
 
-    private LightSection GetLightSection(bool fansEnabled)
+    private LightSection GetLightSection(bool lightEnabled, Light enabledColour)
     {
-      var lLight = fansEnabled ? settings.Colour : DefaultLights.Off;
+      var light = lightEnabled
+        ? enabledColour
+        : DefaultLights.Off;
 
-      return new LightSectionBuilder()
-        .WithAllLights(lLight)
+      return lightSectionBuilder.WithAllLights(light)
         .Build();
     }
 
-    private RumbleSection GetRumbleSection(bool rumbleEnabled)
+    private RumbleSection GetRumbleSection(bool rumbleEnabled, Rumble enabledRumble)
     {
-      var lRumble = rumbleEnabled ? settings.Rumble : DefaultRumbles.Off;
+      var rumble = rumbleEnabled
+        ? enabledRumble
+        : DefaultRumbles.Off;
 
-      return new RumbleSectionBuilder()
-        .WithRumble(lRumble)
+      return rumbleSectionBuilder.WithRumble(rumble)
         .Build();
     }
   }
