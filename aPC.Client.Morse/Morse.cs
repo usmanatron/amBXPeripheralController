@@ -6,22 +6,17 @@ namespace aPC.Client.Morse
   {
     private static void Main(string[] args)
     {
-      var settings = GetSettings(args);
-      var generatedScene = new SceneGenerator(settings).Generate();
-      new NotificationClient().PushCustomScene(generatedScene);
-    }
-
-    private static Settings GetSettings(string[] args)
-    {
       try
       {
         var arguments = string.Join(" ", args);
-        return new ArgumentReader(arguments).Read();
+        var settings = new ArgumentReader(arguments).Read();
+        var generatedScene = new SceneGenerator(settings).Generate();
+
+        new NotificationClient().PushCustomScene(generatedScene);
       }
       catch (UsageException e)
       {
         e.DisplayUsage();
-        throw;
       }
     }
   }
