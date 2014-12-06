@@ -7,9 +7,14 @@ namespace aPC.Common.Builders
   /// </summary>
   public class RumbleSectionBuilder
   {
-    private readonly RumbleSection rumbleSection;
+    private RumbleSection rumbleSection;
 
     public RumbleSectionBuilder()
+    {
+      Reset();
+    }
+
+    private void Reset()
     {
       rumbleSection = new RumbleSection();
     }
@@ -22,7 +27,9 @@ namespace aPC.Common.Builders
 
     public RumbleSection Build()
     {
-      return rumbleSection;
+      var builtRumbleSection = rumbleSection;
+      Reset();
+      return builtRumbleSection;
     }
   }
 }

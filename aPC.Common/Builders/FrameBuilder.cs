@@ -14,11 +14,16 @@ namespace aPC.Common.Builders
   /// </remarks>
   public class FrameBuilder
   {
-    private readonly List<Frame> frames;
+    private List<Frame> frames;
     private Frame currentFrame;
     private bool isRepeatedSpecified;
 
     public FrameBuilder()
+    {
+      Reset();
+    }
+
+    private void Reset()
     {
       frames = new List<Frame>();
     }
@@ -102,7 +107,10 @@ namespace aPC.Common.Builders
     public List<Frame> Build()
     {
       AddCurrentFrame();
-      return frames;
+
+      var builtFrames = frames;
+      Reset();
+      return builtFrames;
     }
   }
 }

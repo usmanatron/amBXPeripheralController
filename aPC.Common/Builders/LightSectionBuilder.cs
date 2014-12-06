@@ -10,6 +10,11 @@ namespace aPC.Common.Builders
 
     public LightSectionBuilder()
     {
+      Reset();
+    }
+
+    private void Reset()
+    {
       lightSection = new LightSection();
       lightSpecified = false;
     }
@@ -66,7 +71,9 @@ namespace aPC.Common.Builders
         throw new ArgumentException("Incomplete LightSection built.  At least one light and the Fade Time must be specified.");
       }
 
-      return lightSection;
+      var builtLightSection = lightSection;
+      Reset();
+      return builtLightSection;
     }
 
     private bool LightSectionIsValid

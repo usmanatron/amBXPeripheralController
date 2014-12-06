@@ -5,10 +5,15 @@ namespace aPC.Common.Builders
 {
   public class FanSectionBuilder
   {
-    private readonly FanSection fanSection;
+    private FanSection fanSection;
     private bool fanSpecified;
 
     public FanSectionBuilder()
+    {
+      Reset();
+    }
+
+    private void Reset()
     {
       fanSection = new FanSection();
       fanSpecified = false;
@@ -39,7 +44,9 @@ namespace aPC.Common.Builders
         throw new ArgumentException("Incomplete FanSection built.  At least one fan and the Fade Time must be specified.");
       }
 
-      return fanSection;
+      var builtFanSection = fanSection;
+      Reset();
+      return builtFanSection;
     }
 
     private bool FanSectionIsValid
