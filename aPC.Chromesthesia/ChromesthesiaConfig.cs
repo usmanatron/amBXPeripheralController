@@ -97,6 +97,15 @@ namespace aPC.Chromesthesia
       get { return int.Parse(config["LightMaximumSamplesToUse"]); }
     }
 
+    /// <summary>
+    /// The number of terms to calculate for the Normal Cumulative Distribution Function (CDF).
+    /// The more terms, the higher the accuracy.  However this is a trade-off between accuracy and performance.
+    /// </summary>
+    public static int NormalCDFNumberOfTerms
+    {
+      get { return int.Parse(config["NormalCDFNumberOfTerms"]); }
+    }
+
     #endregion Lights
   }
 }

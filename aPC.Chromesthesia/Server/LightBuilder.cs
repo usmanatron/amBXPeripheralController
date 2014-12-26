@@ -1,6 +1,7 @@
 ﻿using aPC.Chromesthesia.Pitch;
 using aPC.Chromesthesia.Server.Colour;
 using aPC.Common.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Pitch = aPC.Chromesthesia.Pitch.Pitch;
@@ -21,13 +22,26 @@ namespace aPC.Chromesthesia.Server
     public Light BuildLightFrom(PitchResult pitchResult)
     {
       var light = GetEmptyLight();
-      //TODO: The value of spectrumWidth shouln't (I claim) ever change when running - this would allow for simplification!
+      var useNormalDistribution = true;
+      IColourBuilder red, green, blue;
+
+      //TODO: The value of spectrumWidth shouln't (I claim) ever change when running - this would allow for simplification here!
       var spectrumWidth = pitchResult.Pitches.Count;
 
-      // These are magic numbers and may need tweaking to get the colour scheme absolutely right
-      var red = new ColourTriangle(0, spectrumWidth / 4);
-      var green = new ColourTriangle(spectrumWidth / 2, spectrumWidth / 3);
-      var blue = new ColourTriangle((3 * spectrumWidth / 4), spectrumWidth / 2);
+      // These are magic numbers!
+      // TODO: Clean this all up - ideally make it properly configurable through the application config
+      if (useNormalDistribution)
+      {
+        red = new NormalCumulativeColourBuilder((int)Math.Floor(spectrumWidth / 6d), 18);
+        blue = new NormalCumulativeColourBuilder((int)Math.Floor(spectrumWidth / 2d), 20);
+        green = new NormalCumulativeColourBuilder((int)Math.Floor(4 * spectrumWidth / 5d), 20);
+      }
+      else
+      {
+        red = new ColourTriangle(0, spectrumWidth / 4);
+        green = new ColourTriangle(spectrumWidth / 2, spectrumWidth / 3);
+        blue = new ColourTriangle((3 * spectrumWidth / 4), spectrumWidth / 2);
+      }
 
       foreach (var pitch in GetPitchesUnderConsideration(pitchResult))
       {

@@ -65,6 +65,7 @@
     <Compile Include="SceneGeneratorProvider.cs" />
     <Compile Include="Server\Colour\ColourTriangle.cs" />
     <Compile Include="Server\Colour\IColourBuilder.cs" />
+    <Compile Include="Server\Colour\NormalCumulativeColourBuilder.cs" />
     <Compile Include="Server\CompositeLightBuilder.cs" />
     <Compile Include="Server\CompositeLightSectionBuilder.cs" />
     <Compile Include="Server\ConductorManager.cs" />
