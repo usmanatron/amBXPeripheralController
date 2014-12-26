@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace aPC.Chromesthesia.Server
+namespace aPC.Chromesthesia.Server.Colour
 {
   /// <summary>
   /// Handles the value of a colour.
   /// For a given start and end index, values between 0 and 1 are calculated so that,
   /// if graphed, you get a triangle, (with midPoint being the highest point).
   /// </summary>
-  internal class ColourTriangle
+  internal class ColourTriangle : IColourBuilder
   {
     private readonly int midPoint;
     private readonly int radius;
@@ -22,7 +22,7 @@ namespace aPC.Chromesthesia.Server
     {
       var value = Math.Abs(index - midPoint) / radius;
 
-      if (IsNotInRange2(value))
+      if (IsNotInRange(value))
       {
         return 0f;
       }
@@ -33,7 +33,7 @@ namespace aPC.Chromesthesia.Server
     /// <remarks>
     /// This parity is used to allow for short-circuiting in most (if not all!) scenarios
     /// </remarks>
-    private bool IsNotInRange2(float value)
+    private bool IsNotInRange(float value)
     {
       return value > 1f ||
              value < 0f;
