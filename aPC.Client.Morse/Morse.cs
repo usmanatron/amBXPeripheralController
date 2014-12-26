@@ -2,6 +2,7 @@
 using aPC.Client.Morse.Translators;
 using aPC.Common.Builders;
 using aPC.Common.Client;
+using Ninject;
 
 namespace aPC.Client.Morse
 {
@@ -11,13 +12,11 @@ namespace aPC.Client.Morse
     {
       try
       {
-        var arguments = string.Join(" ", args);
-        var settings = new ArgumentReader(arguments).Read();
-        var translator = new MessageTranslator(new WordTranslator(new CharacterTranslator()));
-        var frameBuilder = new MorseFrameBuilder(new LightSectionBuilder(), new RumbleSectionBuilder());
-        var generatedScene = new SceneGenerator(translator, frameBuilder).Generate(settings);
+        var kernel = new NinjectKernelHandler(string.Join(" ", args)).Kernel;
+        var settings = kernel.Get<ArgumentReader>().Read();
+        var generatedScene = kernel.Get<SceneGenerator>().Generate(settings);
 
-        new NotificationClient(new HostnameAccessor()).PushCustomScene(generatedScene);
+        kernel.Get<NotificationClient>().PushCustomScene(generatedScene);
       }
       catch (UsageException e)
       {

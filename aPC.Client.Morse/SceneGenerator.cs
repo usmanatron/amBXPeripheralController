@@ -37,13 +37,15 @@ namespace aPC.Client.Morse
 
     private amBXScene BuildScene(Settings settings, List<Frame> frames)
     {
-      var scene = new amBXScene()
-      {
-        SceneType = settings.RepeatMessage ? eSceneType.Sync : eSceneType.Event
-      };
-      scene.Frames = frames;
+      var sceneType = settings.RepeatMessage
+        ? eSceneType.Sync
+        : eSceneType.Event;
 
-      return scene;
+      return new amBXScene()
+      {
+        SceneType = sceneType,
+        Frames = frames
+      };
     }
   }
 }
