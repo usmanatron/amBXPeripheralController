@@ -153,7 +153,6 @@ namespace aPC.Client.Morse
         Red = lightComponents[0],
         Green = lightComponents[1],
         Blue = lightComponents[2],
-        Intensity = 1,
         FadeTime = 10
       };
     }

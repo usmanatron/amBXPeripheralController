@@ -5,9 +5,6 @@ namespace aPC.Common.Entities
   public class Light : IComponent
   {
     [XmlElement]
-    public float Intensity;
-
-    [XmlElement]
     public int FadeTime;
 
     [XmlElement]

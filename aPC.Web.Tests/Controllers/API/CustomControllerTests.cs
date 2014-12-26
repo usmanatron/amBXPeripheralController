@@ -64,7 +64,6 @@ namespace aPC.Web.Tests.Controllers.API
       <Lights>
         <FadeTime>200</FadeTime>
         <North>
-          <Intensity>1</Intensity>
           <Red>1</Red>
           <Green>0</Green>
           <Blue>1</Blue>
@@ -77,7 +76,6 @@ namespace aPC.Web.Tests.Controllers.API
       <Lights>
         <FadeTime>200</FadeTime>
         <North>
-          <Intensity>1</Intensity>
           <Red>0</Red>
           <Green>1</Green>
           <Blue>0</Blue>

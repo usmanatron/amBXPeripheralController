@@ -48,7 +48,7 @@ namespace aPC.Client.Tests.Console
     }
 
     [Test]
-    public void CustomScene_WithIvalidPath_Throws()
+    public void CustomScene_WithInvalidPath_Throws()
     {
       var arguments = new[] { @"/F", "DoesntExist.xml" };
       Assert.Throws<UsageException>(() => new ArgumentReader(arguments));

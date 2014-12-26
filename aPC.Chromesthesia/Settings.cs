@@ -76,14 +76,6 @@
       }
     }
 
-    public static int LightIntensityMultiplicationFactor
-    {
-      get
-      {
-        return 10;
-      }
-    }
-
     #endregion Lights
   }
 }

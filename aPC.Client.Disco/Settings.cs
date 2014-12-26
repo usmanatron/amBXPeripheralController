@@ -9,7 +9,6 @@ namespace aPC.Client.Disco
     public Range RedColourWidth;
     public Range BlueColourWidth;
     public Range GreenColourWidth;
-    public Range LightIntensityWidth;
     public Range FadeTime;
 
     public double ChangeThreshold;
@@ -30,7 +29,6 @@ namespace aPC.Client.Disco
       RedColourWidth = new Range(0, 1);
       BlueColourWidth = new Range(0, 1);
       GreenColourWidth = new Range(0, 1);
-      LightIntensityWidth = new Range(0, 1);
     }
 
     private void SetConstantValues()

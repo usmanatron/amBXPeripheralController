@@ -25,9 +25,6 @@ namespace aPC.Client.Disco
           case "bpm":
             settings.BPM = int.Parse(deconstructedArgument[1]);
             break;
-          case "intensity":
-            settings.LightIntensityWidth = GetRange(deconstructedArgument[1]);
-            break;
           case "red":
             settings.RedColourWidth = GetRange(deconstructedArgument[1]);
             break;

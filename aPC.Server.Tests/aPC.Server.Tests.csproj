@@ -95,7 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ExampleScene.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Choose>

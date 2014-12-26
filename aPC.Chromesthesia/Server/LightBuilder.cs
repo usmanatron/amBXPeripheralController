@@ -7,12 +7,10 @@ namespace aPC.Chromesthesia.Server
   internal class LightBuilder
   {
     private readonly int componentMultiplicationFactor;
-    private readonly int amplitudeMultiplicationFactor;
 
     public LightBuilder()
     {
       this.componentMultiplicationFactor = Settings.LightComponentMultiplicationFactor;
-      this.amplitudeMultiplicationFactor = Settings.LightIntensityMultiplicationFactor;
     }
 
     public Light BuildLightFrom(PitchResult pitchResult)
@@ -33,7 +31,6 @@ namespace aPC.Chromesthesia.Server
         light.Green += green.GetValue(pitch.fftBinIndex) * amplitudePercentage * componentMultiplicationFactor / spectrumWidth;
         light.Blue += blue.GetValue(pitch.fftBinIndex) * amplitudePercentage * componentMultiplicationFactor / spectrumWidth;
       }
-      light.Intensity = pitchResult.TotalAmplitude * amplitudeMultiplicationFactor;
 
       return light;
     }
@@ -45,7 +42,6 @@ namespace aPC.Chromesthesia.Server
         Red = 0f,
         Blue = 0f,
         Green = 0f,
-        Intensity = 0f,
         FadeTime = 10
       };
     }
