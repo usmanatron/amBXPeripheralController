@@ -73,6 +73,18 @@ namespace aPC.Chromesthesia
       get { return int.Parse(config["LightComponentMultiplicationFactor"]); }
     }
 
+    /// <summary>
+    /// The maximum number of FFT samples to use when constructing the lights, ordered by amplitue (descending)
+    /// For example, a value of 5 means the five FFT bins with highest amplitude are only used.
+    /// </summary>
+    /// <remarks>
+    /// A value <= 0 implies that all results should be used
+    /// </remarks>
+    public static int LightMaximumSamplesToUse
+    {
+      get { return int.Parse(config["LightMaximumSamplesToUse"]); }
+    }
+
     #endregion Lights
   }
 }

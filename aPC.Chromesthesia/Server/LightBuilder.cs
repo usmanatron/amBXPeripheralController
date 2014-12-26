@@ -1,21 +1,26 @@
 ﻿using aPC.Chromesthesia.Pitch;
 using aPC.Common.Entities;
+using System.Collections.Generic;
 using System.Linq;
+using Pitch = aPC.Chromesthesia.Pitch.Pitch;
 
 namespace aPC.Chromesthesia.Server
 {
   internal class LightBuilder
   {
     private readonly int componentMultiplicationFactor;
+    private readonly int maximumSamplesUnderConsideration;
 
     public LightBuilder()
     {
       this.componentMultiplicationFactor = ChromesthesiaConfig.LightComponentMultiplicationFactor;
+      this.maximumSamplesUnderConsideration = ChromesthesiaConfig.LightMaximumSamplesToUse;
     }
 
     public Light BuildLightFrom(PitchResult pitchResult)
     {
       var light = GetEmptyLight();
+      //TODO: The value of spectrumWidth shouln't (I claim) ever change when running - this would allow for simplification!
       var spectrumWidth = pitchResult.Pitches.Count;
 
       // These are magic numbers and may need tweaking to get the colour scheme absolutely right
@@ -23,7 +28,7 @@ namespace aPC.Chromesthesia.Server
       var green = new ColourTriangle(spectrumWidth / 2, spectrumWidth / 3);
       var blue = new ColourTriangle((3 * spectrumWidth / 4), spectrumWidth / 2);
 
-      foreach (var pitch in pitchResult.Pitches.OrderBy(p => p.fftBinIndex))
+      foreach (var pitch in GetPitchesUnderConsideration(pitchResult))
       {
         var amplitudePercentage = pitch.amplitude / pitchResult.TotalAmplitude;
 
@@ -33,6 +38,15 @@ namespace aPC.Chromesthesia.Server
       }
 
       return light;
+    }
+
+    private IEnumerable<Pitch.Pitch> GetPitchesUnderConsideration(PitchResult pitchResult)
+    {
+      return maximumSamplesUnderConsideration <= 0
+        ? pitchResult.Pitches
+        : pitchResult.Pitches
+            .OrderByDescending(pitch => pitch.amplitude)
+            .Take(maximumSamplesUnderConsideration);
     }
 
     private Light GetEmptyLight()
