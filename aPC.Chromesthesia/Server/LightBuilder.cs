@@ -10,7 +10,7 @@ namespace aPC.Chromesthesia.Server
 
     public LightBuilder()
     {
-      this.componentMultiplicationFactor = Settings.LightComponentMultiplicationFactor;
+      this.componentMultiplicationFactor = ChromesthesiaConfig.LightComponentMultiplicationFactor;
     }
 
     public Light BuildLightFrom(PitchResult pitchResult)

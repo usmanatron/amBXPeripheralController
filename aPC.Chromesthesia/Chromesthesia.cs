@@ -23,7 +23,7 @@ namespace aPC.Chromesthesia
       var waveIn = kernel.Get<WasapiLoopbackCapture>();
       waveIn.StartRecording();
 
-      WriteCaptureSettings(waveIn);
+      WriteCaptureSettings(waveIn.WaveFormat);
 
       var streamRaw = new WaveInProvider(waveIn);
 
@@ -46,13 +46,13 @@ namespace aPC.Chromesthesia
     ///     Sample rate: 44100
     ///     Encoding: IeeeFloat
     /// </remarks>
-    private static void WriteCaptureSettings(IWaveIn waveIn)
+    private static void WriteCaptureSettings(WaveFormat waveFormat)
     {
-      Console.WriteLine("Bits per sample: " + waveIn.WaveFormat.BitsPerSample);
-      Console.WriteLine("Average bytes per second: " + waveIn.WaveFormat.AverageBytesPerSecond);
-      Console.WriteLine("Channels: " + waveIn.WaveFormat.Channels);
-      Console.WriteLine("Sample rate: " + waveIn.WaveFormat.SampleRate);
-      Console.WriteLine("Encoding: " + waveIn.WaveFormat.Encoding);
+      Console.WriteLine("Bits per sample: " + waveFormat.BitsPerSample);
+      Console.WriteLine("Average bytes per second: " + waveFormat.AverageBytesPerSecond);
+      Console.WriteLine("Channels: " + waveFormat.Channels);
+      Console.WriteLine("Sample rate: " + waveFormat.SampleRate);
+      Console.WriteLine("Encoding: " + waveFormat.Encoding);
     }
 
     /// <summary>

@@ -46,6 +46,7 @@
       <HintPath>..\packages\Ninject.3.0.1.10\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
@@ -67,7 +68,7 @@
     <Compile Include="Server\ConductorManager.cs" />
     <Compile Include="Server\LightBuilder.cs" />
     <Compile Include="Server\SceneBuilder.cs" />
-    <Compile Include="Settings.cs" />
+    <Compile Include="ChromesthesiaConfig.cs" />
     <Compile Include="StereoBuffer.cs" />
     <Compile Include="FloatDataStereoSplitter.cs" />
   </ItemGroup>

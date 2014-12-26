@@ -19,9 +19,9 @@ namespace aPC.Chromesthesia.Pitch
 
     public FftPitchDetector()
     {
-      this.sampleRate = Settings.InputAudioSampleRate;
-      this.lowerDetectionFrequency = Settings.FftLowerDetectionFrequency;
-      this.upperDetectionFrequency = Settings.FftUpperDetectionFrequency;
+      this.sampleRate = ChromesthesiaConfig.InputAudioSampleRate;
+      this.lowerDetectionFrequency = ChromesthesiaConfig.FftLowerDetectionFrequency;
+      this.upperDetectionFrequency = ChromesthesiaConfig.FftUpperDetectionFrequency;
     }
 
     public PitchResult DetectPitchDistribution(float[] buffer, int inFrames)
