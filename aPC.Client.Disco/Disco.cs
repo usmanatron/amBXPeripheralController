@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ninject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,7 +9,7 @@ namespace aPC.Client.Disco
   {
     public static void Main(string[] args)
     {
-      var kernel = new NinjectKernelHandler();
+      var kernel = new NinjectKernelHandler().Kernel;
       BuildSettings(args.ToList(), kernel.Get<Settings>());
 
       var task = kernel.Get<DiscoTask>();

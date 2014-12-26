@@ -7,7 +7,7 @@ namespace aPC.Client.Morse
 {
   internal class NinjectKernelHandler
   {
-    public StandardKernel Kernel;
+    public StandardKernel Kernel { get; private set; }
 
     public NinjectKernelHandler(string arguments)
     {

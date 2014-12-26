@@ -48,7 +48,6 @@
     <Compile Include="Communication\ClientConnection.cs" />
     <Compile Include="Communication\NotificationClientBase.cs" />
     <Compile Include="HostnameAccessorBase.cs" />
-    <Compile Include="NinjectKernelHandlerBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UsageExceptionBase.cs" />
   </ItemGroup>

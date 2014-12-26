@@ -8,6 +8,7 @@ using aPC.Common.Server.Conductors;
 using aPC.Common.Server.Engine;
 using aPC.Common.Server.SceneHandlers;
 using NAudio.Wave;
+using Ninject;
 using System;
 
 namespace aPC.Chromesthesia
@@ -18,15 +19,17 @@ namespace aPC.Chromesthesia
 
     private static void Main()
     {
-      var kernel = new NinjectKernelHandler();
+      var kernel = new NinjectKernelHandler().Kernel;
       var waveIn = kernel.Get<WasapiLoopbackCapture>();
       waveIn.StartRecording();
 
       WriteCaptureSettings(waveIn);
 
       var streamRaw = new WaveInProvider(waveIn);
+
       var streamPitch = new PitchGeneratorProvider(streamRaw, new FftPitchDetector(), new FftPitchDetector(), new FloatDataStereoSplitter());
       var compositeLightSectionBuilder = new SceneBuilder(new CompositeLightSectionBuilder(new LightSectionBuilder(), new CompositeLightBuilder()), new LightBuilder());
+
       var frameConductor = new FrameConductor(new FrameActor(new EngineManager()), new FrameHandler(new SceneAccessor(new DefaultScenes()).GetScene("rainbow"), EventComplete));
       var streamScene = new SceneGenerator(streamPitch, compositeLightSectionBuilder, new ConductorManager(frameConductor));
 

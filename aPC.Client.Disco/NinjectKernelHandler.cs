@@ -3,18 +3,22 @@ using aPC.Client.Disco.Generators;
 using aPC.Common.Client;
 using aPC.Common.Client.Communication;
 using aPC.Common.Entities;
+using Ninject;
 
 namespace aPC.Client.Disco
 {
-  internal class NinjectKernelHandler : NinjectKernelHandlerBase
+  internal class NinjectKernelHandler
   {
-    protected override void SetupBindings()
+    public StandardKernel Kernel { get; private set; }
+
+    public NinjectKernelHandler()
     {
-      kernel.Bind<Settings>().ToSelf().InSingletonScope();
-      kernel.Bind<HostnameAccessor>().ToSelf().InSingletonScope();
-      kernel.Bind<NotificationClientBase>().To<NotificationClient>();
-      kernel.Bind<IGenerator<amBXScene>>().To<RandomSceneGenerator>();
-      kernel.Bind<IGenerator<LightSection>>().To<RandomLightSectionGenerator>();
+      Kernel = new StandardKernel();
+      Kernel.Bind<Settings>().ToSelf().InSingletonScope();
+      Kernel.Bind<HostnameAccessor>().ToSelf().InSingletonScope();
+      Kernel.Bind<NotificationClientBase>().To<NotificationClient>();
+      Kernel.Bind<IGenerator<amBXScene>>().To<RandomSceneGenerator>();
+      Kernel.Bind<IGenerator<LightSection>>().To<RandomLightSectionGenerator>();
     }
   }
 }

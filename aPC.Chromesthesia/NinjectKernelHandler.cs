@@ -1,15 +1,19 @@
 ﻿using aPC.Chromesthesia.Pitch;
 using aPC.Common.Client;
 using NAudio.Wave;
+using Ninject;
 
 namespace aPC.Chromesthesia
 {
-  internal class NinjectKernelHandler : NinjectKernelHandlerBase
+  internal class NinjectKernelHandler
   {
-    protected override void SetupBindings()
+    public StandardKernel Kernel { get; private set; }
+
+    public NinjectKernelHandler()
     {
-      kernel.Bind<IWaveIn>().To<WasapiLoopbackCapture>();
-      kernel.Bind<IPitchDetector>().To<FftPitchDetector>();
+      Kernel = new StandardKernel();
+      Kernel.Bind<IWaveIn>().To<WasapiLoopbackCapture>();
+      Kernel.Bind<IPitchDetector>().To<FftPitchDetector>();
     }
   }
 }
