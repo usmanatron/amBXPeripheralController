@@ -44,6 +44,18 @@ namespace aPC.Chromesthesia
       get { return int.Parse(config["FftUpperDetectionFrequency"]); }
     }
 
+    /// <summary>
+    /// The interval which the PitchResult Summary Writer employs when there is no data to write
+    /// </summary>
+    /// <remarks>
+    /// If this value is changed without proper consideration, it may cause memory overflows
+    /// (too high) or excessive cpu usage (too low).
+    /// The chosen value appears to be a safe option, given a few tests.  Change with caution!</remarks>
+    public static int PitchSummaryWriterSleepInterval
+    {
+      get { return 30; }
+    }
+
     #endregion FFT
 
     #region Lights

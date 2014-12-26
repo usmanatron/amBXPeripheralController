@@ -15,7 +15,7 @@ namespace aPC.Chromesthesia
 
     public void Run()
     {
-      ApplyAutoTune(true);
+      Execute(true);
 
       while (true)
       {
@@ -29,13 +29,13 @@ namespace aPC.Chromesthesia
     /// successful buffer sizes: 8192, 4096, 2048, 1024
     /// (some pitch detection algorithms need at least 2048)
     /// </remarks>
-    public void ApplyAutoTune(bool runForever)
+    public void Execute(bool runForever)
     {
-      int readLength = 8192;
+      int bufferSize = 8192;
 
       do
       {
-        sceneGenerator.Execute(readLength);
+        sceneGenerator.Execute(bufferSize);
       } while (runForever);
     }
   }

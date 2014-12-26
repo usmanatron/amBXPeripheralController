@@ -54,6 +54,7 @@
     <Compile Include="ChromesthesiaTask.cs" />
     <Compile Include="Chromesthesia.cs" />
     <Compile Include="NinjectKernelHandler.cs" />
+    <Compile Include="PitchResultSummaryWriter.cs" />
     <Compile Include="Pitch\FftPitchDetector.cs" />
     <Compile Include="Pitch\IPitchDetector.cs" />
     <Compile Include="Pitch\Pitch.cs" />

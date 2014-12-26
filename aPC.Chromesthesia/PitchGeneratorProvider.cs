@@ -10,6 +10,7 @@ namespace aPC.Chromesthesia
     private readonly IPitchDetector leftPitchDetector;
     private readonly IPitchDetector rightPitchDetector;
     private readonly FloatDataStereoSplitter stereoSplitter;
+    private readonly PitchResultSummaryWriter resultWriter;
 
     private WaveBuffer intermediaryBuffer;
     private WaveBuffer leftBuffer;
@@ -17,9 +18,9 @@ namespace aPC.Chromesthesia
 
     public StereoPitchResult PitchResults { get; private set; }
 
-    public PitchGeneratorProvider(IWaveProvider sourceProvider, IPitchDetector leftPitchDetector, IPitchDetector rightPitchDetector, FloatDataStereoSplitter stereoSplitter)
+    public PitchGeneratorProvider(IWaveProvider sourceProvider, IPitchDetector leftPitchDetector, IPitchDetector rightPitchDetector, FloatDataStereoSplitter stereoSplitter, PitchResultSummaryWriter resultWriter)
     {
-      if (sourceProvider.WaveFormat.SampleRate != 44100)
+      if (sourceProvider.WaveFormat.SampleRate != ChromesthesiaConfig.InputAudioSampleRate)
       {
         throw new ArgumentException("This provider only works at 44.1kHz");
       }
@@ -30,6 +31,7 @@ namespace aPC.Chromesthesia
 
       this.sourceProvider = sourceProvider;
       this.stereoSplitter = stereoSplitter;
+      this.resultWriter = resultWriter;
 
       this.leftPitchDetector = leftPitchDetector;
       this.rightPitchDetector = rightPitchDetector;
@@ -83,26 +85,8 @@ namespace aPC.Chromesthesia
       var leftPitchResult = leftPitchDetector.DetectPitchDistribution(leftBuffer.FloatBuffer, stereoFrames);
       var rightPitchResult = rightPitchDetector.DetectPitchDistribution(rightBuffer.FloatBuffer, stereoFrames);
 
-      WriteSummaryToConsole(leftPitchResult, rightPitchResult);
+      resultWriter.Enqueue(leftPitchResult, rightPitchResult);
       PitchResults = new StereoPitchResult(leftPitchResult, rightPitchResult, bytesRead);
-    }
-
-    private void WriteSummaryToConsole(PitchResult leftResult, PitchResult rightResult)
-    {
-      var leftPeakPitchNonZero = ToNonZeroString(leftResult.PeakPitch.averageFrequency, "0000.000");
-      var rightPeakPitchNonZero = ToNonZeroString(rightResult.PeakPitch.averageFrequency, "0000.000");
-      var leftTotalAmp = ToNonZeroString(leftResult.TotalAmplitude, "0.00000");
-      var rightTotalAmp = ToNonZeroString(rightResult.TotalAmplitude, "0.00000");
-
-      if (leftPeakPitchNonZero != "       " || rightPeakPitchNonZero != "       " || leftTotalAmp != "       " || rightTotalAmp != "       ")
-      {
-        Console.WriteLine("{0} : {1} <- PP | MA -> {2} : {3}", leftPeakPitchNonZero, rightPeakPitchNonZero, leftTotalAmp, rightTotalAmp);
-      }
-    }
-
-    private string ToNonZeroString(float value, string format)
-    {
-      return value == 0 ? "       " : value.ToString(format);
     }
 
     public WaveFormat WaveFormat
