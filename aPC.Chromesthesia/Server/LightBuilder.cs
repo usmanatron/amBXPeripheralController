@@ -10,46 +10,43 @@ namespace aPC.Chromesthesia.Server
 {
   internal class LightBuilder
   {
-    private readonly int componentMultiplicationFactor;
-    private readonly int maximumSamplesUnderConsideration;
+    private IColourBuilder redComponent;
+    private IColourBuilder greenComponent;
+    private IColourBuilder blueComponent;
+    private Light light;
 
     public LightBuilder()
     {
-      this.componentMultiplicationFactor = ChromesthesiaConfig.LightComponentMultiplicationFactor;
-      this.maximumSamplesUnderConsideration = ChromesthesiaConfig.LightMaximumSamplesToUse;
+      var spectrumWidth = ChromesthesiaConfig.FFTMaximumBinSize - ChromesthesiaConfig.FFTMinimumBinSize + 1;
+
+      // Warning: These are magic numbers!
+      // TODO: Clean this all up - ideally make it properly configurable through the application config
+      if (ChromesthesiaConfig.LightBuilderUsesNormalCDF)
+      {
+        redComponent = new NormalCumulativeColourBuilder((int)Math.Floor(spectrumWidth / 6d), 18);
+        greenComponent = new NormalCumulativeColourBuilder((int)Math.Floor(spectrumWidth / 2d), 20);
+        blueComponent = new NormalCumulativeColourBuilder((int)Math.Floor(4 * spectrumWidth / 5d), 20);
+      }
+      else
+      {
+        redComponent = new ColourTriangle(0, spectrumWidth / 4);
+        greenComponent = new ColourTriangle(spectrumWidth / 2, spectrumWidth / 3);
+        blueComponent = new ColourTriangle((3 * spectrumWidth / 4), spectrumWidth / 2);
+      }
     }
 
     public Light BuildLightFrom(PitchResult pitchResult)
     {
       var light = GetEmptyLight();
-      var useNormalDistribution = true;
-      IColourBuilder red, green, blue;
-
-      //TODO: The value of spectrumWidth shouln't (I claim) ever change when running - this would allow for simplification here!
-      var spectrumWidth = pitchResult.Pitches.Count;
-
-      // These are magic numbers!
-      // TODO: Clean this all up - ideally make it properly configurable through the application config
-      if (useNormalDistribution)
-      {
-        red = new NormalCumulativeColourBuilder((int)Math.Floor(spectrumWidth / 6d), 18);
-        blue = new NormalCumulativeColourBuilder((int)Math.Floor(spectrumWidth / 2d), 20);
-        green = new NormalCumulativeColourBuilder((int)Math.Floor(4 * spectrumWidth / 5d), 20);
-      }
-      else
-      {
-        red = new ColourTriangle(0, spectrumWidth / 4);
-        green = new ColourTriangle(spectrumWidth / 2, spectrumWidth / 3);
-        blue = new ColourTriangle((3 * spectrumWidth / 4), spectrumWidth / 2);
-      }
+      var componentMultiplicationFactor = ChromesthesiaConfig.LightComponentMultiplicationFactor;
 
       foreach (var pitch in GetPitchesUnderConsideration(pitchResult))
       {
         var amplitudePercentage = pitch.amplitude / pitchResult.TotalAmplitude;
 
-        light.Red += red.GetValue(pitch.fftBinIndex) * amplitudePercentage * componentMultiplicationFactor / spectrumWidth;
-        light.Green += green.GetValue(pitch.fftBinIndex) * amplitudePercentage * componentMultiplicationFactor / spectrumWidth;
-        light.Blue += blue.GetValue(pitch.fftBinIndex) * amplitudePercentage * componentMultiplicationFactor / spectrumWidth;
+        light.Red += redComponent.GetValue(pitch.fftBinIndex) * amplitudePercentage * componentMultiplicationFactor;
+        light.Green += greenComponent.GetValue(pitch.fftBinIndex) * amplitudePercentage * componentMultiplicationFactor;
+        light.Blue += blueComponent.GetValue(pitch.fftBinIndex) * amplitudePercentage * componentMultiplicationFactor;
       }
 
       return light;
@@ -57,11 +54,11 @@ namespace aPC.Chromesthesia.Server
 
     private IEnumerable<Pitch.Pitch> GetPitchesUnderConsideration(PitchResult pitchResult)
     {
-      return maximumSamplesUnderConsideration <= 0
+      return ChromesthesiaConfig.LightMaximumSamplesToUse <= 0
         ? pitchResult.Pitches
         : pitchResult.Pitches
             .OrderByDescending(pitch => pitch.amplitude)
-            .Take(maximumSamplesUnderConsideration);
+            .Take(ChromesthesiaConfig.LightMaximumSamplesToUse);
     }
 
     private Light GetEmptyLight()

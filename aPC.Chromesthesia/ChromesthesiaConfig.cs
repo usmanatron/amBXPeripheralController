@@ -162,6 +162,15 @@ namespace aPC.Chromesthesia
     }
 
     /// <summary>
+    /// Set to true if the Normal CDF-based Colour builder should be used.
+    /// A value of anything except "true" will cause the LightBuilder to fall back to using Colour Traingles
+    /// </summary>
+    public static bool LightBuilderUsesNormalCDF
+    {
+      get { return bool.Parse(config["LightBuilderUsesNormalCDF"]); }
+    }
+
+    /// <summary>
     /// The number of terms to calculate for the Normal Cumulative Distribution Function (CDF).
     /// The more terms, the higher the accuracy.  However this is a trade-off between accuracy and performance.
     /// </summary>
