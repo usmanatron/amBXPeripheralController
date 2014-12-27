@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 
 namespace aPC.Chromesthesia
 {
@@ -23,15 +24,14 @@ namespace aPC.Chromesthesia
       }
     }
 
-    /// <remarks>
-    /// buffer length needs to be a power of 2 for FFT to work nicely
-    /// however, make the buffer too long and pitches aren't detected fast enough
-    /// successful buffer sizes: 8192, 4096, 2048, 1024
-    /// (some pitch detection algorithms need at least 2048)
-    /// </remarks>
     public void Execute(bool runForever)
     {
-      int bufferSize = 8192;
+      int bufferSize = ChromesthesiaConfig.InputBufferLengthPerSample;
+
+      if (bufferSize % 8 != 0)
+      {
+        throw new ArgumentException("Input buffer size must be disible by 8.  Given value is: " + bufferSize);
+      }
 
       do
       {

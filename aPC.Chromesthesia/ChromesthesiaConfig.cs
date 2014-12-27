@@ -32,6 +32,25 @@ namespace aPC.Chromesthesia
       }
     }
 
+    /// <summary>
+    /// The size of the buffer to fill for each sample.
+    /// ** Must be divisible by 8 ** (this allows us to convert to floats (/4) and split to stereo (/2)).
+    /// ** Must be a power to 2 ** (to allow the later FFT step to work nicely)
+    /// </summary>
+    /// <remarks>
+    /// Make the buffer too long and pitches aren't detected fast enough!
+    /// Potentially good buffer sizes are 8192, 4096, 2048, 1024; however further
+    /// experimentaion is needed for the optimal value.  As such, changing this value
+    /// should be done with care.
+    /// </remarks>
+    public static int InputBufferLengthPerSample
+    {
+      get
+      {
+        return 8192;
+      }
+    }
+
     #region FFT
 
     public static int FftLowerDetectionFrequency
