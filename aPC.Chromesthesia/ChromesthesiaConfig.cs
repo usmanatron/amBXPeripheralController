@@ -51,6 +51,20 @@ namespace aPC.Chromesthesia
       }
     }
 
+    /// <summary>
+    /// The number of float samples in each sample per channel (i.e. left and right speaker)
+    /// </summary>
+    /// <remarks>
+    ///
+    /// </remarks>
+    public static int InputBufferFloatSamplesPerChannel
+    {
+      get
+      {
+        return InputBufferLengthPerSample / 8;
+      }
+    }
+
     #region FFT
 
     public static int FftLowerDetectionFrequency
@@ -74,6 +88,37 @@ namespace aPC.Chromesthesia
     {
       get { return 30; }
     }
+
+    #region Calculated Values
+
+    /// <summary>
+    /// The width of each FFT bin
+    /// </summary>
+    public static float FFTBinSize
+    {
+      get
+      {
+        return InputAudioSampleRate / InputBufferFloatSamplesPerChannel;
+      }
+    }
+
+    public static int FFTMinimumBinSize
+    {
+      get
+      {
+        return (int)(FftLowerDetectionFrequency / FFTBinSize);
+      }
+    }
+
+    public static int FFTMaximumBinSize
+    {
+      get
+      {
+        return (int)(FftUpperDetectionFrequency / FFTBinSize);
+      }
+    }
+
+    #endregion Calculated Values
 
     #endregion FFT
 

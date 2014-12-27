@@ -5,24 +5,13 @@ using System.Linq;
 
 namespace aPC.Chromesthesia.Pitch
 {
-  // TODO: Increase buffer to 8192 if possible (decrease bin size)
-  // We input 1024 float frames
-  // FFT based pitch detector. seems to work best with block sizes of 4096
+  /// <summary>
+  /// Pitch detector based on Fast Fourier Transform (FFT).
+  /// </summary>
   public class FftPitchDetector : IPitchDetector
   {
     private Complex[] fftBuffer;
     private float[] prevBuffer;
-
-    private readonly int sampleRate;
-    private readonly int lowerDetectionFrequency;
-    private readonly int upperDetectionFrequency;
-
-    public FftPitchDetector()
-    {
-      this.sampleRate = ChromesthesiaConfig.InputAudioSampleRate;
-      this.lowerDetectionFrequency = ChromesthesiaConfig.FftLowerDetectionFrequency;
-      this.upperDetectionFrequency = ChromesthesiaConfig.FftUpperDetectionFrequency;
-    }
 
     public PitchResult DetectPitchDistribution(float[] buffer, int inFrames)
     {
@@ -62,15 +51,11 @@ namespace aPC.Chromesthesia.Pitch
 
     private PitchResult BuildResults(Complex[] fftBuffer, int frames)
     {
-      float binSize = sampleRate / frames;
-      int minBin = (int)(lowerDetectionFrequency / binSize);
-      int maxBin = (int)(upperDetectionFrequency / binSize);
-
       var pitches = new List<Pitch>();
 
-      for (int bin = minBin; bin <= maxBin; bin++)
+      for (int bin = ChromesthesiaConfig.FFTMinimumBinSize; bin <= ChromesthesiaConfig.FFTMaximumBinSize; bin++)
       {
-        pitches.Add(new Pitch(bin, binSize, GetIntensity(fftBuffer[bin])));
+        pitches.Add(new Pitch(bin, ChromesthesiaConfig.FFTBinSize, GetIntensity(fftBuffer[bin])));
       }
 
       return new PitchResult(pitches);
