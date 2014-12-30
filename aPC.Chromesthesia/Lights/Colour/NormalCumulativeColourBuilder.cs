@@ -5,15 +5,17 @@ using System.Text;
 
 namespace aPC.Chromesthesia.Lights.Colour
 {
-  internal class NormalCumulativeColourBuilder : IColourBuilder
+  /// <remarks>
+  /// * midPoint refers to the mean
+  /// * radius refers to the standard deviation
+  /// </remarks>
+  internal class NormalCumulativeColourBuilder : MidpointRadiusColourBuilder
   {
     //TODO: Do some research to determine if this truly is the maximum we should allow!
     private const int maximumNumberOfCDFTerms = 200;
 
-    private readonly int mean;
-    private readonly int deviation;
-
-    public NormalCumulativeColourBuilder(int mean, int deviation)
+    public NormalCumulativeColourBuilder(Tuple<int, int> frequencyRange)
+      : base(frequencyRange)
     {
       if (ChromesthesiaConfig.NormalCDFNumberOfTerms > maximumNumberOfCDFTerms)
       {
@@ -21,12 +23,9 @@ namespace aPC.Chromesthesia.Lights.Colour
           maximumNumberOfCDFTerms);
         throw new ArgumentException(message);
       }
-
-      this.mean = mean;
-      this.deviation = deviation;
     }
 
-    public float GetValue(int index)
+    public override float GetValue(int index)
     {
       var rawValue = GetNormalCDFValue(index);
 
@@ -42,7 +41,7 @@ namespace aPC.Chromesthesia.Lights.Colour
     /// </summary>
     private float GetNormalCDFValue(float input)
     {
-      var normalisedPoint = (input - mean) / deviation;
+      var normalisedPoint = (input - midPoint) / radius;
       var exponential = Math.Exp(-0.5 * normalisedPoint * normalisedPoint);
 
       var sequenceValue = 0d;

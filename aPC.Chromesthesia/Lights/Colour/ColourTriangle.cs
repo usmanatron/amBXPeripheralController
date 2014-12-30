@@ -7,18 +7,14 @@ namespace aPC.Chromesthesia.Lights.Colour
   /// For a given start and end index, values between 0 and 1 are calculated so that,
   /// if graphed, you get a triangle, (with midPoint being the highest point).
   /// </summary>
-  internal class ColourTriangle : IColourBuilder
+  internal class ColourTriangle : MidpointRadiusColourBuilder
   {
-    private readonly int midPoint;
-    private readonly int radius;
-
-    public ColourTriangle(int midPoint, int radius)
+    public ColourTriangle(Tuple<int, int> frequencyRange)
+      : base(frequencyRange)
     {
-      this.midPoint = midPoint;
-      this.radius = radius;
     }
 
-    public float GetValue(int index)
+    public override float GetValue(int index)
     {
       var value = Math.Abs(index - midPoint) / radius;
 

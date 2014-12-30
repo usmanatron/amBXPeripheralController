@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Specialized;
 using System.Configuration;
 
 namespace aPC.Chromesthesia
@@ -177,6 +178,36 @@ namespace aPC.Chromesthesia
     public static int NormalCDFNumberOfTerms
     {
       get { return int.Parse(config["NormalCDFNumberOfTerms"]); }
+    }
+
+    /// <summary>
+    /// The ...MainFrequencyRange objects define the main range of frequencies which the given colour component applies
+    /// For example, a RedMFR of 100-200 implies that the main range for red is between 100Hz and 200Hz.  The IColourBuilder
+    /// class in effect uses this to appropriately translate the sound sample into the right hue.
+    /// </summary>
+    /// <remarks>
+    /// Note that this does *not* necessarily mean that red will only be shown within this range - merely that the
+    /// strongest red will be here.  This is particularly true for the Normal CDF IColourBuilder, which bleeds through this range!
+    /// </remarks>
+    public static Tuple<int, int> RedMainFrequencyRange
+    {
+      get { return GetFrequencyRange(config["RedMainFrequencyRange"]); }
+    }
+
+    public static Tuple<int, int> GreenMainFrequencyRange
+    {
+      get { return GetFrequencyRange(config["GreenMainFrequencyRange"]); }
+    }
+
+    public static Tuple<int, int> BlueMainFrequencyRange
+    {
+      get { return GetFrequencyRange(config["BlueMainFrequencyRange"]); }
+    }
+
+    private static Tuple<int, int> GetFrequencyRange(string input)
+    {
+      var range = input.Split(':');
+      return new Tuple<int, int>(int.Parse(range[0]), int.Parse(range[1]));
     }
 
     #endregion Lights

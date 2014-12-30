@@ -23,15 +23,15 @@ namespace aPC.Chromesthesia.Lights
       // TODO: Clean this all up - ideally make it properly configurable through the application config
       if (ChromesthesiaConfig.LightBuilderUsesNormalCDF)
       {
-        redComponent = new NormalCumulativeColourBuilder((int)Math.Floor(spectrumWidth / 6d), (int)Math.Floor((3 * spectrumWidth) / 4d));
-        greenComponent = new NormalCumulativeColourBuilder((int)Math.Floor(spectrumWidth / 2d), oneThirdSpectrumWidth);
-        blueComponent = new NormalCumulativeColourBuilder((int)Math.Floor(4 * spectrumWidth / 5d), oneThirdSpectrumWidth);
+        redComponent = new NormalCumulativeColourBuilder(ChromesthesiaConfig.RedMainFrequencyRange);
+        greenComponent = new NormalCumulativeColourBuilder(ChromesthesiaConfig.GreenMainFrequencyRange);
+        blueComponent = new NormalCumulativeColourBuilder(ChromesthesiaConfig.BlueMainFrequencyRange);
       }
       else
       {
-        redComponent = new ColourTriangle(0, spectrumWidth / 4);
-        greenComponent = new ColourTriangle(spectrumWidth / 2, spectrumWidth / 3);
-        blueComponent = new ColourTriangle((3 * spectrumWidth / 4), spectrumWidth / 2);
+        redComponent = new ColourTriangle(ChromesthesiaConfig.RedMainFrequencyRange);
+        greenComponent = new ColourTriangle(ChromesthesiaConfig.GreenMainFrequencyRange);
+        blueComponent = new ColourTriangle(ChromesthesiaConfig.BlueMainFrequencyRange);
       }
     }
 
