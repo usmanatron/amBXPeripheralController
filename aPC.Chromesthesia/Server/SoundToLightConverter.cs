@@ -8,14 +8,14 @@ using Pitch = aPC.Chromesthesia.Pitch.Pitch;
 
 namespace aPC.Chromesthesia.Server
 {
-  internal class LightBuilder
+  internal class SoundToLightConverter
   {
     private IColourBuilder redComponent;
     private IColourBuilder greenComponent;
     private IColourBuilder blueComponent;
     private Light light;
 
-    public LightBuilder()
+    public SoundToLightConverter()
     {
       var spectrumWidth = ChromesthesiaConfig.FFTMaximumBinSize - ChromesthesiaConfig.FFTMinimumBinSize + 1;
       var oneThirdSpectrumWidth = (int)Math.Floor(spectrumWidth / 3d);

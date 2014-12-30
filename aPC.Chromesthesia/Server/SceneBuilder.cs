@@ -8,22 +8,22 @@ namespace aPC.Chromesthesia.Server
   internal class SceneBuilder
   {
     private readonly CompositeLightSectionBuilder compositeLightSectionBuilder;
-    private readonly LightBuilder lightBuilder;
+    private readonly SoundToLightConverter converter;
     private readonly int diagonalLightPercentage;
     private readonly int frameLength;
 
-    public SceneBuilder(CompositeLightSectionBuilder compositeLightSectionBuilder, LightBuilder lightBuilder)
+    public SceneBuilder(CompositeLightSectionBuilder compositeLightSectionBuilder, SoundToLightConverter converter)
     {
       this.compositeLightSectionBuilder = compositeLightSectionBuilder;
-      this.lightBuilder = lightBuilder;
+      this.converter = converter;
       this.diagonalLightPercentage = ChromesthesiaConfig.DiagonalLightPercentageOfSide;
       this.frameLength = ChromesthesiaConfig.SceneFrameLength;
     }
 
     public amBXScene BuildSceneFromPitchResults(StereoPitchResult pitchResults)
     {
-      var leftLight = lightBuilder.BuildLightFrom(pitchResults.Left);
-      var rightLight = lightBuilder.BuildLightFrom(pitchResults.Right);
+      var leftLight = converter.BuildLightFrom(pitchResults.Left);
+      var rightLight = converter.BuildLightFrom(pitchResults.Right);
 
       var lightSection = compositeLightSectionBuilder
         .WithLights(leftLight, rightLight)
