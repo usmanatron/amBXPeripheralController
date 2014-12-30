@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace aPC.Chromesthesia.Pitch
+namespace aPC.Chromesthesia.Sound.Entities
 {
   public class PitchResult
   {

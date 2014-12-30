@@ -1,8 +1,8 @@
-﻿using aPC.Chromesthesia.Pitch;
+﻿using aPC.Chromesthesia.Sound.Entities;
 using NAudio.Wave;
 using System;
 
-namespace aPC.Chromesthesia
+namespace aPC.Chromesthesia.Sound
 {
   internal class PitchGeneratorProvider : IWaveProvider
   {

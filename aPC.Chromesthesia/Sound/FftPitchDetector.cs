@@ -1,9 +1,10 @@
-﻿using NAudio.Dsp;
+﻿using aPC.Chromesthesia.Sound.Entities;
+using NAudio.Dsp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace aPC.Chromesthesia.Pitch
+namespace aPC.Chromesthesia.Sound
 {
   /// <summary>
   /// Pitch detector based on Fast Fourier Transform (FFT).

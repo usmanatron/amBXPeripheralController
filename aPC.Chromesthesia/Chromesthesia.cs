@@ -1,5 +1,6 @@
-﻿using aPC.Chromesthesia.Pitch;
+﻿using aPC.Chromesthesia.Lights;
 using aPC.Chromesthesia.Server;
+using aPC.Chromesthesia.Sound;
 using aPC.Common;
 using aPC.Common.Builders;
 using aPC.Common.Defaults;

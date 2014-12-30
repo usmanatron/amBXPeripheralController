@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace aPC.Chromesthesia.Server.Colour
+namespace aPC.Chromesthesia.Lights.Colour
 {
   internal class NormalCumulativeColourBuilder : IColourBuilder
   {

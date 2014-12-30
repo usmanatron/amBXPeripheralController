@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace aPC.Chromesthesia.Server.Colour
+namespace aPC.Chromesthesia.Lights.Colour
 {
   internal interface IColourBuilder
   {

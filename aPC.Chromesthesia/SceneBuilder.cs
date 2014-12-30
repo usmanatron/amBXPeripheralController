@@ -1,4 +1,5 @@
-﻿using aPC.Chromesthesia.Pitch;
+﻿using aPC.Chromesthesia.Lights;
+using aPC.Chromesthesia.Sound.Entities;
 using aPC.Common;
 using aPC.Common.Builders;
 using aPC.Common.Entities;

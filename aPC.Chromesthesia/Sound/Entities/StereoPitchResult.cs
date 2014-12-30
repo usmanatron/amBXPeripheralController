@@ -1,4 +1,4 @@
-﻿namespace aPC.Chromesthesia.Pitch
+﻿namespace aPC.Chromesthesia.Sound.Entities
 {
   internal class StereoPitchResult
   {

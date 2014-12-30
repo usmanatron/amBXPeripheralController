@@ -1,7 +1,7 @@
 ﻿using aPC.Common.Entities;
 using System;
 
-namespace aPC.Chromesthesia.Server
+namespace aPC.Chromesthesia.Lights
 {
   internal class CompositeLightBuilder
   {

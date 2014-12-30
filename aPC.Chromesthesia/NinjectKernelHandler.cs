@@ -1,4 +1,4 @@
-﻿using aPC.Chromesthesia.Pitch;
+﻿using aPC.Chromesthesia.Sound;
 using aPC.Common.Client;
 using NAudio.Wave;
 using Ninject;

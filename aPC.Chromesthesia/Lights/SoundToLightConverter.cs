@@ -1,11 +1,10 @@
-﻿using aPC.Chromesthesia.Pitch;
+﻿using aPC.Chromesthesia.Sound.Entities;
 using aPC.Common.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Pitch = aPC.Chromesthesia.Pitch.Pitch;
 
-namespace aPC.Chromesthesia.Server
+namespace aPC.Chromesthesia.Lights
 {
   internal class SoundToLightConverter
   {
@@ -29,7 +28,7 @@ namespace aPC.Chromesthesia.Server
       return builder.Build();
     }
 
-    private IEnumerable<Pitch.Pitch> GetPitchesUnderConsideration(PitchResult pitchResult)
+    private IEnumerable<Pitch> GetPitchesUnderConsideration(PitchResult pitchResult)
     {
       return ChromesthesiaConfig.LightMaximumSamplesToUse <= 0
         ? pitchResult.Pitches

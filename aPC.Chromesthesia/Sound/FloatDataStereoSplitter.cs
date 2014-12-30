@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace aPC.Chromesthesia
+namespace aPC.Chromesthesia.Sound
 {
   internal class FloatDataStereoSplitter
   {

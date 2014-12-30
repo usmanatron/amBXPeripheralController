@@ -1,12 +1,13 @@
-﻿using aPC.Chromesthesia.Server.Colour;
+﻿using aPC.Chromesthesia.Lights.Colour;
+using aPC.Chromesthesia.Sound.Entities;
 using aPC.Common.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace aPC.Chromesthesia.Server
+namespace aPC.Chromesthesia.Lights
 {
-  class LightBuilder
+  internal class LightBuilder
   {
     private IColourBuilder redComponent;
     private IColourBuilder greenComponent;
@@ -51,7 +52,7 @@ namespace aPC.Chromesthesia.Server
       };
     }
 
-    public LightBuilder AddPitch(Pitch.Pitch pitch, float totalAmplitude)
+    public LightBuilder AddPitch(Pitch pitch, float totalAmplitude)
     {
       var amplitudePercentage = pitch.amplitude / totalAmplitude;
       light.Red += GetComponentValue(redComponent, pitch.fftBinIndex, amplitudePercentage);

@@ -1,4 +1,6 @@
-﻿namespace aPC.Chromesthesia.Pitch
+﻿using aPC.Chromesthesia.Sound.Entities;
+
+namespace aPC.Chromesthesia.Sound
 {
   public interface IPitchDetector
   {
