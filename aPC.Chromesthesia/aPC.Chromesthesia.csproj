@@ -70,6 +70,7 @@
     <Compile Include="Server\CompositeLightSectionBuilder.cs" />
     <Compile Include="Server\ConductorManager.cs" />
     <Compile Include="Server\LightBuilder.cs" />
+    <Compile Include="Server\SoundToLightConverter.cs" />
     <Compile Include="Server\SceneBuilder.cs" />
     <Compile Include="ChromesthesiaConfig.cs" />
     <Compile Include="StereoBuffer.cs" />

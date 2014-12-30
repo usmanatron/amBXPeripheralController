@@ -21,7 +21,7 @@ namespace aPC.Chromesthesia.Server
       this.lightSectionBuilder = lightSectionBuilder;
       this.sidePercentageOnDiagonal = -1;
       this.compositeLightBuilder = compositeLightBuilder;
-      this.fadeTime = ChromesthesiaConfig.LightSectionFadeTime;
+      this.fadeTime = ChromesthesiaConfig.LightFadeTime;
     }
 
     public CompositeLightSectionBuilder WithLights(Light westLight, Light eastLight)

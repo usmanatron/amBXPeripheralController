@@ -139,7 +139,7 @@ namespace aPC.Chromesthesia
       get { return int.Parse(config["SceneFrameLength"]); }
     }
 
-    public static int LightSectionFadeTime
+    public static int LightFadeTime
     {
       get { return int.Parse(config["LightSectionFadeTime"]); }
     }

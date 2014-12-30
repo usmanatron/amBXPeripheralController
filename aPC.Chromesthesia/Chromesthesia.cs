@@ -28,7 +28,7 @@ namespace aPC.Chromesthesia
       var streamRaw = new WaveInProvider(waveIn);
 
       var streamPitch = new PitchGeneratorProvider(streamRaw, new FftPitchDetector(), new FftPitchDetector(), new FloatDataStereoSplitter(), new PitchResultSummaryWriter());
-      var compositeLightSectionBuilder = new SceneBuilder(new CompositeLightSectionBuilder(new LightSectionBuilder(), new CompositeLightBuilder()), new SoundToLightConverter());
+      var compositeLightSectionBuilder = new SceneBuilder(new CompositeLightSectionBuilder(new LightSectionBuilder(), new CompositeLightBuilder()), new SoundToLightConverter(new LightBuilder()));
 
       var frameConductor = new FrameConductor(new FrameActor(new EngineManager()), new FrameHandler(new SceneAccessor(new DefaultScenes()).GetScene("rainbow"), EventComplete));
       var streamScene = new SceneGenerator(streamPitch, compositeLightSectionBuilder, new ConductorManager(frameConductor));
