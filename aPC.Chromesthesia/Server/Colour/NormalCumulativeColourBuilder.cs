@@ -8,7 +8,7 @@ namespace aPC.Chromesthesia.Server.Colour
   internal class NormalCumulativeColourBuilder : IColourBuilder
   {
     //TODO: Do some research to determine if this truly is the maximum we should allow!
-    private const int maximumNumberOfCDFTerms = 20;
+    private const int maximumNumberOfCDFTerms = 200;
 
     private readonly int mean;
     private readonly int deviation;

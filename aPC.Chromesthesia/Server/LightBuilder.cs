@@ -18,14 +18,15 @@ namespace aPC.Chromesthesia.Server
     public LightBuilder()
     {
       var spectrumWidth = ChromesthesiaConfig.FFTMaximumBinSize - ChromesthesiaConfig.FFTMinimumBinSize + 1;
+      var oneThirdSpectrumWidth = (int)Math.Floor(spectrumWidth / 3d);
 
       // Warning: These are magic numbers!
       // TODO: Clean this all up - ideally make it properly configurable through the application config
       if (ChromesthesiaConfig.LightBuilderUsesNormalCDF)
       {
-        redComponent = new NormalCumulativeColourBuilder((int)Math.Floor(spectrumWidth / 6d), 18);
-        greenComponent = new NormalCumulativeColourBuilder((int)Math.Floor(spectrumWidth / 2d), 20);
-        blueComponent = new NormalCumulativeColourBuilder((int)Math.Floor(4 * spectrumWidth / 5d), 20);
+        redComponent = new NormalCumulativeColourBuilder((int)Math.Floor(spectrumWidth / 6d), (int)Math.Floor((3 * spectrumWidth) / 4d));
+        greenComponent = new NormalCumulativeColourBuilder((int)Math.Floor(spectrumWidth / 2d), oneThirdSpectrumWidth);
+        blueComponent = new NormalCumulativeColourBuilder((int)Math.Floor(4 * spectrumWidth / 5d), oneThirdSpectrumWidth);
       }
       else
       {
