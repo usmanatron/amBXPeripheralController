@@ -23,6 +23,9 @@ namespace aPC.Chromesthesia.Lights.Colour
           maximumNumberOfCDFTerms);
         throw new ArgumentException(message);
       }
+
+      // In this case, the radium needs to halved (to ensure the values returned are not too large)
+      radius = (int)Math.Ceiling(radius / 2d);
     }
 
     public override float GetValue(float frequency)

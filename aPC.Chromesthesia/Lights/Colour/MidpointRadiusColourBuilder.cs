@@ -5,7 +5,7 @@ namespace aPC.Chromesthesia.Lights.Colour
   /// <summary>
   /// Defines an abstract Colourbuilder which uses midpoint and radius values to calculate the colour value
   /// </summary>
-  internal abstract class MidpointRadiusColourBuilder : IColourBuilder
+  public abstract class MidpointRadiusColourBuilder : IColourBuilder
   {
     protected int midPoint;
     protected int radius;
@@ -18,7 +18,7 @@ namespace aPC.Chromesthesia.Lights.Colour
       }
 
       this.midPoint = (frequencyRange.Item1 + frequencyRange.Item2) / 2;
-      this.radius = (int)Math.Ceiling(frequencyRange.Item2 - midPoint / 2d);
+      this.radius = frequencyRange.Item2 - midPoint;
     }
 
     public abstract float GetValue(float frequency);
