@@ -9,6 +9,7 @@
     <assembly path="aPC.Server.Tests\bin\Debug\aPC.Server.Tests.dll" />
     <assembly path="aPC.Web.Tests\bin\Debug\aPC.Web.Tests.dll" />
     <assembly path="aPC.Common.Server.Tests\bin\Debug\aPC.Common.Server.Tests.dll" />
+    <assembly path="aPC.Chromesthesia.Tests\bin\Debug\aPC.Chromesthesia.Tests.dll" />
   </Config>
   <Config name="Release" binpathtype="Auto">
     <assembly path="aPC.Client.Tests\bin\Release\aPC.Client.Tests.dll" />
