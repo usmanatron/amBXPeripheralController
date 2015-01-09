@@ -25,9 +25,9 @@ namespace aPC.Chromesthesia.Lights.Colour
       }
     }
 
-    public override float GetValue(int index)
+    public override float GetValue(float frequency)
     {
-      var rawValue = GetNormalCDFValue(index);
+      var rawValue = GetNormalCDFValue(frequency);
 
       return rawValue <= 0.5
         ? rawValue

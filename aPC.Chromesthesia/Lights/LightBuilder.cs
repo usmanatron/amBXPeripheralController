@@ -16,11 +16,6 @@ namespace aPC.Chromesthesia.Lights
 
     public LightBuilder()
     {
-      var spectrumWidth = ChromesthesiaConfig.FFTMaximumBinSize - ChromesthesiaConfig.FFTMinimumBinSize + 1;
-      var oneThirdSpectrumWidth = (int)Math.Floor(spectrumWidth / 3d);
-
-      // Warning: These are magic numbers!
-      // TODO: Clean this all up - ideally make it properly configurable through the application config
       if (ChromesthesiaConfig.LightBuilderUsesNormalCDF)
       {
         redComponent = new NormalCumulativeColourBuilder(ChromesthesiaConfig.RedMainFrequencyRange);
@@ -55,16 +50,16 @@ namespace aPC.Chromesthesia.Lights
     public LightBuilder AddPitch(Pitch pitch, float totalAmplitude)
     {
       var amplitudePercentage = pitch.amplitude / totalAmplitude;
-      light.Red += GetComponentValue(redComponent, pitch.fftBinIndex, amplitudePercentage);
-      light.Green += GetComponentValue(greenComponent, pitch.fftBinIndex, amplitudePercentage);
-      light.Blue += GetComponentValue(blueComponent, pitch.fftBinIndex, amplitudePercentage);
+      light.Red += GetComponentValue(redComponent, pitch.averageFrequency, amplitudePercentage);
+      light.Green += GetComponentValue(greenComponent, pitch.averageFrequency, amplitudePercentage);
+      light.Blue += GetComponentValue(blueComponent, pitch.averageFrequency, amplitudePercentage);
 
       return this;
     }
 
-    private Func<IColourBuilder, int, float, float> GetComponentValue = (IColourBuilder colourBuilder, int fftBinIndex, float amplitudePercentage) =>
+    private Func<IColourBuilder, float, float, float> GetComponentValue = (IColourBuilder colourBuilder, float frequency, float amplitudePercentage) =>
       {
-        return colourBuilder.GetValue(fftBinIndex) * ChromesthesiaConfig.LightComponentMultiplicationFactor * amplitudePercentage;
+        return colourBuilder.GetValue(frequency) * ChromesthesiaConfig.LightComponentMultiplicationFactor * amplitudePercentage;
       };
 
     public Light Build()

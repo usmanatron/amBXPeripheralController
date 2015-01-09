@@ -14,9 +14,9 @@ namespace aPC.Chromesthesia.Lights.Colour
     {
     }
 
-    public override float GetValue(int index)
+    public override float GetValue(float frequency)
     {
-      var value = Math.Abs(index - midPoint) / radius;
+      var value = Math.Abs(frequency - midPoint) / radius;
 
       if (IsNotInRange(value))
       {
