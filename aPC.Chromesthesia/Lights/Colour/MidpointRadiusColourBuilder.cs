@@ -3,7 +3,7 @@
 namespace aPC.Chromesthesia.Lights.Colour
 {
   /// <summary>
-  /// Defines an abstract Colourbuilder which uses midpoint and radius values to calculate the colour value
+  /// Defines an abstract ColourBuilder which uses midpoint and radius values to calculate the colour value
   /// </summary>
   public abstract class MidpointRadiusColourBuilder : IColourBuilder
   {

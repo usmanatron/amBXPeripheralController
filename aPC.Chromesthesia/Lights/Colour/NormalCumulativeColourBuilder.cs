@@ -12,7 +12,7 @@ namespace aPC.Chromesthesia.Lights.Colour
     public NormalCumulativeColourBuilder(Tuple<int, int> frequencyRange)
       : base(frequencyRange)
     {
-      // In this case, the radium needs to halved (to ensure the values returned are not too large)
+      // In this case, the radius needs to halved (to ensure the values returned are not too large)
       radius = (int)Math.Ceiling(radius / 2d);
 
       normalCDF = new NormalCumulativeDistributionFunction(midPoint, radius);

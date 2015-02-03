@@ -1,6 +1,7 @@
 .\packages\NUnit.Runners.2.6.3\tools\nunit-console-x86.exe /framework:net-4.0 .\aPC.Common.Tests\bin\Debug\aPC.Common.Tests.dll /noshadow /result:shippable\testresults\aPC.Common.xml
 .\packages\NUnit.Runners.2.6.3\tools\nunit-console-x86.exe /framework:net-4.0 .\aPC.Common.Server.Tests\bin\Debug\aPC.Common.Server.Tests.dll /noshadow /result:shippable\testresults\aPC.Common.Server.xml
 .\packages\NUnit.Runners.2.6.3\tools\nunit-console-x86.exe /framework:net-4.0 .\aPC.Server.Tests\bin\Debug\aPC.Server.Tests.dll /noshadow /result:shippable\testresults\aPC.Server.xml
+.\packages\NUnit.Runners.2.6.3\tools\nunit-console-x86.exe /framework:net-4.0 .\aPC.Chromesthesia.Tests\bin\Debug\aPC.Chromesthesia.Tests.dll /noshadow /result:shippable\testresults\aPC.Chromesthesia.xml
 .\packages\NUnit.Runners.2.6.3\tools\nunit-console-x86.exe /framework:net-4.0 .\aPC.Client.Tests\bin\Debug\aPC.Client.Tests.dll /noshadow /result:shippable\testresults\aPC.Client.xml
 .\packages\NUnit.Runners.2.6.3\tools\nunit-console-x86.exe /framework:net-4.0 .\aPC.Client.Disco.Tests\bin\Debug\aPC.Client.Disco.Tests.dll /noshadow /result:shippable\testresults\aPC.Client.Disco.xml
 .\packages\NUnit.Runners.2.6.3\tools\nunit-console-x86.exe /framework:net-4.0 .\aPC.Client.Morse.Tests\bin\Debug\aPC.Client.Morse.Tests.dll /noshadow /result:shippable\testresults\aPC.Client.Morse.xml
