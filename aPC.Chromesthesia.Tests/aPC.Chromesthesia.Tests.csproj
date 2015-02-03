@@ -58,6 +58,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Lights\Colour\ColourTriangleTests.cs" />
+    <Compile Include="Lights\CompositeLightBuilderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +68,10 @@
     <ProjectReference Include="..\aPC.Chromesthesia\aPC.Chromesthesia.csproj">
       <Project>{0dde3008-f7f2-4136-9139-ce1e8c3e57fd}</Project>
       <Name>aPC.Chromesthesia</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\aPC.Common\aPC.Common.csproj">
+      <Project>{b6543e75-59af-4059-acf8-560e82bc72ce}</Project>
+      <Name>aPC.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

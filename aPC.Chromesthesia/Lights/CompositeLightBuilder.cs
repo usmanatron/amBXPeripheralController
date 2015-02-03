@@ -3,13 +3,17 @@ using System;
 
 namespace aPC.Chromesthesia.Lights
 {
-  internal class CompositeLightBuilder
+  public class CompositeLightBuilder
   {
+    private const int minPercentageValue = 0;
+    private const int maxPercentageValue = 100;
+
     public Light BuildCompositeLight(Light firstLight, Light secondLight, int firstLightPercentage)
     {
       if (!IsPercentage(firstLightPercentage))
       {
-        throw new ArgumentException("Unexpected percentage (must be between 0 and 100)");
+        var message = string.Format("Unexpected percentage (must be between {0} and {1})", minPercentageValue, maxPercentageValue);
+        throw new ArgumentException(message);
       }
 
       return new Light
@@ -23,19 +27,19 @@ namespace aPC.Chromesthesia.Lights
 
     private bool IsPercentage(int value)
     {
-      return 0 <= value && value <= 100;
+      return minPercentageValue <= value && value <= maxPercentageValue;
     }
 
     private float BuildCompositeValue(float firstValue, float secondValue, int firstValuePercentage)
     {
-      var secondValuePercentage = 100 - firstValuePercentage;
+      var secondValuePercentage = maxPercentageValue - firstValuePercentage;
 
-      return (firstValue * GetPercentage(firstValuePercentage)) + (secondValue * GetPercentage(secondValuePercentage));
+      return GetPercentage((firstValue * firstValuePercentage) + (secondValue * secondValuePercentage));
     }
 
-    private float GetPercentage(int value)
+    private float GetPercentage(float value)
     {
-      return value / 100f;
+      return value / (float)maxPercentageValue;
     }
   }
 }
