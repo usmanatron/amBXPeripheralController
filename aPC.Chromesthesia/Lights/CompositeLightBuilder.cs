@@ -3,7 +3,7 @@ using System;
 
 namespace aPC.Chromesthesia.Lights
 {
-  public class CompositeLightBuilder
+  public class CompositeLightBuilder : ICompositeLightBuilder
   {
     private const int minPercentageValue = 0;
     private const int maxPercentageValue = 100;

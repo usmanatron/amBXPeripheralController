@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Lights\Colour\ColourTriangleTests.cs" />
     <Compile Include="Lights\CompositeLightBuilderTests.cs" />
+    <Compile Include="Lights\CompositeLightSectionBuilderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

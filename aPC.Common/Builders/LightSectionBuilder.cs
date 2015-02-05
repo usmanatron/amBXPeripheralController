@@ -3,7 +3,7 @@ using System;
 
 namespace aPC.Common.Builders
 {
-  public class LightSectionBuilder
+  public class LightSectionBuilder : ILightSectionBuilder
   {
     private LightSection lightSection;
     private bool lightSpecified;
@@ -19,7 +19,7 @@ namespace aPC.Common.Builders
       lightSpecified = false;
     }
 
-    public LightSectionBuilder WithAllLights(Light light)
+    public ILightSectionBuilder WithAllLights(Light light)
     {
       WithLightInDirection(eDirection.North, light);
       WithLightInDirection(eDirection.NorthEast, light);
@@ -33,7 +33,7 @@ namespace aPC.Common.Builders
       return this;
     }
 
-    public LightSectionBuilder WithLightInDirection(eDirection direction, Light light)
+    public ILightSectionBuilder WithLightInDirection(eDirection direction, Light light)
     {
       if (!LightIsValid(light))
       {
@@ -54,7 +54,7 @@ namespace aPC.Common.Builders
       return light.FadeTime > 0;
     }
 
-    public LightSectionBuilder WithLightInDirectionIfPhysical(eDirection direction, Light light)
+    public ILightSectionBuilder WithLightInDirectionIfPhysical(eDirection direction, Light light)
     {
       var lightExists = lightSection.SetPhysicalComponentValueInDirection(light, direction);
       if (lightExists)

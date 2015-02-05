@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builders\FanSectionBuilder.cs" />
+    <Compile Include="Builders\ILightSectionBuilder.cs" />
     <Compile Include="Builders\LightSectionBuilder.cs" />
     <Compile Include="Builders\RumbleSectionBuilder.cs" />
     <Compile Include="Defaults\DefaultRumbles.cs" />

@@ -5,23 +5,30 @@ using System;
 
 namespace aPC.Chromesthesia.Lights
 {
-  internal class CompositeLightSectionBuilder
+  public class CompositeLightSectionBuilder
   {
-    private LightSectionBuilder lightSectionBuilder;
-    private CompositeLightBuilder compositeLightBuilder;
+    private const int centrePercentage = 50;
+    private const int sidePercentageMinValue = 50;
+    private const int sidePercentageMaxValue = 100;
+
+    private ILightSectionBuilder lightSectionBuilder;
+    private ICompositeLightBuilder compositeLightBuilder;
     private Light westLight;
     private Light eastLight;
+
+    /// <summary>
+    ///   The diagonal lights are composed from a percentage of the left light
+    ///   and a percentage of the right.  This value determines the percentage of the side light
+    ///   to use for a diagonal on that side.  For example, the NW light takes a percentage of the
+    ///   West light equal to sidePercentageOnDiagonal.
+    ///   The valid range taken by this value is detailed in the IsValid method.
+    /// </summary>
     private int sidePercentageOnDiagonal;
-    private readonly int fadeTime;
 
-    private const int centrePercentage = 50;
-
-    public CompositeLightSectionBuilder(LightSectionBuilder lightSectionBuilder, CompositeLightBuilder compositeLightBuilder)
+    public CompositeLightSectionBuilder(ILightSectionBuilder lightSectionBuilder, ICompositeLightBuilder compositeLightBuilder)
     {
       this.lightSectionBuilder = lightSectionBuilder;
-      this.sidePercentageOnDiagonal = -1;
       this.compositeLightBuilder = compositeLightBuilder;
-      this.fadeTime = ChromesthesiaConfig.LightFadeTime;
     }
 
     public CompositeLightSectionBuilder WithLights(Light westLight, Light eastLight)
@@ -31,39 +38,25 @@ namespace aPC.Chromesthesia.Lights
       return this;
     }
 
-    /// <summary>
-    ///   Set the value of sidePercentageOnDiagonal.
-    ///
-    /// The diagonal lights are composed from a percentage of the left light
-    ///   and a percentage of the right.  This value determines the percentage of the side light
-    ///   to use for a diagonal on that side.  For example, the NW light takes a percentage of the
-    ///   West light equal to sidePercentageOnDiagonal.
-    /// </summary>
-    /// <remarks>
-    ///   This value is expected to be between 50 and 100  (since the centre lights are hardcoded
-    ///   as 50% of each side light).
-    /// </remarks>
     public CompositeLightSectionBuilder WithSidePercentageOnDiagonal(int percentage)
     {
-      if (!percentageInExpectedRange(percentage))
-      {
-        throw new ArgumentException("Unexpected value");
-      }
-
       sidePercentageOnDiagonal = percentage;
       return this;
     }
 
-    private bool percentageInExpectedRange(int value)
-    {
-      return 50 <= value && value <= 100;
-    }
-
     public LightSection Build()
     {
+      if (!IsValid())
+      {
+        var message = string.Format("Unable to build the LightSection.  This is either because something is missing (both the percentage and the lights must be specified) or because the given percentage value is invalid (it must be beteen {0} and {1})",
+          sidePercentageMinValue,
+          sidePercentageMaxValue);
+        throw new ArgumentException(message);
+      }
+
       var westDiagonalLight = compositeLightBuilder.BuildCompositeLight(westLight, eastLight, sidePercentageOnDiagonal);
       var centralLight = compositeLightBuilder.BuildCompositeLight(westLight, eastLight, centrePercentage);
-      var eastDiagonalLight = compositeLightBuilder.BuildCompositeLight(eastLight, westLight, sidePercentageOnDiagonal);
+      var eastDiagonalLight = compositeLightBuilder.BuildCompositeLight(westLight, eastLight, sidePercentageMaxValue - sidePercentageOnDiagonal);
 
       return lightSectionBuilder
         .WithLightInDirection(eDirection.North, centralLight)
@@ -75,6 +68,18 @@ namespace aPC.Chromesthesia.Lights
         .WithLightInDirection(eDirection.West, westLight)
         .WithLightInDirection(eDirection.NorthWest, westDiagonalLight)
         .Build();
+    }
+
+    /// <remarks>
+    ///   This value of sidePercentageOnDiagonal is expected to be between 50 and 100
+    ///   (since the centre lights are hardcoded as 50% of each side light).
+    /// </remarks>
+    private bool IsValid()
+    {
+      return sidePercentageMinValue <= sidePercentageOnDiagonal &&
+                   sidePercentageOnDiagonal <= sidePercentageMaxValue &&
+             westLight != null &&
+             eastLight != null;
     }
   }
 }
