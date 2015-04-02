@@ -27,6 +27,10 @@
 
   #region amBXLib-equivalent enums
 
+  /// <remarks>
+  ///  *** WARNING ***
+  ///  Do not change this enum!  It has to exactly map with the amBXLib equivalent (CompassDirection)
+  /// </remarks>
   public enum eDirection
   {
     Everywhere = 0,
@@ -41,6 +45,10 @@
     Center = 256
   }
 
+  /// <remarks>
+  ///  *** WARNING ***
+  ///  Do not change this enum!  It has to exactly map with the amBXLib equivalent (RumbleType)
+  /// </remarks>
   public enum eRumbleType
   {
     Boing = 0,
