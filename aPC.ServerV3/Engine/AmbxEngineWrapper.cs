@@ -10,7 +10,7 @@ namespace aPC.ServerV3.Engine
   /// <summary>
   ///  Manages the amBXEngine interface.
   /// </summary>
-  internal class AmbxEngineWrapper
+  internal class AmbxEngineWrapper : IDisposable
   {
     private readonly amBX engine;
     private readonly Dictionary<eDirection, amBXLight> lights;
