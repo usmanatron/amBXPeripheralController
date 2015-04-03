@@ -1,6 +1,7 @@
 ﻿using aPC.Common.Entities;
 using aPC.Common.Server.Engine;
 using aPC.Common.Server.Snapshots;
+using System.Linq;
 
 namespace aPC.Common.Server.Actors
 {
@@ -15,43 +16,43 @@ namespace aPC.Common.Server.Actors
 
     public void ActNextFrame(eDirection direction, FrameSnapshot snapshot)
     {
-      if (snapshot.Frame.Lights != null)
+      if (snapshot.Frame.LightSection != null)
       {
-        UpdateLights(snapshot.Frame.Lights);
+        UpdateLights(snapshot.Frame.LightSection);
       }
 
-      if (snapshot.Frame.Fans != null)
+      if (snapshot.Frame.FanSection != null)
       {
-        UpdateFans(snapshot.Frame.Fans);
+        UpdateFans(snapshot.Frame.FanSection);
       }
 
-      if (snapshot.Frame.Rumbles != null)
+      if (snapshot.Frame.RumbleSection != null)
       {
-        UpdateRumbles(snapshot.Frame.Rumbles);
+        UpdateRumbles(snapshot.Frame.RumbleSection);
       }
     }
 
     private void UpdateLights(LightSection lights)
     {
-      engine.UpdateComponent(eDirection.North, lights.North);
-      engine.UpdateComponent(eDirection.NorthEast, lights.NorthEast);
-      engine.UpdateComponent(eDirection.East, lights.East);
-      engine.UpdateComponent(eDirection.SouthEast, lights.SouthEast);
-      engine.UpdateComponent(eDirection.South, lights.South);
-      engine.UpdateComponent(eDirection.SouthWest, lights.SouthWest);
-      engine.UpdateComponent(eDirection.West, lights.West);
-      engine.UpdateComponent(eDirection.NorthWest, lights.NorthWest);
+      engine.UpdateComponent(eDirection.North, lights.GetComponentValueInDirection(eDirection.North));
+      engine.UpdateComponent(eDirection.NorthEast, lights.GetComponentValueInDirection(eDirection.NorthEast));
+      engine.UpdateComponent(eDirection.East, lights.GetComponentValueInDirection(eDirection.East));
+      engine.UpdateComponent(eDirection.SouthEast, lights.GetComponentValueInDirection(eDirection.SouthEast));
+      engine.UpdateComponent(eDirection.South, lights.GetComponentValueInDirection(eDirection.South));
+      engine.UpdateComponent(eDirection.SouthWest, lights.GetComponentValueInDirection(eDirection.SouthWest));
+      engine.UpdateComponent(eDirection.West, lights.GetComponentValueInDirection(eDirection.West));
+      engine.UpdateComponent(eDirection.NorthWest, lights.GetComponentValueInDirection(eDirection.NorthWest));
     }
 
     private void UpdateFans(FanSection fans)
     {
-      engine.UpdateComponent(eDirection.East, fans.East);
-      engine.UpdateComponent(eDirection.West, fans.West);
+      engine.UpdateComponent(eDirection.East, fans.GetComponentValueInDirection(eDirection.East));
+      engine.UpdateComponent(eDirection.West, fans.GetComponentValueInDirection(eDirection.West));
     }
 
     private void UpdateRumbles(RumbleSection rumble)
     {
-      engine.UpdateComponent(eDirection.Center, rumble.Rumble);
+      engine.UpdateComponent(eDirection.Center, rumble.Rumbles.Single());
     }
   }
 }

@@ -57,14 +57,14 @@ namespace aPC.Common.Tests.Builders
         .WithAllLights(aribitraryColour)
         .Build();
 
-      Assert.AreEqual(aribitraryColour, section.North);
-      Assert.AreEqual(aribitraryColour, section.NorthEast);
-      Assert.AreEqual(aribitraryColour, section.East);
-      Assert.AreEqual(aribitraryColour, section.SouthEast);
-      Assert.AreEqual(aribitraryColour, section.South);
-      Assert.AreEqual(aribitraryColour, section.SouthWest);
-      Assert.AreEqual(aribitraryColour, section.West);
-      Assert.AreEqual(aribitraryColour, section.NorthWest);
+      Assert.AreEqual(aribitraryColour, section.GetComponentValueInDirection(eDirection.North));
+      Assert.AreEqual(aribitraryColour, section.GetComponentValueInDirection(eDirection.NorthEast));
+      Assert.AreEqual(aribitraryColour, section.GetComponentValueInDirection(eDirection.East));
+      Assert.AreEqual(aribitraryColour, section.GetComponentValueInDirection(eDirection.SouthEast));
+      Assert.AreEqual(aribitraryColour, section.GetComponentValueInDirection(eDirection.South));
+      Assert.AreEqual(aribitraryColour, section.GetComponentValueInDirection(eDirection.SouthWest));
+      Assert.AreEqual(aribitraryColour, section.GetComponentValueInDirection(eDirection.West));
+      Assert.AreEqual(aribitraryColour, section.GetComponentValueInDirection(eDirection.NorthWest));
     }
 
     [Test]
@@ -77,14 +77,14 @@ namespace aPC.Common.Tests.Builders
         .WithLightInDirection(eDirection.NorthWest, orange)
         .Build();
 
-      Assert.AreEqual(green, section.North);
-      Assert.AreEqual(null, section.NorthEast);
-      Assert.AreEqual(blue, section.East);
-      Assert.AreEqual(null, section.SouthEast);
-      Assert.AreEqual(null, section.South);
-      Assert.AreEqual(red, section.SouthWest);
-      Assert.AreEqual(null, section.West);
-      Assert.AreEqual(orange, section.NorthWest);
+      Assert.AreEqual(green, section.GetComponentValueInDirection(eDirection.North));
+      Assert.AreEqual(null, section.GetComponentValueInDirection(eDirection.NorthEast));
+      Assert.AreEqual(blue, section.GetComponentValueInDirection(eDirection.East));
+      Assert.AreEqual(null, section.GetComponentValueInDirection(eDirection.SouthEast));
+      Assert.AreEqual(null, section.GetComponentValueInDirection(eDirection.South));
+      Assert.AreEqual(red, section.GetComponentValueInDirection(eDirection.SouthWest));
+      Assert.AreEqual(null, section.GetComponentValueInDirection(eDirection.West));
+      Assert.AreEqual(orange, section.GetComponentValueInDirection(eDirection.NorthWest));
     }
 
     [Test]
@@ -93,41 +93,6 @@ namespace aPC.Common.Tests.Builders
       var section = new LightSectionBuilder();
 
       Assert.Throws<InvalidOperationException>(() => section.WithLightInDirection(eDirection.Center, blue));
-    }
-
-    /// <remarks>
-    /// In order to confirm the light is not added, we show that the Builder is invalid
-    /// It clearly has a fade time, so this must be from the lack of light.
-    /// </remarks>
-    [Test]
-    public void SpecifyingAPhysicalLightInANonPhysicalLocation_DoesNotUpdateLight()
-    {
-      var sectionBuilder = new LightSectionBuilder()
-        .WithLightInDirectionIfPhysical(eDirection.South, blue);
-
-      Assert.Throws<ArgumentException>(() => sectionBuilder.Build());
-    }
-
-    [Test]
-    public void SpecifyingAPhysicalLightInaNonPhysicalDirection_DoesNotOverwritePreviousData()
-    {
-      var section = new LightSectionBuilder()
-        .WithLightInDirection(eDirection.South, aribitraryColour)
-        .WithLightInDirectionIfPhysical(eDirection.South, blue)
-        .Build();
-
-      Assert.AreEqual(aribitraryColour, section.South);
-    }
-
-    [Test]
-    public void SpecifyingAPhysicalLightInAPhysicalDirection_UpdatesLight()
-    {
-      var sectionBuilder = new LightSectionBuilder()
-        .WithLightInDirectionIfPhysical(eDirection.North, aribitraryColour);
-
-      var section = sectionBuilder.Build();
-
-      Assert.AreEqual(aribitraryColour, section.North);
     }
   }
 }

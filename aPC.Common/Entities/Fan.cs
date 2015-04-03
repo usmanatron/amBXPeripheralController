@@ -2,12 +2,12 @@
 
 namespace aPC.Common.Entities
 {
-  public class Fan : IComponent
+  public class Fan : IDirectionalComponent
   {
     [XmlElement]
     public float Intensity;
 
-    public eComponentType ComponentType()
+    public override eComponentType ComponentType()
     {
       return eComponentType.Fan;
     }

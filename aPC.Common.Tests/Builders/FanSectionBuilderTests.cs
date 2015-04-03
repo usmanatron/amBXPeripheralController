@@ -34,8 +34,8 @@ namespace aPC.Common.Tests.Builders
         .WithAllFans(halfPower)
         .Build();
 
-      Assert.AreEqual(halfPower, section.East);
-      Assert.AreEqual(halfPower, section.West);
+      Assert.AreEqual(halfPower, section.GetComponentValueInDirection(eDirection.East));
+      Assert.AreEqual(halfPower, section.GetComponentValueInDirection(eDirection.West));
     }
 
     [Test]
@@ -46,8 +46,8 @@ namespace aPC.Common.Tests.Builders
         .WithFanInDirection(eDirection.West, halfPower)
         .Build();
 
-      Assert.AreEqual(fullPower, section.East);
-      Assert.AreEqual(halfPower, section.West);
+      Assert.AreEqual(fullPower, section.GetComponentValueInDirection(eDirection.East));
+      Assert.AreEqual(halfPower, section.GetComponentValueInDirection(eDirection.West));
     }
 
     [Test]
@@ -69,10 +69,10 @@ namespace aPC.Common.Tests.Builders
       {
         case eDirection.East:
         case eDirection.NorthEast:
-          return fanSection.East;
+          return (Fan)fanSection.GetComponentValueInDirection(eDirection.East);
         case eDirection.West:
         case eDirection.NorthWest:
-          return fanSection.West;
+          return (Fan)fanSection.GetComponentValueInDirection(eDirection.West);
         default:
           throw new InvalidOperationException("Unexpected Direction");
       }

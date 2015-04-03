@@ -1,4 +1,5 @@
 ﻿using aPC.Client.Disco.Generators;
+using aPC.Common;
 using aPC.Common.Client;
 using aPC.Common.Entities;
 using NUnit.Framework;
@@ -22,9 +23,9 @@ namespace aPC.Client.Disco.Tests.Generators
     {
       var section = generator.Generate();
 
-      Assert.IsNull(section.SouthEast);
-      Assert.IsNull(section.South);
-      Assert.IsNull(section.SouthWest);
+      Assert.IsNull(section.GetComponentValueInDirection(eDirection.SouthEast));
+      Assert.IsNull(section.GetComponentValueInDirection(eDirection.South));
+      Assert.IsNull(section.GetComponentValueInDirection(eDirection.SouthWest));
     }
   }
 }

@@ -61,22 +61,22 @@ namespace aPC.ServerV3.Engine
 
     #region Engine Updates
 
-    public void UpdateLight(eDirection direction, Light inputLight)
+    public void UpdateLight(Light inputLight)
     {
-      var light = lights[direction];
+      var light = lights[inputLight.Direction];
       light.Color = new amBXColor { Red = inputLight.Red, Green = inputLight.Green, Blue = inputLight.Blue };
       light.FadeTime = inputLight.FadeTime;
     }
 
-    public void UpdateFan(eDirection direction, Fan inputFan)
+    public void UpdateFan(Fan inputFan)
     {
-      var fan = fans[direction];
+      var fan = fans[inputFan.Direction];
       fan.Intensity = inputFan.Intensity;
     }
 
-    public void UpdateRumble(eDirection direction, Rumble inputRumble)
+    public void UpdateRumble(Rumble inputRumble)
     {
-      var rumble = rumbles[direction];
+      var rumble = rumbles[inputRumble.Direction];
 
       rumble.RumbleSetting = new amBXRumbleSetting
       {

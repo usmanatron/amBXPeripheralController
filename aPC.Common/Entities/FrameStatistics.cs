@@ -25,9 +25,9 @@ namespace aPC.Common.Entities
     private void ProcessFrame(Frame frame)
     {
       SceneLength += frame.Length;
-      ProcessComponent(frame.Lights);
-      ProcessComponent(frame.Fans);
-      ProcessComponent(frame.Rumbles);
+      ProcessComponent(frame.LightSection);
+      ProcessComponent(frame.FanSection);
+      ProcessComponent(frame.RumbleSection);
     }
 
     /// <remarks>

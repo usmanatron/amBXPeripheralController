@@ -5,6 +5,6 @@ namespace aPC.Common.Server.Engine
 {
   public interface IEngine : IDisposable
   {
-    void UpdateComponent(eDirection direction, IComponent component);
+    void UpdateComponent(eDirection direction, IDirectionalComponent component);
   }
 }

@@ -1,4 +1,5 @@
 ﻿using aPC.Common.Entities;
+using System;
 
 namespace aPC.Common.Builders
 {
@@ -8,10 +9,12 @@ namespace aPC.Common.Builders
   public class RumbleSectionBuilder
   {
     private RumbleSection rumbleSection;
+    private bool rumbleSpecified;
 
     public RumbleSectionBuilder()
     {
       Reset();
+      rumbleSpecified = false;
     }
 
     private void Reset()
@@ -19,17 +22,36 @@ namespace aPC.Common.Builders
       rumbleSection = new RumbleSection();
     }
 
-    public RumbleSectionBuilder WithRumble(Rumble rumble)
+    public RumbleSectionBuilder WithRumbleInDirection(eDirection direction, Rumble rumble)
     {
-      rumbleSection.Rumble = rumble;
+      if (rumbleSection.GetComponentValueInDirection(direction) != null)
+      {
+        throw new ArgumentException("Attempted to add multiple Rumbles in the same direction");
+      }
+
+      rumbleSection.Rumbles.Add(rumble);
+      rumbleSpecified = true;
       return this;
     }
 
     public RumbleSection Build()
     {
+      if (!RumbleSectionIsValid)
+      {
+        throw new ArgumentException("Incomplete FanSection built.  At least one fan and the Fade Time must be specified.");
+      }
+
       var builtRumbleSection = rumbleSection;
       Reset();
       return builtRumbleSection;
+    }
+
+    private bool RumbleSectionIsValid
+    {
+      get
+      {
+        return rumbleSpecified;
+      }
     }
   }
 }

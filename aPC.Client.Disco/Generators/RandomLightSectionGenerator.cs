@@ -2,6 +2,7 @@
 using aPC.Common.Builders;
 using aPC.Common.Entities;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace aPC.Client.Disco.Generators
@@ -22,9 +23,10 @@ namespace aPC.Client.Disco.Generators
       var fadeTime = (int)settings.FadeTime.GetScaledValue(random.NextDouble());
       var sectionBuilder = new LightSectionBuilder();
 
-      foreach (eDirection direction in Enum.GetValues(typeof(eDirection)).Cast<eDirection>())
+      var physicalDirections = new List<eDirection> { eDirection.West, eDirection.NorthWest, eDirection.North, eDirection.NorthEast, eDirection.East };
+      foreach (eDirection direction in physicalDirections)
       {
-        sectionBuilder.WithLightInDirectionIfPhysical(direction, GetRandomLight());
+        sectionBuilder.WithLightInDirection(direction, GetRandomLight());
       }
 
       return sectionBuilder.Build();

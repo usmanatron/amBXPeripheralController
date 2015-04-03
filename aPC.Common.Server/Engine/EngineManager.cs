@@ -66,7 +66,7 @@ namespace aPC.Common.Server.Engine
 
     #region Updating
 
-    public void UpdateComponent(eDirection direction, IComponent component)
+    public void UpdateComponent(eDirection direction, IDirectionalComponent component)
     {
       if (component == null)
       {

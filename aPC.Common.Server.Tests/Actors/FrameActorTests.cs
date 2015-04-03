@@ -1,5 +1,6 @@
 ﻿using aPC.Common.Builders;
 using aPC.Common.Defaults;
+using aPC.Common.Entities;
 using aPC.Common.Server.Actors;
 using aPC.Common.Server.Snapshots;
 using NUnit.Framework;
@@ -38,7 +39,7 @@ namespace aPC.Common.Server.Tests.Actors
       Assert.IsTrue(engine.Updated[eComponentType.Light]);
       Assert.IsFalse(engine.Updated[eComponentType.Fan]);
       Assert.IsFalse(engine.Updated[eComponentType.Rumble]);
-      Assert.AreEqual(DefaultLights.Green, engine.Status.Lights.North);
+      Assert.AreEqual(DefaultLights.Green, engine.Status.LightSection.GetComponentValueInDirection(eDirection.North));
     }
 
     [Test]
@@ -58,7 +59,7 @@ namespace aPC.Common.Server.Tests.Actors
       Assert.IsFalse(engine.Updated[eComponentType.Light]);
       Assert.IsTrue(engine.Updated[eComponentType.Fan]);
       Assert.IsFalse(engine.Updated[eComponentType.Rumble]);
-      Assert.AreEqual(DefaultFans.QuarterPower, engine.Status.Fans.West);
+      Assert.AreEqual(DefaultFans.QuarterPower, engine.Status.FanSection.GetComponentValueInDirection(eDirection.West));
     }
 
     [Test]
@@ -74,7 +75,7 @@ namespace aPC.Common.Server.Tests.Actors
       Assert.IsFalse(engine.Updated[eComponentType.Light]);
       Assert.IsFalse(engine.Updated[eComponentType.Fan]);
       Assert.IsTrue(engine.Updated[eComponentType.Rumble]);
-      Assert.AreEqual(DefaultRumbleSections.SoftThunder.Rumble, engine.Status.Rumbles.Rumble);
+      Assert.AreEqual(DefaultRumbleSections.SoftThunder.Rumbles.Single(), engine.Status.RumbleSection.Rumbles.Single());
     }
 
     [Test]
@@ -96,7 +97,7 @@ namespace aPC.Common.Server.Tests.Actors
         Assert.IsTrue(engine.Updated[eComponentType.Light]);
         Assert.IsFalse(engine.Updated[eComponentType.Fan]);
         Assert.IsFalse(engine.Updated[eComponentType.Rumble]);
-        Assert.AreEqual(DefaultLights.Green, engine.Status.Lights.North);
+        Assert.AreEqual(DefaultLights.Green, engine.Status.LightSection.GetComponentValueInDirection(eDirection.North));
       }
     }
 

@@ -30,11 +30,11 @@ namespace aPC.Common.Server.SceneHandlers
       switch (componentType)
       {
         case eComponentType.Light:
-          return frame.Lights;
+          return frame.LightSection;
         case eComponentType.Fan:
-          return frame.Fans;
+          return frame.FanSection;
         case eComponentType.Rumble:
-          return frame.Rumbles;
+          return frame.RumbleSection;
         default:
           throw new InvalidOperationException("Unexpected Component Type!");
       }

@@ -2,7 +2,7 @@
 
 namespace aPC.Common.Entities
 {
-  public class Rumble : IComponent
+  public class Rumble : IDirectionalComponent
   {
     [XmlElement]
     public eRumbleType RumbleType;
@@ -13,7 +13,7 @@ namespace aPC.Common.Entities
     [XmlElement]
     public float Speed;
 
-    public eComponentType ComponentType()
+    public override eComponentType ComponentType()
     {
       return eComponentType.Rumble;
     }

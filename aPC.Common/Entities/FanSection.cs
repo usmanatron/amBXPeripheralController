@@ -1,19 +1,20 @@
-﻿using System.Xml.Serialization;
+﻿using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace aPC.Common.Entities
 {
   public class FanSection : IComponentSection
   {
-    [XmlElement]
-    [Direction(eDirection.East)]
-    [Direction(eDirection.NorthEast)]
-    [PhysicalComponent]
-    public Fan East;
+    [XmlArray]
+    [XmlArrayItem("Fan")]
+    public List<Fan> Fans;
 
-    [XmlElement]
-    [Direction(eDirection.West)]
-    [Direction(eDirection.NorthWest)]
-    [PhysicalComponent]
-    public Fan West;
+    public IEnumerable<IDirectionalComponent> GetComponents()
+    {
+      foreach (var fan in Fans)
+      {
+        yield return (IDirectionalComponent)fan;
+      }
+    }
   }
 }

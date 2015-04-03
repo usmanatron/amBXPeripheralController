@@ -1,6 +1,7 @@
 ﻿using aPC.Chromesthesia.Server;
 using aPC.Chromesthesia.Sound;
 using aPC.Chromesthesia.Sound.Entities;
+using aPC.Common;
 using aPC.Common.Entities;
 using NAudio.Wave;
 using System;
@@ -44,8 +45,8 @@ namespace aPC.Chromesthesia
 
     private bool SceneIsEmpty(amBXScene scene)
     {
-      return LightIsEmpty(scene.Frames[0].Lights.East) &&
-             LightIsEmpty(scene.Frames[0].Lights.West);
+      return LightIsEmpty((Light)scene.Frames[0].LightSection.GetComponentValueInDirection(eDirection.East)) &&
+             LightIsEmpty((Light)scene.Frames[0].LightSection.GetComponentValueInDirection(eDirection.West));
     }
 
     private bool LightIsEmpty(Light light)

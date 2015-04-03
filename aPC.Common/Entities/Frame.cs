@@ -13,12 +13,12 @@ namespace aPC.Common.Entities
     public bool IsRepeated;
 
     [XmlElement]
-    public LightSection Lights;
+    public LightSection LightSection;
 
     [XmlElement]
-    public FanSection Fans;
+    public FanSection FanSection;
 
     [XmlElement]
-    public RumbleSection Rumbles;
+    public RumbleSection RumbleSection;
   }
 }

@@ -1,6 +1,8 @@
 ﻿using aPC.Client.Morse.Codes;
+using aPC.Common;
 using aPC.Common.Builders;
 using aPC.Common.Defaults;
+using aPC.Common.Entities;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,13 +45,13 @@ namespace aPC.Client.Morse.Tests
         var colour = blocks[i].Enabled ? settings.Colour : DefaultLights.Off;
         var rumble = blocks[i].Enabled ? settings.Rumble : DefaultRumbles.Off;
 
-        Assert.IsNull(frames[i].Fans);
-        Assert.IsNotNull(frames[i].Lights);
-        Assert.IsNotNull(frames[i].Rumbles);
+        Assert.IsNull(frames[i].FanSection);
+        Assert.IsNotNull(frames[i].LightSection);
+        Assert.IsNotNull(frames[i].RumbleSection);
 
         Assert.AreEqual(blocks[i].Length * settings.UnitLength, frames[i].Length);
-        Assert.AreEqual(colour, frames[i].Lights.North);
-        Assert.AreEqual(rumble, frames[i].Rumbles.Rumble);
+        Assert.AreEqual(colour, frames[i].LightSection.GetComponentValueInDirection(eDirection.North));
+        Assert.AreEqual(rumble, frames[i].RumbleSection.Rumbles.Single());
       }
     }
 
@@ -65,13 +67,13 @@ namespace aPC.Client.Morse.Tests
 
       Assert.AreEqual(1, frames.Count);
       var frame = frames.Single();
-      Assert.IsNull(frame.Fans);
-      Assert.IsNotNull(frame.Lights);
-      Assert.IsNotNull(frame.Rumbles);
+      Assert.IsNull(frame.FanSection);
+      Assert.IsNotNull(frame.LightSection);
+      Assert.IsNotNull(frame.RumbleSection);
 
       Assert.AreEqual(block.Length * settings.UnitLength, frame.Length);
-      Assert.AreEqual(colour, frame.Lights.North);
-      Assert.AreEqual(rumble, frame.Rumbles.Rumble);
+      Assert.AreEqual(colour, frame.LightSection.GetComponentValueInDirection(eDirection.North));
+      Assert.AreEqual(rumble, frame.RumbleSection.Rumbles.Single());
     }
 
     private IEnumerable<IMorseBlock> IMorseBlocks

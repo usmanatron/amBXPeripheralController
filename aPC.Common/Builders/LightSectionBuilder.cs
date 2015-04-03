@@ -35,16 +35,12 @@ namespace aPC.Common.Builders
 
     public LightSectionBuilder WithLightInDirection(eDirection direction, Light light)
     {
-      if (!LightIsValid(light))
+      if (lightSection.GetComponentValueInDirection(direction) != null)
       {
-        throw new ArgumentException("Given light is not valid");
+        throw new ArgumentException("Attempted to add multiple lights in the same direction");
       }
 
-      var lightExists = lightSection.SetComponentValueInDirection(light, direction);
-      if (!lightExists)
-      {
-        throw new InvalidOperationException("Attempted to update a light which does not exist");
-      }
+      lightSection.Lights.Add(light);
       lightSpecified = true;
       return this;
     }
@@ -52,16 +48,6 @@ namespace aPC.Common.Builders
     private bool LightIsValid(Light light)
     {
       return light.FadeTime > 0;
-    }
-
-    public LightSectionBuilder WithLightInDirectionIfPhysical(eDirection direction, Light light)
-    {
-      var lightExists = lightSection.SetPhysicalComponentValueInDirection(light, direction);
-      if (lightExists)
-      {
-        lightSpecified = true;
-      }
-      return this;
     }
 
     public LightSection Build()

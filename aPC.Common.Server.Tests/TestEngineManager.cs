@@ -13,9 +13,9 @@ namespace aPC.Common.Server.Tests
     {
       Status = new Frame()
       {
-        Lights = new LightSection(),
-        Fans = new FanSection(),
-        Rumbles = new RumbleSection()
+        LightSection = new LightSection(),
+        FanSection = new FanSection(),
+        RumbleSection = new RumbleSection()
       };
       Updated = new Dictionary<eComponentType, bool>()
         {
@@ -23,7 +23,7 @@ namespace aPC.Common.Server.Tests
         };
     }
 
-    public void UpdateComponent(eDirection direction, IComponent component)
+    public void UpdateComponent(eDirection direction, IDirectionalComponent component)
     {
       if (component == null)
       {
@@ -47,19 +47,19 @@ namespace aPC.Common.Server.Tests
     private void UpdateLight(eDirection direction, Light light)
     {
       Updated[eComponentType.Light] = true;
-      Status.Lights.SetComponentValueInDirection(light, direction);
+      Status.LightSection.Lights.Add(light);
     }
 
     private void UpdateFan(eDirection direction, Fan fan)
     {
       Updated[eComponentType.Fan] = true;
-      Status.Fans.SetComponentValueInDirection(fan, direction);
+      Status.FanSection.Fans.Add(fan);
     }
 
     private void UpdateRumble(eDirection direction, Rumble rumble)
     {
       Updated[eComponentType.Rumble] = true;
-      Status.Rumbles.SetComponentValueInDirection(rumble, direction);
+      Status.RumbleSection.Rumbles.Add(rumble);
     }
 
     // Nothing to dispose.

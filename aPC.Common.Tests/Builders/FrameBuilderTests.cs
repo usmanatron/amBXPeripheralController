@@ -89,9 +89,9 @@ namespace aPC.Common.Tests.Builders
       .Build()
       .Single();
 
-      Assert.AreEqual(lightSection, frame.Lights);
-      Assert.AreEqual(fanSection, frame.Fans);
-      Assert.AreEqual(rumbleSection, frame.Rumbles);
+      Assert.AreEqual(lightSection, frame.LightSection);
+      Assert.AreEqual(fanSection, frame.FanSection);
+      Assert.AreEqual(rumbleSection, frame.RumbleSection);
     }
 
     [Test]

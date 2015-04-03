@@ -2,7 +2,7 @@
 
 namespace aPC.Common.Entities
 {
-  public class Light : IComponent
+  public class Light : IDirectionalComponent
   {
     [XmlElement]
     public int FadeTime;
@@ -16,7 +16,7 @@ namespace aPC.Common.Entities
     [XmlElement]
     public float Blue;
 
-    public eComponentType ComponentType()
+    public override eComponentType ComponentType()
     {
       return eComponentType.Light;
     }

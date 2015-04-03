@@ -30,7 +30,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
 
       Assert.AreEqual(expectedFrame.Length, snapshot.Frame.Length);
       Assert.AreEqual(expectedFrame.IsRepeated, snapshot.Frame.IsRepeated);
-      Assert.AreEqual(expectedFrame.Lights, snapshot.Frame.Lights);
+      Assert.AreEqual(expectedFrame.LightSection, snapshot.Frame.LightSection);
     }
 
     [Test]
@@ -44,7 +44,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
 
       Assert.AreEqual(expectedFrame.Length, snapshot.Frame.Length);
       Assert.AreEqual(expectedFrame.IsRepeated, snapshot.Frame.IsRepeated);
-      Assert.AreEqual(expectedFrame.Lights, snapshot.Frame.Lights);
+      Assert.AreEqual(expectedFrame.LightSection, snapshot.Frame.LightSection);
     }
   }
 }

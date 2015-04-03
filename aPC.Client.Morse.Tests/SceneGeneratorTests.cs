@@ -47,7 +47,7 @@ namespace aPC.Client.Morse.Tests
     {
       var generatedScene = sceneGenerator.Generate(new Settings("Test"));
 
-      foreach (var light in generatedScene.Frames.Select(frame => frame.Lights))
+      foreach (var light in generatedScene.Frames.Select(frame => frame.LightSection))
       {
         foreach (eDirection direction in ApplicableLightDirections)
         {
@@ -61,7 +61,7 @@ namespace aPC.Client.Morse.Tests
     {
       var generatedScene = sceneGenerator.Generate(new Settings("Test"));
 
-      foreach (var rumble in generatedScene.Frames.Select(frame => frame.Rumbles))
+      foreach (var rumble in generatedScene.Frames.Select(frame => frame.RumbleSection))
       {
         Assert.IsNull(rumble.GetComponentValueInDirection(eDirection.Center));
       }
@@ -73,7 +73,7 @@ namespace aPC.Client.Morse.Tests
       var lWhiteLight = DefaultLights.White;
       var generatedScene = sceneGenerator.Generate(new Settings("T"));
 
-      foreach (var light in generatedScene.Frames.Select(frame => frame.Lights))
+      foreach (var light in generatedScene.Frames.Select(frame => frame.LightSection))
       {
         foreach (eDirection direction in ApplicableLightDirections)
         {
@@ -131,7 +131,7 @@ namespace aPC.Client.Morse.Tests
       settings.RumblesEnabled = true;
       var generatedScene = sceneGenerator.Generate(settings);
 
-      foreach (var rumble in generatedScene.Frames.Select(frame => frame.Rumbles))
+      foreach (var rumble in generatedScene.Frames.Select(frame => frame.RumbleSection))
       {
         Assert.IsNotNull(rumble.GetComponentValueInDirection(eDirection.Center));
       }
@@ -144,7 +144,7 @@ namespace aPC.Client.Morse.Tests
       settings.Colour = DefaultLights.Red;
       var generatedScene = sceneGenerator.Generate(settings);
 
-      foreach (var light in generatedScene.Frames.Select(frame => frame.Lights))
+      foreach (var light in generatedScene.Frames.Select(frame => frame.LightSection))
       {
         foreach (eDirection direction in ApplicableLightDirections)
         {
@@ -176,7 +176,7 @@ namespace aPC.Client.Morse.Tests
       var scene = generatedScene.Frames.Last();
       var expectedBlock = new MessageEndMarker();
 
-      Assert.AreEqual(expectedBlock.Enabled, scene.Lights.North == settings.Colour);
+      Assert.AreEqual(expectedBlock.Enabled, scene.LightSection.GetComponentValueInDirection(eDirection.North) == settings.Colour);
       Assert.AreEqual(expectedBlock.Length * settings.UnitLength, scene.Length);
     }
 
@@ -189,7 +189,7 @@ namespace aPC.Client.Morse.Tests
       var scene = generatedScene.Frames.Last();
       var expectedBlock = new MessageEndMarker();
 
-      Assert.AreNotEqual(expectedBlock.Enabled, scene.Lights.North == settings.Colour);
+      Assert.AreNotEqual(expectedBlock.Enabled, scene.LightSection.GetComponentValueInDirection(eDirection.North) == settings.Colour);
       Assert.AreNotEqual(expectedBlock.Length * settings.UnitLength, scene.Length);
     }
 
@@ -206,8 +206,8 @@ namespace aPC.Client.Morse.Tests
       Assert.AreEqual(1, generatedScene.Frames.Count);
       var frame = generatedScene.Frames.Single();
 
-      Assert.IsNotNull(frame.Lights);
-      Assert.AreEqual(settings.Colour, frame.Lights.North); // Sufficient to just test North
+      Assert.IsNotNull(frame.LightSection);
+      Assert.AreEqual(settings.Colour, frame.LightSection.GetComponentValueInDirection(eDirection.North)); // Sufficient to just test North
       Assert.AreEqual(new Dash().Length * settings.UnitLength, frame.Length);
     }
 
@@ -225,11 +225,11 @@ namespace aPC.Client.Morse.Tests
       var firstExpectedFrame = new Dash();
       var secondExpectedFrame = new MessageEndMarker();
 
-      Assert.IsNotNull(generatedScene.Frames[0].Lights);
-      Assert.AreEqual(settings.Colour, generatedScene.Frames[0].Lights.North); // Sufficient to just test North
+      Assert.IsNotNull(generatedScene.Frames[0].LightSection);
+      Assert.AreEqual(settings.Colour, generatedScene.Frames[0].LightSection.GetComponentValueInDirection(eDirection.North)); // Sufficient to just test North
       Assert.AreEqual(firstExpectedFrame.Length * settings.UnitLength, generatedScene.Frames[0].Length);
-      Assert.IsNotNull(generatedScene.Frames[1].Lights);
-      Assert.AreEqual(DefaultLights.Off, generatedScene.Frames[1].Lights.North);
+      Assert.IsNotNull(generatedScene.Frames[1].LightSection);
+      Assert.AreEqual(DefaultLights.Off, generatedScene.Frames[1].LightSection.GetComponentValueInDirection(eDirection.North));
       Assert.AreEqual(secondExpectedFrame.Length * settings.UnitLength, generatedScene.Frames[1].Length);
     }
 

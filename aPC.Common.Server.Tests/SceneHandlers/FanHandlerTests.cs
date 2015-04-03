@@ -45,7 +45,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
       var expectedFrame = standardScene.Frames[0];
 
       Assert.IsFalse(snapshot.IsComponentNull);
-      Assert.AreEqual(expectedFrame.Fans.East, snapshot.Item);
+      Assert.AreEqual(expectedFrame.FanSection.GetComponentValueInDirection(eDirection.East), snapshot.Item);
       Assert.AreEqual(expectedFrame.Length, snapshot.Length);
     }
 
@@ -74,7 +74,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
       Assert.AreEqual(expectedFrame.Length, snapshot.Length);
       if (!snapshot.IsComponentNull)
       {
-        Assert.AreEqual(expectedFrame.Fans.GetComponentValueInDirection(direction), snapshot.Item);
+        Assert.AreEqual(expectedFrame.FanSection.GetComponentValueInDirection(direction), snapshot.Item);
       }
     }
   }

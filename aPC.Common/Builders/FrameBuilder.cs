@@ -61,9 +61,9 @@ namespace aPC.Common.Builders
     {
       get
       {
-        return currentFrame.Lights != null ||
-               currentFrame.Fans != null ||
-               currentFrame.Rumbles != null;
+        return currentFrame.LightSection != null ||
+               currentFrame.FanSection != null ||
+               currentFrame.RumbleSection != null;
       }
     }
 
@@ -88,19 +88,19 @@ namespace aPC.Common.Builders
 
     public FrameBuilder WithLightSection(LightSection lightSection)
     {
-      currentFrame.Lights = lightSection;
+      currentFrame.LightSection = lightSection;
       return this;
     }
 
     public FrameBuilder WithFanSection(FanSection fanSection)
     {
-      currentFrame.Fans = fanSection;
+      currentFrame.FanSection = fanSection;
       return this;
     }
 
     public FrameBuilder WithRumbleSection(RumbleSection rumbleSection)
     {
-      currentFrame.Rumbles = rumbleSection;
+      currentFrame.RumbleSection = rumbleSection;
       return this;
     }
 

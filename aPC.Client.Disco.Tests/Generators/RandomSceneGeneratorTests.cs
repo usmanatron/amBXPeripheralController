@@ -29,8 +29,8 @@ namespace aPC.Client.Disco.Tests.Generators
     {
       var scene = generator.Generate();
 
-      Assert.IsNull(scene.Frames[0].Fans);
-      Assert.IsNull(scene.Frames[0].Rumbles);
+      Assert.IsNull(scene.Frames[0].FanSection);
+      Assert.IsNull(scene.Frames[0].RumbleSection);
     }
   }
 }

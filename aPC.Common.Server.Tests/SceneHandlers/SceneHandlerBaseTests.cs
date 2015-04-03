@@ -107,7 +107,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
 
       Assert.AreEqual(expectedFrame.Length, frame.Length);
       Assert.AreEqual(expectedFrame.IsRepeated, frame.IsRepeated);
-      Assert.AreEqual(expectedFrame.Lights, frame.Lights);
+      Assert.AreEqual(expectedFrame.LightSection, frame.LightSection);
     }
 
     [Test]
@@ -121,7 +121,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
 
       Assert.AreEqual(expectedFrame.Length, frame.Length);
       Assert.AreEqual(expectedFrame.IsRepeated, frame.IsRepeated);
-      Assert.AreEqual(expectedFrame.Lights, frame.Lights);
+      Assert.AreEqual(expectedFrame.LightSection, frame.LightSection);
     }
 
     [Test]
@@ -138,7 +138,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
 
       Assert.AreEqual(expectedFrame.Length, frame.Length);
       Assert.AreEqual(expectedFrame.IsRepeated, frame.IsRepeated);
-      Assert.AreEqual(expectedFrame.Lights, frame.Lights);
+      Assert.AreEqual(expectedFrame.LightSection, frame.LightSection);
     }
 
     [Test]
@@ -153,7 +153,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
 
       Assert.AreEqual(expectedFrame.Length, frame.Length);
       Assert.AreEqual(expectedFrame.IsRepeated, frame.IsRepeated);
-      Assert.AreEqual(expectedFrame.Lights, frame.Lights);
+      Assert.AreEqual(expectedFrame.LightSection, frame.LightSection);
     }
 
     [Test]
@@ -179,7 +179,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
       Assert.IsFalse(handler.IsEnabled);
       Assert.AreEqual(default(int), frame.Length);
       Assert.AreEqual(default(bool), frame.IsRepeated);
-      Assert.IsNull(frame.Lights);
+      Assert.IsNull(frame.LightSection);
     }
 
     [Test]
@@ -191,7 +191,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
 
       // Confirm it's actually updated the Scene Handler
       var eventFrame = handler.NextFrame;
-      Assert.AreEqual(eventFrame.Lights, purpleEvent.Frames.Single().Lights);
+      Assert.AreEqual(eventFrame.LightSection, purpleEvent.Frames.Single().LightSection);
 
       handler.AdvanceScene();
 
@@ -201,7 +201,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
 
       Assert.AreEqual(expectedFrame.Length, previousFrame.Length);
       Assert.AreEqual(expectedFrame.IsRepeated, previousFrame.IsRepeated);
-      Assert.AreEqual(expectedFrame.Lights, previousFrame.Lights);
+      Assert.AreEqual(expectedFrame.LightSection, previousFrame.LightSection);
     }
 
     [Test]
@@ -213,7 +213,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
 
       // Confirm the current Scene is still the event
       var firstFrame = handler.NextFrame;
-      Assert.AreEqual(firstFrame.Lights, blueEvent.Frames.Single().Lights);
+      Assert.AreEqual(firstFrame.LightSection, blueEvent.Frames.Single().LightSection);
 
       handler.AdvanceScene();
 
@@ -223,7 +223,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
 
       Assert.AreEqual(expectedFrame.Length, previousFrame.Length);
       Assert.AreEqual(expectedFrame.IsRepeated, previousFrame.IsRepeated);
-      Assert.AreEqual(expectedFrame.Lights, previousFrame.Lights);
+      Assert.AreEqual(expectedFrame.LightSection, previousFrame.LightSection);
     }
   }
 }

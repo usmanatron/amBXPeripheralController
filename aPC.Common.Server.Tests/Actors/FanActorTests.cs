@@ -27,7 +27,7 @@ namespace aPC.Common.Server.Tests.Actors
 
       actor.ActNextFrame(eDirection.East, snapshot);
 
-      Assert.IsNull(engine.Status.Fans.East);
+      Assert.IsNull(engine.Status.FanSection.GetComponentValueInDirection(eDirection.East));
     }
 
     [Test]
@@ -41,11 +41,11 @@ namespace aPC.Common.Server.Tests.Actors
       {
         if (direction == eDirection.West || direction == eDirection.NorthWest)
         {
-          Assert.AreEqual(DefaultFans.FullPower, engine.Status.Fans.GetComponentValueInDirection(direction));
+          Assert.AreEqual(DefaultFans.FullPower, engine.Status.FanSection.GetComponentValueInDirection(direction));
         }
         else
         {
-          Assert.IsNull(engine.Status.Fans.GetComponentValueInDirection(direction));
+          Assert.IsNull(engine.Status.FanSection.GetComponentValueInDirection(direction));
         }
       }
     }

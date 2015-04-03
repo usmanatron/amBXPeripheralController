@@ -28,11 +28,12 @@ namespace aPC.Common.Builders
 
     public FanSectionBuilder WithFanInDirection(eDirection direction, Fan fan)
     {
-      var fanExists = fanSection.SetComponentValueInDirection(fan, direction);
-      if (!fanExists)
+      if (fanSection.GetComponentValueInDirection(direction) != null)
       {
-        throw new InvalidOperationException("Attempted to update a fan which does not exist");
+        throw new ArgumentException("Attempted to add multiple fans in the same direction");
       }
+
+      fanSection.Fans.Add(fan);
       fanSpecified = true;
       return this;
     }

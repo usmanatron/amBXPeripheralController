@@ -1,21 +1,20 @@
-﻿using System.Xml.Serialization;
+﻿using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace aPC.Common.Entities
 {
   public class RumbleSection : IComponentSection
   {
-    [XmlElement]
-    [PhysicalComponent]
-    [Direction(eDirection.Everywhere)]
-    [Direction(eDirection.North)]
-    [Direction(eDirection.NorthEast)]
-    [Direction(eDirection.East)]
-    [Direction(eDirection.SouthEast)]
-    [Direction(eDirection.South)]
-    [Direction(eDirection.SouthWest)]
-    [Direction(eDirection.West)]
-    [Direction(eDirection.NorthWest)]
-    [Direction(eDirection.Center)]
-    public Rumble Rumble;
+    [XmlArray]
+    [XmlArrayItem("Rumble")]
+    public List<Rumble> Rumbles;
+
+    public IEnumerable<IDirectionalComponent> GetComponents()
+    {
+      foreach (var rumble in Rumbles)
+      {
+        yield return (IDirectionalComponent)rumble;
+      }
+    }
   }
 }

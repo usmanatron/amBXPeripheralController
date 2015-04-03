@@ -4,6 +4,7 @@ using aPC.Common.Entities;
 using aPC.Common.Server.SceneHandlers;
 using NUnit.Framework;
 using System;
+using System.Linq;
 
 namespace aPC.Common.Server.Tests.SceneHandlers
 {
@@ -46,7 +47,7 @@ namespace aPC.Common.Server.Tests.SceneHandlers
       var expectedFrame = standardScene.Frames[0];
 
       Assert.IsFalse(snapshot.IsComponentNull);
-      Assert.AreEqual(expectedFrame.Rumbles.Rumble, snapshot.Item);
+      Assert.AreEqual(expectedFrame.RumbleSection.Rumbles.Single(), snapshot.Item);
       Assert.AreEqual(expectedFrame.Length, snapshot.Length);
     }
 

@@ -1,4 +1,5 @@
-﻿using aPC.Common;
+﻿using Akka.Actor;
+using aPC.Common;
 using aPC.Common.Entities;
 using System;
 using System.Threading;
@@ -14,18 +15,18 @@ namespace aPC.ServerV3.Engine
       this.ambxEngineWrapper = ambxEngineWrapper;
     }
 
-    public void UpdateComponent(IComponent component, eDirection direction)
+    public void UpdateComponent(IDirectionalComponent component)
     {
       switch (component.ComponentType())
       {
         case eComponentType.Light:
-          ThreadPool.QueueUserWorkItem(_ => ambxEngineWrapper.UpdateLight(direction, (Light)component));
+          ThreadPool.QueueUserWorkItem(_ => ambxEngineWrapper.UpdateLight((Light)component));
           break;
         case eComponentType.Fan:
-          ThreadPool.QueueUserWorkItem(_ => ambxEngineWrapper.UpdateFan(direction, (Fan)component));
+          ThreadPool.QueueUserWorkItem(_ => ambxEngineWrapper.UpdateFan((Fan)component));
           break;
         case eComponentType.Rumble:
-          ThreadPool.QueueUserWorkItem(_ => ambxEngineWrapper.UpdateRumble(direction, (Rumble)component));
+          ThreadPool.QueueUserWorkItem(_ => ambxEngineWrapper.UpdateRumble((Rumble)component));
           break;
         default:
           throw new ArgumentException("Unexpected Component Type");

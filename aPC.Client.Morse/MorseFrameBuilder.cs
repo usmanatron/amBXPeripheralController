@@ -1,4 +1,5 @@
 ﻿using aPC.Client.Morse.Codes;
+using aPC.Common;
 using aPC.Common.Builders;
 using aPC.Common.Defaults;
 using aPC.Common.Entities;
@@ -66,7 +67,7 @@ namespace aPC.Client.Morse
         ? enabledRumble
         : DefaultRumbles.Off;
 
-      return rumbleSectionBuilder.WithRumble(rumble)
+      return rumbleSectionBuilder.WithRumbleInDirection(eDirection.Center, rumble)
         .Build();
     }
   }
