@@ -23,7 +23,7 @@ namespace aPC.Common.Server.Tests
         };
     }
 
-    public void UpdateComponent(eDirection direction, DirectionalComponent component)
+    public void UpdateComponent(DirectionalComponent component)
     {
       if (component == null)
       {
@@ -33,30 +33,30 @@ namespace aPC.Common.Server.Tests
       switch (component.ComponentType())
       {
         case eComponentType.Light:
-          UpdateLight(direction, (Light)component);
+          UpdateLight((Light)component);
           break;
         case eComponentType.Fan:
-          UpdateFan(direction, (Fan)component);
+          UpdateFan((Fan)component);
           break;
         case eComponentType.Rumble:
-          UpdateRumble(direction, (Rumble)component);
+          UpdateRumble((Rumble)component);
           break;
       }
     }
 
-    private void UpdateLight(eDirection direction, Light light)
+    private void UpdateLight(Light light)
     {
       Updated[eComponentType.Light] = true;
       Status.LightSection.Lights.Add(light);
     }
 
-    private void UpdateFan(eDirection direction, Fan fan)
+    private void UpdateFan(Fan fan)
     {
       Updated[eComponentType.Fan] = true;
       Status.FanSection.Fans.Add(fan);
     }
 
-    private void UpdateRumble(eDirection direction, Rumble rumble)
+    private void UpdateRumble(Rumble rumble)
     {
       Updated[eComponentType.Rumble] = true;
       Status.RumbleSection.Rumbles.Add(rumble);

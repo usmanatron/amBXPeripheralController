@@ -34,7 +34,7 @@ namespace aPC.Common.Server.Tests.Actors
         .Build()
         .Single();
 
-      actor.ActNextFrame(eDirection.East, new FrameSnapshot(frame, 100));
+      actor.ActNextFrame(new FrameSnapshot(frame, 100));
 
       Assert.IsTrue(engine.Updated[eComponentType.Light]);
       Assert.IsFalse(engine.Updated[eComponentType.Fan]);
@@ -54,7 +54,7 @@ namespace aPC.Common.Server.Tests.Actors
         .Build()
         .Single();
 
-      actor.ActNextFrame(eDirection.East, new FrameSnapshot(frame, 100));
+      actor.ActNextFrame(new FrameSnapshot(frame, 100));
 
       Assert.IsFalse(engine.Updated[eComponentType.Light]);
       Assert.IsTrue(engine.Updated[eComponentType.Fan]);
@@ -70,7 +70,7 @@ namespace aPC.Common.Server.Tests.Actors
         .Build()
         .Single();
 
-      actor.ActNextFrame(eDirection.Center, new FrameSnapshot(frame, 100));
+      actor.ActNextFrame(new FrameSnapshot(frame, 100));
 
       Assert.IsFalse(engine.Updated[eComponentType.Light]);
       Assert.IsFalse(engine.Updated[eComponentType.Fan]);
@@ -92,7 +92,7 @@ namespace aPC.Common.Server.Tests.Actors
 
       foreach (eDirection direction in Enum.GetValues(typeof(eDirection)))
       {
-        actor.ActNextFrame(direction, new FrameSnapshot(frame, 100));
+        actor.ActNextFrame(new FrameSnapshot(frame, 100));
 
         Assert.IsTrue(engine.Updated[eComponentType.Light]);
         Assert.IsFalse(engine.Updated[eComponentType.Fan]);

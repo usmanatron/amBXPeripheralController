@@ -14,7 +14,7 @@ namespace aPC.Common.Server.Actors
       this.engine = engine;
     }
 
-    public void ActNextFrame(eDirection direction, FrameSnapshot snapshot)
+    public void ActNextFrame(FrameSnapshot snapshot)
     {
       if (snapshot.Frame.LightSection != null)
       {
@@ -34,25 +34,25 @@ namespace aPC.Common.Server.Actors
 
     private void UpdateLights(LightSection lights)
     {
-      engine.UpdateComponent(eDirection.North, lights.GetComponentValueInDirection(eDirection.North));
-      engine.UpdateComponent(eDirection.NorthEast, lights.GetComponentValueInDirection(eDirection.NorthEast));
-      engine.UpdateComponent(eDirection.East, lights.GetComponentValueInDirection(eDirection.East));
-      engine.UpdateComponent(eDirection.SouthEast, lights.GetComponentValueInDirection(eDirection.SouthEast));
-      engine.UpdateComponent(eDirection.South, lights.GetComponentValueInDirection(eDirection.South));
-      engine.UpdateComponent(eDirection.SouthWest, lights.GetComponentValueInDirection(eDirection.SouthWest));
-      engine.UpdateComponent(eDirection.West, lights.GetComponentValueInDirection(eDirection.West));
-      engine.UpdateComponent(eDirection.NorthWest, lights.GetComponentValueInDirection(eDirection.NorthWest));
+      engine.UpdateComponent(lights.GetComponentValueInDirection(eDirection.North));
+      engine.UpdateComponent(lights.GetComponentValueInDirection(eDirection.NorthEast));
+      engine.UpdateComponent(lights.GetComponentValueInDirection(eDirection.East));
+      engine.UpdateComponent(lights.GetComponentValueInDirection(eDirection.SouthEast));
+      engine.UpdateComponent(lights.GetComponentValueInDirection(eDirection.South));
+      engine.UpdateComponent(lights.GetComponentValueInDirection(eDirection.SouthWest));
+      engine.UpdateComponent(lights.GetComponentValueInDirection(eDirection.West));
+      engine.UpdateComponent(lights.GetComponentValueInDirection(eDirection.NorthWest));
     }
 
     private void UpdateFans(FanSection fans)
     {
-      engine.UpdateComponent(eDirection.East, fans.GetComponentValueInDirection(eDirection.East));
-      engine.UpdateComponent(eDirection.West, fans.GetComponentValueInDirection(eDirection.West));
+      engine.UpdateComponent(fans.GetComponentValueInDirection(eDirection.East));
+      engine.UpdateComponent(fans.GetComponentValueInDirection(eDirection.West));
     }
 
     private void UpdateRumbles(RumbleSection rumble)
     {
-      engine.UpdateComponent(eDirection.Center, rumble.Rumbles.Single());
+      engine.UpdateComponent(rumble.Rumbles.Single());
     }
   }
 }

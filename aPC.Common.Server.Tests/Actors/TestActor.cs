@@ -11,7 +11,7 @@ namespace aPC.Common.Server.Tests.Actors
       TimesInvoked = 0;
     }
 
-    public void ActNextFrame(eDirection direction, TestSnapshot snapshot)
+    public void ActNextFrame(TestSnapshot snapshot)
     {
       TimesInvoked++;
     }

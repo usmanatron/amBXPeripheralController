@@ -15,11 +15,11 @@ namespace aPC.Common.Server.Actors
       this.engine = engine;
     }
 
-    public void ActNextFrame(eDirection direction, ComponentSnapshot snapshot)
+    public void ActNextFrame(ComponentSnapshot snapshot)
     {
       if (!snapshot.IsComponentNull)
       {
-        engine.UpdateComponent(direction, snapshot.Item);
+        engine.UpdateComponent(snapshot.Item);
       }
     }
   }

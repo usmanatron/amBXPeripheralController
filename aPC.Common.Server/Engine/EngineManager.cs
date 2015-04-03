@@ -66,14 +66,14 @@ namespace aPC.Common.Server.Engine
 
     #region Updating
 
-    public void UpdateComponent(eDirection direction, DirectionalComponent component)
+    public void UpdateComponent(DirectionalComponent component)
     {
       if (component == null)
       {
         return;
       }
 
-      var convertedDirection = ConversionHelpers.GetDirection(direction);
+      var convertedDirection = ConversionHelpers.GetDirection(component.Direction);
       switch (component.ComponentType())
       {
         case eComponentType.Light:

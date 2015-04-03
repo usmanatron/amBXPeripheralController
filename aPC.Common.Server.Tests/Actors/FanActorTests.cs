@@ -25,7 +25,7 @@ namespace aPC.Common.Server.Tests.Actors
     {
       var snapshot = new ComponentSnapshot(1000);
 
-      actor.ActNextFrame(eDirection.East, snapshot);
+      actor.ActNextFrame(snapshot);
 
       Assert.IsNull(engine.Status.FanSection.GetComponentValueInDirection(eDirection.East));
     }
@@ -37,7 +37,7 @@ namespace aPC.Common.Server.Tests.Actors
       fan.Direction = eDirection.West;
       var snapshot = new ComponentSnapshot(fan, 1000);
 
-      actor.ActNextFrame(eDirection.West, snapshot);
+      actor.ActNextFrame(snapshot);
 
       foreach (eDirection direction in Enum.GetValues(typeof(eDirection)))
       {

@@ -64,7 +64,7 @@ namespace aPC.Common.Server.Conductors
           throw new InvalidOperationException("An error occured when retrieving the next snapshot");
         }
 
-        actor.ActNextFrame(Direction, snapshot);
+        actor.ActNextFrame(snapshot);
         WaitforInterval(snapshot.Length);
         handler.AdvanceScene();
       }

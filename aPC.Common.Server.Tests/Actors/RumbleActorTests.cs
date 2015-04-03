@@ -25,7 +25,7 @@ namespace aPC.Common.Server.Tests.Actors
     {
       var snapshot = new ComponentSnapshot(1000);
 
-      actor.ActNextFrame(eDirection.Center, snapshot);
+      actor.ActNextFrame(snapshot);
 
       CollectionAssert.IsEmpty(engine.Status.RumbleSection.Rumbles);
     }
@@ -35,7 +35,7 @@ namespace aPC.Common.Server.Tests.Actors
     {
       var snapshot = new ComponentSnapshot(DefaultRumbleSections.Boing.Rumbles.Single(), 1000);
 
-      actor.ActNextFrame(eDirection.Center, snapshot);
+      actor.ActNextFrame(snapshot);
 
       Assert.AreEqual(DefaultRumbleSections.Boing.Rumbles.Single(), engine.Status.RumbleSection.Rumbles.Single());
     }
