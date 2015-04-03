@@ -62,7 +62,6 @@
     <Compile Include="Communication\NotificationServiceTests.cs" />
     <Compile Include="DiscoTaskTests.cs" />
     <Compile Include="Generators\RandomSceneGeneratorTests.cs" />
-    <Compile Include="Generators\RandomLightSectionGeneratorTests.cs" />
     <Compile Include="Generators\TestLightSectionGenerator.cs" />
     <Compile Include="Generators\TestRandomSceneGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

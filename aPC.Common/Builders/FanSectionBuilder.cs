@@ -1,5 +1,6 @@
 ﻿using aPC.Common.Entities;
 using System;
+using System.Collections.Generic;
 
 namespace aPC.Common.Builders
 {
@@ -15,14 +16,14 @@ namespace aPC.Common.Builders
 
     private void Reset()
     {
-      fanSection = new FanSection();
+      fanSection = new FanSection() { Fans = new List<Fan>() };
       fanSpecified = false;
     }
 
     public FanSectionBuilder WithAllFans(Fan fan)
     {
-      WithFanInDirection(eDirection.East, fan);
-      WithFanInDirection(eDirection.West, fan);
+      WithFanInDirection(eDirection.East, (Fan)fan.Clone());
+      WithFanInDirection(eDirection.West, (Fan)fan.Clone());
       return this;
     }
 
@@ -33,6 +34,7 @@ namespace aPC.Common.Builders
         throw new ArgumentException("Attempted to add multiple fans in the same direction");
       }
 
+      fan.Direction = direction;
       fanSection.Fans.Add(fan);
       fanSpecified = true;
       return this;

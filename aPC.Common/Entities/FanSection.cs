@@ -9,11 +9,11 @@ namespace aPC.Common.Entities
     [XmlArrayItem("Fan")]
     public List<Fan> Fans;
 
-    public IEnumerable<IDirectionalComponent> GetComponents()
+    public IEnumerable<DirectionalComponent> GetComponents()
     {
       foreach (var fan in Fans)
       {
-        yield return (IDirectionalComponent)fan;
+        yield return (DirectionalComponent)fan;
       }
     }
   }

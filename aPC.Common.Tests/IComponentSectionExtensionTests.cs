@@ -14,6 +14,12 @@ namespace aPC.Common.Tests
     public void Setup()
     {
       this.testSection = new TestSection();
+      testSection.Components = new List<TestComponent>
+      {
+        new TestComponent() { Direction = eDirection.North, Value = "Value-North"},
+        new TestComponent() { Direction = eDirection.South, Value = "Value-South1"},
+        new TestComponent() { Direction = eDirection.South, Value = "Value-South2"}
+      };
     }
 
     [Test]
@@ -25,18 +31,6 @@ namespace aPC.Common.Tests
     }
 
     [Test]
-    public void GettingComponentByDirection_WhereFieldHasMultipleDifferentDirections_GivesCorrectMember()
-    {
-      var northEast = testSection.GetComponentValueInDirection(eDirection.NorthEast);
-      var east = testSection.GetComponentValueInDirection(eDirection.East);
-      var southEast = testSection.GetComponentValueInDirection(eDirection.SouthEast);
-
-      Assert.AreEqual(testSection.GetComponentValueInDirection(eDirection.NorthEast), northEast);
-      Assert.AreEqual(testSection.GetComponentValueInDirection(eDirection.East), east);
-      Assert.AreEqual(testSection.GetComponentValueInDirection(eDirection.SouthEast), southEast);
-    }
-
-    [Test]
     public void MultipleFieldsSharingTheSameDirection_ThrowsException()
     {
       Assert.Throws<InvalidOperationException>(() => testSection.GetComponentValueInDirection(eDirection.South));
@@ -45,28 +39,34 @@ namespace aPC.Common.Tests
 
   internal class TestSection : IComponentSection
   {
-#pragma warning disable 169 // Fields are used exclusively by reflection
-
     public List<TestComponent> Components;
 
-    public IEnumerable<IDirectionalComponent> GetComponents()
+    public IEnumerable<DirectionalComponent> GetComponents()
     {
       foreach (var component in Components)
       {
-        yield return (IDirectionalComponent)component;
+        yield return (DirectionalComponent)component;
       }
     }
-
-#pragma warning restore 169
   }
 
-  internal class TestComponent : IDirectionalComponent
+  internal class TestComponent : DirectionalComponent
   {
     public string Value;
 
     public override eComponentType ComponentType()
     {
       return eComponentType.Light;
+    }
+
+    public override object Clone()
+    {
+      throw new NotImplementedException();
+    }
+
+    public override bool Equals(object other)
+    {
+      throw new NotImplementedException();
     }
   }
 }

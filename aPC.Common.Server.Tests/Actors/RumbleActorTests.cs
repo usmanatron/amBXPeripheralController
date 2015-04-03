@@ -27,7 +27,7 @@ namespace aPC.Common.Server.Tests.Actors
 
       actor.ActNextFrame(eDirection.Center, snapshot);
 
-      Assert.IsNull(engine.Status.RumbleSection.Rumbles.Single());
+      CollectionAssert.IsEmpty(engine.Status.RumbleSection.Rumbles);
     }
 
     [Test]
@@ -37,8 +37,6 @@ namespace aPC.Common.Server.Tests.Actors
 
       actor.ActNextFrame(eDirection.Center, snapshot);
 
-      // Unlike other component tests, direction is not relevant as
-      // only one rumble is currently supported.
       Assert.AreEqual(DefaultRumbleSections.Boing.Rumbles.Single(), engine.Status.RumbleSection.Rumbles.Single());
     }
   }

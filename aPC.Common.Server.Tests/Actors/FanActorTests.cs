@@ -33,13 +33,15 @@ namespace aPC.Common.Server.Tests.Actors
     [Test]
     public void ActingNextSnapshot_UpdatesComponentInCorrectDirection()
     {
-      var snapshot = new ComponentSnapshot(DefaultFans.FullPower, 1000);
+      var fan = DefaultFans.FullPower;
+      fan.Direction = eDirection.West;
+      var snapshot = new ComponentSnapshot(fan, 1000);
 
       actor.ActNextFrame(eDirection.West, snapshot);
 
       foreach (eDirection direction in Enum.GetValues(typeof(eDirection)))
       {
-        if (direction == eDirection.West || direction == eDirection.NorthWest)
+        if (direction == eDirection.West)
         {
           Assert.AreEqual(DefaultFans.FullPower, engine.Status.FanSection.GetComponentValueInDirection(direction));
         }

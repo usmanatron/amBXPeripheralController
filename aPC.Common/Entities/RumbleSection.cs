@@ -9,11 +9,11 @@ namespace aPC.Common.Entities
     [XmlArrayItem("Rumble")]
     public List<Rumble> Rumbles;
 
-    public IEnumerable<IDirectionalComponent> GetComponents()
+    public IEnumerable<DirectionalComponent> GetComponents()
     {
       foreach (var rumble in Rumbles)
       {
-        yield return (IDirectionalComponent)rumble;
+        yield return (DirectionalComponent)rumble;
       }
     }
   }

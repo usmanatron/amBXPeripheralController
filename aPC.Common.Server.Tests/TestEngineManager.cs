@@ -13,9 +13,9 @@ namespace aPC.Common.Server.Tests
     {
       Status = new Frame()
       {
-        LightSection = new LightSection(),
-        FanSection = new FanSection(),
-        RumbleSection = new RumbleSection()
+        LightSection = new LightSection() { Lights = new List<Light>() },
+        FanSection = new FanSection() { Fans = new List<Fan>() },
+        RumbleSection = new RumbleSection() { Rumbles = new List<Rumble>() }
       };
       Updated = new Dictionary<eComponentType, bool>()
         {
@@ -23,7 +23,7 @@ namespace aPC.Common.Server.Tests
         };
     }
 
-    public void UpdateComponent(eDirection direction, IDirectionalComponent component)
+    public void UpdateComponent(eDirection direction, DirectionalComponent component)
     {
       if (component == null)
       {

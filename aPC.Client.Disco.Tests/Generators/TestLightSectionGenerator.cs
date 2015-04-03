@@ -20,7 +20,7 @@ namespace aPC.Client.Disco.Tests.Generators
 
     public string GeneratedScene()
     {
-      return @"<?xml version=""1.0"" encoding=""utf-16""?>
+      return @"<?xml version=""1.0\"" encoding=""utf-16""?>
 <amBXScene xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <IsExclusive>false</IsExclusive>
   <SceneType>Desync</SceneType>
@@ -28,56 +28,66 @@ namespace aPC.Client.Disco.Tests.Generators
     <Frame>
       <Length>1000</Length>
       <IsRepeated>true</IsRepeated>
-      <Lights>
-        <North>
-          <FadeTime>100</FadeTime>
-          <Red>1</Red>
-          <Green>0.5</Green>
-          <Blue>0</Blue>
-        </North>
-        <NorthEast>
-          <FadeTime>100</FadeTime>
-          <Red>1</Red>
-          <Green>0.5</Green>
-          <Blue>0</Blue>
-        </NorthEast>
-        <East>
-          <FadeTime>100</FadeTime>
-          <Red>1</Red>
-          <Green>0.5</Green>
-          <Blue>0</Blue>
-        </East>
-        <SouthEast>
-          <FadeTime>100</FadeTime>
-          <Red>1</Red>
-          <Green>0.5</Green>
-          <Blue>0</Blue>
-        </SouthEast>
-        <South>
-          <FadeTime>100</FadeTime>
-          <Red>1</Red>
-          <Green>0.5</Green>
-          <Blue>0</Blue>
-        </South>
-        <SouthWest>
-          <FadeTime>100</FadeTime>
-          <Red>1</Red>
-          <Green>0.5</Green>
-          <Blue>0</Blue>
-        </SouthWest>
-        <West>
-          <FadeTime>100</FadeTime>
-          <Red>1</Red>
-          <Green>0.5</Green>
-          <Blue>0</Blue>
-        </West>
-        <NorthWest>
-          <FadeTime>100</FadeTime>
-          <Red>1</Red>
-          <Green>0.5</Green>
-          <Blue>0</Blue>
-        </NorthWest>
-      </Lights>
+      <LightSection>
+        <Lights>
+          <Light>
+            <Direction>North</Direction>
+            <FadeTime>100</FadeTime>
+            <Red>1</Red>
+            <Green>0.5</Green>
+            <Blue>0</Blue>
+          </Light>
+          <Light>
+            <Direction>NorthEast</Direction>
+            <FadeTime>100</FadeTime>
+            <Red>1</Red>
+            <Green>0.5</Green>
+            <Blue>0</Blue>
+          </Light>
+          <Light>
+            <Direction>East</Direction>
+            <FadeTime>100</FadeTime>
+            <Red>1</Red>
+            <Green>0.5</Green>
+            <Blue>0</Blue>
+          </Light>
+          <Light>
+            <Direction>SouthEast</Direction>
+            <FadeTime>100</FadeTime>
+            <Red>1</Red>
+            <Green>0.5</Green>
+            <Blue>0</Blue>
+          </Light>
+          <Light>
+            <Direction>South</Direction>
+            <FadeTime>100</FadeTime>
+            <Red>1</Red>
+            <Green>0.5</Green>
+            <Blue>0</Blue>
+          </Light>
+          <Light>
+            <Direction>SouthWest</Direction>
+            <FadeTime>100</FadeTime>
+            <Red>1</Red>
+            <Green>0.5</Green>
+            <Blue>0</Blue>
+          </Light>
+          <Light>
+            <Direction>West</Direction>
+            <FadeTime>100</FadeTime>
+            <Red>1</Red>
+            <Green>0.5</Green>
+            <Blue>0</Blue>
+          </Light>
+          <Light>
+            <Direction>NorthWest</Direction>
+            <FadeTime>100</FadeTime>
+            <Red>1</Red>
+            <Green>0.5</Green>
+            <Blue>0</Blue>
+          </Light>
+        </Lights>
+      </LightSection>
     </Frame>
   </Frames>
 </amBXScene>";

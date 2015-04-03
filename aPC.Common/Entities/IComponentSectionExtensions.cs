@@ -6,12 +6,17 @@ namespace aPC.Common.Entities
 {
   public static class IComponentSectionExtensions
   {
-    public static IDirectionalComponent GetComponentValueInDirection(this IComponentSection section, eDirection direction)
+    public static DirectionalComponent GetComponentValueInDirection(this IComponentSection section, eDirection direction)
     {
+      if (section == null)
+      {
+        return null;
+      }
+
       return section
         .GetComponents()
         .Where(component => component.Direction == direction)
-        .Single(); //qqUMI Should this be a Single?
+        .SingleOrDefault();
     }
   }
 }

@@ -1,5 +1,6 @@
 ﻿using aPC.Common.Entities;
 using System;
+using System.Collections.Generic;
 
 namespace aPC.Common.Builders
 {
@@ -19,7 +20,7 @@ namespace aPC.Common.Builders
 
     private void Reset()
     {
-      rumbleSection = new RumbleSection();
+      rumbleSection = new RumbleSection() { Rumbles = new List<Rumble>() };
     }
 
     public RumbleSectionBuilder WithRumbleInDirection(eDirection direction, Rumble rumble)
@@ -29,6 +30,7 @@ namespace aPC.Common.Builders
         throw new ArgumentException("Attempted to add multiple Rumbles in the same direction");
       }
 
+      rumble.Direction = direction;
       rumbleSection.Rumbles.Add(rumble);
       rumbleSpecified = true;
       return this;

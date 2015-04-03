@@ -15,7 +15,7 @@ namespace aPC.ServerV3.Engine
       this.ambxEngineWrapper = ambxEngineWrapper;
     }
 
-    public void UpdateComponent(IDirectionalComponent component)
+    public void UpdateComponent(DirectionalComponent component)
     {
       switch (component.ComponentType())
       {

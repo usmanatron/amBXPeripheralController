@@ -70,14 +70,14 @@ namespace aPC.Client.Morse.Tests
     [Test]
     public void GeneratedScene_WithDefaultSettings_HasWhiteLights()
     {
-      var lWhiteLight = DefaultLights.White;
+      var whiteLight = DefaultLights.White;
       var generatedScene = sceneGenerator.Generate(new Settings("T"));
 
       foreach (var light in generatedScene.Frames.Select(frame => frame.LightSection))
       {
         foreach (eDirection direction in ApplicableLightDirections)
         {
-          Assert.AreEqual(lWhiteLight, light.GetComponentValueInDirection(direction));
+          Assert.AreEqual(whiteLight, light.GetComponentValueInDirection(direction));
         }
       }
     }
@@ -189,7 +189,7 @@ namespace aPC.Client.Morse.Tests
       var scene = generatedScene.Frames.Last();
       var expectedBlock = new MessageEndMarker();
 
-      Assert.AreNotEqual(expectedBlock.Enabled, scene.LightSection.GetComponentValueInDirection(eDirection.North) == settings.Colour);
+      Assert.AreNotEqual(expectedBlock.Enabled, scene.LightSection.GetComponentValueInDirection(eDirection.North).Equals(settings.Colour));
       Assert.AreNotEqual(expectedBlock.Length * settings.UnitLength, scene.Length);
     }
 

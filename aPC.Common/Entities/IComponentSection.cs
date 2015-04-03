@@ -4,6 +4,6 @@ namespace aPC.Common.Entities
 {
   public interface IComponentSection
   {
-    IEnumerable<IDirectionalComponent> GetComponents();
+    IEnumerable<DirectionalComponent> GetComponents();
   }
 }

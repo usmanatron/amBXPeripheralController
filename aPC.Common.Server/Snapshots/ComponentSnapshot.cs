@@ -8,11 +8,11 @@ namespace aPC.Common.Server.Snapshots
     /// Used when a component is not available
     /// </summary>
     public ComponentSnapshot(int length)
-      : this(default(IDirectionalComponent), length)
+      : this(default(DirectionalComponent), length)
     {
     }
 
-    public ComponentSnapshot(IDirectionalComponent component, int length)
+    public ComponentSnapshot(DirectionalComponent component, int length)
       : base(length)
     {
       Item = component;
@@ -26,6 +26,6 @@ namespace aPC.Common.Server.Snapshots
       }
     }
 
-    public IDirectionalComponent Item;
+    public DirectionalComponent Item;
   }
 }

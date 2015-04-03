@@ -33,7 +33,9 @@ namespace aPC.Common.Server.Tests.Actors
     [Test]
     public void ActingNextSnapshot_UpdatesComponentInCorrectDirection()
     {
-      var snapshot = new ComponentSnapshot(DefaultLights.Blue, 1000);
+      var light = DefaultLights.Blue;
+      light.Direction = eDirection.East;
+      var snapshot = new ComponentSnapshot(light, 1000);
 
       actor.ActNextFrame(eDirection.East, snapshot);
 

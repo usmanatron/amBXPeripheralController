@@ -193,6 +193,15 @@ namespace aPC.Common.Defaults
     {
       get
       {
+        var physicalDirections = new List<eDirection>()
+        {
+          eDirection.West,
+          eDirection.NorthWest,
+          eDirection.North,
+          eDirection.NorthEast,
+          eDirection.East,
+        };
+
         var scene = new amBXScene
                      {
                        SceneType = eSceneType.Sync
@@ -203,11 +212,7 @@ namespace aPC.Common.Defaults
           .WithRepeated(false)
           .WithFrameLength(2000)
           .WithLightSection(new LightSectionBuilder()
-            .WithLightInDirection(eDirection.West, DefaultLights.SoftPurple)
-            .WithLightInDirection(eDirection.NorthWest, DefaultLights.SoftPurple)
-            .WithLightInDirection(eDirection.North, DefaultLights.SoftPurple)
-            .WithLightInDirection(eDirection.NorthEast, DefaultLights.SoftPurple)
-            .WithLightInDirection(eDirection.East, DefaultLights.SoftPurple)
+            .WithLightInDirections(physicalDirections, DefaultLights.SoftPurple)
             .Build())
           .WithFanSection(DefaultFanSections.Full)
 
@@ -220,22 +225,18 @@ namespace aPC.Common.Defaults
           .WithRepeated(true)
           .WithFrameLength(1000)
           .WithLightSection(new LightSectionBuilder()
-            .WithLightInDirection(eDirection.West, DefaultLights.Red)
-            .WithLightInDirection(eDirection.NorthWest, DefaultLights.Red)
+            .WithLightInDirections(new List<eDirection> { eDirection.West, eDirection.NorthWest }, DefaultLights.Red)
             .WithLightInDirection(eDirection.North, DefaultLights.SoftPurple)
-            .WithLightInDirection(eDirection.NorthEast, DefaultLights.Blue)
-            .WithLightInDirection(eDirection.East, DefaultLights.Blue)
+            .WithLightInDirections(new List<eDirection> { eDirection.NorthEast, eDirection.East }, DefaultLights.Blue)
             .Build())
 
           .AddFrame()
           .WithRepeated(true)
           .WithFrameLength(1000)
           .WithLightSection(new LightSectionBuilder()
-            .WithLightInDirection(eDirection.West, DefaultLights.Blue)
-            .WithLightInDirection(eDirection.NorthWest, DefaultLights.Blue)
+            .WithLightInDirections(new List<eDirection> { eDirection.West, eDirection.NorthWest }, DefaultLights.Blue)
             .WithLightInDirection(eDirection.North, DefaultLights.SoftPurple)
-            .WithLightInDirection(eDirection.NorthEast, DefaultLights.Red)
-            .WithLightInDirection(eDirection.East, DefaultLights.Red)
+            .WithLightInDirections(new List<eDirection> { eDirection.NorthEast, eDirection.East }, DefaultLights.Red)
             .Build())
           .Build();
 

@@ -1,5 +1,6 @@
 ﻿using aPC.Common.Entities;
 using System;
+using System.Collections.Generic;
 
 namespace aPC.Common.Builders
 {
@@ -15,20 +16,22 @@ namespace aPC.Common.Builders
 
     private void Reset()
     {
-      lightSection = new LightSection();
+      lightSection = new LightSection() { Lights = new List<Light>() };
       lightSpecified = false;
     }
 
     public LightSectionBuilder WithAllLights(Light light)
     {
-      WithLightInDirection(eDirection.North, light);
-      WithLightInDirection(eDirection.NorthEast, light);
-      WithLightInDirection(eDirection.East, light);
-      WithLightInDirection(eDirection.SouthEast, light);
-      WithLightInDirection(eDirection.South, light);
-      WithLightInDirection(eDirection.SouthWest, light);
-      WithLightInDirection(eDirection.West, light);
-      WithLightInDirection(eDirection.NorthWest, light);
+      return WithLightInDirections(EnumExtensions.GetCompassDirections(), light);
+    }
+
+    public LightSectionBuilder WithLightInDirections(IEnumerable<eDirection> directions, Light light)
+    {
+      foreach (var direction in directions)
+      {
+        var directionalLight = (Light)light.Clone();
+        WithLightInDirection(direction, directionalLight);
+      }
 
       return this;
     }
@@ -40,6 +43,7 @@ namespace aPC.Common.Builders
         throw new ArgumentException("Attempted to add multiple lights in the same direction");
       }
 
+      light.Direction = direction;
       lightSection.Lights.Add(light);
       lightSpecified = true;
       return this;

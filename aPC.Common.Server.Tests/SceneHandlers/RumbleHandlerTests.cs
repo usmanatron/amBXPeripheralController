@@ -11,7 +11,6 @@ namespace aPC.Common.Server.Tests.SceneHandlers
   [TestFixture]
   internal class RumbleHandlerTests
   {
-    private readonly eDirection[] directions = (eDirection[])Enum.GetValues(typeof(eDirection));
     private amBXScene standardScene;
     private amBXScene nonRumbleScene;
     private Action action;
@@ -62,19 +61,6 @@ namespace aPC.Common.Server.Tests.SceneHandlers
       Assert.IsTrue(snapshot.IsComponentNull);
       Assert.IsNull(snapshot.Item);
       Assert.AreEqual(expectedFrame.Length, snapshot.Length);
-    }
-
-    [Test]
-    [TestCaseSource("directions")]
-    public void NextRumbleSnapshot_ReturnsARumble_IrrespectiveOfDirection(eDirection direction)
-    {
-      var handler = new ComponentHandler(eComponentType.Rumble, standardScene, action);
-
-      var snapshot = handler.GetNextSnapshot(direction);
-      var expectedFrame = standardScene.Frames[0];
-
-      Assert.AreEqual(expectedFrame.Length, snapshot.Length);
-      Assert.IsFalse(snapshot.IsComponentNull);
     }
   }
 }

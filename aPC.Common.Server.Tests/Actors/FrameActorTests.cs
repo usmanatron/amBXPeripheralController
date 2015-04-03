@@ -97,7 +97,7 @@ namespace aPC.Common.Server.Tests.Actors
         Assert.IsTrue(engine.Updated[eComponentType.Light]);
         Assert.IsFalse(engine.Updated[eComponentType.Fan]);
         Assert.IsFalse(engine.Updated[eComponentType.Rumble]);
-        Assert.AreEqual(DefaultLights.Green, engine.Status.LightSection.GetComponentValueInDirection(eDirection.North));
+        Assert.AreEqual(DefaultLights.Green, engine.Status.LightSection.Lights.Last());
       }
     }
 

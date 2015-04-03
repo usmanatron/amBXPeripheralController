@@ -1,8 +1,10 @@
-﻿using aPC.Common.Builders;
+﻿using aPC.Common;
+using aPC.Common.Builders;
 using aPC.Common.Defaults;
 using aPC.Common.Entities;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 
 namespace aPC.Common.Tests.Builders
 {
@@ -57,14 +59,10 @@ namespace aPC.Common.Tests.Builders
         .WithAllLights(aribitraryColour)
         .Build();
 
-      Assert.AreEqual(aribitraryColour, section.GetComponentValueInDirection(eDirection.North));
-      Assert.AreEqual(aribitraryColour, section.GetComponentValueInDirection(eDirection.NorthEast));
-      Assert.AreEqual(aribitraryColour, section.GetComponentValueInDirection(eDirection.East));
-      Assert.AreEqual(aribitraryColour, section.GetComponentValueInDirection(eDirection.SouthEast));
-      Assert.AreEqual(aribitraryColour, section.GetComponentValueInDirection(eDirection.South));
-      Assert.AreEqual(aribitraryColour, section.GetComponentValueInDirection(eDirection.SouthWest));
-      Assert.AreEqual(aribitraryColour, section.GetComponentValueInDirection(eDirection.West));
-      Assert.AreEqual(aribitraryColour, section.GetComponentValueInDirection(eDirection.NorthWest));
+      foreach (var direction in EnumExtensions.GetCompassDirections())
+      {
+        Assert.AreEqual(aribitraryColour, section.GetComponentValueInDirection(direction));
+      }
     }
 
     [Test]
@@ -88,11 +86,20 @@ namespace aPC.Common.Tests.Builders
     }
 
     [Test]
-    public void NewLightSection_SpecifyingALightInAnInvalidDirection_ThrowsException()
+    public void NewLightSection_LightsSpecifiedInABlockOfDirections_SpecifiedInRightDirectons()
     {
-      var section = new LightSectionBuilder();
+      var section = new LightSectionBuilder()
+        .WithLightInDirections(new List<eDirection> { eDirection.North, eDirection.East, eDirection.South, eDirection.West }, green)
+        .Build();
 
-      Assert.Throws<InvalidOperationException>(() => section.WithLightInDirection(eDirection.Center, blue));
+      Assert.AreEqual(green, section.GetComponentValueInDirection(eDirection.North));
+      Assert.AreEqual(null, section.GetComponentValueInDirection(eDirection.NorthEast));
+      Assert.AreEqual(green, section.GetComponentValueInDirection(eDirection.East));
+      Assert.AreEqual(null, section.GetComponentValueInDirection(eDirection.SouthEast));
+      Assert.AreEqual(green, section.GetComponentValueInDirection(eDirection.South));
+      Assert.AreEqual(null, section.GetComponentValueInDirection(eDirection.SouthWest));
+      Assert.AreEqual(green, section.GetComponentValueInDirection(eDirection.West));
+      Assert.AreEqual(null, section.GetComponentValueInDirection(eDirection.NorthWest));
     }
   }
 }

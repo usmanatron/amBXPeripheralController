@@ -8,9 +8,8 @@ namespace aPC.Common.Builders
   ///   Assists with building a list of frames.
   /// </summary>
   /// <remarks>
-  ///   An important Gotcha: when creating a new Builder, you must first call AddFrame
-  ///   before calling anything else to complete iitialisation.
-  ///   TODO: Fix this limitation
+  ///   An important gotcha: when creating a new Builder, you must first call AddFrame
+  ///   before building your first Frame.
   /// </remarks>
   public class FrameBuilder
   {
@@ -34,7 +33,11 @@ namespace aPC.Common.Builders
       {
         AddCurrentFrame();
       }
-      SetupCurrentFrame();
+
+      // Setup current Frame
+      currentFrame = new Frame();
+      isRepeatedSpecified = false;
+
       return this;
     }
 
@@ -53,11 +56,11 @@ namespace aPC.Common.Builders
       {
         return isRepeatedSpecified &&
                currentFrame.Length != default(int) &&
-               AtLeastOneSectionSpecified;
+               AtLeastOneComponentSpecified;
       }
     }
 
-    private bool AtLeastOneSectionSpecified
+    private bool AtLeastOneComponentSpecified
     {
       get
       {
@@ -65,12 +68,6 @@ namespace aPC.Common.Builders
                currentFrame.FanSection != null ||
                currentFrame.RumbleSection != null;
       }
-    }
-
-    private void SetupCurrentFrame()
-    {
-      currentFrame = new Frame();
-      isRepeatedSpecified = false;
     }
 
     public FrameBuilder WithFrameLength(int length)
