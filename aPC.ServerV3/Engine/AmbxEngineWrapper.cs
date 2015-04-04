@@ -30,7 +30,7 @@ namespace aPC.ServerV3.Engine
 
     private void InitialiseEngine()
     {
-      foreach (CompassDirection compassDirection in Enum.GetValues(typeof(CompassDirection)))
+      foreach (CompassDirection compassDirection in EnumExtensions.GetCompassDirections())
       {
         CreateLight(compassDirection);
       }
