@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AtypicalFirstRunInfiniteTicker.cs" />
     <Compile Include="Engine\AmbxEngineWrapper.cs">
       <SubType>Code</SubType>
     </Compile>

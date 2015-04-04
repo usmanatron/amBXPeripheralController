@@ -1,4 +1,5 @@
-﻿using System;
+﻿using aPC.Common.Entities;
+using System;
 
 namespace aPC.ServerV3
 {
@@ -14,6 +15,11 @@ namespace aPC.ServerV3
 
     private int initialCount;
     private int subsequentCount;
+
+    public AtypicalFirstRunInfiniteTicker(amBXScene scene)
+      : this(scene.Frames.Count, scene.RepeatableFrames.Count)
+    {
+    }
 
     public AtypicalFirstRunInfiniteTicker(int initialCount, int subsequentCount)
     {
