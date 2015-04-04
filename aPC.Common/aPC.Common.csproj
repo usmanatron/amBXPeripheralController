@@ -62,7 +62,7 @@
     <Compile Include="Entities\FrameStatistics.cs" />
     <Compile Include="Entities\DirectionalComponent.cs" />
     <Compile Include="Entities\IComponentSection.cs" />
-    <Compile Include="Entities\IComponentSectionExtensions.cs" />
+    <Compile Include="Entities\EntityExtensions.cs" />
     <Compile Include="EnumExtensions.cs" />
     <Compile Include="Locked.cs" />
     <Compile Include="SceneAccessor.cs" />

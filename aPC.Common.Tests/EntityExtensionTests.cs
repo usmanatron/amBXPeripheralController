@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace aPC.Common.Tests
 {
   [TestFixture]
-  internal class IComponentSectionExtensionTests
+  internal class EntityExtensionTests
   {
     private TestSection testSection;
 
