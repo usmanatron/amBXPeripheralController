@@ -8,19 +8,19 @@ using System.Threading;
 
 namespace aPC.ServerV3
 {
-  internal class SceneOrchestrator
+  internal class SceneSplitter
   {
     public List<RunningDirectionalComponent> RunningComponents;
     public List<DirectionalComponent> UpdatedDirectionalComponents;
     public eSceneType CurrentState;
 
-    public SceneOrchestrator()
+    public SceneSplitter()
     {
       RunningComponents = new List<RunningDirectionalComponent>();
       UpdatedDirectionalComponents = new List<DirectionalComponent>();
     }
 
-    public void UpdateComponents(amBXScene scene)
+    public void SplitScene(amBXScene scene)
     {
       HandleNewScene(scene);
     }

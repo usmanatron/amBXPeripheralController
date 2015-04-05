@@ -53,6 +53,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Servers", "Servers", "{AD88
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.ServerV3", "aPC.ServerV3\aPC.ServerV3.csproj", "{E30D0ADB-36A7-48A5-AD1D-C3DC496E1ACC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.ServerV3.Tests", "aPC.ServerV3.Tests\aPC.ServerV3.Tests.csproj", "{403F51FC-6034-49CF-A30F-379851403BA6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -253,6 +255,16 @@ Global
 		{E30D0ADB-36A7-48A5-AD1D-C3DC496E1ACC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{E30D0ADB-36A7-48A5-AD1D-C3DC496E1ACC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{E30D0ADB-36A7-48A5-AD1D-C3DC496E1ACC}.Release|Win32.ActiveCfg = Release|Any CPU
+		{403F51FC-6034-49CF-A30F-379851403BA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{403F51FC-6034-49CF-A30F-379851403BA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{403F51FC-6034-49CF-A30F-379851403BA6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{403F51FC-6034-49CF-A30F-379851403BA6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{403F51FC-6034-49CF-A30F-379851403BA6}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{403F51FC-6034-49CF-A30F-379851403BA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{403F51FC-6034-49CF-A30F-379851403BA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{403F51FC-6034-49CF-A30F-379851403BA6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{403F51FC-6034-49CF-A30F-379851403BA6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{403F51FC-6034-49CF-A30F-379851403BA6}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -272,5 +284,6 @@ Global
 		{E1F7F34A-BA61-4B82-BB93-CE56EC797904} = {23CB1063-44C7-418E-98E4-8328E01F2BF9}
 		{93B6F816-979F-4120-A1E8-C70454D8F3FB} = {23CB1063-44C7-418E-98E4-8328E01F2BF9}
 		{E30D0ADB-36A7-48A5-AD1D-C3DC496E1ACC} = {AD88E8DA-767E-421A-B8D9-DE20E016F023}
+		{403F51FC-6034-49CF-A30F-379851403BA6} = {AD88E8DA-767E-421A-B8D9-DE20E016F023}
 	EndGlobalSection
 EndGlobal

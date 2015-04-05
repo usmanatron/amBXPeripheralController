@@ -71,7 +71,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="NewSceneProcessor.cs" />
-    <Compile Include="SceneOrchestrator.cs" />
+    <Compile Include="SceneSplitter.cs" />
     <Compile Include="TaskManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\RunningDirectionalComponent.cs" />

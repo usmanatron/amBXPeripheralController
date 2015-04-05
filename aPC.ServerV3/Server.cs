@@ -12,8 +12,8 @@ namespace aPC.ServerV3
     private static void Main(string[] args)
     {
       var wrapper = new AmbxEngineWrapper();
-      var orchestrator = new SceneOrchestrator();
-      new ServerTask(new NewSceneProcessor(orchestrator, new TaskManager(orchestrator, new EngineActor(wrapper), new DirectionalComponentActionList())), new NotificationService(), wrapper).Run();
+      var splitter = new SceneSplitter();
+      new ServerTask(new NewSceneProcessor(splitter, new TaskManager(splitter, new EngineActor(wrapper), new DirectionalComponentActionList())), new NotificationService(), wrapper).Run();
     }
   }
 }

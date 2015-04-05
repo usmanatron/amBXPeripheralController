@@ -12,12 +12,12 @@ namespace aPC.ServerV3
   {
     private amBXScene previousScene;
     private amBXScene currentScene;
-    private SceneOrchestrator sceneOrchestrator;
+    private SceneSplitter sceneSplitter;
     private TaskManager taskManager;
 
-    public NewSceneProcessor(SceneOrchestrator sceneOrchestrator, TaskManager taskManager)
+    public NewSceneProcessor(SceneSplitter sceneSplitter, TaskManager taskManager)
     {
-      this.sceneOrchestrator = sceneOrchestrator;
+      this.sceneSplitter = sceneSplitter;
       this.taskManager = taskManager;
       currentScene = new amBXScene() { SceneType = eSceneType.Desync };
     }
@@ -80,8 +80,8 @@ namespace aPC.ServerV3
 
     private void PushChanges()
     {
-      sceneOrchestrator.UpdateComponents(currentScene);
-      taskManager.RefreshFromSceneOrchestrator();
+      sceneSplitter.SplitScene(currentScene);
+      taskManager.RefreshTasks();
     }
   }
 }
