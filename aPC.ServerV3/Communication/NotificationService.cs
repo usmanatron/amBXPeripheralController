@@ -13,9 +13,8 @@ namespace aPC.ServerV3.Communication
   {
     private Action<amBXScene> action;
 
-    // TODO: Add the right action to do the update
     public NotificationService()
-      : this((scene) => { })
+      : this(scene => ServerTask.UpdateScene(scene))
     {
     }
 
