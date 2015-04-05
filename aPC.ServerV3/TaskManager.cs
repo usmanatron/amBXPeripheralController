@@ -21,6 +21,7 @@ namespace aPC.ServerV3
     {
       this.engineActor = engineActor;
       this.directionalComponentActionList = directionalComponentActionList;
+      this.runningDirectionalComponents = runningDirectionalComponents;
     }
 
     public void RefreshTasks()
