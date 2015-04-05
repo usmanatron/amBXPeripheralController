@@ -1,4 +1,5 @@
 ﻿using aPC.Common;
+using aPC.Common.Entities;
 using aPC.ServerV3.Entities;
 using System;
 using System.Collections.Generic;
@@ -45,9 +46,9 @@ namespace aPC.ServerV3
     /// <summary>
     /// Cancels the action for the given ComponentType and Direction, before removing from the list
     /// </summary>
-    public void Cancel(eComponentType? componentType, eDirection direction)
+    public void Cancel(DirectionalComponent directionalComponent)
     {
-      var action = Get(componentType, direction);
+      var action = Get(directionalComponent);
 
       if (action != null)
       {
@@ -59,11 +60,11 @@ namespace aPC.ServerV3
       }
     }
 
-    private DirectionalComponentAction Get(eComponentType? componentType, eDirection direction)
+    private DirectionalComponentAction Get(DirectionalComponent directionalComponent)
     {
       lock (locker)
       {
-        return actions.SingleOrDefault(action => action.ComponentType == componentType && action.Direction == direction);
+        return actions.SingleOrDefault(action => action.DirectionalComponent == directionalComponent);
       }
     }
 

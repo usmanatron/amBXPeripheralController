@@ -6,15 +6,36 @@ namespace aPC.Common.Entities
   /// <summary>
   /// The base interface for individual light / fan / rumble sources
   /// </summary>
-  public abstract class DirectionalComponent : ICloneable
+  public class DirectionalComponent
   {
     [XmlElement]
     public eDirection Direction;
 
-    public abstract eComponentType ComponentType();
+    [XmlIgnore]
+    public eComponentType ComponentType { get; private set; }
 
-    public abstract object Clone();
+    public DirectionalComponent(eComponentType componentType, eDirection direction)
+      : this(componentType)
+    {
+      this.Direction = direction;
+    }
 
-    //public abstract bool Equals(object other);
+    public DirectionalComponent(eComponentType componentType)
+    {
+      this.ComponentType = componentType;
+    }
+
+    public override bool Equals(object other)
+    {
+      if (!(other is DirectionalComponent))
+      {
+        return false;
+      }
+
+      var otherComponent = (DirectionalComponent)other;
+
+      return this.ComponentType == otherComponent.ComponentType &&
+             this.Direction == otherComponent.Direction;
+    }
   }
 }

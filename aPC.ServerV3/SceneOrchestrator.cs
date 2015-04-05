@@ -11,13 +11,13 @@ namespace aPC.ServerV3
   internal class SceneOrchestrator
   {
     public List<RunningDirectionalComponent> RunningComponents;
-    public List<Tuple<eComponentType?, eDirection>> UpdatedDirectionalComponents;
+    public List<DirectionalComponent> UpdatedDirectionalComponents;
     public eSceneType CurrentState;
 
     public SceneOrchestrator()
     {
       RunningComponents = new List<RunningDirectionalComponent>();
-      UpdatedDirectionalComponents = new List<Tuple<eComponentType?, eDirection>>();
+      UpdatedDirectionalComponents = new List<DirectionalComponent>();
     }
 
     public void UpdateComponents(amBXScene scene)
@@ -61,25 +61,25 @@ namespace aPC.ServerV3
             continue;
           }
 
-          UpdateRunningComponentAndLog(scene, componentType, direction);
+          UpdateRunningComponentAndLog(scene, new DirectionalComponent(componentType, direction));
         }
     }
 
     private void UpdateRunningComponentForFrame(amBXScene scene)
     {
-      UpdateRunningComponentAndLog(scene, null, eDirection.Everywhere);
+      UpdateRunningComponentAndLog(scene, new DirectionalComponent(null, eDirection.Everywhere));
     }
 
-    private void UpdateRunningComponentAndLog(amBXScene scene, eComponentType? componentType, eDirection direction)
+    private void UpdateRunningComponentAndLog(amBXScene scene, DirectionalComponent directionalComponent)
     {
-      var existingComponent = RunningComponents.SingleOrDefault(component => component.ComponentType == componentType && component.Direction == direction);
+      var existingComponent = RunningComponents.SingleOrDefault(component => component.DirectionalComponent == directionalComponent);
       if (existingComponent != null)
       {
         RunningComponents.Remove(existingComponent);
       }
 
-      UpdatedDirectionalComponents.Add(new Tuple<eComponentType?, eDirection>(componentType, direction));
-      RunningComponents.Add(new RunningDirectionalComponent(scene, direction, componentType, new AtypicalFirstRunInfiniteTicker(scene)));
+      UpdatedDirectionalComponents.Add(directionalComponent);
+      RunningComponents.Add(new RunningDirectionalComponent(scene, directionalComponent, new AtypicalFirstRunInfiniteTicker(scene)));
     }
   }
 }

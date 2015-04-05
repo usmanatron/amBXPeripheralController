@@ -1,8 +1,9 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Xml.Serialization;
 
 namespace aPC.Common.Entities
 {
-  public class Rumble : DirectionalComponent
+  public class Rumble : DirectionalComponent, ICloneable
   {
     [XmlElement]
     public eRumbleType RumbleType;
@@ -13,12 +14,12 @@ namespace aPC.Common.Entities
     [XmlElement]
     public float Speed;
 
-    public override eComponentType ComponentType()
+    public Rumble()
+      : base(eComponentType.Rumble)
     {
-      return eComponentType.Rumble;
     }
 
-    public override object Clone()
+    public object Clone()
     {
       return new Rumble()
       {

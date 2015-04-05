@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace aPC.Common.Entities
 {
-  public class Light : DirectionalComponent
+  public class Light : DirectionalComponent, ICloneable
   {
     [XmlElement]
     public int FadeTime;
@@ -17,12 +17,12 @@ namespace aPC.Common.Entities
     [XmlElement]
     public float Blue;
 
-    public override eComponentType ComponentType()
+    public Light()
+      : base(eComponentType.Light)
     {
-      return eComponentType.Light;
     }
 
-    public override object Clone()
+    public object Clone()
     {
       return new Light()
       {

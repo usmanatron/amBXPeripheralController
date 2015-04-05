@@ -7,13 +7,22 @@ namespace aPC.Common.Entities
   [Serializable]
   public class FrameStatistics
   {
+    private Func<DirectionalComponent, eComponentType, bool> HasComponentType =
+      (directionalComponent, componentType) => directionalComponent.ComponentType == componentType;
+
+    private Func<DirectionalComponent, eDirection, bool> HasDirection =
+      (directionalComponent, direction) => directionalComponent.Direction == direction;
+
+    public readonly List<DirectionalComponent> EnabledDirectionalComponents;
+    public int SceneLength;
+
     /// <remarks>
     ///   For now, just go through all of the frames and process them - forgoe
     ///   any potential performance gains of doing anything smarter
     /// </remarks>
     public FrameStatistics(List<Frame> frames)
     {
-      EnabledDirectionalComponents = new List<Tuple<eComponentType, eDirection>>();
+      EnabledDirectionalComponents = new List<DirectionalComponent>();
       SceneLength = 0;
 
       foreach (var frame in frames)
@@ -49,10 +58,10 @@ namespace aPC.Common.Entities
     {
       foreach (eDirection direction in Enum.GetValues(typeof(eDirection)))
       {
-        var component = section.GetComponentValueInDirection(direction);
+        var component = section.GetComponentSectionInDirection(direction);
         if (component != null)
         {
-          AddDirectionalComponent(component.ComponentType(), direction);
+          AddDirectionalComponent(component.ComponentType, direction);
         }
       }
     }
@@ -61,7 +70,7 @@ namespace aPC.Common.Entities
     {
       if (!AreEnabledForComponentAndDirection(componentType, direction))
       {
-        EnabledDirectionalComponents.Add(new Tuple<eComponentType, eDirection>(componentType, direction));
+        EnabledDirectionalComponents.Add(new DirectionalComponent(componentType, direction));
       }
     }
 
@@ -77,14 +86,5 @@ namespace aPC.Common.Entities
         .Any(c => HasComponentType(c, componentType) &&
                   HasDirection(c, direction));
     }
-
-    private Func<Tuple<eComponentType, eDirection>, eComponentType, bool> HasComponentType =
-      (item, componentType) => item.Item1 == componentType;
-
-    private Func<Tuple<eComponentType, eDirection>, eDirection, bool> HasDirection =
-      (item, direction) => item.Item2 == direction;
-
-    public readonly List<Tuple<eComponentType, eDirection>> EnabledDirectionalComponents;
-    public int SceneLength;
   }
 }

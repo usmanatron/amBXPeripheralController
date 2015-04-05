@@ -17,7 +17,7 @@ namespace aPC.ServerV3.Engine
 
     public void UpdateComponent(DirectionalComponent component)
     {
-      switch (component.ComponentType())
+      switch (component.ComponentType)
       {
         case eComponentType.Light:
           ThreadPool.QueueUserWorkItem(_ => ambxEngineWrapper.UpdateLight((Light)component));

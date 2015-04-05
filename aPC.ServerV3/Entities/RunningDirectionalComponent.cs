@@ -19,17 +19,16 @@ namespace aPC.ServerV3.Entities
   {
     public amBXScene Scene { get; private set; }
 
-    public eDirection Direction { get; private set; }
+    public DirectionalComponent DirectionalComponent { get; private set; }
 
-    public eComponentType? ComponentType { get; private set; }
+    public eComponentType ComponentType { get; private set; }
 
     public AtypicalFirstRunInfiniteTicker Ticker { get; private set; }
 
-    public RunningDirectionalComponent(amBXScene scene, eDirection direction, eComponentType? componentType, AtypicalFirstRunInfiniteTicker ticker)
+    public RunningDirectionalComponent(amBXScene scene, DirectionalComponent directionalComponent, AtypicalFirstRunInfiniteTicker ticker)
     {
       this.Scene = scene;
-      this.Direction = direction;
-      this.ComponentType = componentType;
+      this.DirectionalComponent = directionalComponent;
       this.Ticker = ticker;
     }
   }

@@ -1,18 +1,19 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Xml.Serialization;
 
 namespace aPC.Common.Entities
 {
-  public class Fan : DirectionalComponent
+  public class Fan : DirectionalComponent, ICloneable
   {
     [XmlElement]
     public float Intensity;
 
-    public override eComponentType ComponentType()
+    public Fan()
+      : base(eComponentType.Fan)
     {
-      return eComponentType.Fan;
     }
 
-    public override object Clone()
+    public object Clone()
     {
       return new Fan()
       {

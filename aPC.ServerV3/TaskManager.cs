@@ -30,9 +30,9 @@ namespace aPC.ServerV3
       switch (sceneOrchestrator.CurrentState)
       {
         case eSceneType.Desync:
-          foreach (var directionAndComponent in sceneOrchestrator.UpdatedDirectionalComponents)
+          foreach (var directionalComponent in sceneOrchestrator.UpdatedDirectionalComponents)
           {
-            ReScheduleTask(sceneOrchestrator.RunningComponents.Single(component => component.ComponentType == directionAndComponent.Item1 && component.Direction == directionAndComponent.Item2));
+            ReScheduleTask(sceneOrchestrator.RunningComponents.Single(component => component.DirectionalComponent == directionalComponent));
           }
           break;
         case eSceneType.Sync:
@@ -45,7 +45,7 @@ namespace aPC.ServerV3
 
     private void ReScheduleTask(RunningDirectionalComponent runningComponent)
     {
-      directionalComponentActionList.Cancel(runningComponent.ComponentType, runningComponent.Direction);
+      directionalComponentActionList.Cancel(runningComponent.DirectionalComponent);
       ScheduleTask(runningComponent, 0);
     }
 
@@ -57,7 +57,7 @@ namespace aPC.ServerV3
 
       if (sceneOrchestrator.CurrentState == eSceneType.Desync)
       {
-        var component = frame.GetComponentInDirection(runningComponent.ComponentType.Value, runningComponent.Direction);
+        var component = frame.GetComponentInDirection(runningComponent.DirectionalComponent.ComponentType, runningComponent.DirectionalComponent.Direction);
         engineActor.UpdateComponent(component);
       }
       else
@@ -109,7 +109,7 @@ namespace aPC.ServerV3
                 RunFrameForDirectionalComponent(runningComponent, cancellationToken);
               }, cancellationToken.Token);
 
-      directionalComponentActionList.Add(new DirectionalComponentAction(cancellationToken, runningComponent.ComponentType, runningComponent.Direction));
+      directionalComponentActionList.Add(new DirectionalComponentAction(cancellationToken, runningComponent.DirectionalComponent));
     }
   }
 }

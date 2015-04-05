@@ -74,7 +74,7 @@ namespace aPC.Common.Server.Engine
       }
 
       var convertedDirection = ConversionHelpers.GetDirection(component.Direction);
-      switch (component.ComponentType())
+      switch (component.ComponentType)
       {
         case eComponentType.Light:
           ThreadPool.QueueUserWorkItem(_ => UpdateLightInternal(lights[convertedDirection], (Light)component));

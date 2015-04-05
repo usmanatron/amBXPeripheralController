@@ -30,7 +30,7 @@ namespace aPC.Common.Server.Tests
         return;
       }
 
-      switch (component.ComponentType())
+      switch (component.ComponentType)
       {
         case eComponentType.Light:
           UpdateLight((Light)component);

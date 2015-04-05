@@ -1,6 +1,6 @@
 ﻿using aPC.Common;
+using aPC.Common.Entities;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace aPC.ServerV3.Entities
 {
@@ -8,15 +8,12 @@ namespace aPC.ServerV3.Entities
   {
     public CancellationTokenSource CancellationToken { get; private set; }
 
-    public eComponentType? ComponentType { get; private set; }
+    public DirectionalComponent DirectionalComponent { get; private set; }
 
-    public eDirection Direction { get; private set; }
-
-    public DirectionalComponentAction(CancellationTokenSource cancellationToken, eComponentType? compoenntType, eDirection direction)
+    public DirectionalComponentAction(CancellationTokenSource cancellationToken, DirectionalComponent directionalComponent)
     {
       this.CancellationToken = cancellationToken;
-      this.ComponentType = compoenntType;
-      this.Direction = direction;
+      this.DirectionalComponent = directionalComponent;
     }
   }
 }

@@ -54,12 +54,12 @@ namespace aPC.Common.Tests
   {
     public string Value;
 
-    public override eComponentType ComponentType()
+    public TestComponent()
+      : base(eComponentType.Light)
     {
-      return eComponentType.Light;
     }
 
-    public override object Clone()
+    public object Clone()
     {
       throw new NotImplementedException();
     }
