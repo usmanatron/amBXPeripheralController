@@ -61,16 +61,16 @@ namespace aPC.Common.Entities
         var component = section.GetComponentSectionInDirection(direction);
         if (component != null)
         {
-          AddDirectionalComponent(component.ComponentType, direction);
+          AddDirectionalComponent(new DirectionalComponent(component.ComponentType, direction));
         }
       }
     }
 
-    private void AddDirectionalComponent(eComponentType componentType, eDirection direction)
+    private void AddDirectionalComponent(DirectionalComponent directionalComponent)
     {
-      if (!AreEnabledForComponentAndDirection(componentType, direction))
+      if (!AreEnabledForComponentAndDirection(directionalComponent))
       {
-        EnabledDirectionalComponents.Add(new DirectionalComponent(componentType, direction));
+        EnabledDirectionalComponents.Add(directionalComponent);
       }
     }
 
@@ -80,11 +80,11 @@ namespace aPC.Common.Entities
         .Any(c => HasComponentType(c, componentType));
     }
 
-    public bool AreEnabledForComponentAndDirection(eComponentType componentType, eDirection direction)
+    public bool AreEnabledForComponentAndDirection(DirectionalComponent directionalComponent)
     {
       return EnabledDirectionalComponents
-        .Any(c => HasComponentType(c, componentType) &&
-                  HasDirection(c, direction));
+        .Any(enabledComponent => HasComponentType(enabledComponent, directionalComponent.ComponentType) &&
+                  HasDirection(enabledComponent, directionalComponent.Direction));
     }
   }
 }

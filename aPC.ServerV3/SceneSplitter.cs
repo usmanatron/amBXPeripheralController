@@ -56,7 +56,7 @@ namespace aPC.ServerV3
       foreach (eComponentType componentType in Enum.GetValues(typeof(eComponentType)))
         foreach (eDirection direction in Enum.GetValues(typeof(eDirection)))
         {
-          if (!scene.FrameStatistics.AreEnabledForComponentAndDirection(componentType, direction))
+          if (!scene.FrameStatistics.AreEnabledForComponentAndDirection(new DirectionalComponent(componentType, direction)))
           {
             continue;
           }

@@ -55,14 +55,14 @@ namespace aPC.Server
 
     private void UpdateSceneIfRelevant(ComponentConductor conductor, amBXScene scene)
     {
-      if (IsApplicableForConductor(scene.FrameStatistics, conductor.ComponentType, conductor.Direction))
+      if (IsApplicableForConductor(scene.FrameStatistics, new DirectionalComponent(conductor.ComponentType, conductor.Direction)))
       {
         conductor.UpdateScene(scene);
       }
     }
 
-    private Func<FrameStatistics, eComponentType, eDirection, bool> IsApplicableForConductor =
-      (statistics, componentType, direction) => statistics.AreEnabledForComponentAndDirection(componentType, direction);
+    private Func<FrameStatistics, DirectionalComponent, bool> IsApplicableForConductor =
+      (statistics, directionalComponent) => statistics.AreEnabledForComponentAndDirection(directionalComponent);
 
     #endregion Update Scene
 

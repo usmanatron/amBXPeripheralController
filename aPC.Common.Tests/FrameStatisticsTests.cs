@@ -35,7 +35,7 @@ namespace aPC.Common.Tests
       Assert.IsFalse(stats.AreEnabledForComponent(eComponentType.Fan));
       Assert.IsFalse(stats.AreEnabledForComponent(eComponentType.Rumble));
 
-      Assert.IsTrue(stats.AreEnabledForComponentAndDirection(eComponentType.Light, eDirection.North));
+      Assert.IsTrue(stats.AreEnabledForComponentAndDirection(new DirectionalComponent(eComponentType.Light, eDirection.North)));
       Assert.AreEqual(1, stats.EnabledDirectionalComponents.Count());
     }
 
