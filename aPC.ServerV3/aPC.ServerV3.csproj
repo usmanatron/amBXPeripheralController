@@ -56,7 +56,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AtypicalFirstRunInfiniteTicker.cs" />
-    <Compile Include="Entities\CancellableTask.cs" />
+    <Compile Include="DirectionalComponentActionList.cs" />
+    <Compile Include="Entities\DirectionalComponentAction.cs" />
     <Compile Include="Communication\CommunicationManager.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -70,6 +71,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="SceneOrchestrator.cs" />
+    <Compile Include="TaskManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\RunningDirectionalComponent.cs" />
     <Compile Include="Server.cs">
