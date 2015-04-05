@@ -56,7 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AtypicalFirstRunInfiniteTicker.cs" />
-    <Compile Include="DirectionalComponentActionList.cs" />
+    <Compile Include="Entities\DirectionalComponentActionList.cs" />
     <Compile Include="Entities\DirectionalComponentAction.cs" />
     <Compile Include="Communication\CommunicationManager.cs">
       <SubType>Code</SubType>

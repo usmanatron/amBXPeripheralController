@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace aPC.ServerV3
+namespace aPC.ServerV3.Entities
 {
   /// <summary>
   /// Handles the list of DirectionalComponentActions
