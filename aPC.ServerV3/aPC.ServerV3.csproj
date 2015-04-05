@@ -70,6 +70,7 @@
     <Compile Include="Engine\EngineActor.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Entities\RunningDirectionalComponentList.cs" />
     <Compile Include="NewSceneProcessor.cs" />
     <Compile Include="SceneSplitter.cs" />
     <Compile Include="TaskManager.cs" />

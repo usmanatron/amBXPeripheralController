@@ -10,14 +10,11 @@ namespace aPC.ServerV3
 {
   internal class SceneSplitter
   {
-    public List<RunningDirectionalComponent> RunningComponents;
-    public List<DirectionalComponent> UpdatedDirectionalComponents;
-    public eSceneType CurrentState;
+    public RunningDirectionalComponentList runningDirectionalComponentList;
 
-    public SceneSplitter()
+    public SceneSplitter(RunningDirectionalComponentList runningDirectionalComponentsList)
     {
-      RunningComponents = new List<RunningDirectionalComponent>();
-      UpdatedDirectionalComponents = new List<DirectionalComponent>();
+      this.runningDirectionalComponentList = runningDirectionalComponentsList;
     }
 
     public void SplitScene(amBXScene scene)
@@ -27,12 +24,13 @@ namespace aPC.ServerV3
 
     private void HandleNewScene(amBXScene scene)
     {
-      UpdatedDirectionalComponents.Clear();
+      var previousSceneType = runningDirectionalComponentList.SceneType;
+      runningDirectionalComponentList.StartUpdate(scene.SceneType);
 
       switch (scene.SceneType)
       {
         case eSceneType.Sync:
-          RunningComponents.Clear();
+          runningDirectionalComponentList.Clear();
           MergeNewRunningComponentsIntoExisting(scene);
           UpdateRunningComponentForFrame(scene);
           break;
@@ -40,15 +38,14 @@ namespace aPC.ServerV3
           MergeNewRunningComponentsIntoExisting(scene);
           break;
         case eSceneType.Event:
-          if (CurrentState == eSceneType.Event)
+          if (previousSceneType == eSceneType.Event)
           {
             throw new InvalidOperationException("You cannot transition from one event to another");
           }
           UpdateRunningComponentForFrame(scene);
           break;
       }
-
-      CurrentState = scene.SceneType;
+      runningDirectionalComponentList.EndUpdate();
     }
 
     private void MergeNewRunningComponentsIntoExisting(amBXScene scene)
@@ -61,25 +58,13 @@ namespace aPC.ServerV3
             continue;
           }
 
-          UpdateRunningComponentAndLog(scene, new DirectionalComponent(componentType, direction));
+          runningDirectionalComponentList.Update(scene, new DirectionalComponent(componentType, direction));
         }
     }
 
     private void UpdateRunningComponentForFrame(amBXScene scene)
     {
-      UpdateRunningComponentAndLog(scene, new DirectionalComponent(null, eDirection.Everywhere));
-    }
-
-    private void UpdateRunningComponentAndLog(amBXScene scene, DirectionalComponent directionalComponent)
-    {
-      var existingComponent = RunningComponents.SingleOrDefault(component => component.DirectionalComponent == directionalComponent);
-      if (existingComponent != null)
-      {
-        RunningComponents.Remove(existingComponent);
-      }
-
-      UpdatedDirectionalComponents.Add(directionalComponent);
-      RunningComponents.Add(new RunningDirectionalComponent(scene, directionalComponent, new AtypicalFirstRunInfiniteTicker(scene)));
+      runningDirectionalComponentList.UpdateSync(scene);
     }
   }
 }
