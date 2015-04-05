@@ -8,21 +8,21 @@ using System.Threading.Tasks;
 namespace aPC.ServerV3
 {
   // Handles new scenes - ultimately passes onto the SceneDisseminator for processing
-  internal class NewSceneHandler
+  internal class NewSceneProcessor
   {
     private amBXScene previousScene;
     private amBXScene currentScene;
     private SceneOrchestrator sceneOrchestrator;
     private TaskManager taskManager;
 
-    public NewSceneHandler(SceneOrchestrator sceneOrchestrator, TaskManager taskManager)
+    public NewSceneProcessor(SceneOrchestrator sceneOrchestrator, TaskManager taskManager)
     {
       this.sceneOrchestrator = sceneOrchestrator;
       this.taskManager = taskManager;
       currentScene = new amBXScene() { SceneType = eSceneType.Desync };
     }
 
-    public void HandleNewScene(amBXScene scene)
+    public void Process(amBXScene scene)
     {
       AssignPreviousSceneIfApplicable(scene);
       currentScene = scene;
