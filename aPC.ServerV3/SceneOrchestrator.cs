@@ -10,12 +10,14 @@ namespace aPC.ServerV3
 {
   internal class SceneOrchestrator
   {
-    public List<RunningDirectionalComponent> runningComponents;
-    public eSceneType currentState;
+    public List<RunningDirectionalComponent> RunningComponents;
+    public List<Tuple<eComponentType?, eDirection>> UpdatedDirectionalComponents;
+    public eSceneType CurrentState;
 
     public SceneOrchestrator()
     {
-      runningComponents = new List<RunningDirectionalComponent>();
+      RunningComponents = new List<RunningDirectionalComponent>();
+      UpdatedDirectionalComponents = new List<Tuple<eComponentType?, eDirection>>();
     }
 
     public void UpdateComponents(amBXScene scene)
@@ -25,10 +27,12 @@ namespace aPC.ServerV3
 
     private void HandleNewScene(amBXScene scene)
     {
+      UpdatedDirectionalComponents.Clear();
+
       switch (scene.SceneType)
       {
         case eSceneType.Sync:
-          runningComponents.Clear();
+          RunningComponents.Clear();
           MergeNewRunningComponentsIntoExisting(scene);
           UpdateRunningComponentForFrame(scene);
           break;
@@ -36,7 +40,7 @@ namespace aPC.ServerV3
           MergeNewRunningComponentsIntoExisting(scene);
           break;
         case eSceneType.Event:
-          if (currentState == eSceneType.Event)
+          if (CurrentState == eSceneType.Event)
           {
             throw new InvalidOperationException("You cannot transition from one event to another");
           }
@@ -44,7 +48,7 @@ namespace aPC.ServerV3
           break;
       }
 
-      currentState = scene.SceneType;
+      CurrentState = scene.SceneType;
     }
 
     private void MergeNewRunningComponentsIntoExisting(amBXScene scene)
@@ -57,24 +61,25 @@ namespace aPC.ServerV3
             continue;
           }
 
-          UpdateRunningComponent(scene, componentType, direction);
+          UpdateRunningComponentAndLog(scene, componentType, direction);
         }
     }
 
     private void UpdateRunningComponentForFrame(amBXScene scene)
     {
-      UpdateRunningComponent(scene, null, eDirection.Everywhere);
+      UpdateRunningComponentAndLog(scene, null, eDirection.Everywhere);
     }
 
-    private void UpdateRunningComponent(amBXScene scene, eComponentType? componentType, eDirection direction)
+    private void UpdateRunningComponentAndLog(amBXScene scene, eComponentType? componentType, eDirection direction)
     {
-      var existingComponent = runningComponents.SingleOrDefault(component => component.ComponentType == componentType && component.Direction == direction);
+      var existingComponent = RunningComponents.SingleOrDefault(component => component.ComponentType == componentType && component.Direction == direction);
       if (existingComponent != null)
       {
-        runningComponents.Remove(existingComponent);
+        RunningComponents.Remove(existingComponent);
       }
 
-      runningComponents.Add(new RunningDirectionalComponent(scene, direction, componentType, new AtypicalFirstRunInfiniteTicker(scene)));
+      UpdatedDirectionalComponents.Add(new Tuple<eComponentType?, eDirection>(componentType, direction));
+      RunningComponents.Add(new RunningDirectionalComponent(scene, direction, componentType, new AtypicalFirstRunInfiniteTicker(scene)));
     }
   }
 }
