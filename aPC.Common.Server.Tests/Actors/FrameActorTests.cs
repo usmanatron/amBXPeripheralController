@@ -39,7 +39,7 @@ namespace aPC.Common.Server.Tests.Actors
       Assert.IsTrue(engine.Updated[eComponentType.Light]);
       Assert.IsFalse(engine.Updated[eComponentType.Fan]);
       Assert.IsFalse(engine.Updated[eComponentType.Rumble]);
-      Assert.AreEqual(DefaultLights.Green, engine.Status.LightSection.GetComponentValueInDirection(eDirection.North));
+      Assert.AreEqual(DefaultLights.Green, engine.Status.LightSection.GetComponentSectionInDirection(eDirection.North));
     }
 
     [Test]
@@ -59,7 +59,7 @@ namespace aPC.Common.Server.Tests.Actors
       Assert.IsFalse(engine.Updated[eComponentType.Light]);
       Assert.IsTrue(engine.Updated[eComponentType.Fan]);
       Assert.IsFalse(engine.Updated[eComponentType.Rumble]);
-      Assert.AreEqual(DefaultFans.QuarterPower, engine.Status.FanSection.GetComponentValueInDirection(eDirection.West));
+      Assert.AreEqual(DefaultFans.QuarterPower, engine.Status.FanSection.GetComponentSectionInDirection(eDirection.West));
     }
 
     [Test]

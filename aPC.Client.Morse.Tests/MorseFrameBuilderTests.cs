@@ -50,7 +50,7 @@ namespace aPC.Client.Morse.Tests
         Assert.IsNotNull(frames[i].RumbleSection);
 
         Assert.AreEqual(blocks[i].Length * settings.UnitLength, frames[i].Length);
-        Assert.AreEqual(colour, frames[i].LightSection.GetComponentValueInDirection(eDirection.North));
+        Assert.AreEqual(colour, frames[i].LightSection.GetComponentSectionInDirection(eDirection.North));
         Assert.AreEqual(rumble, frames[i].RumbleSection.Rumbles.Single());
       }
     }
@@ -72,7 +72,7 @@ namespace aPC.Client.Morse.Tests
       Assert.IsNotNull(frame.RumbleSection);
 
       Assert.AreEqual(block.Length * settings.UnitLength, frame.Length);
-      Assert.AreEqual(colour, frame.LightSection.GetComponentValueInDirection(eDirection.North));
+      Assert.AreEqual(colour, frame.LightSection.GetComponentSectionInDirection(eDirection.North));
       Assert.AreEqual(rumble, frame.RumbleSection.Rumbles.Single());
     }
 

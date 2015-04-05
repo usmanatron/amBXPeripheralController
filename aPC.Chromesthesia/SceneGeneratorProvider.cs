@@ -45,8 +45,8 @@ namespace aPC.Chromesthesia
 
     private bool SceneIsEmpty(amBXScene scene)
     {
-      return LightIsEmpty((Light)scene.Frames[0].LightSection.GetComponentValueInDirection(eDirection.East)) &&
-             LightIsEmpty((Light)scene.Frames[0].LightSection.GetComponentValueInDirection(eDirection.West));
+      return LightIsEmpty((Light)scene.Frames[0].LightSection.GetComponentSectionInDirection(eDirection.East)) &&
+             LightIsEmpty((Light)scene.Frames[0].LightSection.GetComponentSectionInDirection(eDirection.West));
     }
 
     private bool LightIsEmpty(Light light)

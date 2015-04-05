@@ -27,8 +27,8 @@ namespace aPC.Common.Tests.Builders
         .WithAllFans(halfPower)
         .Build();
 
-      Assert.AreEqual(halfPower, section.GetComponentValueInDirection(eDirection.East));
-      Assert.AreEqual(halfPower, section.GetComponentValueInDirection(eDirection.West));
+      Assert.AreEqual(halfPower, section.GetComponentSectionInDirection(eDirection.East));
+      Assert.AreEqual(halfPower, section.GetComponentSectionInDirection(eDirection.West));
     }
 
     [Test]
@@ -39,8 +39,8 @@ namespace aPC.Common.Tests.Builders
         .WithFanInDirection(eDirection.West, halfPower)
         .Build();
 
-      Assert.AreEqual(fullPower, section.GetComponentValueInDirection(eDirection.East));
-      Assert.AreEqual(halfPower, section.GetComponentValueInDirection(eDirection.West));
+      Assert.AreEqual(fullPower, section.GetComponentSectionInDirection(eDirection.East));
+      Assert.AreEqual(halfPower, section.GetComponentSectionInDirection(eDirection.West));
     }
   }
 }

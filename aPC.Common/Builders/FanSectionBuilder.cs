@@ -29,7 +29,7 @@ namespace aPC.Common.Builders
 
     public FanSectionBuilder WithFanInDirection(eDirection direction, Fan fan)
     {
-      if (fanSection.GetComponentValueInDirection(direction) != null)
+      if (fanSection.GetComponentSectionInDirection(direction) != null)
       {
         throw new ArgumentException("Attempted to add multiple fans in the same direction");
       }

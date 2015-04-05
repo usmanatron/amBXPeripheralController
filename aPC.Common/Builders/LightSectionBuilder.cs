@@ -38,7 +38,7 @@ namespace aPC.Common.Builders
 
     public LightSectionBuilder WithLightInDirection(eDirection direction, Light light)
     {
-      if (lightSection.GetComponentValueInDirection(direction) != null)
+      if (lightSection.GetComponentSectionInDirection(direction) != null)
       {
         throw new ArgumentException("Attempted to add multiple lights in the same direction");
       }

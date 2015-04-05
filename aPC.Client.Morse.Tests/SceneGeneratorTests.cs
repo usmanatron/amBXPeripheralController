@@ -51,7 +51,7 @@ namespace aPC.Client.Morse.Tests
       {
         foreach (eDirection direction in ApplicableLightDirections)
         {
-          Assert.IsNotNull(light.GetComponentValueInDirection(direction));
+          Assert.IsNotNull(light.GetComponentSectionInDirection(direction));
         }
       }
     }
@@ -63,7 +63,7 @@ namespace aPC.Client.Morse.Tests
 
       foreach (var rumble in generatedScene.Frames.Select(frame => frame.RumbleSection))
       {
-        Assert.IsNull(rumble.GetComponentValueInDirection(eDirection.Center));
+        Assert.IsNull(rumble.GetComponentSectionInDirection(eDirection.Center));
       }
     }
 
@@ -77,7 +77,7 @@ namespace aPC.Client.Morse.Tests
       {
         foreach (eDirection direction in ApplicableLightDirections)
         {
-          Assert.AreEqual(whiteLight, light.GetComponentValueInDirection(direction));
+          Assert.AreEqual(whiteLight, light.GetComponentSectionInDirection(direction));
         }
       }
     }
@@ -133,7 +133,7 @@ namespace aPC.Client.Morse.Tests
 
       foreach (var rumble in generatedScene.Frames.Select(frame => frame.RumbleSection))
       {
-        Assert.IsNotNull(rumble.GetComponentValueInDirection(eDirection.Center));
+        Assert.IsNotNull(rumble.GetComponentSectionInDirection(eDirection.Center));
       }
     }
 
@@ -148,7 +148,7 @@ namespace aPC.Client.Morse.Tests
       {
         foreach (eDirection direction in ApplicableLightDirections)
         {
-          Assert.AreEqual(DefaultLights.Red, light.GetComponentValueInDirection(direction));
+          Assert.AreEqual(DefaultLights.Red, light.GetComponentSectionInDirection(direction));
         }
       }
     }
@@ -176,7 +176,7 @@ namespace aPC.Client.Morse.Tests
       var scene = generatedScene.Frames.Last();
       var expectedBlock = new MessageEndMarker();
 
-      Assert.AreEqual(expectedBlock.Enabled, scene.LightSection.GetComponentValueInDirection(eDirection.North) == settings.Colour);
+      Assert.AreEqual(expectedBlock.Enabled, scene.LightSection.GetComponentSectionInDirection(eDirection.North) == settings.Colour);
       Assert.AreEqual(expectedBlock.Length * settings.UnitLength, scene.Length);
     }
 
@@ -189,7 +189,7 @@ namespace aPC.Client.Morse.Tests
       var scene = generatedScene.Frames.Last();
       var expectedBlock = new MessageEndMarker();
 
-      Assert.AreNotEqual(expectedBlock.Enabled, scene.LightSection.GetComponentValueInDirection(eDirection.North).Equals(settings.Colour));
+      Assert.AreNotEqual(expectedBlock.Enabled, scene.LightSection.GetComponentSectionInDirection(eDirection.North).Equals(settings.Colour));
       Assert.AreNotEqual(expectedBlock.Length * settings.UnitLength, scene.Length);
     }
 
@@ -207,7 +207,7 @@ namespace aPC.Client.Morse.Tests
       var frame = generatedScene.Frames.Single();
 
       Assert.IsNotNull(frame.LightSection);
-      Assert.AreEqual(settings.Colour, frame.LightSection.GetComponentValueInDirection(eDirection.North)); // Sufficient to just test North
+      Assert.AreEqual(settings.Colour, frame.LightSection.GetComponentSectionInDirection(eDirection.North)); // Sufficient to just test North
       Assert.AreEqual(new Dash().Length * settings.UnitLength, frame.Length);
     }
 
@@ -226,10 +226,10 @@ namespace aPC.Client.Morse.Tests
       var secondExpectedFrame = new MessageEndMarker();
 
       Assert.IsNotNull(generatedScene.Frames[0].LightSection);
-      Assert.AreEqual(settings.Colour, generatedScene.Frames[0].LightSection.GetComponentValueInDirection(eDirection.North)); // Sufficient to just test North
+      Assert.AreEqual(settings.Colour, generatedScene.Frames[0].LightSection.GetComponentSectionInDirection(eDirection.North)); // Sufficient to just test North
       Assert.AreEqual(firstExpectedFrame.Length * settings.UnitLength, generatedScene.Frames[0].Length);
       Assert.IsNotNull(generatedScene.Frames[1].LightSection);
-      Assert.AreEqual(DefaultLights.Off, generatedScene.Frames[1].LightSection.GetComponentValueInDirection(eDirection.North));
+      Assert.AreEqual(DefaultLights.Off, generatedScene.Frames[1].LightSection.GetComponentSectionInDirection(eDirection.North));
       Assert.AreEqual(secondExpectedFrame.Length * settings.UnitLength, generatedScene.Frames[1].Length);
     }
 

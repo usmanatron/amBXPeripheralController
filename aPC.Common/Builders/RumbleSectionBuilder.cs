@@ -25,7 +25,7 @@ namespace aPC.Common.Builders
 
     public RumbleSectionBuilder WithRumbleInDirection(eDirection direction, Rumble rumble)
     {
-      if (rumbleSection.GetComponentValueInDirection(direction) != null)
+      if (rumbleSection.GetComponentSectionInDirection(direction) != null)
       {
         throw new ArgumentException("Attempted to add multiple Rumbles in the same direction");
       }

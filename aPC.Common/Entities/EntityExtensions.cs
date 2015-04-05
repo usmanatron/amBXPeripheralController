@@ -7,7 +7,7 @@ namespace aPC.Common.Entities
 {
   public static class EntityExtensions
   {
-    public static DirectionalComponent GetComponentValueInDirection(this IComponentSection section, eDirection direction)
+    public static DirectionalComponent GetComponentSectionInDirection(this IComponentSection section, eDirection direction)
     {
       if (section == null)
       {
@@ -25,11 +25,11 @@ namespace aPC.Common.Entities
       switch (componentType)
       {
         case eComponentType.Light:
-          return frame.LightSection.GetComponentValueInDirection(direction);
+          return frame.LightSection.GetComponentSectionInDirection(direction);
         case eComponentType.Fan:
-          return frame.FanSection.GetComponentValueInDirection(direction);
+          return frame.FanSection.GetComponentSectionInDirection(direction);
         case eComponentType.Rumble:
-          return frame.RumbleSection.GetComponentValueInDirection(direction);
+          return frame.RumbleSection.GetComponentSectionInDirection(direction);
         default:
           throw new ArgumentException("Unexpected Component Type");
       }

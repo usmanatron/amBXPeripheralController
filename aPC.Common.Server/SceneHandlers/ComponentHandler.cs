@@ -18,7 +18,7 @@ namespace aPC.Common.Server.SceneHandlers
     {
       var frame = GetNextFrame();
       var componentSection = GetSection(frame);
-      var component = componentSection.GetComponentValueInDirection(direction);
+      var component = componentSection.GetComponentSectionInDirection(direction);
 
       return component == null
         ? new ComponentSnapshot(frame.Length)

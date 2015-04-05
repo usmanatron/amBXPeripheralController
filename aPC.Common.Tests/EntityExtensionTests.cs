@@ -25,15 +25,15 @@ namespace aPC.Common.Tests
     [Test]
     public void GettingComponentByDirection_GivesCorrectMember()
     {
-      var component = testSection.GetComponentValueInDirection(eDirection.North);
+      var component = testSection.GetComponentSectionInDirection(eDirection.North);
 
-      Assert.AreEqual(testSection.GetComponentValueInDirection(eDirection.North), component);
+      Assert.AreEqual(testSection.GetComponentSectionInDirection(eDirection.North), component);
     }
 
     [Test]
     public void MultipleFieldsSharingTheSameDirection_ThrowsException()
     {
-      Assert.Throws<InvalidOperationException>(() => testSection.GetComponentValueInDirection(eDirection.South));
+      Assert.Throws<InvalidOperationException>(() => testSection.GetComponentSectionInDirection(eDirection.South));
     }
   }
 
