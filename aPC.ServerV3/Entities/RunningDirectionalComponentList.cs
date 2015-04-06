@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace aPC.ServerV3.Entities
 {
-  internal class RunningDirectionalComponentList
+  public class RunningDirectionalComponentList
   {
     private RunningDirectionalComponent frame;
     private List<RunningDirectionalComponent> components;

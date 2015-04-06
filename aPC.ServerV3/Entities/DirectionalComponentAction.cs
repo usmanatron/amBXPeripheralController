@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace aPC.ServerV3.Entities
 {
-  internal class DirectionalComponentAction
+  public class DirectionalComponentAction
   {
     public CancellationTokenSource CancellationToken { get; private set; }
 

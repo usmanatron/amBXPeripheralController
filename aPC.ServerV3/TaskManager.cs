@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace aPC.ServerV3
 {
   // Handles the masses of tasks flying around.
-  internal class TaskManager
+  public class TaskManager
   {
     private EngineActor engineActor;
     private DirectionalComponentActionList directionalComponentActionList;

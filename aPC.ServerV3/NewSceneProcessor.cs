@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace aPC.ServerV3
 {
   // Handles new scenes - ultimately passes onto the SceneDisseminator for processing
-  internal class NewSceneProcessor
+  public class NewSceneProcessor
   {
     private amBXScene previousScene;
     private amBXScene currentScene;

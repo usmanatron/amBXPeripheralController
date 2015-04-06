@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace aPC.ServerV3.Engine
 {
-  internal class EngineActor
+  public class EngineActor
   {
     private AmbxEngineWrapper ambxEngineWrapper;
 

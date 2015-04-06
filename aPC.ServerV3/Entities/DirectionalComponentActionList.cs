@@ -12,7 +12,7 @@ namespace aPC.ServerV3.Entities
   /// <summary>
   /// Handles the list of DirectionalComponentActions
   /// </summary>
-  internal class DirectionalComponentActionList
+  public class DirectionalComponentActionList
   {
     private List<DirectionalComponentAction> actions;
     private object locker;

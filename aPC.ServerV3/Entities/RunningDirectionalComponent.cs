@@ -15,7 +15,7 @@ namespace aPC.ServerV3.Entities
   ///   This also encapsulates a Frame when running in Sync mode.  This is
   ///   arguably an abuse of this class
   /// </remarks>
-  internal class RunningDirectionalComponent
+  public class RunningDirectionalComponent
   {
     public amBXScene Scene { get; private set; }
 

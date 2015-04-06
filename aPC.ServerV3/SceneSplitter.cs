@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace aPC.ServerV3
 {
-  internal class SceneSplitter
+  public class SceneSplitter
   {
     public RunningDirectionalComponentList runningDirectionalComponentList;
 
