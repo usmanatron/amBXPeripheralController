@@ -1,10 +1,9 @@
-﻿using Akka.Actor;
-using aPC.Common;
+﻿using aPC.Common;
 using aPC.Common.Entities;
 using System;
 using System.Threading;
 
-namespace aPC.Server.Engine
+namespace aPC.Common.Server.Engine
 {
   public class EngineActor
   {

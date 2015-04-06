@@ -1,13 +1,13 @@
 ﻿using aPC.Common;
 using aPC.Common.Entities;
-using aPC.Server.Entities;
+using aPC.Common.Server.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace aPC.Server.Entities
+namespace aPC.Common.Server.Entities
 {
   /// <summary>
   /// Handles the list of DirectionalComponentActions

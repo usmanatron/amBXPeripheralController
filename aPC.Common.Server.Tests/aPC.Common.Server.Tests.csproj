@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{403F51FC-6034-49CF-A30F-379851403BA6}</ProjectGuid>
+    <ProjectGuid>{A5C60DB6-8CD4-425D-A30E-723496DA2BC6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>aPC.ServerV3.Tests</RootNamespace>
-    <AssemblyName>aPC.ServerV3.Tests</AssemblyName>
+    <RootNamespace>aPC.Common.Server.Tests</RootNamespace>
+    <AssemblyName>aPC.Common.Server.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -16,9 +16,9 @@
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
+    <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -28,7 +28,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -57,15 +56,16 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="AtypicalFirstRunInfiniteTickerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\aPC.Server\aPC.Server.csproj">
-      <Project>{e30d0adb-36a7-48a5-ad1d-c3dc496e1acc}</Project>
-      <Name>aPC.Server</Name>
+    <ProjectReference Include="..\aPC.Common.Server\aPC.Common.Server.csproj">
+      <Project>{47258892-f375-4bd9-9b47-87ad0a6569fd}</Project>
+      <Name>aPC.Common.Server</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

@@ -85,13 +85,13 @@
       <Project>{20941C53-9669-4BF2-B354-AFF8023C1A1E}</Project>
       <Name>aPC.Common.Client</Name>
     </ProjectReference>
+    <ProjectReference Include="..\aPC.Common.Server\aPC.Common.Server.csproj">
+      <Project>{47258892-f375-4bd9-9b47-87ad0a6569fd}</Project>
+      <Name>aPC.Common.Server</Name>
+    </ProjectReference>
     <ProjectReference Include="..\aPC.Common\aPC.Common.csproj">
       <Project>{b6543e75-59af-4059-acf8-560e82bc72ce}</Project>
       <Name>aPC.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\aPC.Server\aPC.Server.csproj">
-      <Project>{e30d0adb-36a7-48a5-ad1d-c3dc496e1acc}</Project>
-      <Name>aPC.Server</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
