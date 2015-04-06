@@ -69,7 +69,6 @@
     <Compile Include="Lights\Colour\NormalCumulativeColourBuilder.cs" />
     <Compile Include="Lights\CompositeLightBuilder.cs" />
     <Compile Include="Lights\CompositeLightSectionBuilder.cs" />
-    <Compile Include="ConductorManager.cs" />
     <Compile Include="Lights\LightBuilder.cs" />
     <Compile Include="Lights\SoundToLightConverter.cs" />
     <Compile Include="SceneBuilder.cs" />
@@ -86,13 +85,13 @@
       <Project>{20941C53-9669-4BF2-B354-AFF8023C1A1E}</Project>
       <Name>aPC.Common.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\aPC.Common.Server\aPC.Common.Server.csproj">
-      <Project>{d92d8fb4-7414-4dfe-83b6-2ee8852676bc}</Project>
-      <Name>aPC.Common.Server</Name>
-    </ProjectReference>
     <ProjectReference Include="..\aPC.Common\aPC.Common.csproj">
       <Project>{b6543e75-59af-4059-acf8-560e82bc72ce}</Project>
       <Name>aPC.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\aPC.ServerV3\aPC.ServerV3.csproj">
+      <Project>{e30d0adb-36a7-48a5-ad1d-c3dc496e1acc}</Project>
+      <Name>aPC.ServerV3</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

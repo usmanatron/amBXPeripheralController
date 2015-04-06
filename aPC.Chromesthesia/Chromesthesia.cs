@@ -4,10 +4,9 @@ using aPC.Chromesthesia.Sound;
 using aPC.Common;
 using aPC.Common.Builders;
 using aPC.Common.Defaults;
-using aPC.Common.Server.Actors;
-using aPC.Common.Server.Conductors;
-using aPC.Common.Server.Engine;
-using aPC.Common.Server.SceneHandlers;
+using aPC.ServerV3;
+using aPC.ServerV3.Engine;
+using aPC.ServerV3.Entities;
 using NAudio.Wave;
 using Ninject;
 using System;
@@ -31,8 +30,8 @@ namespace aPC.Chromesthesia
       var streamPitch = new PitchGeneratorProvider(streamRaw, new FftPitchDetector(), new FftPitchDetector(), new FloatDataStereoSplitter(), new PitchResultSummaryWriter());
       var compositeLightSectionBuilder = kernel.Get<SceneBuilder>();
 
-      var frameConductor = new FrameConductor(new FrameActor(new EngineManager()), new FrameHandler(new SceneAccessor(new DefaultScenes()).GetScene("rainbow"), EventComplete));
-      var streamScene = new SceneGenerator(streamPitch, compositeLightSectionBuilder, new ConductorManager(frameConductor));
+      var newSceneProcessor = kernel.Get<NewSceneProcessor>();
+      var streamScene = new SceneGenerator(streamPitch, compositeLightSectionBuilder, newSceneProcessor);
 
       task = new ChromesthesiaTask(streamScene);
 

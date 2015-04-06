@@ -3,8 +3,10 @@ using aPC.Chromesthesia.Sound;
 using aPC.Chromesthesia.Sound.Entities;
 using aPC.Common;
 using aPC.Common.Entities;
+using aPC.ServerV3;
 using NAudio.Wave;
 using System;
+using System.Threading;
 
 namespace aPC.Chromesthesia
 {
@@ -12,13 +14,13 @@ namespace aPC.Chromesthesia
   {
     private readonly PitchGeneratorProvider pitchGenerator;
     private readonly SceneBuilder sceneBuilder;
-    private readonly ConductorManager conductorManager;
+    private readonly NewSceneProcessor newSceneProcessor;
 
-    public SceneGenerator(PitchGeneratorProvider pitchGenerator, SceneBuilder sceneBuilder, ConductorManager conductorManager)
+    public SceneGenerator(PitchGeneratorProvider pitchGenerator, SceneBuilder sceneBuilder, NewSceneProcessor newSceneProcessor)
     {
       this.pitchGenerator = pitchGenerator;
       this.sceneBuilder = sceneBuilder;
-      this.conductorManager = conductorManager;
+      this.newSceneProcessor = newSceneProcessor;
     }
 
     public void Execute(int readLength)
@@ -30,8 +32,8 @@ namespace aPC.Chromesthesia
 
       if (!SceneIsEmpty(scene))
       {
-        // Push through conductorManager
-        conductorManager.Update(scene);
+        // Push changes
+        newSceneProcessor.Process(scene);
       }
 
       return;

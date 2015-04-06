@@ -66,14 +66,11 @@ namespace aPC.Chromesthesia.Lights
       var eastDiagonalLight = compositeLightBuilder.BuildCompositeLight(eastLight, westLight, sidePercentageOnDiagonal);
 
       return lightSectionBuilder
-        .WithLightInDirection(eDirection.North, centralLight)
-        .WithLightInDirection(eDirection.NorthEast, eastDiagonalLight)
         .WithLightInDirection(eDirection.East, eastLight)
-        .WithLightInDirection(eDirection.SouthEast, eastDiagonalLight)
-        .WithLightInDirection(eDirection.South, centralLight)
-        .WithLightInDirection(eDirection.SouthWest, westDiagonalLight)
         .WithLightInDirection(eDirection.West, westLight)
-        .WithLightInDirection(eDirection.NorthWest, westDiagonalLight)
+        .WithLightInDirections(new[] { eDirection.North, eDirection.South }, centralLight)
+        .WithLightInDirections(new[] { eDirection.NorthEast, eDirection.SouthEast }, eastDiagonalLight)
+        .WithLightInDirections(new[] { eDirection.NorthWest, eDirection.SouthWest }, westDiagonalLight)
         .Build();
     }
   }
