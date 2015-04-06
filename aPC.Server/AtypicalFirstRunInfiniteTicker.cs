@@ -1,7 +1,7 @@
 ﻿using aPC.Common.Entities;
 using System;
 
-namespace aPC.ServerV3
+namespace aPC.Server
 {
   /// <summary>
   /// an infinite ticker that deals with an atypical first run (e.g. the first run has more steps,

@@ -1,12 +1,12 @@
 ﻿using aPC.Common;
 using aPC.Common.Entities;
-using aPC.ServerV3.Entities;
+using aPC.Server.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace aPC.ServerV3
+namespace aPC.Server
 {
   // Handles new scenes - ultimately passes onto the SceneDisseminator for processing
   public class NewSceneProcessor

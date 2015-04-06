@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
 
-namespace aPC.ServerV3.Communication
+namespace aPC.Server.Communication
 {
   public class NotificationService : INotificationService
   {

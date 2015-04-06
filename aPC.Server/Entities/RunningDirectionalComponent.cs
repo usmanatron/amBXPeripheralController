@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aPC.ServerV3.Entities
+namespace aPC.Server.Entities
 {
   /// <summary>
   ///   Encapsulates a running DirectionalComponent

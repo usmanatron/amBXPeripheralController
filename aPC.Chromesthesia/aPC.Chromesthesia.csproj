@@ -89,9 +89,9 @@
       <Project>{b6543e75-59af-4059-acf8-560e82bc72ce}</Project>
       <Name>aPC.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\aPC.ServerV3\aPC.ServerV3.csproj">
+    <ProjectReference Include="..\aPC.Server\aPC.Server.csproj">
       <Project>{e30d0adb-36a7-48a5-ad1d-c3dc496e1acc}</Project>
-      <Name>aPC.ServerV3</Name>
+      <Name>aPC.Server</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

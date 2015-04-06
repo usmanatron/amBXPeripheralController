@@ -1,14 +1,14 @@
 ﻿using aPC.Common;
 using aPC.Common.Entities;
-using aPC.ServerV3.Engine;
-using aPC.ServerV3.Entities;
+using aPC.Server.Engine;
+using aPC.Server.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace aPC.ServerV3
+namespace aPC.Server
 {
   // Handles the masses of tasks flying around.
   public class TaskManager

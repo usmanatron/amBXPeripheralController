@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace aPC.ServerV3.Entities
+namespace aPC.Server.Entities
 {
   public class RunningDirectionalComponentList
   {

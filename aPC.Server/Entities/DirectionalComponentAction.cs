@@ -2,7 +2,7 @@
 using aPC.Common.Entities;
 using System.Threading;
 
-namespace aPC.ServerV3.Entities
+namespace aPC.Server.Entities
 {
   public class DirectionalComponentAction
   {

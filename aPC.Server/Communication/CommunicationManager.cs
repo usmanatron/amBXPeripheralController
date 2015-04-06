@@ -4,7 +4,7 @@ using System.Net;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 
-namespace aPC.ServerV3.Communication
+namespace aPC.Server.Communication
 {
   public class CommunicationManager : IDisposable
   {

@@ -43,9 +43,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.Client.Tests", "aPC.Cli
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Servers", "Servers", "{AD88E8DA-767E-421A-B8D9-DE20E016F023}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.ServerV3", "aPC.ServerV3\aPC.ServerV3.csproj", "{E30D0ADB-36A7-48A5-AD1D-C3DC496E1ACC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.Server", "aPC.Server\aPC.Server.csproj", "{E30D0ADB-36A7-48A5-AD1D-C3DC496E1ACC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.ServerV3.Tests", "aPC.ServerV3.Tests\aPC.ServerV3.Tests.csproj", "{403F51FC-6034-49CF-A30F-379851403BA6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.Server.Tests", "aPC.Server.Tests\aPC.Server.Tests.csproj", "{403F51FC-6034-49CF-A30F-379851403BA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace aPC.ServerV3.Engine
+namespace aPC.Server.Engine
 {
   /// <summary>
   ///  Manages the amBXEngine interface.

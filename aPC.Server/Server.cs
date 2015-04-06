@@ -1,9 +1,9 @@
 ﻿using aPC.Common.Defaults;
-using aPC.ServerV3.Communication;
-using aPC.ServerV3.Engine;
-using aPC.ServerV3.Entities;
+using aPC.Server.Communication;
+using aPC.Server.Engine;
+using aPC.Server.Entities;
 
-namespace aPC.ServerV3
+namespace aPC.Server
 {
   internal class Server
   {

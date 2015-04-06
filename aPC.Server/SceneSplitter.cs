@@ -1,9 +1,9 @@
 ﻿using aPC.Common;
 using aPC.Common.Entities;
-using aPC.ServerV3.Entities;
+using aPC.Server.Entities;
 using System;
 
-namespace aPC.ServerV3
+namespace aPC.Server
 {
   public class SceneSplitter
   {

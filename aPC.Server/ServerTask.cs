@@ -1,15 +1,15 @@
 ﻿using aPC.Common.Communication;
 using aPC.Common.Defaults;
 using aPC.Common.Entities;
-using aPC.ServerV3.Communication;
-using aPC.ServerV3.Engine;
+using aPC.Server.Communication;
+using aPC.Server.Engine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace aPC.ServerV3
+namespace aPC.Server
 {
   internal class ServerTask
   {
