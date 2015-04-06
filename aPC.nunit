@@ -6,9 +6,7 @@
     <assembly path="aPC.Client.Morse.Tests\bin\Debug\aPC.Client.Morse.Tests.dll" />
     <assembly path="aPC.Common.Client.Tests\bin\Debug\aPC.Common.Client.Tests.dll" />
     <assembly path="aPC.Common.Tests\bin\Debug\aPC.Common.Tests.dll" />
-    <assembly path="aPC.Server.Tests\bin\Debug\aPC.Server.Tests.dll" />
     <assembly path="aPC.Web.Tests\bin\Debug\aPC.Web.Tests.dll" />
-    <assembly path="aPC.Common.Server.Tests\bin\Debug\aPC.Common.Server.Tests.dll" />
   </Config>
   <Config name="Release" binpathtype="Auto">
     <assembly path="aPC.Client.Tests\bin\Release\aPC.Client.Tests.dll" />
@@ -16,7 +14,6 @@
     <assembly path="aPC.Client.Morse.Tests\bin\Release\aPC.Client.Morse.Tests.dll" />
     <assembly path="aPC.Common.Client.Tests\bin\Release\aPC.Common.Client.Tests.dll" />
     <assembly path="aPC.Common.Tests\bin\Release\aPC.Common.Tests.dll" />
-    <assembly path="aPC.Server.Tests\bin\Release\aPC.Server.Tests.dll" />
     <assembly path="aPC.Web.Tests\bin\Release\aPC.Web.Tests.dll" />
   </Config>
 </NUnitProject>
