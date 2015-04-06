@@ -1,5 +1,6 @@
 ﻿using aPC.Common;
 using aPC.Common.Entities;
+using aPC.ServerV3.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +15,13 @@ namespace aPC.ServerV3
     private amBXScene currentScene;
     private SceneSplitter sceneSplitter;
     private TaskManager taskManager;
+    private RunningDirectionalComponentList runningDirectionalComponents;
 
-    public NewSceneProcessor(SceneSplitter sceneSplitter, TaskManager taskManager)
+    public NewSceneProcessor(SceneSplitter sceneSplitter, TaskManager taskManager, RunningDirectionalComponentList runningDirectionalComponents)
     {
       this.sceneSplitter = sceneSplitter;
       this.taskManager = taskManager;
+      this.runningDirectionalComponents = runningDirectionalComponents;
       currentScene = new amBXScene() { SceneType = eSceneType.Desync };
     }
 
@@ -80,8 +83,8 @@ namespace aPC.ServerV3
 
     private void PushChanges()
     {
-      sceneSplitter.SplitScene(currentScene);
-      taskManager.RefreshTasks();
+      sceneSplitter.SplitScene(runningDirectionalComponents, currentScene);
+      taskManager.RefreshTasks(runningDirectionalComponents);
     }
   }
 }

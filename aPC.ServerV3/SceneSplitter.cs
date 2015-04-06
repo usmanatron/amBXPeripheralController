@@ -2,35 +2,28 @@
 using aPC.Common.Entities;
 using aPC.ServerV3.Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
 
 namespace aPC.ServerV3
 {
   public class SceneSplitter
   {
-    public RunningDirectionalComponentList runningDirectionalComponentList;
+    private RunningDirectionalComponentList runningDirectionalComponents;
 
-    public SceneSplitter(RunningDirectionalComponentList runningDirectionalComponentsList)
+    public void SplitScene(RunningDirectionalComponentList runningDirectionalComponents, amBXScene scene)
     {
-      this.runningDirectionalComponentList = runningDirectionalComponentsList;
-    }
-
-    public void SplitScene(amBXScene scene)
-    {
+      this.runningDirectionalComponents = runningDirectionalComponents;
       HandleNewScene(scene);
     }
 
     private void HandleNewScene(amBXScene scene)
     {
-      var previousSceneType = runningDirectionalComponentList.SceneType;
-      runningDirectionalComponentList.StartUpdate(scene.SceneType);
+      var previousSceneType = runningDirectionalComponents.SceneType;
+      runningDirectionalComponents.StartUpdate(scene.SceneType);
 
       switch (scene.SceneType)
       {
         case eSceneType.Sync:
-          runningDirectionalComponentList.Clear();
+          runningDirectionalComponents.Clear();
           MergeNewRunningComponentsIntoExisting(scene);
           UpdateRunningComponentForFrame(scene);
           break;
@@ -45,7 +38,7 @@ namespace aPC.ServerV3
           UpdateRunningComponentForFrame(scene);
           break;
       }
-      runningDirectionalComponentList.EndUpdate();
+      runningDirectionalComponents.EndUpdate();
     }
 
     private void MergeNewRunningComponentsIntoExisting(amBXScene scene)
@@ -58,13 +51,13 @@ namespace aPC.ServerV3
             continue;
           }
 
-          runningDirectionalComponentList.Update(scene, new DirectionalComponent(componentType, direction));
+          runningDirectionalComponents.Update(scene, new DirectionalComponent(componentType, direction));
         }
     }
 
     private void UpdateRunningComponentForFrame(amBXScene scene)
     {
-      runningDirectionalComponentList.UpdateSync(scene);
+      runningDirectionalComponents.UpdateSync(scene);
     }
   }
 }

@@ -15,29 +15,30 @@ namespace aPC.ServerV3
   {
     private EngineActor engineActor;
     private DirectionalComponentActionList directionalComponentActionList;
-    private RunningDirectionalComponentList runningDirectionalComponents;
+    private eSceneType runningSceneType;
 
-    public TaskManager(EngineActor engineActor, DirectionalComponentActionList directionalComponentActionList, RunningDirectionalComponentList runningDirectionalComponents)
+    public TaskManager(EngineActor engineActor, DirectionalComponentActionList directionalComponentActionList)
     {
       this.engineActor = engineActor;
       this.directionalComponentActionList = directionalComponentActionList;
-      this.runningDirectionalComponents = runningDirectionalComponents;
     }
 
-    public void RefreshTasks()
+    public void RefreshTasks(RunningDirectionalComponentList runningDirectionalComponentList)
     {
-      switch (runningDirectionalComponents.SceneType)
+      this.runningSceneType = runningDirectionalComponentList.SceneType;
+
+      switch (runningSceneType)
       {
         case eSceneType.Desync:
-          foreach (var directionalComponent in runningDirectionalComponents.LastUpdatedDirectionalComponents)
+          foreach (var directionalComponent in runningDirectionalComponentList.LastUpdatedDirectionalComponents)
           {
-            ReScheduleTask(runningDirectionalComponents.Get(directionalComponent));
+            ReScheduleTask(runningDirectionalComponentList.Get(directionalComponent));
           }
           break;
         case eSceneType.Sync:
         case eSceneType.Event:
           directionalComponentActionList.CancelAll();
-          ScheduleTask(runningDirectionalComponents.GetSync(), 0);
+          ScheduleTask(runningDirectionalComponentList.GetSync(), 0);
           break;
       }
     }
@@ -54,7 +55,7 @@ namespace aPC.ServerV3
 
       var frame = GetFrame(runningComponent);
 
-      if (runningDirectionalComponents.SceneType == eSceneType.Desync)
+      if (runningSceneType == eSceneType.Desync)
       {
         var component = frame.GetComponentInDirection(runningComponent.DirectionalComponent.ComponentType, runningComponent.DirectionalComponent.Direction);
         engineActor.UpdateComponent(component);
