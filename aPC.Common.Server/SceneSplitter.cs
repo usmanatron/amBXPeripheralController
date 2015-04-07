@@ -1,5 +1,4 @@
-﻿using aPC.Common;
-using aPC.Common.Entities;
+﻿using aPC.Common.Entities;
 using aPC.Common.Server.Entities;
 using System;
 
@@ -9,9 +8,9 @@ namespace aPC.Common.Server
   {
     private RunningDirectionalComponentList runningDirectionalComponents;
 
-    public void SplitScene(RunningDirectionalComponentList runningDirectionalComponents, amBXScene scene)
+    public void SplitScene(RunningDirectionalComponentList runningDirectionalComponentList, amBXScene scene)
     {
-      this.runningDirectionalComponents = runningDirectionalComponents;
+      runningDirectionalComponents = runningDirectionalComponentList;
       HandleNewScene(scene);
     }
 
@@ -27,9 +26,11 @@ namespace aPC.Common.Server
           MergeNewRunningComponentsIntoExisting(scene);
           UpdateRunningComponentForFrame(scene);
           break;
+
         case eSceneType.Desync:
           MergeNewRunningComponentsIntoExisting(scene);
           break;
+
         case eSceneType.Event:
           if (previousSceneType == eSceneType.Event)
           {

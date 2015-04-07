@@ -1,5 +1,4 @@
-﻿using aPC.Common;
-using aPC.Common.Entities;
+﻿using aPC.Common.Entities;
 using System;
 using System.Threading;
 
@@ -7,7 +6,7 @@ namespace aPC.Common.Server.Engine
 {
   public class EngineActor
   {
-    private AmbxEngineWrapper ambxEngineWrapper;
+    private readonly AmbxEngineWrapper ambxEngineWrapper;
 
     public EngineActor(AmbxEngineWrapper ambxEngineWrapper)
     {
@@ -21,12 +20,15 @@ namespace aPC.Common.Server.Engine
         case eComponentType.Light:
           ThreadPool.QueueUserWorkItem(_ => ambxEngineWrapper.UpdateLight((Light)component));
           break;
+
         case eComponentType.Fan:
           ThreadPool.QueueUserWorkItem(_ => ambxEngineWrapper.UpdateFan((Fan)component));
           break;
+
         case eComponentType.Rumble:
           ThreadPool.QueueUserWorkItem(_ => ambxEngineWrapper.UpdateRumble((Rumble)component));
           break;
+
         default:
           throw new ArgumentException("Unexpected Component Type");
       }

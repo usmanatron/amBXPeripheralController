@@ -1,5 +1,4 @@
-﻿using aPC.Common;
-using aPC.Common.Entities;
+﻿using aPC.Common.Entities;
 using System.Threading;
 
 namespace aPC.Common.Server.Entities
@@ -12,8 +11,8 @@ namespace aPC.Common.Server.Entities
 
     public DirectionalComponentAction(CancellationTokenSource cancellationToken, DirectionalComponent directionalComponent)
     {
-      this.CancellationToken = cancellationToken;
-      this.DirectionalComponent = directionalComponent;
+      CancellationToken = cancellationToken;
+      DirectionalComponent = directionalComponent;
     }
   }
 }

@@ -1,10 +1,4 @@
-﻿using aPC.Common;
-using aPC.Common.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using aPC.Common.Entities;
 
 namespace aPC.Common.Server.Entities
 {
@@ -21,15 +15,13 @@ namespace aPC.Common.Server.Entities
 
     public DirectionalComponent DirectionalComponent { get; private set; }
 
-    public eComponentType ComponentType { get; private set; }
-
     public AtypicalFirstRunInfiniteTicker Ticker { get; private set; }
 
     public RunningDirectionalComponent(amBXScene scene, DirectionalComponent directionalComponent, AtypicalFirstRunInfiniteTicker ticker)
     {
-      this.Scene = scene;
-      this.DirectionalComponent = directionalComponent;
-      this.Ticker = ticker;
+      Scene = scene;
+      DirectionalComponent = directionalComponent;
+      Ticker = ticker;
     }
   }
 }

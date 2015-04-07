@@ -11,10 +11,10 @@ namespace aPC.Server.Communication
 {
   public class NotificationService : INotificationService
   {
-    private Action<amBXScene> action;
+    private readonly Action<amBXScene> action;
 
     public NotificationService()
-      : this(scene => ServerTask.UpdateScene(scene))
+      : this(ServerTask.UpdateScene)
     {
     }
 

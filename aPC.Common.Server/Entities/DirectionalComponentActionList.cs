@@ -1,10 +1,6 @@
-﻿using aPC.Common;
-using aPC.Common.Entities;
-using aPC.Common.Server.Entities;
-using System;
+﻿using aPC.Common.Entities;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 
 namespace aPC.Common.Server.Entities
@@ -14,8 +10,8 @@ namespace aPC.Common.Server.Entities
   /// </summary>
   public class DirectionalComponentActionList
   {
-    private List<DirectionalComponentAction> actions;
-    private object locker;
+    private readonly List<DirectionalComponentAction> actions;
+    private readonly object locker;
 
     public DirectionalComponentActionList()
     {
@@ -64,7 +60,7 @@ namespace aPC.Common.Server.Entities
     {
       lock (locker)
       {
-        return actions.SingleOrDefault(action => action.DirectionalComponent == directionalComponent);
+        return actions.SingleOrDefault(action => action.DirectionalComponent.Equals(directionalComponent));
       }
     }
 

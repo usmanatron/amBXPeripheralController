@@ -1,5 +1,4 @@
-﻿using aPC.Common;
-using aPC.Common.Entities;
+﻿using aPC.Common.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +8,7 @@ namespace aPC.Common.Server.Entities
   public class RunningDirectionalComponentList
   {
     private RunningDirectionalComponent frame;
-    private List<RunningDirectionalComponent> components;
+    private readonly List<RunningDirectionalComponent> components;
     private bool inUpdateMode;
 
     public eSceneType SceneType { get; private set; }
@@ -18,15 +17,15 @@ namespace aPC.Common.Server.Entities
 
     public RunningDirectionalComponentList()
     {
-      this.components = new List<RunningDirectionalComponent>();
-      this.LastUpdatedDirectionalComponents = new List<DirectionalComponent>();
+      components = new List<RunningDirectionalComponent>();
+      LastUpdatedDirectionalComponents = new List<DirectionalComponent>();
     }
 
     #region Retrieval
 
     public RunningDirectionalComponent Get(DirectionalComponent directionalComponent)
     {
-      return components.Single(component => component.DirectionalComponent == directionalComponent);
+      return components.Single(component => component.DirectionalComponent.Equals(directionalComponent));
     }
 
     public RunningDirectionalComponent GetSync()
@@ -39,7 +38,7 @@ namespace aPC.Common.Server.Entities
     public void StartUpdate(eSceneType sceneType)
     {
       inUpdateMode = true;
-      this.SceneType = sceneType;
+      SceneType = sceneType;
       LastUpdatedDirectionalComponents.Clear();
     }
 
@@ -51,7 +50,8 @@ namespace aPC.Common.Server.Entities
     public void Update(amBXScene scene, DirectionalComponent directionalComponent)
     {
       ThrowIfNotInUpdateMode();
-      var existingComponent = components.SingleOrDefault(component => component.DirectionalComponent == directionalComponent);
+      var existingComponent = components
+        .SingleOrDefault(component => component.DirectionalComponent.Equals(directionalComponent));
       if (existingComponent != null)
       {
         components.Remove(existingComponent);

@@ -1,10 +1,7 @@
-﻿using aPC.Common;
-using aPC.Common.Entities;
+﻿using aPC.Common.Entities;
 using aPC.Common.Server.Engine;
 using aPC.Common.Server.Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,8 +10,8 @@ namespace aPC.Common.Server
   // Handles the masses of tasks flying around.
   public class TaskManager
   {
-    private EngineActor engineActor;
-    private DirectionalComponentActionList directionalComponentActionList;
+    private readonly EngineActor engineActor;
+    private readonly DirectionalComponentActionList directionalComponentActionList;
     private eSceneType runningSceneType;
 
     public TaskManager(EngineActor engineActor, DirectionalComponentActionList directionalComponentActionList)
@@ -25,7 +22,7 @@ namespace aPC.Common.Server
 
     public void RefreshTasks(RunningDirectionalComponentList runningDirectionalComponentList)
     {
-      this.runningSceneType = runningDirectionalComponentList.SceneType;
+      runningSceneType = runningDirectionalComponentList.SceneType;
 
       switch (runningSceneType)
       {
@@ -35,6 +32,7 @@ namespace aPC.Common.Server
             ReScheduleTask(runningDirectionalComponentList.Get(directionalComponent));
           }
           break;
+
         case eSceneType.Sync:
         case eSceneType.Event:
           directionalComponentActionList.CancelAll();
@@ -103,11 +101,11 @@ namespace aPC.Common.Server
     private void ScheduleTask(RunningDirectionalComponent runningComponent, int delay)
     {
       var cancellationToken = new CancellationTokenSource();
-      var task = Task.Run(async delegate
-              {
-                await Task.Delay(TimeSpan.FromMilliseconds(delay));
-                RunFrameForDirectionalComponent(runningComponent, cancellationToken);
-              }, cancellationToken.Token);
+      Task.Run(async delegate
+                     {
+                       await Task.Delay(TimeSpan.FromMilliseconds(delay), cancellationToken.Token);
+                       RunFrameForDirectionalComponent(runningComponent, cancellationToken);
+                     }, cancellationToken.Token);
 
       directionalComponentActionList.Add(new DirectionalComponentAction(cancellationToken, runningComponent.DirectionalComponent));
     }

@@ -1,5 +1,4 @@
-﻿using aPC.Common.Defaults;
-using aPC.Common.Server;
+﻿using aPC.Common.Server;
 using aPC.Common.Server.Engine;
 using aPC.Common.Server.Entities;
 using aPC.Server.Communication;
@@ -12,7 +11,7 @@ namespace aPC.Server
     ///   TODO: Add DI.  When doing so, note that the following need to be Singletons:
     ///   * AmbxEngineWrapper (has amBX objects)
     /// </remarks>
-    private static void Main(string[] args)
+    private static void Main()
     {
       var wrapper = new AmbxEngineWrapper();
 
