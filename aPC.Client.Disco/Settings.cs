@@ -33,6 +33,7 @@ namespace aPC.Client.Disco
 
     private void SetConstantValues()
     {
+      // A larger value of ChangeThreshold means that light changes etc. happen more frequently.
       ChangeThreshold = 0.5d;
       FramesPerScene = 4;
     }

@@ -23,7 +23,7 @@ namespace aPC.Client.Disco.Tests
       var sceneGenerator = new TestRandomSceneGenerator(lightSectionGenerator);
       notificationClient = new TestNotificationClient();
 
-      discoTask = new DiscoTask(settings, sceneGenerator, notificationClient);
+      discoTask = new DiscoTask(settings, sceneGenerator, notificationClient, new TestRandom(0.3));
     }
 
     [Test]

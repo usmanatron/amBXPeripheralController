@@ -1,6 +1,7 @@
 ﻿using aPC.Client.Disco.Generators;
 using aPC.Common.Client.Communication;
 using aPC.Common.Entities;
+using System;
 using System.Threading;
 
 namespace aPC.Client.Disco
@@ -10,12 +11,14 @@ namespace aPC.Client.Disco
     private readonly Settings settings;
     private readonly IGenerator<amBXScene> randomSceneGenerator;
     private readonly NotificationClientBase notificationService;
+    private readonly Random random;
 
-    public DiscoTask(Settings settings, IGenerator<amBXScene> randomSceneGenerator, NotificationClientBase notificationService)
+    public DiscoTask(Settings settings, IGenerator<amBXScene> randomSceneGenerator, NotificationClientBase notificationService, Random random)
     {
       this.settings = settings;
       this.randomSceneGenerator = randomSceneGenerator;
       this.notificationService = notificationService;
+      this.random = random;
     }
 
     public void Run()
@@ -23,7 +26,12 @@ namespace aPC.Client.Disco
       while (true)
       {
         var scene = GenerateScene();
-        PushScene(scene);
+
+        if (random.NextDouble() < settings.ChangeThreshold)
+        {
+          PushScene(scene);
+        }
+
         WaitForInterval();
       }
     }

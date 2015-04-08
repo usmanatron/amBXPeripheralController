@@ -9,39 +9,60 @@ namespace aPC.Client.Disco.Generators
 {
   public class RandomLightSectionGenerator : IGenerator<LightSection>
   {
-    private readonly Random random;
     private readonly Settings settings;
+    private readonly LightSectionBuilder lightSectionBuilder;
+    private readonly Random random;
 
-    public RandomLightSectionGenerator(Settings settings, Random random)
+    public RandomLightSectionGenerator(Settings settings, LightSectionBuilder lightSectionBuilder, Random random)
     {
       this.settings = settings;
+      this.lightSectionBuilder = lightSectionBuilder;
       this.random = random;
     }
 
     public LightSection Generate()
     {
-      var fadeTime = (int)settings.FadeTime.GetScaledValue(random.NextDouble());
-      var sectionBuilder = new LightSectionBuilder();
+      var lights = BuildLights();
+      var lightsSubset = RemoveSubset(lights);
 
-      var physicalDirections = new List<eDirection> { eDirection.West, eDirection.NorthWest, eDirection.North, eDirection.NorthEast, eDirection.East };
-      foreach (eDirection direction in physicalDirections)
+      foreach (var light in lightsSubset)
       {
-        sectionBuilder.WithLightInDirection(direction, GetRandomLight());
+        lightSectionBuilder.WithLightInDirection(light.Direction, light);
       }
 
-      return sectionBuilder.Build();
+      return lightSectionBuilder.Build();
     }
 
-    private Light GetRandomLight()
+    private IEnumerable<Light> BuildLights()
     {
-      return random.NextDouble() < settings.ChangeThreshold
-        ? null
-        : new Light
+      foreach (eDirection direction in EnumExtensions.GetCompassDirections())
       {
+        yield return GetRandomLightInDirection(direction);
+      }
+    }
+
+    /// <summary>
+    ///   Remove some of the given lights to make updates even more random
+    /// </summary>
+    /// <remarks>
+    ///   Use the ChangeThreshold to decide how many lights we should remove.
+    ///   A larger change threshold implies more updates
+    /// </remarks>
+    private IEnumerable<Light> RemoveSubset(IEnumerable<Light> lights)
+    {
+      var numberOfLightsToKeep = (int)Math.Ceiling(settings.ChangeThreshold * lights.Count());
+      return lights.OrderBy(light => light.Red).Take(numberOfLightsToKeep);
+    }
+
+    private Light GetRandomLightInDirection(eDirection direction)
+    {
+      return new Light
+      {
+        Direction = direction,
         Red = settings.RedColourWidth.GetScaledValue(random.NextDouble()),
         Blue = settings.BlueColourWidth.GetScaledValue(random.NextDouble()),
         Green = settings.GreenColourWidth.GetScaledValue(random.NextDouble()),
-        FadeTime = 10 // Light updates are nearly instant
+        FadeTime = (int)settings.FadeTime.GetScaledValue(random.NextDouble())
       };
     }
   }
