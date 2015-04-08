@@ -40,7 +40,7 @@ namespace aPC.Common.Builders
     {
       if (!RumbleSectionIsValid)
       {
-        throw new ArgumentException("Incomplete FanSection built.  At least one fan and the Fade Time must be specified.");
+        throw new ArgumentException("Incomplete RumbleSection built.  At least one rumble must be specified.");
       }
 
       var builtRumbleSection = rumbleSection;

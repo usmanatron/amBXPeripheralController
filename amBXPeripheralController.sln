@@ -51,6 +51,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.Common.Server", "aPC.Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.Common.Server.Tests", "aPC.Common.Server.Tests\aPC.Common.Server.Tests.csproj", "{A5C60DB6-8CD4-425D-A30E-723496DA2BC6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aPC.SceneMigrator", "aPC.SceneMigrator\aPC.SceneMigrator.csproj", "{E8173B6A-CC97-4BDE-B640-CED269E07FC4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -241,6 +243,16 @@ Global
 		{A5C60DB6-8CD4-425D-A30E-723496DA2BC6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{A5C60DB6-8CD4-425D-A30E-723496DA2BC6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{A5C60DB6-8CD4-425D-A30E-723496DA2BC6}.Release|Win32.ActiveCfg = Release|Any CPU
+		{E8173B6A-CC97-4BDE-B640-CED269E07FC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8173B6A-CC97-4BDE-B640-CED269E07FC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8173B6A-CC97-4BDE-B640-CED269E07FC4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E8173B6A-CC97-4BDE-B640-CED269E07FC4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E8173B6A-CC97-4BDE-B640-CED269E07FC4}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{E8173B6A-CC97-4BDE-B640-CED269E07FC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8173B6A-CC97-4BDE-B640-CED269E07FC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8173B6A-CC97-4BDE-B640-CED269E07FC4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E8173B6A-CC97-4BDE-B640-CED269E07FC4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{E8173B6A-CC97-4BDE-B640-CED269E07FC4}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

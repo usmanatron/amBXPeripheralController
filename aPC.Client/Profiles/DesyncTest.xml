@@ -1,34 +1,37 @@
 <?xml version="1.0"?>
-<!--
-A test event scene
--->
-<amBXScene>
+<amBXScene xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <IsExclusive>true</IsExclusive>
   <SceneType>Desync</SceneType>
   <Frames>
     <Frame>
       <Length>500</Length>
       <IsRepeated>true</IsRepeated>
-      <Lights>
-        <FadeTime>200</FadeTime>
-        <North>
-          <Red>1</Red>
-          <Green>0</Green>
-          <Blue>1</Blue>
-        </North>
-      </Lights>
+      <LightSection>
+        <Lights>
+          <Light>
+            <Direction>North</Direction>
+            <FadeTime>200</FadeTime>
+            <Red>1</Red>
+            <Green>0</Green>
+            <Blue>1</Blue>
+          </Light>
+        </Lights>
+      </LightSection>
     </Frame>
     <Frame>
       <Length>500</Length>
       <IsRepeated>true</IsRepeated>
-      <Lights>
-        <FadeTime>200</FadeTime>
-        <North>
-          <Red>0</Red>
-          <Green>1</Green>
-          <Blue>0</Blue>
-        </North>
-      </Lights>
+      <LightSection>
+        <Lights>
+          <Light>
+            <Direction>North</Direction>
+            <FadeTime>200</FadeTime>
+            <Red>0</Red>
+            <Green>1</Green>
+            <Blue>0</Blue>
+          </Light>
+        </Lights>
+      </LightSection>
     </Frame>
   </Frames>
 </amBXScene>

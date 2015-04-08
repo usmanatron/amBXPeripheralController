@@ -1,106 +1,136 @@
 <?xml version="1.0"?>
-<!--
-A test event scene
--->
-<amBXScene>
+<amBXScene xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <IsExclusive>true</IsExclusive>
   <SceneType>Event</SceneType>
   <Frames>
     <Frame>
       <Length>200</Length>
       <IsRepeated>false</IsRepeated>
-      <Lights>
-        <FadeTime>100</FadeTime>
-        <West>
-          <Red>0.5</Red>
-          <Green>0</Green>
-          <Blue>1</Blue>
-        </West>
-        <NorthWest>
-          <Red>0.5</Red>
-          <Green>0</Green>
-          <Blue>1</Blue>
-        </NorthWest>
-        <North>
-          <Red>0.5</Red>
-          <Green>0</Green>
-          <Blue>1</Blue>
-        </North>
-        <NorthEast>
-          <Red>0.5</Red>
-          <Green>0</Green>
-          <Blue>1</Blue>
-        </NorthEast>
-        <East>
-          <Red>0.5</Red>
-          <Green>0</Green>
-          <Blue>1</Blue>
-        </East>
-      </Lights>
+      <LightSection>
+        <Lights>
+          <Light>
+            <Direction>North</Direction>
+            <FadeTime>100</FadeTime>
+            <Red>0.5</Red>
+            <Green>0</Green>
+            <Blue>1</Blue>
+          </Light>
+          <Light>
+            <Direction>NorthEast</Direction>
+            <FadeTime>100</FadeTime>
+            <Red>0.5</Red>
+            <Green>0</Green>
+            <Blue>1</Blue>
+          </Light>
+          <Light>
+            <Direction>East</Direction>
+            <FadeTime>100</FadeTime>
+            <Red>0.5</Red>
+            <Green>0</Green>
+            <Blue>1</Blue>
+          </Light>
+          <Light>
+            <Direction>West</Direction>
+            <FadeTime>100</FadeTime>
+            <Red>0.5</Red>
+            <Green>0</Green>
+            <Blue>1</Blue>
+          </Light>
+          <Light>
+            <Direction>NorthWest</Direction>
+            <FadeTime>100</FadeTime>
+            <Red>0.5</Red>
+            <Green>0</Green>
+            <Blue>1</Blue>
+          </Light>
+        </Lights>
+      </LightSection>
     </Frame>
     <Frame>
       <Length>1000</Length>
       <IsRepeated>false</IsRepeated>
-      <Lights>
-        <FadeTime>200</FadeTime>
-        <West>
-          <Red>1</Red>
-          <Green>0.5</Green>
-          <Blue>0.5</Blue>
-        </West>
-        <NorthWest>
-          <Red>1</Red>
-          <Green>0.5</Green>
-          <Blue>0.5</Blue>
-        </NorthWest>
-        <North>
-          <Red>1</Red>
-          <Green>0.5</Green>
-          <Blue>0.5</Blue>
-        </North>
-        <NorthEast>
-          <Red>1</Red>
-          <Green>0.5</Green>
-          <Blue>0.5</Blue>
-        </NorthEast>
-        <East>
-          <Red>1</Red>
-          <Green>0.5</Green>
-          <Blue>0.5</Blue>
-        </East>
-      </Lights>
+      <LightSection>
+        <Lights>
+          <Light>
+            <Direction>North</Direction>
+            <FadeTime>200</FadeTime>
+            <Red>1</Red>
+            <Green>0.5</Green>
+            <Blue>0.5</Blue>
+          </Light>
+          <Light>
+            <Direction>NorthEast</Direction>
+            <FadeTime>200</FadeTime>
+            <Red>1</Red>
+            <Green>0.5</Green>
+            <Blue>0.5</Blue>
+          </Light>
+          <Light>
+            <Direction>East</Direction>
+            <FadeTime>200</FadeTime>
+            <Red>1</Red>
+            <Green>0.5</Green>
+            <Blue>0.5</Blue>
+          </Light>
+          <Light>
+            <Direction>West</Direction>
+            <FadeTime>200</FadeTime>
+            <Red>1</Red>
+            <Green>0.5</Green>
+            <Blue>0.5</Blue>
+          </Light>
+          <Light>
+            <Direction>NorthWest</Direction>
+            <FadeTime>200</FadeTime>
+            <Red>1</Red>
+            <Green>0.5</Green>
+            <Blue>0.5</Blue>
+          </Light>
+        </Lights>
+      </LightSection>
     </Frame>
     <Frame>
       <Length>500</Length>
       <IsRepeated>false</IsRepeated>
-      <Lights>
-        <FadeTime>100</FadeTime>
-        <West>
-          <Red>0.5</Red>
-          <Green>0</Green>
-          <Blue>1</Blue>
-        </West>
-        <NorthWest>
-          <Red>0.5</Red>
-          <Green>0</Green>
-          <Blue>1</Blue>
-        </NorthWest>
-        <North>
-          <Red>0.5</Red>
-          <Green>0</Green>
-          <Blue>1</Blue>
-        </North>
-        <NorthEast>
-          <Red>0.5</Red>
-          <Green>0</Green>
-          <Blue>1</Blue>
-        </NorthEast>
-        <East>
-          <Red>0.5</Red>
-          <Green>0</Green>
-          <Blue>1</Blue>
-        </East>
-      </Lights>
+      <LightSection>
+        <Lights>
+          <Light>
+            <Direction>North</Direction>
+            <FadeTime>100</FadeTime>
+            <Red>0.5</Red>
+            <Green>0</Green>
+            <Blue>1</Blue>
+          </Light>
+          <Light>
+            <Direction>NorthEast</Direction>
+            <FadeTime>100</FadeTime>
+            <Red>0.5</Red>
+            <Green>0</Green>
+            <Blue>1</Blue>
+          </Light>
+          <Light>
+            <Direction>East</Direction>
+            <FadeTime>100</FadeTime>
+            <Red>0.5</Red>
+            <Green>0</Green>
+            <Blue>1</Blue>
+          </Light>
+          <Light>
+            <Direction>West</Direction>
+            <FadeTime>100</FadeTime>
+            <Red>0.5</Red>
+            <Green>0</Green>
+            <Blue>1</Blue>
+          </Light>
+          <Light>
+            <Direction>NorthWest</Direction>
+            <FadeTime>100</FadeTime>
+            <Red>0.5</Red>
+            <Green>0</Green>
+            <Blue>1</Blue>
+          </Light>
+        </Lights>
+      </LightSection>
     </Frame>
   </Frames>
 </amBXScene>
