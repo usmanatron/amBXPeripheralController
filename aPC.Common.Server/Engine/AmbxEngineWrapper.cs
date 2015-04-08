@@ -1,9 +1,7 @@
 ﻿using amBXLib;
-using aPC.Common;
 using aPC.Common.Entities;
 using System;
 using System.Collections.Generic;
-using System.Threading;
 
 namespace aPC.Common.Server.Engine
 {
@@ -30,8 +28,9 @@ namespace aPC.Common.Server.Engine
 
     private void InitialiseEngine()
     {
-      foreach (CompassDirection compassDirection in EnumExtensions.GetCompassDirections())
+      foreach (var eDirection in EnumExtensions.GetCompassDirections())
       {
+        var compassDirection = (CompassDirection)eDirection;
         CreateLight(compassDirection);
       }
       CreateFan(CompassDirection.East);

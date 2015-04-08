@@ -26,25 +26,24 @@ namespace aPC.Common.Server
       ResetTicker(initialCount, subsequentCount);
     }
 
-    public void Reset(int initialCount, int subsequentCount)
+    public void Reset(int newInitialCount, int newSubsequentCount)
     {
-      ResetTicker(initialCount, subsequentCount);
+      ResetTicker(newInitialCount, newSubsequentCount);
     }
 
-    private void ResetTicker(int initialCount, int subsequentCount)
+    private void ResetTicker(int newInitialCount, int newSubsequentCount)
     {
       // It's fine to have a subsequentCount of zero (this denotes a single run).
-      if (initialCount <= 0 || subsequentCount < 0)
+      if (newInitialCount <= 0 || newSubsequentCount < 0)
       {
         var error = string.Format("Attempted to create a ticker with non-positive inputs: {0}, {1}",
-          initialCount,
-          subsequentCount);
+          newInitialCount,
+          newSubsequentCount);
         throw new InvalidOperationException(error);
       }
 
-      this.initialCount = initialCount;
-      this.subsequentCount = subsequentCount;
-
+      initialCount = newInitialCount;
+      subsequentCount = newSubsequentCount;
       Index = 0;
       IsFirstRun = true;
     }

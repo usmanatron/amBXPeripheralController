@@ -1,9 +1,6 @@
-﻿using aPC.Common;
-using aPC.Common.Entities;
+﻿using aPC.Common.Entities;
 using aPC.Common.Server.Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace aPC.Common.Server
@@ -13,16 +10,16 @@ namespace aPC.Common.Server
   {
     private amBXScene previousScene;
     private amBXScene currentScene;
-    private SceneSplitter sceneSplitter;
-    private TaskManager taskManager;
-    private RunningDirectionalComponentList runningDirectionalComponents;
+    private readonly SceneSplitter sceneSplitter;
+    private readonly TaskManager taskManager;
+    private readonly RunningDirectionalComponentList runningDirectionalComponents;
 
     public NewSceneProcessor(SceneSplitter sceneSplitter, TaskManager taskManager, RunningDirectionalComponentList runningDirectionalComponents)
     {
       this.sceneSplitter = sceneSplitter;
       this.taskManager = taskManager;
       this.runningDirectionalComponents = runningDirectionalComponents;
-      currentScene = new amBXScene() { SceneType = eSceneType.Desync };
+      currentScene = new amBXScene { SceneType = eSceneType.Desync };
     }
 
     public void Process(amBXScene scene)
@@ -49,7 +46,6 @@ namespace aPC.Common.Server
           // Don't interrupt the currently playing event - instead quietly update
           // the previous scene so that we fall back to this when the event is done.
           previousScene = scene;
-          return;
         }
       }
       else
@@ -67,11 +63,11 @@ namespace aPC.Common.Server
       {
         var eventLength = currentScene.FrameStatistics.SceneLength;
 
-        var task = Task.Run(async delegate
-        {
-          await Task.Delay(TimeSpan.FromMilliseconds(eventLength));
-          RollbackScene();
-        });
+        Task.Run(async delegate
+                       {
+                         await Task.Delay(TimeSpan.FromMilliseconds(eventLength));
+                         RollbackScene();
+                       });
       }
     }
 

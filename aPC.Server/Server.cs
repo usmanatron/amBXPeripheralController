@@ -1,22 +1,20 @@
-﻿using aPC.Common.Defaults;
-using aPC.Common.Server;
+﻿using aPC.Common.Communication;
 using aPC.Common.Server.Engine;
-using aPC.Common.Server.Entities;
 using aPC.Server.Communication;
+using Ninject;
 
 namespace aPC.Server
 {
   internal class Server
   {
-    /// <remarks>
-    ///   TODO: Add DI.  When doing so, note that the following need to be Singletons:
-    ///   * AmbxEngineWrapper (has amBX objects)
-    /// </remarks>
-    private static void Main(string[] args)
+    private static void Main()
     {
-      var wrapper = new AmbxEngineWrapper();
+      var kernel = new StandardKernel();
+      kernel.Bind<INotificationService>().To<NotificationService>();
+      kernel.Bind<AmbxEngineWrapper>().ToSelf().InSingletonScope();
 
-      new ServerTask(new NewSceneProcessor(new SceneSplitter(), new TaskManager(new EngineActor(wrapper), new DirectionalComponentActionList()), new RunningDirectionalComponentList()), new NotificationService(), wrapper).Run();
+      var task = kernel.Get<ServerTask>();
+      task.Run();
     }
   }
 }

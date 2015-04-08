@@ -1,26 +1,31 @@
 ﻿using aPC.Common;
 using aPC.Common.Communication;
-using aPC.Common.Defaults;
 using aPC.Common.Entities;
+using Ninject;
 using System;
 using System.IO;
 using System.Linq;
+using System.ServiceModel;
 using System.Xml.Serialization;
 
 namespace aPC.Server.Communication
 {
+  [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
   public class NotificationService : INotificationService
   {
-    private Action<amBXScene> action;
+    private readonly Action<amBXScene> action;
+    private readonly SceneAccessor sceneAccessor;
 
-    public NotificationService()
-      : this(scene => ServerTask.UpdateScene(scene))
+    [Inject]
+    public NotificationService(SceneAccessor sceneAccessor)
+      : this(sceneAccessor, ServerTask.UpdateScene)
     {
     }
 
     // Used for tests
-    public NotificationService(Action<amBXScene> updateScene)
+    public NotificationService(SceneAccessor sceneAccessor, Action<amBXScene> updateScene)
     {
+      this.sceneAccessor = sceneAccessor;
       action = updateScene;
     }
 
@@ -32,18 +37,15 @@ namespace aPC.Server.Communication
 
     public void RunIntegratedScene(string sceneName)
     {
-      var accessor = new SceneAccessor(new DefaultScenes());
-      var scene = accessor.GetScene(sceneName) ??
-                   accessor.GetScene("Error_Flash");
+      var scene = sceneAccessor.GetScene(sceneName) ??
+                   sceneAccessor.GetScene("Error_Flash");
 
       UpdateScene(scene);
     }
 
     public string[] GetSupportedIntegratedScenes()
     {
-      var lAccessor = new SceneAccessor(new DefaultScenes());
-
-      return lAccessor.GetAllScenes()
+      return sceneAccessor.GetAllScenes()
         .Select(scene => scene.Key)
         .ToArray();
     }

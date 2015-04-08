@@ -20,8 +20,7 @@ namespace aPC.Server.Communication
     {
       string baseAddress = CommunicationSettings.GetServiceUrl(Dns.GetHostName(), eApplicationType.amBXPeripheralController);
 
-      host = new ServiceHost(notificationService.GetType(), new Uri(baseAddress));
-
+      host = new ServiceHost(notificationService, new Uri(baseAddress));
       AddHostBehaviors();
       AddEndpoint();
     }

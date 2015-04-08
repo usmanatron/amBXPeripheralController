@@ -4,10 +4,6 @@ using aPC.Common.Entities;
 using aPC.Common.Server;
 using aPC.Common.Server.Engine;
 using aPC.Server.Communication;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 
 namespace aPC.Server
@@ -15,8 +11,8 @@ namespace aPC.Server
   internal class ServerTask
   {
     private static NewSceneProcessor newSceneProcessor;
-    private INotificationService notificationService;
-    private AmbxEngineWrapper engine;
+    private readonly INotificationService notificationService;
+    private readonly AmbxEngineWrapper engine;
 
     public ServerTask(NewSceneProcessor newSceneProcessor, INotificationService notificationService, AmbxEngineWrapper engine)
     {
