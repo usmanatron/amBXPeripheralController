@@ -34,7 +34,7 @@ namespace aPC.Chromesthesia.Server
       var frames = new FrameBuilder()
         .AddFrame()
         .WithLightSection(lightSection)
-        .WithRepeated(true)
+        .WithRepeated(false)
         .WithFrameLength(frameLength)
         .Build();
 
@@ -42,7 +42,7 @@ namespace aPC.Chromesthesia.Server
              {
                Frames = frames,
                IsExclusive = false,
-               SceneType = eSceneType.Desync
+               SceneType = eSceneType.Sync
              };
     }
   }

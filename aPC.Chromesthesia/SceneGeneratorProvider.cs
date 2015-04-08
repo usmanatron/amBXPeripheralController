@@ -23,17 +23,22 @@ namespace aPC.Chromesthesia
       this.newSceneProcessor = newSceneProcessor;
     }
 
+    private const int allowEvery = 128;
+    private int index = 0;
+
     public void Execute(int readLength)
     {
       var results = GetResultsFromPitchGenerator(new byte[readLength], 0, readLength);
 
       // BuildScene
       var scene = sceneBuilder.BuildSceneFromPitchResults(results);
+      index++;
 
-      if (!SceneIsEmpty(scene))
+      if (!SceneIsEmpty(scene) && index % allowEvery == 0)
       {
         // Push changes
         newSceneProcessor.Process(scene);
+        index = index - allowEvery;
       }
 
       return;
