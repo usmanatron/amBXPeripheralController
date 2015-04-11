@@ -15,6 +15,7 @@ namespace aPC.Chromesthesia
     private readonly PitchGeneratorProvider pitchGenerator;
     private readonly SceneBuilder sceneBuilder;
     private readonly SceneRunner sceneRunner;
+    private const float lightTolerance = 0.01f;
 
     public SceneGenerator(PitchGeneratorProvider pitchGenerator, SceneBuilder sceneBuilder, SceneRunner newSceneProcessor)
     {
@@ -23,15 +24,16 @@ namespace aPC.Chromesthesia
       this.sceneRunner = newSceneProcessor;
     }
 
-    private const int allowEvery = 128;
-
     public void Execute(int readLength)
     {
       var results = GetResultsFromPitchGenerator(new byte[readLength], 0, readLength);
 
       var scene = sceneBuilder.BuildSceneFromPitchResults(results);
 
-      sceneRunner.RunScene(scene);
+      if (!SceneIsEmpty(scene))
+      {
+        sceneRunner.PushCustomScene(scene);
+      }
     }
 
     private StereoPitchResult GetResultsFromPitchGenerator(byte[] buffer, int offset, int count)
@@ -48,11 +50,7 @@ namespace aPC.Chromesthesia
 
     private bool LightIsEmpty(Light light)
     {
-      return Math.Abs(light.Red) < TOLERANCE && Math.Abs(light.Green) < TOLERANCE && Math.Abs(light.Blue) < TOLERANCE;
+      return Math.Abs(light.Red) < lightTolerance && Math.Abs(light.Green) < lightTolerance && Math.Abs(light.Blue) < lightTolerance;
     }
-
-    private const float TOLERANCE = 0.01f;
-
-    public WaveFormat WaveFormat { get; private set; }
   }
 }

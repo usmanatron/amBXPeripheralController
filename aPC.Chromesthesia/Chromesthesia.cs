@@ -16,6 +16,11 @@ namespace aPC.Chromesthesia
   internal class Chromesthesia
   {
     private static ChromesthesiaTask task;
+    private const string preRunSummary = @"Bits per sample: {0}
+Average bytes per second: {1}
+Channels: {2}
+Sample rate: {3}
+Encoding: {4}";
 
     private static void Main()
     {
@@ -48,22 +53,7 @@ namespace aPC.Chromesthesia
     /// </remarks>
     private static void WriteCaptureSettings(WaveFormat waveFormat)
     {
-      Console.WriteLine("Bits per sample: " + waveFormat.BitsPerSample);
-      Console.WriteLine("Average bytes per second: " + waveFormat.AverageBytesPerSecond);
-      Console.WriteLine("Channels: " + waveFormat.Channels);
-      Console.WriteLine("Sample rate: " + waveFormat.SampleRate);
-      Console.WriteLine("Encoding: " + waveFormat.Encoding);
-    }
-
-    /// <summary>
-    /// The action to take when an event has been run
-    /// </summary>
-    /// <remarks>
-    ///   As events are not supported, we never expect this to be called, therefore throw an exception!
-    /// </remarks>
-    private static void EventComplete()
-    {
-      throw new InvalidOperationException("Attempted to run an event through the Chromesthesia application - this should never happen!");
+      Console.WriteLine(string.Format(preRunSummary, waveFormat.BitsPerSample, waveFormat.AverageBytesPerSecond, waveFormat.Channels, waveFormat.SampleRate, waveFormat.Encoding));
     }
   }
 }
