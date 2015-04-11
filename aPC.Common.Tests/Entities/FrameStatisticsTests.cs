@@ -4,7 +4,7 @@ using aPC.Common.Entities;
 using NUnit.Framework;
 using System.Linq;
 
-namespace aPC.Common.Tests
+namespace aPC.Common.Tests.Entities
 {
   [TestFixture]
   internal class FrameStatisticsTests

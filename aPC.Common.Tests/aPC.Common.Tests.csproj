@@ -68,8 +68,9 @@
     <Compile Include="Builders\FanSectionBuilderTests.cs" />
     <Compile Include="Builders\FrameBuilderTests.cs" />
     <Compile Include="Builders\RumbleSectionBuilderTests.cs" />
-    <Compile Include="FrameStatisticsTests.cs" />
-    <Compile Include="EntityExtensionTests.cs" />
+    <Compile Include="Entities\DirectionalComponentTests.cs" />
+    <Compile Include="Entities\FrameStatisticsTests.cs" />
+    <Compile Include="Entities\EntityExtensionTests.cs" />
     <Compile Include="Builders\LightSectionBuilderTests.cs" />
     <Compile Include="Defaults\DefaultSceneTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

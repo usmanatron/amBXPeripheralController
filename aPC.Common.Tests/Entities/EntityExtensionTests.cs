@@ -3,7 +3,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 
-namespace aPC.Common.Tests
+namespace aPC.Common.Tests.Entities
 {
   [TestFixture]
   internal class EntityExtensionTests
