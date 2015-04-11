@@ -11,20 +11,20 @@ namespace aPC.Chromesthesia.Sound
 {
   internal class PitchResultSummaryWriter
   {
-    private ConcurrentQueue<Tuple<PitchResult, PitchResult>> summaryData;
+    private ConcurrentQueue<PitchResultSummary> summaryData;
     private const string frequencyFormat = "0000.000";
     private const string amplitudeFormat = "0.00000";
     private const string empty = "       ";
 
     public PitchResultSummaryWriter()
     {
-      summaryData = new ConcurrentQueue<Tuple<PitchResult, PitchResult>>();
+      summaryData = new ConcurrentQueue<PitchResultSummary>();
       ThreadPool.QueueUserWorkItem(_ => WriteBackground());
     }
 
-    public void Enqueue(PitchResult leftResult, PitchResult rightResult)
+    public void Enqueue(PitchResultSummary summary)
     {
-      summaryData.Enqueue(new Tuple<PitchResult, PitchResult>(leftResult, rightResult));
+      summaryData.Enqueue(summary);
     }
 
     public void WriteBackground()
@@ -37,27 +37,27 @@ namespace aPC.Chromesthesia.Sound
           continue;
         }
 
-        Tuple<PitchResult, PitchResult> item;
+        PitchResultSummary item;
         if (!summaryData.TryDequeue(out item))
         {
           Thread.Sleep(ChromesthesiaConfig.PitchSummaryWriterSleepInterval);
           continue;
         }
 
-        WriteInternal(item.Item1, item.Item2);
+        WriteInternal(item);
       }
     }
 
-    private void WriteInternal(PitchResult leftResult, PitchResult rightResult)
+    private void WriteInternal(PitchResultSummary summary)
     {
-      var leftPeakPitchNonZero = ToNonZeroString(leftResult.PeakPitch.averageFrequency, frequencyFormat);
-      var rightPeakPitchNonZero = ToNonZeroString(rightResult.PeakPitch.averageFrequency, frequencyFormat);
-      var leftTotalAmp = ToNonZeroString(leftResult.TotalAmplitude, amplitudeFormat);
-      var rightTotalAmp = ToNonZeroString(rightResult.TotalAmplitude, amplitudeFormat);
+      var leftPeakPitchNonZero = ToNonZeroString(summary.leftResult.PeakPitch.averageFrequency, frequencyFormat);
+      var rightPeakPitchNonZero = ToNonZeroString(summary.rightResult.PeakPitch.averageFrequency, frequencyFormat);
+      var leftTotalAmp = ToNonZeroString(summary.leftResult.TotalAmplitude, amplitudeFormat);
+      var rightTotalAmp = ToNonZeroString(summary.rightResult.TotalAmplitude, amplitudeFormat);
 
       if (leftPeakPitchNonZero != empty || rightPeakPitchNonZero != empty || leftTotalAmp != empty || rightTotalAmp != empty)
       {
-        Console.WriteLine("{0} : {1} <- PP | MA -> {2} : {3}", leftPeakPitchNonZero, rightPeakPitchNonZero, leftTotalAmp, rightTotalAmp);
+        Console.WriteLine("{0} -- {1} : {2} <- PP | MA -> {3} : {4}", summary.time, leftPeakPitchNonZero, rightPeakPitchNonZero, leftTotalAmp, rightTotalAmp);
       }
     }
 

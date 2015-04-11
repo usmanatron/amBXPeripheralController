@@ -85,7 +85,7 @@ namespace aPC.Chromesthesia.Sound
       var leftPitchResult = leftPitchDetector.DetectPitchDistribution(leftBuffer.FloatBuffer, stereoFrames);
       var rightPitchResult = rightPitchDetector.DetectPitchDistribution(rightBuffer.FloatBuffer, stereoFrames);
 
-      resultWriter.Enqueue(leftPitchResult, rightPitchResult);
+      resultWriter.Enqueue(new PitchResultSummary(leftPitchResult, rightPitchResult));
       PitchResults = new StereoPitchResult(leftPitchResult, rightPitchResult, bytesRead);
     }
 
