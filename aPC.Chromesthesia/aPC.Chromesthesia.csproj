@@ -55,6 +55,7 @@
     <Compile Include="Chromesthesia.cs" />
     <Compile Include="Lights\Colour\MidpointRadiusColourBuilder.cs" />
     <Compile Include="NinjectKernelHandler.cs" />
+    <Compile Include="Server\SceneRunner.cs" />
     <Compile Include="Sound\PitchResultSummaryWriter.cs" />
     <Compile Include="Sound\FftPitchDetector.cs" />
     <Compile Include="Sound\IPitchDetector.cs" />

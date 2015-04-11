@@ -14,34 +14,24 @@ namespace aPC.Chromesthesia
   {
     private readonly PitchGeneratorProvider pitchGenerator;
     private readonly SceneBuilder sceneBuilder;
-    private readonly NewSceneProcessor newSceneProcessor;
+    private readonly SceneRunner sceneRunner;
 
-    public SceneGenerator(PitchGeneratorProvider pitchGenerator, SceneBuilder sceneBuilder, NewSceneProcessor newSceneProcessor)
+    public SceneGenerator(PitchGeneratorProvider pitchGenerator, SceneBuilder sceneBuilder, SceneRunner newSceneProcessor)
     {
       this.pitchGenerator = pitchGenerator;
       this.sceneBuilder = sceneBuilder;
-      this.newSceneProcessor = newSceneProcessor;
+      this.sceneRunner = newSceneProcessor;
     }
 
     private const int allowEvery = 128;
-    private int index = 0;
 
     public void Execute(int readLength)
     {
       var results = GetResultsFromPitchGenerator(new byte[readLength], 0, readLength);
 
-      // BuildScene
       var scene = sceneBuilder.BuildSceneFromPitchResults(results);
-      index++;
 
-      if (!SceneIsEmpty(scene) && index % allowEvery == 0)
-      {
-        // Push changes
-        newSceneProcessor.Process(scene);
-        index = index - allowEvery;
-      }
-
-      return;
+      sceneRunner.RunScene(scene);
     }
 
     private StereoPitchResult GetResultsFromPitchGenerator(byte[] buffer, int offset, int count)

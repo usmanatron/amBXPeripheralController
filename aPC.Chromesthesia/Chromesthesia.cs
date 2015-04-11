@@ -30,8 +30,8 @@ namespace aPC.Chromesthesia
       var streamPitch = new PitchGeneratorProvider(streamRaw, new FftPitchDetector(), new FftPitchDetector(), new FloatDataStereoSplitter(), new PitchResultSummaryWriter());
       var compositeLightSectionBuilder = kernel.Get<SceneBuilder>();
 
-      var newSceneProcessor = kernel.Get<NewSceneProcessor>();
-      var streamScene = new SceneGenerator(streamPitch, compositeLightSectionBuilder, newSceneProcessor);
+      var sceneRunner = kernel.Get<SceneRunner>();
+      var streamScene = new SceneGenerator(streamPitch, compositeLightSectionBuilder, sceneRunner);
 
       task = new ChromesthesiaTask(streamScene);
 
