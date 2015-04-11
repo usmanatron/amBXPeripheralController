@@ -48,7 +48,7 @@ namespace aPC.Chromesthesia
     {
       get
       {
-        return 8192;
+        return 16384;
       }
     }
 
