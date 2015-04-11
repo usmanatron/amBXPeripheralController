@@ -1,9 +1,10 @@
 ﻿using amBXLib;
+using aPC.Common;
 using aPC.Common.Entities;
 using System;
 using System.Collections.Generic;
 
-namespace aPC.Common.Server.Engine
+namespace aPC.Server.Engine
 {
   /// <summary>
   ///  Manages the amBXEngine interface.

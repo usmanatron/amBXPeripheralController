@@ -1,9 +1,10 @@
-﻿using aPC.Common.Entities;
+﻿using aPC.Common;
+using aPC.Common.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace aPC.Common.Server.Entities
+namespace aPC.Server.Entities
 {
   public class RunningDirectionalComponentList
   {

@@ -1,9 +1,10 @@
-﻿using aPC.Common.Entities;
-using aPC.Common.Server.Entities;
+﻿using aPC.Common;
+using aPC.Common.Entities;
+using aPC.Server.Entities;
 using System;
 using System.Threading.Tasks;
 
-namespace aPC.Common.Server
+namespace aPC.Server
 {
   // Handles new scenes - ultimately passes onto the SceneDisseminator for processing
   public class NewSceneProcessor

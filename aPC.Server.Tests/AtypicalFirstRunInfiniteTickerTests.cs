@@ -1,8 +1,8 @@
-﻿using aPC.Common.Server;
+﻿using aPC.Server;
 using NUnit.Framework;
 using System;
 
-namespace aPC.Common.Server.Tests
+namespace aPC.Server.Tests
 {
   [TestFixture]
   public class AtypicalFirstRunInfiniteTickerTests

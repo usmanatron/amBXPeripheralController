@@ -7,6 +7,7 @@
     <assembly path="aPC.Common.Client.Tests\bin\Debug\aPC.Common.Client.Tests.dll" />
     <assembly path="aPC.Common.Tests\bin\Debug\aPC.Common.Tests.dll" />
     <assembly path="aPC.Web.Tests\bin\Debug\aPC.Web.Tests.dll" />
+    <assembly path="aPC.Server.Tests\bin\Debug\aPC.Server.Tests.dll" />
   </Config>
   <Config name="Release" binpathtype="Auto">
     <assembly path="aPC.Client.Tests\bin\Release\aPC.Client.Tests.dll" />

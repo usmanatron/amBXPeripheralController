@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-namespace aPC.Common.Server.Entities
+namespace aPC.Server.Entities
 {
   /// <summary>
   /// Handles the list of DirectionalComponentActions

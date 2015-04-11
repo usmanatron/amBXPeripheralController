@@ -1,8 +1,9 @@
-﻿using aPC.Common.Entities;
+﻿using aPC.Common;
+using aPC.Common.Entities;
 using System;
 using System.Threading;
 
-namespace aPC.Common.Server.Engine
+namespace aPC.Server.Engine
 {
   public class EngineActor
   {

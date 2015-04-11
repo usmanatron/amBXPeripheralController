@@ -56,7 +56,6 @@
     <Compile Include="Communication\NotificationClient.cs" />
     <Compile Include="Lights\Colour\MidpointRadiusColourBuilder.cs" />
     <Compile Include="NinjectKernelHandler.cs" />
-    <Compile Include="Server\SceneRunner.cs" />
     <Compile Include="Sound\PitchResultSummary.cs" />
     <Compile Include="Sound\PitchResultSummaryWriter.cs" />
     <Compile Include="Sound\FftPitchDetector.cs" />

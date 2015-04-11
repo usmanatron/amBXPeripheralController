@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="amBXLib, Version=1.0.5056.34406, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Debug\amBXLib.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -52,26 +56,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AtypicalFirstRunInfiniteTicker.cs" />
     <Compile Include="Communication\CommunicationManager.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Communication\NotificationService.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Engine\AmbxEngineWrapper.cs" />
+    <Compile Include="Engine\EngineActor.cs" />
+    <Compile Include="Entities\DirectionalComponentAction.cs" />
+    <Compile Include="Entities\DirectionalComponentActionList.cs" />
+    <Compile Include="Entities\RunningDirectionalComponent.cs" />
+    <Compile Include="Entities\RunningDirectionalComponentList.cs" />
+    <Compile Include="NewSceneProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SceneSplitter.cs" />
     <Compile Include="Server.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ServerTask.cs" />
+    <Compile Include="TaskManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\aPC.Common.Communication\aPC.Common.Communication.csproj">
       <Project>{38537b40-b1fd-433b-b958-8a1b3c7b83d7}</Project>
       <Name>aPC.Common.Communication</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\aPC.Common.Server\aPC.Common.Server.csproj">
-      <Project>{47258892-f375-4bd9-9b47-87ad0a6569fd}</Project>
-      <Name>aPC.Common.Server</Name>
     </ProjectReference>
     <ProjectReference Include="..\aPC.Common\aPC.Common.csproj">
       <Project>{b6543e75-59af-4059-acf8-560e82bc72ce}</Project>

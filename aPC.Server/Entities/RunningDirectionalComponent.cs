@@ -1,6 +1,6 @@
 ﻿using aPC.Common.Entities;
 
-namespace aPC.Common.Server.Entities
+namespace aPC.Server.Entities
 {
   /// <summary>
   ///   Encapsulates a running DirectionalComponent
