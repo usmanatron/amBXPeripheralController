@@ -1,13 +1,13 @@
 ﻿using aPC.Common.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace aPC.Common.Builders
 {
   public class LightSectionBuilder
   {
     private LightSection lightSection;
-    private bool lightSpecified;
 
     public LightSectionBuilder()
     {
@@ -17,7 +17,6 @@ namespace aPC.Common.Builders
     private void Reset()
     {
       lightSection = new LightSection() { Lights = new List<Light>() };
-      lightSpecified = false;
     }
 
     public LightSectionBuilder WithAllLights(Light light)
@@ -43,9 +42,13 @@ namespace aPC.Common.Builders
         throw new ArgumentException("Attempted to add multiple lights in the same direction");
       }
 
+      if (!LightIsValid(light))
+      {
+        throw new ArgumentException("Input Light is invalid");
+      }
+
       light.Direction = direction;
       lightSection.Lights.Add(light);
-      lightSpecified = true;
       return this;
     }
 
@@ -58,7 +61,7 @@ namespace aPC.Common.Builders
     {
       if (!LightSectionIsValid)
       {
-        throw new ArgumentException("Incomplete LightSection built.  At least one light and the Fade Time must be specified.");
+        throw new ArgumentException("Incomplete LightSection built - at least one light must be specified.");
       }
 
       var builtLightSection = lightSection;
@@ -70,7 +73,7 @@ namespace aPC.Common.Builders
     {
       get
       {
-        return lightSpecified;
+        return lightSection.Lights.Any();
       }
     }
   }

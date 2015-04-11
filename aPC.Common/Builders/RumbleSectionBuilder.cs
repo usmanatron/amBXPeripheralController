@@ -1,6 +1,7 @@
 ﻿using aPC.Common.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace aPC.Common.Builders
 {
@@ -10,12 +11,10 @@ namespace aPC.Common.Builders
   public class RumbleSectionBuilder
   {
     private RumbleSection rumbleSection;
-    private bool rumbleSpecified;
 
     public RumbleSectionBuilder()
     {
       Reset();
-      rumbleSpecified = false;
     }
 
     private void Reset()
@@ -32,7 +31,6 @@ namespace aPC.Common.Builders
 
       rumble.Direction = direction;
       rumbleSection.Rumbles.Add(rumble);
-      rumbleSpecified = true;
       return this;
     }
 
@@ -40,7 +38,7 @@ namespace aPC.Common.Builders
     {
       if (!RumbleSectionIsValid)
       {
-        throw new ArgumentException("Incomplete RumbleSection built.  At least one rumble must be specified.");
+        throw new ArgumentException("Incomplete RumbleSection built - at least one rumble must be specified.");
       }
 
       var builtRumbleSection = rumbleSection;
@@ -52,7 +50,7 @@ namespace aPC.Common.Builders
     {
       get
       {
-        return rumbleSpecified;
+        return rumbleSection.Rumbles.Any();
       }
     }
   }

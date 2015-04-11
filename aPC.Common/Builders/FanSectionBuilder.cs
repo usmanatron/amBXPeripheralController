@@ -1,13 +1,13 @@
 ﻿using aPC.Common.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace aPC.Common.Builders
 {
   public class FanSectionBuilder
   {
     private FanSection fanSection;
-    private bool fanSpecified;
 
     public FanSectionBuilder()
     {
@@ -17,7 +17,6 @@ namespace aPC.Common.Builders
     private void Reset()
     {
       fanSection = new FanSection() { Fans = new List<Fan>() };
-      fanSpecified = false;
     }
 
     public FanSectionBuilder WithAllFans(Fan fan)
@@ -36,7 +35,6 @@ namespace aPC.Common.Builders
 
       fan.Direction = direction;
       fanSection.Fans.Add(fan);
-      fanSpecified = true;
       return this;
     }
 
@@ -44,7 +42,7 @@ namespace aPC.Common.Builders
     {
       if (!FanSectionIsValid)
       {
-        throw new ArgumentException("Incomplete FanSection built.  At least one fan and the Fade Time must be specified.");
+        throw new ArgumentException("Incomplete FanSection built - at least one fan must be specified.");
       }
 
       var builtFanSection = fanSection;
@@ -56,7 +54,7 @@ namespace aPC.Common.Builders
     {
       get
       {
-        return fanSpecified;
+        return fanSection.Fans.Any();
       }
     }
   }
