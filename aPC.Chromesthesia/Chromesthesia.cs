@@ -1,12 +1,6 @@
-﻿using aPC.Chromesthesia.Lights;
-using aPC.Chromesthesia.Server;
+﻿using aPC.Chromesthesia.Server;
 using aPC.Chromesthesia.Sound;
-using aPC.Common;
-using aPC.Common.Builders;
-using aPC.Common.Defaults;
-using aPC.Common.Server;
-using aPC.Common.Server.Engine;
-using aPC.Common.Server.Entities;
+using aPC.Common.Client.Communication;
 using NAudio.Wave;
 using Ninject;
 using System;
@@ -15,7 +9,6 @@ namespace aPC.Chromesthesia
 {
   internal class Chromesthesia
   {
-    private static ChromesthesiaTask task;
     private const string preRunSummary = @"Bits per sample: {0}
 Average bytes per second: {1}
 Channels: {2}
@@ -34,11 +27,10 @@ Encoding: {4}";
 
       var streamPitch = new PitchGeneratorProvider(streamRaw, new FftPitchDetector(), new FftPitchDetector(), new FloatDataStereoSplitter(), new PitchResultSummaryWriter());
       var compositeLightSectionBuilder = kernel.Get<SceneBuilder>();
+      var notifiationClient = kernel.Get<NotificationClientBase>();
+      var streamScene = new SceneGenerator(streamPitch, compositeLightSectionBuilder, notifiationClient);
 
-      var sceneRunner = kernel.Get<SceneRunner>();
-      var streamScene = new SceneGenerator(streamPitch, compositeLightSectionBuilder, sceneRunner);
-
-      task = new ChromesthesiaTask(streamScene);
+      var task = new ChromesthesiaTask(streamScene);
 
       task.Run();
     }

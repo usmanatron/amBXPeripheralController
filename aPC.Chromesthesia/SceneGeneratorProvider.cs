@@ -1,7 +1,10 @@
-﻿using aPC.Chromesthesia.Server;
+﻿using aPC.Chromesthesia.Communication;
+using aPC.Chromesthesia.Server;
 using aPC.Chromesthesia.Sound;
 using aPC.Chromesthesia.Sound.Entities;
 using aPC.Common;
+using aPC.Common.Client.Communication;
+using aPC.Common.Communication;
 using aPC.Common.Entities;
 using aPC.Common.Server;
 using NAudio.Wave;
@@ -14,10 +17,10 @@ namespace aPC.Chromesthesia
   {
     private readonly PitchGeneratorProvider pitchGenerator;
     private readonly SceneBuilder sceneBuilder;
-    private readonly SceneRunner sceneRunner;
+    private readonly NotificationClientBase sceneRunner;
     private const float lightTolerance = 0.01f;
 
-    public SceneGenerator(PitchGeneratorProvider pitchGenerator, SceneBuilder sceneBuilder, SceneRunner newSceneProcessor)
+    public SceneGenerator(PitchGeneratorProvider pitchGenerator, SceneBuilder sceneBuilder, NotificationClientBase newSceneProcessor)
     {
       this.pitchGenerator = pitchGenerator;
       this.sceneBuilder = sceneBuilder;

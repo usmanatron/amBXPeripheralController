@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="ChromesthesiaTask.cs" />
     <Compile Include="Chromesthesia.cs" />
+    <Compile Include="Communication\NotificationClient.cs" />
     <Compile Include="Lights\Colour\MidpointRadiusColourBuilder.cs" />
     <Compile Include="NinjectKernelHandler.cs" />
     <Compile Include="Server\SceneRunner.cs" />
@@ -86,6 +87,10 @@
     <ProjectReference Include="..\aPC.Common.Client\aPC.Common.Client.csproj">
       <Project>{20941C53-9669-4BF2-B354-AFF8023C1A1E}</Project>
       <Name>aPC.Common.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\aPC.Common.Communication\aPC.Common.Communication.csproj">
+      <Project>{38537b40-b1fd-433b-b958-8a1b3c7b83d7}</Project>
+      <Name>aPC.Common.Communication</Name>
     </ProjectReference>
     <ProjectReference Include="..\aPC.Common.Server\aPC.Common.Server.csproj">
       <Project>{47258892-f375-4bd9-9b47-87ad0a6569fd}</Project>
