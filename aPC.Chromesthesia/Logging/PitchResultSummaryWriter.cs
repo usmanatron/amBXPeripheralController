@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace aPC.Chromesthesia.Sound
+namespace aPC.Chromesthesia.Logging
 {
   internal class PitchResultSummaryWriter
   {

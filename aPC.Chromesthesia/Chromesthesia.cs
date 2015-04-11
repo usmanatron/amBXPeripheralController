@@ -1,4 +1,5 @@
-﻿using aPC.Chromesthesia.Server;
+﻿using aPC.Chromesthesia.Logging;
+using aPC.Chromesthesia.Server;
 using aPC.Chromesthesia.Sound;
 using aPC.Common.Client.Communication;
 using NAudio.Wave;

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace aPC.Chromesthesia.Sound
+namespace aPC.Chromesthesia.Sound.Entities
 {
   /// <summary>
   /// Handles a buffer in Stereo

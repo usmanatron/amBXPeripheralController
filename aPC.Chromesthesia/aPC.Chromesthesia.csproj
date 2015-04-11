@@ -56,8 +56,8 @@
     <Compile Include="Communication\NotificationClient.cs" />
     <Compile Include="Lights\Colour\MidpointRadiusColourBuilder.cs" />
     <Compile Include="NinjectKernelHandler.cs" />
-    <Compile Include="Sound\PitchResultSummary.cs" />
-    <Compile Include="Sound\PitchResultSummaryWriter.cs" />
+    <Compile Include="Logging\PitchResultSummary.cs" />
+    <Compile Include="Logging\PitchResultSummaryWriter.cs" />
     <Compile Include="Sound\FftPitchDetector.cs" />
     <Compile Include="Sound\IPitchDetector.cs" />
     <Compile Include="Sound\Entities\Pitch.cs" />
@@ -75,7 +75,7 @@
     <Compile Include="Lights\SoundToLightConverter.cs" />
     <Compile Include="SceneBuilder.cs" />
     <Compile Include="ChromesthesiaConfig.cs" />
-    <Compile Include="Sound\StereoBuffer.cs" />
+    <Compile Include="Sound\Entities\StereoBuffer.cs" />
     <Compile Include="Sound\FloatDataStereoSplitter.cs" />
   </ItemGroup>
   <ItemGroup>

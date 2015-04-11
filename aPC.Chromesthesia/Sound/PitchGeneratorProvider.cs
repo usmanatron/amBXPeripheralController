@@ -1,4 +1,5 @@
-﻿using aPC.Chromesthesia.Sound.Entities;
+﻿using aPC.Chromesthesia.Logging;
+using aPC.Chromesthesia.Sound.Entities;
 using NAudio.Wave;
 using System;
 

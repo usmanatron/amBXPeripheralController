@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using aPC.Chromesthesia.Sound.Entities;
+using System.Linq;
 
 namespace aPC.Chromesthesia.Sound
 {

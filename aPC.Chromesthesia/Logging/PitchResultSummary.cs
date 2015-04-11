@@ -1,7 +1,7 @@
 ﻿using aPC.Chromesthesia.Sound.Entities;
 using System;
 
-namespace aPC.Chromesthesia.Sound
+namespace aPC.Chromesthesia.Logging
 {
   internal class PitchResultSummary
   {
