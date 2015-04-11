@@ -57,7 +57,7 @@ namespace aPC.Client.Disco
         mBPM = value;
 
         var maximumFadeLength = PushInterval / (FramesPerScene - 1);
-        FadeTime = new Range(10, maximumFadeLength);
+        FadeTime = new Range(1, maximumFadeLength);
       }
     }
   }
