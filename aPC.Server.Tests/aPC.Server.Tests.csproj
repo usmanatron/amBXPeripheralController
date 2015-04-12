@@ -58,12 +58,17 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AtypicalFirstRunInfiniteTickerTests.cs" />
+    <Compile Include="Entities\RunningDirectionalComponentListTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\aPC.Common\aPC.Common.csproj">
+      <Project>{b6543e75-59af-4059-acf8-560e82bc72ce}</Project>
+      <Name>aPC.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\aPC.Server\aPC.Server.csproj">
       <Project>{e30d0adb-36a7-48a5-ad1d-c3dc496e1acc}</Project>
       <Name>aPC.Server</Name>

@@ -26,7 +26,7 @@ namespace aPC.Server.Entities
 
     public RunningDirectionalComponent Get(DirectionalComponent directionalComponent)
     {
-      return components.Single(component => component.DirectionalComponent.Equals(directionalComponent));
+      return components.SingleOrDefault(component => component.DirectionalComponent.Equals(directionalComponent));
     }
 
     public RunningDirectionalComponent GetSync()
