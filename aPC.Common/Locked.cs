@@ -13,6 +13,7 @@ namespace aPC.Common
     public Locked(T item)
     {
       itemLocker = new ReaderWriterLockSlim();
+      Set(item);
     }
 
     public T Get
