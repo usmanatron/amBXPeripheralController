@@ -1,7 +1,9 @@
 ﻿using aPC.Common.Client;
+using System;
 
 namespace aPC.Client.Morse
 {
+  [Serializable]
   public class UsageException : UsageExceptionBase
   {
     public UsageException(string description)

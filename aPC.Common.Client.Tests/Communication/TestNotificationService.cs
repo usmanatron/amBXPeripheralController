@@ -7,7 +7,7 @@ using System.ServiceModel.Description;
 namespace aPC.Common.Client.Tests.Communication
 {
   [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
-  public class TestNotificationService : INotificationService, IDisposable
+  public sealed class TestNotificationService : INotificationService, IDisposable
   {
     // Item1 is a boolean specifying if the item pushed was an integrated scene
     // Item2 is the information sent
@@ -84,6 +84,7 @@ namespace aPC.Common.Client.Tests.Communication
     public void Dispose()
     {
       host.Close();
+      GC.SuppressFinalize(this);
     }
   }
 }

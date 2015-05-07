@@ -6,7 +6,7 @@ using System.ServiceModel.Description;
 
 namespace aPC.Server.Communication
 {
-  public class CommunicationManager : IDisposable
+  public sealed class CommunicationManager : IDisposable
   {
     private ServiceHost host;
 
@@ -43,6 +43,7 @@ namespace aPC.Server.Communication
     public void Dispose()
     {
       Close();
+      GC.SuppressFinalize(this);
     }
   }
 }

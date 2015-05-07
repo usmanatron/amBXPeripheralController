@@ -8,7 +8,7 @@ namespace aPC.Common.Client
   /// </summary>
   public class HostnameAccessor
   {
-    private Locked<bool> hasChangedSinceLastCheck;
+    private readonly Locked<bool> hasChangedSinceLastCheck;
     private List<string> hostnames;
 
     public HostnameAccessor()
@@ -37,10 +37,7 @@ namespace aPC.Common.Client
 
     public IEnumerable<string> GetAll()
     {
-      foreach (var hostname in hostnames)
-      {
-        yield return hostname;
-      }
+      return hostnames;
     }
 
     #region Watching for updates

@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace aPC.Common.Client
 {
   [Serializable]
   public abstract class UsageExceptionBase : Exception
   {
+    private readonly string userDescription;
+
     protected UsageExceptionBase(string description)
     {
       userDescription = description;
@@ -18,7 +21,5 @@ namespace aPC.Common.Client
     }
 
     protected abstract string Usage();
-
-    private readonly string userDescription;
   }
 }

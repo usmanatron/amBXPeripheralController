@@ -1,16 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.InteropServices;
 
 namespace aPC.Client.Console
 {
   internal class ConsoleRunner
   {
-    [DllImport("Kernel32.dll")]
-    private static extern bool AllocConsole();
-
     private readonly SceneRunner sceneRunner;
 
-    public ConsoleRunner(Settings settings, SceneRunner sceneRunner, List<string> arguments)
+    public ConsoleRunner(Settings settings, SceneRunner sceneRunner, IEnumerable<string> arguments)
     {
       this.sceneRunner = sceneRunner;
       var reader = new ArgumentReader(arguments);
@@ -19,7 +15,7 @@ namespace aPC.Client.Console
 
     public void Run()
     {
-      AllocateConsole();
+      NativeMethods.AllocConsole();
 
       try
       {
@@ -30,11 +26,6 @@ namespace aPC.Client.Console
         exception.DisplayUsage();
         System.Console.ReadLine();
       }
-    }
-
-    private void AllocateConsole()
-    {
-      AllocConsole();
     }
   }
 }

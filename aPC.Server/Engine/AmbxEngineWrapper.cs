@@ -9,7 +9,7 @@ namespace aPC.Server.Engine
   /// <summary>
   ///  Manages the amBXEngine interface.
   /// </summary>
-  public class AmbxEngineWrapper : IDisposable
+  public sealed class AmbxEngineWrapper : IDisposable
   {
     private readonly amBX engine;
     private readonly Dictionary<eDirection, amBXLight> lights;
@@ -91,6 +91,7 @@ namespace aPC.Server.Engine
     public void Dispose()
     {
       engine.Dispose();
+      GC.SuppressFinalize(this);
     }
   }
 }
