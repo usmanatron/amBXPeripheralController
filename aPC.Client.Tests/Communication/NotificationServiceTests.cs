@@ -13,8 +13,8 @@ namespace aPC.Client.Tests.Communication
     [TestFixtureSetUp]
     public void SetupTests()
     {
-      this.host = new TestNotificationService();
-      this.client = new NotificationClient(host.Hostname);
+      host = new TestNotificationService();
+      client = new NotificationClient(host.Hostname);
     }
 
     [SetUp]

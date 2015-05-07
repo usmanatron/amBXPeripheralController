@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace aPC.Common.Tests.Entities
 {
@@ -13,7 +14,7 @@ namespace aPC.Common.Tests.Entities
     [SetUp]
     public void Setup()
     {
-      this.testSection = new TestSection();
+      testSection = new TestSection();
       testSection.Components = new List<TestComponent>
       {
         new TestComponent() { Direction = eDirection.North, Value = "Value-North"},
@@ -43,10 +44,7 @@ namespace aPC.Common.Tests.Entities
 
     public IEnumerable<DirectionalComponent> GetComponents()
     {
-      foreach (var component in Components)
-      {
-        yield return (DirectionalComponent)component;
-      }
+      return Components;
     }
   }
 

@@ -11,7 +11,7 @@ namespace aPC.Chromesthesia.Logging
 {
   internal class PitchResultSummaryWriter
   {
-    private ConcurrentQueue<PitchResultSummary> summaryData;
+    private readonly ConcurrentQueue<PitchResultSummary> summaryData;
     private const string frequencyFormat = "0000.000";
     private const string amplitudeFormat = "0.00000";
     private const string empty = "       ";

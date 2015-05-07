@@ -5,7 +5,7 @@ namespace aPC.Client
   /// <summary>
   /// Interaction logic for HostnameInput.xaml
   /// </summary>
-  public partial class HostnameInput : Window
+  public partial class HostnameInput
   {
     public HostnameInput()
     {

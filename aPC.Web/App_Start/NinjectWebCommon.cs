@@ -1,4 +1,5 @@
 using aPC.Common.Communication;
+using aPC.Web.App_Start;
 using aPC.Web.Helpers;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
@@ -6,9 +7,10 @@ using Ninject.Web.Common;
 using System;
 using System.Web;
 using System.Web.Http;
+using WebActivatorEx;
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(aPC.Web.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(aPC.Web.App_Start.NinjectWebCommon), "Stop")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
+[assembly: ApplicationShutdownMethod(typeof(NinjectWebCommon), "Stop")]
 
 namespace aPC.Web.App_Start
 {

@@ -9,7 +9,7 @@ namespace aPC.Client
   /// <summary>
   /// Interaction logic for MainWindow.xaml
   /// </summary>
-  public partial class MainWindow : Window
+  public partial class MainWindow
   {
     private readonly Settings settings;
     private readonly ISceneListing integratedSceneListing;
@@ -24,8 +24,8 @@ namespace aPC.Client
                       UpdatableHostnameAccessor hostnameAccessor, CustomFileHandler customFileHandler, SceneRunner sceneRunner)
     {
       this.settings = settings;
-      this.integratedSceneListing = integratedListing;
-      this.customSceneListing = customListing;
+      integratedSceneListing = integratedListing;
+      customSceneListing = customListing;
       this.hostnameAccessor = hostnameAccessor; //qqUMI This will break if you update twice+
       this.customFileHandler = customFileHandler;
       this.sceneRunner = sceneRunner;

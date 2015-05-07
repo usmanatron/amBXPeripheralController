@@ -13,11 +13,10 @@ namespace aPC.Client.Morse
   /// </summary>
   public class MorseFrameBuilder : FrameBuilder
   {
-    private LightSectionBuilder lightSectionBuilder;
-    private RumbleSectionBuilder rumbleSectionBuilder;
+    private readonly LightSectionBuilder lightSectionBuilder;
+    private readonly RumbleSectionBuilder rumbleSectionBuilder;
 
     public MorseFrameBuilder(LightSectionBuilder lightSectionBuilder, RumbleSectionBuilder rumbleSectionBuilder)
-      : base()
     {
       this.lightSectionBuilder = lightSectionBuilder;
       this.rumbleSectionBuilder = rumbleSectionBuilder;
@@ -33,22 +32,20 @@ namespace aPC.Client.Morse
       return this;
     }
 
-    private MorseFrameBuilder AddFrame(Settings settings, IMorseBlock block)
+    private void AddFrame(Settings settings, IMorseBlock block)
     {
-      this.AddFrame()
+      AddFrame()
         .WithRepeated(settings.RepeatMessage)
         .WithFrameLength(block.Length * settings.UnitLength);
 
       if (settings.LightsEnabled)
       {
-        this.WithLightSection(GetLightSection(block.Enabled, settings.Colour));
+        WithLightSection(GetLightSection(block.Enabled, settings.Colour));
       }
       if (settings.RumblesEnabled)
       {
-        this.WithRumbleSection(GetRumbleSection(block.Enabled, settings.Rumble));
+        WithRumbleSection(GetRumbleSection(block.Enabled, settings.Rumble));
       }
-
-      return this;
     }
 
     private LightSection GetLightSection(bool lightEnabled, Light enabledColour)

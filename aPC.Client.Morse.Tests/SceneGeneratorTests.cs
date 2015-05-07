@@ -236,14 +236,13 @@ namespace aPC.Client.Morse.Tests
     #endregion Message Tests
 
     //TODO: Consider moving this idea into SectionBaseExtensions and call it Readirections or similar (non-compound)
-    private List<eDirection> ApplicableLightDirections
+    private IEnumerable<eDirection> ApplicableLightDirections
     {
       get
       {
         return ((eDirection[])Enum.GetValues(typeof(eDirection)))
           .Where(dirn => dirn != eDirection.Center &&
-                         dirn != eDirection.Everywhere)
-          .ToList();
+                         dirn != eDirection.Everywhere);
       }
     }
   }

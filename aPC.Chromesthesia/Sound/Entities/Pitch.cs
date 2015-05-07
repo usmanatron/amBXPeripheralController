@@ -9,8 +9,8 @@
 
     public Pitch(int fftBinIndex, float fftBinSize, float amplitude)
     {
-      this.lowerFrequency = fftBinIndex * fftBinSize;
-      this.upperFrequency = (fftBinIndex + 1) * fftBinSize;
+      lowerFrequency = fftBinIndex * fftBinSize;
+      upperFrequency = (fftBinIndex + 1) * fftBinSize;
       this.amplitude = amplitude;
       this.fftBinIndex = fftBinIndex;
     }

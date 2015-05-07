@@ -33,11 +33,11 @@ namespace aPC.Common.Entities
     {
       get
       {
-        return Enum.GetName(typeof(eSceneType), this.SceneType);
+        return Enum.GetName(typeof(eSceneType), SceneType);
       }
       set
       {
-        this.SceneType = (eSceneType)Enum.Parse(typeof(eSceneType), value);
+        SceneType = (eSceneType)Enum.Parse(typeof(eSceneType), value);
       }
     }
 
@@ -75,11 +75,7 @@ namespace aPC.Common.Entities
     {
       get
       {
-        if (frameStatistics == null)
-        {
-          frameStatistics = new FrameStatistics(Frames);
-        }
-        return frameStatistics;
+        return frameStatistics ?? (frameStatistics = new FrameStatistics(Frames));
       }
     }
 

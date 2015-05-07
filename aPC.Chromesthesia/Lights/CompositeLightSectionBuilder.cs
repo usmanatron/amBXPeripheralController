@@ -7,8 +7,8 @@ namespace aPC.Chromesthesia.Lights
 {
   internal class CompositeLightSectionBuilder
   {
-    private LightSectionBuilder lightSectionBuilder;
-    private CompositeLightBuilder compositeLightBuilder;
+    private readonly LightSectionBuilder lightSectionBuilder;
+    private readonly CompositeLightBuilder compositeLightBuilder;
     private Light westLight;
     private Light eastLight;
     private int sidePercentageOnDiagonal;
@@ -19,9 +19,9 @@ namespace aPC.Chromesthesia.Lights
     public CompositeLightSectionBuilder(LightSectionBuilder lightSectionBuilder, CompositeLightBuilder compositeLightBuilder)
     {
       this.lightSectionBuilder = lightSectionBuilder;
-      this.sidePercentageOnDiagonal = -1;
+      sidePercentageOnDiagonal = -1;
       this.compositeLightBuilder = compositeLightBuilder;
-      this.fadeTime = ChromesthesiaConfig.LightFadeTime;
+      fadeTime = ChromesthesiaConfig.LightFadeTime;
     }
 
     public CompositeLightSectionBuilder WithLights(Light westLight, Light eastLight)

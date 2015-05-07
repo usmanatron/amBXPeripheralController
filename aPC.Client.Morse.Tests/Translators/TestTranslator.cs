@@ -20,7 +20,7 @@ namespace aPC.Client.Morse.Tests.Translators
       }
     }
 
-    public List<IMorseBlock> AddSeparatorsToList(IEnumerable<List<IMorseBlock>> list, IMorseBlock separator)
+    public new List<IMorseBlock> AddSeparatorsToList(IEnumerable<List<IMorseBlock>> list, IMorseBlock separator)
     {
       return base.AddSeparatorsToList(list, separator);
     }

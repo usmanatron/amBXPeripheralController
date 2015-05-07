@@ -33,10 +33,10 @@ namespace aPC.Common
     public Dictionary<string, amBXScene> GetAllScenes()
     {
       return GetAllIntegratedScenes()
-        .ToDictionary(scene => SceneNameAttribute.GetName(scene), scene => (amBXScene)scene.GetValue(defaultScenes));
+        .ToDictionary(SceneNameAttribute.GetName, scene => (amBXScene)scene.GetValue(defaultScenes));
     }
 
-    private PropertyInfo[] GetAllIntegratedScenes()
+    private IEnumerable<PropertyInfo> GetAllIntegratedScenes()
     {
       return defaultScenes.GetType()
         .GetProperties();

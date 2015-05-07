@@ -11,10 +11,7 @@ namespace aPC.Common.Entities
 
     public IEnumerable<DirectionalComponent> GetComponents()
     {
-      foreach (var fan in Fans)
-      {
-        yield return (DirectionalComponent)fan;
-      }
+      return Fans;
     }
   }
 }

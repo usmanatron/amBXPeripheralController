@@ -17,8 +17,8 @@ namespace aPC.Chromesthesia.Server
     {
       this.compositeLightSectionBuilder = compositeLightSectionBuilder;
       this.converter = converter;
-      this.diagonalLightPercentage = ChromesthesiaConfig.DiagonalLightPercentageOfSide;
-      this.frameLength = ChromesthesiaConfig.SceneFrameLength;
+      diagonalLightPercentage = ChromesthesiaConfig.DiagonalLightPercentageOfSide;
+      frameLength = ChromesthesiaConfig.SceneFrameLength;
     }
 
     public amBXScene BuildSceneFromPitchResults(StereoPitchResult pitchResults)

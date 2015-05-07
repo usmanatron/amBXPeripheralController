@@ -16,7 +16,7 @@ namespace aPC.Common.Builders
 
     private void Reset()
     {
-      fanSection = new FanSection() { Fans = new List<Fan>() };
+      fanSection = new FanSection { Fans = new List<Fan>() };
     }
 
     public FanSectionBuilder WithAllFans(Fan fan)

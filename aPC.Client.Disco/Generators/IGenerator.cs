@@ -1,6 +1,6 @@
 ﻿namespace aPC.Client.Disco.Generators
 {
-  public interface IGenerator<T>
+  public interface IGenerator<out T>
   {
     T Generate();
   }

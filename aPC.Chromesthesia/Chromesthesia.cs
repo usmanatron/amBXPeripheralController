@@ -46,7 +46,7 @@ Encoding: {4}";
     /// </remarks>
     private static void WriteCaptureSettings(WaveFormat waveFormat)
     {
-      Console.WriteLine(string.Format(preRunSummary, waveFormat.BitsPerSample, waveFormat.AverageBytesPerSecond, waveFormat.Channels, waveFormat.SampleRate, waveFormat.Encoding));
+      Console.WriteLine(preRunSummary, waveFormat.BitsPerSample, waveFormat.AverageBytesPerSecond, waveFormat.Channels, waveFormat.SampleRate, waveFormat.Encoding);
     }
   }
 }

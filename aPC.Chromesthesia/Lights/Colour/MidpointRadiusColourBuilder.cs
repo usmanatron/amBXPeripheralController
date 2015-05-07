@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace aPC.Chromesthesia.Lights.Colour
 {
@@ -14,10 +10,10 @@ namespace aPC.Chromesthesia.Lights.Colour
     protected int midPoint;
     protected int radius;
 
-    public MidpointRadiusColourBuilder(Tuple<int, int> frequencyRange)
+    protected MidpointRadiusColourBuilder(Tuple<int, int> frequencyRange)
     {
-      this.midPoint = GetMidpoint(frequencyRange);
-      this.radius = GetMidpointOfDifference(frequencyRange.Item2);
+      midPoint = GetMidpoint(frequencyRange);
+      radius = GetMidpointOfDifference(frequencyRange.Item2);
     }
 
     /// <remarks>

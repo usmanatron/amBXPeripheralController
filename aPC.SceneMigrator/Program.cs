@@ -33,7 +33,7 @@ namespace aPC.SceneMigrator
       using (var stream = new FileStream(filepath, FileMode.Open))
       {
         var deserialiser = new XmlSerializer(typeof(amBXSceneV1));
-        amBXSceneV1 scene = (amBXSceneV1)deserialiser.Deserialize(stream);
+        var scene = (amBXSceneV1)deserialiser.Deserialize(stream);
         return scene;
       }
     }

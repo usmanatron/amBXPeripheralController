@@ -35,10 +35,8 @@ namespace aPC.Client.Disco.Generators
 
     private IEnumerable<Light> BuildLights()
     {
-      foreach (eDirection direction in EnumExtensions.GetCompassDirections())
-      {
-        yield return GetRandomLightInDirection(direction);
-      }
+      return EnumExtensions.GetCompassDirections()
+        .Select(GetRandomLightInDirection);
     }
 
     /// <summary>

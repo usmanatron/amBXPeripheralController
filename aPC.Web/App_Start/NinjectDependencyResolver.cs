@@ -8,7 +8,7 @@ namespace aPC.Web.App_Start
   /// </summary>
   public class NinjectDependencyResolver : NinjectDependencyScope, IDependencyResolver
   {
-    private IKernel kernel;
+    private readonly IKernel kernel;
 
     public NinjectDependencyResolver(IKernel kernel)
       : base(kernel)

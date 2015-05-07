@@ -1,27 +1,23 @@
 ﻿using aPC.Client.Morse.Codes;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace aPC.Client.Morse.Translators
 {
   public class MessageTranslator : TranslatorBase
   {
-    private WordTranslator baseTranslator;
+    private readonly WordTranslator baseTranslator;
 
     public MessageTranslator(WordTranslator wordTranslator)
     {
-      this.baseTranslator = wordTranslator;
+      baseTranslator = wordTranslator;
     }
 
     public override IEnumerable<List<IMorseBlock>> TranslateContent(string content)
     {
-      var translatedMessage = new List<List<IMorseBlock>>();
-
-      foreach (var word in content.Split(' '))
-      {
-        translatedMessage.Add(baseTranslator.Translate(word));
-      }
-
-      return translatedMessage;
+      return content.Split(' ')
+        .Select(word => baseTranslator.Translate(word))
+        .ToList();
     }
 
     public override IMorseBlock Separator

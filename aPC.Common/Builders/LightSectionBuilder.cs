@@ -16,7 +16,7 @@ namespace aPC.Common.Builders
 
     private void Reset()
     {
-      lightSection = new LightSection() { Lights = new List<Light>() };
+      lightSection = new LightSection { Lights = new List<Light>() };
     }
 
     public LightSectionBuilder WithAllLights(Light light)

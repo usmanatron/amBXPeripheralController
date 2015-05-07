@@ -14,7 +14,7 @@ namespace aPC.Client
   /// <summary>
   /// Interaction logic for App.xaml
   /// </summary>
-  public partial class App : Application
+  public partial class App
   {
     /// <summary>
     ///   Checks if arguments have been passed in - if this is the case,
@@ -69,7 +69,7 @@ namespace aPC.Client
     private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
     {
       var filePath = Path.Combine(Environment.CurrentDirectory, "Exception.log");
-      System.IO.File.WriteAllText(filePath, e.ExceptionObject.ToString());
+      File.WriteAllText(filePath, e.ExceptionObject.ToString());
     }
   }
 }

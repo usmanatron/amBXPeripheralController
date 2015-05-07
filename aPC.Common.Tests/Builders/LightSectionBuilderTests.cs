@@ -19,7 +19,7 @@ namespace aPC.Common.Tests.Builders
     private readonly Light green = DefaultLights.Green;
     private readonly Light blue = DefaultLights.Blue;
     private readonly Light red = DefaultLights.Red;
-    private eDirection[] compassDirections = EnumExtensions.GetCompassDirections().ToArray();
+    private readonly eDirection[] compassDirections = EnumExtensions.GetCompassDirections().ToArray();
 
     [SetUp]
     public void Setup()

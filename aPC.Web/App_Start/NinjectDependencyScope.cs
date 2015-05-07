@@ -23,7 +23,7 @@ namespace aPC.Web.App_Start
 
     public void Dispose()
     {
-      IDisposable disposable = resolver as IDisposable;
+      var disposable = resolver as IDisposable;
       if (disposable != null)
         disposable.Dispose();
 

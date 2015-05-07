@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace aPC.Common.Entities
 {
@@ -16,8 +14,7 @@ namespace aPC.Common.Entities
 
       return section
         .GetComponents()
-        .Where(component => component.Direction == direction)
-        .SingleOrDefault();
+        .SingleOrDefault(component => component.Direction == direction);
     }
 
     public static DirectionalComponent GetComponentInDirection(this Frame frame, eComponentType componentType, eDirection direction)
@@ -26,10 +23,13 @@ namespace aPC.Common.Entities
       {
         case eComponentType.Light:
           return frame.LightSection.GetComponentSectionInDirection(direction);
+
         case eComponentType.Fan:
           return frame.FanSection.GetComponentSectionInDirection(direction);
+
         case eComponentType.Rumble:
           return frame.RumbleSection.GetComponentSectionInDirection(direction);
+
         default:
           throw new ArgumentException("Unexpected Component Type");
       }

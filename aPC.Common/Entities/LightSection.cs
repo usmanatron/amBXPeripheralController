@@ -11,10 +11,7 @@ namespace aPC.Common.Entities
 
     public IEnumerable<DirectionalComponent> GetComponents()
     {
-      foreach (var light in Lights)
-      {
-        yield return (DirectionalComponent)light;
-      }
+      return Lights;
     }
   }
 }

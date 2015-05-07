@@ -11,10 +11,7 @@ namespace aPC.Common.Entities
 
     public IEnumerable<DirectionalComponent> GetComponents()
     {
-      foreach (var rumble in Rumbles)
-      {
-        yield return (DirectionalComponent)rumble;
-      }
+      return Rumbles;
     }
   }
 }

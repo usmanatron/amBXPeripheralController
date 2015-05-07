@@ -1,5 +1,6 @@
 ﻿using aPC.Client.Console;
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.IO;
 
 namespace aPC.Client.Tests.Console
@@ -61,7 +62,7 @@ namespace aPC.Client.Tests.Console
       return File.ReadAllText(Path.GetFullPath(filename));
     }
 
-    private Settings GetSettingsFromArguments(string[] arguments)
+    private Settings GetSettingsFromArguments(IEnumerable<string> arguments)
     {
       var settings = new Settings();
       new ArgumentReader(arguments).AddArgumentsToSettings(settings);

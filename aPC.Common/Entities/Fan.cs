@@ -15,10 +15,10 @@ namespace aPC.Common.Entities
 
     public object Clone()
     {
-      return new Fan()
+      return new Fan
       {
-        Intensity = this.Intensity,
-        Direction = this.Direction
+        Intensity = Intensity,
+        Direction = Direction
       };
     }
 
@@ -31,7 +31,7 @@ namespace aPC.Common.Entities
 
       var otherFan = (Fan)other;
 
-      return this.Intensity == otherFan.Intensity;
+      return Intensity == otherFan.Intensity;
     }
   }
 }

@@ -24,13 +24,13 @@ namespace aPC.Common.Entities
 
     public object Clone()
     {
-      return new Light()
+      return new Light
       {
-        FadeTime = this.FadeTime,
-        Red = this.Red,
-        Green = this.Green,
-        Blue = this.Blue,
-        Direction = this.Direction
+        FadeTime = FadeTime,
+        Red = Red,
+        Green = Green,
+        Blue = Blue,
+        Direction = Direction
       };
     }
 
@@ -43,10 +43,10 @@ namespace aPC.Common.Entities
 
       var otherLight = (Light)other;
 
-      return this.FadeTime == otherLight.FadeTime &&
-             this.Red == otherLight.Red &&
-             this.Green == otherLight.Green &&
-             this.Blue == otherLight.Blue;
+      return FadeTime == otherLight.FadeTime &&
+             Red == otherLight.Red &&
+             Green == otherLight.Green &&
+             Blue == otherLight.Blue;
     }
   }
 }

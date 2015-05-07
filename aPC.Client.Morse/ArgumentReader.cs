@@ -10,7 +10,7 @@ namespace aPC.Client.Morse
   {
     protected List<string> switches;
     protected string message;
-    private Regex morsePattern = new Regex(@"[\w\s\.\,\?\'\!\/\(\)\&\:\;\=\+\""\$\@]+", RegexOptions.Compiled);
+    private readonly Regex morsePattern = new Regex(@"[\w\s\.\,\?\'\!\/\(\)\&\:\;\=\+\""\$\@]+", RegexOptions.Compiled);
 
     public ArgumentReader(string arguments)
     {
@@ -121,15 +121,19 @@ namespace aPC.Client.Morse
         case @"/d":
           settings.RepeatMessage = true;
           break;
+
         case @"/r":
           settings.RumblesEnabled = true;
           break;
+
         case @"/l":
           settings.LightsEnabled = false;
           break;
+
         case @"/c":
           settings.Colour = ParseColour(@switch);
           break;
+
         case @"/u":
           settings.UnitLength = ParseUnitLength(@switch);
           break;
@@ -140,15 +144,14 @@ namespace aPC.Client.Morse
     {
       var lightComponents = argument
         .Remove(0, 3).Split(',')
-        .Select(colour => float.Parse(colour)).ToList();
+        .Select(float.Parse).ToList();
 
-      if (lightComponents.Count != 3 ||
-          lightComponents.Any(colour => IsOutOfRange(colour)))
+      if (lightComponents.Count != 3 || lightComponents.Any(IsOutOfRange))
       {
         throw new ArgumentOutOfRangeException();
       }
 
-      return new Light()
+      return new Light
       {
         Red = lightComponents[0],
         Green = lightComponents[1],

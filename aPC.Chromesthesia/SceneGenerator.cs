@@ -23,7 +23,7 @@ namespace aPC.Chromesthesia
     {
       this.pitchGenerator = pitchGenerator;
       this.sceneBuilder = sceneBuilder;
-      this.sceneRunner = newSceneProcessor;
+      sceneRunner = newSceneProcessor;
     }
 
     public void Execute(int readLength)

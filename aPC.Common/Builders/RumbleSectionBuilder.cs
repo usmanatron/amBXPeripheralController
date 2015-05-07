@@ -19,7 +19,7 @@ namespace aPC.Common.Builders
 
     private void Reset()
     {
-      rumbleSection = new RumbleSection() { Rumbles = new List<Rumble>() };
+      rumbleSection = new RumbleSection { Rumbles = new List<Rumble>() };
     }
 
     public RumbleSectionBuilder WithRumbleInDirection(eDirection direction, Rumble rumble)

@@ -1,13 +1,14 @@
 ﻿using aPC.Client.Morse.Codes;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace aPC.Client.Morse.Translators
 {
   public class WordTranslator : TranslatorBase
   {
-    private CharacterTranslator baseTranslator;
+    private readonly CharacterTranslator baseTranslator;
 
     public WordTranslator(CharacterTranslator baseTranslator)
     {
@@ -16,14 +17,10 @@ namespace aPC.Client.Morse.Translators
 
     public override IEnumerable<List<IMorseBlock>> TranslateContent(string content)
     {
-      var translatedWord = new List<List<IMorseBlock>>();
-
-      foreach (var character in content.ToCharArray())
-      {
-        translatedWord.Add(baseTranslator.Translate(character.ToString()));
-      }
-
-      return translatedWord;
+      return content
+        .ToCharArray()
+        .Select(character => baseTranslator.Translate(character.ToString(CultureInfo.InvariantCulture)))
+        .ToList();
     }
 
     protected override void ThrowIfInputInvalid(string word)

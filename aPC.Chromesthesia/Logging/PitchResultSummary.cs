@@ -13,7 +13,7 @@ namespace aPC.Chromesthesia.Logging
     {
       this.leftResult = leftResult;
       this.rightResult = rightResult;
-      this.time = DateTime.Now.TimeOfDay;
+      time = DateTime.Now.TimeOfDay;
     }
   }
 }

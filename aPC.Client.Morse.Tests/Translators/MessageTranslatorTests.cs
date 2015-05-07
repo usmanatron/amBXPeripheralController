@@ -13,11 +13,11 @@ namespace aPC.Client.Morse.Tests.Translators
     private MessageTranslator translator;
     private WordTranslator wordTranslator;
 
-    private static IMorseBlock dot = new Dot();
-    private static IMorseBlock dash = new Dash();
-    private static IMorseBlock dotDashSeparator = new DotDashSeparator();
-    private static IMorseBlock characterSeparator = new CharacterSeparator();
-    private static IMorseBlock wordSeparator = new WordSeparator();
+    private static readonly IMorseBlock dot = new Dot();
+    private static readonly IMorseBlock dash = new Dash();
+    private static readonly IMorseBlock dotDashSeparator = new DotDashSeparator();
+    private static readonly IMorseBlock characterSeparator = new CharacterSeparator();
+    private static readonly IMorseBlock wordSeparator = new WordSeparator();
 
     [SetUp]
     public void Setup()
@@ -40,7 +40,7 @@ namespace aPC.Client.Morse.Tests.Translators
       }
     }
 
-    private TestMultiCharacterData[] TestMessages = new TestMultiCharacterData[]
+    private readonly TestMultiCharacterData[] TestMessages = new TestMultiCharacterData[]
     {
       new TestMultiCharacterData("Boom", new List<IMorseBlock> {
         dash, dotDashSeparator, dot, dotDashSeparator, dot, dotDashSeparator, dot, characterSeparator,

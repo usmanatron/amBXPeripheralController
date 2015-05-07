@@ -5,8 +5,8 @@ namespace aPC.Client.Disco
 {
   public class ArgumentReader
   {
-    private List<string> args;
-    private Settings settings;
+    private readonly List<string> args;
+    private readonly Settings settings;
 
     public ArgumentReader(List<string> args, Settings settings)
     {
@@ -25,18 +25,23 @@ namespace aPC.Client.Disco
           case "bpm":
             settings.BPM = int.Parse(deconstructedArgument[1]);
             break;
+
           case "red":
             settings.RedColourWidth = GetRange(deconstructedArgument[1]);
             break;
+
           case "blue":
             settings.BlueColourWidth = GetRange(deconstructedArgument[1]);
             break;
+
           case "green":
             settings.GreenColourWidth = GetRange(deconstructedArgument[1]);
             break;
+
           case "servers":
             settings.HostnameAccessor.ResetWith(deconstructedArgument[1].Split(',').ToList());
             break;
+
           default:
             throw new UsageException("Unknown argument: " + deconstructedArgument);
         }

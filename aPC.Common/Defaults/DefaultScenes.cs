@@ -193,7 +193,7 @@ namespace aPC.Common.Defaults
     {
       get
       {
-        var physicalDirections = new List<eDirection>()
+        var physicalDirections = new List<eDirection>
         {
           eDirection.West,
           eDirection.NorthWest,
@@ -295,7 +295,7 @@ namespace aPC.Common.Defaults
     {
       get
       {
-        var scene = new amBXScene()
+        var scene = new amBXScene
           {
             SceneType = eSceneType.Desync
           };

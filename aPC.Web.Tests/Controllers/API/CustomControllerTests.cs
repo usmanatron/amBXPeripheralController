@@ -30,18 +30,14 @@ namespace aPC.Web.Tests.Controllers.API
     [TestCaseSource("ValidInput")]
     public void Parse_WithValidInput_ReturnsOK(string scene)
     {
-      amBXScene sceneOut;
-
-      Assert.DoesNotThrow(() => sceneOut = controller.Parse(scene));
+      Assert.DoesNotThrow(() => controller.Parse(scene));
     }
 
     [Test]
     [TestCaseSource("InvalidInput")]
     public void Parse_WithInvalidInput_ReturnsOK(string scene)
     {
-      amBXScene sceneOut;
-
-      Assert.DoesNotThrow(() => sceneOut = controller.Parse(scene));
+      Assert.DoesNotThrow(() => controller.Parse(scene));
     }
 
     private string[] ValidInput()

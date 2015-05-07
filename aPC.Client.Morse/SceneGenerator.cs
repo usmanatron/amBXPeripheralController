@@ -9,8 +9,8 @@ namespace aPC.Client.Morse
 {
   public class SceneGenerator
   {
-    private MessageTranslator messageTranslator;
-    private MorseFrameBuilder frameBuilder;
+    private readonly MessageTranslator messageTranslator;
+    private readonly MorseFrameBuilder frameBuilder;
 
     public SceneGenerator(MessageTranslator messageTranslator, MorseFrameBuilder frameBuilder)
     {

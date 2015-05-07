@@ -7,7 +7,7 @@ namespace aPC.Client.Morse.Tests.Translators
   {
     public readonly List<IMorseBlock> ExpectedCode;
 
-    public TestCharacterBase(List<IMorseBlock> expectedCode)
+    protected TestCharacterBase(List<IMorseBlock> expectedCode)
     {
       ExpectedCode = expectedCode;
     }

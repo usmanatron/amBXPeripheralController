@@ -7,10 +7,10 @@ namespace aPC.Common.Entities
   [Serializable]
   public class FrameStatistics
   {
-    private Func<DirectionalComponent, eComponentType, bool> HasComponentType =
+    private readonly Func<DirectionalComponent, eComponentType, bool> HasComponentType =
       (directionalComponent, componentType) => directionalComponent.ComponentType == componentType;
 
-    private Func<DirectionalComponent, eDirection, bool> HasDirection =
+    private readonly Func<DirectionalComponent, eDirection, bool> HasDirection =
       (directionalComponent, direction) => directionalComponent.Direction == direction;
 
     public readonly List<DirectionalComponent> EnabledDirectionalComponents;
@@ -20,7 +20,7 @@ namespace aPC.Common.Entities
     ///   For now, just go through all of the frames and process them - forgoe
     ///   any potential performance gains of doing anything smarter
     /// </remarks>
-    public FrameStatistics(List<Frame> frames)
+    public FrameStatistics(IEnumerable<Frame> frames)
     {
       EnabledDirectionalComponents = new List<DirectionalComponent>();
       SceneLength = 0;

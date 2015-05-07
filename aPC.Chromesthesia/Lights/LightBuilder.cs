@@ -2,16 +2,14 @@
 using aPC.Chromesthesia.Sound.Entities;
 using aPC.Common.Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace aPC.Chromesthesia.Lights
 {
   internal class LightBuilder
   {
-    private IColourBuilder redComponent;
-    private IColourBuilder greenComponent;
-    private IColourBuilder blueComponent;
+    private readonly IColourBuilder redComponent;
+    private readonly IColourBuilder greenComponent;
+    private readonly IColourBuilder blueComponent;
     private Light light;
 
     public LightBuilder()
@@ -57,10 +55,8 @@ namespace aPC.Chromesthesia.Lights
       return this;
     }
 
-    private Func<IColourBuilder, int, float, float> GetComponentValue = (IColourBuilder colourBuilder, int fftBinIndex, float amplitudePercentage) =>
-      {
-        return colourBuilder.GetValue(fftBinIndex) * ChromesthesiaConfig.LightComponentMultiplicationFactor * amplitudePercentage;
-      };
+    private readonly Func<IColourBuilder, int, float, float> GetComponentValue = (colourBuilder, fftBinIndex, amplitudePercentage) =>
+      colourBuilder.GetValue(fftBinIndex) * ChromesthesiaConfig.LightComponentMultiplicationFactor * amplitudePercentage;
 
     public Light Build()
     {

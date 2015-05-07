@@ -27,7 +27,7 @@ namespace aPC.Client.Morse.Tests
     [Test]
     public void ArgumentString_CorrectlyBrokenIntoSeparateArguments()
     {
-      var argumentString = @"/D /R /C:0,0,1 /U:250 /M:Message";
+      const string argumentString = @"/D /R /C:0,0,1 /U:250 /M:Message";
       var argumentReader = new TestArgumentReader(argumentString);
 
       var switches = argumentReader.Switches;

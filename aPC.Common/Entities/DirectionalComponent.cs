@@ -1,5 +1,4 @@
-﻿using System;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace aPC.Common.Entities
 {
@@ -17,12 +16,12 @@ namespace aPC.Common.Entities
     public DirectionalComponent(eComponentType componentType, eDirection direction)
       : this(componentType)
     {
-      this.Direction = direction;
+      Direction = direction;
     }
 
     public DirectionalComponent(eComponentType componentType)
     {
-      this.ComponentType = componentType;
+      ComponentType = componentType;
     }
 
     public override bool Equals(object other)
@@ -34,8 +33,8 @@ namespace aPC.Common.Entities
 
       var otherComponent = (DirectionalComponent)other;
 
-      return this.ComponentType == otherComponent.ComponentType &&
-             this.Direction == otherComponent.Direction;
+      return ComponentType == otherComponent.ComponentType &&
+             Direction == otherComponent.Direction;
     }
   }
 }

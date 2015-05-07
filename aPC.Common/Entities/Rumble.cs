@@ -21,12 +21,12 @@ namespace aPC.Common.Entities
 
     public object Clone()
     {
-      return new Rumble()
+      return new Rumble
       {
-        RumbleType = this.RumbleType,
-        Intensity = this.Intensity,
-        Speed = this.Speed,
-        Direction = this.Direction
+        RumbleType = RumbleType,
+        Intensity = Intensity,
+        Speed = Speed,
+        Direction = Direction
       };
     }
 
@@ -39,9 +39,9 @@ namespace aPC.Common.Entities
 
       var otherRumble = (Rumble)other;
 
-      return this.RumbleType == otherRumble.RumbleType &&
-             this.Intensity == otherRumble.Intensity &&
-             this.Speed == otherRumble.Speed;
+      return RumbleType == otherRumble.RumbleType &&
+             Intensity == otherRumble.Intensity &&
+             Speed == otherRumble.Speed;
     }
   }
 }

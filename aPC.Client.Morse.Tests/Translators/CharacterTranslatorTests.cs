@@ -45,7 +45,7 @@ namespace aPC.Client.Morse.Tests.Translators
     }
 
     // The case doesn't matter
-    private TestSingleCharacterData[] TestCharacters = new TestSingleCharacterData[]
+    private readonly TestSingleCharacterData[] TestCharacters = new TestSingleCharacterData[]
     {
       new TestSingleCharacterData("A", new List<IMorseBlock> {new Dot(), new DotDashSeparator(), new Dash()}),
       new TestSingleCharacterData("C", new List<IMorseBlock> {new Dash(), new DotDashSeparator(), new Dot(), new DotDashSeparator(),

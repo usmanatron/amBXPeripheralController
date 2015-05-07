@@ -1,9 +1,6 @@
 ﻿using aPC.Common.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using amBXSceneV1 = aPC.SceneMigrator.EntitiesV1.amBXScene;
 using FrameV1 = aPC.SceneMigrator.EntitiesV1.Frame;
 
@@ -11,9 +8,9 @@ namespace aPC.SceneMigrator
 {
   internal class SceneMigrator
   {
-    private LightSectionMigrator lightSectionMigrator;
-    private FanSectionMigrator fanSectionMigrator;
-    private RumbleSectionMigrator rumbleSectionMigrator;
+    private readonly LightSectionMigrator lightSectionMigrator;
+    private readonly FanSectionMigrator fanSectionMigrator;
+    private readonly RumbleSectionMigrator rumbleSectionMigrator;
 
     public SceneMigrator(LightSectionMigrator lightSectionMigrator, FanSectionMigrator fanSectionMigrator, RumbleSectionMigrator rumbleSectionMigrator)
     {
@@ -34,10 +31,7 @@ namespace aPC.SceneMigrator
 
     private IEnumerable<Frame> MigrateFrames(IEnumerable<FrameV1> oldFrames)
     {
-      foreach (var oldFrame in oldFrames)
-      {
-        yield return MigrateFrame(oldFrame);
-      }
+      return oldFrames.Select(MigrateFrame);
     }
 
     private Frame MigrateFrame(FrameV1 oldFrame)

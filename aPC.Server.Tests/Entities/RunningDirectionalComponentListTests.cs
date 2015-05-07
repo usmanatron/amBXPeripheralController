@@ -20,11 +20,11 @@ namespace aPC.Server.Tests.Entities
     [SetUp]
     public void Setup()
     {
-      this.runningDirectionalComponentList = new RunningDirectionalComponentList();
+      runningDirectionalComponentList = new RunningDirectionalComponentList();
       var defaultScenes = new DefaultScenes();
-      this.arbitrarySyncScene = defaultScenes.DefaultRedVsBlue;
-      this.arbitraryDesyncScene = defaultScenes.Rainbow;
-      this.arbitraryDirectionalComponent = new DirectionalComponent(eComponentType.Light);
+      arbitrarySyncScene = defaultScenes.DefaultRedVsBlue;
+      arbitraryDesyncScene = defaultScenes.Rainbow;
+      arbitraryDirectionalComponent = new DirectionalComponent(eComponentType.Light);
     }
 
     [Test]

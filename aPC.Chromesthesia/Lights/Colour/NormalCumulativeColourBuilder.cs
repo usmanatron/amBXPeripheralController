@@ -1,8 +1,5 @@
-﻿using MathNet.Numerics;
+﻿using MathNet.Numerics.Distributions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace aPC.Chromesthesia.Lights.Colour
 {
@@ -19,7 +16,7 @@ namespace aPC.Chromesthesia.Lights.Colour
 
     public override float GetValue(int index)
     {
-      float rawValue = (float)MathNet.Numerics.Distributions.Normal.CDF(midPoint, radius, index);
+      var rawValue = (float)Normal.CDF(midPoint, radius, index);
 
       return rawValue <= 0.5
         ? rawValue

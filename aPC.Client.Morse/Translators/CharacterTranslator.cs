@@ -7,8 +7,8 @@ namespace aPC.Client.Morse.Translators
 {
   public class CharacterTranslator : TranslatorBase
   {
-    private static IMorseBlock dot = new Dot();
-    private static IMorseBlock dash = new Dash();
+    private static readonly IMorseBlock dot = new Dot();
+    private static readonly IMorseBlock dash = new Dash();
 
     public override IEnumerable<List<IMorseBlock>> TranslateContent(string content)
     {
@@ -37,7 +37,7 @@ namespace aPC.Client.Morse.Translators
     ///   Gives the Morse Code equivalent of every available character
     ///   *WITHOUT THE SEPARATORS* between dots and dashes.
     /// </summary>
-    private static Dictionary<char, List<IMorseBlock>> RawCharacters = new Dictionary<char, List<IMorseBlock>>
+    private static readonly Dictionary<char, List<IMorseBlock>> RawCharacters = new Dictionary<char, List<IMorseBlock>>
     {
       {'a', new List<IMorseBlock>(){dot, dash}},
       {'b', new List<IMorseBlock>(){dash, dot, dot, dot}},
