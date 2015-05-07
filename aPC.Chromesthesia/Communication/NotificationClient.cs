@@ -1,10 +1,12 @@
 ﻿using aPC.Common.Client;
 using aPC.Common.Client.Communication;
+using Ninject;
 
 namespace aPC.Chromesthesia.Communication
 {
   public class NotificationClient : NotificationClientBase
   {
+    [Inject]
     public NotificationClient(HostnameAccessor hostnameAccessor)
       : base(hostnameAccessor)
     {
