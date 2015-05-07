@@ -172,15 +172,6 @@ namespace aPC.Chromesthesia
     }
 
     /// <summary>
-    /// The number of terms to calculate for the Normal Cumulative Distribution Function (CDF).
-    /// The more terms, the higher the accuracy.  However this is a trade-off between accuracy and performance.
-    /// </summary>
-    public static int NormalCDFNumberOfTerms
-    {
-      get { return int.Parse(config["NormalCDFNumberOfTerms"]); }
-    }
-
-    /// <summary>
     /// The ...MainFrequencyRange objects define the main range of frequencies which the given colour component applies
     /// For example, a RedMFR of 100-200 implies that the main range for red is between 100Hz and 200Hz.  The IColourBuilder
     /// class in effect uses this to appropriately translate the sound sample into the right hue.
