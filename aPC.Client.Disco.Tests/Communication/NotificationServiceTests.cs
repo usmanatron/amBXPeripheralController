@@ -38,7 +38,7 @@ namespace aPC.Client.Disco.Tests.Communication
 
       Assert.AreEqual(1, host.Scenes.Count);
       Assert.AreEqual(false, host.Scenes[0].Item1);
-      Assert.AreEqual(scene, host.Scenes[0].Item2);
+      //TODO: More comprehensive equality checks
     }
   }
 }
