@@ -44,12 +44,16 @@
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builders\FanSectionBuilder.cs" />
     <Compile Include="Builders\LightSectionBuilder.cs" />
     <Compile Include="Builders\RumbleSectionBuilder.cs" />
+    <Compile Include="Communication\Communicationsettings.cs" />
+    <Compile Include="Communication\INotificationClient.cs" />
+    <Compile Include="Communication\INotificationService.cs" />
     <Compile Include="Defaults\DefaultRumbles.cs" />
     <Compile Include="Defaults\DefaultRumbleSections.cs" />
     <Compile Include="Defaults\DefaultFanSections.cs" />
