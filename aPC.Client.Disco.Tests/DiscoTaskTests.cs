@@ -49,8 +49,8 @@ namespace aPC.Client.Disco.Tests
       task.Start();
       Thread.Sleep(interval);
 
-      Assert.AreEqual(0, notificationClient.NumberOfCustomScenesPushed);
-      Assert.AreEqual(lightSectionGenerator.GeneratedScene(), notificationClient.CustomScenesPushed[0]);
+      Assert.AreEqual(2, notificationClient.NumberOfCustomScenesPushed);
+      Assert.AreEqual(lightSectionGenerator.GeneratedScene(), notificationClient.CustomScenesPushed[0].Frames[0].LightSection);
     }
   }
 }

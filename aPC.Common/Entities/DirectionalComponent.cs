@@ -1,10 +1,12 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Xml.Serialization;
 
 namespace aPC.Common.Entities
 {
   /// <summary>
   /// The base interface for individual light / fan / rumble sources
   /// </summary>
+  [Serializable]
   public class DirectionalComponent
   {
     [XmlElement]
