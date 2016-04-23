@@ -1,0 +1,13 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="aPC.Client.Gui.HostnameInput"
+    Title="Enter new Hostname" Height="150" Width="300" MinHeight="10" MinWidth="300"
+    ResizeMode="CanResizeWithGrip" ShowInTaskbar="False" WindowStartupLocation="CenterOwner"
+    FocusManager.FocusedElement="{Binding ElementName=leftMarginTextBox}">
+  <Grid>
+    <Label Margin="20,10" Content="Enter new Hostname below:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" />
+    <TextBox Margin="20,50,20,0" VerticalAlignment="Top" FontSize="16" x:Name="NewHostnameTextBox" />
+
+    <Button Margin="0,0,20,10" Name="OkButton" Content="OK" Click="OkButtonClick" IsDefault="True" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="32" />
+    <Button Margin="0,0,75,10" x:Name="CancelButton" Content="Cancel" IsCancel="True" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="43" />
+  </Grid>
+</Window>
