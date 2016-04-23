@@ -15,9 +15,9 @@ namespace aPC.Common.Client.Communication
     private readonly HostnameAccessor hostnameAccessor;
     private List<ClientConnection> clients;
 
-    protected abstract bool SupportsCustomScenes { get; }
+    protected abstract bool SupportsScenes { get; }
 
-    protected abstract bool SupportsIntegratedScenes { get; }
+    protected abstract bool SupportsSceneNames { get; }
 
     protected NotificationClientBase(HostnameAccessor hostnameAccessor)
     {
@@ -63,48 +63,48 @@ namespace aPC.Common.Client.Communication
 
     #region Interface methods
 
-    public virtual void PushCustomScene(string scene)
+    public virtual void PushScene(amBXScene scene)
     {
       UpdateClientsIfHostnameChanged();
-      if (!SupportsCustomScenes)
+      if (!SupportsScenes)
       {
-        ThrowUnsupportedException("custom");
+        ThrowUnsupportedException("custom-built");
       }
 
-      Parallel.ForEach(clients, client => PushCustomScene(client.Client, scene));
+      Parallel.ForEach(clients, client => PushScene(client.Client, scene));
     }
 
-    private void PushCustomScene(ChannelFactory<INotificationService> client, string scene)
+    private void PushScene(ChannelFactory<INotificationService> client, amBXScene scene)
     {
-      client.CreateChannel().RunCustomScene(scene);
+      client.CreateChannel().RunScene(scene);
     }
 
-    public virtual void PushIntegratedScene(string scene)
+    public virtual void PushSceneName(string sceneName)
     {
       UpdateClientsIfHostnameChanged();
-      if (!SupportsIntegratedScenes)
+      if (!SupportsSceneNames)
       {
-        ThrowUnsupportedException("integrated");
+        ThrowUnsupportedException("named");
       }
 
-      Parallel.ForEach(clients, client => PushIntegratedScene(client.Client, scene));
+      Parallel.ForEach(clients, client => PushScene(client.Client, sceneName));
     }
 
-    private void PushIntegratedScene(ChannelFactory<INotificationService> client, string scene)
+    private void PushScene(ChannelFactory<INotificationService> client, string scene)
     {
-      client.CreateChannel().RunIntegratedScene(scene);
+      client.CreateChannel().RunSceneName(scene);
     }
 
     // TODO: Should ideally ask all Servers and only return a subset!
-    public virtual string[] GetSupportedIntegratedScenes()
+    public virtual string[] GetAvailableScenes()
     {
       UpdateClientsIfHostnameChanged();
-      if (!SupportsIntegratedScenes)
+      if (!SupportsSceneNames)
       {
-        ThrowUnsupportedException("integrated");
+        ThrowUnsupportedException("named");
       }
 
-      return clients.First().Client.CreateChannel().GetSupportedIntegratedScenes();
+      return clients.First().Client.CreateChannel().GetAvailableScenes();
     }
 
     private void ThrowUnsupportedException(string sceneType)
@@ -113,20 +113,5 @@ namespace aPC.Common.Client.Communication
     }
 
     #endregion Interface methods
-
-    public void PushCustomScene(amBXScene scene)
-    {
-      PushCustomScene(SerialiseScene(scene));
-    }
-
-    private string SerialiseScene(amBXScene scene)
-    {
-      using (var lWriter = new StringWriter())
-      {
-        var lSerializer = new XmlSerializer(typeof(amBXScene));
-        lSerializer.Serialize(lWriter, scene);
-        return lWriter.ToString();
-      }
-    }
   }
 }

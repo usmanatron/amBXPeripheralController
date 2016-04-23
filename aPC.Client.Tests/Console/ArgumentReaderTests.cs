@@ -34,8 +34,7 @@ namespace aPC.Client.Tests.Console
       var arguments = new[] { @"/I", "SceneName" };
       var settings = GetSettingsFromArguments(arguments);
 
-      Assert.AreEqual(true, settings.IsIntegratedScene);
-      Assert.AreEqual(settings.SceneData, arguments[1]);
+      Assert.AreEqual(settings.SceneName, arguments[1]);
     }
 
     [Test]
@@ -44,8 +43,7 @@ namespace aPC.Client.Tests.Console
       var arguments = new[] { @"/F", "ExampleScene.xml" };
       var settings = GetSettingsFromArguments(arguments);
 
-      Assert.AreEqual(false, settings.IsIntegratedScene);
-      Assert.AreEqual(settings.SceneData, GetExampleScene(arguments[1]));
+      Assert.AreEqual(settings.Scene, GetExampleScene(arguments[1]));
     }
 
     [Test]
@@ -65,7 +63,7 @@ namespace aPC.Client.Tests.Console
     private Settings GetSettingsFromArguments(IEnumerable<string> arguments)
     {
       var settings = new Settings();
-      new ArgumentReader(arguments).AddArgumentsToSettings(settings);
+      new ArgumentReader(arguments).ReadInto(settings);
       return settings;
     }
 

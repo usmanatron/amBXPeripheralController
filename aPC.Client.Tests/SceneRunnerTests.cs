@@ -1,4 +1,5 @@
 ﻿using aPC.Common.Client.Tests.Communication;
+using aPC.Common.Entities;
 using NUnit.Framework;
 
 namespace aPC.Client.Tests
@@ -7,26 +8,19 @@ namespace aPC.Client.Tests
   internal class SceneRunnerTests
   {
     private TestNotificationClient testNotificationClient;
+    private Settings settings;
 
     [SetUp]
     public void Setup()
     {
       testNotificationClient = new TestNotificationClient();
-    }
-
-    //TODO: Move this to a better place
-    [Test]
-    public void MissingSceneData_GivesInvalidSettings()
-    {
-      var settings = new Settings(true, string.Empty);
-
-      Assert.IsFalse(settings.IsValid);
+      settings = new Settings();
     }
 
     [Test]
     public void IntegratedScene_PushedAppropriately()
     {
-      var settings = new Settings(true, "Scene_Name");
+      settings.SetSceneName("Scene_Name");
       var task = new SceneRunner(settings, testNotificationClient);
 
       task.RunScene();
@@ -40,7 +34,8 @@ namespace aPC.Client.Tests
     [Test]
     public void CustomScene_PushedAppropriately()
     {
-      var settings = new Settings(false, "CustomScene");
+      var scene = new amBXScene();
+      settings.SetScene(scene);
       var task = new SceneRunner(settings, testNotificationClient);
 
       task.RunScene();
@@ -48,7 +43,7 @@ namespace aPC.Client.Tests
       Assert.IsTrue(settings.IsValid);
       Assert.AreEqual(0, testNotificationClient.NumberOfIntegratedScenesPushed);
       Assert.AreEqual(1, testNotificationClient.NumberOfCustomScenesPushed);
-      Assert.AreEqual("CustomScene", testNotificationClient.CustomScenesPushed[0]);
+      Assert.AreEqual(scene, testNotificationClient.CustomScenesPushed[0]);
     }
   }
 }

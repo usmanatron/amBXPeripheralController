@@ -46,7 +46,7 @@ namespace aPC.Web.Controllers.API
     {
       try
       {
-        notificationClient.PushIntegratedScene(name);
+        notificationClient.PushSceneName(name);
       }
       catch (Exception)
       {

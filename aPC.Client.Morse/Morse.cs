@@ -16,7 +16,7 @@ namespace aPC.Client.Morse
         var settings = kernel.Get<ArgumentReader>().Read();
         var generatedScene = kernel.Get<SceneGenerator>().Generate(settings);
 
-        kernel.Get<NotificationClient>().PushCustomScene(generatedScene);
+        kernel.Get<NotificationClient>().PushScene(generatedScene);
       }
       catch (UsageException e)
       {

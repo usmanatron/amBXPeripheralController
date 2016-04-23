@@ -43,7 +43,7 @@ namespace aPC.Client.Disco
 
     private void PushScene(amBXScene scene)
     {
-      notificationService.PushCustomScene(scene);
+      notificationService.PushScene(scene);
     }
 
     private void WaitForInterval()

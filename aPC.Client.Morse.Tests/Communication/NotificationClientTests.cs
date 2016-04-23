@@ -1,6 +1,7 @@
 ﻿using aPC.Client.Morse.Communication;
 using aPC.Common.Client.Tests.Communication;
 using aPC.Common.Defaults;
+using aPC.Common.Entities;
 using NUnit.Framework;
 using System;
 
@@ -34,32 +35,33 @@ namespace aPC.Client.Morse.Tests.Communication
     [Test]
     public void PushingAnIntegratedScene_ThrowsException()
     {
-      Assert.Throws<NotSupportedException>(() => client.PushIntegratedScene("blah"));
+      Assert.Throws<NotSupportedException>(() => client.PushSceneName("blah"));
     }
 
     [Test]
     public void PushingACustomScene_SendsTheExpectedScene()
     {
-      client.PushCustomScene("scene");
+      var scene = new amBXScene();
+      client.PushScene(scene);
 
       Assert.AreEqual(1, host.Scenes.Count);
       Assert.AreEqual(false, host.Scenes[0].Item1);
-      Assert.AreEqual("scene", host.Scenes[0].Item2);
+      Assert.AreEqual(scene, host.Scenes[0].Item2);
     }
 
     [Test]
     public void PushingACustomAmBXScene_SuccesfullySendsScene()
     {
-      var lScene = new DefaultScenes().Rainbow;
+      var scene = new DefaultScenes().Rainbow;
 
-      client.PushCustomScene(lScene);
+      client.PushScene(scene);
 
       Assert.AreEqual(1, host.Scenes.Count);
       Assert.AreEqual(false, host.Scenes[0].Item1);
-      Assert.AreEqual(mSerialisedRainbow, host.Scenes[0].Item2);
+      Assert.AreEqual(serialisedRainbow, host.Scenes[0].Item2);
     }
 
-    private const string mSerialisedRainbow = @"<?xml version=""1.0"" encoding=""utf-16""?>
+    private const string serialisedRainbow = @"<?xml version=""1.0"" encoding=""utf-16""?>
 <amBXScene xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <IsExclusive>true</IsExclusive>
   <SceneType>Desync</SceneType>

@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 
-namespace aPC.Common
+namespace aPC.Common.Client
 {
   /// <summary>
   /// A wrapper to lock a struct.

@@ -6,15 +6,14 @@ namespace aPC.Client.Console
 {
   public class ArgumentReader
   {
-    private readonly Settings localSettings;
-
+    private List<string> arguments;
+    
     public ArgumentReader(IEnumerable<string> arguments)
     {
-      localSettings = new Settings();
-      ReadArguments(arguments.ToList());
+      this.arguments = arguments.ToList();
     }
 
-    private void ReadArguments(List<string> arguments)
+    public void ReadInto(Settings settings)
     {
       if (arguments.Count != 2)
       {
@@ -24,10 +23,10 @@ namespace aPC.Client.Console
       switch (arguments[0].ToLower())
       {
         case @"/i":
-          localSettings.Update(true, arguments[1]);
+          settings.SetSceneName(arguments[1]);
           break;
         case @"/f":
-          localSettings.Update(false, RetrieveFile(arguments[1]));
+          //settings.SetScene(RetrieveFile(arguments[1]));
           break;
         default:
           throw new UsageException("Unexpected first argument");
@@ -50,11 +49,6 @@ namespace aPC.Client.Console
         // File not there / error
         throw new UsageException("Input was not a valid path");
       }
-    }
-
-    public void AddArgumentsToSettings(Settings settings)
-    {
-      settings.Update(localSettings.IsIntegratedScene, localSettings.SceneData);
     }
   }
 }

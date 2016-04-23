@@ -27,17 +27,18 @@ namespace aPC.Client.Disco.Tests.Communication
     [Test]
     public void PushingAnIntegratedScene_ThrowsException()
     {
-      Assert.Throws<NotSupportedException>(() => client.PushIntegratedScene("ccnet_green"));
+      Assert.Throws<NotSupportedException>(() => client.PushSceneName("ccnet_green"));
     }
 
     [Test]
     public void PushingACustomScene_SendsTheExpectedScene()
     {
-      client.PushCustomScene("scene");
+      var scene = new aPC.Common.Defaults.DefaultScenes().Building;
+      client.PushScene(scene);
 
       Assert.AreEqual(1, host.Scenes.Count);
       Assert.AreEqual(false, host.Scenes[0].Item1);
-      Assert.AreEqual("scene", host.Scenes[0].Item2);
+      Assert.AreEqual(scene, host.Scenes[0].Item2);
     }
   }
 }

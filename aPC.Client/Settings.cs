@@ -1,33 +1,47 @@
-﻿namespace aPC.Client
+﻿using aPC.Common.Entities;
+using System;
+
+namespace aPC.Client
 {
   public class Settings
   {
-    public bool IsIntegratedScene { get; private set; }
-
-    public string SceneData { get; private set; }
+    public string SceneName { get; private set; }
+    public amBXScene Scene { get; private set; }
+    private bool Assigned;
 
     public Settings()
-      : this(default(bool), string.Empty)
     {
+      Assigned = false;
     }
 
-    public Settings(bool isIntegratedScene, string sceneData)
+    public void SetScene(amBXScene scene)
     {
-      IsIntegratedScene = isIntegratedScene;
-      SceneData = sceneData;
+      ThrowIfAlreadyAssignedOnce();
+      Scene = scene;
+      Assigned = true;
     }
 
-    public void Update(bool isIntegratedScene, string sceneData)
+    public void SetSceneName(string sceneName)
     {
-      IsIntegratedScene = isIntegratedScene;
-      SceneData = sceneData;
+      ThrowIfAlreadyAssignedOnce();
+      SceneName = sceneName;
+      Assigned = true;
+    }
+
+    private void ThrowIfAlreadyAssignedOnce()
+    {
+      if (Assigned)
+      {
+        throw new InvalidOperationException("Attempted to assign to Settings twice.");
+      }
     }
 
     public bool IsValid
     {
       get
       {
-        return !string.IsNullOrEmpty(SceneData);
+        return Assigned = true &&
+               (!string.IsNullOrEmpty(SceneName) || Scene != null);
       }
     }
   }

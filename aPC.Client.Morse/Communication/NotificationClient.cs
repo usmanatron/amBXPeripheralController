@@ -18,12 +18,12 @@ namespace aPC.Client.Morse.Communication
     {
     }
 
-    protected override bool SupportsCustomScenes
+    protected override bool SupportsScenes
     {
       get { return true; }
     }
 
-    protected override bool SupportsIntegratedScenes
+    protected override bool SupportsSceneNames
     {
       get { return false; }
     }

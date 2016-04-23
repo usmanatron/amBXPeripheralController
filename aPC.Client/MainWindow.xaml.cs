@@ -1,4 +1,5 @@
 ﻿using aPC.Client.Scene;
+using aPC.Common.Entities;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -79,7 +80,7 @@ namespace aPC.Client
     private void IntegratedSceneSelected(object sender, RoutedEventArgs e)
     {
       IntegratedSceneList.IsEnabled = true;
-      SceneSelectionChanged(IntegratedSceneList, integratedSceneListing, true);
+      IntegratedSceneChanged();
     }
 
     private void IntegratedSceneDeselected(object sender, RoutedEventArgs e)
@@ -89,7 +90,17 @@ namespace aPC.Client
 
     private void IntegratedSceneSelectionChanged(object sender, RoutedEventArgs e)
     {
-      SceneSelectionChanged(IntegratedSceneList, integratedSceneListing, true);
+      IntegratedSceneChanged();
+    }
+
+    private void IntegratedSceneChanged()
+    {
+      if (IntegratedSceneList.SelectedIndex > -1)
+      {
+        settings.SetSceneName(integratedSceneListing.GetValue((string)IntegratedSceneList.SelectedValue));
+      }
+
+      StartButton.IsEnabled = settings.IsValid;
     }
 
     #endregion Integrated Scenes
@@ -99,7 +110,7 @@ namespace aPC.Client
     private void CustomSceneSelected(object sender, RoutedEventArgs e)
     {
       CustomSceneList.IsEnabled = true;
-      SceneSelectionChanged(CustomSceneList, customSceneListing, false);
+      CustomSceneChanged();
     }
 
     private void CustomSceneDeselected(object sender, RoutedEventArgs e)
@@ -121,7 +132,18 @@ namespace aPC.Client
         ReloadDropdown(customSceneListing, customScenes);
         CustomSceneList.Text = newFile;
       }
-      SceneSelectionChanged(CustomSceneList, customSceneListing, false);
+      CustomSceneChanged();
+    }
+
+    private void CustomSceneChanged()
+    {
+      if (CustomSceneList.SelectedIndex > -1)
+      {
+        //TODO: Fix this!
+        //settings.SetScene((amBXScene)customSceneListing.GetValue((string)CustomSceneList.SelectedValue));
+      }
+
+      StartButton.IsEnabled = settings.IsValid;
     }
 
     #endregion Custom Scenes
@@ -134,16 +156,6 @@ namespace aPC.Client
       {
         scenes.Add(scene);
       }
-    }
-
-    private void SceneSelectionChanged(ComboBox sceneList, ISceneListing sceneListing, bool isIntegratedScene)
-    {
-      if (sceneList.SelectedIndex > -1)
-      {
-        settings.Update(isIntegratedScene, sceneListing.GetValue((string)sceneList.SelectedValue));
-      }
-
-      StartButton.IsEnabled = settings.IsValid;
     }
 
     private void RunClick(object sender, RoutedEventArgs e)

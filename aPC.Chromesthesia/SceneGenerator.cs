@@ -34,7 +34,7 @@ namespace aPC.Chromesthesia
 
       if (!SceneIsEmpty(scene))
       {
-        sceneRunner.PushCustomScene(scene);
+        sceneRunner.PushScene(scene);
       }
     }
 

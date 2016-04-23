@@ -1,4 +1,5 @@
 ﻿using aPC.Common.Communication;
+using System;
 
 namespace aPC.Client
 {
@@ -15,13 +16,18 @@ namespace aPC.Client
 
     public void RunScene()
     {
-      if (settings.IsIntegratedScene)
+      if (!settings.IsValid)
       {
-        notificationClient.PushIntegratedScene(settings.SceneData);
+        throw new ArgumentException("Given settings is missing a scene - nothing to run!");
+      }
+
+      if (settings.Scene != null)
+      {
+        notificationClient.PushScene(settings.Scene);
       }
       else
       {
-        notificationClient.PushCustomScene(settings.SceneData);
+        notificationClient.PushSceneName(settings.SceneName);
       }
     }
   }

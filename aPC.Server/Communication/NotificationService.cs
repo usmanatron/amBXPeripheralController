@@ -29,39 +29,24 @@ namespace aPC.Server.Communication
       action = updateScene;
     }
 
-    public void RunCustomScene(string sceneXml)
+    public void RunScene(amBXScene scene)
     {
-      var scene = DeserialiseScene(sceneXml);
-      UpdateScene(scene);
+      action(scene);
     }
 
-    public void RunIntegratedScene(string sceneName)
+    public void RunSceneName(string sceneName)
     {
       var scene = sceneAccessor.GetScene(sceneName) ??
                    sceneAccessor.GetScene("Error_Flash");
 
-      UpdateScene(scene);
+      action(scene);
     }
 
-    public string[] GetSupportedIntegratedScenes()
+    public string[] GetAvailableScenes()
     {
       return sceneAccessor.GetAllScenes()
         .Select(scene => scene.Key)
         .ToArray();
-    }
-
-    private amBXScene DeserialiseScene(string sceneXml)
-    {
-      using (var reader = new StringReader(sceneXml))
-      {
-        var serialiser = new XmlSerializer(typeof(amBXScene));
-        return (amBXScene)serialiser.Deserialize(reader);
-      }
-    }
-
-    protected void UpdateScene(amBXScene scene)
-    {
-      action(scene);
     }
   }
 }

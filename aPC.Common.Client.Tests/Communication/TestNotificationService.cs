@@ -1,4 +1,5 @@
 ﻿using aPC.Common.Communication;
+using aPC.Common.Entities;
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
@@ -11,7 +12,7 @@ namespace aPC.Common.Client.Tests.Communication
   {
     // Item1 is a boolean specifying if the item pushed was an integrated scene
     // Item2 is the information sent
-    public List<Tuple<bool, string>> Scenes { get; private set; }
+    public List<Tuple<bool, object>> Scenes { get; private set; }
 
     private string url;
     public string Hostname;
@@ -53,24 +54,32 @@ namespace aPC.Common.Client.Tests.Communication
 
     public void ClearScenes()
     {
-      Scenes = new List<Tuple<bool, string>>();
+      Scenes = new List<Tuple<bool, object>>();
     }
 
-    public void RunCustomScene(string sceneXml)
+    public void RunScene(amBXScene scene)
     {
-      ThrowExceptionIfSpecified(sceneXml);
-      Scenes.Add(new Tuple<bool, string>(false, sceneXml));
+      ThrowExceptionIfSpecified(scene);
+      Scenes.Add(new Tuple<bool, object>(false, scene));
     }
 
-    public void RunIntegratedScene(string sceneName)
+    public void RunSceneName(string sceneName)
     {
       ThrowExceptionIfSpecified(sceneName);
-      Scenes.Add(new Tuple<bool, string>(true, sceneName));
+      Scenes.Add(new Tuple<bool, object>(true, sceneName));
     }
 
-    public string[] GetSupportedIntegratedScenes()
+    public string[] GetAvailableScenes()
     {
       throw new NotImplementedException();
+    }
+
+    private void ThrowExceptionIfSpecified(amBXScene scene)
+    {
+      if (scene.PropertyOneString == "ThrowException")
+      {
+        throw new InvalidOperationException("Test exception");
+      }
     }
 
     private void ThrowExceptionIfSpecified(string content)

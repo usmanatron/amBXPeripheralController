@@ -28,8 +28,8 @@ namespace aPC.Client.Scene
     {
       Scenes = new Dictionary<string, string>();
 
-      var scenes = notificationClient.GetSupportedIntegratedScenes()
-        .OrderBy(scene => scene);
+      var scenes = notificationClient.GetAvailableScenes()
+         .OrderBy(scene => scene);
 
       foreach (var scene in scenes)
       {

@@ -10,7 +10,7 @@ namespace aPC.Client.Console
     {
       this.sceneRunner = sceneRunner;
       var reader = new ArgumentReader(arguments);
-      reader.AddArgumentsToSettings(settings);
+      reader.ReadInto(settings);
     }
 
     public void Run()

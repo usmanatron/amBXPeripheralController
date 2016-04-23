@@ -1,5 +1,6 @@
 ﻿using aPC.Client.Communication;
 using aPC.Common.Client.Tests.Communication;
+using aPC.Common.Entities;
 using NUnit.Framework;
 
 namespace aPC.Client.Tests.Communication
@@ -32,17 +33,18 @@ namespace aPC.Client.Tests.Communication
     [Test]
     public void PushingACustomScene_SendsTheExpectedScene()
     {
-      client.PushCustomScene("ArbitraryScene");
+      var scene = new amBXScene();
+      client.PushScene(scene);
 
       Assert.AreEqual(1, host.Scenes.Count);
       Assert.AreEqual(false, host.Scenes[0].Item1);
-      Assert.AreEqual("ArbitraryScene", host.Scenes[0].Item2);
+      Assert.AreEqual(scene, host.Scenes[0].Item2);
     }
 
     [Test]
     public void PushingAnIntegratedScene_SendsTheExpectedScene()
     {
-      client.PushIntegratedScene("IntegratedScene");
+      client.PushSceneName("IntegratedScene");
 
       Assert.AreEqual(1, host.Scenes.Count);
       Assert.AreEqual(true, host.Scenes[0].Item1);

@@ -1,4 +1,5 @@
 ﻿using aPC.Common.Client.Communication;
+using aPC.Common.Entities;
 using System;
 using System.Collections.Generic;
 
@@ -7,36 +8,36 @@ namespace aPC.Common.Client.Tests.Communication
   public class TestNotificationClient : NotificationClientBase
   {
     public readonly List<string> IntegratedScenesPushed;
-    public readonly List<string> CustomScenesPushed;
+    public readonly List<amBXScene> CustomScenesPushed;
 
     public TestNotificationClient()
       : base(new HostnameAccessor())
     {
       IntegratedScenesPushed = new List<string>();
-      CustomScenesPushed = new List<string>();
+      CustomScenesPushed = new List<amBXScene>();
     }
 
-    protected override bool SupportsCustomScenes
+    protected override bool SupportsScenes
     {
       get { return true; }
     }
 
-    protected override bool SupportsIntegratedScenes
+    protected override bool SupportsSceneNames
     {
       get { return true; }
     }
 
-    public override void PushCustomScene(string scene)
+    public override void PushScene(amBXScene scene)
     {
       CustomScenesPushed.Add(scene);
     }
 
-    public override void PushIntegratedScene(string scene)
+    public override void PushSceneName(string sceneName)
     {
-      IntegratedScenesPushed.Add(scene);
+      IntegratedScenesPushed.Add(sceneName);
     }
 
-    public override string[] GetSupportedIntegratedScenes()
+    public override string[] GetAvailableScenes()
     {
       throw new NotImplementedException();
     }
