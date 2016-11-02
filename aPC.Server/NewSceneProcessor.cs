@@ -80,7 +80,7 @@ namespace aPC.Server
 
     private void PushChanges()
     {
-      runningDirectionalComponents = runningDirectionalComponentListBuilder.SplitScene(currentScene, previousScene.SceneType);
+      runningDirectionalComponents = runningDirectionalComponentListBuilder.Build(currentScene, previousScene.SceneType);
       taskManager.RefreshTasks(runningDirectionalComponents);
     }
   }

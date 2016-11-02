@@ -27,7 +27,7 @@ Encoding: {4}";
       var streamRaw = new WaveInProvider(waveIn);
 
       var streamPitch = new PitchGeneratorProvider(streamRaw, new FftPitchDetector(), new FftPitchDetector(), new FloatDataStereoSplitter(), new PitchResultSummaryWriter());
-      var compositeLightSectionBuilder = kernel.Get<SceneBuilder>();
+      var compositeLightSectionBuilder = kernel.Get<FrameBuilder>();
       var notifiationClient = kernel.Get<NotificationClientBase>();
       var streamScene = new SceneGenerator(streamPitch, compositeLightSectionBuilder, notifiationClient);
 

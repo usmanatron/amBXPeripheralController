@@ -64,14 +64,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Engine\AmbxEngineWrapper.cs" />
+    <Compile Include="Engine\EngineActorSync.cs" />
+    <Compile Include="Engine\IEngineActor.cs" />
     <Compile Include="Engine\EngineActor.cs" />
+    <Compile Include="Engine\RunMode.cs" />
     <Compile Include="Entities\DirectionalComponentTask.cs" />
     <Compile Include="Entities\DirectionalComponentTaskList.cs" />
     <Compile Include="Entities\RunningDirectionalComponent.cs" />
     <Compile Include="Entities\RunningDirectionalComponentList.cs" />
+    <Compile Include="ExclusiveProcessor.cs" />
     <Compile Include="NewSceneProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SceneTransitionHandler.cs" />
+    <Compile Include="RunningDirectionalComponentListBuilder.cs" />
     <Compile Include="Server.cs">
       <SubType>Code</SubType>
     </Compile>

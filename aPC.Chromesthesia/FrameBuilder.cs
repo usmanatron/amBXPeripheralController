@@ -1,19 +1,18 @@
-﻿using aPC.Chromesthesia.Lights;
+﻿using System.Linq;
+using aPC.Chromesthesia.Lights;
 using aPC.Chromesthesia.Sound.Entities;
-using aPC.Common;
-using aPC.Common.Builders;
 using aPC.Common.Entities;
 
 namespace aPC.Chromesthesia.Server
 {
-  internal class SceneBuilder
+  internal class FrameBuilder
   {
     private readonly CompositeLightSectionBuilder compositeLightSectionBuilder;
     private readonly SoundToLightConverter converter;
     private readonly int diagonalLightPercentage;
     private readonly int frameLength;
 
-    public SceneBuilder(CompositeLightSectionBuilder compositeLightSectionBuilder, SoundToLightConverter converter)
+    public FrameBuilder(CompositeLightSectionBuilder compositeLightSectionBuilder, SoundToLightConverter converter)
     {
       this.compositeLightSectionBuilder = compositeLightSectionBuilder;
       this.converter = converter;
@@ -21,7 +20,7 @@ namespace aPC.Chromesthesia.Server
       frameLength = ChromesthesiaConfig.SceneFrameLength;
     }
 
-    public amBXScene BuildSceneFromPitchResults(StereoPitchResult pitchResults)
+    public Frame BuildFrameFromPitchResults(StereoPitchResult pitchResults)
     {
       var leftLight = converter.BuildLightFrom(pitchResults.Left);
       var rightLight = converter.BuildLightFrom(pitchResults.Right);
@@ -31,19 +30,13 @@ namespace aPC.Chromesthesia.Server
         .WithSidePercentageOnDiagonal(diagonalLightPercentage)
         .Build();
 
-      var frames = new FrameBuilder()
+      return new Common.Builders.FrameBuilder()
         .AddFrame()
         .WithLightSection(lightSection)
         .WithRepeated(false)
         .WithFrameLength(frameLength)
-        .Build();
-
-      return new amBXScene
-             {
-               Frames = frames,
-               IsExclusive = false,
-               SceneType = eSceneType.Sync
-             };
+        .Build()
+        .Single();
     }
   }
 }

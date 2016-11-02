@@ -76,7 +76,7 @@
     <Compile Include="Lights\CompositeLightSectionBuilder.cs" />
     <Compile Include="Lights\LightBuilder.cs" />
     <Compile Include="Lights\SoundToLightConverter.cs" />
-    <Compile Include="SceneBuilder.cs" />
+    <Compile Include="FrameBuilder.cs" />
     <Compile Include="ChromesthesiaConfig.cs" />
     <Compile Include="Sound\Entities\StereoBuffer.cs" />
     <Compile Include="Sound\FloatDataStereoSplitter.cs" />

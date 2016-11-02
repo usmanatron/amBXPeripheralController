@@ -116,7 +116,7 @@ namespace aPC.Common.Client.Communication
 
     public void Register(string id)
     {
-      throw new NotImplementedException();
+      clients.ForEach(client => client.Client.CreateChannel().RegisterWithServer(id));
     }
 
     public void PushExclusive(Frame frame)

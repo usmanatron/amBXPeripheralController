@@ -35,7 +35,7 @@ namespace aPC.Server.Entities
         case eSceneType.Desync:
           foreach (var directionalComponent in LastUpdatedDirectionalComponents)
           {
-            yield return components.SingleOrDefault(component => component.DirectionalComponent.Equals(directionalComponent);
+            yield return components.SingleOrDefault(component => component.DirectionalComponent.Equals(directionalComponent));
           }
           break;
         default:

@@ -8,7 +8,7 @@ using System.ServiceModel;
 
 namespace aPC.Server.Communication
 {
-  [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
+  [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, IncludeExceptionDetailInFaults = true)]
   public class NotificationService : INotificationService
   {
     private readonly Action<amBXScene> action;
@@ -16,7 +16,7 @@ namespace aPC.Server.Communication
 
     [Inject]
     public NotificationService(SceneAccessor sceneAccessor)
-      : this(sceneAccessor, ServerTask.UpdateScene)
+      : this(sceneAccessor, ServerTask.Update)
     {
     }
 
@@ -49,14 +49,16 @@ namespace aPC.Server.Communication
 
     public ServerRegistrationResult RegisterWithServer(string id)
     {
-      throw new NotImplementedException();
+      //TODO Add the correct logic
+      return new ServerRegistrationResult()
+      {
+        Successful = true
+      };
     }
 
     public void RunFrameExclusive(Frame frame)
     {
-
-
-      throw new NotImplementedException();
+      ServerTask.UpdateExclusive(frame);
     }
   }
 }

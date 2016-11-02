@@ -13,7 +13,7 @@ namespace aPC.Common.Entities
     public eDirection Direction;
 
     [XmlIgnore]
-    public eComponentType ComponentType { get; private set; }
+    public eComponentType ComponentType { get; }
 
     public DirectionalComponent(eComponentType componentType, eDirection direction)
       : this(componentType)
@@ -24,6 +24,21 @@ namespace aPC.Common.Entities
     public DirectionalComponent(eComponentType componentType)
     {
       ComponentType = componentType;
+    }
+
+    public Light GetLight()
+    {
+      return (Light) this;
+    }
+
+    public Fan GetFan()
+    {
+      return (Fan)this;
+    }
+
+    public Rumble GetRumble()
+    {
+      return (Rumble)this;
     }
 
     public override bool Equals(object other)
