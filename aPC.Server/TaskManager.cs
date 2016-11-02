@@ -13,19 +13,19 @@ namespace aPC.Server
   public class TaskManager
   {
     private readonly EngineActor engineActor;
-    private readonly DirectionalComponentTaskList directionalComponentActionList;
+    private readonly RunningComponentList runningComponentList;
     private eSceneType runningSceneType;
 
-    public TaskManager(EngineActor engineActor, DirectionalComponentTaskList directionalComponentActionList)
+    public TaskManager(EngineActor engineActor, RunningComponentList runningComponentList)
     {
       this.engineActor = engineActor;
-      this.directionalComponentActionList = directionalComponentActionList;
+      this.runningComponentList = runningComponentList;
     }
 
-    public void RefreshTasks(RunningDirectionalComponentList runningDirectionalComponentList)
+    public void RefreshTasks(PreRunComponentList preRunComponentList)
     {
-      runningSceneType = runningDirectionalComponentList.SceneType;
-      var components = runningDirectionalComponentList.Get(runningSceneType);
+      runningSceneType = preRunComponentList.SceneType;
+      var components = preRunComponentList.Get(runningSceneType);
 
       switch (runningSceneType)
       {
@@ -37,27 +37,27 @@ namespace aPC.Server
           break;
         case eSceneType.Sync:
         case eSceneType.Event:
-          directionalComponentActionList.CancelAll();
+          runningComponentList.CancelAll();
           ScheduleTask(components.Single(), 0);
           break;
       }
     }
 
-    private void ReScheduleTask(RunningDirectionalComponent runningComponent)
+    private void ReScheduleTask(PreRunComponenet componentWrapper)
     {
-      directionalComponentActionList.Cancel(runningComponent.DirectionalComponent);
-      ScheduleTask(runningComponent, 0);
+      runningComponentList.Cancel(componentWrapper.DirectionalComponent);
+      ScheduleTask(componentWrapper, 0);
     }
 
-    private void RunFrameForDirectionalComponent(RunningDirectionalComponent runningComponent, CancellationTokenSource cancellationToken)
+    private void RunFrameForDirectionalComponent(PreRunComponenet componentWrapper, CancellationTokenSource cancellationToken)
     {
-      directionalComponentActionList.Remove(cancellationToken);
+      runningComponentList.Remove(cancellationToken);
 
-      var frame = GetFrame(runningComponent);
+      var frame = GetFrame(componentWrapper);
 
       if (runningSceneType == eSceneType.Desync)
       {
-        var component = frame.GetComponentInDirection(runningComponent.DirectionalComponent.ComponentType, runningComponent.DirectionalComponent.Direction);
+        var component = frame.GetComponentInDirection(componentWrapper.DirectionalComponent.ComponentType, componentWrapper.DirectionalComponent.Direction);
         engineActor.UpdateComponent(component);
       }
       else
@@ -73,43 +73,43 @@ namespace aPC.Server
           }
       }
 
-      DoPostUpdateActions(runningComponent, frame.Length);
+      DoPostUpdateActions(componentWrapper, frame.Length);
     }
 
-    private Frame GetFrame(RunningDirectionalComponent runningComponents)
+    private Frame GetFrame(PreRunComponenet componentWrappers)
     {
-      var frames = runningComponents.Ticker.IsFirstRun
-        ? runningComponents.Scene.Frames
-        : runningComponents.Scene.RepeatableFrames;
-      return frames[runningComponents.Ticker.Index];
+      var frames = componentWrappers.Ticker.IsFirstRun
+        ? componentWrappers.Scene.Frames
+        : componentWrappers.Scene.RepeatableFrames;
+      return frames[componentWrappers.Ticker.Index];
     }
 
-    private void DoPostUpdateActions(RunningDirectionalComponent runningComponent, int delay)
+    private void DoPostUpdateActions(PreRunComponenet componentWrapper, int delay)
     {
-      runningComponent.Ticker.Advance();
+      componentWrapper.Ticker.Advance();
 
       // When we've run the scene once through, we need to check that there are either:
       // * repeatable frames
       // * that it's not an event
       // If neither of these hold, then we terminate running by NOT scheduling the next task.
-      if (runningComponent.Ticker.Index == 0 && (runningComponent.Scene.SceneType == eSceneType.Event || runningComponent.Scene.RepeatableFrames.Count == 0))
+      if (componentWrapper.Ticker.Index == 0 && (componentWrapper.Scene.SceneType == eSceneType.Event || componentWrapper.Scene.RepeatableFrames.Count == 0))
       {
         return;
       }
 
-      ScheduleTask(runningComponent, delay);
+      ScheduleTask(componentWrapper, delay);
     }
 
-    private void ScheduleTask(RunningDirectionalComponent runningComponent, int delay)
+    private void ScheduleTask(PreRunComponenet componentWrapper, int delay)
     {
       var cancellationToken = new CancellationTokenSource();
       Task.Run(async delegate
                      {
                        await Task.Delay(TimeSpan.FromMilliseconds(delay), cancellationToken.Token);
-                       RunFrameForDirectionalComponent(runningComponent, cancellationToken);
+                       RunFrameForDirectionalComponent(componentWrapper, cancellationToken);
                      }, cancellationToken.Token);
 
-      directionalComponentActionList.Add(new DirectionalComponentTask(cancellationToken, runningComponent.DirectionalComponent));
+      runningComponentList.Add(new RunningComponent(cancellationToken, componentWrapper.DirectionalComponent));
     }
   }
 }

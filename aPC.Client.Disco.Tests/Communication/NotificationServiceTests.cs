@@ -1,7 +1,7 @@
 ﻿using aPC.Client.Disco.Communication;
 using aPC.Common.Client.Tests.Communication;
 using NUnit.Framework;
-using System;
+using aPC.Common.Client.Communication;
 
 namespace aPC.Client.Disco.Tests.Communication
 {
@@ -27,7 +27,7 @@ namespace aPC.Client.Disco.Tests.Communication
     [Test]
     public void PushingAnIntegratedScene_ThrowsException()
     {
-      Assert.Throws<NotSupportedException>(() => client.PushSceneName("ccnet_green"));
+      Assert.Throws<CommunicationException>(() => client.PushSceneName("ccnet_green"));
     }
 
     [Test]

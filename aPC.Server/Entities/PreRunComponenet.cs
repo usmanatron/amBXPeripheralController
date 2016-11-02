@@ -9,7 +9,7 @@ namespace aPC.Server.Entities
   ///   This also encapsulates a Frame when running in Sync mode.  This is
   ///   arguably an abuse of this class
   /// </remarks>
-  public class RunningDirectionalComponent
+  public class PreRunComponenet
   {
     public amBXScene Scene { get; private set; }
 
@@ -17,7 +17,7 @@ namespace aPC.Server.Entities
 
     public AtypicalFirstRunInfiniteTicker Ticker { get; private set; }
 
-    public RunningDirectionalComponent(amBXScene scene, DirectionalComponent directionalComponent, AtypicalFirstRunInfiniteTicker ticker)
+    public PreRunComponenet(amBXScene scene, DirectionalComponent directionalComponent, AtypicalFirstRunInfiniteTicker ticker)
     {
       Scene = scene;
       DirectionalComponent = directionalComponent;

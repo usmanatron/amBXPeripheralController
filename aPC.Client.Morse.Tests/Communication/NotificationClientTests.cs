@@ -3,7 +3,7 @@ using aPC.Common.Client.Tests.Communication;
 using aPC.Common.Defaults;
 using aPC.Common.Entities;
 using NUnit.Framework;
-using System;
+using aPC.Common.Client.Communication;
 
 namespace aPC.Client.Morse.Tests.Communication
 {
@@ -37,7 +37,7 @@ namespace aPC.Client.Morse.Tests.Communication
     [Test]
     public void PushingAnIntegratedScene_ThrowsException()
     {
-      Assert.Throws<NotSupportedException>(() => client.PushSceneName("blah"));
+      Assert.Throws<CommunicationException>(() => client.PushSceneName("blah"));
     }
 
     [Test]

@@ -11,15 +11,15 @@ namespace aPC.Server
   {
     private amBXScene previousScene;
     private amBXScene currentScene;
-    private RunningDirectionalComponentList runningDirectionalComponents;
-    private readonly RunningDirectionalComponentListBuilder runningDirectionalComponentListBuilder;
+    private PreRunComponentList preRunComponents;
+    private readonly PreRunComponentListBuilder preRunComponentListBuilder;
     private readonly TaskManager taskManager;
 
-    public NewSceneProcessor(RunningDirectionalComponentListBuilder runningDirectionalComponentListBuilder, TaskManager taskManager, RunningDirectionalComponentList runningDirectionalComponents)
+    public NewSceneProcessor(PreRunComponentListBuilder preRunComponentListBuilder, TaskManager taskManager, PreRunComponentList preRunComponents)
     {
-      this.runningDirectionalComponentListBuilder = runningDirectionalComponentListBuilder;
+      this.preRunComponentListBuilder = preRunComponentListBuilder;
       this.taskManager = taskManager;
-      this.runningDirectionalComponents = runningDirectionalComponents;
+      this.preRunComponents = preRunComponents;
       currentScene = new amBXScene { SceneType = eSceneType.Desync };
     }
 
@@ -80,8 +80,8 @@ namespace aPC.Server
 
     private void PushChanges()
     {
-      runningDirectionalComponents = runningDirectionalComponentListBuilder.Build(currentScene, previousScene.SceneType);
-      taskManager.RefreshTasks(runningDirectionalComponents);
+      preRunComponents = preRunComponentListBuilder.Build(currentScene, previousScene.SceneType);
+      taskManager.RefreshTasks(preRunComponents);
     }
   }
 }

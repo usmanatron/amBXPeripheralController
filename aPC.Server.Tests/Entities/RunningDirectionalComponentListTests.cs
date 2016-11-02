@@ -3,8 +3,6 @@ using aPC.Common.Defaults;
 using aPC.Common.Entities;
 using aPC.Server.Entities;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace aPC.Server.Tests.Entities
@@ -12,7 +10,7 @@ namespace aPC.Server.Tests.Entities
   [TestFixture]
   internal class RunningDirectionalComponentListTests
   {
-    private RunningDirectionalComponentList runningDirectionalComponentList;
+    private PreRunComponentList preRunComponentList;
     private amBXScene arbitrarySyncScene;
     private amBXScene arbitraryDesyncScene;
     private DirectionalComponent arbitraryDirectionalComponent;
@@ -20,78 +18,46 @@ namespace aPC.Server.Tests.Entities
     [SetUp]
     public void Setup()
     {
-      runningDirectionalComponentList = new RunningDirectionalComponentList();
+      preRunComponentList = new PreRunComponentList();
       var defaultScenes = new DefaultScenes();
       arbitrarySyncScene = defaultScenes.DefaultRedVsBlue;
       arbitraryDesyncScene = defaultScenes.Rainbow;
-      arbitraryDirectionalComponent = new DirectionalComponent(eComponentType.Light);
+      arbitraryDirectionalComponent = new DirectionalComponent(eComponentType.Light, eDirection.North);
     }
-
-    [Test]
-    public void Updating_WithoutRunningStartUpdate_Throws()
-    {
-      Assert.Throws<InvalidOperationException>(() => runningDirectionalComponentList.Update(arbitrarySyncScene, arbitraryDirectionalComponent));
-    }
-
+    
     [Test]
     public void SettingSync_RetrievableViaGetSync()
     {
-      runningDirectionalComponentList.StartUpdate(arbitrarySyncScene.SceneType);
-      runningDirectionalComponentList.UpdateSync(arbitrarySyncScene);
-      runningDirectionalComponentList.EndUpdate();
+      var directionalComponent = new DirectionalComponent(eComponentType.Light, eDirection.Everywhere);
+      preRunComponentList.Update(arbitrarySyncScene, directionalComponent);
 
-      var component = runningDirectionalComponentList.GetSync();
+      var component = preRunComponentList.Get(eSceneType.Sync);
 
-      Assert.AreEqual(arbitrarySyncScene, component.Scene);
-      Assert.AreEqual(arbitraryDirectionalComponent, component.DirectionalComponent);
+      Assert.AreEqual(arbitrarySyncScene, component.Single().Scene);
+      Assert.AreEqual(directionalComponent, component.Single().DirectionalComponent);
     }
 
     [Test]
     public void SettingScene_BuildsNewTicket()
     {
-      runningDirectionalComponentList.StartUpdate(arbitraryDesyncScene.SceneType);
-      runningDirectionalComponentList.Update(arbitraryDesyncScene, arbitraryDirectionalComponent);
-      runningDirectionalComponentList.EndUpdate();
+      preRunComponentList.Update(arbitraryDesyncScene, arbitraryDirectionalComponent);
 
-      var component = runningDirectionalComponentList.Get(arbitraryDirectionalComponent);
+      var component = preRunComponentList.Get(eSceneType.Desync)
+        .Single(cmp => cmp.DirectionalComponent.Equals(arbitraryDirectionalComponent));
 
       Assert.AreEqual(0, component.Ticker.Index);
       Assert.AreEqual(true, component.Ticker.IsFirstRun);
-    }
-
-    [Test]
-    public void SettingDesync_RetrievableViaGet()
-    {
-      runningDirectionalComponentList.StartUpdate(arbitraryDesyncScene.SceneType);
-      runningDirectionalComponentList.Update(arbitraryDesyncScene, arbitraryDirectionalComponent);
-      runningDirectionalComponentList.EndUpdate();
-
-      var component = runningDirectionalComponentList.Get(arbitraryDirectionalComponent);
-
       Assert.AreEqual(arbitraryDesyncScene, component.Scene);
+
     }
-
-    [Test]
-    public void Clear_RemovesAllDesyncComponents()
-    {
-      runningDirectionalComponentList.StartUpdate(arbitraryDesyncScene.SceneType);
-      runningDirectionalComponentList.Update(arbitraryDesyncScene, arbitraryDirectionalComponent);
-
-      runningDirectionalComponentList.Clear();
-      runningDirectionalComponentList.EndUpdate();
-
-      Assert.IsNull(runningDirectionalComponentList.Get(arbitraryDirectionalComponent));
-    }
-
+    
     [Test]
     public void CompletedUpdateCycle_SetsLastUpdatedComponentList()
     {
-      runningDirectionalComponentList.StartUpdate(arbitraryDesyncScene.SceneType);
-      runningDirectionalComponentList.Update(arbitraryDesyncScene, arbitraryDirectionalComponent);
-      runningDirectionalComponentList.EndUpdate();
+      preRunComponentList.Update(arbitraryDesyncScene, arbitraryDirectionalComponent);
 
-      Assert.AreEqual(1, runningDirectionalComponentList.LastUpdatedDirectionalComponents.Count);
-      Assert.AreEqual(arbitraryDirectionalComponent, runningDirectionalComponentList.LastUpdatedDirectionalComponents.Single());
+      Assert.AreEqual(1, preRunComponentList.LastUpdatedDirectionalComponents.Count);
+      Assert.AreEqual(arbitraryDirectionalComponent, preRunComponentList.LastUpdatedDirectionalComponents.Single());
     }
 
     [Test]
@@ -100,48 +66,12 @@ namespace aPC.Server.Tests.Entities
       var firstComponent = new DirectionalComponent(eComponentType.Light, eDirection.North);
       var secondComponent = new DirectionalComponent(eComponentType.Light, eDirection.East);
 
-      runningDirectionalComponentList.StartUpdate(arbitraryDesyncScene.SceneType);
-      runningDirectionalComponentList.Update(arbitrarySyncScene, firstComponent);
-      runningDirectionalComponentList.EndUpdate();
+      preRunComponentList.Update(arbitrarySyncScene, firstComponent);
 
-      runningDirectionalComponentList.StartUpdate(arbitraryDesyncScene.SceneType);
-      runningDirectionalComponentList.Update(arbitraryDesyncScene, secondComponent);
-      runningDirectionalComponentList.EndUpdate();
+      preRunComponentList.Update(arbitraryDesyncScene, secondComponent);
 
-      Assert.AreEqual(1, runningDirectionalComponentList.LastUpdatedDirectionalComponents.Count);
-      Assert.AreEqual(secondComponent, runningDirectionalComponentList.LastUpdatedDirectionalComponents.Single());
-    }
-
-    [Test]
-    public void SecondUpdateCycle_DoesNotUpdateUntouchedDirectionalComponents()
-    {
-      var firstComponent = new DirectionalComponent(eComponentType.Light, eDirection.North);
-      var secondComponent = new DirectionalComponent(eComponentType.Light, eDirection.East);
-
-      runningDirectionalComponentList.StartUpdate(arbitraryDesyncScene.SceneType);
-      runningDirectionalComponentList.Update(arbitrarySyncScene, firstComponent);
-      runningDirectionalComponentList.EndUpdate();
-
-      runningDirectionalComponentList.StartUpdate(arbitraryDesyncScene.SceneType);
-      runningDirectionalComponentList.Update(arbitraryDesyncScene, secondComponent);
-      runningDirectionalComponentList.EndUpdate();
-
-      Assert.AreEqual(arbitrarySyncScene, runningDirectionalComponentList.Get(firstComponent).Scene);
-      Assert.AreEqual(firstComponent, runningDirectionalComponentList.Get(firstComponent).DirectionalComponent);
-      Assert.AreEqual(arbitraryDesyncScene, runningDirectionalComponentList.Get(secondComponent).Scene);
-      Assert.AreEqual(secondComponent, runningDirectionalComponentList.Get(secondComponent).DirectionalComponent);
-    }
-
-    [Test]
-    public void UpdatingTheSameDirectionalComponent_RemovesThePreviouslySpecifiedOne()
-    {
-      runningDirectionalComponentList.StartUpdate(arbitraryDesyncScene.SceneType);
-      runningDirectionalComponentList.Update(arbitraryDesyncScene, arbitraryDirectionalComponent);
-      runningDirectionalComponentList.Update(arbitrarySyncScene, arbitraryDirectionalComponent);
-      runningDirectionalComponentList.EndUpdate();
-
-      Assert.AreEqual(arbitrarySyncScene, runningDirectionalComponentList.Get(arbitraryDirectionalComponent).Scene);
-      Assert.AreEqual(arbitraryDirectionalComponent, runningDirectionalComponentList.Get(arbitraryDirectionalComponent).DirectionalComponent);
+      Assert.AreEqual(1, preRunComponentList.LastUpdatedDirectionalComponents.Count);
+      Assert.AreEqual(secondComponent, preRunComponentList.LastUpdatedDirectionalComponents.Single());
     }
   }
 }

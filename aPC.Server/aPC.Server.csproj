@@ -68,14 +68,14 @@
     <Compile Include="Engine\IEngineActor.cs" />
     <Compile Include="Engine\EngineActor.cs" />
     <Compile Include="Engine\RunMode.cs" />
-    <Compile Include="Entities\DirectionalComponentTask.cs" />
-    <Compile Include="Entities\DirectionalComponentTaskList.cs" />
-    <Compile Include="Entities\RunningDirectionalComponent.cs" />
-    <Compile Include="Entities\RunningDirectionalComponentList.cs" />
+    <Compile Include="Entities\RunningComponent.cs" />
+    <Compile Include="Entities\RunningComponentList.cs" />
+    <Compile Include="Entities\PreRunComponenet.cs" />
+    <Compile Include="Entities\PreRunComponentList.cs" />
     <Compile Include="ExclusiveProcessor.cs" />
     <Compile Include="NewSceneProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RunningDirectionalComponentListBuilder.cs" />
+    <Compile Include="Entities\PreRunComponentListBuilder.cs" />
     <Compile Include="Server.cs">
       <SubType>Code</SubType>
     </Compile>

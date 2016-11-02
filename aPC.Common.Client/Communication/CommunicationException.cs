@@ -2,7 +2,7 @@
 
 namespace aPC.Common.Client.Communication
 {
-  class CommunicationException : Exception
+  public class CommunicationException : Exception
   {
     private string applicationId;
     private string message;
