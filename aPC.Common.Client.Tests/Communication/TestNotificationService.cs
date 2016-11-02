@@ -74,6 +74,16 @@ namespace aPC.Common.Client.Tests.Communication
       throw new NotImplementedException();
     }
 
+    public ServerRegistrationResult RegisterWithServer(string id)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void RunFrameExclusive(Frame frame)
+    {
+      throw new NotImplementedException();
+    }
+
     private void ThrowExceptionIfSpecified(amBXScene scene)
     {
       if (scene.PropertyOneString == "ThrowException")

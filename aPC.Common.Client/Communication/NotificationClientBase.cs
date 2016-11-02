@@ -2,11 +2,9 @@
 using aPC.Common.Entities;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.ServiceModel;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
 
 namespace aPC.Common.Client.Communication
 {
@@ -19,10 +17,19 @@ namespace aPC.Common.Client.Communication
 
     protected abstract bool SupportsSceneNames { get; }
 
+    protected abstract bool RequiresExclusivity { get; }
+
+    protected abstract string ApplicationId { get; }
+
     protected NotificationClientBase(HostnameAccessor hostnameAccessor)
     {
       this.hostnameAccessor = hostnameAccessor;
       UpdateClients();
+
+      if (RequiresExclusivity)
+      {
+        Register(ApplicationId);
+      }
     }
 
     // Overriding of the Url structure is used by tests
@@ -51,7 +58,7 @@ namespace aPC.Common.Client.Communication
 
     #region Hostname Handling
 
-    public void UpdateClientsIfHostnameChanged()
+    protected void UpdateClientsIfHostnameChanged()
     {
       if (hostnameAccessor.HasChangedSinceLastCheck())
       {
@@ -107,9 +114,24 @@ namespace aPC.Common.Client.Communication
       return clients.First().Client.CreateChannel().GetAvailableScenes();
     }
 
+    public void Register(string id)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void PushExclusive(Frame frame)
+    {
+      if (!RequiresExclusivity)
+      {
+        throw new CommunicationException(ApplicationId, "This method should only be used for clients requiring Exclusivity");
+      }
+
+      clients.ForEach(client => client.Client.CreateChannel().RunFrameExclusive(frame));
+    }
+
     private void ThrowUnsupportedException(string sceneType)
     {
-      throw new NotSupportedException("Attempted to use " + sceneType + " scenes, however these are unsupported!");
+      throw new CommunicationException(ApplicationId, "Attempted to use " + sceneType + " scenes, however these are unsupported!");
     }
 
     #endregion Interface methods

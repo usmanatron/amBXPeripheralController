@@ -4,7 +4,7 @@
   {
     public static string GetServiceUrl(string hostname, eApplicationType applicationType)
     {
-      return @"http://" + hostname + @"/" + applicationType.ToString();
+      return @"http://" + hostname + @"/" + applicationType;
     }
   }
 

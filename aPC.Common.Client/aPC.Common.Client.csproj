@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Communication\ClientConnection.cs" />
+    <Compile Include="Communication\CommunicationException.cs" />
     <Compile Include="Communication\NotificationClientBase.cs" />
     <Compile Include="HostnameAccessorBase.cs" />
     <Compile Include="Locked.cs" />

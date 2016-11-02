@@ -14,5 +14,11 @@ namespace aPC.Common.Communication
 
     [OperationContract]
     string[] GetAvailableScenes();
+
+    [OperationContract]
+    ServerRegistrationResult RegisterWithServer(string id);
+
+    [OperationContract]
+    void RunFrameExclusive(Frame frame);
   }
 }

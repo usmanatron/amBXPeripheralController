@@ -17,15 +17,9 @@ namespace aPC.Common.Client.Tests.Communication
       CustomScenesPushed = new List<amBXScene>();
     }
 
-    protected override bool SupportsScenes
-    {
-      get { return true; }
-    }
+    protected override bool SupportsScenes => true;
 
-    protected override bool SupportsSceneNames
-    {
-      get { return true; }
-    }
+    protected override bool SupportsSceneNames => true;
 
     public override void PushScene(amBXScene scene)
     {
@@ -42,14 +36,12 @@ namespace aPC.Common.Client.Tests.Communication
       throw new NotImplementedException();
     }
 
-    public int NumberOfCustomScenesPushed
-    {
-      get { return CustomScenesPushed.Count; }
-    }
+    public int NumberOfCustomScenesPushed => CustomScenesPushed.Count;
 
-    public int NumberOfIntegratedScenesPushed
-    {
-      get { return IntegratedScenesPushed.Count; }
-    }
+    public int NumberOfIntegratedScenesPushed => IntegratedScenesPushed.Count;
+
+    protected override bool RequiresExclusivity => false;
+
+    protected override string ApplicationId => "TestApp";
   }
 }

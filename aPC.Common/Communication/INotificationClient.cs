@@ -9,5 +9,9 @@ namespace aPC.Common.Communication
     void PushSceneName(string sceneName);
 
     string[] GetAvailableScenes();
+
+    void Register(string id);
+
+    void PushExclusive(Frame frame);
   }
 }

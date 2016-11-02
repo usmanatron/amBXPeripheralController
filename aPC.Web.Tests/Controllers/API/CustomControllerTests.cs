@@ -1,6 +1,5 @@
 ﻿using aPC.Common.Client.Tests.Communication;
 using aPC.Common.Communication;
-using aPC.Common.Entities;
 using aPC.Web.Controllers.API;
 using NUnit.Framework;
 

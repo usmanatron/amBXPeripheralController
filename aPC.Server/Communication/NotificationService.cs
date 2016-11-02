@@ -3,10 +3,8 @@ using aPC.Common.Communication;
 using aPC.Common.Entities;
 using Ninject;
 using System;
-using System.IO;
 using System.Linq;
 using System.ServiceModel;
-using System.Xml.Serialization;
 
 namespace aPC.Server.Communication
 {
@@ -47,6 +45,16 @@ namespace aPC.Server.Communication
       return sceneAccessor.GetAllScenes()
         .Select(scene => scene.Key)
         .ToArray();
+    }
+
+    public ServerRegistrationResult RegisterWithServer(string id)
+    {
+      throw new NotImplementedException();
+    }
+
+    public void RunFrameExclusive(Frame frame)
+    {
+      throw new NotImplementedException();
     }
   }
 }

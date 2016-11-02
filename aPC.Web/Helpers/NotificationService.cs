@@ -1,4 +1,5 @@
-﻿using aPC.Common.Client;
+﻿using System.Reflection;
+using aPC.Common.Client;
 using aPC.Common.Client.Communication;
 
 namespace aPC.Web.Helpers
@@ -16,14 +17,12 @@ namespace aPC.Web.Helpers
     {
     }
 
-    protected override bool SupportsScenes
-    {
-      get { return true; }
-    }
+    protected override bool SupportsScenes => true;
 
-    protected override bool SupportsSceneNames
-    {
-      get { return true; }
-    }
+    protected override bool SupportsSceneNames => true;
+
+    protected override bool RequiresExclusivity => false;
+
+    protected override string ApplicationId => Assembly.GetAssembly(GetType()).FullName;
   }
 }

@@ -54,6 +54,7 @@
     <Compile Include="Communication\CommunicationSettings.cs" />
     <Compile Include="Communication\INotificationClient.cs" />
     <Compile Include="Communication\INotificationService.cs" />
+    <Compile Include="Communication\ServerRegistrationResult.cs" />
     <Compile Include="Defaults\DefaultRumbles.cs" />
     <Compile Include="Defaults\DefaultRumbleSections.cs" />
     <Compile Include="Defaults\DefaultFanSections.cs" />
