@@ -3,6 +3,7 @@ using aPC.Common.Entities;
 using aPC.Server.Engine;
 using aPC.Server.Entities;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,10 +13,10 @@ namespace aPC.Server
   public class TaskManager
   {
     private readonly EngineActor engineActor;
-    private readonly DirectionalComponentActionList directionalComponentActionList;
+    private readonly DirectionalComponentTaskList directionalComponentActionList;
     private eSceneType runningSceneType;
 
-    public TaskManager(EngineActor engineActor, DirectionalComponentActionList directionalComponentActionList)
+    public TaskManager(EngineActor engineActor, DirectionalComponentTaskList directionalComponentActionList)
     {
       this.engineActor = engineActor;
       this.directionalComponentActionList = directionalComponentActionList;
@@ -24,20 +25,20 @@ namespace aPC.Server
     public void RefreshTasks(RunningDirectionalComponentList runningDirectionalComponentList)
     {
       runningSceneType = runningDirectionalComponentList.SceneType;
+      var components = runningDirectionalComponentList.Get(runningSceneType);
 
       switch (runningSceneType)
       {
         case eSceneType.Desync:
-          foreach (var directionalComponent in runningDirectionalComponentList.LastUpdatedDirectionalComponents)
+          foreach (var directionalComponent in components)
           {
-            ReScheduleTask(runningDirectionalComponentList.Get(directionalComponent));
+            ReScheduleTask(directionalComponent);
           }
           break;
-
         case eSceneType.Sync:
         case eSceneType.Event:
           directionalComponentActionList.CancelAll();
-          ScheduleTask(runningDirectionalComponentList.GetSync(), 0);
+          ScheduleTask(components.Single(), 0);
           break;
       }
     }
@@ -108,7 +109,7 @@ namespace aPC.Server
                        RunFrameForDirectionalComponent(runningComponent, cancellationToken);
                      }, cancellationToken.Token);
 
-      directionalComponentActionList.Add(new DirectionalComponentAction(cancellationToken, runningComponent.DirectionalComponent));
+      directionalComponentActionList.Add(new DirectionalComponentTask(cancellationToken, runningComponent.DirectionalComponent));
     }
   }
 }

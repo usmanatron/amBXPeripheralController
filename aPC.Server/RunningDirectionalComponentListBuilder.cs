@@ -5,31 +5,23 @@ using System;
 
 namespace aPC.Server
 {
-  public class SceneSplitter
+  public class RunningDirectionalComponentListBuilder
   {
-    private RunningDirectionalComponentList runningDirectionalComponents;
-
-    public void SplitScene(RunningDirectionalComponentList runningDirectionalComponentList, amBXScene scene)
+    public RunningDirectionalComponentList Build(amBXScene scene, eSceneType previousSceneType)
     {
-      runningDirectionalComponents = runningDirectionalComponentList;
-      HandleNewScene(scene);
-    }
-
-    private void HandleNewScene(amBXScene scene)
-    {
-      var previousSceneType = runningDirectionalComponents.SceneType;
-      runningDirectionalComponents.StartUpdate(scene.SceneType);
+      var componentsList = new RunningDirectionalComponentList();
+      componentsList.StartUpdate(scene.SceneType);
 
       switch (scene.SceneType)
       {
         case eSceneType.Sync:
-          runningDirectionalComponents.Clear();
-          MergeNewRunningComponentsIntoExisting(scene);
-          UpdateRunningComponentForFrame(scene);
+          componentsList.Clear();
+          MergeNewRunningComponentsIntoExisting(scene, componentsList);
+          UpdateRunningComponentForFrame(scene, componentsList);
           break;
 
         case eSceneType.Desync:
-          MergeNewRunningComponentsIntoExisting(scene);
+          MergeNewRunningComponentsIntoExisting(scene, componentsList);
           break;
 
         case eSceneType.Event:
@@ -37,13 +29,14 @@ namespace aPC.Server
           {
             throw new InvalidOperationException("You cannot transition from one event to another");
           }
-          UpdateRunningComponentForFrame(scene);
+          UpdateRunningComponentForFrame(scene, componentsList);
           break;
       }
-      runningDirectionalComponents.EndUpdate();
+      componentsList.EndUpdate();
+      return componentsList;
     }
 
-    private void MergeNewRunningComponentsIntoExisting(amBXScene scene)
+    private void MergeNewRunningComponentsIntoExisting(amBXScene scene, RunningDirectionalComponentList runningDirectionalComponents)
     {
       foreach (eComponentType componentType in Enum.GetValues(typeof(eComponentType)))
         foreach (eDirection direction in Enum.GetValues(typeof(eDirection)))
@@ -57,7 +50,7 @@ namespace aPC.Server
         }
     }
 
-    private void UpdateRunningComponentForFrame(amBXScene scene)
+    private void UpdateRunningComponentForFrame(amBXScene scene, RunningDirectionalComponentList runningDirectionalComponents)
     {
       runningDirectionalComponents.UpdateSync(scene);
     }

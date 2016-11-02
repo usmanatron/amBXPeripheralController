@@ -8,18 +8,18 @@ namespace aPC.Server.Entities
   /// <summary>
   /// Handles the list of DirectionalComponentActions
   /// </summary>
-  public class DirectionalComponentActionList
+  public class DirectionalComponentTaskList
   {
-    private readonly List<DirectionalComponentAction> actions;
+    private readonly List<DirectionalComponentTask> actions;
     private readonly object locker;
 
-    public DirectionalComponentActionList()
+    public DirectionalComponentTaskList()
     {
-      actions = new List<DirectionalComponentAction>();
+      actions = new List<DirectionalComponentTask>();
       locker = new object();
     }
 
-    public void Add(DirectionalComponentAction directionalComponent)
+    public void Add(DirectionalComponentTask directionalComponent)
     {
       lock (locker)
       {
@@ -56,7 +56,7 @@ namespace aPC.Server.Entities
       }
     }
 
-    private DirectionalComponentAction Get(DirectionalComponent directionalComponent)
+    private DirectionalComponentTask Get(DirectionalComponent directionalComponent)
     {
       lock (locker)
       {

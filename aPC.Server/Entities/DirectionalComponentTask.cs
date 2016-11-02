@@ -3,13 +3,13 @@ using System.Threading;
 
 namespace aPC.Server.Entities
 {
-  public class DirectionalComponentAction
+  public class DirectionalComponentTask
   {
     public CancellationTokenSource CancellationToken { get; private set; }
 
     public DirectionalComponent DirectionalComponent { get; private set; }
 
-    public DirectionalComponentAction(CancellationTokenSource cancellationToken, DirectionalComponent directionalComponent)
+    public DirectionalComponentTask(CancellationTokenSource cancellationToken, DirectionalComponent directionalComponent)
     {
       CancellationToken = cancellationToken;
       DirectionalComponent = directionalComponent;

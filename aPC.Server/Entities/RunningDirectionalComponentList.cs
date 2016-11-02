@@ -14,7 +14,7 @@ namespace aPC.Server.Entities
 
     public eSceneType SceneType { get; private set; }
 
-    public List<DirectionalComponent> LastUpdatedDirectionalComponents { get; private set; }
+    public List<DirectionalComponent> LastUpdatedDirectionalComponents { get; }
 
     public RunningDirectionalComponentList()
     {
@@ -24,14 +24,23 @@ namespace aPC.Server.Entities
 
     #region Retrieval
 
-    public RunningDirectionalComponent Get(DirectionalComponent directionalComponent)
+    public IEnumerable<RunningDirectionalComponent> Get(eSceneType sceneType)
     {
-      return components.SingleOrDefault(component => component.DirectionalComponent.Equals(directionalComponent));
-    }
-
-    public RunningDirectionalComponent GetSync()
-    {
-      return frame;
+      switch (sceneType)
+      {
+        case eSceneType.Sync:
+        case eSceneType.Event:
+          yield return frame;
+          break;
+        case eSceneType.Desync:
+          foreach (var directionalComponent in LastUpdatedDirectionalComponents)
+          {
+            yield return components.SingleOrDefault(component => component.DirectionalComponent.Equals(directionalComponent);
+          }
+          break;
+        default:
+          throw new ArgumentException($"Unexpected SceneType: {sceneType}");
+      }
     }
 
     #endregion Retrieval

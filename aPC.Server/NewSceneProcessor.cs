@@ -11,13 +11,13 @@ namespace aPC.Server
   {
     private amBXScene previousScene;
     private amBXScene currentScene;
-    private readonly SceneSplitter sceneSplitter;
+    private RunningDirectionalComponentList runningDirectionalComponents;
+    private readonly RunningDirectionalComponentListBuilder runningDirectionalComponentListBuilder;
     private readonly TaskManager taskManager;
-    private readonly RunningDirectionalComponentList runningDirectionalComponents;
 
-    public NewSceneProcessor(SceneSplitter sceneSplitter, TaskManager taskManager, RunningDirectionalComponentList runningDirectionalComponents)
+    public NewSceneProcessor(RunningDirectionalComponentListBuilder runningDirectionalComponentListBuilder, TaskManager taskManager, RunningDirectionalComponentList runningDirectionalComponents)
     {
-      this.sceneSplitter = sceneSplitter;
+      this.runningDirectionalComponentListBuilder = runningDirectionalComponentListBuilder;
       this.taskManager = taskManager;
       this.runningDirectionalComponents = runningDirectionalComponents;
       currentScene = new amBXScene { SceneType = eSceneType.Desync };
@@ -33,11 +33,11 @@ namespace aPC.Server
       SetupRollbackIfEvent(scene);
     }
 
-    private void AssignPreviousSceneIfApplicable(amBXScene scene)
+    private void AssignPreviousSceneIfApplicable(amBXScene newScene)
     {
       if (currentScene.SceneType == eSceneType.Event)
       {
-        if (scene.SceneType == eSceneType.Event)
+        if (newScene.SceneType == eSceneType.Event)
         {
           // Skip updating the previous scene, to ensure that we don't get
           // stuck in an infinite loop of events.
@@ -46,7 +46,7 @@ namespace aPC.Server
         {
           // Don't interrupt the currently playing event - instead quietly update
           // the previous scene so that we fall back to this when the event is done.
-          previousScene = scene;
+          previousScene = newScene;
         }
       }
       else
@@ -80,7 +80,7 @@ namespace aPC.Server
 
     private void PushChanges()
     {
-      sceneSplitter.SplitScene(runningDirectionalComponents, currentScene);
+      runningDirectionalComponents = runningDirectionalComponentListBuilder.SplitScene(currentScene, previousScene.SceneType);
       taskManager.RefreshTasks(runningDirectionalComponents);
     }
   }
