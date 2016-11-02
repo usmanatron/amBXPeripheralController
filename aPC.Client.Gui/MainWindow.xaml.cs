@@ -19,11 +19,11 @@ namespace aPC.Client.Gui
     private ObservableCollection<string> integratedScenes;
     private ObservableCollection<string> customScenes;
     private readonly SceneRunner sceneRunner;
-    private readonly UpdatableHostnameAccessor hostnameAccessor;
+    private readonly SingleHostnameAccessor hostnameAccessor;
     private readonly CustomFileHandler customFileHandler;
 
     public MainWindow(Settings settings, IntegratedListing integratedListing, CustomListing customListing,
-                      UpdatableHostnameAccessor hostnameAccessor, CustomFileHandler customFileHandler, SceneRunner sceneRunner)
+                      SingleHostnameAccessor hostnameAccessor, CustomFileHandler customFileHandler, SceneRunner sceneRunner)
     {
       this.settings = settings;
       integratedSceneListing = integratedListing;
@@ -57,21 +57,42 @@ namespace aPC.Client.Gui
 
     private void PopulateHostname()
     {
-      UpdateHostnameContent();
+      UpdateHostnameContent(hostnameAccessor.Get());
     }
 
     #region Hostname selection \ update
 
-    private void UpdateHostnameContent()
+    private void UpdateHostnameContent(string newHostname)
     {
       Hostname.Content = hostnameAccessor.Get();
+      hostnameAccessor.PersistConfig(newHostname);
+      
     }
 
     public void ChangeHostnameClick(object sender, RoutedEventArgs e)
     {
-      hostnameAccessor.Update();
-      UpdateHostnameContent();
+      var newHostname = GetNewHostname();
+      hostnameAccessor.Update(newHostname);
+      UpdateHostnameContent(newHostname);
       ReloadDropdown(integratedSceneListing, integratedScenes);
+    }
+
+  private string GetNewHostname()
+  {
+    var hostnameInput = new HostnameInput();
+    hostnameInput.ShowDialog();
+    var newHostname = hostnameInput.NewHostname;
+
+    return string.IsNullOrEmpty(newHostname)
+      ? hostnameAccessor.Get()
+      : newHostname;
+  }
+
+
+  public void ReloadClick(object sender, RoutedEventArgs e)
+    {
+      ReloadDropdown(integratedSceneListing, integratedScenes);
+      ReloadDropdown(customSceneListing, customScenes);
     }
 
     #endregion Hostname selection \ update

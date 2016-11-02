@@ -20,6 +20,12 @@ namespace aPC.Client.Gui.Scene
     private void LoadScenes()
     {
       Scenes = new Dictionary<string, string>();
+
+      if (!Directory.Exists(ProfilesStore.Directory))
+      {
+        Directory.CreateDirectory(ProfilesStore.Directory);
+      }
+
       var files = Directory.EnumerateFiles(ProfilesStore.Directory);
 
       foreach (var file in files)

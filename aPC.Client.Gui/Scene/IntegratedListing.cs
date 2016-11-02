@@ -16,7 +16,7 @@ namespace aPC.Client.Gui.Scene
     {
       this.sceneAccessor = sceneAccessor;
       this.notificationClient = notificationClient;
-      LoadScenes();
+      Scenes = new Dictionary<string, string>();
     }
 
     public void Reload()
@@ -37,25 +37,13 @@ namespace aPC.Client.Gui.Scene
       }
     }
 
-    public IEnumerable<string> DropdownListing
-    {
-      get
-      {
-        return Scenes.Keys;
-      }
-    }
+    public IEnumerable<string> DropdownListing => Scenes.Keys;
 
     public string GetValue(string key)
     {
       return Scenes[key];
     }
 
-    public string BrowseItemName
-    {
-      get
-      {
-        return string.Empty;
-      }
-    }
+    public string BrowseItemName => string.Empty;
   }
 }

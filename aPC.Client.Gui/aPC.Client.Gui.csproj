@@ -61,7 +61,7 @@
     <Compile Include="HostnameInput.xaml.cs">
       <DependentUpon>HostnameInput.xaml</DependentUpon>
     </Compile>
-    <Compile Include="HostnameAccessor.cs" />
+    <Compile Include="SingleHostnameAccessor.cs" />
     <Compile Include="Scene\CustomFileHandler.cs" />
     <Compile Include="Scene\CustomListing.cs" />
     <Compile Include="Scene\ISceneListing.cs" />

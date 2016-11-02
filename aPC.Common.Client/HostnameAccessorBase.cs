@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace aPC.Common.Client
 {
@@ -17,9 +18,9 @@ namespace aPC.Common.Client
       hasChangedSinceLastCheck = new Locked<bool>(false);
     }
 
-    public HostnameAccessor(List<string> hostnames)
+    public HostnameAccessor(params string[] hostnames)
     {
-      this.hostnames = hostnames;
+      this.hostnames = hostnames.ToList();
       hasChangedSinceLastCheck = new Locked<bool>(false);
     }
 
@@ -29,9 +30,9 @@ namespace aPC.Common.Client
       MarkUpdated();
     }
 
-    public void ResetWith(List<string> hostnames)
+    public void ResetWith(params string[] newHostnames)
     {
-      this.hostnames = hostnames;
+      this.hostnames = newHostnames.ToList();
       MarkUpdated();
     }
 

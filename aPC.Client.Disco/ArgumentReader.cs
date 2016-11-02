@@ -39,7 +39,7 @@ namespace aPC.Client.Disco
             break;
 
           case "servers":
-            settings.HostnameAccessor.ResetWith(deconstructedArgument[1].Split(',').ToList());
+            settings.HostnameAccessor.ResetWith(deconstructedArgument[1].Split(',').ToArray());
             break;
 
           default:

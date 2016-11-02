@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using aPC.Common.Client;
 
 namespace aPC.Client.Gui
 {
@@ -39,6 +40,7 @@ namespace aPC.Client.Gui
       kernel.Bind<INotificationClient>().To<NotificationClient>();
       kernel.Bind<IntegratedListing>().ToSelf().InSingletonScope();
       kernel.Bind<CustomListing>().ToSelf().InSingletonScope();
+      kernel.Bind<HostnameAccessor>().ToSelf().InSingletonScope();
 
       return kernel;
     }
