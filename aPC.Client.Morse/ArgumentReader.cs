@@ -53,7 +53,7 @@ namespace aPC.Client.Morse
 
     public Settings Read()
     {
-      var message = ReadMessage();
+      ValidateMessage();
       var settings = new Settings(message);
       ReadSwitchesIntoSettings(settings);
 
@@ -61,14 +61,12 @@ namespace aPC.Client.Morse
       return settings;
     }
 
-    private string ReadMessage()
+    private void ValidateMessage()
     {
       if (!IsMessageValid())
       {
         throw new UsageException("Invalid message specified: " + message);
       }
-
-      return message;
     }
 
     /// <summary>
