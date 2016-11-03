@@ -1,4 +1,5 @@
-﻿using aPC.Common.Entities;
+﻿using System.Threading.Tasks;
+using aPC.Common.Entities;
 using aPC.Server.Engine;
 
 namespace aPC.Server
@@ -25,11 +26,7 @@ namespace aPC.Server
       {
         return;
       }
-
-      foreach (var component in section.GetComponents())
-      {
-        engineActor.UpdateComponent(component);
-      }
+      Parallel.ForEach(section.GetComponents(), component => engineActor.UpdateComponent(component));
     }
   }
 }

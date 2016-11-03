@@ -87,7 +87,7 @@ namespace aPC.Chromesthesia
     /// </summary>
     public static int DiagonalLightPercentageOfSide => int.Parse(config["DiagonalLightPercentageOfSide"]);
 
-    public static int SceneFrameLength => int.Parse(config["SceneFrameLength"]);
+    public static int FrameLength => int.Parse(config["FrameLength"]);
 
     public static int LightFadeTime => int.Parse(config["LightSectionFadeTime"]);
 
