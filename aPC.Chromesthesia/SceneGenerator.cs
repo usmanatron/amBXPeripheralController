@@ -27,7 +27,6 @@ namespace aPC.Chromesthesia
       var results = GetResultsFromPitchGenerator(new byte[readLength], 0, readLength);
 
       var frame = frameBuilder.BuildFrameFromPitchResults(results);
-      sceneRunner.PushExclusive(frame);
 
       if (!FrameIsEmpty(frame))
       {
