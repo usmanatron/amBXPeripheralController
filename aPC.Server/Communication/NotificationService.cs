@@ -50,6 +50,7 @@ namespace aPC.Server.Communication
     public ServerRegistrationResult RegisterWithServer(string id)
     {
       //TODO Add the correct logic
+      // ISSUE-25
       return new ServerRegistrationResult()
       {
         Successful = true

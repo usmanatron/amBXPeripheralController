@@ -11,7 +11,7 @@ namespace aPC.Common.Client.Communication
   public abstract class NotificationClientBase : INotificationClient
   {
     private readonly HostnameAccessor hostnameAccessor;
-    private List<ClientConnection> clients;
+    private List<HostConnection> hosts;
 
     protected abstract bool SupportsScenes { get; }
 
@@ -24,7 +24,7 @@ namespace aPC.Common.Client.Communication
     protected NotificationClientBase(HostnameAccessor hostnameAccessor)
     {
       this.hostnameAccessor = hostnameAccessor;
-      UpdateClients();
+      UpdateHostConnections();
 
       if (RequiresExclusivity)
       {
@@ -36,37 +36,33 @@ namespace aPC.Common.Client.Communication
     protected NotificationClientBase(string hostname)
     {
       hostnameAccessor = new HostnameAccessor();
-      clients = new List<ClientConnection> { CreateConnection(hostname, eApplicationType.aPCTest) };
+      hosts = new List<HostConnection> { CreateConnection(hostname, eApplicationType.aPCTest) };
     }
 
-    private void UpdateClients()
+    private void UpdateHostConnections()
     {
-      clients = new List<ClientConnection>();
+      hosts = new List<HostConnection>();
 
       foreach (var hostname in hostnameAccessor.GetAll())
       {
-        clients.Add(CreateConnection(hostname, eApplicationType.amBXPeripheralController));
+        hosts.Add(CreateConnection(hostname, eApplicationType.amBXPeripheralController));
       }
     }
 
-    private ClientConnection CreateConnection(string hostname, eApplicationType applicationType)
+    private HostConnection CreateConnection(string hostname, eApplicationType applicationType)
     {
       var address = new EndpointAddress(CommunicationSettings.GetServiceUrl(hostname, applicationType));
       var client = new ChannelFactory<INotificationService>(new BasicHttpBinding(), address);
-      return new ClientConnection(hostname, client);
+      return new HostConnection(hostname, client);
     }
-
-    #region Hostname Handling
 
     protected void UpdateClientsIfHostnameChanged()
     {
       if (hostnameAccessor.HasChangedSinceLastCheck())
       {
-        UpdateClients();
+        UpdateHostConnections();
       }
     }
-
-    #endregion Hostname Handling
 
     #region Interface methods
 
@@ -78,12 +74,12 @@ namespace aPC.Common.Client.Communication
         ThrowUnsupportedException("custom-built");
       }
 
-      Parallel.ForEach(clients, client => PushScene(client.Client, scene));
+      Parallel.ForEach(hosts, host => PushScene(host.HostService, scene));
     }
 
-    private void PushScene(ChannelFactory<INotificationService> client, amBXScene scene)
+    private void PushScene(ChannelFactory<INotificationService> hostService, amBXScene scene)
     {
-      client.CreateChannel().RunScene(scene);
+      hostService.CreateChannel().RunScene(scene);
     }
 
     public virtual void PushSceneName(string sceneName)
@@ -94,12 +90,12 @@ namespace aPC.Common.Client.Communication
         ThrowUnsupportedException("named");
       }
 
-      Parallel.ForEach(clients, client => PushScene(client.Client, sceneName));
+      Parallel.ForEach(hosts, host => PushScene(host.HostService, sceneName));
     }
 
-    private void PushScene(ChannelFactory<INotificationService> client, string scene)
+    private void PushScene(ChannelFactory<INotificationService> hostService, string scene)
     {
-      client.CreateChannel().RunSceneName(scene);
+      hostService.CreateChannel().RunSceneName(scene);
     }
 
     // TODO: Should ideally ask all Servers and only return a subset!
@@ -111,12 +107,26 @@ namespace aPC.Common.Client.Communication
         ThrowUnsupportedException("named");
       }
 
-      return clients.First().Client.CreateChannel().GetAvailableScenes();
+      return hosts.First().HostService.CreateChannel().GetAvailableScenes();
     }
 
     public void Register(string id)
     {
-      clients.ForEach(client => client.Client.CreateChannel().RegisterWithServer(id));
+      var results = new List<ServerRegistrationResult>();
+
+      foreach (var host in hosts)
+      {
+        results.Add(host.HostService.CreateChannel().RegisterWithServer(id));
+      }
+
+      foreach (var result in results)
+      {
+        //TODO: Make this more robust for multiple hosts
+        if (!result.Successful)
+        {
+          throw result.Exception;
+        }
+      }
     }
 
     public void PushExclusive(Frame frame)
@@ -126,7 +136,7 @@ namespace aPC.Common.Client.Communication
         throw new CommunicationException(ApplicationId, "This method should only be used for clients requiring Exclusivity");
       }
 
-      clients.ForEach(client => client.Client.CreateChannel().RunFrameExclusive(frame));
+      hosts.ForEach(client => client.HostService.CreateChannel().RunFrameExclusive(frame));
     }
 
     private void ThrowUnsupportedException(string sceneType)

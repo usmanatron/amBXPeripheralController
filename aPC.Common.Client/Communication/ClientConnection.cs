@@ -3,15 +3,15 @@ using System.ServiceModel;
 
 namespace aPC.Common.Client.Communication
 {
-  internal class ClientConnection
+  internal class HostConnection
   {
     public readonly string Hostname;
-    public readonly ChannelFactory<INotificationService> Client;
+    public readonly ChannelFactory<INotificationService> HostService;
 
-    public ClientConnection(string xiHostname, ChannelFactory<INotificationService> client)
+    public HostConnection(string xiHostname, ChannelFactory<INotificationService> host)
     {
       Hostname = xiHostname;
-      Client = client;
+      HostService = host;
     }
   }
 }
