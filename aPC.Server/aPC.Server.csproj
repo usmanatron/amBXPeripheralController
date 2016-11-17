@@ -71,9 +71,13 @@
     <Compile Include="Engine\IEngineActor.cs" />
     <Compile Include="Engine\EngineActor.cs" />
     <Compile Include="Engine\RunMode.cs" />
-    <Compile Include="Entities\RunningComponent.cs" />
+    <Compile Include="Entities\DirectionalPreRunComponent.cs" />
+    <Compile Include="Entities\PreRunFrame.cs" />
+    <Compile Include="Entities\IRunningComponent.cs" />
+    <Compile Include="Entities\RunningFrame.cs" />
+    <Compile Include="Entities\DirectionalRunningComponent.cs" />
     <Compile Include="Entities\RunningComponentList.cs" />
-    <Compile Include="Entities\PreRunComponent.cs" />
+    <Compile Include="Entities\IPreRunComponent.cs" />
     <Compile Include="Entities\PreRunComponentList.cs" />
     <Compile Include="ExclusiveProcessor.cs" />
     <Compile Include="NewSceneProcessor.cs" />
