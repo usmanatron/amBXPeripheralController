@@ -3,14 +3,12 @@ using aPC.Common.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 
 namespace aPC.Server.Entities
 {
   public class PreRunComponentList
   {
-    private PreRunComponenet frame;
-    private readonly List<PreRunComponenet> components;
+    private readonly List<IPreRunComponent> preRunComponents;
 
     public eSceneType SceneType { get; private set; }
 
@@ -18,21 +16,22 @@ namespace aPC.Server.Entities
 
     public PreRunComponentList()
     {
-      components = new List<PreRunComponenet>();
+      preRunComponents = new List<IPreRunComponent>();
       LastUpdatedDirectionalComponents = new List<DirectionalComponent>();
     }
 
-    public IEnumerable<PreRunComponenet> Get(eSceneType sceneType)
+    public IEnumerable<IPreRunComponent> Get(eSceneType sceneType) //qqUMI Why are we only passing LastUpdated?
     {
       switch (sceneType)
       {
         case eSceneType.Singular:
-          yield return frame;
+          yield return preRunComponents.Single();
           break;
         case eSceneType.Composite:
           foreach (var directionalComponent in LastUpdatedDirectionalComponents)
           {
-            yield return components.SingleOrDefault(component => component.DirectionalComponent.Equals(directionalComponent));
+            yield return preRunComponents
+              .SingleOrDefault(cmp => ((DirectionalPreRunComponent)cmp).DirectionalComponent.Equals(directionalComponent));
           }
           break;
         default:
@@ -45,26 +44,38 @@ namespace aPC.Server.Entities
       SceneType = scene.SceneType;
       LastUpdatedDirectionalComponents.Clear();
 
-      if (scene.SceneType== eSceneType.Singular)
+      switch (scene.SceneType)
       {
-        components.Clear();
+        case eSceneType.Singular:
+          UpdateSingular(scene);
+          break;
+        case eSceneType.Composite:
+          UpdateComposite(scene);
+          break;
+        default:
+          throw new ArgumentException("TODO Add Message");
       }
+    }
 
-      foreach (var component in directionalComponents)
+    public void UpdateSingular(amBXScene scene)
+    {
+      preRunComponents.Clear();
+      preRunComponents.Add(new PreRunFrame(scene, new AtypicalFirstRunInfiniteTicker(scene)));
+    }
+
+    public void UpdateComposite(amBXScene scene)
+    {
+      foreach (var component in scene.FrameStatistics.EnabledDirectionalComponents)
       {
-        if (component.Direction == eDirection.Everywhere)
-        {
-          frame = new PreRunComponenet(scene, new DirectionalComponent(eComponentType.Light, eDirection.Everywhere), new AtypicalFirstRunInfiniteTicker(scene));
-          continue;
-        }
-        var existingComponent = components
-          .SingleOrDefault(cmp => cmp.DirectionalComponent.Equals(component));
+        var existingComponent = preRunComponents
+          .SingleOrDefault(cmp => ((DirectionalPreRunComponent)cmp).DirectionalComponent.Equals(component));
+
         if (existingComponent != null)
         {
-          components.Remove(existingComponent);
+          preRunComponents.Remove(existingComponent);
         }
 
-        components.Add(new PreRunComponenet(scene, component, new AtypicalFirstRunInfiniteTicker(scene)));
+        preRunComponents.Add(new DirectionalPreRunComponent(scene, component, new AtypicalFirstRunInfiniteTicker(scene)));
         LastUpdatedDirectionalComponents.Add(component);
       }
     }

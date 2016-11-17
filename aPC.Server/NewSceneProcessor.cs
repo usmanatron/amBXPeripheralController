@@ -15,7 +15,8 @@ namespace aPC.Server
     private readonly PreRunComponentListBuilder preRunComponentListBuilder;
     private readonly TaskManager taskManager;
 
-    public NewSceneProcessor(PreRunComponentListBuilder preRunComponentListBuilder, TaskManager taskManager, PreRunComponentList preRunComponents)
+    public NewSceneProcessor(PreRunComponentListBuilder preRunComponentListBuilder, TaskManager taskManager, 
+      PreRunComponentList preRunComponents)
     {
       this.preRunComponentListBuilder = preRunComponentListBuilder;
       this.taskManager = taskManager;

@@ -26,7 +26,9 @@ namespace aPC.Server
       {
         return;
       }
-      Parallel.ForEach(section.GetComponents(), component => engineActor.UpdateComponent(component, RunMode.Synchronous));
+      Parallel.ForEach(
+        section.GetComponents(), 
+        component => engineActor.UpdateComponent(component, RunMode.Synchronous));
     }
   }
 }
