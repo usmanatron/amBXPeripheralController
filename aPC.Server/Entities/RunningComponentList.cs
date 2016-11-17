@@ -10,19 +10,19 @@ namespace aPC.Server.Entities
   /// </summary>
   public class RunningComponentList
   {
-    private readonly List<RunningComponent> actions;
+    private readonly List<IRunningComponent> runningComponents;
     private readonly ReaderWriterLockSlim locker;
 
     public RunningComponentList()
     {
-      actions = new List<RunningComponent>();
+      runningComponents = new List<IRunningComponent>();
       locker = new ReaderWriterLockSlim();
     }
 
-    public void Add(RunningComponent runningComponent)
+    public void Add(IRunningComponent runningComponent)
     {
       locker.EnterWriteLock();
-      actions.Add(runningComponent);
+      runningComponents.Add(runningComponent);
       locker.ExitWriteLock();
     }
 
@@ -33,42 +33,43 @@ namespace aPC.Server.Entities
     public void Remove(CancellationTokenSource cancellationToken)
     {
       locker.EnterWriteLock();
-      actions.Remove(actions.Single(task => task.CancellationToken == cancellationToken));
+      runningComponents.Remove(runningComponents.Single(task => task.CancellationToken == cancellationToken));
       locker.ExitWriteLock();
     }
 
     /// <summary>
     /// Cancels the action for the given ComponentType and Direction, before removing from the list
     /// </summary>
-    public void Cancel(DirectionalComponent directionalComponent)
+    public void CancelComposite(DirectionalComponent directionalComponent)
     {
       locker.EnterUpgradeableReadLock();
-      var action = Get(directionalComponent);
+      var runningComponent = Get(directionalComponent);
 
-      if (action != null)
+      if (runningComponent != null)
       {
         locker.EnterWriteLock();
-          action.CancellationToken.Cancel();
-          actions.Remove(action);
+        runningComponent.CancellationToken.Cancel();
+        runningComponents.Remove(runningComponent);
         locker.ExitWriteLock();
       }
 
       locker.ExitUpgradeableReadLock();
     }
 
-    private RunningComponent Get(DirectionalComponent directionalComponent)
+    private DirectionalRunningComponent Get(DirectionalComponent directionalComponent)
     {
       locker.EnterReadLock();
-      var action =  actions.SingleOrDefault(act => act.DirectionalComponent.Equals(directionalComponent));
+      var runningComponent = 
+        runningComponents.SingleOrDefault(act => ((DirectionalRunningComponent)act).DirectionalComponent.Equals(directionalComponent));
       locker.ExitReadLock();
-      return action;
+      return (DirectionalRunningComponent)runningComponent;
     }
 
     public void CancelAll()
     {
       locker.EnterWriteLock();
-        actions.ForEach(task => task.CancellationToken.Cancel());
-        actions.Clear();
+      runningComponents.ForEach(task => task.CancellationToken.Cancel());
+      runningComponents.Clear();
       locker.ExitWriteLock();
     }
   }

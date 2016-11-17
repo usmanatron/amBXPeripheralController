@@ -30,85 +30,111 @@ namespace aPC.Server
       switch (runningSceneType)
       {
         case eSceneType.Composite:
-          foreach (var directionalComponent in components)
+          foreach (DirectionalPreRunComponent directionalComponent in components)
           {
             ReScheduleTask(directionalComponent);
           }
           break;
+
         case eSceneType.Singular:
           runningComponentList.CancelAll();
-          ScheduleTask(components.Single(), 0);
+          var component = (PreRunFrame)components.Single();
+          ScheduleTask(component, 0);
           break;
       }
     }
 
-    private void ReScheduleTask(PreRunComponenet componentWrapper)
+    private void ReScheduleTask(DirectionalPreRunComponent componentWrapper)
     {
-      runningComponentList.Cancel(componentWrapper.DirectionalComponent);
+      runningComponentList.CancelComposite(componentWrapper.DirectionalComponent);
       ScheduleTask(componentWrapper, 0);
     }
 
-    private void RunFrameForDirectionalComponent(PreRunComponenet componentWrapper, CancellationTokenSource cancellationToken)
+    private void ScheduleTask(IPreRunComponent componentWrapper, int delay)
     {
-      runningComponentList.Remove(cancellationToken);
+      //qqTODO:
+      // Rewrite.  Break up depending on type of componentWrapper
+      var cancellationToken = new CancellationTokenSource();
+      Task.Run(async delegate
+                     {
+                       await Task.Delay(TimeSpan.FromMilliseconds(delay), cancellationToken.Token);
+                       runningComponentList.Remove(cancellationToken);
+                       int frameLength;
 
-      var frame = GetFrame(componentWrapper);
+                       if (componentWrapper.Scene.SceneType == eSceneType.Composite)
+                       {
+                         frameLength = RunFrameForDirectionalComponent_Composite((DirectionalPreRunComponent) componentWrapper);
+                       }
+                       else
+                       {
+                         frameLength = RunFrameForDirectionalComponent_Singular((PreRunFrame) componentWrapper);
+                       }
 
-      if (runningSceneType == eSceneType.Composite)
+                       DoPostUpdateActions(componentWrapper, frameLength);
+                     }, cancellationToken.Token);
+
+      IRunningComponent component;
+      if (componentWrapper is DirectionalPreRunComponent)
       {
-        var component = frame.GetComponentInDirection(componentWrapper.DirectionalComponent.ComponentType, componentWrapper.DirectionalComponent.Direction);
-        engineActor.UpdateComponent(component, RunMode.Asynchronous);
+        component = new DirectionalRunningComponent(cancellationToken, ((DirectionalPreRunComponent)componentWrapper).DirectionalComponent);
       }
       else
       {
-        foreach (eComponentType componentType in Enum.GetValues(typeof(eComponentType)))
-          foreach (eDirection direction in EnumExtensions.GetCompassDirections())
-          {
-            var component = frame.GetComponentInDirection(componentType, direction);
-            if (component != null)
-            {
-              engineActor.UpdateComponent(component, RunMode.Asynchronous);
-            }
-          }
+        component = new RunningFrame(cancellationToken);
       }
 
-      DoPostUpdateActions(componentWrapper, frame.Length);
+      runningComponentList.Add(component);
     }
 
-    private Frame GetFrame(PreRunComponenet componentWrappers)
+    private int RunFrameForDirectionalComponent_Singular(PreRunFrame componentWrapper)
     {
-      var frames = componentWrappers.Ticker.IsFirstRun
-        ? componentWrappers.Scene.Frames
-        : componentWrappers.Scene.RepeatableFrames;
-      return frames[componentWrappers.Ticker.Index];
+      var frame = GetFrame(componentWrapper as IPreRunComponent);
+
+      foreach (eComponentType componentType in Enum.GetValues(typeof(eComponentType)))
+        foreach (eDirection direction in EnumExtensions.GetCompassDirections())
+        {
+          var component = frame.GetComponentInDirection(componentType, direction);
+          if (component != null)
+          {
+            engineActor.UpdateComponent(component, RunMode.Asynchronous);
+          }
+        }
+
+      return frame.Length;
     }
 
-    private void DoPostUpdateActions(PreRunComponenet componentWrapper, int delay)
+    private int RunFrameForDirectionalComponent_Composite(DirectionalPreRunComponent componentWrapper)
+    {
+      var frame = GetFrame(componentWrapper as IPreRunComponent);
+
+      var directionalComponentFromWrapper = componentWrapper.DirectionalComponent;
+      var component = frame
+        .GetComponentInDirection(directionalComponentFromWrapper.ComponentType, directionalComponentFromWrapper.Direction);
+      engineActor.UpdateComponent(component, RunMode.Asynchronous);
+
+      return frame.Length;
+    }
+
+    private Frame GetFrame(IPreRunComponent componentWrapper)
+    {
+      var frames = componentWrapper.Ticker.IsFirstRun
+        ? componentWrapper.Scene.Frames
+        : componentWrapper.Scene.RepeatableFrames;
+      return frames[componentWrapper.Ticker.Index];
+    }
+
+    private void DoPostUpdateActions(IPreRunComponent componentWrapper, int delay)
     {
       componentWrapper.Ticker.Advance();
 
-      // When we've run the scene once through, we need to check that there are either:
-      // * repeatable frames
-      // * that it's not an event
-      // If neither of these hold, then we terminate running by NOT scheduling the next task.
+      // When we've run the scene once through, we need to check if there are repeatable frames
+      // If there aren't any, then we terminate running by not scheduling the next task.
       if (componentWrapper.Ticker.Index == 0 && !componentWrapper.Scene.HasRepeatableFrames)
       {
         return;
       }
 
       ScheduleTask(componentWrapper, delay);
-    }
-
-    private void ScheduleTask(PreRunComponenet componentWrapper, int delay)
-    {
-      var cancellationToken = new CancellationTokenSource();
-      Task.Run(async delegate
-                     {
-                       await Task.Delay(TimeSpan.FromMilliseconds(delay), cancellationToken.Token);
-                       RunFrameForDirectionalComponent(componentWrapper, cancellationToken);
-                     }, cancellationToken.Token);
-
-      runningComponentList.Add(new RunningComponent(cancellationToken, componentWrapper.DirectionalComponent));
     }
   }
 }
