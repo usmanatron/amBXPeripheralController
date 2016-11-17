@@ -65,8 +65,16 @@ namespace aPC.Common.Entities
     {
       get
       {
-        return Frames.Where(frame => frame.IsRepeated)
-                     .ToList();
+        return Frames.Where(frame => frame.IsRepeated).ToList();
+      }
+    }
+
+    [XmlIgnore]
+    public bool HasRepeatableFrames
+    {
+      get
+      {
+        return RepeatableFrames.Any();
       }
     }
 

@@ -29,14 +29,13 @@ namespace aPC.Server
 
       switch (runningSceneType)
       {
-        case eSceneType.Desync:
+        case eSceneType.Composite:
           foreach (var directionalComponent in components)
           {
             ReScheduleTask(directionalComponent);
           }
           break;
-        case eSceneType.Sync:
-        case eSceneType.Event:
+        case eSceneType.Singular:
           runningComponentList.CancelAll();
           ScheduleTask(components.Single(), 0);
           break;
@@ -55,7 +54,7 @@ namespace aPC.Server
 
       var frame = GetFrame(componentWrapper);
 
-      if (runningSceneType == eSceneType.Desync)
+      if (runningSceneType == eSceneType.Composite)
       {
         var component = frame.GetComponentInDirection(componentWrapper.DirectionalComponent.ComponentType, componentWrapper.DirectionalComponent.Direction);
         engineActor.UpdateComponent(component, RunMode.Asynchronous);
@@ -92,7 +91,7 @@ namespace aPC.Server
       // * repeatable frames
       // * that it's not an event
       // If neither of these hold, then we terminate running by NOT scheduling the next task.
-      if (componentWrapper.Ticker.Index == 0 && (componentWrapper.Scene.SceneType == eSceneType.Event || componentWrapper.Scene.RepeatableFrames.Count == 0))
+      if (componentWrapper.Ticker.Index == 0 && !componentWrapper.Scene.HasRepeatableFrames)
       {
         return;
       }

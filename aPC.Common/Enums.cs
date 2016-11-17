@@ -11,25 +11,18 @@
   }
 
   /// <summary>
-  /// Desync - Allow all components to run by themselves
-  /// Sync  - Force all sections to be in sync with each other
-  /// Event - Ignore IsRepeatable.  Once all frames have been run, return to the previously running Scene.
+  /// Composite - Allow all components to run by themselves
+  /// Singular  - Force all components to be in sync with each other
   /// </summary>
-  /// <remarks>
-  ///   Being an event implies that your also Sync (i.e. a desync event doesn't make sense)
-  /// </remarks>
   public enum eSceneType
   {
-    Desync,
-    Sync,
-    Event
+    Composite,
+    Singular
   }
-
-  #region amBXLib-equivalent enums
 
   /// <remarks>
   ///  *** WARNING ***
-  ///  Do not change this enum!  It has to exactly map with the amBXLib equivalent (CompassDirection)
+  ///  Do not change this enum!  It has to exactly map with the amBXLib equivalent (Direction)
   /// </remarks>
   public enum eDirection
   {
@@ -63,6 +56,4 @@
     Thud = 9,
     Thunder = 10,
   }
-
-  #endregion amBXLib-equivalent enums
 }

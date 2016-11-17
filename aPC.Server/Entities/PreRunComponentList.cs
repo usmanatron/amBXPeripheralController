@@ -11,8 +11,6 @@ namespace aPC.Server.Entities
   {
     private PreRunComponenet frame;
     private readonly List<PreRunComponenet> components;
-    private bool inUpdateMode;
-    private ReaderWriterLockSlim locker;
 
     public eSceneType SceneType { get; private set; }
 
@@ -28,11 +26,10 @@ namespace aPC.Server.Entities
     {
       switch (sceneType)
       {
-        case eSceneType.Sync:
-        case eSceneType.Event:
+        case eSceneType.Singular:
           yield return frame;
           break;
-        case eSceneType.Desync:
+        case eSceneType.Composite:
           foreach (var directionalComponent in LastUpdatedDirectionalComponents)
           {
             yield return components.SingleOrDefault(component => component.DirectionalComponent.Equals(directionalComponent));
@@ -48,7 +45,7 @@ namespace aPC.Server.Entities
       SceneType = scene.SceneType;
       LastUpdatedDirectionalComponents.Clear();
 
-      if (scene.SceneType== eSceneType.Sync)
+      if (scene.SceneType== eSceneType.Singular)
       {
         components.Clear();
       }

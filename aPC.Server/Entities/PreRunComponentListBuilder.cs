@@ -1,6 +1,5 @@
 ﻿using aPC.Common;
 using aPC.Common.Entities;
-using aPC.Server.Entities;
 using System;
 using System.Collections.Generic;
 
@@ -8,27 +7,22 @@ namespace aPC.Server.Entities
 {
   public class PreRunComponentListBuilder
   {
-    public PreRunComponentList Build(amBXScene scene, eSceneType previousSceneType)
+    public PreRunComponentList Build(amBXScene scene)
     {
       var components = new List<DirectionalComponent>();
 
       switch (scene.SceneType)
       {
-        case eSceneType.Sync:
-          components.AddRange(MergeNewRunningComponentsIntoExisting(scene));
-          components.Add(AddUpdateForFrame());
-          break;
-
-        case eSceneType.Desync:
-          components.AddRange(MergeNewRunningComponentsIntoExisting(scene));
-          break;
-
-        case eSceneType.Event:
-          if (previousSceneType == eSceneType.Event)
+        case eSceneType.Singular:
+          if (scene.HasRepeatableFrames)
           {
-            throw new InvalidOperationException("You cannot transition from one event to another");
+            components.AddRange(MergeNewRunningComponentsIntoExisting(scene));
           }
           components.Add(AddUpdateForFrame());
+          break;
+
+        case eSceneType.Composite:
+          components.AddRange(MergeNewRunningComponentsIntoExisting(scene));
           break;
       }
 

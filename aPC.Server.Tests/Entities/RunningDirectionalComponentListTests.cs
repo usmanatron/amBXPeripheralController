@@ -31,7 +31,7 @@ namespace aPC.Server.Tests.Entities
       var directionalComponent = new DirectionalComponent(eComponentType.Light, eDirection.Everywhere);
       preRunComponentList.Update(arbitrarySyncScene, directionalComponent);
 
-      var component = preRunComponentList.Get(eSceneType.Sync);
+      var component = preRunComponentList.Get(eSceneType.Singular);
 
       Assert.AreEqual(arbitrarySyncScene, component.Single().Scene);
       Assert.AreEqual(directionalComponent, component.Single().DirectionalComponent);
@@ -42,7 +42,7 @@ namespace aPC.Server.Tests.Entities
     {
       preRunComponentList.Update(arbitraryDesyncScene, arbitraryDirectionalComponent);
 
-      var component = preRunComponentList.Get(eSceneType.Desync)
+      var component = preRunComponentList.Get(eSceneType.Composite)
         .Single(cmp => cmp.DirectionalComponent.Equals(arbitraryDirectionalComponent));
 
       Assert.AreEqual(0, component.Ticker.Index);
