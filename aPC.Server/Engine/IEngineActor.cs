@@ -4,6 +4,6 @@ namespace aPC.Server.Engine
 {
   public interface IEngineActor
   {
-    void UpdateComponent(DirectionalComponent component);
+    void UpdateComponent(DirectionalComponent component, RunMode runMode);
   }
 }

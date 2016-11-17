@@ -14,22 +14,33 @@ namespace aPC.Server.Engine
       this.ambxEngineWrapper = ambxEngineWrapper;
     }
 
-    public void UpdateComponent(DirectionalComponent component)
+    public void UpdateComponent(DirectionalComponent component, RunMode runMode)
+    {
+      Action action = GetAction(component);
+
+      switch (runMode)
+      {
+        case RunMode.Asynchronous:
+          ThreadPool.QueueUserWorkItem(_ => action.Invoke());
+          break;
+        case RunMode.Synchronous:
+          action.Invoke();
+          break;
+        default:
+          throw new ArgumentException("Unexpected RunMode");
+      }
+    }
+
+    private Action GetAction(DirectionalComponent component)
     {
       switch (component.ComponentType)
       {
         case eComponentType.Light:
-          ThreadPool.QueueUserWorkItem(_ => ambxEngineWrapper.UpdateLight(component.GetLight()));
-          break;
-
+          return () => ambxEngineWrapper.UpdateLight(component.GetLight());
         case eComponentType.Fan:
-          ThreadPool.QueueUserWorkItem(_ => ambxEngineWrapper.UpdateFan(component.GetFan()));
-          break;
-
+          return () => ambxEngineWrapper.UpdateFan(component.GetFan());
         case eComponentType.Rumble:
-          ThreadPool.QueueUserWorkItem(_ => ambxEngineWrapper.UpdateRumble(component.GetRumble()));
-          break;
-
+          return () => ambxEngineWrapper.UpdateRumble(component.GetRumble());
         default:
           throw new ArgumentException("Unexpected Component Type");
       }

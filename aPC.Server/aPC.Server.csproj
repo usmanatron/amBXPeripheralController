@@ -64,7 +64,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Engine\AmbxEngineWrapper.cs" />
-    <Compile Include="Engine\EngineActorSync.cs" />
     <Compile Include="Engine\IEngineActor.cs" />
     <Compile Include="Engine\EngineActor.cs" />
     <Compile Include="Engine\RunMode.cs" />

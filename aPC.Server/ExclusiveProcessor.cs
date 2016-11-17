@@ -6,9 +6,9 @@ namespace aPC.Server
 {
   class ExclusiveProcessor
   {
-    private readonly EngineActorSync engineActor;
+    private readonly EngineActor engineActor;
 
-    public ExclusiveProcessor(EngineActorSync engineActor)
+    public ExclusiveProcessor(EngineActor engineActor)
     {
       this.engineActor = engineActor;
     }
@@ -26,7 +26,7 @@ namespace aPC.Server
       {
         return;
       }
-      Parallel.ForEach(section.GetComponents(), component => engineActor.UpdateComponent(component));
+      Parallel.ForEach(section.GetComponents(), component => engineActor.UpdateComponent(component, RunMode.Synchronous));
     }
   }
 }

@@ -1,9 +1,8 @@
 ﻿namespace aPC.Server.Engine
 {
-  enum RunMode
+  public enum RunMode
   {
     Synchronous,
     Asynchronous
-
   }
 }

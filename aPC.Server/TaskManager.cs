@@ -58,7 +58,7 @@ namespace aPC.Server
       if (runningSceneType == eSceneType.Desync)
       {
         var component = frame.GetComponentInDirection(componentWrapper.DirectionalComponent.ComponentType, componentWrapper.DirectionalComponent.Direction);
-        engineActor.UpdateComponent(component);
+        engineActor.UpdateComponent(component, RunMode.Asynchronous);
       }
       else
       {
@@ -68,7 +68,7 @@ namespace aPC.Server
             var component = frame.GetComponentInDirection(componentType, direction);
             if (component != null)
             {
-              engineActor.UpdateComponent(component);
+              engineActor.UpdateComponent(component, RunMode.Asynchronous);
             }
           }
       }
