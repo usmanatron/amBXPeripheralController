@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using aPC.Common;
 using aPC.Common.Entities;
 
@@ -24,9 +25,24 @@ namespace aPC.Server.Entities
 
     public abstract eSceneType ComponentType { get; }
 
+    public abstract IEnumerable<DirectionalComponent> GetNextComponentsToRun();
+
+    public int GetNextFrameLength()
+    {
+      return GetFrame().Length;
+    }
+
     public void Run(CancellationTokenSource token)
     {
       CancellationToken = token;
+    }
+
+    protected Frame GetFrame()
+    {
+      var frames = Ticker.IsFirstRun
+        ? Scene.Frames
+        : Scene.RepeatableFrames;
+      return frames[Ticker.Index];
     }
   }
 }

@@ -1,4 +1,5 @@
-﻿using aPC.Common;
+﻿using System.Collections.Generic;
+using aPC.Common;
 using aPC.Common.Entities;
 
 namespace aPC.Server.Entities
@@ -14,5 +15,14 @@ namespace aPC.Server.Entities
     }
 
     public override eSceneType ComponentType => eSceneType.Composite;
+
+    public override IEnumerable<DirectionalComponent> GetNextComponentsToRun()
+    {
+      var frame = GetFrame();
+
+      var directionalComponentFromWrapper = DirectionalComponent;
+      yield return frame
+        .GetComponentInDirection(directionalComponentFromWrapper.ComponentType, directionalComponentFromWrapper.Direction);
+    }
   }
 }

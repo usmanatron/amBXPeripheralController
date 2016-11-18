@@ -1,5 +1,4 @@
 ﻿using aPC.Common;
-using aPC.Common.Entities;
 using aPC.Server.Engine;
 using aPC.Server.Entities;
 using System;
@@ -61,54 +60,18 @@ namespace aPC.Server
                      {
                        await Task.Delay(TimeSpan.FromMilliseconds(delay), cancellationToken.Token);
                        runningComponentList.Remove(cancellationToken);
-                       int frameLength = componentWrapper.Scene.SceneType == eSceneType.Composite 
-                       ? RunFrameForDirectionalComponent_Composite((CompositeComponentWrapper) componentWrapper) 
-                       : RunFrameForDirectionalComponent_Singular((SingularComponentWrapper)componentWrapper);
+                       foreach (var component in componentWrapper.GetNextComponentsToRun())
+                       {
+                         engineActor.UpdateComponent(component, RunMode.Asynchronous);
+                       }
 
-                       DoPostUpdateActions(componentWrapper, frameLength);
+                       DoPostUpdateActions(componentWrapper, componentWrapper.GetNextFrameLength());
                      }, cancellationToken.Token);
 
       componentWrapper.Run(cancellationToken);
       runningComponentList.Add(componentWrapper);
     }
-
-    private int RunFrameForDirectionalComponent_Singular(SingularComponentWrapper componentWrapper)
-    {
-      var frame = GetFrame(componentWrapper);
-
-      foreach (eComponentType componentType in Enum.GetValues(typeof(eComponentType)))
-        foreach (eDirection direction in EnumExtensions.GetCompassDirections())
-        {
-          var component = frame.GetComponentInDirection(componentType, direction);
-          if (component != null)
-          {
-            engineActor.UpdateComponent(component, RunMode.Asynchronous);
-          }
-        }
-
-      return frame.Length;
-    }
-
-    private int RunFrameForDirectionalComponent_Composite(CompositeComponentWrapper componentWrapper)
-    {
-      var frame = GetFrame(componentWrapper);
-
-      var directionalComponentFromWrapper = componentWrapper.DirectionalComponent;
-      var component = frame
-        .GetComponentInDirection(directionalComponentFromWrapper.ComponentType, directionalComponentFromWrapper.Direction);
-      engineActor.UpdateComponent(component, RunMode.Asynchronous);
-
-      return frame.Length;
-    }
-
-    private Frame GetFrame(ComponentWrapperBase componentWrapper)
-    {
-      var frames = componentWrapper.Ticker.IsFirstRun
-        ? componentWrapper.Scene.Frames
-        : componentWrapper.Scene.RepeatableFrames;
-      return frames[componentWrapper.Ticker.Index];
-    }
-
+    
     private void DoPostUpdateActions(ComponentWrapperBase componentWrapper, int delay)
     {
       componentWrapper.Ticker.Advance();
