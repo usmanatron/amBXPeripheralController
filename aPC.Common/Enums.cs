@@ -20,6 +20,12 @@
     Singular
   }
 
+  public enum RunMode
+  {
+    Synchronous,
+    Asynchronous
+  }
+
   /// <remarks>
   ///  *** WARNING ***
   ///  Do not change this enum!  It has to exactly map with the amBXLib equivalent (Direction)
