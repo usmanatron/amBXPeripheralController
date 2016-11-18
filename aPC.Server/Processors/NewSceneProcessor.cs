@@ -4,10 +4,10 @@ using aPC.Server.Entities;
 using System;
 using System.Threading.Tasks;
 
-namespace aPC.Server
+namespace aPC.Server.Processors
 {
   // Handles new scenes - Passes things to be calculated and subsequently sends them to be run.
-  public class NewSceneProcessor
+  public class NewSceneProcessor : IProcessor
   {
     private amBXScene previousScene;
     private amBXScene currentScene;

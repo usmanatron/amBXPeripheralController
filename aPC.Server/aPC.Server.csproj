@@ -74,8 +74,9 @@
     <Compile Include="Entities\ComponentWrapperBase.cs" />
     <Compile Include="Entities\RunningComponentList.cs" />
     <Compile Include="Entities\ComponentWrapperList.cs" />
-    <Compile Include="ExclusiveProcessor.cs" />
-    <Compile Include="NewSceneProcessor.cs" />
+    <Compile Include="Processors\ExclusiveProcessor.cs" />
+    <Compile Include="Processors\IProcessor.cs" />
+    <Compile Include="Processors\NewSceneProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\ComponentWrapperListBuilder.cs" />
     <Compile Include="Server.cs">

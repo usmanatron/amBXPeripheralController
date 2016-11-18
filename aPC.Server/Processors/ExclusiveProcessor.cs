@@ -1,11 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using aPC.Common;
 using aPC.Common.Entities;
 using aPC.Server.Engine;
 
-namespace aPC.Server
+namespace aPC.Server.Processors
 {
-  class ExclusiveProcessor
+  class ExclusiveProcessor : IProcessor
   {
     private readonly EngineActor engineActor;
 
@@ -14,8 +15,9 @@ namespace aPC.Server
       this.engineActor = engineActor;
     }
 
-    public void Process(Frame frame)
+    public void Process(amBXScene scene)
     {
+      var frame = scene.Frames.Single();
       ProcessSection(frame.LightSection);
       ProcessSection(frame.FanSection);
       ProcessSection(frame.RumbleSection);
