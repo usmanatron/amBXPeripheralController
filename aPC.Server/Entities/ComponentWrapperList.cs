@@ -21,6 +21,7 @@ namespace aPC.Server.Entities
 
     public void ReplaceAllWith(params ComponentWrapperBase[] newComponents)
     {
+      wrappedComponents.ForEach(task => task.CancellationToken.Cancel());
       wrappedComponents.Clear();
       wrappedComponents.AddRange(newComponents);
     }
@@ -35,6 +36,7 @@ namespace aPC.Server.Entities
 
       if (existingComponent != null)
       {
+        existingComponent.CancellationToken.Cancel();
         wrappedComponents.Remove(existingComponent);
       }
 

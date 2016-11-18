@@ -12,12 +12,10 @@ namespace aPC.Server
   public class TaskManager
   {
     private readonly EngineActor engineActor;
-    private readonly RunningComponentList runningComponentList;
 
-    public TaskManager(EngineActor engineActor, RunningComponentList runningComponentList)
+    public TaskManager(EngineActor engineActor)
     {
       this.engineActor = engineActor;
-      this.runningComponentList = runningComponentList;
     }
 
     public void RefreshTasks(ComponentWrapperList preRunComponentList)
@@ -33,33 +31,16 @@ namespace aPC.Server
       foreach (var componentGrouping in componentGroupings)
         foreach (var component in componentGrouping)
         {
-          if (component.ComponentType == eSceneType.Composite)
-          {
-            ReScheduleTask((CompositeComponentWrapper) component);
-          }
-          else
-          {
-            runningComponentList.CancelAll();
-            ScheduleTask((SingularComponentWrapper) component, 0);
-          }
+          ScheduleTask(component, 0);
         }
-    }
-
-    private void ReScheduleTask(CompositeComponentWrapper componentWrapper)
-    {
-      runningComponentList.CancelComposite(componentWrapper.DirectionalComponent);
-      ScheduleTask(componentWrapper, 0);
     }
 
     private void ScheduleTask(ComponentWrapperBase componentWrapper, int delay)
     {
-      //qqTODO:
-      // Rewrite.  Break up depending on type of componentWrapper
       var cancellationToken = new CancellationTokenSource();
       Task.Run(async delegate
                      {
                        await Task.Delay(TimeSpan.FromMilliseconds(delay), cancellationToken.Token);
-                       runningComponentList.Remove(cancellationToken);
                        foreach (var component in componentWrapper.GetNextComponentsToRun())
                        {
                          engineActor.UpdateComponent(component, RunMode.Asynchronous);
@@ -69,7 +50,6 @@ namespace aPC.Server
                      }, cancellationToken.Token);
 
       componentWrapper.Run(cancellationToken);
-      runningComponentList.Add(componentWrapper);
     }
     
     private void DoPostUpdateActions(ComponentWrapperBase componentWrapper, int delay)

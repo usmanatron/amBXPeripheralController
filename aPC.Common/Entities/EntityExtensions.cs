@@ -7,12 +7,7 @@ namespace aPC.Common.Entities
   {
     public static DirectionalComponent GetComponentSectionInDirection(this IComponentSection section, eDirection direction)
     {
-      if (section == null)
-      {
-        return null;
-      }
-
-      return section
+      return section?
         .GetComponents()
         .SingleOrDefault(component => component.Direction == direction);
     }

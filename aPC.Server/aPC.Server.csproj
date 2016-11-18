@@ -72,7 +72,6 @@
     <Compile Include="Entities\CompositeComponentWrapper.cs" />
     <Compile Include="Entities\SingularComponentWrapper.cs" />
     <Compile Include="Entities\ComponentWrapperBase.cs" />
-    <Compile Include="Entities\RunningComponentList.cs" />
     <Compile Include="Entities\ComponentWrapperList.cs" />
     <Compile Include="Processors\ExclusiveProcessor.cs" />
     <Compile Include="Processors\IProcessor.cs" />

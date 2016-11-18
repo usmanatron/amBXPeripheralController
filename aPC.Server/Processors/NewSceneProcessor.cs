@@ -39,13 +39,21 @@ namespace aPC.Server.Processors
 
     private amBXScene GetPreviousScene(amBXScene newScene)
     {
+      // To handle startup
+      if (previousScene == null)
+      {
+        return newScene;
+      }
+
       if (currentScene.SceneType == eSceneType.Composite || 
          (currentScene.SceneType == eSceneType.Singular && currentScene.HasRepeatableFrames))
       {
         return currentScene;
       }
 
-      // SceneType is Singular and No Repeatable Frames
+      // From this point, the currentScenes 
+      // SceneType is Singular and there are no Repeatable Frames
+
       if (newScene.HasRepeatableFrames)
       {
         // Don't interrupt the currently playing scene - it'll finish and rollback.
