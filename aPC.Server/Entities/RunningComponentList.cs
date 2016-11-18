@@ -6,20 +6,20 @@ using System.Threading;
 namespace aPC.Server.Entities
 {
   /// <summary>
-  /// Handles the list of DirectionalComponentActions
+  /// Handles the list of running ComponentWrappers
   /// </summary>
   public class RunningComponentList
   {
-    private readonly List<IRunningComponent> runningComponents;
+    private readonly List<ComponentWrapperBase> runningComponents;
     private readonly ReaderWriterLockSlim locker;
 
     public RunningComponentList()
     {
-      runningComponents = new List<IRunningComponent>();
+      runningComponents = new List<ComponentWrapperBase>();
       locker = new ReaderWriterLockSlim();
     }
 
-    public void Add(IRunningComponent runningComponent)
+    public void Add(ComponentWrapperBase runningComponent)
     {
       locker.EnterWriteLock();
       runningComponents.Add(runningComponent);
@@ -56,13 +56,13 @@ namespace aPC.Server.Entities
       locker.ExitUpgradeableReadLock();
     }
 
-    private DirectionalRunningComponent Get(DirectionalComponent directionalComponent)
+    private CompositeComponentWrapper Get(DirectionalComponent directionalComponent)
     {
       locker.EnterReadLock();
       var runningComponent = 
-        runningComponents.SingleOrDefault(act => ((DirectionalRunningComponent)act).DirectionalComponent.Equals(directionalComponent));
+        runningComponents.SingleOrDefault(act => ((CompositeComponentWrapper)act).DirectionalComponent.Equals(directionalComponent));
       locker.ExitReadLock();
-      return (DirectionalRunningComponent)runningComponent;
+      return (CompositeComponentWrapper)runningComponent;
     }
 
     public void CancelAll()

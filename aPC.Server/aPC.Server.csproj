@@ -68,21 +68,16 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Engine\AmbxEngineWrapper.cs" />
-    <Compile Include="Engine\IEngineActor.cs" />
     <Compile Include="Engine\EngineActor.cs" />
-    <Compile Include="Engine\RunMode.cs" />
-    <Compile Include="Entities\DirectionalPreRunComponent.cs" />
-    <Compile Include="Entities\PreRunFrame.cs" />
-    <Compile Include="Entities\IRunningComponent.cs" />
-    <Compile Include="Entities\RunningFrame.cs" />
-    <Compile Include="Entities\DirectionalRunningComponent.cs" />
+    <Compile Include="Entities\CompositeComponentWrapper.cs" />
+    <Compile Include="Entities\SingularComponentWrapper.cs" />
+    <Compile Include="Entities\ComponentWrapperBase.cs" />
     <Compile Include="Entities\RunningComponentList.cs" />
-    <Compile Include="Entities\IPreRunComponent.cs" />
-    <Compile Include="Entities\PreRunComponentList.cs" />
+    <Compile Include="Entities\ComponentWrapperList.cs" />
     <Compile Include="ExclusiveProcessor.cs" />
     <Compile Include="NewSceneProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Entities\PreRunComponentListBuilder.cs" />
+    <Compile Include="Entities\ComponentWrapperListBuilder.cs" />
     <Compile Include="Server.cs">
       <SubType>Code</SubType>
     </Compile>

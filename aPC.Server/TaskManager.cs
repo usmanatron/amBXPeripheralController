@@ -14,7 +14,6 @@ namespace aPC.Server
   {
     private readonly EngineActor engineActor;
     private readonly RunningComponentList runningComponentList;
-    private eSceneType runningSceneType;
 
     public TaskManager(EngineActor engineActor, RunningComponentList runningComponentList)
     {
@@ -22,35 +21,38 @@ namespace aPC.Server
       this.runningComponentList = runningComponentList;
     }
 
-    public void RefreshTasks(PreRunComponentList preRunComponentList)
+    public void RefreshTasks(ComponentWrapperList preRunComponentList)
     {
-      runningSceneType = preRunComponentList.SceneType;
-      var components = preRunComponentList.Get(runningSceneType);
+      var componentGroupings = preRunComponentList.Get()
+        .GroupBy(cmp => cmp.ComponentType).ToList();
 
-      switch (runningSceneType)
+      if (componentGroupings.Count() != 1)
       {
-        case eSceneType.Composite:
-          foreach (DirectionalPreRunComponent directionalComponent in components)
-          {
-            ReScheduleTask(directionalComponent);
-          }
-          break;
-
-        case eSceneType.Singular:
-          runningComponentList.CancelAll();
-          var component = (PreRunFrame)components.Single();
-          ScheduleTask(component, 0);
-          break;
+        throw new InvalidOperationException("Composite and Singular in same time qqUMI");
       }
+
+      foreach (var componentGrouping in componentGroupings)
+        foreach (var component in componentGrouping)
+        {
+          if (component.ComponentType == eSceneType.Composite)
+          {
+            ReScheduleTask((CompositeComponentWrapper) component);
+          }
+          else
+          {
+            runningComponentList.CancelAll();
+            ScheduleTask((SingularComponentWrapper) component, 0);
+          }
+        }
     }
 
-    private void ReScheduleTask(DirectionalPreRunComponent componentWrapper)
+    private void ReScheduleTask(CompositeComponentWrapper componentWrapper)
     {
       runningComponentList.CancelComposite(componentWrapper.DirectionalComponent);
       ScheduleTask(componentWrapper, 0);
     }
 
-    private void ScheduleTask(IPreRunComponent componentWrapper, int delay)
+    private void ScheduleTask(ComponentWrapperBase componentWrapper, int delay)
     {
       //qqTODO:
       // Rewrite.  Break up depending on type of componentWrapper
@@ -59,36 +61,20 @@ namespace aPC.Server
                      {
                        await Task.Delay(TimeSpan.FromMilliseconds(delay), cancellationToken.Token);
                        runningComponentList.Remove(cancellationToken);
-                       int frameLength;
-
-                       if (componentWrapper.Scene.SceneType == eSceneType.Composite)
-                       {
-                         frameLength = RunFrameForDirectionalComponent_Composite((DirectionalPreRunComponent) componentWrapper);
-                       }
-                       else
-                       {
-                         frameLength = RunFrameForDirectionalComponent_Singular((PreRunFrame) componentWrapper);
-                       }
+                       int frameLength = componentWrapper.Scene.SceneType == eSceneType.Composite 
+                       ? RunFrameForDirectionalComponent_Composite((CompositeComponentWrapper) componentWrapper) 
+                       : RunFrameForDirectionalComponent_Singular((SingularComponentWrapper)componentWrapper);
 
                        DoPostUpdateActions(componentWrapper, frameLength);
                      }, cancellationToken.Token);
 
-      IRunningComponent component;
-      if (componentWrapper is DirectionalPreRunComponent)
-      {
-        component = new DirectionalRunningComponent(cancellationToken, ((DirectionalPreRunComponent)componentWrapper).DirectionalComponent);
-      }
-      else
-      {
-        component = new RunningFrame(cancellationToken);
-      }
-
-      runningComponentList.Add(component);
+      componentWrapper.Run(cancellationToken);
+      runningComponentList.Add(componentWrapper);
     }
 
-    private int RunFrameForDirectionalComponent_Singular(PreRunFrame componentWrapper)
+    private int RunFrameForDirectionalComponent_Singular(SingularComponentWrapper componentWrapper)
     {
-      var frame = GetFrame(componentWrapper as IPreRunComponent);
+      var frame = GetFrame(componentWrapper);
 
       foreach (eComponentType componentType in Enum.GetValues(typeof(eComponentType)))
         foreach (eDirection direction in EnumExtensions.GetCompassDirections())
@@ -103,9 +89,9 @@ namespace aPC.Server
       return frame.Length;
     }
 
-    private int RunFrameForDirectionalComponent_Composite(DirectionalPreRunComponent componentWrapper)
+    private int RunFrameForDirectionalComponent_Composite(CompositeComponentWrapper componentWrapper)
     {
-      var frame = GetFrame(componentWrapper as IPreRunComponent);
+      var frame = GetFrame(componentWrapper);
 
       var directionalComponentFromWrapper = componentWrapper.DirectionalComponent;
       var component = frame
@@ -115,7 +101,7 @@ namespace aPC.Server
       return frame.Length;
     }
 
-    private Frame GetFrame(IPreRunComponent componentWrapper)
+    private Frame GetFrame(ComponentWrapperBase componentWrapper)
     {
       var frames = componentWrapper.Ticker.IsFirstRun
         ? componentWrapper.Scene.Frames
@@ -123,7 +109,7 @@ namespace aPC.Server
       return frames[componentWrapper.Ticker.Index];
     }
 
-    private void DoPostUpdateActions(IPreRunComponent componentWrapper, int delay)
+    private void DoPostUpdateActions(ComponentWrapperBase componentWrapper, int delay)
     {
       componentWrapper.Ticker.Advance();
 

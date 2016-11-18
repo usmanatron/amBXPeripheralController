@@ -11,16 +11,16 @@ namespace aPC.Server
   {
     private amBXScene previousScene;
     private amBXScene currentScene;
-    private PreRunComponentList preRunComponents;
-    private readonly PreRunComponentListBuilder preRunComponentListBuilder;
+    private ComponentWrapperList wrappedComponents;
+    private readonly ComponentWrapperListBuilder componentWrapperListBuilder;
     private readonly TaskManager taskManager;
 
-    public NewSceneProcessor(PreRunComponentListBuilder preRunComponentListBuilder, TaskManager taskManager, 
-      PreRunComponentList preRunComponents)
+    public NewSceneProcessor(ComponentWrapperListBuilder componentWrapperListBuilder, TaskManager taskManager, 
+      ComponentWrapperList wrappedComponents)
     {
-      this.preRunComponentListBuilder = preRunComponentListBuilder;
+      this.componentWrapperListBuilder = componentWrapperListBuilder;
       this.taskManager = taskManager;
-      this.preRunComponents = preRunComponents;
+      this.wrappedComponents = wrappedComponents;
       currentScene = new amBXScene { SceneType = eSceneType.Composite };
     }
 
@@ -85,8 +85,8 @@ namespace aPC.Server
         return;
       }
 
-      preRunComponents = preRunComponentListBuilder.Build(currentScene);
-      taskManager.RefreshTasks(preRunComponents);
+      wrappedComponents = componentWrapperListBuilder.Build(currentScene);
+      taskManager.RefreshTasks(wrappedComponents);
     }
   }
 }

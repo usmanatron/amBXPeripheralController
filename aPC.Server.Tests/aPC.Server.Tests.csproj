@@ -58,7 +58,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AtypicalFirstRunInfiniteTickerTests.cs" />
-    <Compile Include="Entities\RunningDirectionalComponentListTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
