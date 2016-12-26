@@ -27,7 +27,7 @@ namespace aPC.Client.Disco.Tests.Generators
       {
         Frames = frames,
         IsExclusive = false,
-        SceneType = eSceneType.Desync
+        SceneType = eSceneType.Composite
       };
     }
   }

@@ -16,7 +16,7 @@ namespace aPC.Server.Engine
 
     public void UpdateComponent(DirectionalComponent component, RunMode runMode)
     {
-      Action action = GetAction(component);
+      var action = GetAction(component);
 
       switch (runMode)
       {

@@ -114,7 +114,7 @@ namespace aPC.Common.Defaults
       {
         var scene = new amBXScene
                      {
-                       SceneType = eSceneType.Event,
+                       SceneType = eSceneType.Singular,
                        IsExclusive = true
                      };
 
@@ -131,7 +131,7 @@ namespace aPC.Common.Defaults
           .WithFanSection(DefaultFanSections.Off)
           .WithRumbleSection(DefaultRumbleSections.SoftThunder)
           .AddFrame()
-          .WithRepeated(true)
+          .WithRepeated(false)
           .WithFrameLength(1000)
           .WithLightSection(DefaultLightSections.Violet)
           .WithFanSection(DefaultFanSections.Off)
@@ -149,7 +149,7 @@ namespace aPC.Common.Defaults
       {
         var scene = new amBXScene
                      {
-                       SceneType = eSceneType.Desync,
+                       SceneType = eSceneType.Composite,
                        IsExclusive = true
                      };
 
@@ -204,7 +204,7 @@ namespace aPC.Common.Defaults
 
         var scene = new amBXScene
                      {
-                       SceneType = eSceneType.Sync
+                       SceneType = eSceneType.Singular
                      };
 
         scene.Frames = new FrameBuilder()
@@ -262,7 +262,7 @@ namespace aPC.Common.Defaults
       {
         var scene = new amBXScene
                      {
-                       SceneType = eSceneType.Event
+                       SceneType = eSceneType.Singular
                      };
 
         var off = new FrameBuilder()
@@ -297,7 +297,7 @@ namespace aPC.Common.Defaults
       {
         var scene = new amBXScene
           {
-            SceneType = eSceneType.Desync
+            SceneType = eSceneType.Composite
           };
 
         scene.Frames = new FrameBuilder()
@@ -322,7 +322,7 @@ namespace aPC.Common.Defaults
       {
         var scene = new amBXScene
                      {
-                       SceneType = eSceneType.Event,
+                       SceneType = eSceneType.Singular,
                        IsExclusive = true,
                      };
 
@@ -363,7 +363,7 @@ namespace aPC.Common.Defaults
       {
         var scene = new amBXScene
                      {
-                       SceneType = eSceneType.Event,
+                       SceneType = eSceneType.Singular,
                        IsExclusive = true,
                      };
 

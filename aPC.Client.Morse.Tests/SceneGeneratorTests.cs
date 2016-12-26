@@ -39,7 +39,7 @@ namespace aPC.Client.Morse.Tests
     public void GeneratedScene_WithDefaultSettings_IsNotRepeated()
     {
       var generatedScene = sceneGenerator.Generate(new Settings("Test"));
-      Assert.AreEqual(eSceneType.Event, generatedScene.SceneType);
+      Assert.AreEqual(eSceneType.Singular, generatedScene.SceneType);
     }
 
     [Test]
@@ -105,7 +105,7 @@ namespace aPC.Client.Morse.Tests
       settings.RepeatMessage = true;
       var generatedScene = sceneGenerator.Generate(settings);
 
-      Assert.AreEqual(eSceneType.Sync, generatedScene.SceneType);
+      Assert.AreEqual(eSceneType.Singular, generatedScene.SceneType);
 
       foreach (var frame in generatedScene.Frames)
       {

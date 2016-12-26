@@ -2,6 +2,7 @@
 using aPC.Common.Entities;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Linq;
 
 namespace aPC.Web.Models
 {
@@ -17,8 +18,8 @@ namespace aPC.Web.Models
       SceneLength = scene.Value.FrameStatistics.SceneLength;
 
       var sceneType = scene.Value.SceneType;
-      IsEvent = sceneType == eSceneType.Event;
-      IsSynchronised = sceneType == eSceneType.Sync || sceneType == eSceneType.Event;
+      IsEvent = !scene.Value.HasRepeatableFrames;
+      IsSynchronised = sceneType == eSceneType.Singular;
     }
 
     [DataMember]

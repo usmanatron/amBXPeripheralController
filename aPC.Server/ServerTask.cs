@@ -1,9 +1,11 @@
-﻿using aPC.Common.Communication;
+﻿using System.Collections.Generic;
+using aPC.Common.Communication;
 using aPC.Common.Defaults;
 using aPC.Common.Entities;
 using aPC.Server.Communication;
 using aPC.Server.Engine;
 using System.Threading;
+using aPC.Server.Processors;
 
 namespace aPC.Server
 {
@@ -44,7 +46,8 @@ namespace aPC.Server
 
     public static void UpdateExclusive(Frame frame)
     {
-      exclusiveProcessor.Process(frame);
+      var scene = new amBXScene {Frames = new List<Frame> {frame}};
+      exclusiveProcessor.Process(scene);
     }
   }
 }

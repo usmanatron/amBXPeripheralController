@@ -19,7 +19,7 @@ namespace aPC.Client.Disco.Generators
     {
       var scene = new amBXScene
       {
-        SceneType = eSceneType.Desync
+        SceneType = eSceneType.Composite
       };
 
       var frames = new FrameBuilder();

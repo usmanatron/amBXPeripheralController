@@ -39,6 +39,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\Debug\amBXLib.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -64,17 +68,16 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Engine\AmbxEngineWrapper.cs" />
-    <Compile Include="Engine\IEngineActor.cs" />
     <Compile Include="Engine\EngineActor.cs" />
-    <Compile Include="Engine\RunMode.cs" />
-    <Compile Include="Entities\RunningComponent.cs" />
-    <Compile Include="Entities\RunningComponentList.cs" />
-    <Compile Include="Entities\PreRunComponenet.cs" />
-    <Compile Include="Entities\PreRunComponentList.cs" />
-    <Compile Include="ExclusiveProcessor.cs" />
-    <Compile Include="NewSceneProcessor.cs" />
+    <Compile Include="Entities\CompositeComponentWrapper.cs" />
+    <Compile Include="Entities\SingularComponentWrapper.cs" />
+    <Compile Include="Entities\ComponentWrapperBase.cs" />
+    <Compile Include="Entities\ComponentWrapperList.cs" />
+    <Compile Include="Processors\ExclusiveProcessor.cs" />
+    <Compile Include="Processors\IProcessor.cs" />
+    <Compile Include="Processors\NewSceneProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Entities\PreRunComponentListBuilder.cs" />
+    <Compile Include="Entities\ComponentWrapperListBuilder.cs" />
     <Compile Include="Server.cs">
       <SubType>Code</SubType>
     </Compile>
